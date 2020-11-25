@@ -1,0 +1,872 @@
+fileFormatVersion: 2
+guid: 76f55ab67d3656b45a07a6853b0f2fcf
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5039130176605834105
+    second: T-Cell_IdleSprite_0
+  - first:
+      213: 8205924997429466575
+    second: T-Cell_IdleSprite_1
+  - first:
+      213: 6350283024600352957
+    second: T-Cell_IdleSprite_2
+  - first:
+      213: 3994003002407093966
+    second: T-Cell_IdleSprite_3
+  - first:
+      213: -4531984471892182348
+    second: T-Cell_IdleSprite_4
+  - first:
+      213: 8863168932747579079
+    second: T-Cell_IdleSprite_5
+  - first:
+      213: 597316088452777376
+    second: T-Cell_IdleSprite_6
+  - first:
+      213: -4745836155880862207
+    second: T-Cell_IdleSprite_7
+  - first:
+      213: 2477585981691981347
+    second: T-Cell_IdleSprite_8
+  - first:
+      213: 1898940623238626281
+    second: T-Cell_IdleSprite_9
+  - first:
+      213: -3220333721456706334
+    second: T-Cell_IdleSprite_10
+  - first:
+      213: -6465710330351508674
+    second: T-Cell_IdleSprite_11
+  - first:
+      213: -7917450118556169595
+    second: T-Cell_IdleSprite_12
+  - first:
+      213: -8939980779053794772
+    second: T-Cell_IdleSprite_13
+  - first:
+      213: -8085962193258038491
+    second: T-Cell_IdleSprite_14
+  - first:
+      213: -8430735230592836574
+    second: T-Cell_IdleSprite_15
+  - first:
+      213: -3056623927158420105
+    second: T-Cell_IdleSprite_16
+  - first:
+      213: 1290996882869295887
+    second: T-Cell_IdleSprite_17
+  - first:
+      213: -424281571178399242
+    second: T-Cell_IdleSprite_18
+  - first:
+      213: 7303932136703727693
+    second: T-Cell_IdleSprite_19
+  - first:
+      213: -8456484372106059747
+    second: T-Cell_IdleSprite_20
+  - first:
+      213: -4162694956445881608
+    second: T-Cell_IdleSprite_21
+  - first:
+      213: -2065515655806983378
+    second: T-Cell_IdleSprite_22
+  - first:
+      213: 4617165738245257287
+    second: T-Cell_IdleSprite_23
+  - first:
+      213: 4101009371148231850
+    second: TCell_IdleSprite_0
+  - first:
+      213: 7424776758155536072
+    second: TCell_IdleSprite_1
+  - first:
+      213: 3256881741736247528
+    second: TCell_IdleSprite_2
+  - first:
+      213: -586155077331650836
+    second: TCell_IdleSprite_3
+  - first:
+      213: -2147131211283493487
+    second: TCell_IdleSprite_4
+  - first:
+      213: -4497921099947056017
+    second: TCell_IdleSprite_5
+  - first:
+      213: -5654561082470857735
+    second: TCell_IdleSprite_6
+  - first:
+      213: -5212144454880288363
+    second: TCell_IdleSprite_7
+  - first:
+      213: 2949535159470824832
+    second: TCell_IdleSprite_8
+  - first:
+      213: 5819808709239389062
+    second: TCell_IdleSprite_9
+  - first:
+      213: 7236897129487983606
+    second: TCell_IdleSprite_10
+  - first:
+      213: 361212111299684732
+    second: TCell_IdleSprite_11
+  - first:
+      213: 396457007715947712
+    second: TCell_IdleSprite_12
+  - first:
+      213: -1947818542962137267
+    second: TCell_IdleSprite_13
+  - first:
+      213: 8640802087436035187
+    second: TCell_IdleSprite_14
+  - first:
+      213: -2092847896247802852
+    second: TCell_IdleSprite_15
+  - first:
+      213: -2184395806874108561
+    second: TCell_IdleSprite_16
+  - first:
+      213: -6569838458712169262
+    second: TCell_IdleSprite_17
+  - first:
+      213: 1929552515069065367
+    second: TCell_IdleSprite_18
+  - first:
+      213: -1764893522743286263
+    second: TCell_IdleSprite_19
+  - first:
+      213: 1040714006768773533
+    second: TCell_IdleSprite_20
+  - first:
+      213: -8838376741699805091
+    second: TCell_IdleSprite_21
+  - first:
+      213: 3214185824418357835
+    second: TCell_IdleSprite_22
+  - first:
+      213: -4563727025765096703
+    second: TCell_IdleSprite_23
+  - first:
+      213: 537914882761767684
+    second: TKCell_IdleSprite_0
+  - first:
+      213: 7020793457668649555
+    second: TKCell_IdleSprite_1
+  - first:
+      213: 6545061699466597647
+    second: TKCell_IdleSprite_2
+  - first:
+      213: 6856642577072285792
+    second: TKCell_IdleSprite_3
+  - first:
+      213: -2515508561385896350
+    second: TKCell_IdleSprite_4
+  - first:
+      213: -8559224154681621447
+    second: TKCell_IdleSprite_5
+  - first:
+      213: 4821154114373435404
+    second: TKCell_IdleSprite_6
+  - first:
+      213: -5815777347462562652
+    second: TKCell_IdleSprite_7
+  - first:
+      213: 8657923222804075766
+    second: TKCell_IdleSprite_8
+  - first:
+      213: 6154728212617233264
+    second: TKCell_IdleSprite_9
+  - first:
+      213: 3873899369294615058
+    second: TKCell_IdleSprite_10
+  - first:
+      213: -8693867601868233833
+    second: TKCell_IdleSprite_11
+  - first:
+      213: -1503067458182215312
+    second: TKCell_IdleSprite_12
+  - first:
+      213: -7663733293102483457
+    second: TKCell_IdleSprite_13
+  - first:
+      213: -32776543109023205
+    second: TKCell_IdleSprite_14
+  - first:
+      213: 6255382725184725446
+    second: TKCell_IdleSprite_15
+  - first:
+      213: 8829896782162976308
+    second: TKCell_IdleSprite_16
+  - first:
+      213: 7416909904231715697
+    second: TKCell_IdleSprite_17
+  - first:
+      213: -2149506474131199892
+    second: TKCell_IdleSprite_18
+  - first:
+      213: 5360618850725663711
+    second: TKCell_IdleSprite_19
+  - first:
+      213: -4045673921901929834
+    second: TKCell_IdleSprite_20
+  - first:
+      213: 4632682875858330627
+    second: TKCell_IdleSprite_21
+  - first:
+      213: -6701511066759681004
+    second: TKCell_IdleSprite_22
+  - first:
+      213: 9159689377409147311
+    second: TKCell_IdleSprite_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40b39626cbe077700800000000000000
+      internalID: 537914882761767684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 352f9b5b37ede6160800000000000000
+      internalID: 7020793457668649555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0598bd30fab4da50800000000000000
+      internalID: 6545061699466597647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06866368810b72f50800000000000000
+      internalID: 6856642577072285792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 266c3298a4e171dd0800000000000000
+      internalID: -2515508561385896350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9344243eaf6873980800000000000000
+      internalID: -8559224154681621447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0044aa9f1e28e240800000000000000
+      internalID: 4821154114373435404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4acfab7d0553a4fa0800000000000000
+      internalID: -5815777347462562652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f497dbac4f172870800000000000000
+      internalID: 8657923222804075766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_9
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073002243bcf96550800000000000000
+      internalID: 6154728212617233264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2125a6a93fad2c530800000000000000
+      internalID: 3873899369294615058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_11
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793ed5a6a7d295780800000000000000
+      internalID: -8693867601868233833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07989914c18042be0800000000000000
+      internalID: -1503067458182215312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7ba439c23f4a590800000000000000
+      internalID: -7663733293102483457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a750f58ed8b8ff0800000000000000
+      internalID: -32776543109023205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c120c432759fc650800000000000000
+      internalID: 6255382725184725446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43e503037581a8a70800000000000000
+      internalID: 8829896782162976308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 173decce2482ee660800000000000000
+      internalID: 7416909904231715697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c68e107104b6b22e0800000000000000
+      internalID: -2149506474131199892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd314c5617eb46a40800000000000000
+      internalID: 5360618850725663711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a59ffb001ead7c0800000000000000
+      internalID: -4045673921901929834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3042294d7889a4040800000000000000
+      internalID: 4632682875858330627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_22
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41ca07fd0337ff2a0800000000000000
+      internalID: -6701511066759681004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_IdleSprite_23
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa1246965f0cd1f70800000000000000
+      internalID: 9159689377409147311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

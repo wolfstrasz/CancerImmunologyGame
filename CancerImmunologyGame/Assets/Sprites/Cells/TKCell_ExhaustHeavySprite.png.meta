@@ -1,0 +1,800 @@
+fileFormatVersion: 2
+guid: 702a76eeaf9903a40a2d2032d0c88652
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -594001927633341817
+    second: T-Cell_ES2Sprite_0
+  - first:
+      213: -5711708067800150776
+    second: T-Cell_ES2Sprite_1
+  - first:
+      213: 7018142252086806132
+    second: T-Cell_ES2Sprite_2
+  - first:
+      213: 3156162197854502548
+    second: T-Cell_ES2Sprite_3
+  - first:
+      213: -6585034358465810195
+    second: T-Cell_ES2Sprite_4
+  - first:
+      213: -7503394260005417587
+    second: T-Cell_ES2Sprite_5
+  - first:
+      213: -9065830451670289820
+    second: T-Cell_ES2Sprite_6
+  - first:
+      213: 2471018399592156938
+    second: T-Cell_ES2Sprite_7
+  - first:
+      213: -2795741187133443877
+    second: T-Cell_ES2Sprite_8
+  - first:
+      213: -750137888633251098
+    second: T-Cell_ES2Sprite_9
+  - first:
+      213: -421102826751238450
+    second: T-Cell_ES2Sprite_10
+  - first:
+      213: 2261545418648228117
+    second: T-Cell_ES2Sprite_11
+  - first:
+      213: -5047698341855430874
+    second: T-Cell_ES2Sprite_12
+  - first:
+      213: -9053427890965487100
+    second: T-Cell_ES2Sprite_13
+  - first:
+      213: -6858846655900055155
+    second: T-Cell_ES2Sprite_14
+  - first:
+      213: -7062713362830215395
+    second: T-Cell_ES2Sprite_15
+  - first:
+      213: -5312643198609051731
+    second: T-Cell_ES2Sprite_16
+  - first:
+      213: -7577274981850439713
+    second: T-Cell_ES2Sprite_17
+  - first:
+      213: -8264566502746784434
+    second: T-Cell_ES2Sprite_18
+  - first:
+      213: -3039256635025510801
+    second: T-Cell_ES2Sprite_19
+  - first:
+      213: -2792311253171745976
+    second: T-Cell_ES2Sprite_20
+  - first:
+      213: -1011720722990969733
+    second: T-Cell_ES2Sprite_21
+  - first:
+      213: -1061001662400804687
+    second: T-Cell_ES2Sprite_22
+  - first:
+      213: 5660623443082281216
+    second: T-Cell_ES2Sprite_23
+  - first:
+      213: 187585537889275928
+    second: TKCell_ExhaustHeavySprite_0
+  - first:
+      213: -5245400367719854408
+    second: TKCell_ExhaustHeavySprite_1
+  - first:
+      213: -4450577272558723519
+    second: TKCell_ExhaustHeavySprite_2
+  - first:
+      213: -4550310336424532809
+    second: TKCell_ExhaustHeavySprite_3
+  - first:
+      213: 8525971879309499818
+    second: TKCell_ExhaustHeavySprite_4
+  - first:
+      213: -6258317734631561010
+    second: TKCell_ExhaustHeavySprite_5
+  - first:
+      213: 5807320892058678682
+    second: TKCell_ExhaustHeavySprite_6
+  - first:
+      213: 1587212688934347674
+    second: TKCell_ExhaustHeavySprite_7
+  - first:
+      213: 5845840591980089769
+    second: TKCell_ExhaustHeavySprite_8
+  - first:
+      213: 5826297136186395966
+    second: TKCell_ExhaustHeavySprite_9
+  - first:
+      213: -2289151869205290792
+    second: TKCell_ExhaustHeavySprite_10
+  - first:
+      213: -6448172253466549698
+    second: TKCell_ExhaustHeavySprite_11
+  - first:
+      213: -1314497870270774012
+    second: TKCell_ExhaustHeavySprite_12
+  - first:
+      213: -4009433086159474014
+    second: TKCell_ExhaustHeavySprite_13
+  - first:
+      213: -3577848379891369444
+    second: TKCell_ExhaustHeavySprite_14
+  - first:
+      213: -8370685506490980485
+    second: TKCell_ExhaustHeavySprite_15
+  - first:
+      213: -512957813307442071
+    second: TKCell_ExhaustHeavySprite_16
+  - first:
+      213: -6176858582038294398
+    second: TKCell_ExhaustHeavySprite_17
+  - first:
+      213: -7781008029107758790
+    second: TKCell_ExhaustHeavySprite_18
+  - first:
+      213: 1980191321507939362
+    second: TKCell_ExhaustHeavySprite_19
+  - first:
+      213: -2968978476945601806
+    second: TKCell_ExhaustHeavySprite_20
+  - first:
+      213: 1984798187578830546
+    second: TKCell_ExhaustHeavySprite_21
+  - first:
+      213: -8981291387286158610
+    second: TKCell_ExhaustHeavySprite_22
+  - first:
+      213: -6164110251325843759
+    second: TKCell_ExhaustHeavySprite_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 512
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81014e68d007a9200800000000000000
+      internalID: 187585537889275928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_1
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8beca5928289437b0800000000000000
+      internalID: -5245400367719854408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_2
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ed5bffc8f5c32c0800000000000000
+      internalID: -4450577272558723519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_3
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b4a0ab8bdc0ad0c0800000000000000
+      internalID: -4550310336424532809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_4
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aad563f6046525670800000000000000
+      internalID: 8525971879309499818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_5
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1539
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec822c7ad2df529a0800000000000000
+      internalID: -6258317734631561010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a95bcd3359fb79050800000000000000
+      internalID: 5807320892058678682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_7
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93aceaf789e60610800000000000000
+      internalID: 1587212688934347674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_8
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1588abb09902150800000000000000
+      internalID: 5845840591980089769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_9
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3d0446506a2bd050800000000000000
+      internalID: 5826297136186395966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d0e81fd08c4b30e0800000000000000
+      internalID: -2289151869205290792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_11
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 1026
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e32a895df7d7386a0800000000000000
+      internalID: -6448172253466549698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 405c088c627f1cde0800000000000000
+      internalID: -1314497870270774012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_13
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a234ccd9d1ab58c0800000000000000
+      internalID: -4009433086159474014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_14
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1a3e50dadde85ec0800000000000000
+      internalID: -3577848379891369444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_15
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b772813b1e955db80800000000000000
+      internalID: -8370685506490980485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_16
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96c7c09269b91e8f0800000000000000
+      internalID: -512957813307442071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_17
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 513
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280d8c598d3674aa0800000000000000
+      internalID: -6176858582038294398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a39d19e4c6e440490800000000000000
+      internalID: -7781008029107758790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_19
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224cac1f38d0b7b10800000000000000
+      internalID: 1980191321507939362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_20
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa80e73ec11cc6d0800000000000000
+      internalID: -2968978476945601806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_21
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dea9798f6b6b8b10800000000000000
+      internalID: 1984798187578830546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_22
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee28884711b0c5380800000000000000
+      internalID: -8981291387286158610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TKCell_ExhaustHeavySprite_23
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 513
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d61161a26ea47aa0800000000000000
+      internalID: -6164110251325843759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

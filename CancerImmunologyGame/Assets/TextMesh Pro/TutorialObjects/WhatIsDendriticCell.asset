@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee8943749af9954eb5e22bdb608888e, type: 3}
+  m_Name: WhatIsDendriticCell
+  m_EditorClassIdentifier: 
+  txt: "DCs are the scouts of the body, roaming all tissues in the search for signs
+    of germs, also known as pathogens, and for signs that indicate danger. It seems
+    our buddy DC here has sensed some danger and has come to the lymph node to inform
+    T cells like you about it! Why don\u2019t you go and see what he has to say?"
+  shouldDisplayText: 1
+  doAction: 0
+  skipButton: 1

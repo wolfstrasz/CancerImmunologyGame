@@ -1,0 +1,422 @@
+fileFormatVersion: 2
+guid: c2fc9db9946e974408440a163d73b19d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4862962124498957469
+    second: GasSpriteSheet_0
+  - first:
+      213: -7342587416855907354
+    second: GasSpriteSheet_1
+  - first:
+      213: -492057473798492995
+    second: GasSpriteSheet_2
+  - first:
+      213: 5591788313770216182
+    second: GasSpriteSheet_3
+  - first:
+      213: -8550236416920386689
+    second: GasSpriteSheet_4
+  - first:
+      213: 1821772420973128201
+    second: GasSpriteSheet_5
+  - first:
+      213: 57167508350324415
+    second: GasSpriteSheet_6
+  - first:
+      213: 5844147327869386342
+    second: GasSpriteSheet_7
+  - first:
+      213: 4763989637860927532
+    second: GasSpriteSheet_8
+  - first:
+      213: 195493685527049520
+    second: GasSpriteSheet_9
+  - first:
+      213: 8047380848935972700
+    second: GasSpriteSheet_10
+  - first:
+      213: -4493461790853432862
+    second: GasSpriteSheet_11
+  - first:
+      213: 4130469313446161396
+    second: GasSpriteSheet_12
+  - first:
+      213: -5970288891421363547
+    second: GasSpriteSheet_13
+  - first:
+      213: -1078584418944307368
+    second: GasSpriteSheet_14
+  - first:
+      213: -3925010625720329862
+    second: GasSpriteSheet_15
+  - first:
+      213: -8404358678960328391
+    second: GasSpriteSheet_16
+  - first:
+      213: 7883222248194932865
+    second: GasSpriteSheet_17
+  - first:
+      213: -466589002830196613
+    second: GasSpriteSheet_18
+  - first:
+      213: 3299471878986721420
+    second: GasSpriteSheet_19
+  - first:
+      213: -4814936253427553384
+    second: GasSpriteSheet_20
+  - first:
+      213: -3498844695421008979
+    second: GasSpriteSheet_21
+  - first:
+      213: 5767921878126821190
+    second: GasSpriteSheet_22
+  - first:
+      213: 616889678607226169
+    second: GasSpriteSheet_23
+  - first:
+      213: 2803983708479871729
+    second: GasSpriteSheet_24
+  - first:
+      213: -2473484596767589516
+    second: GasSpriteSheet_25
+  - first:
+      213: -8120627991133740343
+    second: GasSpriteSheet_26
+  - first:
+      213: -9165113020888252348
+    second: GasSpriteSheet_27
+  - first:
+      213: 1123055127863847597
+    second: GasSpriteSheet_28
+  - first:
+      213: 4742286396143383599
+    second: GasSpriteSheet_29
+  - first:
+      213: 4109679084556872941
+    second: GasSpriteSheet_30
+  - first:
+      213: 5578687626420048499
+    second: GasSpriteSheet_31
+  - first:
+      213: 3280923755333076010
+    second: GasSpriteSheet_32
+  - first:
+      213: -7686127818285133898
+    second: GasSpriteSheet_33
+  - first:
+      213: -5440429321071341485
+    second: GasSpriteSheet_34
+  - first:
+      213: 4505308693631421603
+    second: GasSpriteSheet_35
+  - first:
+      213: -4496787826841187623
+    second: GasSpriteSheet_36
+  - first:
+      213: 3341454738484879989
+    second: GasSpriteSheet_37
+  - first:
+      213: -48048419134750184
+    second: GasSpriteSheet_38
+  - first:
+      213: -8297755882882824684
+    second: GasSpriteSheet_39
+  - first:
+      213: 6639400485715834253
+    second: GasSpriteSheet_40
+  - first:
+      213: 961156724229280448
+    second: GasSpriteSheet_41
+  - first:
+      213: 6114115745040067968
+    second: GasSpriteSheet_42
+  - first:
+      213: -7751887672379760648
+    second: GasSpriteSheet_43
+  - first:
+      213: -3222953414924087950
+    second: GasSpriteSheet_44
+  - first:
+      213: 6370381774228187309
+    second: GasSpriteSheet_45
+  - first:
+      213: -6586035679228776770
+    second: GasSpriteSheet_46
+  - first:
+      213: -5330416742689792951
+    second: GasSpriteSheet_47
+  - first:
+      213: 1652472193976181524
+    second: GasSpriteSheet_20
+  - first:
+      213: -6766600651721585991
+    second: GasSpriteSheet_21
+  - first:
+      213: -2607890707387597120
+    second: GasSpriteSheet_22
+  - first:
+      213: -1546114096556400273
+    second: GasSpriteSheet_23
+  - first:
+      213: 7505105924086408520
+    second: GasSpriteSheet_31
+  - first:
+      213: -6493362765520729336
+    second: GasSpriteSheet_32
+  - first:
+      213: 8924211864532688752
+    second: GasSpriteSheet_33
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GasSpriteSheet_39
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 0
+        width: 120
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4168cd7ecf278dc80800000000000000
+      internalID: -8297755882882824684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasSpriteSheet_41
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 0
+        width: 120
+        height: 100
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c21a21c2f6b65d00800000000000000
+      internalID: 961156724229280448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasSpriteSheet_42
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08d6cba40e3b9d450800000000000000
+      internalID: 6114115745040067968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasSpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 376
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36b8f0d76b9438cb0800000000000000
+      internalID: -4862962124498957469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GasSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 376
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e3fc06a5a3e91a90800000000000000
+      internalID: -7342587416855907354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 02f295f2cbcbb7649b45d3f1b1477165
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
