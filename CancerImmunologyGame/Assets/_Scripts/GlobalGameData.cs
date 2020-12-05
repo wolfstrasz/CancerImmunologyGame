@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GlobalGameData : SSystem<GlobalGameData>
 {
+	[Header("Game attributes")]
+	public bool isGameplayPaused = false;
+
+
+	[Header("Player attributes")]
     public float health = 100;
     public float maxHealth = 100;
-
     public float exhaustion = 0;
     public float maxExhaustion = 100;
 
@@ -25,15 +29,24 @@ public class GlobalGameData : SSystem<GlobalGameData>
     void Awake()
     {
         health = maxHealth;
-        healthBar.SetMaxValue(maxHealth);
-		healthBar.SetValue(maxHealth);
+		if (healthBar != null)
+		{
+			healthBar.SetMaxValue(maxHealth);
+			healthBar.SetValue(maxHealth);
+		} else Debug.LogWarning("Health bar is not linked to global data");
 
-        exhaustion = 0.0f;
-        exhaustionBar.SetMaxValue(maxExhaustion);
+		exhaustion = 0.0f;
+		if (exhaustionBar != null)
+		{
+			exhaustionBar.SetMaxValue(maxExhaustion);
+		} else Debug.LogWarning("Exhaust bar is not linked to global data");
 
-        powerUp = 100.0f;
-        powerUpBar.SetMaxValue(maxPowerUp);
-    }
+		powerUp = 100.0f;
+		if (powerUpBar != null)
+		{
+			powerUpBar.SetMaxValue(maxPowerUp);
+		} else Debug.LogWarning("Power up bar is not linked to global data");
+	}
 
 
 
@@ -104,7 +117,7 @@ public class GlobalGameData : SSystem<GlobalGameData>
 
     void Update()
     {
-        if (UIManager.Instance.isPaused) return;
+        if (isGameplayPaused) return;
         if (powerUp == maxPowerUp)
         {
             UIManager.Instance.ImmunotherapyIcon.color = UIManager.Instance.ImmunotherapyCanActivateColour;

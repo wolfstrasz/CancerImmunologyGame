@@ -59,11 +59,12 @@ public class PlayerController : MonoBehaviour
     // input
     void Update()
     {
-        if (UIManager.Instance.isPaused)
-        {
-            movement = new Vector2(0.0f, 0.0f);
-            return;
-        }
+		if (GlobalGameData.Instance.isGameplayPaused)
+		{
+			movement = new Vector2(0.0f, 0.0f);
+			return;
+		}
+
         if (isPlayerRespawning) return;
 
         if (GlobalGameData.Instance.powerUp == 0.0f)
@@ -133,6 +134,11 @@ public class PlayerController : MonoBehaviour
     // physics update
     void FixedUpdate()
     {
+		if (GlobalGameData.Instance.isGameplayPaused)
+		{
+			return;
+		}
+
         if (isPlayerRespawning) return;
 
         if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
@@ -150,11 +156,6 @@ public class PlayerController : MonoBehaviour
         Vector2 dampedMove = move * (GlobalGameData.Instance.maxExhaustion - GlobalGameData.Instance.exhaustion) / GlobalGameData.Instance.maxExhaustion;
         Vector2 finalPos =  dampedMove + rb.position;
         rb.MovePosition(finalPos);
-    }
-
-    private void OnTriggerEnter2D (Collider2D collider)
-    {
-        //collider.gameObject
     }
 
     private void AttackCancerCells()
