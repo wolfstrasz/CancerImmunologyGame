@@ -10,12 +10,14 @@ public class Cancer : MonoBehaviour
 	private List<CancerCell> cancerCells = new List<CancerCell>();
 
 	private List<Vector3> availableLocations = new List<Vector3>();
-	private Dictionary<Vector3, int> availableLocationDensity = new Dictionary<Vector3, int>();
+	private Dictionary<Vector3, int> availableLocationsByDensity = new Dictionary<Vector3, int>();
 	private Dictionary<Vector3, CancerCell> spawnOwners = new Dictionary<Vector3, CancerCell>();
 	private int nextSortOrder = 0;
 
+	// Division handling
 	public CancerCell cellToDivide;
 	public Vector3 locationToSpawn;
+	private bool canDivide = false;
 
 	[Header("Spawn Attributes")]
 	[SerializeField]
@@ -25,9 +27,20 @@ public class Cancer : MonoBehaviour
 	[SerializeField]
 	private float angleRotation = 60.0f;
 	[SerializeField]
-	private bool packed = false;
-	[SerializeField]
 	private float offsetOfAnimation = 0.2f;
+	[SerializeField]
+	private bool keepCellsPacked = false;
+	[SerializeField]
+	[Range(5.0f, 100.0f)]
+	private float timeBetweenDivisions = 10.0f;
+	public float timePassed = 0.0f;
+
+	[Header("Generation attributes")]
+	[SerializeField]
+	private bool shouldGenerateCancer = false;
+	[SerializeField]
+	private int cellsToGenerate = 0;
+
 	[Header("Debug Attributes")]
 	[SerializeField]
 	private bool debugPlotting = false;
@@ -56,15 +69,38 @@ public class Cancer : MonoBehaviour
 			cell.SetSortOrder(nextSortOrder);
 			++nextSortOrder;
 		}
+		canDivide = true;
+
+		if (shouldGenerateCancer)
+		{
+			GenerateCancer();
+		}
 	}
 
 	void Update()
 	{
+
 		if (Input.GetKeyDown(KeyCode.Alpha0))
 		{
 			FullDivisionProcess();
 		}
+
+		if (/*!GlobalGameData.Instance.isGameplayPaused  && */ canDivide)
+		{
+			timePassed += Time.deltaTime;
+			if (timePassed > timeBetweenDivisions)
+			{
+				timePassed = 0.0f;
+				FullDivisionProcess();
+			}
+
+		}
+
+
+
 	}
+
+
 	void FindAllSpotsAvailable()
 	{
 		float distance = radius * 2.0f + offsetOfAnimation;
@@ -93,15 +129,44 @@ public class Cancer : MonoBehaviour
 						Debug.Log(hit.collider.gameObject.name);
 						blockers.Add(hit.collider.gameObject);
 					}
+
+					if (blockers.Count >= 2)
+					{
+						break;
+					}
 				}
 
-				if (blockers.Count <= 1)
+				if (blockers.Count <= 1 )
 				{
 					nextSpawnLocation = cell.transform.position + (circleCastDirection * distance);
-					availableLocations.Add(nextSpawnLocation);
-					if (!spawnOwners.ContainsKey(nextSpawnLocation))
+					// Clamp the floating parts to 3 decimal places
+					nextSpawnLocation.x = Mathf.Round(nextSpawnLocation.x * 1000.0f) / 1000.0f;
+					nextSpawnLocation.y = Mathf.Round(nextSpawnLocation.y * 1000.0f) / 1000.0f;
+
+					if (keepCellsPacked)
 					{
-						spawnOwners.Add(nextSpawnLocation, cell);
+						if (availableLocationsByDensity.ContainsKey(nextSpawnLocation))
+						{
+							++availableLocationsByDensity[nextSpawnLocation];
+							Debug.Log("New location with density: " + availableLocationsByDensity[nextSpawnLocation]);
+						} else
+						{
+							Debug.Log("Adding to dictionary: " + nextSpawnLocation);
+							availableLocationsByDensity.Add(nextSpawnLocation, 1);
+
+							if (!spawnOwners.ContainsKey(nextSpawnLocation))
+							{
+								spawnOwners.Add(nextSpawnLocation, cell);
+							}
+						}
+					}
+					else
+					{
+						availableLocations.Add(nextSpawnLocation);
+						if (!spawnOwners.ContainsKey(nextSpawnLocation))
+						{
+							spawnOwners.Add(nextSpawnLocation, cell);
+						}
 					}
 
 				}
@@ -111,26 +176,54 @@ public class Cancer : MonoBehaviour
 		}
 
 		if (debugPlotting)
-			for (int i = 0; i < availableLocations.Count; i++)
+		{
+			if (keepCellsPacked)
 			{
-				allPlottingObjects.Add(Instantiate(availablePointsPrefab, availableLocations[i], Quaternion.identity, debugPlotSpawn));
+				foreach (var location in availableLocationsByDensity.Keys)
+				{
+					allPlottingObjects.Add(Instantiate(availablePointsPrefab, location, Quaternion.identity, debugPlotSpawn));
+				}
 			}
+			else
+			{
+				foreach (var location in availableLocations)
+				{
+					allPlottingObjects.Add(Instantiate(availablePointsPrefab, location, Quaternion.identity, debugPlotSpawn));
+				}
+			}
+		}
 	}
 
 	void FindSpawnSpot()
 	{
 		// Packed algorithm to make cancer be more packed
-		if (packed)
+		if (keepCellsPacked)
 		{
 			int max = 0;
-			foreach (var key in availableLocationDensity.Keys)
+			List<Vector3> possibleLocationsToSpawn = new List<Vector3>();
+			foreach (var key in availableLocationsByDensity.Keys)
 			{
-				if (availableLocationDensity[key] > max)
+				if (availableLocationsByDensity[key] > max)
 				{
-					max = availableLocationDensity[key];
-					locationToSpawn = key;
+					max = availableLocationsByDensity[key];
+					Debug.Log("Found new max: " + max);
 				}
 			}
+
+			foreach (var key in availableLocationsByDensity.Keys)
+			{
+				if (availableLocationsByDensity[key] == max)
+				{
+					Debug.Log("Found item with value(" + availableLocationsByDensity[key] + ") == " + max);
+					possibleLocationsToSpawn.Add(key);
+				}
+			}
+			
+
+			int index = (int)UnityEngine.Random.Range(0.0f, possibleLocationsToSpawn.Count - 1);
+			Debug.Log(possibleLocationsToSpawn.Count);
+			Debug.Log("index = " + index);
+			locationToSpawn = possibleLocationsToSpawn[index];
 		}
 		else // Choose a random point to spawn next cell
 		{
@@ -164,7 +257,7 @@ public class Cancer : MonoBehaviour
 	void ResetDivisionProcess()
 	{
 		availableLocations.Clear();
-		availableLocationDensity.Clear();
+		availableLocationsByDensity.Clear();
 		while (allPlottingObjects.Count > 0)
 		{
 			var plotOBj = allPlottingObjects[0];
@@ -191,14 +284,37 @@ public class Cancer : MonoBehaviour
 		cancerCells.Add(newCell);
 
 		cellToDivide.StartReturnFromDivision();
+		canDivide = true;
 	}
 
 	public void FullDivisionProcess()
 	{
+		if (!canDivide) return;
+		canDivide = false;
 		ResetDivisionProcess();
 		FindAllSpotsAvailable();
 		FindSpawnSpot();
 		StartDivision();
+	}
 
+	public void GenerateCancer()
+	{
+		bool old_debug = debugPlotting;
+		debugPlotting = false;
+
+		for (int i = 0; i < cellsToGenerate; ++i)
+		{
+			ResetDivisionProcess();
+			FindAllSpotsAvailable();
+			FindSpawnSpot();
+
+			// Request new cell to spawn and make the spawning cell return to its previous
+			CancerCell newCell = Instantiate(cancerCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CancerCell>();
+			newCell.cancer = this;
+			newCell.SetSortOrder(nextSortOrder);
+			++nextSortOrder;
+			cancerCells.Add(newCell);
+		}
+		debugPlotting = old_debug;
 	}
 }

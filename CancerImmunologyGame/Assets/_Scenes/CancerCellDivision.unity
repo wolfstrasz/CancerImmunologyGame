@@ -156,11 +156,16 @@ MonoBehaviour:
   cellToDivide: {fileID: 0}
   locationToSpawn: {x: 0, y: 0, z: 0}
   radius: 0.3
-  radiusThinner: 0.1
+  radiusThinner: 0.15
   angleRotation: 60
-  packed: 0
-  debugPlotting: 1
   offsetOfAnimation: 0.2
+  keepCellsPacked: 0
+  timeBetweenDivisions: 17.4
+  timePassed: 0
+  shouldGenerateCancer: 1
+  cellsToGenerate: 8
+  debugPlotting: 0
+  debugPlotSpawn: {fileID: 176563592}
   availablePointsPrefab: {fileID: 4068078220915920113, guid: 23529fd81df7ac34b9a4443d174201b2,
     type: 3}
   spawnPointPrefab: {fileID: 3472657850428938718, guid: 19b8b34ad8b8d644f9dc319f033cd451,
@@ -178,6 +183,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 176563592}
   - {fileID: 1583333522}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -193,6 +199,36 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &176563591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 176563592}
+  m_Layer: 0
+  m_Name: DebugPlotSpawnLocation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &176563592
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176563591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1775138}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &638894337
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +578,7 @@ PrefabInstance:
     - target: {fileID: 1070459107712460834, guid: 4e2983c11d3771641aedecdfd8d8140d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1070459107712460834, guid: 4e2983c11d3771641aedecdfd8d8140d,
         type: 3}
