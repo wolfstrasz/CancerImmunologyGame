@@ -12,15 +12,9 @@ public class CancerCell : MonoBehaviour
     [SerializeField]
     private GameObject hypoxicArea = null;
     [SerializeField]
-    private Animator animator;
+    private Animator animator = null;
 
     public float health = 100;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        UIManager.Instance.allCancerCells.Add(this);
-    }
 
     void Awake()
     {
@@ -32,9 +26,7 @@ public class CancerCell : MonoBehaviour
     IEnumerator DestroyCell()
     {
         bodyBlocker.enabled = false;
-        UIManager.Instance.allCancerCells.Remove(this);
 		hypoxicArea.gameObject.SetActive(false);
-
 
         animator.SetTrigger("Apoptosis");
 		yield return new WaitForSeconds(wait_before_destroy); 
@@ -44,12 +36,6 @@ public class CancerCell : MonoBehaviour
 
     public void HitCell()
     {
-
-        if (!first_hit)
-        {
-            first_hit = true;
-            UIManager.Instance.StartRegulatoryCellTutorial();
-        }
         health -= 20f;
         if (health <= 0)
         {

@@ -22,7 +22,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.isPaused) return;
+        if (GlobalGameData.Instance.isPaused) return;
 
         if (isSpreading)
         {

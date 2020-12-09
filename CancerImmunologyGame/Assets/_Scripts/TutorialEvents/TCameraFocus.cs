@@ -5,7 +5,7 @@ using UnityEngine;
 public class TCameraFocus : TutorialEvent
 {
 	[SerializeField]
-	private FocusObjectType closestObjectTypeToFocusOn;
+	private FocusObjectType closestObjectTypeToFocusOn = FocusObjectType.NONE;
 
 	protected override void OnEnd()
 	{
@@ -14,6 +14,7 @@ public class TCameraFocus : TutorialEvent
 
 	protected override void OnStart()
 	{
+		if (closestObjectTypeToFocusOn == FocusObjectType.NONE) return;
 		if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)
 		{
 			GameObject playerObj = FindObjectOfType<PlayerController>().gameObject;
@@ -47,5 +48,5 @@ public class TCameraFocus : TutorialEvent
 		return false;
 	}
 
-	private enum FocusObjectType { PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER }
+	private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER }
 }

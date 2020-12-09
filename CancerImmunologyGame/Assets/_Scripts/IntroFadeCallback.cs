@@ -7,7 +7,8 @@ namespace Preload
 	public class IntroFadeCallback : MonoBehaviour
 	{
 		[SerializeField]
-		private Animator animator;
+		private Animator animator = null;
+
 		internal void StartFade()
 		{
 			animator.SetTrigger("Fade");

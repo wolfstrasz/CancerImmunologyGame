@@ -7,8 +7,6 @@ public class TTextInfo : TutorialEvent
 
 	[Header("Text Displayed")]
 	[SerializeField]
-	private bool hasText = false;
-	[SerializeField]
 	private string text = "";
 
 	[Header("Skipping functionality")]

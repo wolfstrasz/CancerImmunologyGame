@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GlobalGameData : Singleton<GlobalGameData>
 {
+	public bool isPaused = false;
+	public bool isControlOff = false;
+
     public float health = 100;
     public float maxHealth = 100;
 
@@ -16,11 +19,11 @@ public class GlobalGameData : Singleton<GlobalGameData>
     public bool isInPowerUpMode = false;
 
     [SerializeField]
-    private HealthBar healthBar;
+    private HealthBar healthBar = null;
     [SerializeField]
-    private ExhaustionBar exhaustionBar;
+    private ExhaustionBar exhaustionBar = null;
     [SerializeField]
-    private ImmunotherapyBar powerUpBar;
+    private ImmunotherapyBar powerUpBar = null;
 
     void Awake()
     {
@@ -44,12 +47,6 @@ public class GlobalGameData : Singleton<GlobalGameData>
         if (health > maxHealth) health = maxHealth;
         else if (health < 0.0f) health = 0.0f;
         healthBar.SetValue(health);
-
-        //if (isInPowerUpMode) return;
-        if ( value <= 0.0f)
-        {
-            UIManager.Instance.StartHealthTutorial();
-        }
     }
 
     public void AddExhaustion(float value)
@@ -60,10 +57,6 @@ public class GlobalGameData : Singleton<GlobalGameData>
         if (exhaustion > maxExhaustion) exhaustion = maxExhaustion;
         else if (exhaustion < 0.0f) exhaustion = 0.0f;
 
-        if (exhaustion > maxExhaustion / 2.0f)
-        {
-            UIManager.Instance.StartExhaustTutorial();
-        }
         exhaustionBar.SetValue(exhaustion);
     }
 
@@ -104,7 +97,9 @@ public class GlobalGameData : Singleton<GlobalGameData>
 
     void Update()
     {
-        if (UIManager.Instance.isPaused) return;
+
+		if (isPaused) return;
+
         if (powerUp == maxPowerUp)
         {
             UIManager.Instance.ImmunotherapyIcon.color = UIManager.Instance.ImmunotherapyCanActivateColour;

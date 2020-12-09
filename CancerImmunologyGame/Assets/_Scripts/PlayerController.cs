@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 movement;
     private bool isPlayerRespawning = false;
-    private bool attackIsOnCooldown = false;
-    public bool areControlsEnabled = false;
+	private bool attackIsOnCooldown = false;
+	public bool areControlsEnabled = false;
 
 
     // NEW ATTACK MECHANIC
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     // input
     void Update()
     {
-        if (UIManager.Instance.isPaused)
+        if (GlobalGameData.Instance.isPaused)
         {
             movement = new Vector2(0.0f, 0.0f);
             return;
@@ -154,38 +154,38 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D (Collider2D collider)
     {
-        //collider.gameObject
+
     }
 
     private void AttackCancerCells()
     {
 
-        if (!attackIsOnCooldown)
-        {
-            // Find closest
-            float minDist = 100000.0f;
-            CancerCell closestCell = null;
+   //     if (!attackIsOnCooldown)
+   //     {
+   //         // Find closest
+   //         float minDist = 100000.0f;
+   //         CancerCell closestCell = null;
 
-            foreach (var cell in UIManager.Instance.allCancerCells)
-            {
+			//foreach (var cell in GlobalGameData.Instance.allCancerCells)
+			//{
 
-                float dist = Vector3.Distance(transform.position, cell.transform.position);
-                if (dist < minDist)
-                {
-                    minDist = dist;
-                    closestCell = cell;
-                }
-            }
+			//	float dist = Vector3.Distance(transform.position, cell.transform.position);
+			//	if (dist < minDist)
+			//	{
+			//		minDist = dist;
+			//		closestCell = cell;
+			//	}
+			//}
 
-            if (minDist > 1.5f) return;
+			//if (minDist > 1.5f) return;
 
-            // hit it
-            animator.SetTrigger("Attacks");
-            GlobalGameData.Instance.AddExhaustion(7.5f);
+   //         // hit it
+   //         animator.SetTrigger("Attacks");
+   //         GlobalGameData.Instance.AddExhaustion(7.5f);
 
-            StartCoroutine(RunEffect(closestCell));
-            StartCoroutine(AttackCooldown());
-        }
+   //         StartCoroutine(RunEffect(closestCell));
+   //         StartCoroutine(AttackCooldown());
+   //     }
     }
 
     IEnumerator RunEffect(CancerCell closestCell)
