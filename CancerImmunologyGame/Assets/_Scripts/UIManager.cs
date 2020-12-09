@@ -44,6 +44,9 @@ public class UIManager : Singleton<UIManager>
     public Button ImmunotherapyButton = null;
 
 
+
+    /////////////////////////////////////
+    public GameObject BlackScreenPanel;
     public GameObject MainMenuPanel;
 
     // Update is called once per frame
@@ -153,17 +156,15 @@ public class UIManager : Singleton<UIManager>
     {
         JustRemoveTutorialText();
         Debug.Log("FOCUS ON DENDRITIC CELL");
-        SmoothCamera.Instance.currentTarget = dendriticCell;
+        SmoothCamera.Instance.focusTarget = dendriticCell;
         SmoothCamera.Instance.isCameraFocused = false;
-        SmoothCamera.Instance.nextTut = false;
     }
 
     public void FocusOnPlayer()
     {
         Debug.Log("FOCUS ON Player CELL");
-        SmoothCamera.Instance.currentTarget = playerObj;
+        SmoothCamera.Instance.focusTarget = playerObj;
         SmoothCamera.Instance.isCameraFocused = false;
-        SmoothCamera.Instance.nextTut = false;
     }
 
     public void SpawnTutorialPopUpAtDendriticCell()
@@ -202,7 +203,35 @@ public class UIManager : Singleton<UIManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+    public void StartGame()
+    {
+        StartCoroutine(RunGame(2.2f));
+    }
+
+    IEnumerator RunGame(float waitSeconds)
+    {
+        BlackScreenPanel.SetActive(true);
+        BlackScreenPanel.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(waitSeconds / 2.0f);
+        MainMenuPanel.SetActive(false);
+        BlackScreenPanel.GetComponent<Animator>().SetTrigger("FadeOut");
+
+        yield return new WaitForSeconds(waitSeconds / 2.0f);
+        BlackScreenPanel.SetActive(false);
+
+        isPaused = false;
+        NextTutorial();
+    }
     public bool isPaused = true;
+
+
+
+
+
+
+
+
 
     ///////////////////////////////////// 
     /// NEW TUTORIAL INFO
