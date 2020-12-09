@@ -133,6 +133,11 @@ public class PlayerController : MonoBehaviour
     // physics update
     void FixedUpdate()
     {
+		if (GlobalGameData.Instance.isGameplayPaused)
+		{
+			return;
+		}
+
         if (isPlayerRespawning) return;
 
         if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
@@ -150,11 +155,6 @@ public class PlayerController : MonoBehaviour
         Vector2 dampedMove = move * (GlobalGameData.Instance.maxExhaustion - GlobalGameData.Instance.exhaustion) / GlobalGameData.Instance.maxExhaustion;
         Vector2 finalPos =  dampedMove + rb.position;
         rb.MovePosition(finalPos);
-    }
-
-    private void OnTriggerEnter2D (Collider2D collider)
-    {
-
     }
 
     private void AttackCancerCells()
