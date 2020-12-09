@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalGameData : SSystem<GlobalGameData>
+public class GlobalGameData : Singleton<GlobalGameData>
 {
     public float health = 100;
     public float maxHealth = 100;

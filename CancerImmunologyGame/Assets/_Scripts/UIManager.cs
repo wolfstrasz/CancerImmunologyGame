@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class UIManager : SSystem<UIManager>
+public class UIManager : Singleton<UIManager>
 {
     [SerializeField]
     private PlayerController pc; // SHOULD BE REMOVED FROM HERE
@@ -44,9 +44,6 @@ public class UIManager : SSystem<UIManager>
     public Button ImmunotherapyButton = null;
 
 
-
-    /////////////////////////////////////
-    public GameObject BlackScreenPanel;
     public GameObject MainMenuPanel;
 
     // Update is called once per frame
@@ -205,35 +202,7 @@ public class UIManager : SSystem<UIManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
-    public void StartGame()
-    {
-        StartCoroutine(RunGame(2.2f));
-    }
-
-    IEnumerator RunGame(float waitSeconds)
-    {
-        BlackScreenPanel.SetActive(true);
-        BlackScreenPanel.GetComponent<Animator>().SetTrigger("FadeIn");
-        yield return new WaitForSeconds(waitSeconds / 2.0f);
-        MainMenuPanel.SetActive(false);
-        BlackScreenPanel.GetComponent<Animator>().SetTrigger("FadeOut");
-
-        yield return new WaitForSeconds(waitSeconds / 2.0f);
-        BlackScreenPanel.SetActive(false);
-
-        isPaused = false;
-        NextTutorial();
-    }
     public bool isPaused = true;
-
-
-
-
-
-
-
-
 
     ///////////////////////////////////// 
     /// NEW TUTORIAL INFO

@@ -2,7 +2,7 @@
 using System.Collections;
 
 //[RequireComponent(typeof(Camera))]
-public class SmoothCamera : SSystem<SmoothCamera>
+public class SmoothCamera : Singleton<SmoothCamera>
 {
 
     [SerializeField, Range(1.0f, 20.0f)]
