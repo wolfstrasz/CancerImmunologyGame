@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     // physics update
     void FixedUpdate()
     {
-		if (GlobalGameData.Instance.isGameplayPaused)
+		if (GlobalGameData.Instance.isPaused)
 		{
 			return;
 		}

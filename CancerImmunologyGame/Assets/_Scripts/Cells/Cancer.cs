@@ -21,9 +21,9 @@ public class Cancer : MonoBehaviour
 
 	[Header("Spawn Attributes")]
 	[SerializeField]
-	private float radius;
+	private float radius = 0.0f;
 	[SerializeField]
-	private float radiusThinner;
+	private float radiusThinner = 0.0f;
 	[SerializeField]
 	private float angleRotation = 60.0f;
 	[SerializeField]
