@@ -66,17 +66,17 @@ public class PlayerController : MonoBehaviour
         }
         if (isPlayerRespawning) return;
 
-        if (GlobalGameData.Instance.powerUp == 0.0f)
-        {
-            StopPowerUp();
-        }
+        //if (GlobalGameData.Instance.powerUp == 0.0f)
+        //{
+        //    StopPowerUp();
+        //}
 
         if (Vector3.Distance(gameObject.transform.position, ToTeleportFromLoc.position) <= 2.0f)
         {
             gameObject.transform.position = ArteryStartLoc.position;
         }
 
-        animator.SetFloat("ExhaustionRate", GlobalGameData.Instance.exhaustion / GlobalGameData.Instance.maxExhaustion);
+        //animator.SetFloat("ExhaustionRate", GlobalGameData.Instance.exhaustion / GlobalGameData.Instance.maxExhaustion);
         if (!areControlsEnabled)
         {
             movement = new Vector2(0.0f, 0.0f);
@@ -109,11 +109,11 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if(GlobalGameData.Instance.health <= 0.0f || GlobalGameData.Instance.exhaustion == GlobalGameData.Instance.maxExhaustion)
-        {
-            StartCoroutine(PlayerRespawn());
+        //if(GlobalGameData.Instance.health <= 0.0f || GlobalGameData.Instance.exhaustion == GlobalGameData.Instance.maxExhaustion)
+        //{
+        //    StartCoroutine(PlayerRespawn());
 
-        }
+        //}
     }
 
     IEnumerator PlayerRespawn()
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
         movement = new Vector2(0.0f, 0.0f);
         isPlayerRespawning = true;
         gameObject.transform.position = ArteryStartLoc.position;
-        GlobalGameData.Instance.SetHealth( GlobalGameData.Instance.maxHealth);
+        //GlobalGameData.Instance.SetHealth( GlobalGameData.Instance.maxHealth);
         GlobalGameData.Instance.SetExhaustion(0.0f);
 
         yield return new WaitForSeconds(1.0f);
@@ -152,7 +152,8 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Vector2 dampedMove = move * (GlobalGameData.Instance.maxExhaustion - GlobalGameData.Instance.exhaustion) / GlobalGameData.Instance.maxExhaustion;
+		Vector2 dampedMove = move;
+        //Vector2 dampedMove = move * (GlobalGameData.Instance.maxExhaustion - GlobalGameData.Instance.exhaustion) / GlobalGameData.Instance.maxExhaustion;
         Vector2 finalPos =  dampedMove + rb.position;
         rb.MovePosition(finalPos);
     }

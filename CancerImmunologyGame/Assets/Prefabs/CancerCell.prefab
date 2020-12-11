@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 2115141942196054472}
   - component: {fileID: 4638609810511901261}
   - component: {fileID: 6004634716518056576}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HypoxicArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1924093239740043509}
   - component: {fileID: 6606143670295674717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HypoxicAreaVisual2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 742392084620397936}
   - component: {fileID: 3378311121804379718}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HypoxicAreaVisual1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
