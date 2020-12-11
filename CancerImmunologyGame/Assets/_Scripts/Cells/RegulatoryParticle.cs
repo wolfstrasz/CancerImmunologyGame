@@ -88,7 +88,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     private void OnPlayerReached()
     {
-        GlobalGameData.AddExhaustion(exhaust_dmg);
+		PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         Die();
     }
 

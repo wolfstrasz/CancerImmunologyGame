@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class HypoxicArea : AreaOfEffect
 {
@@ -20,7 +21,7 @@ public class HypoxicArea : AreaOfEffect
 	{
 		if (GlobalGameData.isPaused) return;
 		if (isEffectDeactivated) return;
-		GlobalGameData.AddHealth(-0.02f); // Must change to global scriptable object values
+		PlayerUI.Instance.AddHealth(-0.02f); // Must change to global scriptable object values
 	}
 
 }

@@ -34,7 +34,7 @@ AnimationClip:
     - time: 0.23333333
       value: {fileID: 4399135591412269612, guid: 83060a317e155fe43b4fa7f38c66e842,
         type: 3}
-    - time: 0.28333333
+    - time: 0.3
       value: {fileID: -2865014427176923661, guid: 83060a317e155fe43b4fa7f38c66e842,
         type: 3}
     - time: 0.35
@@ -118,4 +118,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.33333334
+    functionName: OnAttackEffect
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.75
+    functionName: OnAttackFinished
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

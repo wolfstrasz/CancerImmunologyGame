@@ -130,7 +130,7 @@ public class RegulatoryCell : MonoBehaviour
             coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
         }
 
-        GlobalGameData.AddExhaustion(exhaust_dmg);
+		PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(StopBump());
     }
