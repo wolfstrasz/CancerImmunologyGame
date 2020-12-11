@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -279,11 +279,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0548bf8a00a470249a94f6b018e3108a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPersistent: 0
+  free_roam: 1
   zoomDistance: 5
-  currentTarget: {fileID: 0}
+  focusTarget: {fileID: 0}
   focusCenteringSpeed: 0.943
-  distanceDeltaToFocus: 0
-  nextTut: 0
   isCameraFocused: 0
 --- !u!114 &638894340
 MonoBehaviour:
@@ -381,60 +381,6 @@ Transform:
   - {fileID: 1202418975}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &969598548
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 969598550}
-  - component: {fileID: 969598549}
-  m_Layer: 0
-  m_Name: GlobalData
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &969598549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969598548}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59b3e2e2eaffe89428a7533ad3922590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGameplayPaused: 1
-  health: 100
-  maxHealth: 100
-  exhaustion: 0
-  maxExhaustion: 100
-  powerUp: 100
-  maxPowerUp: 100
-  isInPowerUpMode: 0
-  healthBar: {fileID: 0}
-  exhaustionBar: {fileID: 0}
-  powerUpBar: {fileID: 0}
---- !u!4 &969598550
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 969598548}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1202418974
 GameObject:

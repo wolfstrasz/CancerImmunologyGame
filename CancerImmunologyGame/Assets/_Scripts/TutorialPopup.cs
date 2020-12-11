@@ -2,24 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialPopup : MonoBehaviour
-{
-    //bool isActivated = false;
+namespace Tutorials {
+	public class TutorialPopup : MonoBehaviour
+	{
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        //if (!isActivated)
-        //{
-        //    PlayerController pc = collider.gameObject.GetComponent<PlayerController>();
-        //    if (pc != null)
-        //    {
-        //        Debug.Log("PopUpCollision");
-        //        isActivated = true;
-        //        if (gameObject.GetComponent<SpriteRenderer>() != null)
-        //            gameObject.GetComponent<SpriteRenderer>().sprite = null;
-        //        UIManager.Instance.NextTutorial();
-        //        //Destroy(gameObject);
-        //    }
-        //}
-    }
+		[SerializeField]
+		private GameObject visual = null;
+
+		private TReachObjective owner = null;
+
+
+		internal void SetAttributes(float size, bool isVisible, TReachObjective _owner)
+		{
+			transform.localScale = Vector3.one * size;
+			visual.SetActive(isVisible);
+			owner = _owner;
+		}
+
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			if (collider.gameObject == GlobalGameData.player)
+			{
+				collider.enabled = false;
+				gameObject.SetActive(false);
+				Debug.Log("PopUpCollision");
+				owner.Notify();
+			}
+		}
+	}
 }

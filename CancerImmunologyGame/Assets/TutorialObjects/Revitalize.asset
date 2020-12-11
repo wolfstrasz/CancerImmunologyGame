@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ee8943749af9954eb5e22bdb608888e, type: 3}
-  m_Name: WhatIsTKillerCell
+  m_Name: Revitalize
   m_EditorClassIdentifier: 
-  txt: Because of their strength and the possibility of killing healthy cells by
-    mistake, T cells like yourself are educated during development. However, the
-    risk of self-attack always exists. Therefore, T cells are given permission to
-    work by another cell kind, known as dendritic cells, also known as DCs.
+  txt: In time your TK cell will get exhausted or severely damaged. Go near the T-helper
+    cell (blue dot) to revitalize. Don't worry if you die, you will take control
+    of another TK cell.
   shouldDisplayText: 1
   doAction: 0
   skipButton: 1

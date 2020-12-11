@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Player;
 
 namespace Core
 {
@@ -10,14 +11,17 @@ namespace Core
 		// Game state definition through function
 		private delegate void StateFunction();
 		StateFunction StateUpdate;
+		StateFunction StateFixedUpdate;
 
+		private bool isLevelInitialised = false;
 		public void Initialise()
 		{
 			Time.timeScale = 1.0f;
-			//SceneManager.activeSceneChanged += OnActiveSceneChanged;
+			SceneManager.activeSceneChanged += OnActiveSceneChanged;
 
 			SceneManager.sceneLoaded += OnSceneLoaded;
 			StateUpdate = LevelMainMenu;
+			StateFixedUpdate = NoLevelFixedRunning;
 
 			GlobalGameData.gameplaySpeed = 1.0f;
 			GlobalGameData.gameSpeed = 1.0f;
@@ -26,10 +30,11 @@ namespace Core
 		}
 
 
-		//public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
-		//{
-		//		StateController.State = new LevelLoadingState(StateController);
-		//}
+		public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
+		{
+			StateUpdate = LevelLoading;
+			StateFixedUpdate = NoLevelFixedRunning;
+		}
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
@@ -40,7 +45,7 @@ namespace Core
 				return;
 			}
 
-
+			StartCoroutine(InitialiseLevel());
 			//GlobalData.levelData = LevelManager.Instance.GetLevelData(scene.buildIndex);
 			//GlobalData.SetPathTileGallery(scene.buildIndex);
 
@@ -55,19 +60,37 @@ namespace Core
 			//loadingSceneFinished = true;
 		}
 
+		private IEnumerator InitialiseLevel()
+		{
+			PlayerController.Instance.Initialise();
+			yield return null;
+		}
 
-
-		public void LevelMainMenu()
+		private void LevelMainMenu()
 		{
 
 		}
 
-		public void LevelLoading()
+		private void LevelLoading()
+		{
+			if (isLevelInitialised)
+			{
+				StateUpdate = LevelRunning;
+				StateFixedUpdate = LevelFixedRunning;
+			}
+		}
+
+		private void LevelFixedRunning()
+		{
+			PlayerController.Instance.OnFixedUpdate();
+		}
+
+		private void NoLevelFixedRunning()
 		{
 
 		}
 
-		public void LevelRunning()
+		private void LevelRunning()
 		{
 
 		}

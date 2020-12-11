@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public static class GlobalGameData
 {
@@ -10,6 +11,9 @@ public static class GlobalGameData
     public static bool isInPowerUpMode = false;
 	public static float gameplaySpeed = 1.0f;
 	public static float gameSpeed = 1.0f;
+
+
+	public static GameObject player = null;
 
 	public static void AddHealth(float value)
 	{

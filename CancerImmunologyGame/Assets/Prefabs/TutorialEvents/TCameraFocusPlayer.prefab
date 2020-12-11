@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  removeControl: 0
+  removeControl: 1
   pauseTime: 0
-  closestObjectTypeToFocusOn: 0
+  closestObjectTypeToFocusOn: 1

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-
 //[RequireComponent(typeof(Camera))]
 public class SmoothCamera : Singleton<SmoothCamera>
 {
@@ -27,6 +26,13 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	public void SetNewFocus(GameObject focusObject)
 	{
 		focusTarget = focusObject;
+		isCameraFocused = false;
+		free_roam = false;
+	}
+
+	public void SetFocusToPlayer()
+	{
+		focusTarget = GlobalGameData.player;
 		isCameraFocused = false;
 		free_roam = false;
 	}

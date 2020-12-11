@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Player;
 
 public class RegulatoryCell : MonoBehaviour
 {
