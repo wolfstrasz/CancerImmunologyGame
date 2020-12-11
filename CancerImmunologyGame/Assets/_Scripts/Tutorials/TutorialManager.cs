@@ -23,10 +23,10 @@ namespace Tutorials
 
 		public void Initialise()
 		{
-			foreach (GameObject ts in StoryTutorials)
-			{
-				Instantiate(ts, Vector3.zero, Quaternion.identity, this.transform).GetComponent<TutorialStage>().StartStage();
-			}
+			//foreach (GameObject ts in StoryTutorials)
+			//{
+			//	Instantiate(ts, Vector3.zero, Quaternion.identity).GetComponent<TutorialStage>().StartStage();
+			//}
 		}
 
 		

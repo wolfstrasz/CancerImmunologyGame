@@ -15,10 +15,7 @@ namespace Tutorials
 			Debug.Log(gameObject.name + ": Start Stage");
 			if (event_index < events.Count)
 			{
-				currentEvent = events[event_index];
-				++event_index;
-				currentEvent.owner = this;
-				currentEvent.Start();
+				NextEvent();
 			}
 			else
 			{
@@ -26,16 +23,23 @@ namespace Tutorials
 			}
 		}
 
+		private void NextEvent()
+		{
+			currentEvent = events[event_index];
+			currentEvent.gameObject.SetActive(true);
+			++event_index;
+			currentEvent.owner = this;
+			currentEvent.Start();
+		}
+
 		public void OnEventFinished()
 		{
+			currentEvent.gameObject.SetActive(false);
 			Debug.Log(gameObject.name + ": On Event Finished");
 
 			if (event_index < events.Count)
 			{
-				currentEvent = Instantiate(events[event_index], this.transform, true).GetComponent<TutorialEvent>();
-				++event_index;
-				currentEvent.owner = this;
-				currentEvent.Start();
+				NextEvent();
 			}
 			else
 			{

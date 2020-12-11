@@ -23,8 +23,9 @@ namespace Player
 		Vector2 movement;
 		private bool isPlayerRespawning = false;
 		private bool attackIsOnCooldown = false;
-		public bool areControlsEnabled = false;
 
+		private bool isInPowerUpAnimation = false;
+		private bool isInAttackAnimation = false;
 
 		// NEW ATTACK MECHANIC
 		public float attack_speed = 1.0f;
@@ -42,10 +43,10 @@ namespace Player
 
 		IEnumerator WaitForPowerUpAnim()
 		{
-			areControlsEnabled = false;
+			isInPowerUpAnimation = true;
 			attackIsOnCooldown = true;
 			yield return new WaitForSeconds(power_up_time);
-			areControlsEnabled = true;
+			isInPowerUpAnimation = false;
 			attackIsOnCooldown = false;
 		}
 
@@ -66,7 +67,7 @@ namespace Player
 		// input
 		public void OnUpdate()
 		{
-			if (GlobalGameData.isPaused)
+			if (GlobalGameData.isPaused || isInPowerUpAnimation || isInAttackAnimation)
 			{
 				movement = new Vector2(0.0f, 0.0f);
 				return;
@@ -84,7 +85,7 @@ namespace Player
 			}
 
 			//animator.SetFloat("ExhaustionRate", GlobalGameData.Instance.exhaustion / GlobalGameData.Instance.maxExhaustion);
-			if (!areControlsEnabled)
+			if (!GlobalGameData.areControlsEnabled)
 			{
 				movement = new Vector2(0.0f, 0.0f);
 				return;
@@ -93,7 +94,7 @@ namespace Player
 			movement.x = Input.GetAxisRaw("Horizontal");
 			movement.y = Input.GetAxisRaw("Vertical");
 
-
+			Debug.Log(movement);
 			if (Input.GetKey(KeyCode.Keypad7))
 			{
 				GlobalGameData.AddHealth(-0.1f);
@@ -213,10 +214,10 @@ namespace Player
 
 		IEnumerator AttackCooldown()
 		{
-			areControlsEnabled = false;
+			isInAttackAnimation = false;
 			attackIsOnCooldown = true;
 			yield return new WaitForSeconds(attack_anim_time / attack_speed);
-			areControlsEnabled = true;
+			isInAttackAnimation = true;
 			yield return new WaitForSeconds(attack_anim_time / attack_speed);
 			attackIsOnCooldown = false;
 		}

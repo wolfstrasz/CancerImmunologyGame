@@ -6,7 +6,8 @@ namespace Tutorials
 {
 	public abstract class TutorialEvent : MonoBehaviour
 	{
-		public TutorialStage owner = null;
+		[SerializeField]
+		internal TutorialStage owner = null;
 
 		[SerializeField]
 		protected bool removeControl;
@@ -59,7 +60,6 @@ namespace Tutorials
 				End();
 				finished = true;
 				owner.OnEventFinished();
-				Destroy(gameObject);
 			}
 		}
 	}

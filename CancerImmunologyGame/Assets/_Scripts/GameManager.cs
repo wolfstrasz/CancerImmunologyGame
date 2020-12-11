@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using Player;
+using Tutorials;
 
 namespace Core
 {
@@ -14,6 +15,17 @@ namespace Core
 		StateFunction StateFixedUpdate;
 
 		private bool isLevelInitialised = false;
+		
+		void Update()
+		{
+			StateUpdate();
+		}
+
+		void FixedUpdate()
+		{
+			StateFixedUpdate();
+		}
+
 		public void Initialise()
 		{
 			Time.timeScale = 1.0f;
@@ -38,6 +50,8 @@ namespace Core
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
+			if (scene.buildIndex == 0) return;
+
 			if (scene.buildIndex == 1)
 			{
 				StateUpdate = LevelMainMenu;
@@ -63,18 +77,24 @@ namespace Core
 		private IEnumerator InitialiseLevel()
 		{
 			PlayerController.Instance.Initialise();
+			TutorialManager.Instance.Initialise();
+
+
+			isLevelInitialised = true;
 			yield return null;
 		}
 
 		private void LevelMainMenu()
 		{
-
+			Debug.Log("LevelMainMenu");
 		}
 
 		private void LevelLoading()
 		{
+			Debug.Log("LevelLoading");
 			if (isLevelInitialised)
 			{
+				Debug.Log("Level Loaded");
 				StateUpdate = LevelRunning;
 				StateFixedUpdate = LevelFixedRunning;
 			}
@@ -92,7 +112,7 @@ namespace Core
 
 		private void LevelRunning()
 		{
-
+			PlayerController.Instance.OnUpdate();
 		}
 
 

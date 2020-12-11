@@ -108,6 +108,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WhatIsDendritic
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -195,6 +200,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReachDT
       objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -263,7 +273,7 @@ PrefabInstance:
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: size
-      value: 2
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
@@ -296,6 +306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ReachColon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
@@ -365,12 +380,12 @@ PrefabInstance:
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: isVisible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: size
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
@@ -458,6 +473,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HowToFight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -577,6 +597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BloodstreamInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: removeControl
@@ -695,6 +720,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text3
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: removeControl
@@ -757,6 +787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ReachLymphVessel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
@@ -826,12 +861,12 @@ PrefabInstance:
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: isVisible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: size
-      value: 3
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
@@ -919,6 +954,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ColonInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -1040,6 +1080,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text2
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: removeControl
@@ -1157,6 +1202,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ExplainTKpower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -1278,6 +1328,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChemokinesInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: removeControl
@@ -1342,6 +1397,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ReachBloodStream
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
@@ -1411,12 +1471,12 @@ PrefabInstance:
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: isVisible
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: size
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
@@ -1504,6 +1564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LymphVesselInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -1611,6 +1676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HowToMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -1731,6 +1801,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Text1
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660502, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: removeControl
@@ -1793,6 +1868,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TCameraFocusPlayer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408509735548494172, guid: b497a9ed460f4e5419129dfe10b2ad27,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6408509735548494174, guid: b497a9ed460f4e5419129dfe10b2ad27,
         type: 3}
@@ -1936,6 +2016,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TCameraFocusDendritic
       objectReference: {fileID: 0}
+    - target: {fileID: 7800286783617314926, guid: 94bf78834d30a9641aaf342b35b908c7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94bf78834d30a9641aaf342b35b908c7, type: 3}
 --- !u!114 &2596889100171312019 stripped
@@ -1967,6 +2052,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ReachMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
@@ -2023,6 +2113,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: size
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
 --- !u!114 &4040463355898877149 stripped
@@ -2054,6 +2149,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TCameraFocusPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6408509735548494172, guid: b497a9ed460f4e5419129dfe10b2ad27,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6408509735548494174, guid: b497a9ed460f4e5419129dfe10b2ad27,
         type: 3}

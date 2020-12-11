@@ -6,7 +6,7 @@ using Player;
 public static class GlobalGameData
 {
 	public static bool isPaused = false;
-	public static bool isControlOff = false;
+	public static bool areControlsEnabled = true;
 	public static bool isInitialised = false;
     public static bool isInPowerUpMode = false;
 	public static float gameplaySpeed = 1.0f;

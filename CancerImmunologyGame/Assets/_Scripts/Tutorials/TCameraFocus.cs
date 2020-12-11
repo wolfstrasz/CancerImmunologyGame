@@ -24,6 +24,7 @@ namespace Tutorials
 			if (closestObjectTypeToFocusOn == FocusObjectType.DENDRITIC_CELL)
 			{
 				GameObject playerObj = FindObjectOfType<DendriticCell>().gameObject;
+				Debug.Log(playerObj);
 				SmoothCamera.Instance.SetNewFocus(playerObj);
 			}
 
