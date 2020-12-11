@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Core;
+using UnityEngine.SceneManagement;
 
+namespace Loader {
 
-namespace Preload {
-
-	public class Preloader : Singleton<Preloader>
+	public class Loader : Singleton<Loader>
 	{
 		void Awake()
 		{
@@ -14,6 +15,7 @@ namespace Preload {
 
 		IEnumerator LoadGameAndInitialise()
 		{
+			GameManager.Instance.Initialise();
 			// Load datas
 
 
@@ -24,7 +26,7 @@ namespace Preload {
 
 		internal void OnIntroFinished()
 		{
-
+			SceneManager.LoadScene("MainMenu");
 		}
 	}
 

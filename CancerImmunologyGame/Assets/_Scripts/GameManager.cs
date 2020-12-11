@@ -11,19 +11,18 @@ namespace Core
 		private delegate void StateFunction();
 		StateFunction StateUpdate;
 
-		private float gameplaySpeed = 1.0f;
-		private float gameSpeed = 1.0f;
-		private bool isPaused = false;
-
-		void Start()
+		public void Initialise()
 		{
-			gameplaySpeed = 1.0f;
-			gameSpeed = 1.0f;
-			isPaused = false;
 			Time.timeScale = 1.0f;
 			//SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
 			SceneManager.sceneLoaded += OnSceneLoaded;
 			StateUpdate = LevelMainMenu;
+
+			GlobalGameData.gameplaySpeed = 1.0f;
+			GlobalGameData.gameSpeed = 1.0f;
+			GlobalGameData.isPaused = false;
+			GlobalGameData.isInitialised = true;
 		}
 
 
@@ -34,6 +33,14 @@ namespace Core
 
 		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 		{
+			if (scene.buildIndex == 1)
+			{
+				StateUpdate = LevelMainMenu;
+				UIManager.Instance.OpenMainMenu();
+				return;
+			}
+
+
 			//GlobalData.levelData = LevelManager.Instance.GetLevelData(scene.buildIndex);
 			//GlobalData.SetPathTileGallery(scene.buildIndex);
 

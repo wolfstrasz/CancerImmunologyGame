@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Preload
+namespace Loader
 {
 	public class IntroFadeCallback : MonoBehaviour
 	{

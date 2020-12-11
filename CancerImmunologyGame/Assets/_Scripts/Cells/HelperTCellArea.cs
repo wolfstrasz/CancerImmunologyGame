@@ -17,10 +17,10 @@ public class HelperTCellArea : AreaOfEffect
 
 	protected override void OnEffectStatus()
 	{
-		if (GlobalGameData.Instance.isPaused) return;
+		if (GlobalGameData.isPaused) return;
 		if (isEffectDeactivated) return;
-		GlobalGameData.Instance.AddHealth(+0.35f); // Must change to global scriptable object values
-		GlobalGameData.Instance.AddExhaustion(-0.30f); // Must change to global scriptable object values
+		GlobalGameData.AddHealth(+0.35f); // Must change to global scriptable object values
+		GlobalGameData.AddExhaustion(-0.30f); // Must change to global scriptable object values
 	}
 
 }

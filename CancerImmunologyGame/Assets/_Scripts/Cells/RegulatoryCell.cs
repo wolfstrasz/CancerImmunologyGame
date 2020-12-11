@@ -30,7 +30,7 @@ public class RegulatoryCell : MonoBehaviour
 
     void Update()
     {
-		if (GlobalGameData.Instance.isPaused) return;
+		if (GlobalGameData.isPaused) return;
 
         if (isMoving)
             Move();
@@ -76,7 +76,7 @@ public class RegulatoryCell : MonoBehaviour
         while (isShooting)
         {
             yield return new WaitForSeconds(shootDelay * (particles.Count + 1) * 0.7f);
-            if (GlobalGameData.Instance.isPaused) continue;
+            if (GlobalGameData.isPaused) continue;
 
             if (particles.Count < 4)
             {
@@ -129,7 +129,7 @@ public class RegulatoryCell : MonoBehaviour
             coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
         }
 
-        GlobalGameData.Instance.AddExhaustion(exhaust_dmg);
+        GlobalGameData.AddExhaustion(exhaust_dmg);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(StopBump());
     }

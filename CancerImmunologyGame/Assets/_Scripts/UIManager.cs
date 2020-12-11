@@ -7,29 +7,50 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager>
 {
+	private const int FIRST_PLAY_SCENE_ID = 2;
 
-    [SerializeField]
-    public GameObject WinScreen = null;
-
-    public Image ImmunotherapyIcon = null;
-    public Color ImmunotherapyCanActivateColour = Color.cyan;
-    public Color ImmunotherapyCannotActivateColour = Color.white;
-    public Button ImmunotherapyButton = null;
-
-    /////////////////////////////////////
-    public GameObject BlackScreenPanel;
-    public GameObject MainMenuPanel;
+	[Header("UI Panels")]
+	[SerializeField] private GameObject MainMenuPanel = null;
+	[SerializeField] private GameObject WinScreenPanel = null;
 
 
+	public void OpenMainMenu()
+	{
+		WinScreenPanel.SetActive(false);
+		MainMenuPanel.SetActive(true);
+	}
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+	// Main Menu Functionality
+
+	public void Play()
+	{
+		Debug.Log("Play");
+		MainMenuPanel.SetActive(false);
+		SceneManager.LoadScene(FIRST_PLAY_SCENE_ID);
+	}
+
+	//public void Credits()
+	//{
+	//}
+
+	//public void Settings()
+	//{
+	//}
+
+	public void QuitGame()
+	{
+		Application.Quit();
+	}
+
+	//public void ResetMainMenu()
+	//{
+	//	SettingsPanel.SetActive(false);
+	//	CreditsPanel.SetActive(false);
+	//}
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(FIRST_PLAY_SCENE_ID);
     }
 
 }

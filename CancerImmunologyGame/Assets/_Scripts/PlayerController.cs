@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     // input
     void Update()
     {
-        if (GlobalGameData.Instance.isPaused)
+        if (GlobalGameData.isPaused)
         {
             movement = new Vector2(0.0f, 0.0f);
             return;
@@ -89,19 +89,19 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Keypad7))
         {
-            GlobalGameData.Instance.AddHealth(-0.1f);
+            GlobalGameData.AddHealth(-0.1f);
         }
         if (Input.GetKey(KeyCode.Keypad9))
         {
-            GlobalGameData.Instance.AddHealth(+0.1f);
+            GlobalGameData.AddHealth(+0.1f);
         }
         if (Input.GetKey(KeyCode.Keypad4))
         {
-            GlobalGameData.Instance.AddExhaustion(-0.1f);
+            GlobalGameData.AddExhaustion(-0.1f);
         }
         if (Input.GetKey(KeyCode.Keypad6))
         {
-            GlobalGameData.Instance.AddExhaustion(+0.1f);
+            GlobalGameData.AddExhaustion(+0.1f);
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
         {
@@ -123,7 +123,7 @@ public class PlayerController : MonoBehaviour
         isPlayerRespawning = true;
         gameObject.transform.position = ArteryStartLoc.position;
         //GlobalGameData.Instance.SetHealth( GlobalGameData.Instance.maxHealth);
-        GlobalGameData.Instance.SetExhaustion(0.0f);
+        GlobalGameData.SetExhaustion(0.0f);
 
         yield return new WaitForSeconds(1.0f);
         isPlayerRespawning = false;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     // physics update
     void FixedUpdate()
     {
-		if (GlobalGameData.Instance.isPaused)
+		if (GlobalGameData.isPaused)
 		{
 			return;
 		}

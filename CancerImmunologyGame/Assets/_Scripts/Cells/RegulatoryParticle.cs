@@ -22,7 +22,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     void Update()
     {
-        if (GlobalGameData.Instance.isPaused) return;
+        if (GlobalGameData.isPaused) return;
 
         if (isSpreading)
         {
@@ -87,7 +87,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     private void OnPlayerReached()
     {
-        GlobalGameData.Instance.AddExhaustion(exhaust_dmg);
+        GlobalGameData.AddExhaustion(exhaust_dmg);
         Die();
     }
 

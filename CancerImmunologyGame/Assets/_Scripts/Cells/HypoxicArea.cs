@@ -18,9 +18,9 @@ public class HypoxicArea : AreaOfEffect
 
 	protected override void OnEffectStatus()
 	{
-		if (GlobalGameData.Instance.isPaused) return;
+		if (GlobalGameData.isPaused) return;
 		if (isEffectDeactivated) return;
-		GlobalGameData.Instance.AddHealth(-0.02f); // Must change to global scriptable object values
+		GlobalGameData.AddHealth(-0.02f); // Must change to global scriptable object values
 	}
 
 }

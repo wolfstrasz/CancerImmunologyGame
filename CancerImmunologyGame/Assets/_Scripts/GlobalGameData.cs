@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalGameData : Singleton<GlobalGameData>
+public static class GlobalGameData
 {
-	public bool isPaused = false;
-	public bool isControlOff = false;
+	public static bool isPaused = false;
+	public static bool isControlOff = false;
+	public static bool isInitialised = false;
+    public static bool isInPowerUpMode = false;
+	public static float gameplaySpeed = 1.0f;
+	public static float gameSpeed = 1.0f;
 
-    public bool isInPowerUpMode = false;
-
-
-	public void AddHealth(float value)
+	public static void AddHealth(float value)
 	{
 
 		//health += value;
@@ -19,7 +20,7 @@ public class GlobalGameData : Singleton<GlobalGameData>
 		//healthBar.SetValue(health);
 	}
 
-	public void AddExhaustion(float value)
+	public static void AddExhaustion(float value)
 	{
 		//if (isInPowerUpMode && value >= 0.0f) return;
 
@@ -30,7 +31,7 @@ public class GlobalGameData : Singleton<GlobalGameData>
 		//exhaustionBar.SetValue(exhaustion);
 	}
 
-	public void AddPowerUp(float value)
+	public static void AddPowerUp(float value)
 	{
 		//powerUp += value;
 		//if (powerUp > maxPowerUp)
@@ -47,26 +48,26 @@ public class GlobalGameData : Singleton<GlobalGameData>
 	}
 
 
-	public void SetHealth(float value)
+	public static void SetHealth(float value)
 	{
 		//health = value;
 		//healthBar.SetValue(value);
 	}
 
-	public void SetExhaustion(float value)
+	public static void SetExhaustion(float value)
 	{
 		//exhaustion = value;
 		//exhaustionBar.SetValue(value);
 	}
 
-	public void SetPowerUp(float value)
+	public static void SetPowerUp(float value)
 	{
 		//powerUp = value;
 		//powerUpBar.SetValue(value);
 	}
 
-	void Update()
-    {
+	//void Update()
+ //   {
 
 		//if (isPaused) return;
 
@@ -90,9 +91,9 @@ public class GlobalGameData : Singleton<GlobalGameData>
   //          AddExhaustion(value);
   //          AddPowerUp(value);
   //      }
-    }
+    //}
 
-    public bool TriggerPowerUp()
+    public static bool TriggerPowerUp()
     {
 		//if (powerUp >= maxPowerUp)
 		//{

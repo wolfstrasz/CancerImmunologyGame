@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Preload
+namespace Loader
 {
 	public class Intro : Singleton<Intro>
 	{
@@ -45,7 +45,7 @@ namespace Preload
 			{
 				if (Input.GetKey(KeyCode.Space))
 				{
-					Debug.Log(skipHoldSlider.value + " : " + skipHoldSlider.maxValue);
+					//Debug.Log(skipHoldSlider.value + " : " + skipHoldSlider.maxValue);
 					skipHoldSlider.value = skipHoldSlider.value + Time.deltaTime;
 					if (skipHoldSlider.value == skipHoldSlider.maxValue)
 					{
@@ -70,7 +70,7 @@ namespace Preload
 
 		private void IntroFinished()
 		{
-			Preloader.Instance.OnIntroFinished();
+			Loader.Instance.OnIntroFinished();
 		}
 
 		/// <summary>

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Preload
+namespace Loader
 {
 	public class IntroText : MonoBehaviour
 	{
