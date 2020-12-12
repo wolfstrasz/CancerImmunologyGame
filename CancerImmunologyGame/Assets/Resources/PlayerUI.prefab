@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 4217334581176189780}
   - component: {fileID: 4217334581176189781}
   - component: {fileID: 4217334581176189782}
+  - component: {fileID: 6030912377656142543}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -196,6 +197,31 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &6030912377656142543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4217334581176189783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1eb830886060c30458938c72abd60083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isPersistent: 0
+  maxHealth: 150
+  maxExhaustion: 150
+  maxPowerUp: 100
+  playerInfoPanel: {fileID: 4217334581072988029}
+  playerPowerUpPanel: {fileID: 4217334582016766005}
+  healthBar: {fileID: 4217334581215402590}
+  exhaustionBar: {fileID: 4217334582605724416}
+  powerUpBar: {fileID: 4217334582375885167}
+  immunotherapyButton: {fileID: 4217334582680560472}
+  immunotherapyIcon: {fileID: 4217334582353724157}
+  iconEnabledColor: {r: 0, g: 0, b: 1, a: 1}
+  iconDisabledColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!1 &4217334581215402584
 GameObject:
   m_ObjectHideFlags: 0

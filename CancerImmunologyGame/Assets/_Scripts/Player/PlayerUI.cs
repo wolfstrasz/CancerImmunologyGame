@@ -15,7 +15,7 @@ namespace Player
 		[SerializeField]
 		private float maxPowerUp = 100.0f;
 
-		private float health = 100;
+		private float health = 100.0f;
 		public float Health => health;
 
 		private float exhaustion = 0;
@@ -45,7 +45,7 @@ namespace Player
 		[SerializeField]
 		private Button immunotherapyButton = null;
 		[SerializeField]
-		private SpriteRenderer immunotherapyIconRenderer = null;
+		private Image immunotherapyIcon = null;
 		[SerializeField]
 		private Color iconEnabledColor = Color.blue;
 		[SerializeField]
@@ -53,25 +53,25 @@ namespace Player
 
 		void Start()
 		{
-			health = maxHealth;
 			if (healthBar != null)
 			{
 				healthBar.SetMaxValue(maxHealth);
-				healthBar.SetValue(maxHealth);
+				healthBar.SetValue(health = maxHealth);
 			}
 			else Debug.LogWarning("Health bar is not linked to global data");
 
-			exhaustion = 0.0f;
 			if (exhaustionBar != null)
 			{
 				exhaustionBar.SetMaxValue(maxExhaustion);
+				exhaustionBar.SetValue(exhaustion = 0.0f);
 			}
 			else Debug.LogWarning("Exhaust bar is not linked to global data");
 
-			powerUp = 100.0f;
 			if (powerUpBar != null)
 			{
 				powerUpBar.SetMaxValue(maxPowerUp);
+				powerUpBar.SetValue(powerUp = 100.0f);
+				immunotherapyIcon.color = iconEnabledColor;
 			}
 			else Debug.LogWarning("Power up bar is not linked to global data");
 		}
@@ -161,7 +161,7 @@ namespace Player
 			{
 				powerUp = maxPowerUp;
 				powerUpBar.SetValue(powerUp = maxPowerUp);
-				immunotherapyIconRenderer.color = iconEnabledColor;
+				immunotherapyIcon.color = iconEnabledColor;
 				immunotherapyButton.interactable = true;
 				return;
 			}
@@ -169,13 +169,13 @@ namespace Player
 			if (powerUp < 0.0f)
 			{
 				powerUpBar.SetValue(powerUp = 0.0f);
-				immunotherapyIconRenderer.color = iconDisabledColor;
+				immunotherapyIcon.color = iconDisabledColor;
 				immunotherapyButton.interactable = false;
 				return;
 			}
 
 			powerUpBar.SetValue(powerUp);
-			immunotherapyIconRenderer.color = iconDisabledColor;
+			immunotherapyIcon.color = iconDisabledColor;
 		}
 
 		internal void ResetData()
