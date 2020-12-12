@@ -86,12 +86,12 @@ namespace Core
 
 		private void LevelMainMenu()
 		{
-			Debug.Log("LevelMainMenu");
+			//Debug.Log("LevelMainMenu");
 		}
 
 		private void LevelLoading()
 		{
-			Debug.Log("LevelLoading");
+			//Debug.Log("LevelLoading");
 			if (isLevelInitialised)
 			{
 				Debug.Log("Level Loaded");

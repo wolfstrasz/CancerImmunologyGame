@@ -797,7 +797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &258542179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,11 +813,11 @@ MonoBehaviour:
   editorData:
     _bezierPath:
       points:
-      - {x: -21.073395, y: -7.409895, z: 0}
-      - {x: -18.324772, y: -9.38915, z: 0}
-      - {x: -15.57615, y: -11.368404, z: 0}
+      - {x: -20.843231, y: -7.5902443, z: 0}
+      - {x: -18.167114, y: -9.486577, z: 0}
+      - {x: -15.490999, y: -11.38291, z: 0}
       - {x: -12.808502, y: -11.556502, z: 0}
-      - {x: -10.6536045, y: -11.702955, z: 0}
+      - {x: -10.653143, y: -11.695982, z: 0}
       - {x: -8.102995, y: -9.70231, z: 0}
       - {x: -5.9957824, y: -9.228302, z: 0}
       - {x: -4.42319, y: -8.874555, z: 0}
@@ -966,7 +966,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 0
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
