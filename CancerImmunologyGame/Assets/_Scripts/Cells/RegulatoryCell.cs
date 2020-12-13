@@ -31,7 +31,7 @@ public class RegulatoryCell : MonoBehaviour
 
     void Update()
     {
-		if (GlobalGameData.isPaused) return;
+		if (GlobalGameData.isGameplayPaused) return;
 
         if (isMoving)
             Move();
@@ -77,7 +77,7 @@ public class RegulatoryCell : MonoBehaviour
         while (isShooting)
         {
             yield return new WaitForSeconds(shootDelay * (particles.Count + 1) * 0.7f);
-            if (GlobalGameData.isPaused) continue;
+            if (GlobalGameData.isGameplayPaused) continue;
 
             if (particles.Count < 4)
             {

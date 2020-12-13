@@ -37,7 +37,7 @@ namespace Core
 
 			GlobalGameData.gameplaySpeed = 1.0f;
 			GlobalGameData.gameSpeed = 1.0f;
-			GlobalGameData.isPaused = false;
+			GlobalGameData.isGameplayPaused = false;
 			GlobalGameData.isInitialised = true;
 		}
 
@@ -60,25 +60,12 @@ namespace Core
 			}
 
 			StartCoroutine(InitialiseLevel());
-			//GlobalData.levelData = LevelManager.Instance.GetLevelData(scene.buildIndex);
-			//GlobalData.SetPathTileGallery(scene.buildIndex);
-
-			//GUIManager.Instance.LevelSceneInstance();
-			//BoardManager.Instance.GenerateLevel();
-			//PoolManager.Instance.Initialise();
-			//LevelControl.Instance.Initialise();
-			//GUIWaveInfoDisplayer.Instance.Reset();
-			//GUIWaveInfoDisplayer.Instance.Hide();
-			//GUITowerInfoDisplayer.Instance.Hide();
-
-			//loadingSceneFinished = true;
 		}
 
 		private IEnumerator InitialiseLevel()
 		{
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();
-
 
 			isLevelInitialised = true;
 			yield return null;
@@ -95,9 +82,20 @@ namespace Core
 			if (isLevelInitialised)
 			{
 				Debug.Log("Level Loaded");
-				StateUpdate = LevelRunning;
-				StateFixedUpdate = LevelFixedRunning;
+				StateUpdate = OnLevelEnterRunning;
 			}
+		}
+
+		private void OnLevelEnterRunning()
+		{
+			GlobalGameData.isGameplayPaused = false;
+			StateUpdate = LevelRunning;
+			StateFixedUpdate = LevelFixedRunning;
+		}
+
+		private void LevelRunning()
+		{
+			PlayerController.Instance.OnUpdate();
 		}
 
 		private void LevelFixedRunning()
@@ -110,13 +108,14 @@ namespace Core
 
 		}
 
-		private void LevelRunning()
+		private void OnEnterLevelPause()
 		{
-			PlayerController.Instance.OnUpdate();
+			GlobalGameData.isGameplayPaused = true;
+			StateUpdate = LevelPaused;
+			StateFixedUpdate = NoLevelFixedRunning;
 		}
 
-
-		public void LevelPaused()
+		private void LevelPaused()
 		{
 
 		}
