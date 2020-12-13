@@ -15,8 +15,8 @@ public static class GlobalGameData
 
 	// Shared object pool
 	public static GameObject player = null;
-
 	private static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
+	public static List<Cancer> Cancers = new List<Cancer>();
 
 	public static Vector3 GetClosestSpawnLocation(Vector3 position)
 	{

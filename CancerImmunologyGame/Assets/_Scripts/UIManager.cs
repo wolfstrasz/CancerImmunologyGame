@@ -14,6 +14,11 @@ public class UIManager : Singleton<UIManager>
 	[SerializeField] private GameObject WinScreenPanel = null;
 
 
+	public void WinScreen()
+	{
+		WinScreenPanel.SetActive(true);
+	}
+
 	public void OpenMainMenu()
 	{
 		WinScreenPanel.SetActive(false);
@@ -36,6 +41,12 @@ public class UIManager : Singleton<UIManager>
 	//public void Settings()
 	//{
 	//}
+
+	public void ClosePanels()
+	{
+		WinScreenPanel.SetActive(false);
+		MainMenuPanel.SetActive(false);
+	}
 
 	public void QuitGame()
 	{

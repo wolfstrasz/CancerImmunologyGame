@@ -64,7 +64,11 @@ namespace Core
 
 		private IEnumerator InitialiseLevel()
 		{
+			UIManager.Instance.ClosePanels();
 			GlobalGameData.RestObjectPool();
+			GlobalGameData.Cancers.Clear();
+			GlobalGameData.Cancers.AddRange(FindObjectsOfType<Cancer>());
+
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();
 
@@ -97,6 +101,16 @@ namespace Core
 		private void LevelRunning()
 		{
 			PlayerController.Instance.OnUpdate();
+
+			if (GlobalGameData.Cancers.Count == 0)
+			{
+				OnLevelFinished();
+				return;
+			}
+			for (int i =0; i< GlobalGameData.Cancers.Count; ++i)
+			{
+				GlobalGameData.Cancers[i].OnUpdate();
+			}
 		}
 
 		private void LevelFixedRunning()
@@ -119,6 +133,14 @@ namespace Core
 		private void LevelPaused()
 		{
 
+		}
+
+		private void OnLevelFinished()
+		{
+			GlobalGameData.isGameplayPaused = true;
+			StateUpdate = LevelPaused;
+			StateFixedUpdate = NoLevelFixedRunning;
+			UIManager.Instance.WinScreen();
 		}
 
 
