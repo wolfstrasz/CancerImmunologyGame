@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class DendriticCell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	[SerializeField]
+	private DCInteractArea dcArea = null;
+	[SerializeField]
+	private ChemokinPath chemokinePath = null;
+	[SerializeField]
+	private bool interacted = false;
+	public bool HasInteracted => interacted;
+
+	public void StartInteraction()
+	{
+		// Start the interaction
+
+		// TODO: remove this after adding the interaction animation/video/ect.
+		FinishInteraction();
+	}
+
+
+	private void FinishInteraction()
+	{
+		chemokinePath.ActivateChemokines();
+		interacted = true;
+	}
 }

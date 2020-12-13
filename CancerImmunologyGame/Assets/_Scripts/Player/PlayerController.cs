@@ -36,12 +36,15 @@ namespace Player
 				return;
 			}
 
-			if (GlobalGameData.isPaused || isInPowerUpAnimation || isInAttackAnimation || !GlobalGameData.areControlsEnabled)
+			//Debug.Log(GlobalGameData.isGameplayPaused  + " " + isInPowerUpAnimation + " " + isInAttackAnimation + " " + (!GlobalGameData.areControlsEnabled));
+
+			if (GlobalGameData.isGameplayPaused || isInPowerUpAnimation || isInAttackAnimation || !GlobalGameData.areControlsEnabled)
 			{
 				movement = new Vector2(0.0f, 0.0f);
 				return;
 			}
 
+			//Debug.Log("Here");
 			// Collect input 
 			movement.x = Input.GetAxisRaw("Horizontal");
 			movement.y = Input.GetAxisRaw("Vertical");
@@ -51,7 +54,7 @@ namespace Player
 				ExitPowerUpMode();
 			}
 
-			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E))
 			{
 				AttackCancerCells();
 			}
@@ -63,6 +66,7 @@ namespace Player
 		{
 			if (isPlayerRespawning) return;
 
+			//Debug.Log(movement);
 			// WHY DID I DO THIS I NEED TO FIND OUT !!!
 			if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
 			{

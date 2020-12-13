@@ -100,7 +100,7 @@ namespace Player
 		
 		private void IncreasePowerUpBar()
 		{
-			if (GlobalGameData.isPaused) return;
+			if (GlobalGameData.isGameplayPaused) return;
 
 			if (!PlayerController.Instance.isInPowerUpMode)
 			{
