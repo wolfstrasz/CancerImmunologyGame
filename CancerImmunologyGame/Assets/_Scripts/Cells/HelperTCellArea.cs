@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
+
 public class HelperTCellArea : AreaOfEffect
 {
 	private bool isEffectDeactivated = true;
@@ -17,10 +19,10 @@ public class HelperTCellArea : AreaOfEffect
 
 	protected override void OnEffectStatus()
 	{
-		if (UIManager.Instance.isPaused) return;
+		if (GlobalGameData.isGameplayPaused) return;
 		if (isEffectDeactivated) return;
-		GlobalGameData.Instance.AddHealth(+0.35f); // Must change to global scriptable object values
-		GlobalGameData.Instance.AddExhaustion(-0.30f); // Must change to global scriptable object values
+		PlayerUI.Instance.AddHealth(+0.35f); // Must change to global scriptable object values
+		PlayerUI.Instance.AddExhaustion(-0.30f); // Must change to global scriptable object values
 	}
 
 }

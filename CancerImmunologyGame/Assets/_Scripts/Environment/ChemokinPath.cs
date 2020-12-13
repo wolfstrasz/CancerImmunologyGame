@@ -5,24 +5,21 @@ using PathCreation;
 
 public class ChemokinPath : MonoBehaviour
 {
-    PathCreator pathCreator;
-
-    public GameObject chemokinePrefab;
+    PathCreator pathCreator = null;
+    public GameObject chemokinePrefab = null;
     public float spacing = 3;
     const float minSpacing = .1f;
 
-    // Start is called before the first frame update
-    void Awake()
+
+	public void ActivateChemokines()
+	{
+		gameObject.SetActive(true);
+	}
+	// Start is called before the first frame update
+	void Awake()
     {
         pathCreator = GetComponent<PathCreator>();
-
         Generate();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void Generate()

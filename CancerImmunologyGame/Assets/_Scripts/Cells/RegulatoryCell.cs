@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Player;
 
 public class RegulatoryCell : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class RegulatoryCell : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.isPaused) return;
+		if (GlobalGameData.isGameplayPaused) return;
 
         if (isMoving)
             Move();
@@ -76,7 +77,7 @@ public class RegulatoryCell : MonoBehaviour
         while (isShooting)
         {
             yield return new WaitForSeconds(shootDelay * (particles.Count + 1) * 0.7f);
-            if (UIManager.Instance.isPaused) continue;
+            if (GlobalGameData.isGameplayPaused) continue;
 
             if (particles.Count < 4)
             {
@@ -129,7 +130,7 @@ public class RegulatoryCell : MonoBehaviour
             coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
         }
 
-        GlobalGameData.Instance.AddExhaustion(exhaust_dmg);
+		PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(StopBump());
     }

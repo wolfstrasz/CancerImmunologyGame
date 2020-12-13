@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class RegulatoryParticle : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.isPaused) return;
+        if (GlobalGameData.isGameplayPaused) return;
 
         if (isSpreading)
         {
@@ -87,7 +88,7 @@ public class RegulatoryParticle : MonoBehaviour
 
     private void OnPlayerReached()
     {
-        GlobalGameData.Instance.AddExhaustion(exhaust_dmg);
+		PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         Die();
     }
 
