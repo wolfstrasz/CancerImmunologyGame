@@ -51,8 +51,11 @@ namespace Player
 		[SerializeField]
 		private Color iconDisabledColor = Color.gray;
 
-		void Start()
+		internal Animator playerAnimator = null;
+
+		internal void Initialise(Animator anim)
 		{
+			playerAnimator = anim;
 			if (healthBar != null)
 			{
 				healthBar.SetMaxValue(maxHealth);
@@ -64,6 +67,7 @@ namespace Player
 			{
 				exhaustionBar.SetMaxValue(maxExhaustion);
 				exhaustionBar.SetValue(exhaustion = 0.0f);
+				playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
 			}
 			else Debug.LogWarning("Exhaust bar is not linked to global data");
 
@@ -76,7 +80,7 @@ namespace Player
 			else Debug.LogWarning("Power up bar is not linked to global data");
 		}
 
-		void Update()
+		internal void OnUpdate()
 		{
 
 			IncreasePowerUpBar();
@@ -140,6 +144,7 @@ namespace Player
 			if (exhaustion > maxExhaustion)
 			{
 				exhaustionBar.SetValue(exhaustion = maxExhaustion);
+				playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
 				PlayerController.Instance.Respawn();
 				return;
 			}
@@ -147,10 +152,12 @@ namespace Player
 			if (exhaustion < 0.0f)
 			{
 				exhaustionBar.SetValue(exhaustion = 0.0f);
+				playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
 				return;
 			}
 
 			exhaustionBar.SetValue(exhaustion);
+			playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
 		}
 
 		public void AddPowerUp(float value)
@@ -162,15 +169,13 @@ namespace Player
 				powerUp = maxPowerUp;
 				powerUpBar.SetValue(powerUp = maxPowerUp);
 				immunotherapyIcon.color = iconEnabledColor;
-				immunotherapyButton.interactable = true;
 				return;
 			}
 			
 			if (powerUp < 0.0f)
 			{
 				powerUpBar.SetValue(powerUp = 0.0f);
-				immunotherapyIcon.color = iconDisabledColor;
-				immunotherapyButton.interactable = false;
+				playerAnimator.SetTrigger("PowerUpFinished");
 				return;
 			}
 
@@ -182,19 +187,32 @@ namespace Player
 		{
 			healthBar.SetValue(health = maxHealth);
 			exhaustionBar.SetValue(exhaustion = 0.0f);
+			playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
 			powerUpBar.SetValue(powerUp = 0.0f);
 		}
 
 
-		internal float GetExhaustRatio()
+		internal float GetExhaustionRatio()
+		{
+			return exhaustion / maxExhaustion;
+		}
+
+		internal float GetSlowDown()
 		{
 			return (maxExhaustion - exhaustion) / maxExhaustion;
 		}
 
 		public void TriggerPowerUp()
 		{
+
+			Debug.Log("PowerUpClicked");
+
+			if (powerUp < maxPowerUp) return;
 			AddPowerUp(-0.01f);
+			immunotherapyIcon.color = iconDisabledColor;
 			PlayerController.Instance.EnterPowerUpMode();
+
+
 		}
 
 	}

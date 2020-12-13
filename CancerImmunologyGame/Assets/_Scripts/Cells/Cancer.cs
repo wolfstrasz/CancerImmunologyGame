@@ -102,10 +102,17 @@ public class Cancer : MonoBehaviour
 		}
 	}
 
-	void Update()
+	public void OnUpdate()
 	{
 		if (!isInitialised) return;
 
+		if (cancerCells.Count == 0)
+		{
+			canDivide = false;
+			GlobalGameData.Cancers.Remove(this);
+			Destroy(gameObject);
+			return;
+		}
 		//if (Input.GetKeyDown(KeyCode.Alpha0))
 		//{
 		//	FullDivisionProcess();
@@ -131,6 +138,10 @@ public class Cancer : MonoBehaviour
 		float distance = radius * 2.0f + offsetOfAnimation;
 		for (int i = 0; i < cancerCells.Count; i++)
 		{
+			if (cancerCells[i].isDying)
+			{
+				continue;
+			}
 			CancerCell cell = cancerCells[i];
 			Vector3 circleCastDirection = Vector3.right;
 

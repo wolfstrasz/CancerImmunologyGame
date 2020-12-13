@@ -6,10 +6,14 @@ public class CancerCell : MonoBehaviour
 {
 	internal Cancer cancer = null;
 
-    public static bool first_hit = false; // should switch to a tutorial pop-up event
+	private bool inDivision = false;
+	internal bool isDying = false;
+
+	public static bool first_hit = false; // should switch to a tutorial pop-up event
 	public static float wait_before_destroy = 3.0f; // Must remove hard-coding value
 	[SerializeField]
     private CancerCellBody body = null;
+	
 	[SerializeField]
 	public CircleCollider2D divisionBodyBlocker = null;
 
@@ -40,6 +44,8 @@ public class CancerCell : MonoBehaviour
         health -= 20f;
         if (health <= 0)
         {
+			isDying = true;
+
 			cancer.RemoveCell(this);
 			body.gameObject.SetActive(false);
 			animator.SetTrigger("Apoptosis");
@@ -48,11 +54,16 @@ public class CancerCell : MonoBehaviour
 		return false;
     }
 
+	public bool CellInDivision()
+	{
+		return inDivision;
+	}
 
 
 	// Control calls
 	public void StartPrepareDivision(float _rotationAngle)
 	{
+		inDivision = true;
 		divisionBodyBlocker.gameObject.SetActive(true);
 		animator.SetTrigger("PrepareToDivide");
 		rotationAngle = _rotationAngle;
@@ -83,6 +94,8 @@ public class CancerCell : MonoBehaviour
 
 	public void CellSpawned()
 	{
+		inDivision = false;
+		isDying = false;
 		if (!hypoxicArea.activeSelf)
 		{
 			float randomAngle = Random.Range(0.0f, 360.0f);

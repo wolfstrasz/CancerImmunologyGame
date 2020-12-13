@@ -25,15 +25,22 @@ namespace Player
 		private Vector2 movement = Vector2.zero;
 
 		// control states
+		[SerializeField]
+		private bool queuePowerUp = false;
+		[SerializeField]
 		private bool isPlayerRespawning = false;
+		[SerializeField]
 		private bool isInPowerUpAnimation = false;
+		[SerializeField]
 		private bool isInAttackAnimation = false;
+		[SerializeField]
 		internal bool isInPowerUpMode = false;
-	
+
 
 
 		public void Initialise()
 		{
+			PlayerUI.Instance.Initialise(animator);
 			GlobalGameData.player = gameObject;
 			cancerCellsInRange.Clear();
 		}
@@ -43,6 +50,8 @@ namespace Player
 		// input
 		public void OnUpdate()
 		{
+			PlayerUI.Instance.OnUpdate();
+
 			if (isPlayerRespawning)
 			{
 				WaitForCameraToFocusAfterRespawn();
@@ -57,7 +66,6 @@ namespace Player
 				return;
 			}
 
-			//Debug.Log("Here");
 			// Collect input 
 			movement.x = Input.GetAxisRaw("Horizontal");
 			movement.y = Input.GetAxisRaw("Vertical");
@@ -66,6 +74,8 @@ namespace Player
 			{
 				ExitPowerUpMode();
 			}
+
+			if (queuePowerUp) return;
 
 			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E))
 			{
@@ -79,7 +89,6 @@ namespace Player
 		{
 			if (isPlayerRespawning) return;
 
-			//Debug.Log(movement);
 			// WHY DID I DO THIS I NEED TO FIND OUT !!!
 			if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
 			{
@@ -94,7 +103,7 @@ namespace Player
 			}
 			else
 			{
-				rb.MovePosition(move * PlayerUI.Instance.GetExhaustRatio() + rb.position);
+				rb.MovePosition(move * PlayerUI.Instance.GetSlowDown() + rb.position);
 			}
 		}
 
@@ -102,6 +111,13 @@ namespace Player
 		// Power up functionality
 		internal void EnterPowerUpMode()
 		{
+			if (isInAttackAnimation)
+			{
+				isInPowerUpMode = true;
+				queuePowerUp = true;
+				return;
+			}
+
 			isInPowerUpMode = true;
 			isInPowerUpAnimation = true;
 			animator.SetTrigger("PowerUp");
@@ -174,6 +190,8 @@ namespace Player
 
 			foreach (var cell in cancerCellsInRange)
 			{
+				if (cell.CellInDivision()) continue;
+
 				float dist = Vector3.Distance(transform.position, cell.transform.position);
 				if (dist < minDist)
 				{
@@ -182,7 +200,11 @@ namespace Player
 				}
 			}
 
-			if (minDist > 1.5f) return;
+			if (closestCell == null)
+			{
+				isInAttackAnimation = false;
+				return;
+			}
 
 			animator.SetTrigger("Attacks");
 		}
@@ -208,6 +230,11 @@ namespace Player
 		public void OnAttackFinished()
 		{
 			isInAttackAnimation = false;
+			if (queuePowerUp)
+			{
+				EnterPowerUpMode();
+				queuePowerUp = false;
+			}
 		}
 	}
 }
