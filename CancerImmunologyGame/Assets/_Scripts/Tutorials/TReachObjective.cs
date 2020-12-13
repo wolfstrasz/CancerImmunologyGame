@@ -20,12 +20,12 @@ namespace Tutorials {
 			notifiedFromPopup = true;
 		}
 
-		protected override void OnEnd()
+		protected override void OnEndEvent()
 		{
 			Destroy(popup);
 		}
 
-		protected override void OnStart()
+		protected override void OnStartEvent()
 		{
 			popup = Instantiate(popupPrefab, this.transform).GetComponent<TutorialPopup>();
 			popup.SetAttributes(size, isVisible, this);

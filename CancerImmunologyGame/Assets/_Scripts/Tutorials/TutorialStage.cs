@@ -29,7 +29,7 @@ namespace Tutorials
 			currentEvent.gameObject.SetActive(true);
 			++event_index;
 			currentEvent.owner = this;
-			currentEvent.Start();
+			currentEvent.StartEvent();
 		}
 
 		public void OnEventFinished()

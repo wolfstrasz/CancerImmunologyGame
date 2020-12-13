@@ -9,12 +9,12 @@ namespace Tutorials
 		[SerializeField]
 		private FocusObjectType closestObjectTypeToFocusOn = FocusObjectType.NONE;
 
-		protected override void OnEnd()
+		protected override void OnEndEvent()
 		{
 			return;
 		}
 
-		protected override void OnStart()
+		protected override void OnStartEvent()
 		{
 			if (closestObjectTypeToFocusOn == FocusObjectType.NONE) return;
 			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)

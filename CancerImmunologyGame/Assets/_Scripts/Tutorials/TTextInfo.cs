@@ -26,12 +26,12 @@ namespace Tutorials
 		private float timeBeforeFinish = 0.0f;
 		private bool allowFinish = false;
 
-		protected override void OnEnd()
+		protected override void OnEndEvent()
 		{
 			TutorialManager.Instance.HideText();
 		}
 
-		protected override void OnStart()
+		protected override void OnStartEvent()
 		{
 			TutorialManager.Instance.DisplayText(text);
 

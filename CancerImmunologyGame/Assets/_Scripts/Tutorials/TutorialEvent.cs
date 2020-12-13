@@ -12,52 +12,62 @@ namespace Tutorials
 		[SerializeField]
 		protected bool removeControl;
 		[SerializeField]
-		protected bool pauseTime;
+		protected bool pauseGameplay;
 
+		private bool prevGameplayValue = false;
+		private bool prevControlValue = true;
 		private bool finished = true;
-		private float previousTimeScale = 0.0f;
 
-		public void Start()
+		public void StartEvent()
 		{
 			if (removeControl)
 			{
-				// Remove control
+				prevControlValue = GlobalGameData.areControlsEnabled;
+				Debug.Log("On start control: " + prevControlValue);
+
+				GlobalGameData.areControlsEnabled = false;
 			}
-			if (pauseTime)
+			if (pauseGameplay)
 			{
-				
+
+				prevGameplayValue = GlobalGameData.isGameplayPaused;
+				Debug.Log("On start gameplay: " + prevGameplayValue);
+				GlobalGameData.isGameplayPaused = true;
 			}
 
-			OnStart();
+			OnStartEvent();
 			finished = false;
 		}
 
-		public void End()
+		public void EndEvent()
 		{
 			if (removeControl)
 			{
-				// return control
+				GlobalGameData.areControlsEnabled = prevControlValue;
+				Debug.Log("On end controls: " + GlobalGameData.areControlsEnabled);
 			}
 
-			if (pauseTime)
+			if (pauseGameplay)
 			{
-				
+				GlobalGameData.isGameplayPaused = prevGameplayValue;
+				Debug.Log("On end pasued: " + GlobalGameData.isGameplayPaused);
 			}
-			OnEnd();
+
+			OnEndEvent();
 		}
 
-		protected abstract void OnStart();
+		protected abstract void OnStartEvent();
 
 		protected abstract bool OnUpdate();
 
-		protected abstract void OnEnd();
+		protected abstract void OnEndEvent();
 
 		void Update()
 		{
 			if (finished) return;
 			if (OnUpdate())
 			{
-				End();
+				EndEvent();
 				finished = true;
 				owner.OnEventFinished();
 			}

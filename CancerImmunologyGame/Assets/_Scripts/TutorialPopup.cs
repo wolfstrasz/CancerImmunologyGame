@@ -23,7 +23,6 @@ namespace Tutorials {
 		{
 			if (collider.gameObject == GlobalGameData.player)
 			{
-				collider.enabled = false;
 				gameObject.SetActive(false);
 				Debug.Log("PopUpCollision");
 				owner.Notify();
