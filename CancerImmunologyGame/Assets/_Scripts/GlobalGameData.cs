@@ -16,28 +16,32 @@ public static class GlobalGameData
 
 	public static GameObject player = null;
 
-	private static List<Vector3> RespawnLocations = new List<Vector3>();
+	private static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 
 	public static Vector3 GetClosestSpawnLocation(Vector3 position)
 	{
-		if (RespawnLocations.Count == 1)
+		if (RespawnAreas.Count == 1)
 		{
-			return RespawnLocations[0];
+			return RespawnAreas[0].Location;
 		}
 
 		Vector3 closestRespawnLocation = Vector3.zero;
 		float minDistance = 100000.0f;
 
-		foreach(var location in RespawnLocations)
+		foreach(var area in RespawnAreas)
 		{
-			float distance = Vector3.Distance(position, location);
+			float distance = Vector3.Distance(position, area.Location);
 			if (distance <= minDistance)
 			{
 				minDistance = distance;
-				closestRespawnLocation = location;
+				closestRespawnLocation = area.Location;
 			}
 		}
 
 		return closestRespawnLocation;
+	}
+	public static void AddSpawnLocation(PlayerRespawnArea area)
+	{
+		RespawnAreas.Add(area);
 	}
 }
