@@ -4847,9 +4847,10 @@ GameObject:
   - component: {fileID: 7959733575649244700}
   - component: {fileID: 7959733575649244699}
   - component: {fileID: 7959733575649244698}
-  - component: {fileID: 7959733575649244703}
   - component: {fileID: 7959733575649244702}
   - component: {fileID: 7959733575649244701}
+  - component: {fileID: 7959733575392156539}
+  - component: {fileID: 7959733575392156540}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -4886,20 +4887,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
-  ArteryStartLoc: {fileID: 0}
-  ToTeleportFromLoc: {fileID: 0}
-  headSystem: {fileID: 7959733575049580868}
-  attackEffect: {fileID: 7959733575123391962}
   AttackEffectPrefab: {fileID: 7959733575123391961}
   animator: {fileID: 7959733575649244702}
   rotOFfset: -0.18
   speed: 5
   rb: {fileID: 7959733575649244698}
-  areControlsEnabled: 0
-  attack_speed: 1
-  attack_anim_time: 0.4
-  power_up_time: 0.8
-  powered_up: 0
 --- !u!50 &7959733575649244698
 Rigidbody2D:
   serializedVersion: 4
@@ -4921,22 +4913,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &7959733575649244703
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7959733575649244696}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.0076618195, y: -0.048385262}
-  m_Size: {x: 0.950367, y: 0.950367}
-  m_Direction: 0
 --- !u!95 &7959733575649244702
 Animator:
   serializedVersion: 3
@@ -5006,6 +4982,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &7959733575392156539
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959733575649244696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02, y: -0.05}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!58 &7959733575392156540
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959733575649244696}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.02, y: -0.05}
+  serializedVersion: 2
+  m_Radius: 0.7
 --- !u!1001 &1434504923940196271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5084,12 +5092,6 @@ GameObject:
 --- !u!4 &7959733575123391960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9051889056786143863, guid: 518487211c7ab8e438a22629aae69d76,
-    type: 3}
-  m_PrefabInstance: {fileID: 1434504923940196271}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7959733575123391962 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 9051889056786143861, guid: 518487211c7ab8e438a22629aae69d76,
     type: 3}
   m_PrefabInstance: {fileID: 1434504923940196271}
   m_PrefabAsset: {fileID: 0}

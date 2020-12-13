@@ -9,7 +9,7 @@ public class CancerCell : MonoBehaviour
     public static bool first_hit = false; // should switch to a tutorial pop-up event
 	public static float wait_before_destroy = 3.0f; // Must remove hard-coding value
 	[SerializeField]
-    private CircleCollider2D bodyBlocker = null;
+    private CancerCellBody body = null;
 	[SerializeField]
 	public CircleCollider2D divisionBodyBlocker = null;
 
@@ -22,6 +22,9 @@ public class CancerCell : MonoBehaviour
 
     public float health = 100;
 
+	// Division info
+	private float rotationAngle = 0.0f;
+
 	internal void SetSortOrder (int sortOrder)
 	{
 		render.sortingOrder = sortOrder;
@@ -32,32 +35,23 @@ public class CancerCell : MonoBehaviour
 		hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
     }
 
-    IEnumerator DestroyCell()
-    {
-        bodyBlocker.enabled = false;
-		hypoxicArea.gameObject.SetActive(false);
-
-        animator.SetTrigger("Apoptosis");
-		yield return new WaitForSeconds(wait_before_destroy); 
-		Destroy(hypoxicArea);
-        Destroy(gameObject);
-    }
-
-    public void HitCell()
+    public bool HitCell()
     {
         health -= 20f;
         if (health <= 0)
         {
-            StartCoroutine(DestroyCell());
+			cancer.RemoveCell(this);
+			body.gameObject.SetActive(false);
+			animator.SetTrigger("Apoptosis");
+			return true;
         }
+		return false;
     }
 
-	private float rotationAngle;
-	private float _divideToLocation;
 
 
 	// Control calls
-	public void StartPrepareDivision(Vector3 _divideToLocation, float _rotationAngle)
+	public void StartPrepareDivision(float _rotationAngle)
 	{
 		divisionBodyBlocker.gameObject.SetActive(true);
 		animator.SetTrigger("PrepareToDivide");
@@ -67,7 +61,6 @@ public class CancerCell : MonoBehaviour
 
 	public void StartDivision()
 	{
-
 		animator.SetTrigger("Divide");
 	}
 
@@ -102,7 +95,7 @@ public class CancerCell : MonoBehaviour
 
 	public void CellDied()
 	{
-		Destroy(hypoxicArea);
+
 		Destroy(gameObject);
 	}
 

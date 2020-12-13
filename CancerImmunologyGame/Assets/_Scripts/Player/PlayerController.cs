@@ -6,30 +6,43 @@ namespace Player
 {
 	public class PlayerController : Singleton<PlayerController>
 	{
-		public GameObject AttackEffectPrefab = null;
+		// Attack
+		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
+		private CancerCell closestCell = null;
 
-		public Animator animator = null;
-		public float rotOFfset = 0.2f;
+		[SerializeField]
+		private GameObject AttackEffectPrefab = null;
+		[SerializeField]
+		private Animator animator = null;
+		[SerializeField]
+		private float rotOFfset = 0.2f;
 
-		public float speed = 4.0f;
-		public Rigidbody2D rb = null;
+		// Movement
+		[SerializeField]
+		private float speed = 4.0f;
+		[SerializeField]
+		private Rigidbody2D rb = null;
+		private Vector2 movement = Vector2.zero;
 
-		Vector2 movement = Vector2.zero;
+		// control states
 		private bool isPlayerRespawning = false;
 		private bool isInPowerUpAnimation = false;
 		private bool isInAttackAnimation = false;
-
 		internal bool isInPowerUpMode = false;
 	
+
+
 		public void Initialise()
 		{
 			GlobalGameData.player = gameObject;
+			cancerCellsInRange.Clear();
 		}
 		
+	
+
 		// input
 		public void OnUpdate()
 		{
-
 			if (isPlayerRespawning)
 			{
 				WaitForCameraToFocusAfterRespawn();
@@ -131,16 +144,35 @@ namespace Player
 
 
 		// Attack functionality
-		private CancerCell closestCell = null;
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
+			Debug.Log(collider.gameObject.name);
+			if (cell != null)
+			{
+				cancerCellsInRange.Add(cell.owner);
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
+			if (cell != null)
+			{
+				cancerCellsInRange.Remove(cell.owner);
+			}
+		}
+
 		private void AttackCancerCells()
 		{
+			if (cancerCellsInRange.Count == 0) return;
 			isInAttackAnimation = true;
 			// Find closest cancer cell
 			// Need to change to Cancer optimisation
 			float minDist = 100000.0f;
 			closestCell = null;
 
-			foreach (var cell in FindObjectsOfType<CancerCell>())
+			foreach (var cell in cancerCellsInRange)
 			{
 				float dist = Vector3.Distance(transform.position, cell.transform.position);
 				if (dist < minDist)
@@ -166,7 +198,11 @@ namespace Player
 			newEffect.GetComponent<ParticleSystem>().Play();
 			PlayerUI.Instance.AddExhaustion(7.5f);
 
-			closestCell.HitCell();
+			bool killedTheCell = closestCell.HitCell();
+			if (killedTheCell)
+			{
+				cancerCellsInRange.Remove(closestCell);
+			}
 		}
 
 		public void OnAttackFinished()

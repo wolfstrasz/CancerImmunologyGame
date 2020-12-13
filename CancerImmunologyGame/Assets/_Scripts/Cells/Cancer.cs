@@ -21,6 +21,8 @@ public class Cancer : MonoBehaviour
 
 	[Header("Spawn Attributes")]
 	[SerializeField]
+	private int maximumCells = 10;
+	[SerializeField]
 	private float radius = 0.0f;
 	[SerializeField]
 	private float radiusThinner = 0.0f;
@@ -59,10 +61,33 @@ public class Cancer : MonoBehaviour
 	// Debug containers
 	private List<GameObject> allPlottingObjects = new List<GameObject>();
 
+	private bool isInitialised = false;
+
+
+	public void RemoveCell(CancerCell cc)
+	{
+		cancerCells.Remove(cc);
+	}
+
+	public void OnTriggerEnter2D(Collider2D collider)
+	{
+		if (collider.gameObject == GlobalGameData.player)
+		{
+			isInitialised = true;
+		}
+	}
 
 	// Start is called before the first frame update
 	void Awake()
 	{
+		if ( cancerCells.Count == 0)
+		{
+			cancerCells.Add( 
+				Instantiate(cancerCellPrefab, this.transform)
+				.GetComponent<CancerCell>()
+				);
+		}
+
 		foreach (var cell in cancerCells)
 		{
 			cell.cancer = this;
@@ -79,24 +104,24 @@ public class Cancer : MonoBehaviour
 
 	void Update()
 	{
+		if (!isInitialised) return;
 
-		if (Input.GetKeyDown(KeyCode.Alpha0))
-		{
-			FullDivisionProcess();
-		}
+		//if (Input.GetKeyDown(KeyCode.Alpha0))
+		//{
+		//	FullDivisionProcess();
+		//}
 
-		if (/*!GlobalGameData.Instance.isGameplayPaused  && */ canDivide)
+		if (cancerCells.Count >= maximumCells) return;
+
+		if (!GlobalGameData.isGameplayPaused && canDivide)
 		{
 			timePassed += Time.deltaTime;
 			if (timePassed > timeBetweenDivisions)
 			{
-				timePassed = 0.0f;
 				FullDivisionProcess();
 			}
 
 		}
-
-
 
 	}
 
@@ -126,7 +151,7 @@ public class Cancer : MonoBehaviour
 				{
 					if (hit.collider.gameObject.tag == "BlocksCancerSpawns")
 					{
-						Debug.Log(hit.collider.gameObject.name);
+						//Debug.Log(hit.collider.gameObject.name);
 						blockers.Add(hit.collider.gameObject);
 					}
 
@@ -148,10 +173,10 @@ public class Cancer : MonoBehaviour
 						if (availableLocationsByDensity.ContainsKey(nextSpawnLocation))
 						{
 							++availableLocationsByDensity[nextSpawnLocation];
-							Debug.Log("New location with density: " + availableLocationsByDensity[nextSpawnLocation]);
+							//Debug.Log("New location with density: " + availableLocationsByDensity[nextSpawnLocation]);
 						} else
 						{
-							Debug.Log("Adding to dictionary: " + nextSpawnLocation);
+							//Debug.Log("Adding to dictionary: " + nextSpawnLocation);
 							availableLocationsByDensity.Add(nextSpawnLocation, 1);
 
 							if (!spawnOwners.ContainsKey(nextSpawnLocation))
@@ -221,8 +246,8 @@ public class Cancer : MonoBehaviour
 			
 
 			int index = (int)UnityEngine.Random.Range(0.0f, possibleLocationsToSpawn.Count - 1);
-			Debug.Log(possibleLocationsToSpawn.Count);
-			Debug.Log("index = " + index);
+			//Debug.Log(possibleLocationsToSpawn.Count);
+			//Debug.Log("index = " + index);
 			locationToSpawn = possibleLocationsToSpawn[index];
 		}
 		else // Choose a random point to spawn next cell
@@ -240,8 +265,8 @@ public class Cancer : MonoBehaviour
 
 	void StartDivision()
 	{
-		Debug.Log("Division preparation");
-		Debug.Log("Spawn location: " + locationToSpawn);
+		//Debug.Log("Division preparation");
+		//Debug.Log("Spawn location: " + locationToSpawn);
 
 		cellToDivide = spawnOwners[locationToSpawn];
 
@@ -251,7 +276,7 @@ public class Cancer : MonoBehaviour
 		float spawnRotationAngle = ((Mathf.Atan2(diff.y, diff.x)) * Mathf.Rad2Deg);
 
 
-		cellToDivide.StartPrepareDivision(locationToSpawn, spawnRotationAngle);
+		cellToDivide.StartPrepareDivision(spawnRotationAngle);
 	}
 
 	void ResetDivisionProcess()
@@ -284,12 +309,13 @@ public class Cancer : MonoBehaviour
 		cancerCells.Add(newCell);
 
 		cellToDivide.StartReturnFromDivision();
+		Debug.Log("OnFinsishDivision");
+		timePassed = 0.0f;
 		canDivide = true;
 	}
 
 	public void FullDivisionProcess()
 	{
-		if (!canDivide) return;
 		canDivide = false;
 		ResetDivisionProcess();
 		FindAllSpotsAvailable();

@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1070459107483184934}
   - component: {fileID: 1070459107483184935}
+  - component: {fileID: 8437387295570275682}
   m_Layer: 0
   m_Name: BodyBlocker
   m_TagString: BlocksCancerSpawns
@@ -94,6 +95,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.3
+--- !u!114 &8437387295570275682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070459107483184933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafd8f986b751934eb5d899ee4d31ac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1070459107712460835}
 --- !u!1 &1070459107712460833
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070459107712460833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -1.67, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 1070459107483184934}
@@ -142,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eeb29e1de8287b41bc66eb8ab92435b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyBlocker: {fileID: 1070459107483184935}
+  body: {fileID: 8437387295570275682}
   divisionBodyBlocker: {fileID: 482302453487780885}
   hypoxicArea: {fileID: 6835890743153242823}
   animator: {fileID: 6345655435669232103}

@@ -13,7 +13,7 @@ public static class GlobalGameData
 	public static float gameplaySpeed = 1.0f;
 	public static float gameSpeed = 1.0f;
 
-
+	// Shared object pool
 	public static GameObject player = null;
 
 	private static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
@@ -43,5 +43,11 @@ public static class GlobalGameData
 	public static void AddSpawnLocation(PlayerRespawnArea area)
 	{
 		RespawnAreas.Add(area);
+	}
+
+	public static void RestObjectPool()
+	{
+		player = null;
+		RespawnAreas.Clear();
 	}
 }

@@ -64,6 +64,7 @@ namespace Core
 
 		private IEnumerator InitialiseLevel()
 		{
+			GlobalGameData.RestObjectPool();
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();
 
