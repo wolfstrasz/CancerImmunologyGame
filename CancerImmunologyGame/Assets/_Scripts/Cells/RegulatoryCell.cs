@@ -87,9 +87,8 @@ public class RegulatoryCell : MonoBehaviour
 
                 GameObject particle = Instantiate(particleToShoot, transform.position, Quaternion.identity);
                 RegulatoryParticle rp = particle.GetComponent<RegulatoryParticle>();
-                rp.rc = this;
                 particles.Add(rp);
-                rp.StartSpread(transform.position + spreadVector);
+                rp.Initialise(transform.position + spreadVector);
             }
         }
     }

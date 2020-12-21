@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
-public class HelperTCellArea : AreaOfEffect
+public class HelperSense : AreaOfEffect
 {
 	private bool isEffectDeactivated = true;
 
