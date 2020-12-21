@@ -76,7 +76,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4702413554856043946}
   - component: {fileID: 4702413554856043956}
-  - component: {fileID: 4702413554856043957}
   m_Layer: 8
   m_Name: HelperTCellArea
   m_TagString: Untagged
@@ -113,19 +112,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
---- !u!114 &4702413554856043957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4702413554856043947}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98dc5d1cab102b8429315e0017676767, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Radius: 1
 --- !u!1 &4702413554881257943
 GameObject:
   m_ObjectHideFlags: 0
