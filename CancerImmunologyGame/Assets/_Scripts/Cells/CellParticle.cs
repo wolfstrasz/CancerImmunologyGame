@@ -43,13 +43,7 @@ public abstract class CellParticle : MonoBehaviour
 	{
 		spreadPosition = _spreadPosition;
 		target = _target;
-		if (target)
-		{
-			StateAction = FollowTarget;
-		} else
-		{
-			StateAction = Spread;
-		}
+		StateAction = Spread;
 	}
 
 	private void Idle()
@@ -70,6 +64,10 @@ public abstract class CellParticle : MonoBehaviour
 			transform.position += directionVector.normalized * Time.unscaledDeltaTime
 				* speed * GlobalGameData.gameplaySpeed;
 		}
+		else if (target != null)
+		{
+			StateAction = FollowTarget;
+		}
 		else
 		{
 			StateAction = Idle;
@@ -82,7 +80,7 @@ public abstract class CellParticle : MonoBehaviour
 		if (Vector3.SqrMagnitude(directionVector) <= distanceToReachSqr)
 		{
 			OnReachTarget();
-		}
+		} 
 		else
 		{
 			transform.position += directionVector.normalized * Time.unscaledDeltaTime
@@ -90,10 +88,7 @@ public abstract class CellParticle : MonoBehaviour
 		}
 	}
 
-	private void Dead()
-	{
-
-	}
+	private void Dead() { }
 
 	protected abstract void OnReachTarget();
 
@@ -105,7 +100,7 @@ public abstract class CellParticle : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (!target) return;
+		if (target != null) return;
 
 		KillerCell cell = collider.GetComponent<KillerCell>();
 		if (cell != null)

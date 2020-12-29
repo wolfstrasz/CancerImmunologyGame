@@ -12,8 +12,10 @@ public class HelperCellParticle : CellParticle
 
 	protected override void OnReachTarget()
 	{
+		Debug.Log("Reached targer");
 		target.ReceiveHealth(healthRegeneration);
 		target.ReceiveExhaustion(-exhaustRegeneration);
+		Destroy(gameObject);
 	}
 }
 
