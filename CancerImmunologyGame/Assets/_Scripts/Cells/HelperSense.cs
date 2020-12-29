@@ -1,28 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
 
-public class HelperSense : AreaOfEffect
+namespace Cells
 {
-	private bool isEffectDeactivated = true;
-
-	protected override void OnActivation()
+	[RequireComponent(typeof(Collider2D))]
+	public class HelperSense : MonoBehaviour
 	{
-		isEffectDeactivated = false;
-	}
+		[SerializeField]
+		private List<KillerCell> killerCells = new List<KillerCell>();
+		public List<KillerCell> KillerCells => killerCells;
 
-	protected override void OnDeactivation()
-	{
-		isEffectDeactivated = true;
-	}
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+			if (kc != null)
+			{
+				killerCells.Add(kc);
+			}
+		}
 
-	protected override void OnEffectStatus()
-	{
-		if (GlobalGameData.isGameplayPaused) return;
-		if (isEffectDeactivated) return;
-		PlayerUI.Instance.AddHealth(+0.35f); // Must change to global scriptable object values
-		PlayerUI.Instance.AddExhaustion(-0.30f); // Must change to global scriptable object values
-	}
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+			if (kc != null)
+			{
+				killerCells.Remove(kc);
+			}
+		}
 
+	}
 }
