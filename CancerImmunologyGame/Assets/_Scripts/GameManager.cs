@@ -14,8 +14,16 @@ namespace Core
 		StateFunction StateUpdate;
 		StateFunction StateFixedUpdate;
 
+		private bool isInitialised = false;
+
 		private bool isLevelInitialised = false;
 		
+		void Start()
+		{
+			if(!isInitialised)
+				OnSampleInitialise();
+		}
+
 		void Update()
 		{
 			StateUpdate();
@@ -26,8 +34,31 @@ namespace Core
 			StateFixedUpdate();
 		}
 
+		private void OnSampleInitialise(){
+			Debug.Log("Initialise Sample Game Manager");
+			isInitialised = true;
+			Time.timeScale = 1.0f;
+
+			GlobalGameData.gameplaySpeed = 1.0f;
+			GlobalGameData.gameSpeed = 1.0f;
+			GlobalGameData.isGameplayPaused = false;
+			GlobalGameData.isInitialised = true;
+
+			GlobalGameData.RestObjectPool();
+			GlobalGameData.Cancers.Clear();
+			GlobalGameData.Cancers.AddRange(FindObjectsOfType<Cancer>());
+
+			PlayerController.Instance.Initialise();
+
+			isLevelInitialised = true;
+
+			StateUpdate = LevelSampleRunning;
+			StateFixedUpdate = LevelFixedRunning;
+		}
+
 		public void Initialise()
 		{
+			Debug.Log("Initialise Game Manager");
 			Time.timeScale = 1.0f;
 			SceneManager.activeSceneChanged += OnActiveSceneChanged;
 
@@ -111,6 +142,11 @@ namespace Core
 			{
 				GlobalGameData.Cancers[i].OnUpdate();
 			}
+		}
+
+		private void LevelSampleRunning()
+		{
+			PlayerController.Instance.OnUpdate();
 		}
 
 		private void LevelFixedRunning()
