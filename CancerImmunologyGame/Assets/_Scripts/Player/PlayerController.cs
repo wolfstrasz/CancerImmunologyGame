@@ -6,8 +6,10 @@ namespace Player
 {
 	public class PlayerController : Singleton<PlayerController>
 	{
+		[SerializeField]
+		KillerCell kc = null;
+
 		// Attack
-		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
 		private CancerCell closestCell = null;
 
 		[SerializeField]
@@ -40,18 +42,35 @@ namespace Player
 
 		public void Initialise()
 		{
+			allotherKCs = new List<KillerCell>(FindObjectsOfType<KillerCell>());
+			allotherKCs.Remove(kc);
 			PlayerUI.Instance.Initialise(animator);
 			GlobalGameData.player = gameObject;
-			cancerCellsInRange.Clear();
+			kc.Initialise();
 		}
-		
-	
+
+
+		// hardcoded
+		List<KillerCell> allotherKCs = new List<KillerCell>();
+		int KCindex = 0;
 
 		// input
 		public void OnUpdate()
 		{
 			PlayerUI.Instance.OnUpdate();
 
+			// hard-code should be removed
+
+			if (Input.GetKeyDown(KeyCode.Tab))
+			{
+				if (allotherKCs.Count == 0) return;
+
+				Vector3 nextPosition = allotherKCs[KCindex].transform.position;
+				allotherKCs[KCindex].transform.position = transform.position;
+				KCindex = (++KCindex) % allotherKCs.Count;
+
+				transform.position = nextPosition;
+			}
 			if (isPlayerRespawning)
 			{
 				WaitForCameraToFocusAfterRespawn();
@@ -157,30 +176,11 @@ namespace Player
 			}
 		}
 
-
-
-		// Attack functionality
-		private void OnTriggerEnter2D(Collider2D collider)
-		{
-			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-			Debug.Log(collider.gameObject.name);
-			if (cell != null)
-			{
-				cancerCellsInRange.Add(cell.owner);
-			}
-		}
-
-		private void OnTriggerExit2D(Collider2D collider)
-		{
-			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-			if (cell != null)
-			{
-				cancerCellsInRange.Remove(cell.owner);
-			}
-		}
-
+		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
 		private void AttackCancerCells()
 		{
+			cancerCellsInRange = kc.GetCancerCellsInRange();
+
 			if (cancerCellsInRange.Count == 0) return;
 			isInAttackAnimation = true;
 			// Find closest cancer cell
