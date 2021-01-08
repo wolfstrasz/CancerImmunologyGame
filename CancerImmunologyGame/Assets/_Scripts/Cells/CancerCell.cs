@@ -48,7 +48,8 @@ public class CancerCell : MonoBehaviour
         {
 			isDying = true;
 
-			cancer.RemoveCell(this);
+			if (cancer != null)
+				cancer.RemoveCell(this);
 			body.gameObject.SetActive(false);
 			animator.SetTrigger("Apoptosis");
 			return true;
