@@ -7,7 +7,7 @@ public class KillerSense : MonoBehaviour
 {
 	[SerializeField]
 	private KillerCell owner = null;
-
+	[SerializeField]
 	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
 	public List<CancerCell> CancerCellsInRange => cancerCellsInRange;
 
@@ -15,6 +15,7 @@ public class KillerSense : MonoBehaviour
 	// Attack functionality
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
+		Debug.Log("Colliding with  " + collider.gameObject);
 		CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
 		Debug.Log(collider.gameObject.name);
 		if (cell != null)

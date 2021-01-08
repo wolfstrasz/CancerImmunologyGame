@@ -41,12 +41,15 @@ public class CancerCell : MonoBehaviour
 
     public bool HitCell()
     {
+		if (isDying) return false;
+
         health -= 20f;
         if (health <= 0)
         {
 			isDying = true;
 
-			cancer.RemoveCell(this);
+			if (cancer != null)
+				cancer.RemoveCell(this);
 			body.gameObject.SetActive(false);
 			animator.SetTrigger("Apoptosis");
 			return true;

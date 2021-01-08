@@ -21,7 +21,7 @@ public class HypoxicArea : AreaOfEffect
 	{
 		if (GlobalGameData.isGameplayPaused) return;
 		if (isEffectDeactivated) return;
-		PlayerUI.Instance.AddHealth(-0.02f); // Must change to global scriptable object values
+		//PlayerUI.Instance.AddHealth(-0.02f); // Must change to global scriptable object values
 	}
 
 }
