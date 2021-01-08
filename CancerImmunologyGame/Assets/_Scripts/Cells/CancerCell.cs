@@ -41,6 +41,8 @@ public class CancerCell : MonoBehaviour
 
     public bool HitCell()
     {
+		if (isDying) return false;
+
         health -= 20f;
         if (health <= 0)
         {

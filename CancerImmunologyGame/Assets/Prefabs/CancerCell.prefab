@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 1070459107483184934}
   - component: {fileID: 1070459107483184935}
   - component: {fileID: 8437387295570275682}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BodyBlocker
   m_TagString: BlocksCancerSpawns
   m_Icon: {fileID: 0}
