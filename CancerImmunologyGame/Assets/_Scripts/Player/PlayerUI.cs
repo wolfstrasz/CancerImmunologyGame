@@ -106,7 +106,7 @@ namespace Player
 		{
 			if (GlobalGameData.isGameplayPaused) return;
 
-			if (!PlayerController.Instance.isInPowerUpMode)
+			if (!GlobalGameData.isInPowerUpMode)
 			{
 				AddPowerUp(2.0f * Time.deltaTime);
 				return;
@@ -137,7 +137,7 @@ namespace Player
 
 		public void AddExhaustion(float value)
 		{
-			if (PlayerController.Instance.isInPowerUpMode && value >= 0.0f) return;
+			if (GlobalGameData.isInPowerUpMode && value >= 0.0f) return;
 
 			exhaustion += value;
 
@@ -197,10 +197,6 @@ namespace Player
 			return exhaustion / maxExhaustion;
 		}
 
-		internal float GetSlowDown()
-		{
-			return (maxExhaustion - exhaustion) / maxExhaustion;
-		}
 
 		public void TriggerPowerUp()
 		{

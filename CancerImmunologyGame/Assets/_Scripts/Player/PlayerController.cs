@@ -9,6 +9,7 @@ namespace Player
 		[SerializeField]
 		KillerCell kc = null;
 
+
 		// Attack
 		private CancerCell closestCell = null;
 
@@ -19,11 +20,6 @@ namespace Player
 		[SerializeField]
 		private float rotOFfset = 0.2f;
 
-		// Movement
-		[SerializeField]
-		private float speed = 4.0f;
-		[SerializeField]
-		private Rigidbody2D rb = null;
 		private Vector2 movement = Vector2.zero;
 
 		// control states
@@ -35,24 +31,22 @@ namespace Player
 		private bool isInPowerUpAnimation = false;
 		[SerializeField]
 		private bool isInAttackAnimation = false;
-		[SerializeField]
-		internal bool isInPowerUpMode = false;
 
 
 
 		public void Initialise()
 		{
-			allotherKCs = new List<KillerCell>(FindObjectsOfType<KillerCell>());
-			allotherKCs.Remove(kc);
+			//allotherKCs = new List<KillerCell>(FindObjectsOfType<KillerCell>());
+			//allotherKCs.Remove(kc);
 			PlayerUI.Instance.Initialise(animator);
 			GlobalGameData.player = gameObject;
 			kc.Initialise();
 		}
 
 
-		// hardcoded
-		List<KillerCell> allotherKCs = new List<KillerCell>();
-		int KCindex = 0;
+		//// hardcoded
+		//List<KillerCell> allotherKCs = new List<KillerCell>();
+		//int KCindex = 0;
 
 		// input
 		public void OnUpdate()
@@ -61,16 +55,16 @@ namespace Player
 
 			// hard-code should be removed
 
-			if (Input.GetKeyDown(KeyCode.Tab))
-			{
-				if (allotherKCs.Count == 0) return;
+			//if (Input.GetKeyDown(KeyCode.Tab))
+			//{
+			//	if (allotherKCs.Count == 0) return;
 
-				Vector3 nextPosition = allotherKCs[KCindex].transform.position;
-				allotherKCs[KCindex].transform.position = transform.position;
-				KCindex = (++KCindex) % allotherKCs.Count;
+			//	Vector3 nextPosition = allotherKCs[KCindex].transform.position;
+			//	allotherKCs[KCindex].transform.position = transform.position;
+			//	KCindex = (++KCindex) % allotherKCs.Count;
 
-				transform.position = nextPosition;
-			}
+			//	transform.position = nextPosition;
+			//}
 			if (isPlayerRespawning)
 			{
 				WaitForCameraToFocusAfterRespawn();
@@ -108,36 +102,25 @@ namespace Player
 		{
 			if (isPlayerRespawning) return;
 
-			// WHY DID I DO THIS I NEED TO FIND OUT !!!
+			// Damping if both axis are pressed. sqare root of 2.
 			if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
 			{
 				movement = movement * 0.74f;
 			}
-			///////////////////////////////////////////
-
-			Vector2 move = movement * speed * Time.fixedDeltaTime;
-			if (isInPowerUpMode)
-			{
-				rb.MovePosition(move + rb.position);
-			}
-			else
-			{
-				rb.MovePosition(move * PlayerUI.Instance.GetSlowDown() + rb.position);
-			}
+			kc.Move(movement);
 		}
 
 
 		// Power up functionality
 		internal void EnterPowerUpMode()
 		{
+			GlobalGameData.isInPowerUpMode = true;
 			if (isInAttackAnimation)
 			{
-				isInPowerUpMode = true;
 				queuePowerUp = true;
 				return;
 			}
 
-			isInPowerUpMode = true;
 			isInPowerUpAnimation = true;
 			animator.SetTrigger("PowerUp");
 			animator.speed = 2.0f;
@@ -145,7 +128,7 @@ namespace Player
 
 		internal void ExitPowerUpMode()
 		{
-			isInPowerUpMode = false;
+			GlobalGameData.isInPowerUpMode = false;
 			animator.speed = 1.0f;
 		}
 
@@ -158,7 +141,7 @@ namespace Player
 		internal void Respawn()
 		{
 
-			rb.isKinematic = true;
+		//	rb.isKinematic = true;
 			movement = new Vector2(0.0f, 0.0f);
 			isPlayerRespawning = true;
 			gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(gameObject.transform.position);
@@ -172,7 +155,7 @@ namespace Player
 			{
 				PlayerUI.Instance.ResetData();
 				isPlayerRespawning = false;
-				rb.isKinematic = false;
+		//		rb.isKinematic = false;
 			}
 		}
 

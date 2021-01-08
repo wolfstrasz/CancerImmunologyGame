@@ -45,6 +45,8 @@ public static class GlobalGameData
 		RespawnAreas.Add(area);
 	}
 
+	public static bool isPowerUpOn = false;
+
 	public static void RestObjectPool()
 	{
 		player = null;
