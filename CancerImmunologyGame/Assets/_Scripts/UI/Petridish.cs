@@ -33,7 +33,7 @@ namespace CellpediaUI
 		[SerializeField]
 		private static float xShiftCoord = 0.0f;
 		[SerializeField]
-		private bool isShifting = false;
+		internal bool isShifting = false;
 		[SerializeField]
 		private float timepassed = 0.0f;
 

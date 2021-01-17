@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Cancerous
   animatorTrigger: Cancer
   sprite: {fileID: -2487138818442988084, guid: d6c6d95c499c7d6468e7415148eac0ed, type: 3}
-  scale: 1
+  scale: 0.8

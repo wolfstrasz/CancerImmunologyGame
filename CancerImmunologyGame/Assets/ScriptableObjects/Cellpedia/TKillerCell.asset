@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Boom Bam text and so on,
   animatorTrigger: TKiller
   sprite: {fileID: 7020793457668649555, guid: 76f55ab67d3656b45a07a6853b0f2fcf, type: 3}
-  scale: 1
+  scale: 0.8

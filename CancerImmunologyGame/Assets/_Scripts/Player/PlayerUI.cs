@@ -28,6 +28,10 @@ namespace Player
 		private ExhaustionBar exhaustionBar = null;
 		[SerializeField]
 		private ImmunotherapyBar powerUpBar = null;
+		[SerializeField]
+		private GameObject microscope = null;
+		[SerializeField]
+		private GameObject microscopeGlow = null;
 
 		[Header("Power Up Action Button")]
 		[SerializeField]
@@ -48,7 +52,7 @@ namespace Player
 			if (healthBar != null)
 			{
 				healthBar.SetMaxValue(KillerCell.MaxHealth);
-				
+
 			}
 			else Debug.LogWarning("Health bar is not linked to global data");
 
@@ -87,7 +91,7 @@ namespace Player
 			}
 
 		}
-		
+
 		private void UpdateCellBars()
 		{
 			healthBar.SetValue(kc.Health);
@@ -120,7 +124,7 @@ namespace Player
 				immunotherapyIcon.color = iconEnabledColor;
 				return;
 			}
-			
+
 			if (powerUp < 0.0f)
 			{
 				powerUpBar.SetValue(powerUp = 0.0f);
@@ -151,6 +155,26 @@ namespace Player
 
 		}
 
+		public void OpenCellpedia()
+		{
+			CellpediaUI.Cellpedia.Instance.Open();
+			StopGlow();
+		}
+
+		public void StartGlow()
+		{
+			microscopeGlow.SetActive(true);
+		}
+
+		private void StopGlow()
+		{
+			microscopeGlow.SetActive(false);
+		}
+
+		public void ActivateMicroscope()
+		{
+			microscope.SetActive(true);
+		}
 	}
 
 

@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Helps the player.
   animatorTrigger: THelper
   sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de, type: 3}
-  scale: 1
+  scale: 0.7

@@ -29,12 +29,10 @@ namespace CellpediaUI
 		private int cdIndex = 0;
 		[SerializeField]
 		private int dishIndex = 0;
-		[SerializeField]
-		bool rotatorLocked = false;
 
 		void Start()
 		{
-			Initialise();
+			//Initialise();
 		}
 
 		void Update()
@@ -68,6 +66,7 @@ namespace CellpediaUI
 
 			UnlockCellDescription(CellpediaCells.TKILLER);
 			petridishes[0].SetVisual(unlockedCellDescriptions[0]);
+			gameObject.SetActive(false);
 		}
 
 		public void Close()
@@ -83,7 +82,7 @@ namespace CellpediaUI
 		public void UnlockCellDescription(CellpediaCells cc)
 		{
 			unlockedCellDescriptions.Add(cellpediaDescriptions[cc]);
-
+			Player.PlayerUI.Instance.StartGlow();
 			// Make button glow!
 		}
 
@@ -91,29 +90,22 @@ namespace CellpediaUI
 		{
 			if (unlockedCellDescriptions.Count <= 1) return;
 
+			if (petridishes[0].isShifting || petridishes[1].isShifting) return;
+
+			
 			cdIndex++;
 			cdIndex %= unlockedCellDescriptions.Count;
 			dishIndex ^= 1;
 
-			if (!rotatorLocked)
-			{
-				rotatorLocked = true;
-				var cd = unlockedCellDescriptions[cdIndex];
-				petridishes[dishIndex].SetVisual(cd);
-				petridishes[0].ShiftLeft();
-				petridishes[1].ShiftLeft();
-				cellDescription.text = cd.description;
-				cellName.text = cd.cellname;
+			var cd = unlockedCellDescriptions[cdIndex];
+			petridishes[dishIndex].SetVisual(cd);
+			petridishes[0].ShiftLeft();
+			petridishes[1].ShiftLeft();
+			cellDescription.text = cd.description;
+			cellName.text = cd.cellname;
 
-				StartCoroutine(WaitForRotator());
-			}
 		}
 
-		private IEnumerator WaitForRotator()
-		{
-			yield return new WaitForSeconds(time_between_shifts);
-			rotatorLocked = false;
-		}
 
 		[System.Serializable]
 		public struct CellDescriptionLink

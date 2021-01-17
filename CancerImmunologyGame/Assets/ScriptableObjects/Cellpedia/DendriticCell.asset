@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Dendritic cells do stuff.
   animatorTrigger: Dendritic
   sprite: {fileID: 452115995815455089, guid: a3bcce0b71d67974395e31a86f02f18a, type: 3}
-  scale: 1
+  scale: 2.2

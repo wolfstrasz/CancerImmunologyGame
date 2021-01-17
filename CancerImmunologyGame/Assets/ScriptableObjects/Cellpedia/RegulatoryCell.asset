@@ -16,4 +16,4 @@ MonoBehaviour:
   description: Regulates
   animatorTrigger: Regulatory
   sprite: {fileID: 3821337718258041553, guid: 0edfca347b3b6c948aec4d2fa7801bd7, type: 3}
-  scale: 1
+  scale: 0.8
