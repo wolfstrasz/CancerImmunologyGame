@@ -8,7 +8,7 @@ public class DendriticCell : MonoBehaviour
 	[SerializeField]
 	private DCInteractArea dcArea = null;
 	[SerializeField]
-	private ChemokinPath chemokinePath = null;
+	private List<ChemokinPath> chemokinePaths = new List<ChemokinPath>();
 	[SerializeField]
 	private bool interacted = false;
 	public bool HasInteracted => interacted;
@@ -24,7 +24,10 @@ public class DendriticCell : MonoBehaviour
 
 	private void FinishInteraction()
 	{
-		chemokinePath.ActivateChemokines();
+		foreach (ChemokinPath path in chemokinePaths)
+		{
+			path.ActivateChemokines();
+		}
 		interacted = true;
 	}
 }
