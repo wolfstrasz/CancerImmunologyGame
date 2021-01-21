@@ -4,47 +4,66 @@ using UnityEngine;
 using PathCreation;
 using PathCreation.Examples;
 
-public class BloodcellSpawner : MonoBehaviour
+namespace BloodcellAnimation
 {
-    
-    public GameObject bloodCellPrefab;
-    public List<Sprite> bloodCellSprites;
-    public List<PathCreator> paths;
-    public List<Transform> EndPositions;
-    int index = 0;
+	public class BloodcellSpawner : MonoBehaviour
+	{
+		[Header("Functional Linking")]
+		[SerializeField]
+		private GameObject bloodCellPrefab;
+		[SerializeField]
+		private List<BloodcellPathAttributes> pathAttributes = new List<BloodcellPathAttributes>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
+		private List<BloodCell> bloodcells = new List<BloodCell>();
+		int index = 0;
 
-        StartCoroutine(SpawnBloodCells());
-    }
 
-    IEnumerator SpawnBloodCells()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(1.0f);
-            SpawnCell();
-        }
+		void Awake()
+		{
+			foreach (BloodCell cell in bloodcells)
+			{
+				Destroy(cell.gameObject);
+			}
 
-    }
+			bloodcells = new List<BloodCell>();
 
-    void SpawnCell()
-    {
-        GameObject cell = Instantiate(bloodCellPrefab, transform.position, Quaternion.identity);
-        PathFollower follower = cell.GetComponent<PathFollower>();
-        follower.pathCreator = paths[index];
+			foreach (BloodcellPathAttributes attribute in pathAttributes)
+			{
+				// Get the path and its length
+				VertexPath path = attribute.pathCreator.path;
 
-        BloodCell bc = cell.GetComponent<BloodCell>();
-        bc.endPos = EndPositions[index];
+				float spawnDistance = attribute.spawnOffset;
+				Debug.Log("For path: ------------------");
+				float maxSpawnDistance = path.length - (attribute.spawnGap - attribute.spawnOffset);
+				Debug.Log("Path lenght = " + path.length);
+				int numberOfCells = (int)(path.length / attribute.spawnGap);
+				Debug.Log("Cells = " + numberOfCells);
 
-        SpriteRenderer render = cell.GetComponent<SpriteRenderer>();
-        render.sprite = bloodCellSprites[Random.Range(0, bloodCellSprites.Count)];
+				float endDistance = numberOfCells * attribute.spawnGap;
+				Debug.Log("End Distance = " + endDistance);
 
-        index++;
-        index = index % paths.Count;
+				while (spawnDistance < maxSpawnDistance)
+				{
+					GameObject bcObj = Instantiate(bloodCellPrefab, gameObject.transform);
+					BloodCell bc = bcObj.GetComponent<BloodCell>();
 
-        
-    }
+					Debug.Log("Spawn position: " + spawnDistance);
+					bc.SetData(path, spawnDistance, endDistance);
+					spawnDistance += attribute.spawnGap;
+				}
+
+				// Start spawning bloodcells on given distances
+
+
+			}
+		}
+
+		[System.Serializable]
+		struct BloodcellPathAttributes
+		{
+			public PathCreator pathCreator;
+			public float spawnGap;
+			public float spawnOffset;
+		}
+	}
 }
