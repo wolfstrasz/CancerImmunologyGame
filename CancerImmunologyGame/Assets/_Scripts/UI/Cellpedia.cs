@@ -17,8 +17,13 @@ namespace CellpediaUI
 		TMP_Text cellDescription = null;
 		[SerializeField]
 		TMP_Text cellName = null;
+		[SerializeField]
+		private Animator buttonAnimator = null;
+
+
 		[Header("Attributes")]
 		private float time_between_shifts = 2.0f;
+		private const float time_for_button_rotation = 2.0f;
 
 		[Header("Debugging")]
 		[SerializeField]
@@ -37,27 +42,13 @@ namespace CellpediaUI
 
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Z))
-			{
-				UnlockCellDescription(CellpediaCells.DENDRITIC);
-			}
-			if (Input.GetKeyDown(KeyCode.X))
-			{
-				UnlockCellDescription(CellpediaCells.REGULATORY);
-			}
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				UnlockCellDescription(CellpediaCells.CANCER);
-			}
-			if (Input.GetKeyDown(KeyCode.V))
-			{
-				UnlockCellDescription(CellpediaCells.THELPER);
-			}
+
 
 		}
 
 		public void Initialise()
 		{
+			buttonAnimator.speed = buttonAnimator.speed * time_for_button_rotation / time_between_shifts;
 			Petridish.Timetopass = time_between_shifts;
 			foreach (CellDescriptionLink cdl in cellDescriptions)
 			{
@@ -88,11 +79,14 @@ namespace CellpediaUI
 
 		public void NextPetridish()
 		{
+			Debug.Log("Button Clicked");
+
 			if (unlockedCellDescriptions.Count <= 1) return;
 
 			if (petridishes[0].isShifting || petridishes[1].isShifting) return;
 
-			
+			Debug.Log("Button Click Executed");
+			buttonAnimator.Play("Rotate");
 			cdIndex++;
 			cdIndex %= unlockedCellDescriptions.Count;
 			dishIndex ^= 1;

@@ -26,6 +26,8 @@ namespace CellpediaUI
 		private bool isLeaving = false;
 		[SerializeField]
 		private static float timetopass = 2.0f;
+		[SerializeField]
+		private float scalingFactor = 0.75f;
 
 		[Header("Debugging")]
 		[SerializeField]
@@ -52,6 +54,8 @@ namespace CellpediaUI
 				xStartCoord = xShiftCoord;
 				nextPetridish = this;
 			}
+			trans.localScale = new Vector3(scalingFactor, scalingFactor, 1.0f) ;
+			
 			trans.localPosition = new Vector2(xStartCoord, 0.0f);
 		}
 
