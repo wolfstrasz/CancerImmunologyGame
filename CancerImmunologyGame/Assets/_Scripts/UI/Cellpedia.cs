@@ -22,6 +22,7 @@ namespace CellpediaUI
 
 
 		[Header("Attributes")]
+		[SerializeField]
 		private float time_between_shifts = 2.0f;
 		private const float time_for_button_rotation = 2.0f;
 
@@ -40,11 +41,6 @@ namespace CellpediaUI
 			//Initialise();
 		}
 
-		void Update()
-		{
-
-
-		}
 
 		public void Initialise()
 		{
@@ -68,6 +64,10 @@ namespace CellpediaUI
 		public void Open()
 		{
 			gameObject.SetActive(true);
+			CellDescription cd = unlockedCellDescriptions[cdIndex];
+			petridishes[dishIndex].SetVisual(cd);
+			cellDescription.text = cd.description;
+			cellName.text = cd.cellname;
 		}
 
 		public void UnlockCellDescription(CellpediaCells cc)
@@ -81,7 +81,7 @@ namespace CellpediaUI
 		{
 			Debug.Log("Button Clicked");
 
-			if (unlockedCellDescriptions.Count <= 1) return;
+			//if (unlockedCellDescriptions.Count <= 1) return;
 
 			if (petridishes[0].isShifting || petridishes[1].isShifting) return;
 
@@ -91,12 +91,12 @@ namespace CellpediaUI
 			cdIndex %= unlockedCellDescriptions.Count;
 			dishIndex ^= 1;
 
-			var cd = unlockedCellDescriptions[cdIndex];
+			CellDescription cd = unlockedCellDescriptions[cdIndex];
 			petridishes[dishIndex].SetVisual(cd);
-			petridishes[0].ShiftLeft();
-			petridishes[1].ShiftLeft();
 			cellDescription.text = cd.description;
 			cellName.text = cd.cellname;
+			petridishes[0].ShiftLeft();
+			petridishes[1].ShiftLeft();
 
 		}
 

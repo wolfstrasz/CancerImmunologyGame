@@ -106,7 +106,7 @@ namespace CellpediaUI
 		internal void SetVisual(CellDescription cd)
 		{
 			Debug.Log("Setting visual for: " + gameObject.name);
-			float scaleValue = 0.5f * cd.scale;
+			float scaleValue = scalingFactor * cd.scale;
 			cellVisual.transform.localScale = new Vector3(scaleValue, scaleValue, 1.0f);
 			//cellVisualAnimator.SetTrigger(cd.animatorTrigger);
 			cellVisualAnimator.Play(cd.animatorTrigger);
