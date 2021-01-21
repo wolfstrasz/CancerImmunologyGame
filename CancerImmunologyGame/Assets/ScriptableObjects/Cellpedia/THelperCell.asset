@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: THelperCell
   m_EditorClassIdentifier: 
   cellname: T Helper Cell
-  description: Helps the player.
+  description: Everybody needs a helping hand once in a while! As their name suggest,
+    T helper cells are a kind of T cell that help other immune cells. They do this
+    by releasing litter molecular messages called cytokines. When other immune cells
+    pick up these cytokines, their behaviour is altered depending on the content
+    of the message (e.g. cytokines can make other immune cells multiple, or can tell
+    them to change into a different cell type).
   animatorTrigger: THelper
   sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de, type: 3}
-  scale: 0.7
+  scale: 1.2

@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: TKillerCell
   m_EditorClassIdentifier: 
   cellname: T KIller Cell
-  description: Boom Bam text and so on,
+  description: "You are a T killer cell! When T killer cells like you are given the
+    license to act by dendritic cells, they gain the ability to see \u2018breadcrumb
+    trails\u2019 of chemokines. These direct them to the source of danger. When they
+    find the cell that is the source of danger, T killer cells spit little granules
+    that act like tiny missiles, damaging the surface of their target, resulting
+    in the death of their target cell. Amazing!"
   animatorTrigger: TKiller
   sprite: {fileID: 7020793457668649555, guid: 76f55ab67d3656b45a07a6853b0f2fcf, type: 3}
-  scale: 0.8
+  scale: 1.2

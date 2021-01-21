@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: RegulatoryCell
   m_EditorClassIdentifier: 
   cellname: Regulatory Cell
-  description: Regulates
+  description: "T regulatory cells are super important in the body since they have
+    the ability to tell other immune cells to stop what they are doing. This role
+    is crucial in preventing immune cells from accidentally attacking the body, which
+    would result in autoimmunity. However,\r\nT regulatory cells can be \u2018bribed\u2019
+    to protect cancer cells from immune attack. This makes T regulatory cells an
+    interesting cell: both friend and foe depending on the scenario!\r"
   animatorTrigger: Regulatory
   sprite: {fileID: 3821337718258041553, guid: 0edfca347b3b6c948aec4d2fa7801bd7, type: 3}
-  scale: 0.8
+  scale: 1.2

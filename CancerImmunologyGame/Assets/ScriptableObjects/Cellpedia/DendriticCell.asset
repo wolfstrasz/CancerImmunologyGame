@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: DendriticCell
   m_EditorClassIdentifier: 
   cellname: Dendritic Cell
-  description: Dendritic cells do stuff.
+  description: "Dendritic cells, the scouts of your body, are always on the lookout
+    for intruders or signs of danger in every corner of the body. When they spot
+    something, the move to the lymph node, where they present evidence of their findings
+    to T cells. If a T cell recognises the evidence too, it becomes activated, gaining
+    \u2018license\u2019 to begin performing its function."
   animatorTrigger: Dendritic
   sprite: {fileID: 452115995815455089, guid: a3bcce0b71d67974395e31a86f02f18a, type: 3}
   scale: 2.2
