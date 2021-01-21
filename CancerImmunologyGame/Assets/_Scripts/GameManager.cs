@@ -49,6 +49,7 @@ namespace Core
 			GlobalGameData.Cancers.AddRange(FindObjectsOfType<Cancer>());
 
 			PlayerController.Instance.Initialise();
+			CellpediaUI.Cellpedia.Instance.Initialise();
 
 			isLevelInitialised = true;
 
@@ -70,6 +71,7 @@ namespace Core
 			GlobalGameData.gameSpeed = 1.0f;
 			GlobalGameData.isGameplayPaused = false;
 			GlobalGameData.isInitialised = true;
+			CellpediaUI.Cellpedia.Instance.Initialise();
 		}
 
 

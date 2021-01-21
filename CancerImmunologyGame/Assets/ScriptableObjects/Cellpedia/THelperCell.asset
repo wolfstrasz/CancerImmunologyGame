@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e04e8c40321e1e4e99b9c9f017f1c50, type: 3}
+  m_Name: THelperCell
+  m_EditorClassIdentifier: 
+  cellname: T Helper Cell
+  description: Everybody needs a helping hand once in a while! As their name suggest,
+    T helper cells are a kind of T cell that help other immune cells. They do this
+    by releasing litter molecular messages called cytokines. When other immune cells
+    pick up these cytokines, their behaviour is altered depending on the content
+    of the message (e.g. cytokines can make other immune cells multiple, or can tell
+    them to change into a different cell type).
+  animatorTrigger: THelper
+  sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de, type: 3}
+  scale: 1.2
