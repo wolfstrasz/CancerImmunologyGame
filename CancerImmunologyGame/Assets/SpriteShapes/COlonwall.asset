@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7181f404f1447c0a7a17b3070b952b, type: 3}
-  m_Name: COlonwall
+  m_Name: ColonWall
   m_EditorClassIdentifier: 
   m_Angles:
   - m_Start: -113
@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Order: 0
     m_Sprites:
     - {fileID: 21300000, guid: 3b33e17c8d5e6ad4291565ebf131f88d, type: 3}
-  m_FillTexture: {fileID: 2800000, guid: f7f2d9df00f36734aa17b48990e55c9a, type: 3}
+  m_FillTexture: {fileID: 2800000, guid: 6b3b64ab884c5a148bea7dd327647a2f, type: 3}
   m_CornerSprites:
   - m_CornerType: 0
     m_Sprites:
