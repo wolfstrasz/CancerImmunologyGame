@@ -230,6 +230,7 @@ public class KillerCell : Cell
 	
 	public void ExitPowerUpMode()
 	{
+		animator.SetTrigger("PowerUpFinished");
 		animator.speed = 1.0f;
 	}
 }
