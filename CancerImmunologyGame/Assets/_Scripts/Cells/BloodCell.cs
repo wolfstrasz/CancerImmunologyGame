@@ -9,7 +9,7 @@ namespace BloodcellAnimation
 	{
 		[Header("Functional Linking")]
 		[SerializeField]
-		private List<Sprite> bloodCellSprites;
+		private List<Sprite> bloodCellSprites = new List<Sprite>();
 		[SerializeField]
 		private SpriteRenderer render = null;
 

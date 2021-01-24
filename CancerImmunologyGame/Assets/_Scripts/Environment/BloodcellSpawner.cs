@@ -10,12 +10,10 @@ namespace BloodcellAnimation
 	{
 		[Header("Functional Linking")]
 		[SerializeField]
-		private GameObject bloodCellPrefab;
+		private GameObject bloodCellPrefab = null;
 		[SerializeField]
 		private List<BloodcellPathAttributes> pathAttributes = new List<BloodcellPathAttributes>();
-
 		private List<BloodCell> bloodcells = new List<BloodCell>();
-		int index = 0;
 
 
 		void Awake()
@@ -58,11 +56,11 @@ namespace BloodcellAnimation
 		}
 
 		[System.Serializable]
-		struct BloodcellPathAttributes
+		class BloodcellPathAttributes
 		{
-			public PathCreator pathCreator;
-			public float spawnGap;
-			public float spawnOffset;
+			public PathCreator pathCreator = null;
+			public float spawnGap = 0.0f;
+			public float spawnOffset = 0.0f;
 		}
 	}
 }

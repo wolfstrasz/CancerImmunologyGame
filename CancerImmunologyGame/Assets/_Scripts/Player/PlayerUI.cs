@@ -35,8 +35,6 @@ namespace Player
 
 		[Header("Power Up Action Button")]
 		[SerializeField]
-		private Button immunotherapyButton = null;
-		[SerializeField]
 		private Image immunotherapyIcon = null;
 		[SerializeField]
 		private Color iconEnabledColor = Color.blue;

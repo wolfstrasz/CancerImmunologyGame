@@ -14,8 +14,6 @@ namespace Core
 		StateFunction StateUpdate;
 		StateFunction StateFixedUpdate;
 
-		private bool isInitialised = false;
-
 		private bool isLevelInitialised = false;
 		
 		void Start()
@@ -38,7 +36,6 @@ namespace Core
 
 		private void OnSampleInitialise(){
 			Debug.Log("Initialise Sample Game Manager");
-			isInitialised = true;
 			Time.timeScale = 1.0f;
 
 			GlobalGameData.gameplaySpeed = 1.0f;
