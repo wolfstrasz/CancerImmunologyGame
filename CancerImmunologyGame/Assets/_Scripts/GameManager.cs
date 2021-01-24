@@ -96,6 +96,7 @@ namespace Core
 
 		private IEnumerator InitialiseLevel()
 		{
+			SmoothCamera.Instance.Reset();
 			UIManager.Instance.ClosePanels();
 			GlobalGameData.RestObjectPool();
 			GlobalGameData.Cancers.Clear();

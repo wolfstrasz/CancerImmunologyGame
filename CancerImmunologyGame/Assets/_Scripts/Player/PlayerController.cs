@@ -66,6 +66,7 @@ namespace Player
 				{
 					transform.position = kc.transform.position;
 					heartOutroEnd = false;
+					kc.IsKinematic = false;
 				}
 				return;
 			}
@@ -166,6 +167,7 @@ namespace Player
 		public void StartHeartMovement()
 		{
 			heartOutro = true;
+			kc.IsKinematic = true;
 		}
 	}
 }

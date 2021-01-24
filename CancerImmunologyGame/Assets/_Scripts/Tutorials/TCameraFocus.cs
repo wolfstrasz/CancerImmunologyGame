@@ -22,7 +22,6 @@ namespace Tutorials
 			if (closestObjectTypeToFocusOn == FocusObjectType.INTRO)
 			{
 				SmoothCamera.Instance.StartIntro();
-				SmoothCamera.Instance.SetFocusToPlayer();
 			}
 
 			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)

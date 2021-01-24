@@ -31,11 +31,16 @@ public class SmoothCamera : Singleton<SmoothCamera>
 
 	private bool isInIntro = true;
 
-	void Awake()
+	public void Reset()
 	{
-		gameObject.transform.position = startPosition;
-		focusPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0.0f);
+		focusPosition = new Vector3(startPosition.x, startPosition.y, 0.0f);
 	}
+
+	//void Awake()
+	//{
+	//	gameObject.transform.position = startPosition;
+	//	focusPosition = new Vector3(startPosition.x, startPosition.y, 0.0f);
+	//}
 
 	public void SetNewFocus(GameObject focusObject)
 	{
@@ -145,6 +150,9 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		camera.orthographicSize = 6.0f;
 		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
 		cameraAnimator.SetTrigger("Idle");
+		free_roam = false;
+		focusTarget = PlayerController.Instance.gameObject;
+		focusPosition = PlayerController.Instance.gameObject.transform.position;
 	}
 
 }

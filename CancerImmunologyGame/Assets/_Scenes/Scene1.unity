@@ -3165,7 +3165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &547563941
 Transform:
   m_ObjectHideFlags: 0
@@ -3408,12 +3408,6 @@ MonoBehaviour:
     showNormalsHelpInfo: 0
     tabIndex: 0
   initialized: 1
---- !u!1 &688734117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4694666807517601650, guid: 90a739a3a3a9c7a409d41aadb66021fc,
-    type: 3}
-  m_PrefabInstance: {fileID: 7959733575392156537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &691049614
 GameObject:
   m_ObjectHideFlags: 0
@@ -4337,9 +4331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPersistent: 0
   camera: {fileID: 961665455}
-  free_roam: 0
+  free_roam: 1
   zoomDistance: 5
-  focusTarget: {fileID: 688734117}
+  focusTarget: {fileID: 0}
   focusCenteringSpeed: 0.943
   isCameraFocused: 0
   startPosition: {x: -350, y: -17.5, z: -200}
@@ -4410,7 +4404,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 200
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4434,7 +4428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961665450}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -350, y: -17.5, z: -6}
+  m_LocalPosition: {x: -350, y: -17.5, z: -200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 547563941}
@@ -5060,12 +5054,12 @@ PrefabInstance:
     - target: {fileID: 2046459777261753811, guid: 387683cad213d8f439c5cde957d61515,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -355.21
+      value: -355
       objectReference: {fileID: 0}
     - target: {fileID: 2046459777261753811, guid: 387683cad213d8f439c5cde957d61515,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -17.19
+      value: -17.5
       objectReference: {fileID: 0}
     - target: {fileID: 2046459777261753811, guid: 387683cad213d8f439c5cde957d61515,
         type: 3}
@@ -5942,6 +5936,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1483475498}
   - component: {fileID: 1483475499}
+  - component: {fileID: 1483475500}
   m_Layer: 0
   m_Name: Heart
   m_TagString: Untagged
@@ -6014,6 +6009,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1483475500
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483475497}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95947d448aa397e4d87542dcdabd02ee, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1495138552
 GameObject:
   m_ObjectHideFlags: 0
@@ -11419,5 +11433,15 @@ PrefabInstance:
       propertyPath: kc
       value: 
       objectReference: {fileID: 1236789003}
+    - target: {fileID: 4694666807517601653, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: HeartOutroPosition.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694666807517601653, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: HeartOutroPosition.y
+      value: 65
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a739a3a3a9c7a409d41aadb66021fc, type: 3}
