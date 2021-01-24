@@ -52,6 +52,15 @@ public class KillerCell : Cell
 		OnUpdate();
 	}
 
+	public void ClearForces()
+	{
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = 0.0f;
+	}
+	void OnFixedUpdate() 
+	{
+
+	}
 	public void OnUpdate()
 	{
 		if (GlobalGameData.isInPowerUpMode)
@@ -121,6 +130,7 @@ public class KillerCell : Cell
 	{
 		Vector2 move = movementVector * speed * Time.fixedDeltaTime;
 
+		if (GlobalGameData.isInPowerUpMode) move *= 2.0f;
 		rb.MovePosition(move * GetSlowDown() + rb.position);
 	}
 
@@ -170,7 +180,9 @@ public class KillerCell : Cell
 
 		GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
 		newEffect.GetComponent<ParticleSystem>().Play();
-		exhaustion += 7.5f;
+
+		if (!GlobalGameData.isInPowerUpMode)
+			exhaustion += 7.5f;
 
 		bool killedTheCell = closestCell.HitCell();
 		if (killedTheCell)

@@ -75,14 +75,15 @@ namespace Player
 
 			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
 			{
-				kc.MovementVector = new Vector2(0.0f, 0.0f);
+				kc.ClearForces();
+				movement = Vector2.zero;
 				return;
 			}
 
 			// Collect input 
 			movement.x = Input.GetAxisRaw("Horizontal");
 			movement.y = Input.GetAxisRaw("Vertical");
-			kc.MovementVector = movement;
+			//kc.MovementVector = movement;
 
 			// Damping if both axis are pressed. sqare root of 2.
 			if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
