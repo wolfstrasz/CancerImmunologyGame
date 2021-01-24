@@ -110,4 +110,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae803e694e0f6a4fadd258935fe24e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPos: {fileID: 0}
+  bloodCellSprites:
+  - {fileID: 21300000, guid: 47556199546658645a54651afd122801, type: 3}
+  - {fileID: 21300000, guid: 1a11063baa80222459e60d248a82a55f, type: 3}
+  - {fileID: 21300000, guid: 3a5a16d2e69ff304aa5d2d4eda369236, type: 3}
+  render: {fileID: 0}
+  endOfPathInstruction: 0
+  speed: 8
+  rotationSpeed: 90
+  distanceTravelled: 0
+  distanceToEnd: 0
+  isMoving: 0
