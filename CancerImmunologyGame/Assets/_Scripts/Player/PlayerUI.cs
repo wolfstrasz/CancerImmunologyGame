@@ -188,10 +188,25 @@ namespace Player
 			microscopeGlow.SetActive(false);
 		}
 
-		public void ActivateMicroscope()
+
+		public void ActivateMicroscopePanel()
 		{
 			microscope.SetActive(true);
 		}
+
+		public void ActivatePlayerInfoPanel()
+		{
+			playerInfoPanel.SetActive(true);
+		}
+
+		public void ActivateImmunotherapyPanel()
+		{
+			playerPowerUpPanel.SetActive(true);
+		}
+
+
+		public enum PlayerUIPanels { MICROSCOPE, PLAYER_INFO, IMMUNOTHERAPY}
+
 	}
 
 
