@@ -6,7 +6,7 @@ using Player;
 public class RegulatoryParticle : CellParticle
 {
 	[Header("Regulatory Cell Particle Attributes")]
-    public float exhaust_dmg = 10.0f;
+    public float exhaust_dmg = 5.0f;
 
 	protected override void OnReachTarget()
 	{

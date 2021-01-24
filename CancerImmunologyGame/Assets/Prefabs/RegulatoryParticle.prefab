@@ -45,13 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da30a8635e9db304c91ca76012e47416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rc: {fileID: 0}
-  exhaust_dmg: 10
-  speed: 1
   spreadPosition: {x: 0, y: 0, z: 0}
-  isSpreading: 0
-  isFollowingTarget: 0
   target: {fileID: 0}
+  lifeSpan: 0
+  speed: 1
+  distanceToReachSqr: 0.5
+  exhaust_dmg: 5
 --- !u!212 &7097081208392349934
 SpriteRenderer:
   m_ObjectHideFlags: 0
