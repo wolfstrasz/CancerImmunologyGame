@@ -616,3 +616,4 @@ MonoBehaviour:
   skipTextButton: {fileID: 4764412586051488068}
   StoryTutorials:
   - {fileID: 4040463355500961136, guid: b36fbfd58b2b128458d5b797cdfbf115, type: 3}
+  - {fileID: 2073773381908809888, guid: dfb43cff749b3c549a2170c6a0bd5b98, type: 3}

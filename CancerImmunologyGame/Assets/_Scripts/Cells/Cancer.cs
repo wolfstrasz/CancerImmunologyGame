@@ -14,10 +14,14 @@ public class Cancer : MonoBehaviour
 	private Dictionary<Vector3, CancerCell> spawnOwners = new Dictionary<Vector3, CancerCell>();
 	private int nextSortOrder = 0;
 
-	// Division handling
-	public CancerCell cellToDivide;
-	public Vector3 locationToSpawn;
-	private bool canDivide = false;
+
+	[Header("Prefabs Linking")]
+	[SerializeField]
+	private GameObject availablePointsPrefab = null;
+	[SerializeField]
+	private GameObject spawnPointPrefab = null;
+	[SerializeField]
+	private GameObject cancerCellPrefab = null;
 
 	[Header("Spawn Attributes")]
 	[SerializeField]
@@ -35,7 +39,6 @@ public class Cancer : MonoBehaviour
 	[SerializeField]
 	[Range(5.0f, 100.0f)]
 	private float timeBetweenDivisions = 10.0f;
-	public float timePassed = 0.0f;
 
 	[Header("Generation attributes")]
 	[SerializeField]
@@ -49,20 +52,29 @@ public class Cancer : MonoBehaviour
 	[SerializeField]
 	private Transform debugPlotSpawn = null;
 
-	[Header("Prefabs")]
+	[Header("Debug (ReadOnly)")]
 	[SerializeField]
-	private GameObject availablePointsPrefab = null;
+	private float timePassed = 0.0f;
 	[SerializeField]
-	private GameObject spawnPointPrefab = null;
-	[SerializeField]
-	private GameObject cancerCellPrefab = null;
-
-
 	// Debug containers
 	private List<GameObject> allPlottingObjects = new List<GameObject>();
-
+	[SerializeField]
 	private bool isInitialised = false;
+	// Division handling
+	[SerializeField]
+	private CancerCell cellToDivide;
+	[SerializeField]
+	private Vector3 locationToSpawn;
+	[SerializeField]
+	private bool canDivide = false;
 
+
+	public float TimePassed => timePassed;
+	public float TimeBetweenDivisions => timeBetweenDivisions;
+	public void ForceGrowthAfterTime(float time)
+	{
+		timePassed = timeBetweenDivisions - time;
+	}
 
 	public void RemoveCell(CancerCell cc)
 	{

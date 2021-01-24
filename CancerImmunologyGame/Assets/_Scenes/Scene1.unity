@@ -3335,7 +3335,7 @@ GameObject:
   - component: {fileID: 961665452}
   - component: {fileID: 961665451}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: SmoothCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3371,6 +3371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
+  camera: {fileID: 961665455}
   free_roam: 0
   zoomDistance: 5
   focusTarget: {fileID: 0}
@@ -6893,17 +6894,17 @@ PrefabInstance:
     - target: {fileID: 3824674063084145285, guid: c5213883a71b4354f811c53ae36e1130,
         type: 3}
       propertyPath: cellsToGenerate
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -208.78
+      value: -210.15
       objectReference: {fileID: 0}
     - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -71.51
+      value: -71.81
       objectReference: {fileID: 0}
     - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
         type: 3}
@@ -6949,6 +6950,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302661122422548233, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_Radius
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5213883a71b4354f811c53ae36e1130, type: 3}

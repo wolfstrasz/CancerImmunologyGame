@@ -3,6 +3,8 @@ using System.Collections;
 //[RequireComponent(typeof(Camera))]
 public class SmoothCamera : Singleton<SmoothCamera>
 {
+	[SerializeField]
+	private new Camera camera = null;
 	public bool free_roam = true;
 
     [SerializeField, Range(1.0f, 20.0f)]
@@ -80,6 +82,23 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		Vector3 lookDirection = transform.forward;
 		Vector3 lookPosition = focusPosition - lookDirection * zoomDistance;
 		transform.position = lookPosition;
+	}
+
+
+
+	public bool IsInCameraViewBounds(Vector3 position)
+	{
+		
+		Vector2 lowerBound = camera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+		Vector3 upperBound = camera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+
+		if (position.x > lowerBound.x
+			&& position.x < upperBound.x
+			&& position.y > lowerBound.y
+			&& position.y < upperBound.y)
+			return true;
+
+		return false;
 	}
 }
 
