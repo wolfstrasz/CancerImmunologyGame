@@ -9,7 +9,12 @@ namespace Cells
 	{
 		[SerializeField]
 		private HelperSense sense = null;
-
+		[SerializeField]
+		private bool isActivated = false;
+		[SerializeField]
+		private GameObject body = null;
+		[SerializeField]
+		private GameObject sprite = null;
 
 		// Spawning particles functionality
 		[Header("ParticleSpawning")]
@@ -26,8 +31,20 @@ namespace Cells
 		[SerializeField]
 		private float spawnTimePassed = 0.0f;
 
+
+		public void Activate()
+		{
+			body.SetActive(true);
+			sprite.SetActive(true);
+			sense.gameObject.SetActive(true);
+			GetComponent<Animator>().enabled = true;
+			isActivated = true;
+		}
+
 		void Update()
 		{
+			if (!isActivated) return;
+
 			if (GlobalGameData.isGameplayPaused) return;
 
 			if (!spawning && sense.KillerCells.Count > 0)

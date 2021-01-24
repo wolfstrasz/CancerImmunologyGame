@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cells;
 
 namespace Tutorials
 {
@@ -28,11 +29,12 @@ namespace Tutorials
 				SmoothCamera.Instance.SetNewFocus(playerObj);
 			}
 
-			//if (closestObjectTypeToFocusOn == FocusObjectType.HELPER_CELL)
-			//{
-			//	GameObject playerObj = FindObjectOfType<HelperTCell>().gameObject;
-			//	SmoothCamera.Instance.SetNewFocus(playerObj);
-			//}
+			if (closestObjectTypeToFocusOn == FocusObjectType.HELPER_CELL)
+			{
+				GameObject helperOpj = FindObjectOfType<HelperTCell>().gameObject;
+				SmoothCamera.Instance.SetNewFocus(helperOpj);
+			}
+
 			//if (closestObjectTypeToFocusOn == FocusObjectType.CANCER)
 			//{
 			//	GameObject playerObj = FindObjectOfType<Cancer>().gameObject;
