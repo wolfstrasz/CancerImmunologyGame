@@ -36,6 +36,8 @@ namespace CellpediaUI
 		[SerializeField]
 		private int dishIndex = 0;
 
+		public bool IsCellpediaOpened => gameObject.activeSelf;
+
 		void Start()
 		{
 			//Initialise();
@@ -51,8 +53,6 @@ namespace CellpediaUI
 				cellpediaDescriptions.Add(cdl.cc, cdl.cd);
 			}
 
-			UnlockCellDescription(CellpediaCells.TKILLER);
-			petridishes[0].SetVisual(unlockedCellDescriptions[0]);
 			gameObject.SetActive(false);
 		}
 
@@ -72,6 +72,8 @@ namespace CellpediaUI
 
 		public void UnlockCellDescription(CellpediaCells cc)
 		{
+			if (cc == CellpediaCells.NONE) return;
+
 			unlockedCellDescriptions.Add(cellpediaDescriptions[cc]);
 			Player.PlayerUI.Instance.StartGlow();
 			// Make button glow!

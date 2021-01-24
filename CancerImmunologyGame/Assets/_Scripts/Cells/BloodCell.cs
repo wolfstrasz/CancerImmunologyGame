@@ -9,7 +9,7 @@ namespace BloodcellAnimation
 	{
 		[Header("Functional Linking")]
 		[SerializeField]
-		private List<Sprite> bloodCellSprites;
+		private List<Sprite> bloodCellSprites = new List<Sprite>();
 		[SerializeField]
 		private SpriteRenderer render = null;
 
@@ -46,7 +46,7 @@ namespace BloodcellAnimation
 		{
 			render = GetComponent<SpriteRenderer>();
 			render.sprite = bloodCellSprites[Random.Range(0, bloodCellSprites.Count)];
-			//transform.Rotate(0, 0, Random.Range(0.0f, 360.0f));
+			transform.Rotate(0, 0, Random.Range(0.0f, 360.0f));
 		}
 
 		void Update()

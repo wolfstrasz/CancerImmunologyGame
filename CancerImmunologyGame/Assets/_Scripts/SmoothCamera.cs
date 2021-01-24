@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-//[RequireComponent(typeof(Camera))]
+using Player;
+
 public class SmoothCamera : Singleton<SmoothCamera>
 {
+	[SerializeField]
+	private new Camera camera = null;
 	public bool free_roam = true;
 
     [SerializeField, Range(1.0f, 20.0f)]
@@ -32,7 +35,7 @@ public class SmoothCamera : Singleton<SmoothCamera>
 
 	public void SetFocusToPlayer()
 	{
-		focusTarget = GlobalGameData.player;
+		focusTarget = PlayerController.Instance.gameObject;
 		isCameraFocused = false;
 		free_roam = false;
 	}
@@ -80,6 +83,33 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		Vector3 lookDirection = transform.forward;
 		Vector3 lookPosition = focusPosition - lookDirection * zoomDistance;
 		transform.position = lookPosition;
+	}
+
+
+
+	public bool IsInCameraViewBounds(Vector3 position, bool useHalfBoundsForX = false)
+	{
+		Vector2 lowerBound;
+		Vector3 upperBound;
+
+		if (useHalfBoundsForX)
+		{
+			lowerBound = camera.ViewportToWorldPoint(new Vector3(0.25f, 0, 0));
+			upperBound = camera.ViewportToWorldPoint(new Vector3(0.75f, 1, 0));
+		}
+		else
+		{
+			lowerBound = camera.ViewportToWorldPoint(new Vector3(0, 0, 0));
+			upperBound = camera.ViewportToWorldPoint(new Vector3(1, 1, 0));
+		}
+
+		if (position.x > lowerBound.x
+			&& position.x < upperBound.x
+			&& position.y > lowerBound.y
+			&& position.y < upperBound.y)
+			return true;
+
+		return false;
 	}
 }
 

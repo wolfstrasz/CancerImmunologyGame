@@ -10,12 +10,10 @@ namespace BloodcellAnimation
 	{
 		[Header("Functional Linking")]
 		[SerializeField]
-		private GameObject bloodCellPrefab;
+		private GameObject bloodCellPrefab = null;
 		[SerializeField]
 		private List<BloodcellPathAttributes> pathAttributes = new List<BloodcellPathAttributes>();
-
 		private List<BloodCell> bloodcells = new List<BloodCell>();
-		int index = 0;
 
 
 		void Awake()
@@ -33,37 +31,36 @@ namespace BloodcellAnimation
 				VertexPath path = attribute.pathCreator.path;
 
 				float spawnDistance = attribute.spawnOffset;
-				Debug.Log("For path: ------------------");
+				//Debug.Log("For path: ------------------");
 				float maxSpawnDistance = path.length - (attribute.spawnGap - attribute.spawnOffset);
-				Debug.Log("Path lenght = " + path.length);
+				//Debug.Log("Path lenght = " + path.length);
 				int numberOfCells = (int)(path.length / attribute.spawnGap);
-				Debug.Log("Cells = " + numberOfCells);
+				//Debug.Log("Cells = " + numberOfCells);
 
 				float endDistance = numberOfCells * attribute.spawnGap;
-				Debug.Log("End Distance = " + endDistance);
+				//Debug.Log("End Distance = " + endDistance);
 
 				while (spawnDistance < maxSpawnDistance)
 				{
 					GameObject bcObj = Instantiate(bloodCellPrefab, gameObject.transform);
 					BloodCell bc = bcObj.GetComponent<BloodCell>();
 
-					Debug.Log("Spawn position: " + spawnDistance);
+					//Debug.Log("Spawn position: " + spawnDistance);
 					bc.SetData(path, spawnDistance, endDistance);
 					spawnDistance += attribute.spawnGap;
 				}
 
-				// Start spawning bloodcells on given distances
 
 
 			}
 		}
 
 		[System.Serializable]
-		struct BloodcellPathAttributes
+		class BloodcellPathAttributes
 		{
-			public PathCreator pathCreator;
-			public float spawnGap;
-			public float spawnOffset;
+			public PathCreator pathCreator = null;
+			public float spawnGap = 0.0f;
+			public float spawnOffset = 0.0f;
 		}
 	}
 }

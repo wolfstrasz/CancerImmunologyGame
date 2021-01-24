@@ -17,7 +17,7 @@ namespace CellpediaUI
 		[SerializeField]
 		private GameObject cellVisual = null;
 		[SerializeField]
-		private Animator cellVisualAnimator;
+		private Animator cellVisualAnimator = null;
 		[SerializeField]
 		private Image cellVisualSprite = null;
 

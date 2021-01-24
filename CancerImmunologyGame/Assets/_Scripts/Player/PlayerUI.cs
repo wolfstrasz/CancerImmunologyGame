@@ -35,8 +35,6 @@ namespace Player
 
 		[Header("Power Up Action Button")]
 		[SerializeField]
-		private Button immunotherapyButton = null;
-		[SerializeField]
 		private Image immunotherapyIcon = null;
 		[SerializeField]
 		private Color iconEnabledColor = Color.blue;
@@ -90,6 +88,7 @@ namespace Player
 
 			}
 
+#if !REMOVE_PLAYER_DEBUG
 			if (Input.GetKeyDown(KeyCode.Z))
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
@@ -106,7 +105,7 @@ namespace Player
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
 			}
-
+#endif
 		}
 
 		private void UpdateCellBars()
@@ -188,10 +187,25 @@ namespace Player
 			microscopeGlow.SetActive(false);
 		}
 
-		public void ActivateMicroscope()
+
+		public void ActivateMicroscopePanel()
 		{
 			microscope.SetActive(true);
 		}
+
+		public void ActivatePlayerInfoPanel()
+		{
+			playerInfoPanel.SetActive(true);
+		}
+
+		public void ActivateImmunotherapyPanel()
+		{
+			playerPowerUpPanel.SetActive(true);
+		}
+
+
+		public enum PlayerUIPanels { MICROSCOPE, PLAYER_INFO, IMMUNOTHERAPY}
+
 	}
 
 

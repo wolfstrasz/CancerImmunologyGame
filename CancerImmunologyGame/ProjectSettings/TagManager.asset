@@ -17,8 +17,8 @@ TagManager:
   - AreaOfEffects
   - CellSense
   - CellBody
-  - 
-  - 
+  - Player
+  - PlayerInteractiveElement
   - 
   - 
   - 

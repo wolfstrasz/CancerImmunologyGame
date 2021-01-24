@@ -14,7 +14,7 @@ public abstract class AreaOfEffect : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		PlayerController pc = collider.gameObject.GetComponent<PlayerController>();
+		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
 		if (pc != null)
 		{
 			OnActivation();
@@ -23,7 +23,7 @@ public abstract class AreaOfEffect : MonoBehaviour
 
 	private void OnTriggerExit2D(Collider2D collider)
 	{
-		PlayerController pc = collider.gameObject.GetComponent<PlayerController>();
+		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
 		if (pc != null)
 		{
 			OnDeactivation();

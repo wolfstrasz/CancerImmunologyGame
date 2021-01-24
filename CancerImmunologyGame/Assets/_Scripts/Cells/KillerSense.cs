@@ -2,35 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof (Collider2D))]
-public class KillerSense : MonoBehaviour
+
+namespace Cells
 {
-	[SerializeField]
-	private KillerCell owner = null;
-	[SerializeField]
-	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-	public List<CancerCell> CancerCellsInRange => cancerCellsInRange;
-
-
-	// Attack functionality
-	private void OnTriggerEnter2D(Collider2D collider)
+	[RequireComponent(typeof(Collider2D))]
+	public class KillerSense : MonoBehaviour
 	{
-		Debug.Log("Colliding with  " + collider.gameObject);
-		CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-		Debug.Log(collider.gameObject.name);
-		if (cell != null)
-		{
-			cancerCellsInRange.Add(cell.owner);
-		}
-	}
+		[Header("Debug (Read only)")]
+		[SerializeField]
+		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
+		internal List<CancerCell> CancerCellsInRange => cancerCellsInRange;
 
-	private void OnTriggerExit2D(Collider2D collider)
-	{
-		CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-		if (cell != null)
-		{
-			cancerCellsInRange.Remove(cell.owner);
-		}
-	}
 
+		// Attack functionality
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
+			if (cell != null)
+			{
+				cancerCellsInRange.Add(cell.owner);
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
+			if (cell != null)
+			{
+				cancerCellsInRange.Remove(cell.owner);
+			}
+		}
+
+	}
 }

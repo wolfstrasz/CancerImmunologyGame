@@ -45,8 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   removeControl: 0
-  pauseTime: 0
-  hasText: 1
+  pauseGameplay: 0
   text: Wait for time to finish.
   canSkipTxt: 0
   waitBeforeSkip: 0

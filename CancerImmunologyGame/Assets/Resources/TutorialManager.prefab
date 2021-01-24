@@ -614,4 +614,7 @@ MonoBehaviour:
   tutorialPanel: {fileID: 4764412587630988832}
   tutorialTxt: {fileID: 4764412587265709221}
   skipTextButton: {fileID: 4764412586051488068}
-  StoryTutorials: []
+  StoryTutorials:
+  - {fileID: 2073773381908809888, guid: dfb43cff749b3c549a2170c6a0bd5b98, type: 3}
+  - {fileID: 4735386309609026926, guid: 52fb217d2ba472546af59c859649ad7c, type: 3}
+  - {fileID: 7418983377583753594, guid: 0f990fdbab3be054180df16206ec9480, type: 3}

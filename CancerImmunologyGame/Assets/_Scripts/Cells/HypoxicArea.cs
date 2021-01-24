@@ -3,25 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
-public class HypoxicArea : AreaOfEffect
+[RequireComponent(typeof(Collider2D))]
+public class HypoxicArea : MonoBehaviour
 {
-	private bool isEffectDeactivated = true;
+	[Header("Attributes")]
+	[SerializeField]
+	private float dmg = 0.5f;
 
-	protected override void OnActivation()
+	[Header("Debug (Read only)")]
+	[SerializeField]
+	List<KillerCell> killerCells = new List<KillerCell>();
+
+
+	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		isEffectDeactivated = false;
+		KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+		if (kc != null)
+		{
+			killerCells.Add(kc);
+		}
 	}
 
-	protected override void OnDeactivation()
+	private void OnTriggerExit2D(Collider2D collider)
 	{
-		isEffectDeactivated = true;
+		KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+		if (kc != null)
+		{
+			killerCells.Remove(kc);
+		}
 	}
 
-	protected override void OnEffectStatus()
+	void Update()
 	{
 		if (GlobalGameData.isGameplayPaused) return;
-		if (isEffectDeactivated) return;
-		//PlayerUI.Instance.AddHealth(-0.02f); // Must change to global scriptable object values
+
+		foreach (KillerCell cell in killerCells)
+		{
+			cell.ReceiveHealth(-dmg);
+		}
 	}
 
 }
