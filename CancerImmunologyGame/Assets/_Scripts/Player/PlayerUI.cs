@@ -84,6 +84,10 @@ namespace Player
 			}
 
 #if !REMOVE_PLAYER_DEBUG
+			if(Input.GetKeyDown(KeyCode.R))
+			{
+				ActivateImmunotherapyPanel();
+			}
 			if (Input.GetKeyDown(KeyCode.Z))
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
@@ -120,6 +124,7 @@ namespace Player
 				return;
 			}
 
+			Debug.Log("Reduce power-up");
 			float value = -3.33f * Time.deltaTime;
 			AddPowerUp(value);
 		}
@@ -137,7 +142,7 @@ namespace Player
 				return;
 			}
 
-			if (powerUp < 0.0f)
+			if (powerUp <= 0.0f)
 			{
 				powerUpBar.SetValue(powerUp = 0.0f);
 				//playerAnimator.SetTrigger("PowerUpFinished");
@@ -153,7 +158,7 @@ namespace Player
 			Debug.Log("PowerUpClicked");
 
 			if (powerUp < maxPowerUp) return;
-			AddPowerUp(-1.0f);
+			powerUp -= 1.0f;
 
 			GlobalGameData.isInPowerUpMode = true;
 			immunotherapyAnimator.SetTrigger("Activated");
@@ -197,6 +202,8 @@ namespace Player
 		public void ActivateImmunotherapyPanel()
 		{
 			playerPowerUpPanel.SetActive(true);
+			if (powerUp == maxPowerUp)
+				immunotherapyAnimator.SetTrigger("CanBeUsed");
 		}
 
 

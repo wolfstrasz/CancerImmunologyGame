@@ -28,6 +28,10 @@ public class RegulatoryCell : MonoBehaviour
 
     public GameObject particleToShoot = null;
 
+	void Awake()
+	{
+		StartMoving();
+	}
 
     void Update()
     {
@@ -37,6 +41,8 @@ public class RegulatoryCell : MonoBehaviour
             Move();
     }
 
+
+	// MOVING
     public void StartMoving()
     {
         if(pathToFollow == null)
@@ -61,6 +67,8 @@ public class RegulatoryCell : MonoBehaviour
         transform.position = newPos;
         render.flipX = direction.x < 0.0f;
     }
+
+	// SHOOTING
 
     public void StartShooting()
     {
@@ -93,12 +101,13 @@ public class RegulatoryCell : MonoBehaviour
         }
     }
 
+	// BUMPING
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.GetComponent<PlayerController>() != null)
+        if (collider.GetComponent<KillerCell>() != null)
         {
-            StartCoroutine(BumpPlayer());
+            StartCoroutine(BumpPlayer(collider.GetComponent<KillerCell>()));
         }
     }
 
@@ -109,7 +118,7 @@ public class RegulatoryCell : MonoBehaviour
     public float prevRadius;
     public float prevScale;
 
-    IEnumerator BumpPlayer()
+    IEnumerator BumpPlayer(KillerCell target)
     {
         Debug.Log("STARTED BUMP");
 
@@ -129,6 +138,7 @@ public class RegulatoryCell : MonoBehaviour
             coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
         }
 
+		target.ReceiveExhaustion(exhaust_dmg);
 		//PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(StopBump());
