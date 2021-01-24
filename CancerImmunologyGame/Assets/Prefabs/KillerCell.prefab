@@ -240,7 +240,7 @@ MonoBehaviour:
   sense: {fileID: 2046459777672622295}
   animator: {fileID: 2046459777261753809}
   speed: 4
-  attackRotationOffset: 0.2
+  attackRotationOffset: 0
   attackEffect: {fileID: 9051889056786143862, guid: 518487211c7ab8e438a22629aae69d76,
     type: 3}
   isBusy: 0

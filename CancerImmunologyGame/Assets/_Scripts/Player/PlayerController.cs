@@ -21,12 +21,13 @@ namespace Player
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.kc = kc;
 
-			GlobalGameData.player = gameObject;
+			GlobalGameData.player = kc.gameObject;
 		}
 
 		// input
 		public void OnUpdate()
 		{
+			transform.position = kc.transform.position;
 			if (Input.GetKey(KeyCode.Keypad7))
 			{
 				kc.ReceiveHealth(-0.1f);

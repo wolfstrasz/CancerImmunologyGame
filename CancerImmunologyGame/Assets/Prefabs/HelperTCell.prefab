@@ -47,6 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0812730e0ffed4ab43a0f3c2f38b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sense: {fileID: 6947273459215185762}
+  particle: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
+    type: 3}
+  timeBetweenSpawns: 2
+  spreadDistance: 1.5
+  spreadAngle: 30
+  spawning: 0
+  spawnTimePassed: 0
 --- !u!95 &6287359040158972595
 Animator:
   serializedVersion: 3
@@ -76,8 +84,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4702413554856043946}
   - component: {fileID: 4702413554856043956}
+  - component: {fileID: 6947273459215185762}
   m_Layer: 8
-  m_Name: HelperTCellArea
+  m_Name: Sense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,6 +122,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &6947273459215185762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4702413554856043947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662d2040b43e004488ee694999afdb2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killerCells: []
 --- !u!1 &4702413554881257943
 GameObject:
   m_ObjectHideFlags: 0

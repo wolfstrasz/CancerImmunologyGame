@@ -20,12 +20,14 @@ namespace Core
 		
 		void Start()
 		{
-			if(!isInitialised)
-				OnSampleInitialise();
+
 		}
 
 		void Update()
 		{
+			if (Input.GetKeyDown(KeyCode.Return))
+				OnSampleInitialise();
+
 			StateUpdate();
 		}
 

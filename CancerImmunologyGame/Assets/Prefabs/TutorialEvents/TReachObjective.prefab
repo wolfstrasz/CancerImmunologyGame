@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7251772380236164560}
   - component: {fileID: 7251772380236164561}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TReachObjective
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   removeControl: 0
-  pauseTime: 0
+  pauseGameplay: 0
   popupPrefab: {fileID: 690612214031318345, guid: 3c444585f7594564e8d8192eeb0a01be,
     type: 3}
   size: 1
