@@ -75,7 +75,7 @@ namespace CellpediaUI
 			if (cc == CellpediaCells.NONE) return;
 
 			unlockedCellDescriptions.Add(cellpediaDescriptions[cc]);
-			Player.PlayerUI.Instance.StartGlow();
+			Player.PlayerUI.Instance.MicroscopeActivate();
 			// Make button glow!
 		}
 

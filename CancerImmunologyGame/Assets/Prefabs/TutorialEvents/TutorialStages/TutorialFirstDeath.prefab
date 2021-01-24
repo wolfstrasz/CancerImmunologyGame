@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TTextEventWithButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -239,6 +244,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TMonitorStats
+      objectReference: {fileID: 0}
+    - target: {fileID: 6007372700902786872, guid: 0daf84d1f3a4f264d88b2df07e7b9ad1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8020614162526577027, guid: 0daf84d1f3a4f264d88b2df07e7b9ad1,
         type: 3}

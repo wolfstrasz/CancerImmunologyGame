@@ -463,6 +463,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4764412587630988833}
   - component: {fileID: 4764412587630988846}
+  - component: {fileID: 5573618835607710338}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
@@ -498,6 +499,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4764412587630988832}
   m_CullTransparentMesh: 0
+--- !u!114 &5573618835607710338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4764412587630988832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.003921569}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &4764412587923017516
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,3 +648,6 @@ MonoBehaviour:
   - {fileID: 2073773381908809888, guid: dfb43cff749b3c549a2170c6a0bd5b98, type: 3}
   - {fileID: 4735386309609026926, guid: 52fb217d2ba472546af59c859649ad7c, type: 3}
   - {fileID: 7418983377583753594, guid: 0f990fdbab3be054180df16206ec9480, type: 3}
+  - {fileID: 5177704064619137147, guid: d44e565f091e48945a71d748d8b35bf4, type: 3}
+  - {fileID: 6119396624289536253, guid: 4f7098599618a9c41a35e5c055bfd250, type: 3}
+  - {fileID: 4040463355500961136, guid: b36fbfd58b2b128458d5b797cdfbf115, type: 3}

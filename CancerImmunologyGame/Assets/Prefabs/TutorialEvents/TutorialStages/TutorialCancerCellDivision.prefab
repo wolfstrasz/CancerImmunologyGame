@@ -53,7 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 3523613311034056484}
-  - {fileID: 6453717930782559337}
+  - {fileID: 4626212753326015395}
   - {fileID: 7435675901385609508}
   - {fileID: 7435675902208377586}
   - {fileID: 7435675902894191025}
@@ -774,17 +774,7 @@ PrefabInstance:
     - target: {fileID: 6363142375284613755, guid: e7f0695fde4cc154f8d96568b17f0a56,
         type: 3}
       propertyPath: m_Name
-      value: ForceCancerGrowth
-      objectReference: {fileID: 0}
-    - target: {fileID: 6363142375284613755, guid: e7f0695fde4cc154f8d96568b17f0a56,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9051813833166910859, guid: e7f0695fde4cc154f8d96568b17f0a56,
-        type: 3}
-      propertyPath: timeToPassBeforeForceGrowth
-      value: 2
+      value: WaitForCancerDivision
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7f0695fde4cc154f8d96568b17f0a56, type: 3}
@@ -794,16 +784,16 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2598215223290395106}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6453717930782559337 stripped
+--- !u!114 &4626212753326015395 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9051813833166910859, guid: e7f0695fde4cc154f8d96568b17f0a56,
+  m_CorrespondingSourceObject: {fileID: 7222978888737847873, guid: e7f0695fde4cc154f8d96568b17f0a56,
     type: 3}
   m_PrefabInstance: {fileID: 2598215223290395106}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052b53b3375f89f4098b1996b61a8572, type: 3}
+  m_Script: {fileID: 11500000, guid: c9795439de7d0154ab791ea5df29f54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6072289556323037941

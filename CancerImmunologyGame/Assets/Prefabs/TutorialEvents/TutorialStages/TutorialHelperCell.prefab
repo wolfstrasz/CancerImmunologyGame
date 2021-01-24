@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  removeControl: 0
-  pauseGameplay: 0
+  removeControl: 1
+  pauseGameplay: 1
   cellsToInitialise: 2
 --- !u!1 &4768319742846413243
 GameObject:
@@ -189,8 +189,10 @@ MonoBehaviour:
   pauseGameplay: 0
   monitorHealth: 1
   healthValue: 50
+  updateHealth: 0
   monitorExhaustion: 1
   exhaustionValue: 50
+  updateExhaustion: 1
   invertChecks: 0
 --- !u!1 &5177704064619137147
 GameObject:

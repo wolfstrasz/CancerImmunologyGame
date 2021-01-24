@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
+  camera: {fileID: 0}
   free_roam: 1
   zoomDistance: 5
   focusTarget: {fileID: 0}
@@ -215,7 +216,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 194017736}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &194017741
 Camera:
   m_ObjectHideFlags: 0

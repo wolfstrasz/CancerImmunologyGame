@@ -239,7 +239,7 @@ MonoBehaviour:
   rb: {fileID: 2046459777261753813}
   sense: {fileID: 2046459777672622295}
   animator: {fileID: 2046459777261753809}
-  speed: 6
+  speed: 5
   attackRotationOffset: 0
   attackEffect: {fileID: 9051889056786143862, guid: 518487211c7ab8e438a22629aae69d76,
     type: 3}
@@ -307,5 +307,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 162432b7ffcbffe42ba9e7fc31415046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 2046459777990927748}
   cancerCellsInRange: []
