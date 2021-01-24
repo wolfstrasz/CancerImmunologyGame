@@ -68,9 +68,9 @@ public class Cancer : MonoBehaviour
 	[SerializeField]
 	private bool canDivide = false;
 
+	public bool CanDivide => canDivide;
+	public GameObject CellToDivide => cellToDivide.gameObject;
 
-	public float TimePassed => timePassed;
-	public float TimeBetweenDivisions => timeBetweenDivisions;
 	public void ForceGrowthAfterTime(float time)
 	{
 		timePassed = timeBetweenDivisions - time;

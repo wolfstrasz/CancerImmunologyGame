@@ -16,6 +16,8 @@ public class KillerCell : Cell
 	[SerializeField]
 	private float speed = 4.0f;
 	[SerializeField]
+	private float immunotherapySpeedMultiplier = 1.66f;
+	[SerializeField]
 	private static float maxHealth = 100.0f;
 	private float health = 100.0f;
 	[SerializeField]
@@ -141,7 +143,7 @@ public class KillerCell : Cell
 	{
 		Vector2 move = movementVector * speed * Time.fixedDeltaTime;
 		if (GlobalGameData.isInPowerUpMode)
-			move *= 2.0f;
+			move *= immunotherapySpeedMultiplier;
 		rb.MovePosition(move * GetSlowDown() + rb.position);
 	}
 
@@ -151,6 +153,8 @@ public class KillerCell : Cell
 
 	public void Attack()
 	{
+		if (isBusy) return;
+
 		cancerCellsInRange = sense.CancerCellsInRange;
 		if (cancerCellsInRange.Count == 0) return;
 
@@ -218,7 +222,7 @@ public class KillerCell : Cell
 
 		isBusy = true;
 		animator.SetTrigger("PowerUp");
-		animator.speed = 2.0f;
+		animator.speed = immunotherapySpeedMultiplier;
 	}
 
 	public void OnFinishPowerUpAnimation()

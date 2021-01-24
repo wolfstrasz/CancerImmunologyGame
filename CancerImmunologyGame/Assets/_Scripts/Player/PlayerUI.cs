@@ -60,7 +60,7 @@ namespace Player
 			if (powerUpBar != null)
 			{
 				powerUpBar.SetMaxValue(maxPowerUp);
-				powerUpBar.SetValue(powerUp = 100.0f);
+				powerUpBar.SetValue(powerUp = (maxPowerUp - 1.0f));
 			}
 			else Debug.LogWarning("Power up bar is not linked to global data");
 		}
@@ -126,13 +126,14 @@ namespace Player
 
 		public void AddPowerUp(float value)
 		{
+			if (powerUp == maxPowerUp) return;
 			powerUp += value;
 
-			if (powerUp > maxPowerUp)
+			if (powerUp >= maxPowerUp)
 			{
 				powerUp = maxPowerUp;
 				powerUpBar.SetValue(powerUp);
-				immunotherapyAnimator.SetTrigger("NewItem");
+				immunotherapyAnimator.SetTrigger("CanBeUsed");
 				return;
 			}
 
@@ -152,10 +153,10 @@ namespace Player
 			Debug.Log("PowerUpClicked");
 
 			if (powerUp < maxPowerUp) return;
-			AddPowerUp(-0.01f);
+			AddPowerUp(-1.0f);
 
 			GlobalGameData.isInPowerUpMode = true;
-			immunotherapyAnimator.SetTrigger("Opened");
+			immunotherapyAnimator.SetTrigger("Activated");
 
 			var killerCells = FindObjectsOfType<KillerCell>();
 			for (int i = 0; i < killerCells.Length; ++i)
