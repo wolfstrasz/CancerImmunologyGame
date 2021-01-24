@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6408509735548494174
 Transform:
   m_ObjectHideFlags: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   removeControl: 1
-  pauseTime: 0
+  pauseGameplay: 0
   closestObjectTypeToFocusOn: 1

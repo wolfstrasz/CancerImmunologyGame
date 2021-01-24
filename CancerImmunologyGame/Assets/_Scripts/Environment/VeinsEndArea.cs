@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 [RequireComponent(typeof(Collider2D))]
 public class VeinsEndArea : MonoBehaviour
@@ -12,6 +13,7 @@ public class VeinsEndArea : MonoBehaviour
 	{
 		if (collider.gameObject == GlobalGameData.player)
 		{
+			PlayerController.Instance.StartHeartMovement();
 			GlobalGameData.player.transform.position = arteryStart.transform.position;
 		}
 	}

@@ -8,6 +8,11 @@ namespace Player
 	{
 		[SerializeField]
 		KillerCell kc = null;
+		[SerializeField]
+		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
+		private bool heartOutro = false;
+		private bool heartOutroEnd = false;
+		private bool heartOutroCamera = false;
 
 		// Attack
 		private Vector2 movement = Vector2.zero;
@@ -24,9 +29,49 @@ namespace Player
 			GlobalGameData.player = kc.gameObject;
 		}
 
+		public void OnCameraOutroFinished()
+		{
+			heartOutroEnd = true;
+			heartOutroCamera = false;
+		}
+
 		// input
 		public void OnUpdate()
 		{
+
+			if (heartOutro)
+			{
+				if (Vector3.SqrMagnitude(transform.position - HeartOutroPosition) > 1.0f)
+					transform.position = Vector3.Lerp(transform.position, HeartOutroPosition, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
+				else
+				{
+					heartOutro = false;
+					heartOutroCamera = true;
+					SmoothCamera.Instance.StartHeartOutro();
+
+				}
+				return;
+			}
+
+			if (heartOutroCamera)
+			{
+				return;
+			}
+
+			if (heartOutroEnd)
+			{
+				if (Vector3.SqrMagnitude(transform.position - kc.transform.position) > 1.0f)
+					transform.position = Vector3.Lerp(transform.position, kc.transform.position, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
+				else
+				{
+					transform.position = kc.transform.position;
+					heartOutroEnd = false;
+				}
+				return;
+			}
+		
+
+	
 			transform.position = kc.transform.position;
 
 #if !REMOVE_PLAYER_DEBUG
@@ -116,6 +161,11 @@ namespace Player
 				isPlayerRespawning = false;
 				kc.Respawn();
 			}
+		}
+
+		public void StartHeartMovement()
+		{
+			heartOutro = true;
 		}
 	}
 }

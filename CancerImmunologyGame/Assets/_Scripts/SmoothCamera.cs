@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Player;
+using System;
 
 public class SmoothCamera : Singleton<SmoothCamera>
 {
@@ -8,21 +9,31 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	private new Camera camera = null;
 	public bool free_roam = true;
 
-    [SerializeField, Range(1.0f, 20.0f)]
-    float zoomDistance = 8.0f;
+	[SerializeField, Range(1.0f, 20.0f)]
+	float zoomDistance = 8.0f;
 
-    [SerializeField]
-    public GameObject focusTarget;
-    private Vector3 focusPosition;
-    private Vector3 targetPosition;
+	[SerializeField]
+	public GameObject focusTarget;
+	private Vector3 focusPosition;
+	private Vector3 targetPosition;
 
-    [SerializeField, Range(0.5f, 1.0f)] 
-    private float focusCenteringSpeed = 0.943f;
 
-    public bool isCameraFocused = false;
+
+	[SerializeField, Range(0.5f, 1.0f)]
+	private float focusCenteringSpeed = 0.943f;
+
+	public bool isCameraFocused = false;
+	[SerializeField]
+	private Vector3 startPosition = new Vector3(0.0f, 0.0f, 0.0f);
+
+	[SerializeField]
+	private Animator cameraAnimator = null;
+
+	private bool isInIntro = true;
 
 	void Awake()
 	{
+		gameObject.transform.position = startPosition;
 		focusPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 0.0f);
 	}
 
@@ -40,43 +51,43 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		free_roam = false;
 	}
 
-    // Target's position will change in Update, so camera should move focus here
-    void FixedUpdate()
-    {
-		if (free_roam) return;
+	// Target's position will change in Update, so camera should move focus here
+	void FixedUpdate()
+	{
+		if (!free_roam)
+			UpdateFocusPoint();
+	}
 
-        UpdateFocusPoint();
-    }
+	// Focus objects can change in Update, so camera moves here
+	void LateUpdate()
+	{
+		if (!free_roam)
+			UpdatePosition();
+	}
 
-    // Focus objects can change in Update, so camera moves here
-    void LateUpdate()
-    {
-		if (free_roam) return;
+	private void UpdateFocusPoint()
+	{
+		targetPosition = focusTarget.transform.position;
+		float distance = Vector3.Distance(targetPosition, focusPosition);
+		if (distance < 0.2f)
+		{
+			isCameraFocused = true;
+		}
+		else
+		{
+			isCameraFocused = false;
+		}
 
-		UpdatePosition();
-    }
-
-    private void UpdateFocusPoint()
-    {
-        targetPosition = focusTarget.transform.position;
-        float distance = Vector3.Distance(targetPosition, focusPosition);
-        if (distance < 0.2f)
-        {
-            isCameraFocused = true;
-        } else
-        {
-            isCameraFocused = false;
-        }
-
-        if (distance > 0.01f)
-        {
-            // Time.deltaTime switch to unscaledDeltaTime to cover when game is paused
-            focusPosition = Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusCenteringSpeed), Time.unscaledDeltaTime));
-        } else
+		if (distance > 0.01f)
+		{
+			// Time.deltaTime switch to unscaledDeltaTime to cover when game is paused
+			focusPosition = Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusCenteringSpeed), Time.unscaledDeltaTime));
+		}
+		else
 		{
 			focusPosition = targetPosition;
 		}
-    }
+	}
 
 	private void UpdatePosition()
 	{
@@ -84,7 +95,6 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		Vector3 lookPosition = focusPosition - lookDirection * zoomDistance;
 		transform.position = lookPosition;
 	}
-
 
 
 	public bool IsInCameraViewBounds(Vector3 position, bool useHalfBoundsForX = false)
@@ -111,6 +121,32 @@ public class SmoothCamera : Singleton<SmoothCamera>
 
 		return false;
 	}
+
+	public void StartIntro()
+	{
+		cameraAnimator.SetTrigger("Intro");
+	}
+
+	public void StartHeartOutro()
+	{
+		cameraAnimator.SetTrigger("HeartOutro");
+	}
+
+	public void HeartOutroEnd()
+	{
+		PlayerController.Instance.OnCameraOutroFinished();
+		cameraAnimator.SetTrigger("Idle");
+		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
+
+	}
+
+	public void ReturnToIdle()
+	{
+		camera.orthographicSize = 6.0f;
+		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
+		cameraAnimator.SetTrigger("Idle");
+	}
+
 }
 
 

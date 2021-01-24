@@ -18,6 +18,13 @@ namespace Tutorials
 		protected override void OnStartEvent()
 		{
 			if (closestObjectTypeToFocusOn == FocusObjectType.NONE) return;
+
+			if (closestObjectTypeToFocusOn == FocusObjectType.INTRO)
+			{
+				SmoothCamera.Instance.StartIntro();
+				SmoothCamera.Instance.SetFocusToPlayer();
+			}
+
 			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)
 			{
 				SmoothCamera.Instance.SetFocusToPlayer();
@@ -106,6 +113,6 @@ namespace Tutorials
 			return false;
 		}
 
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL }
+		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, INTRO }
 	}
 }
