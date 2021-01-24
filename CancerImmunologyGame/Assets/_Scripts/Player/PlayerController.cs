@@ -28,38 +28,42 @@ namespace Player
 		public void OnUpdate()
 		{
 			transform.position = kc.transform.position;
-			if (Input.GetKey(KeyCode.Keypad7))
+
+#if !REMOVE_PLAYER_DEBUG
+			if (Input.GetKeyDown(KeyCode.Keypad7))
 			{
-				kc.ReceiveHealth(-0.1f);
+				kc.ReceiveHealth(-20.0f);
 			}
-			if (Input.GetKey(KeyCode.Keypad9))
+			if (Input.GetKeyDown(KeyCode.Keypad9))
 			{
-				kc.ReceiveHealth(+0.1f);
+				kc.ReceiveHealth(+20.0f);
 			}
-			if (Input.GetKey(KeyCode.Keypad4))
+			if (Input.GetKeyDown(KeyCode.Keypad4))
 			{
-				kc.ReceiveExhaustion(-0.1f);
+				kc.ReceiveExhaustion(-20.0f);
 			}
-			if (Input.GetKey(KeyCode.Keypad6))
+			if (Input.GetKeyDown(KeyCode.Keypad6))
 			{
-				kc.ReceiveExhaustion(+0.1f);
+				kc.ReceiveExhaustion(+20.0f);
 			}
+#endif
 			PlayerUI.Instance.OnUpdate();
+
 
 			if (isPlayerRespawning)
 			{
 				WaitForCameraToFocusAfterRespawn();
 				return;
 			}
-
-			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
-				return;
-
+   
 			if (kc.IsDead)
 			{
 				Respawn();
 				return;
 			}
+
+			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
+				return;
 
 			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E))
 			{
@@ -71,8 +75,6 @@ namespace Player
 		// Physics update
 		public void OnFixedUpdate()
 		{
-			if (isPlayerRespawning) return;
-
 			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
 			{
 				kc.ClearForces();
@@ -97,21 +99,22 @@ namespace Player
 		// Respawning functionality
 		internal void Respawn()
 		{
-		//	rb.isKinematic = true;
-			movement = new Vector2(0.0f, 0.0f);
-			isPlayerRespawning = true;
-			gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(gameObject.transform.position);
-
 			SmoothCamera.Instance.isCameraFocused = false;
+			isPlayerRespawning = true;
+			kc.IsKinematic = true;
+
+			// Update cell position and controller
+			kc.gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(kc.gameObject.transform.position);
+			gameObject.transform.position = kc.gameObject.transform.position;
 		}
 
 		private void WaitForCameraToFocusAfterRespawn()
 		{
-			if (SmoothCamera.Instance.isCameraFocused && SmoothCamera.Instance.focusTarget == this.gameObject)
+			if (SmoothCamera.Instance.isCameraFocused && kc.IsDead)
 			{
+				kc.IsKinematic = false;
 				isPlayerRespawning = false;
-				kc.IsDead = false;
-		//		rb.isKinematic = false;
+				kc.Respawn();
 			}
 		}
 	}

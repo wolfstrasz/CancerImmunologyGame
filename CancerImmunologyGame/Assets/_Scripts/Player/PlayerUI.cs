@@ -90,6 +90,7 @@ namespace Player
 
 			}
 
+#if !REMOVE_PLAYER_DEBUG
 			if (Input.GetKeyDown(KeyCode.Z))
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
@@ -106,7 +107,7 @@ namespace Player
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
 			}
-
+#endif
 		}
 
 		private void UpdateCellBars()

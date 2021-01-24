@@ -100,8 +100,8 @@ MonoBehaviour:
   lifeSpan: 0
   speed: 1
   distanceToReachSqr: 0.25
-  healthRegeneration: 7.5
-  exhaustRegeneration: 7.5
+  healthRegeneration: 20
+  exhaustRegeneration: 20
 --- !u!58 &5533186655054886685
 CircleCollider2D:
   m_ObjectHideFlags: 0

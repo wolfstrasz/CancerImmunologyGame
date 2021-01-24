@@ -47,9 +47,14 @@ public class KillerCell : Cell
 	public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 	public bool IsDead { get => isDead; set => isDead = value; }
 
+	public bool IsKinematic { get => rb.isKinematic; set => rb.isKinematic = value; }
+
 	void Update()
 	{
 		OnUpdate();
+
+		if (isDead)
+			ClearForces();
 	}
 
 	public void ClearForces()
@@ -57,10 +62,15 @@ public class KillerCell : Cell
 		rb.velocity = Vector3.zero;
 		rb.angularVelocity = 0.0f;
 	}
-	void OnFixedUpdate() 
-	{
 
+	
+	public void Respawn()
+	{
+		isDead = false;
+		ReceiveHealth(maxHealth);
+		ReceiveExhaustion(-maxExhaustion);
 	}
+
 	public void OnUpdate()
 	{
 		if (GlobalGameData.isInPowerUpMode)
@@ -83,11 +93,11 @@ public class KillerCell : Cell
 
 		exhaustion += value;
 
-		if (exhaustion > maxExhaustion)
+		if (exhaustion >= maxExhaustion)
 		{
 			exhaustion = maxExhaustion;
 			animator.SetFloat("ExhaustionRate", 1.0f);
-			IsDead = true;
+			isDead = true;
 			return;
 		}
 
@@ -112,10 +122,11 @@ public class KillerCell : Cell
 			return;
 		}
 
-		if (health < 0.0f)
+		if (health <= 0.0f)
 		{
 			health = 0.0f;
 			isDead = true;
+			
 		}
 	}
 
@@ -129,8 +140,8 @@ public class KillerCell : Cell
 	public void Move(Vector2 movementVector)
 	{
 		Vector2 move = movementVector * speed * Time.fixedDeltaTime;
-
-		if (GlobalGameData.isInPowerUpMode) move *= 2.0f;
+		if (GlobalGameData.isInPowerUpMode)
+			move *= 2.0f;
 		rb.MovePosition(move * GetSlowDown() + rb.position);
 	}
 

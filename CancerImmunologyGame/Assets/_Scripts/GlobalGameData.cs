@@ -25,10 +25,10 @@ public static class GlobalGameData
 			return RespawnAreas[0].Location;
 		}
 
-		Vector3 closestRespawnLocation = Vector3.zero;
-		float minDistance = 100000.0f;
+		Vector3 closestRespawnLocation = RespawnAreas[0].transform.position;
+		float minDistance = Vector3.Distance(position, RespawnAreas[0].Location);
 
-		foreach(var area in RespawnAreas)
+		foreach (var area in RespawnAreas)
 		{
 			float distance = Vector3.Distance(position, area.Location);
 			if (distance <= minDistance)

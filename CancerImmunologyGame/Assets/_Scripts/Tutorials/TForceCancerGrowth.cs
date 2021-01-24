@@ -26,6 +26,24 @@ namespace Tutorials
 		protected override void OnStartEvent()
 		{
 			isWaitingToEnterCameraFrustum = true;
+			GetClosestCancer();
+		}
+
+		private void GetClosestCancer()
+		{
+			Cancer[] Cancers = FindObjectsOfType<Cancer>();
+			float closestDist = Vector3.SqrMagnitude(Cancers[0].gameObject.transform.position - GlobalGameData.player.transform.position);
+			closestCancer = Cancers[0];
+
+			foreach (Cancer cancer in Cancers)
+			{
+				float distanceSquered = Vector3.SqrMagnitude(cancer.gameObject.transform.position - GlobalGameData.player.transform.position);
+				if (distanceSquered < closestDist)
+				{
+					closestDist = distanceSquered;
+					closestCancer = cancer;
+				}
+			}
 		}
 
 		protected override bool OnUpdate()
@@ -33,7 +51,7 @@ namespace Tutorials
 
 			if (isWaitingToEnterCameraFrustum)
 			{
-				if (SmoothCamera.Instance.IsInCameraViewBounds(gameObject.transform.position))
+				if (SmoothCamera.Instance.IsInCameraViewBounds(closestCancer.gameObject.transform.position))
 					ForceGrowth();
 			}
 	
@@ -49,19 +67,7 @@ namespace Tutorials
 		private void ForceGrowth()
 		{
 			isWaitingToEnterCameraFrustum = false;
-			Cancer[] Cancers = FindObjectsOfType<Cancer>();
-			float closestDist = Vector3.SqrMagnitude(Cancers[0].gameObject.transform.position - gameObject.transform.position);
-			closestCancer = Cancers[0];
-
-			foreach (Cancer cancer in Cancers)
-			{
-				float distanceSquered = Vector3.SqrMagnitude(cancer.gameObject.transform.position - gameObject.transform.position);
-				if (closestDist < distanceSquered)
-				{
-					closestDist = distanceSquered;
-					closestCancer = cancer;
-				}
-			}
+			
 			closestCancer.ForceGrowthAfterTime(timeToPassBeforeForceGrowth);
 			isWaitingForCancerToGrow = true;
 

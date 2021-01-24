@@ -15,9 +15,9 @@ public class KillerSense : MonoBehaviour
 	// Attack functionality
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		Debug.Log("Colliding with  " + collider.gameObject);
+		//Debug.Log("Colliding with  " + collider.gameObject);
 		CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-		Debug.Log(collider.gameObject.name);
+		//Debug.Log(collider.gameObject.name);
 		if (cell != null)
 		{
 			cancerCellsInRange.Add(cell.owner);

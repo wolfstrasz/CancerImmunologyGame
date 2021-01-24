@@ -1006,7 +1006,7 @@ PrefabInstance:
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: canSkipTxt
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
@@ -1016,12 +1016,12 @@ PrefabInstance:
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: timed
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: timeBeforeFinish
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
