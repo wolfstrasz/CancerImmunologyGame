@@ -12,9 +12,13 @@ namespace Tutorials
 		[SerializeField]
 		float healthValue = 50.0f;
 		[SerializeField]
+		bool updateHealth = false;
+		[SerializeField]
 		bool monitorExhaustion = false;
 		[SerializeField]
 		float exhaustionValue = 50.0f;
+		[SerializeField]
+		bool updateExhaustion = false;
 		[SerializeField]
 		bool invertChecks = false;
 
@@ -22,8 +26,10 @@ namespace Tutorials
 
 		protected override void OnEndEvent()
 		{
-			playerKC.Exhaustion = exhaustionValue;
-			playerKC.Health = healthValue;
+			if (updateExhaustion)
+				playerKC.Exhaustion = exhaustionValue;
+			if (updateHealth)
+				playerKC.Health = healthValue;
 		}
 
 		protected override void OnStartEvent()
