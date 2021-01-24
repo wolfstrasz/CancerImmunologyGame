@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  removeControl: 0
-  pauseGameplay: 0
+  removeControl: 1
+  pauseGameplay: 1
   cellsToInitialise: 2
 --- !u!1 &4768319742846413243
 GameObject:

@@ -31,15 +31,11 @@ namespace Player
 		[SerializeField]
 		private GameObject microscope = null;
 		[SerializeField]
-		private GameObject microscopeGlow = null;
+		private Animator microscopeIconAnimator = null;
 
 		[Header("Power Up Action Button")]
 		[SerializeField]
-		private Image immunotherapyIcon = null;
-		[SerializeField]
-		private Color iconEnabledColor = Color.blue;
-		[SerializeField]
-		private Color iconDisabledColor = Color.gray;
+		private Animator immunotherapyAnimator = null;
 
 		[Header("Debug only")]
 		[SerializeField]
@@ -65,7 +61,6 @@ namespace Player
 			{
 				powerUpBar.SetMaxValue(maxPowerUp);
 				powerUpBar.SetValue(powerUp = 100.0f);
-				immunotherapyIcon.color = iconEnabledColor;
 			}
 			else Debug.LogWarning("Power up bar is not linked to global data");
 		}
@@ -136,8 +131,8 @@ namespace Player
 			if (powerUp > maxPowerUp)
 			{
 				powerUp = maxPowerUp;
-				powerUpBar.SetValue(powerUp = maxPowerUp);
-				immunotherapyIcon.color = iconEnabledColor;
+				powerUpBar.SetValue(powerUp);
+				immunotherapyAnimator.SetTrigger("NewItem");
 				return;
 			}
 
@@ -149,7 +144,6 @@ namespace Player
 			}
 
 			powerUpBar.SetValue(powerUp);
-			immunotherapyIcon.color = iconDisabledColor;
 		}
 
 		public void TriggerPowerUp()
@@ -159,9 +153,9 @@ namespace Player
 
 			if (powerUp < maxPowerUp) return;
 			AddPowerUp(-0.01f);
-			immunotherapyIcon.color = iconDisabledColor;
 
 			GlobalGameData.isInPowerUpMode = true;
+			immunotherapyAnimator.SetTrigger("Opened");
 
 			var killerCells = FindObjectsOfType<KillerCell>();
 			for (int i = 0; i < killerCells.Length; ++i)
@@ -169,22 +163,23 @@ namespace Player
 				killerCells[i].EnterPowerUpMode();
 			}
 
+
 		}
 
 		public void OpenCellpedia()
 		{
 			CellpediaUI.Cellpedia.Instance.Open();
-			StopGlow();
+			MicroscopeOpened();
 		}
 
-		public void StartGlow()
+		public void MicroscopeActivate()
 		{
-			microscopeGlow.SetActive(true);
+			microscopeIconAnimator.SetTrigger("NewItem");
 		}
 
-		private void StopGlow()
+		private void MicroscopeOpened()
 		{
-			microscopeGlow.SetActive(false);
+			microscopeIconAnimator.SetTrigger("Opened");
 		}
 
 

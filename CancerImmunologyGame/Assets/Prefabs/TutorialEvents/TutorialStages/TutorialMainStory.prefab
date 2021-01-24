@@ -900,6 +900,11 @@ PrefabInstance:
       propertyPath: timeBeforeFinish
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
 --- !u!114 &1787491972572591052 stripped
@@ -1387,6 +1392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBeforeFinish
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
