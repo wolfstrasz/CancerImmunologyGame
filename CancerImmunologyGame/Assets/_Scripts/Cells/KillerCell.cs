@@ -24,6 +24,12 @@ public class KillerCell : Cell
 	private static float maxExhaustion = 100.0f;
 	private float exhaustion = 0.0f;
 
+#if BLOODFLOW_ROTATION
+	[SerializeField]
+	private float rotationSpeed = 2.0f;
+#else
+#endif
+
 	[Header("Attack")]
 	[SerializeField]
 	private float attackRotationOffset = 0.2f;
@@ -39,7 +45,18 @@ public class KillerCell : Cell
 	private bool queuePowerUp = false;
 	[SerializeField]
 	private Vector2 movementVector = Vector2.zero;
+	[SerializeField]
+	private Vector2 flowVector = Vector2.zero;
+	[SerializeField]
+	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
+	[SerializeField]
+	private CancerCell closestCell = null;
 
+#if BLOODFLOW_ROTATION
+	[SerializeField]
+	private Quaternion correctRotation = Quaternion.identity;
+#else
+#endif
 
 	public float Health { get => health; set => health = value; }
 	public float Exhaustion { get => exhaustion; set => exhaustion = value; }
@@ -47,31 +64,41 @@ public class KillerCell : Cell
 	public static float MaxExhaustion { get => maxExhaustion; set => maxExhaustion = value; }
 	public static float MaxHealth { get => maxHealth; set => maxHealth = value; }
 	public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
+	public Vector2 FlowVector { get => flowVector; set => flowVector = value; }
 	public bool IsDead { get => isDead; set => isDead = value; }
 
-	public bool IsKinematic { get => rb.isKinematic; set => rb.isKinematic = value; }
+#if BLOODFLOW_ROTATION
+	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
+#else
+#endif
 
-	void Update()
+
+	public void Initialise()
 	{
-		OnUpdate();
-
-		if (isDead)
-			ClearForces();
+		sense.CancerCellsInRange.Clear();
 	}
 
-	public void ClearForces()
+	public void OnFixedUpdate()
 	{
-		rb.velocity = Vector3.zero;
-		rb.angularVelocity = 0.0f;
+		if (!isDead)
+		{
+			Move();
+#if BLOODFLOW_ROTATION
+			FixRotation();
+#else
+#endif
+
+}
 	}
 
-	
-	public void Respawn()
+
+#if BLOODFLOW_ROTATION
+	private void FixRotation()
 	{
-		isDead = false;
-		ReceiveHealth(maxHealth);
-		ReceiveExhaustion(-maxExhaustion);
+		transform.rotation = Quaternion.Slerp(transform.rotation, correctRotation, rotationSpeed * Time.deltaTime);
 	}
+#else
+#endif
 
 	public void OnUpdate()
 	{
@@ -82,9 +109,12 @@ public class KillerCell : Cell
 		}
 	}
 
-	public void Initialise()
+
+	public void Respawn()
 	{
-		sense.CancerCellsInRange.Clear();
+		isDead = false;
+		ReceiveHealth(maxHealth);
+		ReceiveExhaustion(-maxExhaustion);
 	}
 
 
@@ -132,25 +162,25 @@ public class KillerCell : Cell
 		}
 	}
 
-	internal float GetSlowDown()
+	private float ExhaustionEffect()
 	{
-		if (GlobalGameData.isPowerUpOn) return 1.0f;
+		if (GlobalGameData.isInPowerUpMode)
+			return immunotherapySpeedMultiplier;
 		return (MaxExhaustion - exhaustion) / MaxExhaustion;
 	}
 
-	// Movement
-	public void Move(Vector2 movementVector)
+	/// <summary>
+	/// Applies the movement and flow vectors to calculate the new position of the cell.
+	/// Note: All controllers must apply their effects before hand.
+	/// </summary>
+	private void Move()
 	{
-		Vector2 move = movementVector * speed * Time.fixedDeltaTime;
-		if (GlobalGameData.isInPowerUpMode)
-			move *= immunotherapySpeedMultiplier;
-		rb.MovePosition(move * GetSlowDown() + rb.position);
+		movementVector = movementVector * speed * Time.fixedDeltaTime * ExhaustionEffect();
+		rb.MovePosition(movementVector + flowVector + rb.position);
 	}
 
-	// Attacking
-	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-	private CancerCell closestCell = null;
-
+	// ATTACKING
+	//////////////////////////////////////////
 	public void Attack()
 	{
 		if (isBusy) return;
@@ -211,7 +241,8 @@ public class KillerCell : Cell
 		isBusy = false;
 	}
 
-	// Power Up animation
+	// POWER UP IMMUNOTHERAPY
+	//////////////////////////////////////////
 	public void EnterPowerUpMode()
 	{
 		if (isBusy)

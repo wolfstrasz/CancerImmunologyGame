@@ -70,7 +70,14 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	void FixedUpdate()
 	{
 		if (!free_roam)
+		{
 			UpdateFocusPoint();
+#if BLOODFLOW_ROTATION
+			transform.rotation = focusTarget.transform.rotation;
+#else
+#endif
+
+		}
 	}
 
 	// Focus objects can change in Update, so camera moves here

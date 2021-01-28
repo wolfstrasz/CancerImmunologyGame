@@ -18,7 +18,7 @@ namespace BloodcellAnimation
 		[SerializeField]
 		private EndOfPathInstruction endOfPathInstruction = EndOfPathInstruction.Loop;
 		[SerializeField]
-		private float speed = 8.0f;
+		private float speed = 7.0f;
 		[SerializeField]
 		public float rotationSpeed = 90.0f;
 
@@ -49,17 +49,17 @@ namespace BloodcellAnimation
 			transform.Rotate(0, 0, Random.Range(0.0f, 360.0f));
 		}
 
-		void Update()
+		void FixedUpdate()
 		{
 			if (!isMoving) return;
-			transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+			transform.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
 
 			if (distanceTravelled >= distanceToEnd)
 				distanceTravelled = 0.0f;
 
 			if (vertexPath != null)
 			{
-				distanceTravelled += speed * Time.deltaTime;
+				distanceTravelled += speed * Time.fixedDeltaTime;
 				transform.position = vertexPath.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
 				//transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 			}

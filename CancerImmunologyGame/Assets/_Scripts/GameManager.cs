@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using Player;
 using Tutorials;
+using Bloodflow;
 
 namespace Core
 {
@@ -71,6 +72,7 @@ namespace Core
 
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();
+			BloodflowController.Instance.Initialise();
 
 			isLevelInitialised = true;
 			yield return null;
@@ -101,26 +103,32 @@ namespace Core
 		private void LevelRunning()
 		{
 			PlayerController.Instance.OnUpdate();
+			foreach (KillerCell kc in GlobalGameData.KillerCells)
+			{
+				kc.OnUpdate();
+			}
+
+			foreach (Cancer cancer in GlobalGameData.Cancers)
+			{
+				cancer.OnUpdate();
+			}
 
 			if (GlobalGameData.Cancers.Count == 0)
 			{
 				OnLevelFinished();
 				return;
 			}
-			for (int i =0; i< GlobalGameData.Cancers.Count; ++i)
-			{
-				GlobalGameData.Cancers[i].OnUpdate();
-			}
-		}
-
-		private void LevelSampleRunning()
-		{
-			PlayerController.Instance.OnUpdate();
+		
 		}
 
 		private void LevelFixedRunning()
 		{
 			PlayerController.Instance.OnFixedUpdate();
+			BloodflowController.Instance.OnFixedUpdate();
+			foreach (KillerCell kc in GlobalGameData.KillerCells)
+			{
+				kc.OnFixedUpdate();
+			}
 		}
 
 		private void NoLevelFixedRunning()
