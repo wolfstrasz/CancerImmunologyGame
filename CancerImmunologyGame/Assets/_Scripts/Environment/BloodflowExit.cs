@@ -16,16 +16,21 @@ namespace Bloodflow
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
-			if (kc != null)
+			if (kc != null && environment.KillerCells.Contains(kc))
 			{
 				environment.KillerCells.Remove(kc);
 				kc.FlowVector = Vector2.zero;
 
 #if BLOODFLOW_ROTATION
 				kc.CorrectRotation = Quaternion.identity;
-#else
 #endif
 			}
+		}
+
+		internal void OnForcedExit(KillerCell kc)
+		{
+			if (environment.KillerCells.Contains(kc))
+				environment.KillerCells.Remove(kc);
 		}
 	}
 }

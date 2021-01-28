@@ -67,6 +67,8 @@ namespace Player
 				{
 					transform.position = kc.transform.position;
 					heartOutroEnd = false;
+					GlobalGameData.areControlsEnabled = true;
+
 					//kc.IsKinematic = false;
 				}
 				return;
@@ -175,6 +177,7 @@ namespace Player
 		public void StartHeartMovement()
 		{
 			heartOutro = true;
+			GlobalGameData.areControlsEnabled = false;
 			//kc.IsKinematic = true;
 		}
 	}

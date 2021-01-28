@@ -3,18 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
-[RequireComponent(typeof(Collider2D))]
-public class VeinsEndArea : MonoBehaviour
+namespace Bloodflow
 {
-	[SerializeField]
-	private GameObject arteryStart = null;
-
-	private void OnTriggerEnter2D(Collider2D collider)
+	[RequireComponent(typeof(Collider2D))]
+	public class VeinsEndArea : MonoBehaviour
 	{
-		if (collider.gameObject == GlobalGameData.player)
+		[SerializeField]
+		private GameObject arteryStart = null;
+		[SerializeField]
+		private BloodflowExit exit = null;
+
+		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			PlayerController.Instance.StartHeartMovement();
-			GlobalGameData.player.transform.position = arteryStart.transform.position;
+			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+			if (kc != null)
+			{
+				kc.transform.position = arteryStart.transform.position;
+
+				exit.OnForcedExit(kc);
+			}
+
+			if (collider.gameObject == GlobalGameData.player)
+			{
+				PlayerController.Instance.StartHeartMovement();
+			}
 		}
 	}
 }

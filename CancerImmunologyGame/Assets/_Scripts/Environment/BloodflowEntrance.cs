@@ -17,7 +17,8 @@ namespace Bloodflow
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
 			if (kc != null)
 			{
-				environment.KillerCells.Add(kc);
+				if (!environment.KillerCells.Contains (kc))
+					environment.KillerCells.Add(kc);
 			}
 		}
 		

@@ -80,7 +80,7 @@ public class KillerCell : Cell
 
 	public void OnFixedUpdate()
 	{
-		if (!isDead)
+		if (!isDead && GlobalGameData.areControlsEnabled)
 		{
 			Move();
 #if BLOODFLOW_ROTATION
