@@ -8,6 +8,7 @@ namespace Player
 	{
 		[SerializeField]
 		KillerCell kc = null;
+
 		[SerializeField]
 		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
 		private bool heartOutro = false;
@@ -15,7 +16,7 @@ namespace Player
 		private bool heartOutroCamera = false;
 
 		// Attack
-		private Vector2 movement = Vector2.zero;
+		private Vector2 movementVector = Vector2.zero;
 
 		[SerializeField]
 		private bool isPlayerRespawning = false;
@@ -66,7 +67,9 @@ namespace Player
 				{
 					transform.position = kc.transform.position;
 					heartOutroEnd = false;
-					kc.IsKinematic = false;
+					GlobalGameData.areControlsEnabled = true;
+
+					//kc.IsKinematic = false;
 				}
 				return;
 			}
@@ -74,6 +77,11 @@ namespace Player
 
 	
 			transform.position = kc.transform.position;
+#if BLOODFLOW_ROTATION
+
+			transform.rotation = kc.transform.rotation;
+#else
+#endif
 
 #if !REMOVE_PLAYER_DEBUG
 			if (Input.GetKeyDown(KeyCode.Keypad7))
@@ -109,7 +117,11 @@ namespace Player
 			}
 
 			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
+			{
 				return;
+			}
+
+
 
 			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E))
 			{
@@ -123,23 +135,21 @@ namespace Player
 		{
 			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
 			{
-				kc.ClearForces();
-				movement = Vector2.zero;
+				kc.MovementVector = Vector2.zero;
 				return;
 			}
 
 			// Collect input 
-			movement.x = Input.GetAxisRaw("Horizontal");
-			movement.y = Input.GetAxisRaw("Vertical");
-			//kc.MovementVector = movement;
+			movementVector.x = Input.GetAxisRaw("Horizontal");
+			movementVector.y = Input.GetAxisRaw("Vertical");
 
 			// Damping if both axis are pressed. sqare root of 2.
-			if (Mathf.Abs(movement.x) == 1 && Mathf.Abs(movement.y) == 1)
+			if (Mathf.Abs(movementVector.x) == 1 && Mathf.Abs(movementVector.y) == 1)
 			{
-				movement = movement * 0.74f;
+				movementVector = movementVector * 0.74f;
 			}
 
-			kc.Move(movement);
+			kc.MovementVector = movementVector;
 		}
 
 		// Respawning functionality
@@ -147,7 +157,7 @@ namespace Player
 		{
 			SmoothCamera.Instance.isCameraFocused = false;
 			isPlayerRespawning = true;
-			kc.IsKinematic = true;
+			//kc.IsKinematic = true;
 
 			// Update cell position and controller
 			kc.gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(kc.gameObject.transform.position);
@@ -158,7 +168,7 @@ namespace Player
 		{
 			if (SmoothCamera.Instance.isCameraFocused && kc.IsDead)
 			{
-				kc.IsKinematic = false;
+				//kc.IsKinematic = false;
 				isPlayerRespawning = false;
 				kc.Respawn();
 			}
@@ -167,7 +177,8 @@ namespace Player
 		public void StartHeartMovement()
 		{
 			heartOutro = true;
-			kc.IsKinematic = true;
+			GlobalGameData.areControlsEnabled = false;
+			//kc.IsKinematic = true;
 		}
 	}
 }

@@ -29,7 +29,8 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	[SerializeField]
 	private Animator cameraAnimator = null;
 
-	private bool isInIntro = true;
+	[SerializeField]
+	private bool DebugForceSkip = false;
 
 	public void Reset()
 	{
@@ -41,6 +42,15 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	//	gameObject.transform.position = startPosition;
 	//	focusPosition = new Vector3(startPosition.x, startPosition.y, 0.0f);
 	//}
+
+	void Awake()
+	{
+		if (DebugForceSkip)
+		{
+			cameraAnimator.SetTrigger("Idle");
+			free_roam = false;
+		}
+	}
 
 	public void SetNewFocus(GameObject focusObject)
 	{
@@ -60,7 +70,14 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	void FixedUpdate()
 	{
 		if (!free_roam)
+		{
 			UpdateFocusPoint();
+#if BLOODFLOW_ROTATION
+			transform.rotation = focusTarget.transform.rotation;
+#else
+#endif
+
+		}
 	}
 
 	// Focus objects can change in Update, so camera moves here
@@ -151,8 +168,7 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
 		cameraAnimator.SetTrigger("Idle");
 		free_roam = false;
-		focusTarget = PlayerController.Instance.gameObject;
-		focusPosition = PlayerController.Instance.gameObject.transform.position;
+		focusPosition = focusTarget.transform.position;
 	}
 
 }

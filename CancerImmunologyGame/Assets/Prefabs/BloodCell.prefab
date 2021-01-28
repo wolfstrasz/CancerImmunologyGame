@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4189095983323802907}
   - component: {fileID: 4189095983323802905}
-  - component: {fileID: 4189095983323802906}
   - component: {fileID: 1389133098206696872}
   m_Layer: 0
   m_Name: BloodCell
@@ -83,21 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4189095983323802906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4189095983323802908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33aabe1a2dec93349b06e6e5dc51bc06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pathCreator: {fileID: 0}
-  endOfPathInstruction: 2
-  speed: 8
 --- !u!114 &1389133098206696872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +100,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3a5a16d2e69ff304aa5d2d4eda369236, type: 3}
   render: {fileID: 0}
   endOfPathInstruction: 0
-  speed: 8
+  speed: 7
   rotationSpeed: 90
   distanceTravelled: 0
   distanceToEnd: 0

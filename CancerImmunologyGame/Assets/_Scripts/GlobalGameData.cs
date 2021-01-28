@@ -17,6 +17,7 @@ public static class GlobalGameData
 	public static GameObject player = null;
 	private static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 	public static List<Cancer> Cancers = new List<Cancer>();
+	public static List<KillerCell> KillerCells = new List<KillerCell>();
 
 	public static Vector3 GetClosestSpawnLocation(Vector3 position)
 	{
@@ -47,9 +48,13 @@ public static class GlobalGameData
 
 	public static bool isPowerUpOn = false;
 
-	public static void RestObjectPool()
+	public static void ResetObjectPool()
 	{
 		player = null;
 		RespawnAreas.Clear();
+		Cancers.Clear();
+		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>());
+		KillerCells.Clear();
+		KillerCells.AddRange(GameObject.FindObjectsOfType<KillerCell>());
 	}
 }
