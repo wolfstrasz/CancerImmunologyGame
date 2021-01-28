@@ -47,9 +47,11 @@ public static class GlobalGameData
 
 	public static bool isPowerUpOn = false;
 
-	public static void RestObjectPool()
+	public static void ResetObjectPool()
 	{
 		player = null;
 		RespawnAreas.Clear();
+		Cancers.Clear();
+		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>());
 	}
 }

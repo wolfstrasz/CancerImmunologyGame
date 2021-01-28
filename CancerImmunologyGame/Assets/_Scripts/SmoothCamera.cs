@@ -29,11 +29,9 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	[SerializeField]
 	private Animator cameraAnimator = null;
 
-	private bool isInIntro = true;
 	[SerializeField]
 	private bool DebugForceSkip = false;
-	[SerializeField]
-	private GameObject ForceSkipFocus = null;
+
 	public void Reset()
 	{
 		focusPosition = new Vector3(startPosition.x, startPosition.y, 0.0f);
@@ -50,7 +48,6 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		if (DebugForceSkip)
 		{
 			cameraAnimator.SetTrigger("Idle");
-			focusTarget = ForceSkipFocus;
 			free_roam = false;
 		}
 	}
@@ -164,8 +161,7 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
 		cameraAnimator.SetTrigger("Idle");
 		free_roam = false;
-		focusTarget = PlayerController.Instance.gameObject;
-		focusPosition = PlayerController.Instance.gameObject.transform.position;
+		focusPosition = focusTarget.transform.position;
 	}
 
 }

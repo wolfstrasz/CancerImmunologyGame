@@ -13,47 +13,16 @@ namespace Core
 		private delegate void StateFunction();
 		StateFunction StateUpdate;
 		StateFunction StateFixedUpdate;
-
 		private bool isLevelInitialised = false;
 		
-		void Start()
-		{
-
-		}
-
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Return))
-				OnSampleInitialise();
-
 			StateUpdate();
 		}
 
 		void FixedUpdate()
 		{
 			StateFixedUpdate();
-		}
-
-		private void OnSampleInitialise(){
-			Debug.Log("Initialise Sample Game Manager");
-			Time.timeScale = 1.0f;
-
-			GlobalGameData.gameplaySpeed = 1.0f;
-			GlobalGameData.gameSpeed = 1.0f;
-			GlobalGameData.isGameplayPaused = false;
-			GlobalGameData.isInitialised = true;
-
-			GlobalGameData.RestObjectPool();
-			GlobalGameData.Cancers.Clear();
-			GlobalGameData.Cancers.AddRange(FindObjectsOfType<Cancer>());
-
-			PlayerController.Instance.Initialise();
-			CellpediaUI.Cellpedia.Instance.Initialise();
-
-			isLevelInitialised = true;
-
-			StateUpdate = LevelSampleRunning;
-			StateFixedUpdate = LevelFixedRunning;
 		}
 
 		public void Initialise()
@@ -98,9 +67,7 @@ namespace Core
 		{
 			SmoothCamera.Instance.Reset();
 			UIManager.Instance.ClosePanels();
-			GlobalGameData.RestObjectPool();
-			GlobalGameData.Cancers.Clear();
-			GlobalGameData.Cancers.AddRange(FindObjectsOfType<Cancer>());
+			GlobalGameData.ResetObjectPool();
 
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();

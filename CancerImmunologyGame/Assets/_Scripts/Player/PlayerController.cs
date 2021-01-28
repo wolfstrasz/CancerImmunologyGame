@@ -8,6 +8,7 @@ namespace Player
 	{
 		[SerializeField]
 		KillerCell kc = null;
+
 		[SerializeField]
 		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
 		private bool heartOutro = false;
