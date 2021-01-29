@@ -8,13 +8,13 @@ public class HelperCellParticle : CellParticle
 	[SerializeField]
 	private float healthRegeneration = 0.35f;
 	[SerializeField]
-	private float exhaustRegeneration = 0.30f;
+	private float energyRegeneration = 0.30f;
 
 	protected override void OnReachTarget()
 	{
 		Debug.Log("Reached targer");
-		target.ReceiveHealth(healthRegeneration);
-		target.ReceiveExhaustion(-exhaustRegeneration);
+		target.AddHealth(healthRegeneration);
+		target.AddEnergy(energyRegeneration);
 		Destroy(gameObject);
 	}
 }

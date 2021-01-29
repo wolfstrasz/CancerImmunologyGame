@@ -190,10 +190,11 @@ MonoBehaviour:
   monitorHealth: 1
   healthValue: 50
   updateHealth: 0
-  monitorExhaustion: 1
-  exhaustionValue: 50
-  updateExhaustion: 1
+  monitorEnergy: 1
+  energyValue: 50
+  updateEnergy: 1
   invertChecks: 0
+  playerKC: {fileID: 0}
 --- !u!1 &5177704064619137147
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,7 +118,31 @@ namespace Core
 				OnLevelFinished();
 				return;
 			}
-		
+
+
+#if !REMOVE_PLAYER_DEBUG
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				PlayerUI.Instance.ActivateImmunotherapyPanel();
+			}
+			if (Input.GetKeyDown(KeyCode.Z))
+			{
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
+			}
+			if (Input.GetKeyDown(KeyCode.X))
+			{
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
+			}
+			if (Input.GetKeyDown(KeyCode.C))
+			{
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.CANCER);
+			}
+			if (Input.GetKeyDown(KeyCode.V))
+			{
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
+			}
+#endif
+
 		}
 
 		private void LevelFixedRunning()

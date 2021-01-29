@@ -7,7 +7,7 @@ using Player;
 public class RegulatoryCell : MonoBehaviour
 {
     public float shiftSpeed = 0.5f;
-    public float exhaust_dmg = 10.0f;
+    public float energyDmg = -10.0f;
     public PathCreator path = null;
     public VertexPath pathToFollow = null;
     public CircleCollider2D coll = null;
@@ -138,7 +138,7 @@ public class RegulatoryCell : MonoBehaviour
             coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
         }
 
-		target.ReceiveExhaustion(exhaust_dmg);
+		target.AddEnergy(energyDmg);
 		//PlayerUI.Instance.AddExhaustion(exhaust_dmg);
         yield return new WaitForSeconds(0.1f);
         StartCoroutine(StopBump());

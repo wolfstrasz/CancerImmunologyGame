@@ -25,7 +25,7 @@ namespace Player
 		{
 			kc.Initialise();
 			PlayerUI.Instance.Initialise();
-			PlayerUI.Instance.kc = kc;
+			PlayerUI.Instance.SetPlayerInfo(kc);
 
 			GlobalGameData.player = kc.gameObject;
 		}
@@ -86,19 +86,19 @@ namespace Player
 #if !REMOVE_PLAYER_DEBUG
 			if (Input.GetKeyDown(KeyCode.Keypad7))
 			{
-				kc.ReceiveHealth(-20.0f);
+				kc.AddHealth(-20.0f);
 			}
 			if (Input.GetKeyDown(KeyCode.Keypad9))
 			{
-				kc.ReceiveHealth(+20.0f);
+				kc.AddHealth(+20.0f);
 			}
 			if (Input.GetKeyDown(KeyCode.Keypad4))
 			{
-				kc.ReceiveExhaustion(-20.0f);
+				kc.AddEnergy(-20.0f);
 			}
 			if (Input.GetKeyDown(KeyCode.Keypad6))
 			{
-				kc.ReceiveExhaustion(+20.0f);
+				kc.AddEnergy(+20.0f);
 			}
 #endif
 			PlayerUI.Instance.OnUpdate();

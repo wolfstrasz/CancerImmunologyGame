@@ -18,11 +18,17 @@ public class KillerCell : Cell
 	[SerializeField]
 	private float immunotherapySpeedMultiplier = 1.66f;
 	[SerializeField]
+	private float immunotherapyEnergyRegain = 3.33f;
+
+	[SerializeField]
 	private static float maxHealth = 100.0f;
 	private float health = 100.0f;
 	[SerializeField]
-	private static float maxExhaustion = 100.0f;
-	private float exhaustion = 0.0f;
+	private static float maxEnergy = 100.0f;
+	private float energy = 100.0f;
+
+	[SerializeField]
+	private float normalAttackEnergyCost = -7.5f;
 
 #if BLOODFLOW_ROTATION
 	[SerializeField]
@@ -59,9 +65,9 @@ public class KillerCell : Cell
 #endif
 
 	public float Health { get => health; set => health = value; }
-	public float Exhaustion { get => exhaustion; set => exhaustion = value; }
+	public float Energy { get => energy; set => energy = value; }
 	public bool IsBusy { get => isBusy; set => isBusy = value; }
-	public static float MaxExhaustion { get => maxExhaustion; set => maxExhaustion = value; }
+	public static float MaxEnergy { get => maxEnergy; set => maxEnergy = value; }
 	public static float MaxHealth { get => maxHealth; set => maxHealth = value; }
 	public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 	public Vector2 FlowVector { get => flowVector; set => flowVector = value; }
@@ -104,8 +110,8 @@ public class KillerCell : Cell
 	{
 		if (GlobalGameData.isInPowerUpMode)
 		{
-			float value = -3.33f * Time.deltaTime;
-			ReceiveExhaustion(value);
+			float value = immunotherapyEnergyRegain * Time.deltaTime;
+			AddEnergy(value);
 		}
 	}
 
@@ -113,40 +119,32 @@ public class KillerCell : Cell
 	public void Respawn()
 	{
 		isDead = false;
-		ReceiveHealth(maxHealth);
-		ReceiveExhaustion(-maxExhaustion);
+		AddHealth(maxHealth);
+		AddEnergy(maxEnergy);
 	}
 
 
-	public void ReceiveExhaustion(float value)
+	public void AddEnergy(float value)
 	{
-		Debug.Log(gameObject.name + " received exhaustion of " + value);
-		if (GlobalGameData.isInPowerUpMode && value >= 0.0f) return;
+		if (GlobalGameData.isInPowerUpMode && value <= 0.0f) return;
 
-		exhaustion += value;
+		energy += value;
 
-		if (exhaustion >= maxExhaustion)
+		if (energy >= maxEnergy)
 		{
-			exhaustion = maxExhaustion;
-			animator.SetFloat("ExhaustionRate", 1.0f);
+			energy = maxEnergy;
+		}
+		else if (energy <= 0.0f)
+		{
+			energy = 0.0f;
 			isDead = true;
-			return;
 		}
 
-		if (exhaustion < 0.0f)
-		{
-			exhaustion = 0.0f;
-			animator.SetFloat("ExhaustionRate", 0.0f);
-			return;
-		}
-
-		animator.SetFloat("ExhaustionRate", exhaustion / maxExhaustion);
+		animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
 	}
 
-	public void ReceiveHealth(float value)
+	public void AddHealth(float value)
 	{
-		Debug.Log(gameObject.name + " received health of " + value);
-
 		health += value;
 		if (health > maxHealth)
 		{
@@ -166,7 +164,7 @@ public class KillerCell : Cell
 	{
 		if (GlobalGameData.isInPowerUpMode)
 			return immunotherapySpeedMultiplier;
-		return (MaxExhaustion - exhaustion) / MaxExhaustion;
+		return  energy / maxEnergy;
 	}
 
 	/// <summary>
@@ -226,8 +224,7 @@ public class KillerCell : Cell
 		GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
 		newEffect.GetComponent<ParticleSystem>().Play();
 
-		if (!GlobalGameData.isInPowerUpMode)
-			exhaustion += 7.5f;
+		AddEnergy(normalAttackEnergyCost);
 
 		bool killedTheCell = closestCell.HitCell();
 		if (killedTheCell)

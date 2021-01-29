@@ -265,6 +265,16 @@ PrefabInstance:
       propertyPath: exhaustionValue
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8020614162526577027, guid: 0daf84d1f3a4f264d88b2df07e7b9ad1,
+        type: 3}
+      propertyPath: monitorEnergy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020614162526577027, guid: 0daf84d1f3a4f264d88b2df07e7b9ad1,
+        type: 3}
+      propertyPath: energyValue
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0daf84d1f3a4f264d88b2df07e7b9ad1, type: 3}
 --- !u!4 &8836474767297346461 stripped
