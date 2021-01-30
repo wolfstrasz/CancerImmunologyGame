@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CancerCellBody : MonoBehaviour
+namespace Cancers
 {
-    public CancerCell owner = null;
+	public class CancerCellBody : MonoBehaviour
+	{
+		public CancerCell owner = null;
+	}
 }

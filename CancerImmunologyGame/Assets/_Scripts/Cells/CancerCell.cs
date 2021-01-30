@@ -2,126 +2,159 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CancerCell : MonoBehaviour
+namespace Cancers
 {
-	internal Cancer cancer = null;
-
-	private bool inDivision = false;
-	internal bool isDying = false;
-
-	public static bool first_hit = false; // should switch to a tutorial pop-up event
-	public static float wait_before_destroy = 3.0f; // Must remove hard-coding value
-	[SerializeField]
-    private CancerCellBody body = null;
-	
-	[SerializeField]
-	public CircleCollider2D divisionBodyBlocker = null;
-
-	[SerializeField]
-    private GameObject hypoxicArea = null;
-    [SerializeField]
-    private Animator animator = null;
-	[SerializeField]
-	private SpriteRenderer render = null;
-
-    public float health = 100;
-
-	// Division info
-	private float rotationAngle = 0.0f;
-
-	internal void SetSortOrder (int sortOrder)
+	public class CancerCell : MonoBehaviour
 	{
-		render.sortingOrder = sortOrder;
-	}
+		[Header("Links")]
+		[SerializeField]
+		private CancerCellBody body = null;
+		[SerializeField]
+		public CircleCollider2D divisionBodyBlocker = null;
+		[SerializeField]
+		private GameObject hypoxicArea = null;
+		[SerializeField]
+		private Animator animator = null;
+		[SerializeField]
+		private SpriteRenderer render = null;
+		[SerializeField]
+		private CellHealthBar healthbar = null;
 
-    void Awake()
-    {
-		hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
-    }
+		[Header("Attributes")]
+		[SerializeField]
+		private float maxHealth = 100.0f;
+		[SerializeField]
+		private float health = 100;
 
-    public bool HitCell()
-    {
-		if (isDying) return false;
+		[Header("Debug (Read Only)")]
+		[SerializeField]
+		internal Cancer cancer = null;
+		[SerializeField]
+		private float rotationAngle = 0.0f;
+		[SerializeField]
+		private bool inDivision = false;
+		[SerializeField]
+		internal bool isDying = false;
 
-        health -= 20f;
-        if (health <= 0)
-        {
-			isDying = true;
-
-			if (cancer != null)
-				cancer.RemoveCell(this);
-			body.gameObject.SetActive(false);
-			animator.SetTrigger("Apoptosis");
-			return true;
-        }
-		return false;
-    }
-
-	public bool CellInDivision()
-	{
-		return inDivision;
-	}
-
-
-	// Control calls
-	public void StartPrepareDivision(float _rotationAngle)
-	{
-		inDivision = true;
-		divisionBodyBlocker.gameObject.SetActive(true);
-		animator.SetTrigger("PrepareToDivide");
-		rotationAngle = _rotationAngle;
-	}
+		public bool InDivision => inDivision;
+		/// <summary>
+		/// Sets the rendering sort order of the Cancer cell sprite
+		/// </summary>
+		internal int RenderSortOrder { set => render.sortingOrder = value; }
 
 
-	public void StartDivision()
-	{
-		animator.SetTrigger("Divide");
-	}
-
-	public void StartReturnFromDivision()
-	{
-		animator.SetTrigger("ReturnFromDivision");
-	}
-
-
-	// Animation callbacks
-	public void FinishedDivisionPreparation()
-	{
-		cancer.OnFinishDivisionPreparation();
-	}
-
-	public void FinishedDivision()
-	{
-		cancer.OnFinishDivision();
-	}
-
-	public void CellSpawned()
-	{
-		inDivision = false;
-		isDying = false;
-		if (!hypoxicArea.activeSelf)
+		void Awake()
 		{
-			float randomAngle = Random.Range(0.0f, 360.0f);
-			hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, randomAngle);
-			hypoxicArea.SetActive(true);
-
-			//   UIManager.Instance.allCancerCells.Add(this);
+			hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
+			healthbar.MaxHealth = maxHealth;
+			healthbar.Health = health;
 		}
-	}
 
-	public void CellDied()
-	{
 
-		Destroy(gameObject);
-	}
+		public bool HitCell()
+		{
+			if (isDying || inDivision) return false;
 
-	public void RotateForDivision()
-	{
-		transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
-	}
+			health -= 20f;
+			if (health <= 0)
+			{
+				isDying = true;
 
-	public void RotateForReturn()
-	{
-		transform.rotation = Quaternion.identity;
+				healthbar.gameObject.SetActive(false);
+				if (cancer != null)
+				{
+					cancer.RemoveCell(this);
+				}
+				body.gameObject.SetActive(false);
+				animator.SetTrigger("Apoptosis");
+				return true;
+			}
+
+			healthbar.Health = health;
+			return false;
+		}
+
+		// Cancer cell division animation flow functions
+		// Control calls
+		internal void StartPrepareDivision(float _rotationAngle)
+		{
+			inDivision = true;
+
+			divisionBodyBlocker.gameObject.SetActive(true);
+			animator.SetTrigger("PrepareToDivide");
+			rotationAngle = _rotationAngle;
+		}
+
+
+		internal void StartDivision()
+		{
+			healthbar.gameObject.SetActive(false);
+			animator.SetTrigger("Divide");
+		}
+
+		internal void StartReturnFromDivision()
+		{
+			animator.SetTrigger("ReturnFromDivision");
+		}
+
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void FinishedDivisionPreparation()
+		{
+			cancer.OnFinishDivisionPreparation();
+		}
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void FinishedDivision()
+		{
+			healthbar.gameObject.SetActive(true);
+			divisionBodyBlocker.gameObject.SetActive(false);
+			cancer.OnFinishDivision();
+		}
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void CellSpawned()
+		{
+			inDivision = false;
+			isDying = false;
+			if (!hypoxicArea.activeSelf)
+			{
+				float randomAngle = Random.Range(0.0f, 360.0f);
+				hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, randomAngle);
+				hypoxicArea.SetActive(true);
+
+				//   UIManager.Instance.allCancerCells.Add(this);
+			}
+		}
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void CellDied()
+		{
+			Destroy(gameObject);
+		}
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void RotateForDivision()
+		{
+			transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+		}
+
+		/// <summary>
+		/// Callback to use in division animation.
+		/// </summary>
+		public void RotateForReturn()
+		{
+			transform.rotation = Quaternion.identity;
+		}
 	}
 }
