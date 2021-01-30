@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Cancers
 {
@@ -42,6 +43,7 @@ namespace Cancers
 		/// </summary>
 		internal int RenderSortOrder { set => render.sortingOrder = value; }
 
+		private List<ICancerCellObserver> observers = new List<ICancerCellObserver>();
 
 		void Awake()
 		{
@@ -50,6 +52,14 @@ namespace Cancers
 			healthbar.Health = health;
 		}
 
+		public void AddObserver(ICancerCellObserver observer)
+		{
+			observers.Add(observer);
+		}
+		public void RemoveObserver(ICancerCellObserver observer)
+		{
+			observers.Remove(observer);
+		}
 
 		public bool HitCell()
 		{
@@ -67,6 +77,10 @@ namespace Cancers
 				}
 				body.gameObject.SetActive(false);
 				animator.SetTrigger("Apoptosis");
+				for (int i = 0; i < observers.Count; ++i)
+				{
+					observers[i].NotifyOfDeath(this);
+				}
 				return true;
 			}
 

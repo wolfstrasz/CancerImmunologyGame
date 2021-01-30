@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5947025596767702942}
   - component: {fileID: 5947025596767702940}
   - component: {fileID: 5947025596767702943}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: UpperFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5947025597657489977}
   - component: {fileID: 5947025597657489976}
   - component: {fileID: 5947025597657489979}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ImageZLowerFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 5947025598052521246}
   - component: {fileID: 5947025598052521217}
   - component: {fileID: 5947025598052521216}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5947025598082693397}
   - component: {fileID: 5947025598082693394}
-  m_Layer: 11
+  - component: {fileID: 2837308330035551084}
+  m_Layer: 9
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,10 +297,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: db0441c5596688b459fadc903bc0b2c9, type: 2}
+  canvas: {fileID: 5947025598207416299}
   lowerFill: {fileID: 5947025597657489976}
   upperFill: {fileID: 5947025596767702943}
   imageZ: {fileID: 5947025597657489978}
   canvasTransform: {fileID: 5947025598207416296}
+--- !u!58 &2837308330035551084
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947025598082693396}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.5
 --- !u!1 &5947025598207416299
 GameObject:
   m_ObjectHideFlags: 0
@@ -312,13 +330,13 @@ GameObject:
   - component: {fileID: 5947025598207416295}
   - component: {fileID: 5947025598207416294}
   - component: {fileID: 5947025598207416297}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5947025598207416296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -337,7 +355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.256, y: -0.064}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5947025598207416295
@@ -412,7 +430,7 @@ GameObject:
   - component: {fileID: 5947025598442715156}
   - component: {fileID: 5947025598442715159}
   - component: {fileID: 5947025598442715158}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
