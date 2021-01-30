@@ -7,137 +7,117 @@ namespace Player
 {
 	public class PlayerUI : Singleton<PlayerUI>
 	{
-		[Header("PowerUpStats")]
-		[SerializeField]
-		private float maxPowerUp = 100.0f;
-		[SerializeField]
-		private float powerUp = 100.0f;
+
 		[Header("UI links")]
 		[SerializeField]
 		private GameObject playerInfoPanel = null;
-		public GameObject PlayerInfoPanelActive { set => playerInfoPanel.SetActive(value); }
-
 		[SerializeField]
 		private GameObject playerPowerUpPanel = null;
-		public GameObject PlayerPowerUpPanelActive { set => playerPowerUpPanel.SetActive(value); }
-
-		[Header("Attribute UI links")]
+		[SerializeField]
+		private GameObject microscopePanel = null;
 		[SerializeField]
 		private HealthBar healthBar = null;
 		[SerializeField]
-		private ExhaustionBar exhaustionBar = null;
+		private EnergyBar energyBar = null;
 		[SerializeField]
 		private ImmunotherapyBar powerUpBar = null;
 		[SerializeField]
-		private GameObject microscope = null;
-		[SerializeField]
 		private Animator microscopeIconAnimator = null;
-
-		[Header("Power Up Action Button")]
 		[SerializeField]
 		private Animator immunotherapyAnimator = null;
+
+		[Header("Power-up attributes")]
+		[SerializeField]
+		private float maxPowerUp = 100.0f;
+		[SerializeField]
+		private float powerUp = 0.0f;
+		[SerializeField]
+		private float powerUpIncreaseValue = 2.0f;
+		[SerializeField]
+		private float powerUpDecreaseValue = -2.0f;
+
 
 		[Header("Debug only")]
 		[SerializeField]
 		internal KillerCell kc = null;
 
+
+		/// <summary>
+		/// Sets the maximum values of the player UI bar
+		/// </summary>
 		internal void Initialise()
 		{
 			if (healthBar != null)
 			{
 				healthBar.SetMaxValue(KillerCell.MaxHealth);
-
 			}
 			else Debug.LogWarning("Health bar is not linked to global data");
 
-			if (exhaustionBar != null)
+			if (energyBar != null)
 			{
-				exhaustionBar.SetMaxValue(KillerCell.MaxExhaustion);
-				//playerAnimator.SetFloat("ExhaustionRate", GetExhaustionRatio());
+				energyBar.SetMaxValue(KillerCell.MaxEnergy);
 			}
 			else Debug.LogWarning("Exhaust bar is not linked to global data");
 
 			if (powerUpBar != null)
 			{
 				powerUpBar.SetMaxValue(maxPowerUp);
-				powerUpBar.SetValue(powerUp = (maxPowerUp - 1.0f));
+				powerUpBar.SetValue(powerUp = 0.0f);
 			}
 			else Debug.LogWarning("Power up bar is not linked to global data");
+		}
+
+		/// <summary>
+		/// Sets the new killer cell and its values to be monitored.
+		/// </summary>
+		/// <param name="kc"></param>
+		internal void SetPlayerInfo(KillerCell kc)
+		{
+			this.kc = kc;
+
+			if (healthBar != null)
+			{
+				healthBar.SetValue(kc.Health);
+			}
+			else Debug.LogWarning("Health bar is not linked to global data");
+
+			if (energyBar != null)
+			{
+				energyBar.SetValue(kc.Energy);
+			}
+			else Debug.LogWarning("Exhaust bar is not linked to global data");
 		}
 
 
 		internal void OnUpdate()
 		{
-			UpdateCellBars();
-			IncreasePowerUpBar();
-
-			if (powerUp == 0.0f)
-			{
-				GlobalGameData.isInPowerUpMode = false;
-
-				var killerCells = FindObjectsOfType<KillerCell>();
-				for (int i = 0; i < killerCells.Length; ++i)
-				{
-					killerCells[i].ExitPowerUpMode();
-				}
-
-			}
-
-#if !REMOVE_PLAYER_DEBUG
-			if(Input.GetKeyDown(KeyCode.R))
-			{
-				ActivateImmunotherapyPanel();
-			}
-			if (Input.GetKeyDown(KeyCode.Z))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
-			}
-			if (Input.GetKeyDown(KeyCode.X))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
-			}
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.CANCER);
-			}
-			if (Input.GetKeyDown(KeyCode.V))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
-			}
-#endif
-		}
-
-		private void UpdateCellBars()
-		{
+			// Update bars
 			healthBar.SetValue(kc.Health);
-			exhaustionBar.SetValue(kc.Exhaustion);
-		}
+			energyBar.SetValue(kc.Energy);
 
-
-		private void IncreasePowerUpBar()
-		{
+			// Update power-up
 			if (GlobalGameData.isGameplayPaused) return;
 
-			if (!GlobalGameData.isInPowerUpMode)
+
+			if (GlobalGameData.isInPowerUpMode)
 			{
-				AddPowerUp(2.0f * Time.deltaTime);
+				AddPowerUp(powerUpDecreaseValue * Time.deltaTime);
+			} 
+			else if (powerUp < maxPowerUp)
+			{
+				AddPowerUp(powerUpIncreaseValue * Time.deltaTime);
 				return;
 			}
-
-			Debug.Log("Reduce power-up");
-			float value = -3.33f * Time.deltaTime;
-			AddPowerUp(value);
 		}
+
 
 		public void AddPowerUp(float value)
 		{
-			if (powerUp == maxPowerUp) return;
 			powerUp += value;
 
 			if (powerUp >= maxPowerUp)
 			{
-				powerUp = maxPowerUp;
-				powerUpBar.SetValue(powerUp);
+				powerUpBar.SetValue(powerUp = maxPowerUp);
 				immunotherapyAnimator.SetTrigger("CanBeUsed");
 				return;
 			}
@@ -145,8 +125,7 @@ namespace Player
 			if (powerUp <= 0.0f)
 			{
 				powerUpBar.SetValue(powerUp = 0.0f);
-				//playerAnimator.SetTrigger("PowerUpFinished");
-				return;
+				StopPowerUp();
 			}
 
 			powerUpBar.SetValue(powerUp);
@@ -154,11 +133,8 @@ namespace Player
 
 		public void TriggerPowerUp()
 		{
-
-			Debug.Log("PowerUpClicked");
-
 			if (powerUp < maxPowerUp) return;
-			powerUp -= 1.0f;
+			powerUpBar.SetValue(powerUp + powerUpDecreaseValue);
 
 			GlobalGameData.isInPowerUpMode = true;
 			immunotherapyAnimator.SetTrigger("Activated");
@@ -168,14 +144,24 @@ namespace Player
 			{
 				killerCells[i].EnterPowerUpMode();
 			}
+		}
 
+		private void StopPowerUp()
+		{
+			GlobalGameData.isInPowerUpMode = false;
 
+			var killerCells = FindObjectsOfType<KillerCell>();
+			for (int i = 0; i < killerCells.Length; ++i)
+			{
+				killerCells[i].ExitPowerUpMode();
+			}
+			return;
 		}
 
 		public void OpenCellpedia()
 		{
 			CellpediaUI.Cellpedia.Instance.Open();
-			MicroscopeOpened();
+			microscopeIconAnimator.SetTrigger("Opened");
 		}
 
 		public void MicroscopeActivate()
@@ -183,15 +169,10 @@ namespace Player
 			microscopeIconAnimator.SetTrigger("NewItem");
 		}
 
-		private void MicroscopeOpened()
-		{
-			microscopeIconAnimator.SetTrigger("Opened");
-		}
-
-
+		// Calls from tutorial stage
 		public void ActivateMicroscopePanel()
 		{
-			microscope.SetActive(true);
+			microscopePanel.SetActive(true);
 		}
 
 		public void ActivatePlayerInfoPanel()
@@ -203,13 +184,9 @@ namespace Player
 		{
 			playerPowerUpPanel.SetActive(true);
 			if (powerUp == maxPowerUp)
+			{
 				immunotherapyAnimator.SetTrigger("CanBeUsed");
+			}
 		}
-
-
-		public enum PlayerUIPanels { MICROSCOPE, PLAYER_INFO, IMMUNOTHERAPY}
-
 	}
-
-
 }

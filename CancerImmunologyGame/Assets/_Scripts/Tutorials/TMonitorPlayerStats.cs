@@ -8,26 +8,28 @@ namespace Tutorials
 	{
 		[Header("Attributes")]
 		[SerializeField]
-		bool monitorHealth = false;
+		private bool monitorHealth = false;
 		[SerializeField]
-		float healthValue = 50.0f;
+		private float healthValue = 50.0f;
 		[SerializeField]
-		bool updateHealth = false;
+		private bool updateHealth = false;
 		[SerializeField]
-		bool monitorExhaustion = false;
+		private bool monitorEnergy = false;
 		[SerializeField]
-		float exhaustionValue = 50.0f;
+		private float energyValue = 50.0f;
 		[SerializeField]
-		bool updateExhaustion = false;
+		private bool updateEnergy = false;
 		[SerializeField]
-		bool invertChecks = false;
+		private bool invertChecks = false;
 
-		KillerCell playerKC = null;
+		[Header("Debug (Read Only)")]
+		[SerializeField]
+		private KillerCell playerKC = null;
 
 		protected override void OnEndEvent()
 		{
-			if (updateExhaustion)
-				playerKC.Exhaustion = exhaustionValue;
+			if (updateEnergy)
+				playerKC.Energy = energyValue;
 			if (updateHealth)
 				playerKC.Health = healthValue;
 		}
@@ -41,7 +43,7 @@ namespace Tutorials
 		{
 			if (monitorHealth && playerKC.Health <= healthValue)
 				return true ^ invertChecks;
-			if (monitorExhaustion && playerKC.Exhaustion >= exhaustionValue)
+			if (monitorEnergy && playerKC.Energy <= energyValue)
 				return true ^ invertChecks;
 			
 

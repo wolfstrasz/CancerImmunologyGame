@@ -9,7 +9,7 @@ namespace Tutorials
 	{
 		[Header("Attributes")]
 		[SerializeField]
-		PlayerUI.PlayerUIPanels panel = PlayerUI.PlayerUIPanels.IMMUNOTHERAPY;
+		PlayerUIPanels panel = PlayerUIPanels.IMMUNOTHERAPY;
 
 		protected override void OnEndEvent()
 		{
@@ -17,15 +17,15 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			if (panel == PlayerUI.PlayerUIPanels.IMMUNOTHERAPY)
+			if (panel == PlayerUIPanels.IMMUNOTHERAPY)
 			{
 				PlayerUI.Instance.ActivateImmunotherapyPanel();
 			}
-			else if (panel == PlayerUI.PlayerUIPanels.PLAYER_INFO)
+			else if (panel == PlayerUIPanels.PLAYER_INFO)
 			{
 				PlayerUI.Instance.ActivatePlayerInfoPanel();
 			}
-			else if (panel == PlayerUI.PlayerUIPanels.MICROSCOPE)
+			else if (panel == PlayerUIPanels.MICROSCOPE)
 			{
 				PlayerUI.Instance.ActivateMicroscopePanel();
 			}
