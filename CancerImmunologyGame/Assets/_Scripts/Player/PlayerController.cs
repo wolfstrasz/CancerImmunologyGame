@@ -20,6 +20,8 @@ namespace Player
 
 		[SerializeField]
 		private bool isPlayerRespawning = false;
+		[SerializeField]
+		private PlayerAttackRange range = null;
 
 		public void Initialise()
 		{
@@ -28,6 +30,7 @@ namespace Player
 			PlayerUI.Instance.SetPlayerInfo(kc);
 
 			GlobalGameData.player = kc.gameObject;
+			range.Initialise();
 		}
 
 		public void OnCameraOutroFinished()
@@ -122,8 +125,7 @@ namespace Player
 			}
 
 
-
-			if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.E))
+			if (Input.GetKeyDown(KeyCode.Mouse0))
 			{
 				kc.Attack();
 			}
