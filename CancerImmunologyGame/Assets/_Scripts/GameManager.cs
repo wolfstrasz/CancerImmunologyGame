@@ -104,14 +104,14 @@ namespace Core
 		private void LevelRunning()
 		{
 			PlayerController.Instance.OnUpdate();
-			foreach (KillerCell kc in GlobalGameData.KillerCells)
+			for (int i = 0; i < GlobalGameData.KillerCells.Count; ++i)
 			{
-				kc.OnUpdate();
+				GlobalGameData.KillerCells[i].OnUpdate();
 			}
 
-			foreach (Cancer cancer in GlobalGameData.Cancers)
+			for (int i = 0; i < GlobalGameData.Cancers.Count; ++i)
 			{
-				cancer.OnUpdate();
+				GlobalGameData.Cancers[i].OnUpdate();
 			}
 
 			if (GlobalGameData.Cancers.Count == 0)
