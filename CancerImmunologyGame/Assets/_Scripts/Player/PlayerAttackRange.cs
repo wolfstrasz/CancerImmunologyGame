@@ -25,7 +25,7 @@ namespace Player
 		private RectTransform canvasTransform = null;
 
 		internal bool CanAttack => canvas.activeInHierarchy;
-
+		public Quaternion orientation { get => transform.rotation; }
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			Debug.Log(collider.gameObject);

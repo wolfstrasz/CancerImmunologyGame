@@ -58,6 +58,25 @@ public class KillerCell : Cell
 	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
 	[SerializeField]
 	private CancerCell closestCell = null;
+	[SerializeField]
+	private GameObject spriteObject = null;
+	public Quaternion orientation 
+	{ 
+		get => spriteObject.transform.rotation; 
+		set 
+		{
+			if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 180.0f)
+			{
+				spriteObject.GetComponent<SpriteRenderer>().flipX = false;
+				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z + 180);
+			} else
+			{
+				spriteObject.GetComponent<SpriteRenderer>().flipX = true;
+				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
+				
+			}
+		} 
+	}
 
 #if BLOODFLOW_ROTATION
 	[SerializeField]
@@ -178,7 +197,17 @@ public class KillerCell : Cell
 		rb.MovePosition(movementVector + flowVector + rb.position);
 	}
 
-	// ATTACKING
+	//public void Attack (Vector3 direction)
+	//{
+	//	animator.SetBool("IsAttacking", true);
+	//}
+
+
+	public void StopAttack()
+	{
+		animator.SetBool("IsAttacking", false);
+	}
+	//// ATTACKING
 	//////////////////////////////////////////
 	public void Attack()
 	{

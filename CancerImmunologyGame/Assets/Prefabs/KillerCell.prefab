@@ -241,6 +241,9 @@ MonoBehaviour:
   animator: {fileID: 2046459777261753809}
   speed: 5
   immunotherapySpeedMultiplier: 1.66
+  immunotherapyEnergyRegain: 3.33
+  normalAttackEnergyCost: -7.5
+  rotationSpeed: 2
   attackRotationOffset: 0
   attackEffect: {fileID: 9051889056786143862, guid: 518487211c7ab8e438a22629aae69d76,
     type: 3}
@@ -251,6 +254,8 @@ MonoBehaviour:
   flowVector: {x: 0, y: 0}
   cancerCellsInRange: []
   closestCell: {fileID: 0}
+  spriteObject: {fileID: 2046459777060728083}
+  correctRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &2046459777672622313
 GameObject:
   m_ObjectHideFlags: 0

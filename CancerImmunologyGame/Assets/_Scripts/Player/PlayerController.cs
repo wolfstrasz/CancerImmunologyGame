@@ -80,6 +80,9 @@ namespace Player
 
 	
 			transform.position = kc.transform.position;
+			if (range.CanAttack)
+				kc.orientation = range.orientation;
+
 #if BLOODFLOW_ROTATION
 
 			transform.rotation = kc.transform.rotation;
@@ -125,9 +128,12 @@ namespace Player
 			}
 
 
-			if (Input.GetKeyDown(KeyCode.Mouse0) && range.CanAttack)
+			if (Input.GetKey(KeyCode.Mouse0) && range.CanAttack)
 			{
 				kc.Attack();
+			} else
+			{
+				kc.StopAttack();
 			}
 
 		}
