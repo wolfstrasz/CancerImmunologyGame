@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using System;
+using Cancers;
 
 public static class GlobalGameData
 {

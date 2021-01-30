@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cells;
+using Cancers;
 
 public class KillerCell : Cell
 {
@@ -195,7 +196,7 @@ public class KillerCell : Cell
 
 		foreach (var cell in cancerCellsInRange)
 		{
-			if (cell.CellInDivision()) continue;
+			if (cell.InDivision) continue;
 
 			float dist = Vector3.Distance(transform.position, cell.transform.position);
 			if (dist < minDist)
