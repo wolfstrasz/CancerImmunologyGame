@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class Utilities
+public static class Utils
 {
 
-
-	
 }
 
 public enum CellpediaCells { NONE, TKILLER, THELPER, DENDRITIC, REGULATORY, CANCER}

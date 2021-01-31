@@ -5,33 +5,69 @@ using Cancers;
 
 namespace Cells
 {
-	[RequireComponent(typeof(Collider2D))]
-	public class KillerSense : MonoBehaviour
+	[RequireComponent(typeof(CircleCollider2D))]
+	public class KillerSense : MonoBehaviour, ICancerCellObserver
 	{
+		[SerializeField]
+		private KillerCell owner = null;
+		[SerializeField]
+		public ICellController controller = null;
+
+		[SerializeField]
+		private CircleCollider2D rangeCollider = null;
+		public float Range
+		{
+			get => rangeCollider.radius;
+			set => rangeCollider.radius = value;
+		}
+
 		[Header("Debug (Read only)")]
 		[SerializeField]
 		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-		internal List<CancerCell> CancerCellsInRange => cancerCellsInRange;
+		//internal List<CancerCell> CancerCellsInRange => cancerCellsInRange;
 
-
-		// Attack functionality
-		private void OnTriggerEnter2D(Collider2D collider)
+		void Awake()
 		{
-			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-			if (cell != null)
+			Range = owner.Range;
+		}
+
+		void OnTriggerEnter2D(Collider2D collider)
+		{
+			Debug.Log(collider.gameObject);
+			CancerCell cc = collider.GetComponent<CancerCell>();
+			if (cc != null)
 			{
-				cancerCellsInRange.Add(cell.owner);
+				Debug.Log("Collided with cc body");
+				cancerCellsInRange.Add(cc);
+				cc.AddObserver(this);
+
+				// On cells in range
+				controller.OnEnemiesInRange();
 			}
 		}
 
-		private void OnTriggerExit2D(Collider2D collider)
+		void OnTriggerExit2D(Collider2D collider)
 		{
-			CancerCellBody cell = collider.gameObject.GetComponent<CancerCellBody>();
-			if (cell != null)
+			CancerCell cc = collider.GetComponent<CancerCell>();
+			if (cc != null)
 			{
-				cancerCellsInRange.Remove(cell.owner);
+				Debug.Log("UN-Collided with cc body");
+				cancerCellsInRange.Remove(cc);
+				cc.RemoveObserver(this);
+				if (cancerCellsInRange.Count <= 0)
+				{
+					controller.OnEnemiesOutOfRange();
+				}
 			}
 		}
 
+		public void NotifyOfDeath(CancerCell cc)
+		{
+			cancerCellsInRange.Remove(cc);
+			if (cancerCellsInRange.Count <= 0)
+			{
+				controller.OnEnemiesOutOfRange();
+			}
+		}
 	}
 }

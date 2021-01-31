@@ -1429,6 +1429,7 @@ MonoBehaviour:
   skipHoldSlider: {fileID: 5508400265376595865}
   timeBeforeSkipAppears: 1
   timeHoldToSkip: 1
+  forceSkip: 1
   skipLogos: 0
   skipIntroTexts: 0
 --- !u!1 &5578084623923249069

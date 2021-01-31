@@ -28,20 +28,28 @@ public class KillerCell : Cell
 	private static float maxEnergy = 100.0f;
 	private float energy = 100.0f;
 
+	[Header("Normal Attack")]
+	[SerializeField]
+	private GameObject attackSpawnObject = null;
+	[SerializeField]
+	private GameObject killerParticlePrefab = null;
 	[SerializeField]
 	private float normalAttackEnergyCost = -7.5f;
+	[SerializeField]
+	private float attackCooldown = 0.2f;
+	private float attackDowntime = 0.0f;
+	private bool canAttack = true;
+
+	[SerializeField]
+	private float range = 1.5f;
+	[SerializeField]
+	private float fov = 90.0f;
 
 #if BLOODFLOW_ROTATION
 	[SerializeField]
 	private float rotationSpeed = 2.0f;
 #else
 #endif
-
-	[Header("Attack")]
-	[SerializeField]
-	private float attackRotationOffset = 0.2f;
-	[SerializeField]
-	private GameObject attackEffect = null;
 
 	[Header("Debug only")]
 	[SerializeField]
@@ -54,17 +62,45 @@ public class KillerCell : Cell
 	private Vector2 movementVector = Vector2.zero;
 	[SerializeField]
 	private Vector2 flowVector = Vector2.zero;
+
 	[SerializeField]
-	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
+	private GameObject spriteObject = null;
+
 	[SerializeField]
-	private CancerCell closestCell = null;
+	public ICellController controller = null;
+
+	public Quaternion SpriteOrientation 
+	{
+		get => spriteObject.transform.rotation;
+		set 
+		{
+			Debug.Log(value.eulerAngles);
+			if (value == Quaternion.identity)
+			{
+				spriteObject.transform.localRotation = value;
+				spriteObject.transform.localScale = Vector3.one;
+			}
+			else if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 270.0f)
+			{
+				spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f , value.eulerAngles.z);
+				spriteObject.transform.localScale = new Vector3(-1.0f, -1.0f, 1.0f);
+			} else
+			{
+				spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
+				spriteObject.transform.localScale = new Vector3 (-1.0f , 1.0f , 1.0f);
+
+			}
+		} 
+	}
 
 #if BLOODFLOW_ROTATION
 	[SerializeField]
 	private Quaternion correctRotation = Quaternion.identity;
 #else
 #endif
-
+	public KillerSense Sense { get => sense; }
+	public float Range { get => range; }
+	public float Fov { get => fov; }
 	public float Health { get => health; set => health = value; }
 	public float Energy { get => energy; set => energy = value; }
 	public bool IsBusy { get => isBusy; set => isBusy = value; }
@@ -78,12 +114,6 @@ public class KillerCell : Cell
 	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
 #else
 #endif
-
-
-	public void Initialise()
-	{
-		sense.CancerCellsInRange.Clear();
-	}
 
 	public void OnFixedUpdate()
 	{
@@ -109,11 +139,35 @@ public class KillerCell : Cell
 
 	public void OnUpdate()
 	{
+
+
 		if (GlobalGameData.isInPowerUpMode)
 		{
 			float value = immunotherapyEnergyRegain * Time.deltaTime;
 			AddEnergy(value);
+
+			if (!canAttack)
+			{
+				attackDowntime += Time.deltaTime * immunotherapySpeedMultiplier;
+				if (attackDowntime >= attackCooldown)
+				{
+					canAttack = true;
+				}
+			}
+			return;
 		}
+
+		if (!canAttack)
+		{
+			attackDowntime += Time.deltaTime;
+			if (attackDowntime >= attackCooldown)
+			{
+				canAttack = true;
+			}
+		}
+
+		if (!isBusy && canAttack)
+			animator.SetBool("IsAttacking", false);
 	}
 
 
@@ -178,66 +232,103 @@ public class KillerCell : Cell
 		rb.MovePosition(movementVector + flowVector + rb.position);
 	}
 
-	// ATTACKING
-	//////////////////////////////////////////
-	public void Attack()
+
+	private float spread = 0.0f;
+	public void Attack(Vector3 targetPosition)
 	{
-		if (isBusy) return;
+		if (!canAttack) return;
 
-		cancerCellsInRange = sense.CancerCellsInRange;
-		if (cancerCellsInRange.Count == 0) return;
+		animator.SetBool("IsAttacking", true);
+		attackDowntime = 0.0f;
+		canAttack = false;
+		GameObject bullet = Instantiate(killerParticlePrefab, attackSpawnObject.transform.position, Quaternion.identity);
 
-		isBusy = true;
+		Vector3 bulletDirection = (targetPosition - attackSpawnObject.transform.position).normalized;
 
-		// Find closest cancer cell
-		// Need to change to Cancer optimisation
-		float minDist = 100000.0f;
-		closestCell = null;
-
-		foreach (var cell in cancerCellsInRange)
-		{
-			if (cell.InDivision) continue;
-
-			float dist = Vector3.Distance(transform.position, cell.transform.position);
-			if (dist < minDist)
-			{
-				minDist = dist;
-				closestCell = cell;
-			}
-		}
-
-		if (closestCell == null)
-		{
-			isBusy = false;
-			return;
-		}
-
-		animator.SetTrigger("Attacks");
-	}
-
-	public void OnAttackEffect()
-	{
-		Vector3 diff = closestCell.transform.position - transform.position;
-		diff.Normalize();
-
-		float rot_z = ((Mathf.Atan2(diff.y, diff.x) + attackRotationOffset) * Mathf.Rad2Deg);
-
-		GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
-		newEffect.GetComponent<ParticleSystem>().Play();
-
+		spread =  Mathf.Lerp( Random.Range(-fov /1.9f, fov / 1.9f), spread, Random.Range(0.2f, 0.8f));
+		//spread = Random.Range(-fov /2f, fov / 2f);
+		bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
+		var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f); 
+		bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, range, color);
 		AddEnergy(normalAttackEnergyCost);
 
-		bool killedTheCell = closestCell.HitCell();
-		if (killedTheCell)
-		{
-			cancerCellsInRange.Remove(closestCell);
-		}
 	}
 
-	public void OnAttackFinished()
+	public void StopAttack()
 	{
-		isBusy = false;
+		animator.SetBool("IsAttacking", false);
 	}
+
+	//public void Attack (Vector3 direction)
+	//{
+	//	animator.SetBool("IsAttacking", true);
+	//}
+
+
+	//public void StopAttack()
+	//{
+	//	animator.SetBool("IsAttacking", false);
+	//}
+	//// ATTACKING
+	//////////////////////////////////////////
+	//public void Attack()
+	//{
+	//	if (isBusy) return;
+
+	//	cancerCellsInRange = sense.CancerCellsInRange;
+	//	if (cancerCellsInRange.Count == 0) return;
+
+	//	isBusy = true;
+
+	//	// Find closest cancer cell
+	//	// Need to change to Cancer optimisation
+	//	float minDist = 100000.0f;
+	//	closestCell = null;
+
+	//	foreach (var cell in cancerCellsInRange)
+	//	{
+	//		if (cell.InDivision) continue;
+
+	//		float dist = Vector3.Distance(transform.position, cell.transform.position);
+	//		if (dist < minDist)
+	//		{
+	//			minDist = dist;
+	//			closestCell = cell;
+	//		}
+	//	}
+
+	//	if (closestCell == null)
+	//	{
+	//		isBusy = false;
+	//		return;
+	//	}
+
+	//	animator.SetTrigger("Attacks");
+	//}
+
+	//public void OnAttackEffect()
+	//{
+	//	Vector3 diff = closestCell.transform.position - transform.position;
+	//	diff.Normalize();
+
+	//	float rot_z = ((Mathf.Atan2(diff.y, diff.x) + attackRotationOffset) * Mathf.Rad2Deg);
+
+	//	GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
+	//	newEffect.GetComponent<ParticleSystem>().Play();
+
+	//	AddEnergy(normalAttackEnergyCost);
+
+	//	bool killedTheCell = closestCell.HitCell();
+	//	if (killedTheCell)
+	//	{
+	//		cancerCellsInRange.Remove(closestCell);
+	//	}
+	//}
+
+	//public void OnAttackFinished()
+	//{
+	//	isBusy = false;
+	//}
 
 	// POWER UP IMMUNOTHERAPY
 	//////////////////////////////////////////
