@@ -9,6 +9,8 @@ namespace Cells
 	public class KillerSense : MonoBehaviour, ICancerCellObserver
 	{
 		[SerializeField]
+		private KillerCell owner = null;
+		[SerializeField]
 		public ICellController controller = null;
 
 		[SerializeField]
@@ -24,7 +26,10 @@ namespace Cells
 		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
 		//internal List<CancerCell> CancerCellsInRange => cancerCellsInRange;
 
-
+		void Awake()
+		{
+			Range = owner.Range;
+		}
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			Debug.Log(collider.gameObject);

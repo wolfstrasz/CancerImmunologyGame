@@ -15,8 +15,6 @@ public class KillerCell : Cell
 
 	[Header("Attributes")]
 	[SerializeField]
-	private float range = 4.0f;
-	[SerializeField]
 	private float speed = 4.0f;
 	[SerializeField]
 	private float immunotherapySpeedMultiplier = 1.66f;
@@ -30,8 +28,13 @@ public class KillerCell : Cell
 	private static float maxEnergy = 100.0f;
 	private float energy = 100.0f;
 
+	[Header("Normal Attack")]
 	[SerializeField]
 	private float normalAttackEnergyCost = -7.5f;
+	[SerializeField]
+	private float range = 1.5f;
+	[SerializeField]
+	private float fov = 90.0f;
 
 #if BLOODFLOW_ROTATION
 	[SerializeField]
@@ -89,7 +92,9 @@ public class KillerCell : Cell
 	private Quaternion correctRotation = Quaternion.identity;
 #else
 #endif
+	public KillerSense Sense { get => sense; }
 	public float Range { get => range; }
+	public float Fov { get => fov; }
 	public float Health { get => health; set => health = value; }
 	public float Energy { get => energy; set => energy = value; }
 	public bool IsBusy { get => isBusy; set => isBusy = value; }

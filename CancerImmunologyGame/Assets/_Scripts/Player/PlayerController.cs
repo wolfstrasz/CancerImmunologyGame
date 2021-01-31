@@ -9,7 +9,6 @@ namespace Player
 	{
 		[SerializeField]
 		KillerCell kc = null;
-		[SerializeField]
 		KillerSense kcSense = null;
 
 		[SerializeField]
@@ -33,10 +32,11 @@ namespace Player
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.SetPlayerInfo(kc);
 			kc.controller = this;
+			kcSense = kc.Sense;
 			kcSense.controller = this;
+			rangeDisplay.Initialise(kc.Range, kc.Fov);
 
 			GlobalGameData.player = kc.gameObject;
-			rangeDisplay.Initialise(kc.Range);
 		}
 
 		public void OnCameraOutroFinished()

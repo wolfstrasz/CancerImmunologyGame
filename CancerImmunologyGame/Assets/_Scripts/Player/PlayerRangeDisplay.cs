@@ -9,55 +9,32 @@ namespace Player
 	public class PlayerRangeDisplay : MonoBehaviour
 	{
 		[SerializeField]
-		private PlayerAttackRangeSettings settings = null;
+		private RectTransform outerCircle = null;
 		[SerializeField]
-		private GameObject canvas = null;
-		[SerializeField]
-		private List<CancerCell> ccs = new List<CancerCell>();
+		private Image fovImage = null;
 
 		[SerializeField]
-		private Image lowerFill = null;
+		private float range = 1.0f;
 		[SerializeField]
-		private Image upperFill = null;
-		[SerializeField]
-		private RectTransform imageZ = null;
-		[SerializeField]
-		private RectTransform canvasTransform = null;
+		private float fov = 90.0f;
 
-
-		internal void SetNewSettings(PlayerAttackRangeSettings settings)
+		internal void Initialise(float _range, float _fov)
 		{
-			this.settings = settings;
-			lowerFill.fillAmount = 1.0f - settings.fovCutoff;
-			upperFill.fillAmount = 1.0f - settings.fovCutoff;
-			imageZ.anchorMin = new Vector2(settings.widthCentre, settings.heightCutoff);
-			imageZ.anchorMax = new Vector2(settings.width, 1.0f - settings.heightCutoff);
-			transform.localScale = new Vector3(settings.scaleFactor, settings.scaleFactor, 1.0f);
-			canvasTransform.localPosition = new Vector3(settings.offsetFromCell, 0.0f, 0.0f);
+			fov = _fov;
+			range = _range;
+			fovImage.fillAmount = _fov / 360.0f;
+			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, _fov / 2.0f);
+			outerCircle.localScale = new Vector3(_range, _range, 1.0f);
 		}
 
 
-		internal void Initialise(float range)
-		{
-			lowerFill.fillAmount = 1.0f - settings.fovCutoff;
-			upperFill.fillAmount = 1.0f - settings.fovCutoff;
-			imageZ.anchorMin = new Vector2(settings.widthCentre, settings.heightCutoff);
-			imageZ.anchorMax = new Vector2(settings.width, 1.0f - settings.heightCutoff);
-			transform.localScale = new Vector3(settings.scaleFactor, settings.scaleFactor, 1.0f);
-			canvasTransform.localPosition = new Vector3(settings.offsetFromCell, 0.0f, 0.0f);
-
-		}
 		// Update is called once per frame
 		void Update()
 		{
-
-			canvasTransform.localPosition = new Vector3(settings.offsetFromCell, 0.0f, 0.0f);
 #if UNITY_EDITOR
-			lowerFill.fillAmount = 1.0f - settings.fovCutoff;
-			upperFill.fillAmount = 1.0f - settings.fovCutoff;
-			imageZ.anchorMin = new Vector2 (settings.widthCentre, settings.heightCutoff);
-			imageZ.anchorMax = new Vector2(settings.width, 1.0f - settings.heightCutoff);
-			transform.localScale = new Vector3(settings.scaleFactor, settings.scaleFactor, 1.0f);
+			fovImage.fillAmount = fov / 360.0f;
+			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, fov / 2.0f);
+			outerCircle.localScale = new Vector3(range, range, 1.0f);
 #endif
 
 			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

@@ -24,6 +24,8 @@ namespace Loader
 		private float timeBeforeSkipAppears = 2.0f;
 		[SerializeField]
 		private float timeHoldToSkip = 2.0f;
+		[SerializeField]
+		private bool forceSkip = false;
 
 		private int text_index = 0;
 		private bool allowSkip = false;
@@ -37,6 +39,8 @@ namespace Loader
 		void Awake()
 		{
 			skipHoldSlider.maxValue = timeHoldToSkip;
+			if (forceSkip)
+				IntroFinished();
 		}
 
 		void Update()
