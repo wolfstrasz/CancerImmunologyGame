@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1244794201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1244794202}
+  m_Layer: 10
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1244794202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244794201}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.14899515, y: -0.21200007, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2046459777060728080}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2046459777060728083
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1244794202}
   m_Father: {fileID: 2046459777261753811}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -70,7 +101,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: d645cb4ba5ebd824090cc859ad6d3426, type: 3}
+  m_Sprite: {fileID: 8073065430162629486, guid: 83060a317e155fe43b4fa7f38c66e842,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -202,7 +234,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.0019531}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -242,20 +274,19 @@ MonoBehaviour:
   speed: 5
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
+  attackSpawnObject: {fileID: 1244794201}
+  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
+    type: 3}
   normalAttackEnergyCost: -7.5
+  attackCooldown: 0.2
   range: 1
   fov: 90
   rotationSpeed: 2
-  attackRotationOffset: -0.2
-  attackEffect: {fileID: 9051889056786143862, guid: 518487211c7ab8e438a22629aae69d76,
-    type: 3}
   isBusy: 0
   isDead: 0
   queuePowerUp: 0
   movementVector: {x: 0, y: 0}
   flowVector: {x: 0, y: 0}
-  cancerCellsInRange: []
-  closestCell: {fileID: 0}
   spriteObject: {fileID: 2046459777060728083}
   correctRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &2046459777672622313

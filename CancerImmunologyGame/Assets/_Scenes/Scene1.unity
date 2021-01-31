@@ -4220,6 +4220,12 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 1.7406828, y: 1.2396568, z: -0.00005}
     m_Extent: {x: 4.246565, y: 1.8732784, z: 0.00005}
+--- !u!4 &811944970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1703250464456772314, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 3510334596201503292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &832863277
 GameObject:
   m_ObjectHideFlags: 0
@@ -13574,6 +13580,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 5579564840118924112, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: centre
+      value: 
+      objectReference: {fileID: 811944970}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a739a3a3a9c7a409d41aadb66021fc, type: 3}
 --- !u!1001 &4702413553982910693

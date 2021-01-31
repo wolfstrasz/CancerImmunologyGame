@@ -30,7 +30,16 @@ public class KillerCell : Cell
 
 	[Header("Normal Attack")]
 	[SerializeField]
+	private GameObject attackSpawnObject = null;
+	[SerializeField]
+	private GameObject killerParticlePrefab = null;
+	[SerializeField]
 	private float normalAttackEnergyCost = -7.5f;
+	[SerializeField]
+	private float attackCooldown = 0.2f;
+	private float attackDowntime = 0.0f;
+	private bool canAttack = true;
+
 	[SerializeField]
 	private float range = 1.5f;
 	[SerializeField]
@@ -41,12 +50,6 @@ public class KillerCell : Cell
 	private float rotationSpeed = 2.0f;
 #else
 #endif
-
-	[Header("Attack")]
-	[SerializeField]
-	private float attackRotationOffset = 0.2f;
-	[SerializeField]
-	private GameObject attackEffect = null;
 
 	[Header("Debug only")]
 	[SerializeField]
@@ -59,30 +62,28 @@ public class KillerCell : Cell
 	private Vector2 movementVector = Vector2.zero;
 	[SerializeField]
 	private Vector2 flowVector = Vector2.zero;
-	[SerializeField]
-	private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-	[SerializeField]
-	private CancerCell closestCell = null;
+
 	[SerializeField]
 	private GameObject spriteObject = null;
 
 	[SerializeField]
 	public ICellController controller = null;
 
-	public Quaternion orientation 
-	{ 
-		get => spriteObject.transform.rotation; 
+	public Quaternion SpriteOrientation 
+	{
+		get => spriteObject.transform.rotation;
 		set 
 		{
-			if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 180.0f)
+			Debug.Log(value.eulerAngles);
+			if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 270.0f)
 			{
-				spriteObject.GetComponent<SpriteRenderer>().flipX = false;
-				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z + 180);
+				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f , value.eulerAngles.z);
+				spriteObject.transform.localScale = new Vector3(-1.0f, -1.0f, 1.0f);
 			} else
 			{
-				spriteObject.GetComponent<SpriteRenderer>().flipX = true;
 				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
-				
+				spriteObject.transform.localScale = new Vector3 (-1.0f , 1.0f , 1.0f);
+
 			}
 		} 
 	}
@@ -137,6 +138,13 @@ public class KillerCell : Cell
 		{
 			float value = immunotherapyEnergyRegain * Time.deltaTime;
 			AddEnergy(value);
+		}
+
+		if (!canAttack)
+		{
+			attackDowntime += Time.deltaTime;
+			if (attackDowntime >= attackCooldown)
+				canAttack = true;
 		}
 	}
 
@@ -200,6 +208,31 @@ public class KillerCell : Cell
 	{
 		movementVector = movementVector * speed * Time.fixedDeltaTime * ExhaustionEffect();
 		rb.MovePosition(movementVector + flowVector + rb.position);
+	}
+
+
+	private float spread = 0.0f;
+	public void Attack(Vector3 targetPosition)
+	{
+		if (!canAttack) return;
+
+		animator.SetBool("IsAttacking", true);
+		attackDowntime = 0.0f;
+		canAttack = false;
+		GameObject bullet = Instantiate(killerParticlePrefab, attackSpawnObject.transform.position, Quaternion.identity);
+
+		Vector3 bulletDirection = (targetPosition - attackSpawnObject.transform.position).normalized;
+
+		spread =  Mathf.Lerp( Random.Range(-fov / 2.0f, fov / 2.0f), spread, 0.5f);
+		bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
+		var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f); 
+		bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, range, color);
+
+	}
+
+	public void StopAttack()
+	{
+		animator.SetBool("IsAttacking", false);
 	}
 
 	//public void Attack (Vector3 direction)

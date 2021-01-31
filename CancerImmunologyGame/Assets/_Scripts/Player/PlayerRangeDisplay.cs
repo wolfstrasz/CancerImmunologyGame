@@ -12,11 +12,16 @@ namespace Player
 		private RectTransform outerCircle = null;
 		[SerializeField]
 		private Image fovImage = null;
+		[SerializeField]
+		internal Transform centre = null;
 
+		[Header("Debug (Read Only)")]
 		[SerializeField]
 		private float range = 1.0f;
 		[SerializeField]
 		private float fov = 90.0f;
+		
+		internal Quaternion orientation => transform.rotation;
 
 		internal void Initialise(float _range, float _fov)
 		{

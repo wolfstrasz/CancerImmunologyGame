@@ -25,7 +25,7 @@ namespace Player
 		[Header("Range functionality")]
 		[SerializeField]
 		private PlayerRangeDisplay rangeDisplay = null;
-		private bool canAttack = false;
+		private bool canAttack = true;
 
 		public void Initialise()
 		{
@@ -86,8 +86,7 @@ namespace Player
 
 	
 			transform.position = kc.transform.position;
-			//if (canAttack)
-			//	kc.orientation = rangeDisplay.orientation;
+
 
 #if BLOODFLOW_ROTATION
 
@@ -133,14 +132,21 @@ namespace Player
 				return;
 			}
 
+			
 
-			//if (Input.GetKey(KeyCode.Mouse0) && rangeDisplay.CanAttack)
-			//{
-			//	kc.Attack();
-			//} else
-			//{
-			//	kc.StopAttack();
-			//}
+			if (canAttack)
+			{
+				kc.SpriteOrientation = rangeDisplay.orientation;
+				if (Input.GetKey(KeyCode.Mouse0))
+				{
+					kc.Attack(rangeDisplay.centre.position);
+				}
+			}
+			else
+			{
+				kc.StopAttack();
+				kc.SpriteOrientation = Quaternion.identity;
+			}
 
 		}
 
