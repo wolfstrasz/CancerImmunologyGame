@@ -30,15 +30,16 @@ namespace Cells
 		{
 			Range = owner.Range;
 		}
+
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			Debug.Log(collider.gameObject);
-			CancerCellBody ccBody = collider.GetComponent<CancerCellBody>();
-			if (ccBody != null)
+			CancerCell cc = collider.GetComponent<CancerCell>();
+			if (cc != null)
 			{
 				Debug.Log("Collided with cc body");
-				cancerCellsInRange.Add(ccBody.owner);
-				ccBody.owner.AddObserver(this);
+				cancerCellsInRange.Add(cc);
+				cc.AddObserver(this);
 
 				// On cells in range
 				controller.OnEnemiesInRange();
@@ -47,12 +48,12 @@ namespace Cells
 
 		void OnTriggerExit2D(Collider2D collider)
 		{
-			CancerCellBody ccBody = collider.GetComponent<CancerCellBody>();
-			if (ccBody != null)
+			CancerCell cc = collider.GetComponent<CancerCell>();
+			if (cc != null)
 			{
 				Debug.Log("UN-Collided with cc body");
-				cancerCellsInRange.Remove(ccBody.owner);
-				ccBody.owner.RemoveObserver(this);
+				cancerCellsInRange.Remove(cc);
+				cc.RemoveObserver(this);
 				if (cancerCellsInRange.Count <= 0)
 				{
 					controller.OnEnemiesOutOfRange();

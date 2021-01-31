@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cancers;
 
 public class KillerParticle : MonoBehaviour
 {
 
 	[SerializeField]
 	private SpriteRenderer render = null;
-
 	[SerializeField]
-	protected float speed = 1.0f;
+	private float damage = 2.0f;
+	[SerializeField]
+	private float speed = 1.0f;
 	[SerializeField]
 	private Vector3 direction = Vector3.zero;
 	[SerializeField]
@@ -50,9 +52,16 @@ public class KillerParticle : MonoBehaviour
 	}
 
 
-	void OnTriggerEnter2D()
+	void OnTriggerEnter2D(Collider2D collider)
 	{
-
+		CancerCell cc = collider.gameObject.GetComponent<CancerCell>();
+		if (cc)
+		{
+			if (cc.HitCell(damage))
+			{
+				Destroy(gameObject);
+			}
+		}
 	}
 
 }
