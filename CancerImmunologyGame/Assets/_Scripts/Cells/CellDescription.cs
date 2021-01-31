@@ -11,4 +11,6 @@ public class CellDescription : ScriptableObject
 	public string animatorTrigger;
 	public Sprite sprite;
 	public float scale;
+
+	public Vector3 scaleVector => new Vector3(scale, scale, 1.0f);
 }

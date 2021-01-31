@@ -28,10 +28,6 @@ namespace Player
 		private ExhaustionBar exhaustionBar = null;
 		[SerializeField]
 		private ImmunotherapyBar powerUpBar = null;
-		[SerializeField]
-		private GameObject microscope = null;
-		[SerializeField]
-		private Animator microscopeIconAnimator = null;
 
 		[Header("Power Up Action Button")]
 		[SerializeField]
@@ -172,28 +168,6 @@ namespace Player
 
 		}
 
-		public void OpenCellpedia()
-		{
-			CellpediaUI.Cellpedia.Instance.Open();
-			MicroscopeOpened();
-		}
-
-		public void MicroscopeActivate()
-		{
-			microscopeIconAnimator.SetTrigger("NewItem");
-		}
-
-		private void MicroscopeOpened()
-		{
-			microscopeIconAnimator.SetTrigger("Opened");
-		}
-
-
-		public void ActivateMicroscopePanel()
-		{
-			microscope.SetActive(true);
-		}
-
 		public void ActivatePlayerInfoPanel()
 		{
 			playerInfoPanel.SetActive(true);
@@ -207,7 +181,7 @@ namespace Player
 		}
 
 
-		public enum PlayerUIPanels { MICROSCOPE, PLAYER_INFO, IMMUNOTHERAPY}
+		public enum PlayerUIPanels { PLAYER_INFO, IMMUNOTHERAPY}
 
 	}
 

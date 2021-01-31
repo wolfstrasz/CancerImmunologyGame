@@ -30,6 +30,7 @@ namespace Tutorials
 			++event_index;
 			currentEvent.owner = this;
 			currentEvent.StartEvent();
+
 		}
 
 		public void OnEventFinished()

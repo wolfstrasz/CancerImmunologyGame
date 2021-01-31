@@ -7,6 +7,9 @@ namespace Tutorials
 	public abstract class TutorialEvent : MonoBehaviour
 	{
 		[SerializeField]
+		private bool skip = false;
+
+		[SerializeField]
 		internal TutorialStage owner = null;
 
 		[SerializeField]
@@ -20,6 +23,12 @@ namespace Tutorials
 
 		public void StartEvent()
 		{
+			if (skip)
+			{
+				finished = true;
+				owner.OnEventFinished();
+			}
+
 			if (removeControl)
 			{
 				prevControlValue = GlobalGameData.areControlsEnabled;
