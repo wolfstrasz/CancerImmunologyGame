@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Cells;
 
 namespace Player
 {
-	public class PlayerController : Singleton<PlayerController>
+	public class PlayerController : Singleton<PlayerController> , ICellController
 	{
 		[SerializeField]
 		KillerCell kc = null;
+		[SerializeField]
+		KillerSense kcSense = null;
 
 		[SerializeField]
 		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
@@ -15,22 +18,25 @@ namespace Player
 		private bool heartOutroEnd = false;
 		private bool heartOutroCamera = false;
 
-		// Attack
-		private Vector2 movementVector = Vector2.zero;
-
+		// Movement
 		[SerializeField]
 		private bool isPlayerRespawning = false;
+		private Vector2 movementVector = Vector2.zero;
+
+		[Header("Range functionality")]
 		[SerializeField]
-		private PlayerAttackRange range = null;
+		private PlayerRangeDisplay rangeDisplay = null;
+		private bool canAttack = false;
 
 		public void Initialise()
 		{
-			kc.Initialise();
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.SetPlayerInfo(kc);
+			kc.controller = this;
+			kcSense.controller = this;
 
 			GlobalGameData.player = kc.gameObject;
-			range.Initialise();
+			rangeDisplay.Initialise(kc.Range);
 		}
 
 		public void OnCameraOutroFinished()
@@ -80,8 +86,8 @@ namespace Player
 
 	
 			transform.position = kc.transform.position;
-			if (range.CanAttack)
-				kc.orientation = range.orientation;
+			//if (canAttack)
+			//	kc.orientation = rangeDisplay.orientation;
 
 #if BLOODFLOW_ROTATION
 
@@ -128,13 +134,13 @@ namespace Player
 			}
 
 
-			if (Input.GetKey(KeyCode.Mouse0) && range.CanAttack)
-			{
-				kc.Attack();
-			} else
-			{
-				kc.StopAttack();
-			}
+			//if (Input.GetKey(KeyCode.Mouse0) && rangeDisplay.CanAttack)
+			//{
+			//	kc.Attack();
+			//} else
+			//{
+			//	kc.StopAttack();
+			//}
 
 		}
 
@@ -187,6 +193,18 @@ namespace Player
 			heartOutro = true;
 			GlobalGameData.areControlsEnabled = false;
 			//kc.IsKinematic = true;
+		}
+
+		public void OnEnemiesInRange()
+		{
+			rangeDisplay.gameObject.SetActive(true);
+			canAttack = true;
+		}
+
+		public void OnEnemiesOutOfRange()
+		{
+			rangeDisplay.gameObject.SetActive(false);
+			canAttack = false;
 		}
 	}
 }

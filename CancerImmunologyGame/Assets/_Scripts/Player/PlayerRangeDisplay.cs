@@ -6,7 +6,7 @@ using Cancers;
 
 namespace Player
 {
-	public class PlayerAttackRange : MonoBehaviour, ICancerCellObserver
+	public class PlayerRangeDisplay : MonoBehaviour
 	{
 		[SerializeField]
 		private PlayerAttackRangeSettings settings = null;
@@ -24,40 +24,9 @@ namespace Player
 		[SerializeField]
 		private RectTransform canvasTransform = null;
 
-		internal bool CanAttack => canvas.activeInHierarchy;
-		public Quaternion orientation { get => transform.rotation; }
-		void OnTriggerEnter2D(Collider2D collider)
-		{
-			Debug.Log(collider.gameObject);
-			CancerCellBody ccBody = collider.GetComponent<CancerCellBody>();
-			if (ccBody != null)
-			{
-				Debug.Log("Collided with cc body");
-				ccs.Add(ccBody.owner);
-				ccBody.owner.AddObserver(this);
-				canvas.SetActive(true);
-			}
-		}
-
-		void OnTriggerExit2D(Collider2D collider)
-		{
-			CancerCellBody ccBody = collider.GetComponent<CancerCellBody>();
-			if (ccBody != null)
-			{
-				Debug.Log("UN-Collided with cc body");
-
-				ccs.Remove(ccBody.owner);
-				ccBody.owner.RemoveObserver(this);
-				if (ccs.Count <= 0)
-				{
-					canvas.SetActive(false);
-				}
-			}
-		}
 
 		internal void SetNewSettings(PlayerAttackRangeSettings settings)
 		{
-
 			this.settings = settings;
 			lowerFill.fillAmount = 1.0f - settings.fovCutoff;
 			upperFill.fillAmount = 1.0f - settings.fovCutoff;
@@ -68,7 +37,7 @@ namespace Player
 		}
 
 
-		internal void Initialise()
+		internal void Initialise(float range)
 		{
 			lowerFill.fillAmount = 1.0f - settings.fovCutoff;
 			upperFill.fillAmount = 1.0f - settings.fovCutoff;
@@ -101,13 +70,5 @@ namespace Player
 			
 		}
 
-		public void NotifyOfDeath(CancerCell cc)
-		{
-			ccs.Remove(cc);
-			if (ccs.Count <= 0)
-			{
-				canvas.SetActive(false);
-			}
-		}
 	}
 }

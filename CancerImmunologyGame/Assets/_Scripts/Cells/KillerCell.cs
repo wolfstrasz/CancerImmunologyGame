@@ -15,6 +15,8 @@ public class KillerCell : Cell
 
 	[Header("Attributes")]
 	[SerializeField]
+	private float range = 4.0f;
+	[SerializeField]
 	private float speed = 4.0f;
 	[SerializeField]
 	private float immunotherapySpeedMultiplier = 1.66f;
@@ -60,6 +62,10 @@ public class KillerCell : Cell
 	private CancerCell closestCell = null;
 	[SerializeField]
 	private GameObject spriteObject = null;
+
+	[SerializeField]
+	public ICellController controller = null;
+
 	public Quaternion orientation 
 	{ 
 		get => spriteObject.transform.rotation; 
@@ -83,7 +89,7 @@ public class KillerCell : Cell
 	private Quaternion correctRotation = Quaternion.identity;
 #else
 #endif
-
+	public float Range { get => range; }
 	public float Health { get => health; set => health = value; }
 	public float Energy { get => energy; set => energy = value; }
 	public bool IsBusy { get => isBusy; set => isBusy = value; }
@@ -97,12 +103,6 @@ public class KillerCell : Cell
 	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
 #else
 #endif
-
-
-	public void Initialise()
-	{
-		sense.CancerCellsInRange.Clear();
-	}
 
 	public void OnFixedUpdate()
 	{
@@ -203,70 +203,70 @@ public class KillerCell : Cell
 	//}
 
 
-	public void StopAttack()
-	{
-		animator.SetBool("IsAttacking", false);
-	}
+	//public void StopAttack()
+	//{
+	//	animator.SetBool("IsAttacking", false);
+	//}
 	//// ATTACKING
 	//////////////////////////////////////////
-	public void Attack()
-	{
-		if (isBusy) return;
+	//public void Attack()
+	//{
+	//	if (isBusy) return;
 
-		cancerCellsInRange = sense.CancerCellsInRange;
-		if (cancerCellsInRange.Count == 0) return;
+	//	cancerCellsInRange = sense.CancerCellsInRange;
+	//	if (cancerCellsInRange.Count == 0) return;
 
-		isBusy = true;
+	//	isBusy = true;
 
-		// Find closest cancer cell
-		// Need to change to Cancer optimisation
-		float minDist = 100000.0f;
-		closestCell = null;
+	//	// Find closest cancer cell
+	//	// Need to change to Cancer optimisation
+	//	float minDist = 100000.0f;
+	//	closestCell = null;
 
-		foreach (var cell in cancerCellsInRange)
-		{
-			if (cell.InDivision) continue;
+	//	foreach (var cell in cancerCellsInRange)
+	//	{
+	//		if (cell.InDivision) continue;
 
-			float dist = Vector3.Distance(transform.position, cell.transform.position);
-			if (dist < minDist)
-			{
-				minDist = dist;
-				closestCell = cell;
-			}
-		}
+	//		float dist = Vector3.Distance(transform.position, cell.transform.position);
+	//		if (dist < minDist)
+	//		{
+	//			minDist = dist;
+	//			closestCell = cell;
+	//		}
+	//	}
 
-		if (closestCell == null)
-		{
-			isBusy = false;
-			return;
-		}
+	//	if (closestCell == null)
+	//	{
+	//		isBusy = false;
+	//		return;
+	//	}
 
-		animator.SetTrigger("Attacks");
-	}
+	//	animator.SetTrigger("Attacks");
+	//}
 
-	public void OnAttackEffect()
-	{
-		Vector3 diff = closestCell.transform.position - transform.position;
-		diff.Normalize();
+	//public void OnAttackEffect()
+	//{
+	//	Vector3 diff = closestCell.transform.position - transform.position;
+	//	diff.Normalize();
 
-		float rot_z = ((Mathf.Atan2(diff.y, diff.x) + attackRotationOffset) * Mathf.Rad2Deg);
+	//	float rot_z = ((Mathf.Atan2(diff.y, diff.x) + attackRotationOffset) * Mathf.Rad2Deg);
 
-		GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
-		newEffect.GetComponent<ParticleSystem>().Play();
+	//	GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
+	//	newEffect.GetComponent<ParticleSystem>().Play();
 
-		AddEnergy(normalAttackEnergyCost);
+	//	AddEnergy(normalAttackEnergyCost);
 
-		bool killedTheCell = closestCell.HitCell();
-		if (killedTheCell)
-		{
-			cancerCellsInRange.Remove(closestCell);
-		}
-	}
+	//	bool killedTheCell = closestCell.HitCell();
+	//	if (killedTheCell)
+	//	{
+	//		cancerCellsInRange.Remove(closestCell);
+	//	}
+	//}
 
-	public void OnAttackFinished()
-	{
-		isBusy = false;
-	}
+	//public void OnAttackFinished()
+	//{
+	//	isBusy = false;
+	//}
 
 	// POWER UP IMMUNOTHERAPY
 	//////////////////////////////////////////

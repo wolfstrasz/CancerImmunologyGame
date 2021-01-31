@@ -142,6 +142,7 @@ namespace Core
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
 			}
+
 #endif
 
 		}
