@@ -13580,6 +13580,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerController
       objectReference: {fileID: 0}
+    - target: {fileID: 3510334595041080902, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5579564840118924112, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: centre

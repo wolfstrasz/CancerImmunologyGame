@@ -25,7 +25,7 @@ namespace Player
 		[Header("Range functionality")]
 		[SerializeField]
 		private PlayerRangeDisplay rangeDisplay = null;
-		private bool canAttack = true;
+		private bool canAttack = false;
 
 		public void Initialise()
 		{

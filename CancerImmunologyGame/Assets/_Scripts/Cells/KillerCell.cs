@@ -75,13 +75,18 @@ public class KillerCell : Cell
 		set 
 		{
 			Debug.Log(value.eulerAngles);
-			if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 270.0f)
+			if (value == Quaternion.identity)
 			{
-				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f , value.eulerAngles.z);
+				spriteObject.transform.localRotation = value;
+				spriteObject.transform.localScale = Vector3.one;
+			}
+			else if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 270.0f)
+			{
+				spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f , value.eulerAngles.z);
 				spriteObject.transform.localScale = new Vector3(-1.0f, -1.0f, 1.0f);
 			} else
 			{
-				spriteObject.transform.rotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
+				spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
 				spriteObject.transform.localScale = new Vector3 (-1.0f , 1.0f , 1.0f);
 
 			}
@@ -134,18 +139,35 @@ public class KillerCell : Cell
 
 	public void OnUpdate()
 	{
+
+
 		if (GlobalGameData.isInPowerUpMode)
 		{
 			float value = immunotherapyEnergyRegain * Time.deltaTime;
 			AddEnergy(value);
+
+			if (!canAttack)
+			{
+				attackDowntime += Time.deltaTime * immunotherapySpeedMultiplier;
+				if (attackDowntime >= attackCooldown)
+				{
+					canAttack = true;
+				}
+			}
+			return;
 		}
 
 		if (!canAttack)
 		{
 			attackDowntime += Time.deltaTime;
 			if (attackDowntime >= attackCooldown)
+			{
 				canAttack = true;
+			}
 		}
+
+		if (!isBusy && canAttack)
+			animator.SetBool("IsAttacking", false);
 	}
 
 
@@ -223,10 +245,12 @@ public class KillerCell : Cell
 
 		Vector3 bulletDirection = (targetPosition - attackSpawnObject.transform.position).normalized;
 
-		spread =  Mathf.Lerp( Random.Range(-fov / 2.0f, fov / 2.0f), spread, 0.5f);
+		spread =  Mathf.Lerp( Random.Range(-fov /1.9f, fov / 1.9f), spread, Random.Range(0.2f, 0.8f));
+		//spread = Random.Range(-fov /2f, fov / 2f);
 		bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
 		var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f); 
 		bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, range, color);
+		AddEnergy(normalAttackEnergyCost);
 
 	}
 

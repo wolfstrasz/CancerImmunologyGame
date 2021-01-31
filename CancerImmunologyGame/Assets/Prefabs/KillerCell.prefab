@@ -277,10 +277,10 @@ MonoBehaviour:
   attackSpawnObject: {fileID: 1244794201}
   killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
     type: 3}
-  normalAttackEnergyCost: -7.5
+  normalAttackEnergyCost: -0.5
   attackCooldown: 0.2
   range: 1
-  fov: 90
+  fov: 70
   rotationSpeed: 2
   isBusy: 0
   isDead: 0

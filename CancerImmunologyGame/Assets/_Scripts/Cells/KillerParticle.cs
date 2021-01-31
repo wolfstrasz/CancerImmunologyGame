@@ -45,6 +45,7 @@ public class KillerParticle : MonoBehaviour
 		direction = _direction;
 		distance = _distance;
 		distanceSqr = _distance * distance;
+		speed += Random.Range(-0.2f, 0.2f);
 		gameObject.SetActive(true);
 	}
 
