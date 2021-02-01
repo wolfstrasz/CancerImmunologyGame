@@ -39,8 +39,6 @@ namespace CellpediaUI
 		[SerializeField]
 		private float timepassed = 0.0f;
 
-		public static float Timetopass { get => timetopass; set => timetopass = value; }
-
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -65,21 +63,21 @@ namespace CellpediaUI
 		{
 			if (!isShifting) return;
 
-			if (isShifting && timepassed < Timetopass)
+			if (isShifting && timepassed < timetopass)
 			{
 				timepassed += Time.deltaTime;
-				if (timepassed > Timetopass)
-					timepassed = Timetopass;
+				if (timepassed > timetopass)
+					timepassed = timetopass;
 
 
-				trans.localPosition = new Vector2(xStartCoord - (timepassed / Timetopass) * xShiftCoord, 0.0f);
+				trans.localPosition = new Vector2(xStartCoord - (timepassed / timetopass) * xShiftCoord, 0.0f);
 				return;
 			}
 
 			Reset();
 		}
 
-		private void Reset()
+		internal void Reset()
 		{
 			isShifting = false;
 			timepassed = 0.0f;

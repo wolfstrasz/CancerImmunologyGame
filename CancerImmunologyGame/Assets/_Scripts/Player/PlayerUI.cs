@@ -86,11 +86,11 @@ namespace Player
 			}
 			if (Input.GetKeyDown(KeyCode.Z))
 			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.TKILLER);
 			}
 			if (Input.GetKeyDown(KeyCode.X))
 			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
 			}
 			if (Input.GetKeyDown(KeyCode.C))
 			{
@@ -99,6 +99,10 @@ namespace Player
 			if (Input.GetKeyDown(KeyCode.V))
 			{
 				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
+			}
+			if (Input.GetKeyDown(KeyCode.B))
+			{
+				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
 			}
 #endif
 		}

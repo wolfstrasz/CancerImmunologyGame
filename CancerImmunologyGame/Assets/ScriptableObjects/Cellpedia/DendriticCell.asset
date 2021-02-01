@@ -21,3 +21,6 @@ MonoBehaviour:
   animatorTrigger: Dendritic
   sprite: {fileID: 452115995815455089, guid: a3bcce0b71d67974395e31a86f02f18a, type: 3}
   scale: 2.2
+  note1: {fileID: 21300000, guid: 38fadbf4f57841b43947ccf483bc72fc, type: 3}
+  note2: {fileID: 21300000, guid: a3f37bb674aa1e14fb78c61d7073a1e7, type: 3}
+  note3: {fileID: 0}

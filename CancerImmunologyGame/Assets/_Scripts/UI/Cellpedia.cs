@@ -8,24 +8,22 @@ namespace CellpediaUI
 {
 	public class Cellpedia : Singleton<Cellpedia>
 	{
-		[Header("Cellpedia View")]
+		[Header("Cellpedia View Data")]
 		[SerializeField]
 		private GameObject cellpediaView = null;
 		[SerializeField]
-		private List<CellDescriptionLink> cellDescriptions = new List<CellDescriptionLink>();
+		private CellpediaNotepad notepad = null;
 		[SerializeField]
 		private List<Petridish> petridishes = new List<Petridish>();
+		//[SerializeField]
+		//private List<PetridishButton> petridishBtns = new List<PetridishBtn>();
 		[SerializeField]
-		private Animator buttonAnimator = null;
+		private GameObject leftBtn = null;
+		[SerializeField]
+		private GameObject rightBtn = null;
 
 		[SerializeField]
-		TMP_Text cellDescription = null;
-		[SerializeField]
-		TMP_Text cellName = null;
-		[SerializeField]
-		private float time_between_shifts = 2.0f;
-		private const float time_for_button_rotation = 2.0f;
-
+		private List<CellDescriptionLink> cellDescriptions = new List<CellDescriptionLink>();
 		[Header ("Game UI")]
 		[SerializeField]
 		private GameObject microscopeButton = null;
@@ -40,17 +38,15 @@ namespace CellpediaUI
 
 		[Header("Debugging (Read Only")]
 		[SerializeField]
-		private List<CellDescription> unlockedCellDescriptions = new List<CellDescription>();
-		[SerializeField]
-		private Dictionary<CellpediaCells, CellDescription> cellpediaDescriptions = new Dictionary<CellpediaCells, CellDescription>();
-		[SerializeField]
-		private int cdIndex = 0;
+		private CellDescription currentCD = null;
 		[SerializeField]
 		private int dishIndex = 0;
 
 
-		internal Vector3 MicroscopeButtonPosition => microscopeButton.transform.position;
+
+		// Used by Cellpedia popups
 		internal Transform PopupLayout => popupLayout.transform;
+		internal Vector3 MicroscopeButtonPosition => microscopeButton.transform.position;
 
 		// Used by tutorials
 		public bool IsCellpediaOpened => cellpediaView.gameObject.activeSelf;
@@ -58,11 +54,9 @@ namespace CellpediaUI
 
 		public void Initialise()
 		{
-			buttonAnimator.speed = buttonAnimator.speed * time_for_button_rotation / time_between_shifts;
-			Petridish.Timetopass = time_between_shifts;
 			foreach (CellDescriptionLink cdl in cellDescriptions)
 			{
-				cellpediaDescriptions.Add(cdl.cc, cdl.cd);
+				cdl.button.Initialise(cdl.description.sprite);
 			}
 		}
 
@@ -70,53 +64,77 @@ namespace CellpediaUI
 		public void CloseView()
 		{
 			cellpediaView.SetActive(false);
+			petridishes[0].Reset();
+			petridishes[1].Reset();
 		}
 
 		public void OpenView()
 		{
 			cellpediaView.SetActive(true);
-			CellDescription cd = unlockedCellDescriptions[cdIndex];
-			petridishes[dishIndex].SetVisual(cd);
-			cellDescription.text = cd.description;
-			cellName.text = cd.cellname;
+
+			if (PetridishButton.selected == null)
+			{
+				currentCD = cellDescriptions[0].description;
+				PetridishButton.selected = cellDescriptions[0].button;
+				PetridishButton.selected.Select();
+				petridishes[dishIndex].SetVisual(currentCD);
+				notepad.SetVisual(currentCD);
+			}
+			petridishes[dishIndex].SetVisual(currentCD);
+			notepad.SetVisual(currentCD);
+
+
 			microscopeAnimator.SetTrigger("Opened");
 		}
 
-		public void NextPetridish()
+		internal bool NextPetridish(PetridishButton buttonClicked)
 		{
 
-			if (petridishes[0].isShifting || petridishes[1].isShifting) return;
-
-			buttonAnimator.Play("Rotate");
-			cdIndex++;
-			cdIndex %= unlockedCellDescriptions.Count;
+			if (petridishes[0].isShifting || petridishes[1].isShifting) return false;
 			dishIndex ^= 1;
 
-			CellDescription cd = unlockedCellDescriptions[cdIndex];
-			petridishes[dishIndex].SetVisual(cd);
-			cellDescription.text = cd.description;
-			cellName.text = cd.cellname;
-			petridishes[0].ShiftLeft();
-			petridishes[1].ShiftLeft();
+			for (int i = 0; i < cellDescriptions.Count; ++i)
+			{
+				CellDescriptionLink cdLink = cellDescriptions[i];
+				if (cdLink.button == buttonClicked)
+				{
+					currentCD = cdLink.description;
+					petridishes[dishIndex].SetVisual(currentCD);
+					notepad.SetVisual(currentCD);
 
+					petridishes[0].ShiftLeft();
+					petridishes[1].ShiftLeft();
+					continue;
+				}
+			}
+			return true;
 		}
 
 		public void UnlockCellDescription(CellpediaCells cc)
 		{
 			if (cc == CellpediaCells.NONE) return;
-			microscopeButton.SetActive(true);
-			unlockedCellDescriptions.Add(cellpediaDescriptions[cc]);
-			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
-			popup.SetInfo(cellpediaDescriptions[cc]);
-			microscopeAnimator.SetTrigger("NewItem");
-
+			
+			for (int i = 0; i< cellDescriptions.Count; ++i)
+			{
+				CellDescriptionLink cdLink = cellDescriptions[i];
+				if (cdLink.cell == cc)
+				{
+					microscopeButton.SetActive(true);
+					cdLink.button.Activate();
+					CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
+					popup.SetInfo(cdLink.description);
+					microscopeAnimator.SetTrigger("NewItem");
+					continue;
+				}
+			}
 		}
 
 		[System.Serializable]
 		public struct CellDescriptionLink
 		{
-			public CellDescription cd;
-			public CellpediaCells cc;
+			public CellDescription description;
+			public CellpediaCells cell;
+			public PetridishButton button;
 		}
 	}
 }

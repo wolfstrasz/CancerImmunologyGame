@@ -22,3 +22,6 @@ MonoBehaviour:
   animatorTrigger: THelper
   sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de, type: 3}
   scale: 1.2
+  note1: {fileID: 21300000, guid: c4f488eaa4e37b740891bdf111eba2d0, type: 3}
+  note2: {fileID: 21300000, guid: 053d8db1a85f4354cb3e147564222a63, type: 3}
+  note3: {fileID: 0}
