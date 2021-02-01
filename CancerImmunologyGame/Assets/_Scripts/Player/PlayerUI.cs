@@ -13,16 +13,13 @@ namespace Player
 		private GameObject playerInfoPanel = null;
 		[SerializeField]
 		private GameObject playerPowerUpPanel = null;
-		[SerializeField]
-		private GameObject microscopePanel = null;
+
 		[SerializeField]
 		private HealthBar healthBar = null;
 		[SerializeField]
 		private EnergyBar energyBar = null;
 		[SerializeField]
 		private ImmunotherapyBar powerUpBar = null;
-		[SerializeField]
-		private Animator microscopeIconAnimator = null;
 		[SerializeField]
 		private Animator immunotherapyAnimator = null;
 
@@ -156,23 +153,6 @@ namespace Player
 				killerCells[i].ExitPowerUpMode();
 			}
 			return;
-		}
-
-		public void OpenCellpedia()
-		{
-			CellpediaUI.Cellpedia.Instance.Open();
-			microscopeIconAnimator.SetTrigger("Opened");
-		}
-
-		public void MicroscopeActivate()
-		{
-			microscopeIconAnimator.SetTrigger("NewItem");
-		}
-
-		// Calls from tutorial stage
-		public void ActivateMicroscopePanel()
-		{
-			microscopePanel.SetActive(true);
 		}
 
 		public void ActivatePlayerInfoPanel()

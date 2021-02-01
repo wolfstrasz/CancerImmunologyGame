@@ -7,7 +7,7 @@ public class CellHealthBar : MonoBehaviour
 {
 
 	[SerializeField]
-	private Slider slider;
+	private Slider slider = null;
 	[SerializeField]
 	private bool autoHide = false;
 	[SerializeField]

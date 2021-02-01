@@ -15,8 +15,6 @@ namespace CellpediaUI
 		private CellpediaNotepad notepad = null;
 		[SerializeField]
 		private List<Petridish> petridishes = new List<Petridish>();
-		//[SerializeField]
-		//private List<PetridishButton> petridishBtns = new List<PetridishBtn>();
 		[SerializeField]
 		private GameObject leftBtn = null;
 		[SerializeField]
@@ -54,6 +52,8 @@ namespace CellpediaUI
 
 		public void Initialise()
 		{
+			leftBtn.SetActive(false);
+			rightBtn.SetActive(false);
 			foreach (CellDescriptionLink cdl in cellDescriptions)
 			{
 				cdl.button.Initialise(cdl.description.sprite);
@@ -64,8 +64,8 @@ namespace CellpediaUI
 		public void CloseView()
 		{
 			cellpediaView.SetActive(false);
-			petridishes[0].Reset();
-			petridishes[1].Reset();
+			petridishes[0].SkipAnimation();
+			petridishes[1].SkipAnimation();
 		}
 
 		public void OpenView()

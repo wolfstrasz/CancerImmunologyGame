@@ -77,7 +77,17 @@ namespace CellpediaUI
 			Reset();
 		}
 
-		internal void Reset()
+		internal void SkipAnimation()
+		{
+			if (isShifting)
+			{
+				timepassed = timetopass;
+				trans.localPosition = new Vector2(xStartCoord - xShiftCoord, 0.0f);
+				Reset();
+				return;
+			}
+		}
+		private void Reset()
 		{
 			isShifting = false;
 			timepassed = 0.0f;
