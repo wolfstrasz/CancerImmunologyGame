@@ -42,12 +42,16 @@ public class KillerParticle : MonoBehaviour
 
 	public void Shoot(Vector3 _direction, float _distance, Color color)
 	{
+
 		render.color = color;
 		startPos = transform.position;
 		direction = _direction;
 		distance = _distance;
 		distanceSqr = _distance * distance;
 		speed += Random.Range(-0.2f, 0.2f);
+		if (GlobalGameData.isInPowerUpMode)
+			speed *= 2;
+
 		gameObject.SetActive(true);
 	}
 

@@ -168,7 +168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363393213812419702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -182.02, y: -90.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -204,7 +204,7 @@ MonoBehaviour:
   particleToShoot: {fileID: 7457939708117967971, guid: 4825efb6d8d62ca4d8768ca64ec40332,
     type: 3}
   ScaleIncrease: 1.2
-  RadiusIncrease: 1.2
+  RadiusIncrease: 0.9
   prevRadius: 0
   prevScale: 0
 --- !u!95 &7363393213812419701

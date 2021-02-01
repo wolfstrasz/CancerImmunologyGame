@@ -29,9 +29,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1495698648721124503}
-  - {fileID: 5912183852250247158}
   - {fileID: 9131200580056456950}
   - {fileID: 9131200579298704010}
+  - {fileID: 3358924430417764729}
+  - {fileID: 5912183852250247158}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,9 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 1495698648721124502}
-  - {fileID: 5080899040950371874}
   - {fileID: 9131200580056456953}
   - {fileID: 9131200579298704005}
+  - {fileID: 3358924430417764726}
+  - {fileID: 5080899040950371874}
   currentEvent: {fileID: 0}
 --- !u!1001 &1495698648476339439
 PrefabInstance:
@@ -68,10 +70,9 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: 'This though guy is a regulatory cell and it prevents TK cells, like
-        you, from damaging healthy cells. However, cancer cells can disguise as healthy
-        cells to the regulatory cells. This makes it harder for the T Killer Cells
-        to succeed. '
+      value: One of the ways in which cancer cells protect themselves from the immune
+        system is by recruiting tough cells like this one here. It is a Regulatory
+        T cell.
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -116,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -198,7 +199,7 @@ PrefabInstance:
     - target: {fileID: 5101877013845843334, guid: aa4a35e6b686bb942b25018c4ff944b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5101877013845843334, guid: aa4a35e6b686bb942b25018c4ff944b6,
         type: 3}
@@ -265,8 +266,9 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: Not only will they bump into you when you approach but they also release
-        particles that diminish your powers.
+      value: This very different type of T cell usually prevents other T cells from
+        damaging healthy cells. However, cancer cells can disguise themselves as
+        normal cells to the Regulatory T cells.
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -311,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -433,5 +435,104 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 846ae7899bfab224d9de1cfcb8ef3676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &4964102080014021472
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1480020704293191033}
+    m_Modifications:
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: text
+      value: This makes it harder for the T Killer cells to succeed in their task.
+        They can bump into you and push you back or release suppressive cytokines
+        that diminish your powers. It will be wise to keep your distance.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_Name
+      value: TTextEventWithButton (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
+--- !u!4 &3358924430417764729 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4964102080014021472}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3358924430417764726 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 4964102080014021472}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

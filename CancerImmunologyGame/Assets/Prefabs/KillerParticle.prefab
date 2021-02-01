@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 7924667237588336933}
-  damage: 2
+  damage: 4
   speed: 1
   direction: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
@@ -91,7 +91,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 25
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 0.5628406, g: 0.8584906, b: 0.43329477, a: 1}
   m_FlipX: 0

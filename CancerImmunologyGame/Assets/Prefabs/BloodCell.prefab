@@ -100,7 +100,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3a5a16d2e69ff304aa5d2d4eda369236, type: 3}
   render: {fileID: 0}
   endOfPathInstruction: 0
-  speed: 7
+  speed: 5.5
   rotationSpeed: 90
   distanceTravelled: 0
   distanceToEnd: 0

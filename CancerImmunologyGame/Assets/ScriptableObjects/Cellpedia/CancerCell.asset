@@ -15,9 +15,10 @@ MonoBehaviour:
   cellname: Cancer Cell
   description: "\u2018Cancer\u2019 is the term given to a wide range of different
     diseases; in general, all of these diseases comprise cells that ignore conventional
-    rules followed by normal cells. This results in cancer cells dividing in an uncontrolled
-    fashion and can allow cancer cells to spread into surrounding areas of the body.
-    \r\r"
+    rules followed by normal cells. This ability is the result of mutations in the
+    genetic instructions of cells. The result: cancer cells divide in an uncontrolled
+    fashion, allowing cancer cells to spread into surrounding areas of the body,
+    generally causing damage on the way."
   animatorTrigger: Cancer
   sprite: {fileID: -2487138818442988084, guid: d6c6d95c499c7d6468e7415148eac0ed, type: 3}
   scale: 1.2

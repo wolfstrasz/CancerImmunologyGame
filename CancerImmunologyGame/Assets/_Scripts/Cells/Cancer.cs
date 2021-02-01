@@ -43,7 +43,6 @@ namespace Cancers
 		[SerializeField]
 		[Range(5.0f, 100.0f)]
 		private float timeBetweenDivisions = 10.0f;
-
 		[Header("Generation attributes")]
 		[SerializeField]
 		private bool shouldGenerateCancer = false;

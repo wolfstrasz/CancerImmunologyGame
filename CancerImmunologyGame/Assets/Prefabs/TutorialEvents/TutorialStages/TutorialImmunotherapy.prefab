@@ -29,15 +29,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006960248341391570}
+  - {fileID: 8619069971405575780}
   - {fileID: 148893790844194604}
   - {fileID: 921762245050986448}
-  - {fileID: 299936802196640061}
   - {fileID: 148893790502198211}
-  - {fileID: 299936801478676935}
+  - {fileID: 299936802196640061}
   - {fileID: 148893790450213035}
-  - {fileID: 630561320932814141}
+  - {fileID: 299936801478676935}
   - {fileID: 148893792245247042}
+  - {fileID: 630561320932814141}
   - {fileID: 148893790926033145}
+  - {fileID: 6355941722614718176}
+  - {fileID: 2446276640785925638}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,15 +58,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 2715392226453236258}
+  - {fileID: 8619069971405575787}
   - {fileID: 148893790844194595}
   - {fileID: 921762245050986449}
   - {fileID: 148893790502198220}
   - {fileID: 299936802196640062}
-  - {fileID: 299936801478676932}
   - {fileID: 148893790450213028}
-  - {fileID: 6055756096128485856}
+  - {fileID: 299936801478676932}
   - {fileID: 148893792245247053}
+  - {fileID: 6055756096128485856}
   - {fileID: 148893790926033142}
+  - {fileID: 6355941722614718191}
+  - {fileID: 2446276640785925641}
   currentEvent: {fileID: 0}
 --- !u!1001 &350137153999053442
 PrefabInstance:
@@ -162,6 +168,315 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63aa20442d4c3fd4fbf8f6ebc7a8144c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &2153940024464262269
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7418983377583753592}
+    m_Modifications:
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: text
+      value: GREAT JOB!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: removeControl
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: timeBeforeFinish
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_Name
+      value: TTextEventWithButton0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
+--- !u!4 &8619069971405575780 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2153940024464262269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8619069971405575787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2153940024464262269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &3624716145227271417
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7418983377583753592}
+    m_Modifications:
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: text
+      value: "In the bottom right corner you will see your \u2018immunotherapy bar\u2019
+        (power up bar) - when it is full it means that you are ready to use the immunotherapy."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_Name
+      value: TTextEventWithButton (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
+--- !u!114 &6355941722614718191 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3624716145227271417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &6355941722614718176 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3624716145227271417}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5443630219167290399
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7418983377583753592}
+    m_Modifications:
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: text
+      value: "Keep in mind that the effect of immunotherapies do not last forever,
+        so keep an eye on your power up bar. Give it a try and see how much stronger
+        you\u2019ll get!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_Name
+      value: TTextEventWithButton (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
+--- !u!114 &2446276640785925641 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5443630219167290399}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2446276640785925638 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 5443630219167290399}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7184320819546663137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,7 +537,7 @@ PrefabInstance:
     - target: {fileID: 7742780221271082460, guid: b168263b06eb87341982b3a4b6fc6ec0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7742780221271082460, guid: b168263b06eb87341982b3a4b6fc6ec0,
         type: 3}
@@ -304,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
         type: 3}
@@ -343,12 +658,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94bf78834d30a9641aaf342b35b908c7, type: 3}
---- !u!4 &299936801478676935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7523748534741049771}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &299936801478676932 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7800286783617314927, guid: 94bf78834d30a9641aaf342b35b908c7,
@@ -361,6 +670,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b9777aaea1adb4b8e8b35158bff067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &299936801478676935 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7523748534741049771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7523748534972333659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -371,9 +686,8 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: These are therapies which reverse immune cell exhaustion,  giving immune
-        cells like you the extra boost they need to get rid of cancer. You can use
-        the immunotherapy when the bar is full by pressing on the circular button.
+      value: However, do not fear! Cancer researchers have developed cancer treatments
+        known as immunotherapies.
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -442,12 +756,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
---- !u!4 &148893792245247042 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7523748534972333659}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &148893792245247053 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
@@ -460,6 +768,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &148893792245247042 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7523748534972333659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7523748535206298112
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,7 +829,7 @@ PrefabInstance:
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
         type: 3}
@@ -607,7 +921,7 @@ PrefabInstance:
     - target: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
         type: 3}
@@ -646,12 +960,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 94bf78834d30a9641aaf342b35b908c7, type: 3}
---- !u!4 &299936802196640061 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7523748535507902801}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &299936802196640062 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7800286783617314927, guid: 94bf78834d30a9641aaf342b35b908c7,
@@ -664,6 +972,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b9777aaea1adb4b8e8b35158bff067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &299936802196640061 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7800286783617314924, guid: 94bf78834d30a9641aaf342b35b908c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7523748535507902801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7523748535719320885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,8 +988,9 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: Well done! However, your job is not finished yet! These cells were too
-        few in count to be the main tumour. We need to find it!
+      value: "However, it doesn\u2019t look like your job is finished yet! There
+        were too few cancer cells for this to be the main tumour. Explore the colon
+        and find it!"
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -730,7 +1045,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -777,8 +1092,8 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: Keep in mind that immunotherapies do not last forever! Keep an eye on
-        your power up (blue) bar. Give it a try and see!
+      value: These are therapies which reverse immune cell exhaustion, giving immune
+        cells like you the extra boost they need to get rid of cancer.
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -828,7 +1143,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -875,9 +1190,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: text
-      value: It is too large for us to handle. We can only try and delay the inevitable.
-        However, do not fear! Cancer researchers have developed cancer treatments
-        known as immunotherapies
+      value: "This tumour seems larger, maybe too large for us to handle on our own\u2026"
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -951,12 +1264,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
---- !u!4 &148893790450213035 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7523748536666960562}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &148893790450213028 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
@@ -969,6 +1276,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &148893790450213035 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7523748536666960562}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7523748536715364826
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7904b7a2ed8aa3a49a44258019484f2e, type: 3}
+--- !u!4 &148893790502198211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7523748536715364826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &148893790502198220 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
@@ -1065,9 +1384,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &148893790502198211 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7523748536715364826}
-  m_PrefabAsset: {fileID: 0}

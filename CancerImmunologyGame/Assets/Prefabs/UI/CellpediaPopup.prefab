@@ -294,8 +294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alphaGroup: {fileID: 2735289360272416440}
-  timeBeforeHiding: 3
-  timeToHide: 3
+  timeBeforeHiding: 1.5
+  timeToHide: 1.5
   text: {fileID: 8574515261288817764}
   cellImage: {fileID: 5455369099567644747}
   particleEffectPrefab: {fileID: 0}
@@ -403,7 +403,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 18
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

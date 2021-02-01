@@ -100,7 +100,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_Sprite: {fileID: 8073065430162629486, guid: 83060a317e155fe43b4fa7f38c66e842,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -277,10 +277,10 @@ MonoBehaviour:
   attackSpawnObject: {fileID: 1244794201}
   killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
     type: 3}
-  normalAttackEnergyCost: -0.5
+  normalAttackEnergyCost: -1.1
   attackCooldown: 0.2
   range: 1
-  fov: 70
+  fov: 60
   rotationSpeed: 2
   isBusy: 0
   isDead: 0

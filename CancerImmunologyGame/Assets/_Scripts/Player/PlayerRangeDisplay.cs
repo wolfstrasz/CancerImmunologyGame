@@ -36,6 +36,7 @@ namespace Player
 		// Update is called once per frame
 		void Update()
 		{
+			if (GlobalGameData.isGameplayPaused) return;
 #if UNITY_EDITOR
 			fovImage.fillAmount = fov / 360.0f;
 			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, fov / 2.0f);

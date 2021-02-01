@@ -9,7 +9,7 @@ namespace Tutorials
 	{
 
 		[Header("Text Displayed")]
-		[SerializeField]
+		[SerializeField][TextArea(5,20)]
 		private string text = "";
 
 		[Header("Skipping functionality")]

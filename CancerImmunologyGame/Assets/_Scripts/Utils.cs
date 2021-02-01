@@ -8,4 +8,4 @@ public static class Utils
 }
 
 public enum CellpediaCells { NONE, TKILLER, THELPER, DENDRITIC, REGULATORY, CANCER}
-public enum PlayerUIPanels { MICROSCOPE, PLAYER_INFO, IMMUNOTHERAPY }
+public enum PlayerUIPanels { PLAYER_INFO_ENERGYBAR, PLAYER_INFO_HEALTHBAR, IMMUNOTHERAPY }

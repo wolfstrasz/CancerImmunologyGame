@@ -160,6 +160,11 @@ namespace Player
 			playerInfoPanel.SetActive(true);
 		}
 
+		public void ActivatePlayerInfoPanelEnergyBar() 
+		{
+			energyBar.gameObject.SetActive(true);
+		}
+
 		public void ActivateImmunotherapyPanel()
 		{
 			playerPowerUpPanel.SetActive(true);

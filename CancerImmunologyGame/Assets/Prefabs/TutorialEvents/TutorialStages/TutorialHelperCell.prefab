@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &407561694356312367
 MonoBehaviour:
@@ -43,10 +43,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf27fb11d9f6d2499c9e6a74a21a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 0
   pauseGameplay: 0
   cellToDiscover: 2
+--- !u!1 &2157974467448903516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2997127938583161399}
+  - component: {fileID: 363984189098445627}
+  m_Layer: 0
+  m_Name: TTextEventWithButton (2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2997127938583161399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157974467448903516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5177704064619137145}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &363984189098445627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157974467448903516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skip: 0
+  owner: {fileID: 0}
+  removeControl: 1
+  pauseGameplay: 1
+  text: Cytokines released by T Helper cells can reverse exhaustion and promote the
+    function of T Killer cells.
+  canSkipTxt: 1
+  waitBeforeSkip: 0
+  timed: 0
+  timeBeforeFinish: 0
 --- !u!1 &3107621335334870774
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +130,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3768629865739709453
 MonoBehaviour:
@@ -90,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b9777aaea1adb4b8e8b35158bff067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
@@ -123,7 +178,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3487247388543864892
 MonoBehaviour:
@@ -137,10 +192,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc008b865bfc554aa123aec296ba904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
   cellsToInitialise: 2
+--- !u!1 &4409931839432290584
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 923756589359941526}
+  - component: {fileID: 5772415717153563467}
+  m_Layer: 0
+  m_Name: TActivatePlayerUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &923756589359941526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409931839432290584}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5177704064619137145}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5772415717153563467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409931839432290584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94f29854ef1b51c4a806e468387507ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skip: 0
+  owner: {fileID: 0}
+  removeControl: 0
+  pauseGameplay: 0
+  panel: 0
 --- !u!1 &4768319742846413243
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,11 +288,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510b0f0018d961a409e794bf4eec6090, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 0
   pauseGameplay: 0
   monitorHealth: 1
-  healthValue: 50
+  healthValue: 25
   updateHealth: 0
   monitorEnergy: 1
   energyValue: 50
@@ -224,10 +329,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 538555506451346827}
+  - {fileID: 923756589359941526}
   - {fileID: 3487247388962727719}
   - {fileID: 3487247388543864867}
   - {fileID: 3487247389269810097}
   - {fileID: 3487247389335597161}
+  - {fileID: 2997127938583161399}
   - {fileID: 3487247389967743542}
   - {fileID: 3487247389902071249}
   - {fileID: 3487247390074087369}
@@ -249,10 +356,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 4229414573595023855}
+  - {fileID: 5772415717153563467}
   - {fileID: 356267524727190717}
   - {fileID: 3487247388543864892}
   - {fileID: 3768629865739709453}
   - {fileID: 7525544728619496840}
+  - {fileID: 363984189098445627}
   - {fileID: 6134179744617202979}
   - {fileID: 425512521706423264}
   - {fileID: 7077336477813430882}
@@ -287,7 +396,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6134179744617202979
 MonoBehaviour:
@@ -301,6 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b9777aaea1adb4b8e8b35158bff067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
@@ -334,7 +444,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &356267524727190717
 MonoBehaviour:
@@ -348,12 +458,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
-  text: Oh dear! Interacting with cancer cells makes immune cells like you become
-    tired and exhausted. (look at your brown increasing exhaustion bar). This will
-    make you move slower, a danger in the hypoxic enviroment.
+  text: Interacting with cancer cells makes immune cells like you become tired and
+    exhausted. (look at your decreasing yellow energy bar). This will make you move
+    slower, a danger in the hypoxic environment around cancer cells.
   canSkipTxt: 1
   waitBeforeSkip: 0
   timed: 0
@@ -387,7 +498,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7077336477813430882
 MonoBehaviour:
@@ -401,6 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d9cc357b6db394682c9a191f40f524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 0
   pauseGameplay: 0
@@ -419,7 +531,7 @@ GameObject:
   - component: {fileID: 3487247389902071249}
   - component: {fileID: 425512521706423264}
   m_Layer: 0
-  m_Name: TTextEventWithButton (2)
+  m_Name: TTextEventWithButton (3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,7 +549,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &425512521706423264
 MonoBehaviour:
@@ -451,11 +563,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
   text: To revitalize your T Killer Cell (gain health and lower exhaustion) you can
-    contact these T Helper Cells. Go on and try it for yourself!
+    pick-up some of these cytokines. Go near the T Helper cell and try it for yourself!
   canSkipTxt: 1
   waitBeforeSkip: 0
   timed: 0
@@ -489,7 +602,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5177704064619137145}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7525544728619496840
 MonoBehaviour:
@@ -503,12 +616,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 1
-  text: Everybody needs a helping hand once in a while! T helper cells are a kind
-    of T cell that help other immune cells. They do this by releasing litterally
-    molecular messages called cytokines.
+  text: Everybody needs a helping hand once in a while! T Helper cells are a different
+    kind of T cell that help other immune cells, including T Killer cells. They do
+    this by releasing little molecular messages called cytokines.
   canSkipTxt: 1
   waitBeforeSkip: 0
   timed: 0

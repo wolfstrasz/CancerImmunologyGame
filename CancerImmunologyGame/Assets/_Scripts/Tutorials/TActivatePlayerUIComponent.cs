@@ -22,9 +22,13 @@ namespace Tutorials
 			{
 				PlayerUI.Instance.ActivateImmunotherapyPanel();
 			}
-			else if (panel == PlayerUIPanels.PLAYER_INFO)
+			else if (panel == PlayerUIPanels.PLAYER_INFO_HEALTHBAR)
 			{
 				PlayerUI.Instance.ActivatePlayerInfoPanel();
+			} 
+			else if (panel == PlayerUIPanels.PLAYER_INFO_ENERGYBAR)
+			{
+				PlayerUI.Instance.ActivatePlayerInfoPanelEnergyBar();
 			}
 		}
 

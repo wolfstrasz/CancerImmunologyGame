@@ -13,6 +13,7 @@ public class UIManager : Singleton<UIManager>
 	[Header("UI Panels")]
 	[SerializeField] private GameObject MainMenuPanel = null;
 	[SerializeField] private GameObject WinScreenPanel = null;
+	[SerializeField] private GameObject GameMenuPanel = null;
 	[SerializeField] private string SurveyURL = "";
 
 	private bool lastGameplaySpeed = false;
@@ -25,12 +26,15 @@ public class UIManager : Singleton<UIManager>
 	{
 		WinScreenPanel.SetActive(false);
 		MainMenuPanel.SetActive(true);
+		GameMenuPanel.SetActive(false);
 	}
 
 	public void ClosePanels()
 	{
 		WinScreenPanel.SetActive(false);
 		MainMenuPanel.SetActive(false);
+		GameMenuPanel.SetActive(false);
+
 	}
 
 	// Main Menu Functionality buttons
@@ -48,6 +52,9 @@ public class UIManager : Singleton<UIManager>
 		yield return new WaitForSeconds(0.2f);
 		available = true;
 		MainMenuPanel.SetActive(false);
+		WinScreenPanel.SetActive(false);
+		GameMenuPanel.SetActive(false);
+
 		SceneManager.LoadScene(FIRST_PLAY_SCENE_ID);
 	}
 
@@ -91,7 +98,11 @@ public class UIManager : Singleton<UIManager>
 
 	public void RestartGame()
     {
-        SceneManager.LoadScene(FIRST_PLAY_SCENE_ID);
+		if (!available) return;
+		available = false;
+		lastGameplaySpeed = false;
+		Debug.Log("Play");
+		StartCoroutine(WaitToStart());
     }
 
 

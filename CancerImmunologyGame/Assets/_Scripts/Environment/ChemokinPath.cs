@@ -7,8 +7,9 @@ public class ChemokinPath : MonoBehaviour
 {
     PathCreator pathCreator = null;
     public GameObject chemokinePrefab = null;
+	public float minSpacing = 1;
+	public float maxSpacing = 3;
     public float spacing = 3;
-    const float minSpacing = .1f;
 
 
 	public void ActivateChemokines()
@@ -29,14 +30,14 @@ public class ChemokinPath : MonoBehaviour
 
             VertexPath path = pathCreator.path;
 
-            spacing = Mathf.Max(minSpacing, spacing);
             float dst = 0;
 
             while (dst < path.length)
             {
                 Vector3 point = path.GetPointAtDistance(dst);
-                Instantiate(chemokinePrefab, point, Quaternion.identity, gameObject.transform);
-                dst += spacing;
+				Vector3 normal = path.GetNormalAtDistance(dst) * Random.Range(-0.5f, 0.5f);
+                Instantiate(chemokinePrefab, point + normal, Quaternion.identity, gameObject.transform);
+                dst += Mathf.Lerp(maxSpacing, minSpacing, dst/path.length);
             }
         }
     }
