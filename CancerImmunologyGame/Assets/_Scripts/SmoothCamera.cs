@@ -17,8 +17,6 @@ public class SmoothCamera : Singleton<SmoothCamera>
 	private Vector3 focusPosition;
 	private Vector3 targetPosition;
 
-
-
 	[SerializeField, Range(0.5f, 1.0f)]
 	private float focusCenteringSpeed = 0.943f;
 

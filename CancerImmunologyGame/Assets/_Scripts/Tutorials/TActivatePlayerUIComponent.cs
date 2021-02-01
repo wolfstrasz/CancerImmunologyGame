@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
+using CellpediaUI;
 
 namespace Tutorials
 {
@@ -24,10 +25,6 @@ namespace Tutorials
 			else if (panel == PlayerUIPanels.PLAYER_INFO)
 			{
 				PlayerUI.Instance.ActivatePlayerInfoPanel();
-			}
-			else if (panel == PlayerUIPanels.MICROSCOPE)
-			{
-				PlayerUI.Instance.ActivateMicroscopePanel();
 			}
 		}
 

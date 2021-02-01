@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b9777aaea1adb4b8e8b35158bff067, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 0
   owner: {fileID: 0}
   removeControl: 1
   pauseGameplay: 0
@@ -253,6 +254,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4040463355500961138}
     m_Modifications:
+    - target: {fileID: 4015394118151741697, guid: b168263b06eb87341982b3a4b6fc6ec0,
+        type: 3}
+      propertyPath: skip
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6526014426665628498, guid: b168263b06eb87341982b3a4b6fc6ec0,
         type: 3}
       propertyPath: m_Name

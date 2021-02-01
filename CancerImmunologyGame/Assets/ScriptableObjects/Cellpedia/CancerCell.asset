@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: CancerCell
   m_EditorClassIdentifier: 
   cellname: Cancer Cell
-  description: Cancerous
+  description: "\u2018Cancer\u2019 is the term given to a wide range of different
+    diseases; in general, all of these diseases comprise cells that ignore conventional
+    rules followed by normal cells. This results in cancer cells dividing in an uncontrolled
+    fashion and can allow cancer cells to spread into surrounding areas of the body.
+    \r\r"
   animatorTrigger: Cancer
   sprite: {fileID: -2487138818442988084, guid: d6c6d95c499c7d6468e7415148eac0ed, type: 3}
   scale: 1.2
+  note1: {fileID: 21300000, guid: 37e520372a2c85741a591fbe13958d65, type: 3}
+  note2: {fileID: 21300000, guid: a534aae819730564dbb98af6a7aacae2, type: 3}
+  note3: {fileID: 21300000, guid: 936a9da5358b3e34ab920977cb009016, type: 3}
