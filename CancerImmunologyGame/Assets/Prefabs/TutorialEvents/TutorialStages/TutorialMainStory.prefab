@@ -327,6 +327,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PathBlockerUnlock1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5573699784063029214, guid: 7b30f23e4caaaa54981f94e925d41430,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b30f23e4caaaa54981f94e925d41430, type: 3}
 --- !u!4 &1994480829879164473 stripped
@@ -2740,6 +2745,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PathBlockerUnlock1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573699784063029214, guid: 7b30f23e4caaaa54981f94e925d41430,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b30f23e4caaaa54981f94e925d41430, type: 3}

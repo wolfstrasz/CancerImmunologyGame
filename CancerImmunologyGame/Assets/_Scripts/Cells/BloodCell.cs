@@ -55,7 +55,7 @@ namespace BloodcellAnimation
 			transform.Rotate(0, 0, rotationSpeed * Time.fixedDeltaTime);
 
 			if (distanceTravelled >= distanceToEnd)
-				distanceTravelled = 0.0f;
+				distanceTravelled -=distanceToEnd;
 
 			if (vertexPath != null)
 			{
