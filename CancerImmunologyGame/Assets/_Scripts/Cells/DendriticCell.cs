@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Chemokines;
 
 public class DendriticCell : MonoBehaviour
 {
 
 	[SerializeField]
 	private List<ChemokinPath> chemokinePaths = new List<ChemokinPath>();
+
 	[SerializeField]
 	private bool interacted = false;
 	public bool HasInteracted => interacted;

@@ -2,11 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chemokine : MonoBehaviour
+namespace Chemokines
 {
+	public class Chemokine : MonoBehaviour
+	{
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Destroy(gameObject);
-    }
+		[SerializeField]
+		private new AudioSource audio = null;
+		[SerializeField]
+		private SpriteRenderer render = null;
+		[SerializeField]
+		private GameObject glow = null;
+
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			if (collider.gameObject == GlobalGameData.player)
+			{
+				audio.Play();
+				render.enabled = false;
+				glow.SetActive(false);
+			}
+		}
+
+		internal void Remove()
+		{
+			Destroy(this.gameObject);
+		}
+
+	}
 }
