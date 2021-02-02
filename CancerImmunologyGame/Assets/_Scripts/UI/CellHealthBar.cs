@@ -37,10 +37,6 @@ public class CellHealthBar : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			Health -= 1.0f;
-		}
 
 		if (autoHide)
 		{

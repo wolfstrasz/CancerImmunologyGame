@@ -7,7 +7,7 @@ namespace Chemokines {
 	{
 
 		[SerializeField]
-		private ChemokinPath owner;
+		private ChemokinPath owner = null;
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			if (collider.gameObject == GlobalGameData.player)

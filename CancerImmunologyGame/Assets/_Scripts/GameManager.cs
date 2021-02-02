@@ -66,6 +66,7 @@ namespace Core
 
 		private IEnumerator InitialiseLevel()
 		{
+			BackgroundMusic.Instance.Initialise();
 			SmoothCamera.Instance.Reset();
 			UIManager.Instance.ClosePanels();
 			GlobalGameData.ResetObjectPool();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Cancers
 {
@@ -105,8 +106,10 @@ namespace Cancers
 
 			if (cancerCells.Count == 0)
 			{
+				BackgroundMusic.Instance.PlayNormalMusic();
 				canDivide = false;
 				GlobalGameData.Cancers.Remove(this);
+
 				Destroy(gameObject);
 				return;
 			}
@@ -131,9 +134,10 @@ namespace Cancers
 
 		public void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == GlobalGameData.player)
+			if (collider.GetComponent<PlayerController>()!= null)
 			{
 				isInitialised = true;
+				BackgroundMusic.Instance.PlayBattleMusic();
 			}
 		}
 

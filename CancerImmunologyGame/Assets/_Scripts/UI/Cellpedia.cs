@@ -71,13 +71,6 @@ namespace CellpediaUI
 			}
 		}
 
-		void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Y))
-			{
-				Initialise();
-			}
-		}
 		// UI Button callbacks
 		public void CloseView()
 		{
