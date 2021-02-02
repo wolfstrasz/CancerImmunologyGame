@@ -57,9 +57,27 @@ namespace CellpediaUI
 			foreach (CellDescriptionLink cdl in cellDescriptions)
 			{
 				cdl.button.Initialise(cdl.description.sprite);
+				cdl.button.Deactivate();
+				PetridishButton.selected = null;
+				if (dishIndex != 0)
+				{
+					petridishes[0].Reset();
+					petridishes[1].Reset();
+					dishIndex = 0;
+				}
+				currentCD = null;
+				microscopeButton.SetActive(false);
+
 			}
 		}
 
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Y))
+			{
+				Initialise();
+			}
+		}
 		// UI Button callbacks
 		public void CloseView()
 		{

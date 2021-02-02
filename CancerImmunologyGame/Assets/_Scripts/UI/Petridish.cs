@@ -87,7 +87,8 @@ namespace CellpediaUI
 				return;
 			}
 		}
-		private void Reset()
+
+		internal  void Reset()
 		{
 			isShifting = false;
 			timepassed = 0.0f;

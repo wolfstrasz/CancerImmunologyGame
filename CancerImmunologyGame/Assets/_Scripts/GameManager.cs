@@ -41,7 +41,6 @@ namespace Core
 			GlobalGameData.gameSpeed = 1.0f;
 			GlobalGameData.isGameplayPaused = false;
 			GlobalGameData.isInitialised = true;
-			CellpediaUI.Cellpedia.Instance.Initialise();
 		}
 
 
@@ -74,6 +73,7 @@ namespace Core
 			PlayerController.Instance.Initialise();
 			TutorialManager.Instance.Initialise();
 			BloodflowController.Instance.Initialise();
+			CellpediaUI.Cellpedia.Instance.Initialise();
 
 			isLevelInitialised = true;
 			yield return null;

@@ -31,6 +31,13 @@ namespace CellpediaUI
 			cellImage.color = Color.white;
 		}
 
+		internal void Deactivate()
+		{
+			isActivated = false;
+			cellImage.color = Color.black;
+			glow.SetActive(false);
+		}
+
 		internal void Select()
 		{
 			
