@@ -53,7 +53,7 @@ MonoBehaviour:
   sprite: {fileID: 4702413555579791003}
   particle: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
     type: 3}
-  timeBetweenSpawns: 2
+  timeBetweenSpawns: 1.5
   spreadDistance: 1.5
   spreadAngle: 30
   spawning: 0

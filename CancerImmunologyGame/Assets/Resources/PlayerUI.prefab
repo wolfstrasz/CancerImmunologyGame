@@ -1698,7 +1698,7 @@ MonoBehaviour:
   maxPowerUp: 100
   powerUp: 100
   powerUpIncreaseValue: 2
-  powerUpDecreaseValue: -2
+  powerUpDecreaseValue: -3
   kc: {fileID: 0}
 --- !u!114 &326316518847891427
 MonoBehaviour:
