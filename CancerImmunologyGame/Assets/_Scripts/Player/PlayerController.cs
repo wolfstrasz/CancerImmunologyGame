@@ -34,7 +34,7 @@ namespace Player
 			kc.controller = this;
 			kcSense = kc.Sense;
 			kcSense.controller = this;
-			rangeDisplay.Initialise(kc.Range, kc.Fov);
+			rangeDisplay.Initialise(kc);
 
 			GlobalGameData.player = kc.gameObject;
 		}

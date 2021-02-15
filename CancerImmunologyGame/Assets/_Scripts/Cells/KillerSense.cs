@@ -24,7 +24,7 @@ namespace Cells
 		[Header("Debug (Read only)")]
 		[SerializeField]
 		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-		//internal List<CancerCell> CancerCellsInRange => cancerCellsInRange;
+		public List<CancerCell> CancerCellsInRange => cancerCellsInRange;
 
 		void Awake()
 		{

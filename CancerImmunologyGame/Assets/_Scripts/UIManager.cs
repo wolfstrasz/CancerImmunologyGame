@@ -118,4 +118,14 @@ public class UIManager : Singleton<UIManager>
 		GlobalGameData.isGameplayPaused = lastGameplaySpeed;
 	}
 
+	public void UseAutoAim()
+	{
+		GlobalGameData.autoAim = true;
+	}
+
+
+	public void NoAutoAim()
+	{
+		GlobalGameData.autoAim = false;
+	}
 }

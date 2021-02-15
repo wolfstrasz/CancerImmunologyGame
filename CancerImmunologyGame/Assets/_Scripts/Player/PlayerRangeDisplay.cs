@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cells;
 using Cancers;
 
 namespace Player
@@ -22,14 +23,17 @@ namespace Player
 		private float fov = 90.0f;
 		
 		internal Quaternion orientation => transform.rotation;
+		KillerSense killerSense = null;
+		Vector3 worldPosition = Vector3.zero;
 
-		internal void Initialise(float _range, float _fov)
+		internal void Initialise(KillerCell kc)
 		{
-			fov = _fov;
-			range = _range;
-			fovImage.fillAmount = _fov / 360.0f;
-			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, _fov / 2.0f);
-			outerCircle.localScale = new Vector3(_range, _range, 1.0f);
+			killerSense = kc.Sense;
+			fov = kc.Fov;
+			range = kc.Range;
+			fovImage.fillAmount = kc.Fov / 360.0f;
+			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, kc.Fov / 2.0f);
+			outerCircle.localScale = new Vector3(kc.Range, kc.Range, 1.0f);
 		}
 
 
@@ -43,7 +47,32 @@ namespace Player
 			outerCircle.localScale = new Vector3(range, range, 1.0f);
 #endif
 
-			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+			if (GlobalGameData.autoAim)
+			{
+				if (!(killerSense.CancerCellsInRange.Count > 0)) return;
+
+				CancerCell closestCell = killerSense.CancerCellsInRange[0];
+				float minDist = Vector3.SqrMagnitude(closestCell.transform.position - transform.position);
+
+				for (int i = 1; i < killerSense.CancerCellsInRange.Count; ++i)
+				{
+					float dist = Vector3.SqrMagnitude(killerSense.CancerCellsInRange[i].transform.position - transform.position);
+					if (dist < minDist)
+					{
+						minDist = dist;
+						closestCell = killerSense.CancerCellsInRange[i];
+					}
+				}
+
+				worldPosition = closestCell.transform.position;
+			}
+			else
+			{
+
+				worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			}
+			
 			worldPosition.z = 0.0f;
 
 			Vector3 diff = worldPosition - transform.position;
@@ -52,6 +81,8 @@ namespace Player
 			transform.rotation = Quaternion.Euler(0.0f, 0.0f, spawnRotationAngle);
 			
 		}
+
+
 
 	}
 }
