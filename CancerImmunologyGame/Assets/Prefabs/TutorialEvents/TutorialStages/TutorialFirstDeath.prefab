@@ -68,7 +68,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: pauseGameplay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -196,7 +196,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: pauseGameplay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}

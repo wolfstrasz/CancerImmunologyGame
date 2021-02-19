@@ -175,6 +175,11 @@ PrefabInstance:
         microscope button at the top left corner. The microscope will allow you to
         have a look at cells in the body in more detail."
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_Name
@@ -572,6 +577,11 @@ PrefabInstance:
       propertyPath: waitBeforeSkip
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_Name
@@ -670,6 +680,11 @@ PrefabInstance:
       value: Looking through your microscope, you can see a T Killer Cell just like
         you! On the right hand side, you will find notes and more information about
         different cell types. The more you progress the more notes you will unlock.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -857,6 +872,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBeforeFinish
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
@@ -1477,7 +1497,7 @@ PrefabInstance:
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: pauseGameplay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
@@ -1846,7 +1866,7 @@ PrefabInstance:
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: pauseGameplay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
@@ -1974,6 +1994,11 @@ PrefabInstance:
       propertyPath: timeBeforeFinish
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
 --- !u!114 &1787491974049446959 stripped
@@ -2099,6 +2124,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBeforeFinish
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
@@ -2341,6 +2371,11 @@ PrefabInstance:
       propertyPath: timeBeforeFinish
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
 --- !u!4 &1787491974347541525 stripped
@@ -2467,7 +2502,7 @@ PrefabInstance:
     - target: {fileID: 2368029707718660503, guid: 9af16900e1678f34db58713b6c9a893f,
         type: 3}
       propertyPath: pauseGameplay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9af16900e1678f34db58713b6c9a893f, type: 3}
@@ -2593,6 +2628,11 @@ PrefabInstance:
       propertyPath: text
       value: "Everytime you encounter a new cell, your microscope will glow, meaning
         you will have unlocked that cell\u2019s information. Have a look!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -3103,6 +3143,11 @@ PrefabInstance:
         cell plates below. Give it a try by clicking on the one with a Dendritic
         Cell! '
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_Name
@@ -3448,6 +3493,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9180915438055013551, guid: 6c3c25242102bbb4b9c9940258137b58,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c3c25242102bbb4b9c9940258137b58, type: 3}
