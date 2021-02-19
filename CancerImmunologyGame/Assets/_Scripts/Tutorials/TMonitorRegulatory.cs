@@ -19,9 +19,9 @@ namespace Tutorials
 			regCells.AddRange(FindObjectsOfType<RegulatoryCell>());
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
-			if (GlobalGameData.isGameplayPaused || !GlobalGameData.areControlsEnabled) return false;
+			if (GlobalGameData.isGameplayPaused) return false;
 
 			foreach (RegulatoryCell cell in regCells)
 			{

@@ -14,7 +14,7 @@ namespace Tutorials
 		{
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			if (Cellpedia.Instance.IsCellpediaOpened)
 				return true;

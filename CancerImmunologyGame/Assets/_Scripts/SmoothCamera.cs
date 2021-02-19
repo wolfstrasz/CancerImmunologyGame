@@ -101,7 +101,7 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		if (distance > 0.01f)
 		{
 			// Time.deltaTime switch to unscaledDeltaTime to cover when game is paused
-			focusPosition = Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusCenteringSpeed), Time.unscaledDeltaTime));
+			focusPosition = Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusCenteringSpeed), Time.deltaTime));
 		}
 		else
 		{

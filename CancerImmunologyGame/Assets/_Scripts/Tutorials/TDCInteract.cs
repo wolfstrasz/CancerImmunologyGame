@@ -17,7 +17,7 @@ namespace Tutorials
 			cellToInteractWithPlayer = FindObjectOfType<DendriticCell>();
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			return cellToInteractWithPlayer.HasInteracted;
 		}

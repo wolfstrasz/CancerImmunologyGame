@@ -93,7 +93,6 @@ namespace Player
 			energyBar.SetValue(kc.Energy);
 
 			// Update power-up
-			if (GlobalGameData.isGameplayPaused) return;
 
 
 			if (GlobalGameData.isInPowerUpMode)

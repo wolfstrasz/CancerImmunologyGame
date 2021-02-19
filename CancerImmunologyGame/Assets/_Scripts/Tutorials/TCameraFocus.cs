@@ -104,7 +104,7 @@ namespace Tutorials
 			SmoothCamera.Instance.SetNewFocus(closestCell.gameObject);
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			if (SmoothCamera.Instance.isCameraFocused)
 			{

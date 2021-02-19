@@ -57,7 +57,7 @@ namespace Core
 				activeState.OnStateEnter();
 			}
 
-			internal void RemoveState() // Removes the state and continues with the previous state
+			internal void RemoveCurrentState() // Removes the state and continues with the previous state
 			{
 
 				if (stateHistory.Count <= 0)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using Bloodflow;
+using Tutorials;
 
 namespace Core
 {
@@ -32,6 +33,7 @@ namespace Core
 
 			internal override void OnUpdate()
 			{
+				TutorialManager.Instance.OnUpdate();
 				PlayerController.Instance.OnUpdate();
 				for (int i = 0; i < GlobalGameData.KillerCells.Count; ++i)
 				{
@@ -49,34 +51,6 @@ namespace Core
 					owner.SetState(new MainMenuState(owner));
 					return;
 				}
-
-#if !REMOVE_PLAYER_DEBUG
-				if (Input.GetKeyDown(KeyCode.R))
-				{
-					PlayerUI.Instance.ActivateImmunotherapyPanel();
-				}
-				if (Input.GetKeyDown(KeyCode.Z))
-				{
-					CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.TKILLER);
-				}
-				if (Input.GetKeyDown(KeyCode.X))
-				{
-					CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
-				}
-				if (Input.GetKeyDown(KeyCode.C))
-				{
-					CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.CANCER);
-				}
-				if (Input.GetKeyDown(KeyCode.V))
-				{
-					CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
-				}
-				if (Input.GetKeyDown(KeyCode.B))
-				{
-					CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
-				}
-
-#endif
 			}
 		}
 	}

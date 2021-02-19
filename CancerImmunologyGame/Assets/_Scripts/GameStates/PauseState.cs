@@ -8,26 +8,27 @@ namespace Core
 	{
 		public class PauseState : GameState
 		{
+
+			private float prevTimeScale = 1.0f;
 			public PauseState(GameStateController owner) : base(owner) { }
 
 			internal override void OnFixedUpdate()
 			{
-				throw new System.NotImplementedException();
 			}
 
 			internal override void OnStateEnter()
 			{
-				throw new System.NotImplementedException();
+				prevTimeScale = Time.timeScale;
+				Time.timeScale = 0.0f;
 			}
 
 			internal override void OnStateExit()
 			{
-				throw new System.NotImplementedException();
+				Time.timeScale = prevTimeScale;
 			}
 
 			internal override void OnUpdate()
 			{
-				throw new System.NotImplementedException();
 			}
 		}
 	}

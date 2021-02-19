@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Tutorials;
 
 namespace Core
 {
@@ -13,22 +14,21 @@ namespace Core
 
 			internal override void OnFixedUpdate()
 			{
-				throw new System.NotImplementedException();
 			}
 
 			internal override void OnStateEnter()
 			{
-				throw new System.NotImplementedException();
+				GlobalGameData.isGameplayPaused = true;
 			}
 
 			internal override void OnStateExit()
 			{
-				throw new System.NotImplementedException();
+				GlobalGameData.isGameplayPaused = false;
 			}
 
 			internal override void OnUpdate()
 			{
-				throw new System.NotImplementedException();
+				TutorialManager.Instance.OnUpdate();
 			}
 		}
 	}

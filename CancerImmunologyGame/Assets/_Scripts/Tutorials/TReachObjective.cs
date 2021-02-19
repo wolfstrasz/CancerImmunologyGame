@@ -31,7 +31,7 @@ namespace Tutorials {
 			popup.SetAttributes(size, isVisible, this);
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			return notifiedFromPopup;
 		}

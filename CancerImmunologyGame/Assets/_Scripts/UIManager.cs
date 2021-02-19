@@ -109,13 +109,16 @@ public class UIManager : Singleton<UIManager>
 
 	public void OnOpenGameMenu()
 	{
-		lastGameplaySpeed = GlobalGameData.isGameplayPaused;
-		GlobalGameData.isGameplayPaused = true;
+		//lastGameplaySpeed = GlobalGameData.isGameplayPaused;
+		//GlobalGameData.isGameplayPaused = true;
+		Core.GameManagement.GameManager.Instance.RequestGamePause();
 	}
 
 	public void OnCloseGameMenu()
 	{
-		GlobalGameData.isGameplayPaused = lastGameplaySpeed;
+		//GlobalGameData.isGameplayPaused = lastGameplaySpeed;
+		Core.GameManagement.GameManager.Instance.RequestGameUnpause();
+
 	}
 
 	public void UseAutoAim()

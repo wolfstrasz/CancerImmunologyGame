@@ -23,7 +23,6 @@ public class KillerParticle : MonoBehaviour
 
 	void Update()
 	{
-		if (GlobalGameData.isGameplayPaused) return;
 		OnUpdate();
 	}
 

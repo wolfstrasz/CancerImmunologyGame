@@ -120,7 +120,7 @@ namespace Cancers
 
 			if (cancerCells.Count >= maximumCells) return;
 
-			if (!GlobalGameData.isGameplayPaused && canDivide)
+			if (canDivide)
 			{
 				timePassed += Time.deltaTime;
 				if (timePassed > timeBetweenDivisions)

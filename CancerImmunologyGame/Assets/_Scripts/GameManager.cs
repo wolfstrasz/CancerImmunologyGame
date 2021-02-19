@@ -15,12 +15,6 @@ namespace Core
 		{
 			private GameStateController stateController = new GameStateController();
 
-			// Game state definition through function
-			private delegate void StateFunction();
-			StateFunction StateUpdate;
-			StateFunction StateFixedUpdate;
-			private bool isLevelInitialised = false;
-
 			void Update()
 			{
 				stateController.OnUpdate();
@@ -43,7 +37,6 @@ namespace Core
 
 				GlobalGameData.gameplaySpeed = 1.0f;
 				GlobalGameData.gameSpeed = 1.0f;
-				GlobalGameData.isGameplayPaused = false;
 				GlobalGameData.isInitialised = true;
 			}
 
@@ -66,6 +59,26 @@ namespace Core
 			private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 			{
 				sceneLoaded = true;
+			}
+
+			public void RequestGameplayPause()
+			{
+				stateController.AddState(new GameplayPauseState(stateController));
+			}
+
+			public void RequestGameplayUnpause()
+			{
+				stateController.RemoveCurrentState();
+			}
+
+			public void RequestGamePause()
+			{
+				stateController.AddState(new PauseState(stateController));
+			}
+
+			public void RequestGameUnpause()
+			{
+				stateController.RemoveCurrentState();
 			}
 		}
 	}

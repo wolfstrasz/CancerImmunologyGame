@@ -21,7 +21,7 @@ namespace Tutorials
 			
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			if (GlobalGameData.Cancers.Count == cancer_number)
 				return true;

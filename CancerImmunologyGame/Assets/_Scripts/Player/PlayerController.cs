@@ -19,6 +19,8 @@ namespace Player
 
 		// Movement
 		[SerializeField]
+		private bool areControlsEnabled = true;
+		[SerializeField]
 		private bool isPlayerRespawning = false;
 		private Vector2 movementVector = Vector2.zero;
 
@@ -76,7 +78,7 @@ namespace Player
 				{
 					transform.position = kc.transform.position;
 					heartOutroEnd = false;
-					GlobalGameData.areControlsEnabled = true;
+					areControlsEnabled = true;
 
 					//kc.IsKinematic = false;
 				}
@@ -113,6 +115,7 @@ namespace Player
 			}
 #endif
 			PlayerUI.Instance.OnUpdate();
+			rangeDisplay.OnUpdate();
 
 
 			if (isPlayerRespawning)
@@ -127,12 +130,12 @@ namespace Player
 				return;
 			}
 
-			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
+
+			if (kc.IsBusy || !areControlsEnabled)
 			{
 				return;
 			}
 
-			
 
 			if (canAttack)
 			{
@@ -153,7 +156,7 @@ namespace Player
 		// Physics update
 		public void OnFixedUpdate()
 		{
-			if (GlobalGameData.isGameplayPaused || kc.IsBusy || !GlobalGameData.areControlsEnabled)
+			if (kc.IsBusy || !areControlsEnabled)
 			{
 				kc.MovementVector = Vector2.zero;
 				return;
@@ -197,7 +200,7 @@ namespace Player
 		public void StartHeartMovement()
 		{
 			heartOutro = true;
-			GlobalGameData.areControlsEnabled = false;
+			areControlsEnabled = false;
 			//kc.IsKinematic = true;
 		}
 

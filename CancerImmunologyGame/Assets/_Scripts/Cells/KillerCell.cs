@@ -117,15 +117,14 @@ public class KillerCell : Cell
 
 	public void OnFixedUpdate()
 	{
-		if (!isDead && GlobalGameData.areControlsEnabled)
+		if (!isDead)
 		{
 			Move();
 #if BLOODFLOW_ROTATION
 			FixRotation();
 #else
 #endif
-
-}
+		}
 	}
 
 
@@ -230,6 +229,7 @@ public class KillerCell : Cell
 	{
 		movementVector = movementVector * speed * Time.fixedDeltaTime * ExhaustionEffect();
 		rb.MovePosition(movementVector + flowVector + rb.position);
+		movementVector = Vector3.zero;
 	}
 
 
