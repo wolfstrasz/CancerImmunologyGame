@@ -39,7 +39,7 @@ namespace Tutorials
 			playerKC = GlobalGameData.player.GetComponent<KillerCell>();
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			if (monitorHealth && playerKC.Health <= healthValue)
 				return true ^ invertChecks;

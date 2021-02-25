@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Core.GameManagement;
 
 namespace Tutorials
 {
@@ -13,12 +14,9 @@ namespace Tutorials
 		internal TutorialStage owner = null;
 
 		[SerializeField]
-		protected bool removeControl;
-		[SerializeField]
 		protected bool pauseGameplay;
-
 		private bool prevGameplayValue = false;
-		private bool prevControlValue = true;
+
 		private bool finished = true;
 
 		public void StartEvent()
@@ -27,21 +25,15 @@ namespace Tutorials
 			{
 				finished = true;
 				owner.OnEventFinished();
+				return;
 			}
 
-			if (removeControl)
-			{
-				prevControlValue = GlobalGameData.areControlsEnabled;
-				Debug.Log("On start control: " + prevControlValue);
-
-				GlobalGameData.areControlsEnabled = false;
-			}
 			if (pauseGameplay)
 			{
-
-				prevGameplayValue = GlobalGameData.isGameplayPaused;
-				Debug.Log("On start gameplay: " + prevGameplayValue);
-				GlobalGameData.isGameplayPaused = true;
+				GameManager.Instance.RequestGameplayPause();
+				//prevGameplayValue = GlobalGameData.isGameplayPaused;
+				//Debug.Log("On start gameplay: " + prevGameplayValue);
+				//GlobalGameData.isGameplayPaused = true;
 			}
 
 			OnStartEvent();
@@ -50,16 +42,11 @@ namespace Tutorials
 
 		public void EndEvent()
 		{
-			if (removeControl)
-			{
-				GlobalGameData.areControlsEnabled = prevControlValue;
-				Debug.Log("On end controls: " + GlobalGameData.areControlsEnabled);
-			}
-
 			if (pauseGameplay)
 			{
-				GlobalGameData.isGameplayPaused = prevGameplayValue;
-				Debug.Log("On end pasued: " + GlobalGameData.isGameplayPaused);
+				//GlobalGameData.isGameplayPaused = prevGameplayValue;
+				//Debug.Log("On end pasued: " + GlobalGameData.isGameplayPaused);
+				GameManager.Instance.RequestGameplayUnpause();
 			}
 
 			OnEndEvent();
@@ -67,14 +54,14 @@ namespace Tutorials
 
 		protected abstract void OnStartEvent();
 
-		protected abstract bool OnUpdate();
+		protected abstract bool OnUpdateEvent();
 
 		protected abstract void OnEndEvent();
 
-		void Update()
+		internal void OnUpdate()
 		{
 			if (finished) return;
-			if (OnUpdate())
+			if (OnUpdateEvent())
 			{
 				EndEvent();
 				finished = true;

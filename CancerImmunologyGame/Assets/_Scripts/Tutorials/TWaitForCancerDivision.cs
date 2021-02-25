@@ -27,7 +27,7 @@ namespace Tutorials
 			cancers.AddRange(FindObjectsOfType<Cancer>());
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 
 			if(isWaitingToSeeDivision){

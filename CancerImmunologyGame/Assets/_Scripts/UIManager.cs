@@ -49,7 +49,7 @@ public class UIManager : Singleton<UIManager>
 
 	private IEnumerator WaitToStart()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSecondsRealtime(0.2f);
 		available = true;
 		MainMenuPanel.SetActive(false);
 		WinScreenPanel.SetActive(false);
@@ -80,7 +80,7 @@ public class UIManager : Singleton<UIManager>
 
 	private IEnumerator WaitToQuit()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSecondsRealtime(0.2f);
 		Application.Quit();
 	}
 	//public void ResetMainMenu()
@@ -109,13 +109,16 @@ public class UIManager : Singleton<UIManager>
 
 	public void OnOpenGameMenu()
 	{
-		lastGameplaySpeed = GlobalGameData.isGameplayPaused;
-		GlobalGameData.isGameplayPaused = true;
+		//lastGameplaySpeed = GlobalGameData.isGameplayPaused;
+		//GlobalGameData.isGameplayPaused = true;
+		Core.GameManagement.GameManager.Instance.RequestGamePause();
 	}
 
 	public void OnCloseGameMenu()
 	{
-		GlobalGameData.isGameplayPaused = lastGameplaySpeed;
+		//GlobalGameData.isGameplayPaused = lastGameplaySpeed;
+		Core.GameManagement.GameManager.Instance.RequestGameUnpause();
+
 	}
 
 	public void UseAutoAim()

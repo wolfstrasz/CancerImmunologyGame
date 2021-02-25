@@ -38,7 +38,7 @@ namespace Tutorials
 			}
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			return true;
 		}

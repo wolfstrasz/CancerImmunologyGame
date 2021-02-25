@@ -9,7 +9,6 @@ public static class GlobalGameData
 {
 	public static bool autoAim = false;
 	public static bool isGameplayPaused = false;
-	public static bool areControlsEnabled = true;
 	public static bool isInitialised = false;
     public static bool isInPowerUpMode = false;
 	public static float gameplaySpeed = 1.0f;

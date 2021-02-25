@@ -28,6 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 7818698743154477006}
   - {fileID: 1495698648721124503}
   - {fileID: 9131200580056456950}
   - {fileID: 9131200579298704010}
@@ -49,12 +50,125 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   events:
+  - {fileID: 7818698743154477007}
   - {fileID: 1495698648721124502}
   - {fileID: 9131200580056456953}
   - {fileID: 9131200579298704005}
   - {fileID: 3358924430417764726}
   - {fileID: 5080899040950371874}
   currentEvent: {fileID: 0}
+--- !u!1001 &586278953261672990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1480020704293191033}
+    m_Modifications:
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_Name
+      value: ReachColon
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164527, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -201.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -70.521
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -100.510704
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: isVisible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
+        type: 3}
+      propertyPath: size
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 843fc17b13eb7844b8af7432d5ab8182, type: 3}
+--- !u!4 &7818698743154477006 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7251772380236164560, guid: 843fc17b13eb7844b8af7432d5ab8182,
+    type: 3}
+  m_PrefabInstance: {fileID: 586278953261672990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7818698743154477007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7251772380236164561, guid: 843fc17b13eb7844b8af7432d5ab8182,
+    type: 3}
+  m_PrefabInstance: {fileID: 586278953261672990}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d9cc357b6db394682c9a191f40f524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1495698648476339439
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78,6 +192,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TTextEventWithButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -117,7 +236,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -199,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 5101877013845843334, guid: aa4a35e6b686bb942b25018c4ff944b6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5101877013845843334, guid: aa4a35e6b686bb942b25018c4ff944b6,
         type: 3}
@@ -230,6 +349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TDiscoverNewCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 9015196134746575061, guid: aa4a35e6b686bb942b25018c4ff944b6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa4a35e6b686bb942b25018c4ff944b6, type: 3}
@@ -275,6 +399,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TTextEventWithButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -313,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -362,6 +491,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonitorForRegulatoryCells
       objectReference: {fileID: 0}
+    - target: {fileID: 1100536268678929205, guid: 21a617ec1fea348449f00518b6fcc66a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1100536268678929206, guid: 21a617ec1fea348449f00518b6fcc66a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -400,7 +534,7 @@ PrefabInstance:
     - target: {fileID: 1100536268678929206, guid: 21a617ec1fea348449f00518b6fcc66a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1100536268678929206, guid: 21a617ec1fea348449f00518b6fcc66a,
         type: 3}
@@ -461,6 +595,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TTextEventWithButton (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -499,7 +638,7 @@ PrefabInstance:
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232729, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}

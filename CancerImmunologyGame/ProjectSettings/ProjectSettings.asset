@@ -583,6 +583,7 @@ PlayerSettings:
   webGLWasmStreaming: 0
   scriptingDefineSymbols:
     1: BLOODFLOW_ROTATION
+    13: BLOODFLOW_ROTATION
   platformArchitecture: {}
   scriptingBackend:
     Standalone: 1

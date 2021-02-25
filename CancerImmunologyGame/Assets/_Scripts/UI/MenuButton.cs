@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 
-public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler
+public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 	[SerializeField]
 	private AudioSource audioSource = null;
@@ -25,11 +25,12 @@ public class MenuButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, I
 	}
 
 	// When selected.
-	public void OnSelect(BaseEventData eventData)
+	public void OnPointerClick(PointerEventData eventData)
 	{
 		// Do something.
 		audioSource.Play();
 		gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		Debug.Log("<color=red>Event:</color> Completed selection.");
 	}
+
 }

@@ -6,20 +6,31 @@ namespace Tutorials
 {
 	public class TutorialStage : MonoBehaviour
 	{
-		public List<TutorialEvent> events = new List<TutorialEvent>();
-		public TutorialEvent currentEvent = null;
+		[SerializeField]
+		private List<TutorialEvent> events = new List<TutorialEvent>();
+		[SerializeField]
+		private TutorialEvent currentEvent = null;
 		private int event_index = 0;
+		internal bool isFinished = false;
 
-		public void StartStage()
+	
+		internal void OnUpdate()
 		{
-			Debug.Log(gameObject.name + ": Start Stage");
+			currentEvent.OnUpdate();
+		}
+
+
+		internal void InitialiseStage()
+		{
+			//events = new List<TutorialEvent>();
+			//events.AddRange(gameObject.GetComponentsInChildren<TutorialEvent>());
 			if (event_index < events.Count)
 			{
 				NextEvent();
 			}
 			else
 			{
-				StageFinished();
+				isFinished = true;
 			}
 		}
 
@@ -33,7 +44,7 @@ namespace Tutorials
 
 		}
 
-		public void OnEventFinished()
+		internal void OnEventFinished()
 		{
 			currentEvent.gameObject.SetActive(false);
 			Debug.Log(gameObject.name + ": On Event Finished");
@@ -44,16 +55,9 @@ namespace Tutorials
 			}
 			else
 			{
-				StageFinished();
+				isFinished = true;
 			}
 		}
-
-		public void StageFinished()
-		{
-			Debug.Log(gameObject.name + ": Stage finsihed");
-			TutorialManager.Instance.OnStageFinished(this);
-		}
-
 
 	}
 }

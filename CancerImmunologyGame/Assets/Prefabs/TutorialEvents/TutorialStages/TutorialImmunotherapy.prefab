@@ -295,6 +295,11 @@ PrefabInstance:
       value: "In the bottom right corner you will see your \u2018immunotherapy bar\u2019
         (power up bar) - when it is full it means that you are ready to use the immunotherapy."
       objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
       propertyPath: m_Name
@@ -393,6 +398,11 @@ PrefabInstance:
       value: "Keep in mind that the effect of immunotherapies do not last forever,
         so keep an eye on your power up bar. Give it a try and see how much stronger
         you\u2019ll get!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -782,6 +792,11 @@ PrefabInstance:
       propertyPath: text
       value: However, do not fear! Cancer researchers have developed cancer treatments
         known as immunotherapies.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}
@@ -1188,6 +1203,11 @@ PrefabInstance:
       propertyPath: text
       value: These are therapies which reverse immune cell exhaustion, giving immune
         cells like you the extra boost they need to get rid of cancer.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7672237603188232726, guid: 7904b7a2ed8aa3a49a44258019484f2e,
+        type: 3}
+      propertyPath: pauseGameplay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7672237603188232727, guid: 7904b7a2ed8aa3a49a44258019484f2e,
         type: 3}

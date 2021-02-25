@@ -20,7 +20,7 @@ namespace Tutorials
 			Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			return true;
 		}

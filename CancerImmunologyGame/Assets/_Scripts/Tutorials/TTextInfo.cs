@@ -41,7 +41,7 @@ namespace Tutorials
 				StartCoroutine(WaitBeforeFinish());
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 			if (allowSkip)
 			{

@@ -9,184 +9,77 @@ using Cancers;
 
 namespace Core
 {
-	public class GameManager : Singleton<GameManager>
+	namespace GameManagement
 	{
-		// Game state definition through function
-		private delegate void StateFunction();
-		StateFunction StateUpdate;
-		StateFunction StateFixedUpdate;
-		private bool isLevelInitialised = false;
-		
-		void Update()
+		public class GameManager : Singleton<GameManager>
 		{
-			StateUpdate();
-		}
+			private GameStateController stateController = new GameStateController();
 
-		void FixedUpdate()
-		{
-			StateFixedUpdate();
-		}
-
-		public void Initialise()
-		{
-			Debug.Log("Initialise Game Manager");
-			Time.timeScale = 1.0f;
-			SceneManager.activeSceneChanged += OnActiveSceneChanged;
-
-			SceneManager.sceneLoaded += OnSceneLoaded;
-			StateUpdate = LevelMainMenu;
-			StateFixedUpdate = NoLevelFixedRunning;
-
-			GlobalGameData.gameplaySpeed = 1.0f;
-			GlobalGameData.gameSpeed = 1.0f;
-			GlobalGameData.isGameplayPaused = false;
-			GlobalGameData.isInitialised = true;
-		}
-
-
-		public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
-		{
-			StateUpdate = LevelLoading;
-			StateFixedUpdate = NoLevelFixedRunning;
-		}
-
-		private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-		{
-			if (scene.buildIndex == 0) return;
-
-			if (scene.buildIndex == 1)
+			void Update()
 			{
-				StateUpdate = LevelMainMenu;
-				UIManager.Instance.OpenMainMenu();
-				return;
+				stateController.OnUpdate();
 			}
 
-			StartCoroutine(InitialiseLevel());
-		}
-
-		private IEnumerator InitialiseLevel()
-		{
-			BackgroundMusic.Instance.Initialise();
-			SmoothCamera.Instance.Reset();
-			UIManager.Instance.ClosePanels();
-			GlobalGameData.ResetObjectPool();
-
-			PlayerController.Instance.Initialise();
-			TutorialManager.Instance.Initialise();
-			BloodflowController.Instance.Initialise();
-			CellpediaUI.Cellpedia.Instance.Initialise();
-
-			isLevelInitialised = true;
-			yield return null;
-		}
-
-		private void LevelMainMenu()
-		{
-			//Debug.Log("LevelMainMenu");
-		}
-
-		private void LevelLoading()
-		{
-			//Debug.Log("LevelLoading");
-			if (isLevelInitialised)
+			void FixedUpdate()
 			{
-				Debug.Log("Level Loaded");
-				StateUpdate = OnLevelEnterRunning;
-			}
-		}
-
-		private void OnLevelEnterRunning()
-		{
-			GlobalGameData.isGameplayPaused = false;
-			StateUpdate = LevelRunning;
-			StateFixedUpdate = LevelFixedRunning;
-		}
-
-		private void LevelRunning()
-		{
-			PlayerController.Instance.OnUpdate();
-			for (int i = 0; i < GlobalGameData.KillerCells.Count; ++i)
-			{
-				GlobalGameData.KillerCells[i].OnUpdate();
+				stateController.OnFixedUpdate();
 			}
 
-			for (int i = 0; i < GlobalGameData.Cancers.Count; ++i)
+			public void Initialise()
 			{
-				GlobalGameData.Cancers[i].OnUpdate();
-			}
 
-			if (GlobalGameData.Cancers.Count == 0)
-			{
-				OnLevelFinished();
-				return;
+				Time.timeScale = 1.0f;
+				SceneManager.activeSceneChanged += OnActiveSceneChanged;
+
+				SceneManager.sceneLoaded += OnSceneLoaded;
+				//StateUpdate = LevelMainMenu;
+				//StateFixedUpdate = NoLevelFixedRunning;
+
+				GlobalGameData.gameplaySpeed = 1.0f;
+				GlobalGameData.gameSpeed = 1.0f;
+				GlobalGameData.isInitialised = true;
 			}
 
 
-#if !REMOVE_PLAYER_DEBUG
-			if (Input.GetKeyDown(KeyCode.R))
+			internal bool sceneLoaded = false;
+			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
 			{
-				PlayerUI.Instance.ActivateImmunotherapyPanel();
-			}
-			if (Input.GetKeyDown(KeyCode.Z))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.TKILLER);
-			}
-			if (Input.GetKeyDown(KeyCode.X))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.DENDRITIC);
-			}
-			if (Input.GetKeyDown(KeyCode.C))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.CANCER);
-			}
-			if (Input.GetKeyDown(KeyCode.V))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.THELPER);
-			}
-			if (Input.GetKeyDown(KeyCode.B))
-			{
-				CellpediaUI.Cellpedia.Instance.UnlockCellDescription(CellpediaCells.REGULATORY);
+				if (nextScene.buildIndex == 0) return;
+				if (nextScene.buildIndex == 1)
+				{
+					stateController.SetState(new MainMenuState(stateController));
+					UIManager.Instance.OpenMainMenu();
+					return;
+				}
+
+				sceneLoaded = false;
+				stateController.SetState(new LoadState(stateController));
 			}
 
-#endif
+			private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+			{
+				sceneLoaded = true;
+			}
 
+			public void RequestGameplayPause()
+			{
+				stateController.AddState(new GameplayPauseState(stateController));
+			}
+
+			public void RequestGameplayUnpause()
+			{
+				stateController.RemoveCurrentState();
+			}
+
+			public void RequestGamePause()
+			{
+				stateController.AddState(new PauseState(stateController));
+			}
+
+			public void RequestGameUnpause()
+			{
+				stateController.RemoveCurrentState();
+			}
 		}
-
-		private void LevelFixedRunning()
-		{
-			PlayerController.Instance.OnFixedUpdate();
-			BloodflowController.Instance.OnFixedUpdate();
-			foreach (KillerCell kc in GlobalGameData.KillerCells)
-			{
-				kc.OnFixedUpdate();
-			}
-		}
-
-		private void NoLevelFixedRunning()
-		{
-
-		}
-
-		private void OnEnterLevelPause()
-		{
-			GlobalGameData.isGameplayPaused = true;
-			StateUpdate = LevelPaused;
-			StateFixedUpdate = NoLevelFixedRunning;
-		}
-
-		private void LevelPaused()
-		{
-
-		}
-
-		private void OnLevelFinished()
-		{
-			GlobalGameData.isGameplayPaused = true;
-			StateUpdate = LevelPaused;
-			StateFixedUpdate = NoLevelFixedRunning;
-			UIManager.Instance.WinScreen();
-		}
-
-
 	}
 }

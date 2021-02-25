@@ -20,7 +20,7 @@ namespace Tutorials
 			cancers.AddRange(FindObjectsOfType<Cancer>());
 		}
 
-		protected override bool OnUpdate()
+		protected override bool OnUpdateEvent()
 		{
 
 			foreach (Cancer cancer in cancers)
