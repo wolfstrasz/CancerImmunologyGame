@@ -2426,7 +2426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.79263175, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.3117895, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -4991,6 +4991,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuitBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 2515375834675780958, guid: 61f790bcd13b7224084bc6b7990cfe8a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2715232398010087517, guid: 61f790bcd13b7224084bc6b7990cfe8a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6019,6 +6024,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 2515375834675780958, guid: 61f790bcd13b7224084bc6b7990cfe8a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2715232398010087517, guid: 61f790bcd13b7224084bc6b7990cfe8a,
         type: 3}

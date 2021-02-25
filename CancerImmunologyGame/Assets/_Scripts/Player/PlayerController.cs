@@ -97,22 +97,22 @@ namespace Player
 #endif
 
 #if !REMOVE_PLAYER_DEBUG
-			if (Input.GetKeyDown(KeyCode.Keypad7))
-			{
-				kc.AddHealth(-20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad9))
-			{
-				kc.AddHealth(+20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad4))
-			{
-				kc.AddEnergy(-20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad6))
-			{
-				kc.AddEnergy(+20.0f);
-			}
+			//if (Input.GetKeyDown(KeyCode.Keypad7))
+			//{
+			//	kc.AddHealth(-20.0f);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Keypad9))
+			//{
+			//	kc.AddHealth(+20.0f);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Keypad4))
+			//{
+			//	kc.AddEnergy(-20.0f);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Keypad6))
+			//{
+			//	kc.AddEnergy(+20.0f);
+			//}
 #endif
 			PlayerUI.Instance.OnUpdate();
 			rangeDisplay.OnUpdate();
