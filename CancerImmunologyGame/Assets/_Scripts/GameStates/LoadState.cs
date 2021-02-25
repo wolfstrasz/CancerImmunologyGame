@@ -37,10 +37,12 @@ namespace Core
 
 			private void InitialiseLevel()
 			{
+				GlobalGameData.ResetObjectPool(); // Maybe move to OnState enter
+
 				BackgroundMusic.Instance.Initialise();
 				SmoothCamera.Instance.Reset();
 				UIManager.Instance.ClosePanels();
-				GlobalGameData.ResetObjectPool();
+				
 
 				PlayerController.Instance.Initialise();
 				TutorialManager.Instance.Initialise();

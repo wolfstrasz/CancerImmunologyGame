@@ -32,7 +32,10 @@ namespace Player
 		private bool areControlsEnabled = true;
 		[SerializeField]
 		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
-		
+
+
+		public KillerCell KC => kc;
+
 		public void Initialise()
 		{
 			PlayerUI.Instance.Initialise();
@@ -40,7 +43,6 @@ namespace Player
 			kc.Sense.controller = this;
 			kc.controller = this;
 			rangeDisplay.Initialise(kc);
-			GlobalGameData.player = kc.gameObject;
 		}
 
 
@@ -185,12 +187,29 @@ namespace Player
 		}
 
 		public void OnCellDeath()
-		{
-			gameObject.transform.position = kc.gameObject.transform.position;
+		{ 
+			// Find closest spawn location
+			List < PlayerRespawnArea > respawnLocations = GlobalGameData.RespawnAreas;
+			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
+			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Location);
+
+			foreach (var area in respawnLocations)
+			{
+				float distance = Vector3.Distance(transform.position, area.Location);
+				if (distance <= minDistance)
+				{
+					minDistance = distance;
+					closestRespawnLocation = area.Location;
+				}
+			}
+
+			kc.AddHealth(KillerCell.maxHealth);
+			kc.AddEnergy(KillerCell.maxEnergy);
+			kc.gameObject.transform.position = closestRespawnLocation;
+			gameObject.transform.position = closestRespawnLocation;
+
 			SmoothCamera.Instance.SetNewFocus(this.gameObject, true);
-			kc.gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(kc.gameObject.transform.position);
-			kc.AddHealth(KillerCell.MaxHealth);
-			kc.AddEnergy(KillerCell.MaxEnergy);
+
 			for (int i = 0; i < observers.Count; ++i)
 			{
 				observers[i].OnPlayerDeath();

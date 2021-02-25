@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Tutorials
 {
@@ -36,7 +37,7 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			playerKC = GlobalGameData.player.GetComponent<KillerCell>();
+			playerKC = PlayerController.Instance.KC;
 		}
 
 		protected override bool OnUpdateEvent()

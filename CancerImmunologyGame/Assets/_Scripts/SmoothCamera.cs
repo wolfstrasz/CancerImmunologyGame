@@ -65,12 +65,6 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		}
 	}
 
-	public void SetFocusToPlayer()
-	{
-		focusTarget = PlayerController.Instance.gameObject;
-		isCameraFocused = false;
-		free_roam = false;
-	}
 
 	// Target's position will change in Update, so camera should move focus here
 	void FixedUpdate()

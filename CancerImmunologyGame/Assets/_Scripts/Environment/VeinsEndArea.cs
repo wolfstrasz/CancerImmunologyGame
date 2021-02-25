@@ -23,7 +23,7 @@ namespace Bloodflow
 				exit.OnForcedExit(kc);
 			}
 
-			if (collider.gameObject == GlobalGameData.player)
+			if (collider.gameObject == PlayerController.Instance.KC.gameObject)
 			{
 				PlayerController.Instance.StartHeartMovement();
 			}

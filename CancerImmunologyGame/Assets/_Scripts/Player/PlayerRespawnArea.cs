@@ -9,7 +9,7 @@ namespace Player
 		public Vector3 Location => transform.position;
 		void Start()
 		{
-			GlobalGameData.AddSpawnLocation(this);
+			GlobalGameData.RespawnAreas.Add(this);
 		}
 	}
 }

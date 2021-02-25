@@ -22,10 +22,10 @@ public class KillerCell : Cell
 	private float immunotherapyEnergyRegain = 3.33f;
 
 	[SerializeField]
-	public static float MaxHealth = 100.0f;
+	public static float maxHealth = 100.0f;
 	private float health = 100.0f;
 	[SerializeField]
-	public static float MaxEnergy = 100.0f;
+	public static float maxEnergy = 100.0f;
 	private float energy = 100.0f;
 
 	[Header("Normal Attack")]
@@ -169,24 +169,24 @@ public class KillerCell : Cell
 
 		energy += value;
 
-		if (energy >= MaxEnergy)
+		if (energy >= maxEnergy)
 		{
-			energy = MaxEnergy;
+			energy = maxEnergy;
 		}
 		else if (energy <= 0.0f)
 		{
 			controller.OnCellDeath();
 		}
 
-		animator.SetFloat("ExhaustionRate", (MaxEnergy - energy) / MaxEnergy);
+		animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
 	}
 
 	public void AddHealth(float value)
 	{
 		health += value;
-		if (health > MaxHealth)
+		if (health > maxHealth)
 		{
-			health = MaxHealth;
+			health = maxHealth;
 			return;
 		}
 
@@ -200,7 +200,7 @@ public class KillerCell : Cell
 	{
 		if (GlobalGameData.isInPowerUpMode)
 			return immunotherapySpeedMultiplier;
-		return  energy / MaxEnergy;
+		return  energy / maxEnergy;
 	}
 
 	/// <summary>

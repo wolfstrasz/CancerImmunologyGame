@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Player;
 
 namespace Tutorials {
 	public class TutorialPopup : MonoBehaviour
@@ -21,7 +20,7 @@ namespace Tutorials {
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == GlobalGameData.player)
+			if (collider.gameObject == PlayerController.Instance.gameObject)
 			{
 				gameObject.SetActive(false);
 				Debug.Log("PopUpCollision");
