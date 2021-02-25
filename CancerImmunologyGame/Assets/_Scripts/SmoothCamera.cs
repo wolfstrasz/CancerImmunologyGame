@@ -50,11 +50,19 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		}
 	}
 
-	public void SetNewFocus(GameObject focusObject)
+	public void SetNewFocus(GameObject focusObject, bool instant = false)
 	{
 		focusTarget = focusObject;
 		isCameraFocused = false;
 		free_roam = false;
+
+		if (instant)
+		{
+			focusPosition = focusTarget.transform.position;
+			Vector3 lookDirection = transform.forward;
+			Vector3 lookPosition = focusPosition - lookDirection * zoomDistance;
+			transform.position = lookPosition;
+		}
 	}
 
 	public void SetFocusToPlayer()

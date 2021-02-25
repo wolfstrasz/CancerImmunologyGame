@@ -16,7 +16,6 @@ public class UIManager : Singleton<UIManager>
 	[SerializeField] private GameObject GameMenuPanel = null;
 	[SerializeField] private string SurveyURL = "";
 
-	private bool lastGameplaySpeed = false;
 	public void WinScreen()
 	{
 		WinScreenPanel.SetActive(true);
@@ -42,7 +41,6 @@ public class UIManager : Singleton<UIManager>
 	{
 		if (!available) return;
 		available = false;
-		lastGameplaySpeed = false;
 		Debug.Log("Play");
 		StartCoroutine(WaitToStart());
 	}
@@ -100,7 +98,6 @@ public class UIManager : Singleton<UIManager>
     {
 		if (!available) return;
 		available = false;
-		lastGameplaySpeed = false;
 		Debug.Log("Play");
 		StartCoroutine(WaitToStart());
     }
@@ -109,16 +106,12 @@ public class UIManager : Singleton<UIManager>
 
 	public void OnOpenGameMenu()
 	{
-		//lastGameplaySpeed = GlobalGameData.isGameplayPaused;
-		//GlobalGameData.isGameplayPaused = true;
 		Core.GameManagement.GameManager.Instance.RequestGamePause();
 	}
 
 	public void OnCloseGameMenu()
 	{
-		//GlobalGameData.isGameplayPaused = lastGameplaySpeed;
 		Core.GameManagement.GameManager.Instance.RequestGameUnpause();
-
 	}
 
 	public void UseAutoAim()

@@ -15,7 +15,6 @@ namespace Tutorials
 
 		[SerializeField]
 		protected bool pauseGameplay;
-		private bool prevGameplayValue = false;
 
 		private bool finished = true;
 

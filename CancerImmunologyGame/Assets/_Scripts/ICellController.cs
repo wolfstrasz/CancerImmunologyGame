@@ -7,5 +7,5 @@ public interface ICellController
 
 	void OnEnemiesInRange();
 	void OnEnemiesOutOfRange();
-
+	void OnCellDeath();
 }
