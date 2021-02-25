@@ -130,12 +130,6 @@ namespace Player
 			DebugInput();
 #endif
 
-			if (kc.IsBusy || !areControlsEnabled)
-			{
-				return;
-			}
-
-
 			if (canAttack)
 			{
 				kc.SpriteOrientation = rangeDisplay.orientation;
@@ -153,7 +147,7 @@ namespace Player
 
 		public void OnFixedUpdate()
 		{
-			if (kc.IsBusy || !areControlsEnabled)
+			if (!areControlsEnabled)
 			{
 				kc.MovementVector = Vector2.zero;
 				return;

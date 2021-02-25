@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICellController
-{
+public interface ICellController : 
+	ICellDeathObserver,
+	ICellEnemiesDetector {}
 
+public interface ICellDeathObserver
+{
+	void OnCellDeath();
+}
+
+public interface ICellEnemiesDetector
+{
 	void OnEnemiesInRange();
 	void OnEnemiesOutOfRange();
-	void OnCellDeath();
 }
