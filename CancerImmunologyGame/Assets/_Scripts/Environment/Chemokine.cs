@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Player;
 
 namespace Chemokines
 {
@@ -16,7 +15,7 @@ namespace Chemokines
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == GlobalGameData.player)
+			if (collider.gameObject == PlayerController.Instance.gameObject)
 			{
 				audio.Play();
 				render.enabled = false;

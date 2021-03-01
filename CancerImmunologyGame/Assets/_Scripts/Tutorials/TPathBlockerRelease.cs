@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace Tutorials
 {
@@ -25,7 +26,7 @@ namespace Tutorials
 				pathBlockers[0].gameObject.SetActive(false);
 				return;
 			}
-			Vector3 playerPos = GlobalGameData.player.transform.position;
+			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
 			float minDist = (pathBlockers[0].transform.position - playerPos).sqrMagnitude;
 			TutorialPathBlocker closestPB = pathBlockers[0];
 

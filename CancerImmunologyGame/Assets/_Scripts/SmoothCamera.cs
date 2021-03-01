@@ -50,19 +50,21 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		}
 	}
 
-	public void SetNewFocus(GameObject focusObject)
+	public void SetNewFocus(GameObject focusObject, bool instant = false)
 	{
 		focusTarget = focusObject;
 		isCameraFocused = false;
 		free_roam = false;
+
+		if (instant)
+		{
+			focusPosition = focusTarget.transform.position;
+			Vector3 lookDirection = transform.forward;
+			Vector3 lookPosition = focusPosition - lookDirection * zoomDistance;
+			transform.position = lookPosition;
+		}
 	}
 
-	public void SetFocusToPlayer()
-	{
-		focusTarget = PlayerController.Instance.gameObject;
-		isCameraFocused = false;
-		free_roam = false;
-	}
 
 	// Target's position will change in Update, so camera should move focus here
 	void FixedUpdate()

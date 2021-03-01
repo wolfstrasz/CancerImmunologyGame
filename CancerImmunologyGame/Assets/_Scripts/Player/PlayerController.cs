@@ -2,55 +2,90 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cells;
+using Cancers;
 
 namespace Player
 {
-	public class PlayerController : Singleton<PlayerController> , ICellController
+	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathListener
 	{
-		[SerializeField]
-		KillerCell kc = null;
-		KillerSense kcSense = null;
 
+		// TODO: REMOVE THIS FROM HERE
 		[SerializeField]
 		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
 		private bool heartOutro = false;
 		private bool heartOutroEnd = false;
 		private bool heartOutroCamera = false;
+		// ---------------------------------------
 
-		// Movement
 		[SerializeField]
-		private bool areControlsEnabled = true;
-		[SerializeField]
-		private bool isPlayerRespawning = false;
-		private Vector2 movementVector = Vector2.zero;
+		private KillerCell kc = null;
 
 		[Header("Range functionality")]
 		[SerializeField]
 		private PlayerRangeDisplay rangeDisplay = null;
 		private bool canAttack = false;
 
+		[Header("Debug (Read Only)")]
+		[SerializeField]
+		private Vector2 movementVector = Vector2.zero;
+		[SerializeField]
+		private bool areControlsEnabled = true;
+		[SerializeField]
+		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
+
+
+		public KillerCell KC => kc;
+
 		public void Initialise()
 		{
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.SetPlayerInfo(kc);
+			kc.Sense.controller = this;
 			kc.controller = this;
-			kcSense = kc.Sense;
-			kcSense.controller = this;
 			rangeDisplay.Initialise(kc);
-
-			GlobalGameData.player = kc.gameObject;
 		}
 
+
+		void OnTriggerEnter2D(Collider2D collider)
+		{
+			Cancer cancer = collider.GetComponent<Cancer>();
+			if (cancer != null)
+			{
+				BackgroundMusic.Instance.PlayBattleMusic();
+				cancer.SubscribeListener(this);
+			}
+		}
+
+		void OnTriggerExit2D(Collider2D collider)
+		{
+			Cancer cancer = collider.GetComponent<Cancer>();
+			if (cancer != null)
+			{
+
+				BackgroundMusic.Instance.PlayNormalMusic();
+				cancer.UnsubscribeListener(this);
+			}
+		}
+
+		//TODO : REMOVE THIS
 		public void OnCameraOutroFinished()
 		{
 			heartOutroEnd = true;
 			heartOutroCamera = false;
 		}
 
+		public void StartHeartMovement()
+		{
+			heartOutro = true;
+			areControlsEnabled = false;
+		}
+		//----------------------------
+
 		// input
 		public void OnUpdate()
 		{
 
+		
 			if (heartOutro)
 			{
 				if (Vector3.SqrMagnitude(transform.position - HeartOutroPosition) > 1.0f)
@@ -84,58 +119,18 @@ namespace Player
 				}
 				return;
 			}
-		
+			// -----------------------------------------
 
-	
+			// TODO: manage it better
 			transform.position = kc.transform.position;
-
-
-#if BLOODFLOW_ROTATION
-
 			transform.rotation = kc.transform.rotation;
-#else
-#endif
 
-#if !REMOVE_PLAYER_DEBUG
-			//if (Input.GetKeyDown(KeyCode.Keypad7))
-			//{
-			//	kc.AddHealth(-20.0f);
-			//}
-			//if (Input.GetKeyDown(KeyCode.Keypad9))
-			//{
-			//	kc.AddHealth(+20.0f);
-			//}
-			//if (Input.GetKeyDown(KeyCode.Keypad4))
-			//{
-			//	kc.AddEnergy(-20.0f);
-			//}
-			//if (Input.GetKeyDown(KeyCode.Keypad6))
-			//{
-			//	kc.AddEnergy(+20.0f);
-			//}
-#endif
 			PlayerUI.Instance.OnUpdate();
 			rangeDisplay.OnUpdate();
 
-
-			if (isPlayerRespawning)
-			{
-				WaitForCameraToFocusAfterRespawn();
-				return;
-			}
-   
-			if (kc.IsDead)
-			{
-				Respawn();
-				return;
-			}
-
-
-			if (kc.IsBusy || !areControlsEnabled)
-			{
-				return;
-			}
-
+#if PLAYER_DEBUG
+			DebugInput();
+#endif
 
 			if (canAttack)
 			{
@@ -150,13 +145,11 @@ namespace Player
 				kc.StopAttack();
 				kc.SpriteOrientation = Quaternion.identity;
 			}
-
 		}
 
-		// Physics update
 		public void OnFixedUpdate()
 		{
-			if (kc.IsBusy || !areControlsEnabled)
+			if (!areControlsEnabled)
 			{
 				kc.MovementVector = Vector2.zero;
 				return;
@@ -175,35 +168,7 @@ namespace Player
 			kc.MovementVector = movementVector;
 		}
 
-		// Respawning functionality
-		internal void Respawn()
-		{
-			SmoothCamera.Instance.isCameraFocused = false;
-			isPlayerRespawning = true;
-			//kc.IsKinematic = true;
-
-			// Update cell position and controller
-			kc.gameObject.transform.position = GlobalGameData.GetClosestSpawnLocation(kc.gameObject.transform.position);
-			gameObject.transform.position = kc.gameObject.transform.position;
-		}
-
-		private void WaitForCameraToFocusAfterRespawn()
-		{
-			if (SmoothCamera.Instance.isCameraFocused && kc.IsDead)
-			{
-				//kc.IsKinematic = false;
-				isPlayerRespawning = false;
-				kc.Respawn();
-			}
-		}
-
-		public void StartHeartMovement()
-		{
-			heartOutro = true;
-			areControlsEnabled = false;
-			//kc.IsKinematic = true;
-		}
-
+		// Subscribtions
 		public void OnEnemiesInRange()
 		{
 			rangeDisplay.gameObject.SetActive(true);
@@ -215,5 +180,73 @@ namespace Player
 			rangeDisplay.gameObject.SetActive(false);
 			canAttack = false;
 		}
+
+		public void OnCancerDeath()
+		{
+			BackgroundMusic.Instance.PlayNormalMusic();
+		}
+
+		public void OnCellDeath()
+		{ 
+			// Find closest spawn location
+			List < PlayerRespawnArea > respawnLocations = GlobalGameData.RespawnAreas;
+			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
+			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Location);
+
+			foreach (var area in respawnLocations)
+			{
+				float distance = Vector3.Distance(transform.position, area.Location);
+				if (distance <= minDistance)
+				{
+					minDistance = distance;
+					closestRespawnLocation = area.Location;
+				}
+			}
+
+			kc.AddHealth(KillerCell.maxHealth);
+			kc.AddEnergy(KillerCell.maxEnergy);
+			kc.gameObject.transform.position = closestRespawnLocation;
+			gameObject.transform.position = closestRespawnLocation;
+
+			SmoothCamera.Instance.SetNewFocus(this.gameObject, true);
+
+			for (int i = 0; i < observers.Count; ++i)
+			{
+				observers[i].OnPlayerDeath();
+			}
+		}
+
+		// Observers
+		public void SubscribeObserver(IPlayerObserver observer)
+		{
+			observers.Add(observer);
+		}
+
+		public void UnsubscribeObserver(IPlayerObserver observer)
+		{
+			observers.Remove(observer);
+		}
+
+#if PLAYER_DEBUG
+		private void DebugInput()
+		{
+			if (Input.GetKeyDown(KeyCode.Keypad7))
+			{
+				kc.AddHealth(-20.0f);
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad9))
+			{
+				kc.AddHealth(+20.0f);
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad4))
+			{
+				kc.AddEnergy(-20.0f);
+			}
+			if (Input.GetKeyDown(KeyCode.Keypad6))
+			{
+				kc.AddEnergy(+20.0f);
+			}
+		}
+#endif
 	}
 }

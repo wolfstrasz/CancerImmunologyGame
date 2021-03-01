@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cells;
 using Cancers;
+using Player;
 
 namespace Tutorials
 {
@@ -27,8 +28,9 @@ namespace Tutorials
 
 			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)
 			{
-				SmoothCamera.Instance.SetFocusToPlayer();
+				SmoothCamera.Instance.SetNewFocus(PlayerController.Instance.gameObject);
 			}
+
 			if (closestObjectTypeToFocusOn == FocusObjectType.DENDRITIC_CELL)
 			{
 				FindClosesDendritic();
@@ -48,13 +50,15 @@ namespace Tutorials
 
 		private void FindClosesDendritic()
 		{
-			DendriticCell[] dendriticCells = GameObject.FindObjectsOfType<DendriticCell>();
-			float closestDist = Vector3.SqrMagnitude(dendriticCells[0].gameObject.transform.position - GlobalGameData.player.transform.position);
+			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
+			DendriticCell[] dendriticCells = FindObjectsOfType<DendriticCell>();
+
+			float closestDist = Vector3.SqrMagnitude(dendriticCells[0].gameObject.transform.position - playerPos);
 			DendriticCell closestCell = dendriticCells[0];
 
 			foreach (DendriticCell cell in dendriticCells)
 			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - GlobalGameData.player.transform.position);
+				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
 				if (dist < closestDist)
 				{
 					closestDist = dist;
@@ -67,13 +71,15 @@ namespace Tutorials
 
 		private void FindClosestCancer()
 		{
-			Cancer[] cancers = GameObject.FindObjectsOfType<Cancer>();
-			float closestDist = Vector3.SqrMagnitude(cancers[0].gameObject.transform.position - GlobalGameData.player.transform.position);
+			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
+			Cancer[] cancers = FindObjectsOfType<Cancer>();
+
+			float closestDist = Vector3.SqrMagnitude(cancers[0].gameObject.transform.position - playerPos);
 			Cancer closestCell = cancers[0];
 
 			foreach (Cancer cell in cancers)
 			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - GlobalGameData.player.transform.position);
+				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
 				if (dist < closestDist)
 				{
 					closestDist = dist;
@@ -86,14 +92,14 @@ namespace Tutorials
 
 		private void FindClosestHelperCell()
 		{
-
+			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
 			HelperTCell[] helperCells = GameObject.FindObjectsOfType<HelperTCell>();
-			float closestDist = Vector3.SqrMagnitude(helperCells[0].gameObject.transform.position - GlobalGameData.player.transform.position);
+			float closestDist = Vector3.SqrMagnitude(helperCells[0].gameObject.transform.position - playerPos);
 			HelperTCell closestCell = helperCells[0];
 
 			foreach (HelperTCell cell in helperCells)
 			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - GlobalGameData.player.transform.position);
+				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
 				if (dist < closestDist)
 				{
 					closestDist = dist;

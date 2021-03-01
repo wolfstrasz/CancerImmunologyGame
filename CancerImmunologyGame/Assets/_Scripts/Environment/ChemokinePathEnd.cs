@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Player;
 
 namespace Chemokines {
 	public class ChemokinePathEnd : MonoBehaviour
@@ -8,9 +7,10 @@ namespace Chemokines {
 
 		[SerializeField]
 		private ChemokinPath owner = null;
+
 		void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == GlobalGameData.player)
+			if (collider.gameObject == PlayerController.Instance.gameObject)
 			{
 				owner.OnPlayerReachedEndOfPath();
 			}

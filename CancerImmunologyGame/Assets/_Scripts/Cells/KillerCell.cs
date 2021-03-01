@@ -22,10 +22,10 @@ public class KillerCell : Cell
 	private float immunotherapyEnergyRegain = 3.33f;
 
 	[SerializeField]
-	private static float maxHealth = 100.0f;
+	public static float maxHealth = 100.0f;
 	private float health = 100.0f;
 	[SerializeField]
-	private static float maxEnergy = 100.0f;
+	public static float maxEnergy = 100.0f;
 	private float energy = 100.0f;
 
 	[Header("Normal Attack")]
@@ -54,8 +54,6 @@ public class KillerCell : Cell
 	[Header("Debug only")]
 	[SerializeField]
 	private bool isBusy = false;
-	[SerializeField]
-	private bool isDead = false;
 	[SerializeField]
 	private bool queuePowerUp = false;
 	[SerializeField]
@@ -103,12 +101,8 @@ public class KillerCell : Cell
 	public float Fov { get => fov; }
 	public float Health { get => health; set => health = value; }
 	public float Energy { get => energy; set => energy = value; }
-	public bool IsBusy { get => isBusy; set => isBusy = value; }
-	public static float MaxEnergy { get => maxEnergy; set => maxEnergy = value; }
-	public static float MaxHealth { get => maxHealth; set => maxHealth = value; }
 	public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 	public Vector2 FlowVector { get => flowVector; set => flowVector = value; }
-	public bool IsDead { get => isDead; set => isDead = value; }
 
 #if BLOODFLOW_ROTATION
 	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
@@ -117,14 +111,14 @@ public class KillerCell : Cell
 
 	public void OnFixedUpdate()
 	{
-		if (!isDead)
-		{
-			Move();
+
+		if (isBusy) return;
+		Move();
 #if BLOODFLOW_ROTATION
-			FixRotation();
+		FixRotation();
 #else
 #endif
-		}
+	
 	}
 
 
@@ -169,15 +163,6 @@ public class KillerCell : Cell
 			animator.SetBool("IsAttacking", false);
 	}
 
-
-	public void Respawn()
-	{
-		isDead = false;
-		AddHealth(maxHealth);
-		AddEnergy(maxEnergy);
-	}
-
-
 	public void AddEnergy(float value)
 	{
 		if (GlobalGameData.isInPowerUpMode && value <= 0.0f) return;
@@ -190,8 +175,7 @@ public class KillerCell : Cell
 		}
 		else if (energy <= 0.0f)
 		{
-			energy = 0.0f;
-			isDead = true;
+			controller.OnCellDeath();
 		}
 
 		animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
@@ -208,9 +192,7 @@ public class KillerCell : Cell
 
 		if (health <= 0.0f)
 		{
-			health = 0.0f;
-			isDead = true;
-			
+			controller.OnCellDeath();
 		}
 	}
 
@@ -236,6 +218,7 @@ public class KillerCell : Cell
 	private float spread = 0.0f;
 	public void Attack(Vector3 targetPosition)
 	{
+		if (isBusy) return;
 		if (!canAttack) return;
 
 		animator.SetBool("IsAttacking", true);
@@ -258,77 +241,6 @@ public class KillerCell : Cell
 	{
 		animator.SetBool("IsAttacking", false);
 	}
-
-	//public void Attack (Vector3 direction)
-	//{
-	//	animator.SetBool("IsAttacking", true);
-	//}
-
-
-	//public void StopAttack()
-	//{
-	//	animator.SetBool("IsAttacking", false);
-	//}
-	//// ATTACKING
-	//////////////////////////////////////////
-	//public void Attack()
-	//{
-	//	if (isBusy) return;
-
-	//	cancerCellsInRange = sense.CancerCellsInRange;
-	//	if (cancerCellsInRange.Count == 0) return;
-
-	//	isBusy = true;
-
-	//	// Find closest cancer cell
-	//	// Need to change to Cancer optimisation
-	//	float minDist = 100000.0f;
-	//	closestCell = null;
-
-	//	foreach (var cell in cancerCellsInRange)
-	//	{
-	//		if (cell.InDivision) continue;
-
-	//		float dist = Vector3.Distance(transform.position, cell.transform.position);
-	//		if (dist < minDist)
-	//		{
-	//			minDist = dist;
-	//			closestCell = cell;
-	//		}
-	//	}
-
-	//	if (closestCell == null)
-	//	{
-	//		isBusy = false;
-	//		return;
-	//	}
-
-	//	animator.SetTrigger("Attacks");
-	//}
-
-	//public void OnAttackEffect()
-	//{
-	//	Vector3 diff = closestCell.transform.position - transform.position;
-	//	diff.Normalize();
-
-	//	float rot_z = ((Mathf.Atan2(diff.y, diff.x) + attackRotationOffset) * Mathf.Rad2Deg);
-
-	//	GameObject newEffect = Instantiate(attackEffect, transform.position, Quaternion.Euler(0f, 0f, rot_z));
-	//	newEffect.GetComponent<ParticleSystem>().Play();
-
-	//	AddEnergy(normalAttackEnergyCost);
-
-	//	bool killedTheCell = closestCell.HitCell();
-	//	if (killedTheCell)
-	//	{
-	//		cancerCellsInRange.Remove(closestCell);
-	//	}
-	//}
-
-	//public void OnAttackFinished()
-	//{
-	//	isBusy = false;
-	//}
 
 	// POWER UP IMMUNOTHERAPY
 	//////////////////////////////////////////

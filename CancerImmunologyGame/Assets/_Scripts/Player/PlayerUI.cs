@@ -46,13 +46,13 @@ namespace Player
 		{
 			if (healthBar != null)
 			{
-				healthBar.SetMaxValue(KillerCell.MaxHealth);
+				healthBar.SetMaxValue(KillerCell.maxHealth);
 			}
 			else Debug.LogWarning("Health bar is not linked to global data");
 
 			if (energyBar != null)
 			{
-				energyBar.SetMaxValue(KillerCell.MaxEnergy);
+				energyBar.SetMaxValue(KillerCell.maxEnergy);
 			}
 			else Debug.LogWarning("Exhaust bar is not linked to global data");
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3205355822767766342}
   - component: {fileID: 3205355822767766343}
   - component: {fileID: 4010284065806789738}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Chemokine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 8091731686324180508}
   - component: {fileID: 9154237488378321306}
   - component: {fileID: 8308207858425536691}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
