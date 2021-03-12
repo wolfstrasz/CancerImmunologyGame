@@ -3120,6 +3120,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: KillerCell
       objectReference: {fileID: 0}
+    - target: {fileID: 2046459777990927748, guid: 387683cad213d8f439c5cde957d61515,
+        type: 3}
+      propertyPath: exhaustEffectReduction
+      value: 0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 387683cad213d8f439c5cde957d61515, type: 3}
 --- !u!114 &1884182439 stripped

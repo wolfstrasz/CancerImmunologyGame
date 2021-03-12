@@ -15,6 +15,8 @@ public class KillerCell : Cell
 
 	[Header("Attributes")]
 	[SerializeField]
+	private float exhaustEffectReduction = 0.75f;
+	[SerializeField]
 	private float speed = 4.0f;
 	[SerializeField]
 	private float immunotherapySpeedMultiplier = 1.66f;
@@ -200,7 +202,7 @@ public class KillerCell : Cell
 	{
 		if (GlobalGameData.isInPowerUpMode)
 			return immunotherapySpeedMultiplier;
-		return  energy / maxEnergy;
+		return  1.0f - (maxEnergy - energy) / maxEnergy * exhaustEffectReduction;
 	}
 
 	/// <summary>
