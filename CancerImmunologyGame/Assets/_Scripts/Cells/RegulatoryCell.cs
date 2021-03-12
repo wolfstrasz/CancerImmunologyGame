@@ -21,7 +21,11 @@ public class RegulatoryCell : MonoBehaviour
     public bool isShooting = false;
     public float shootDelay = 3.0f;
     public List<RegulatoryParticle> particles = new List<RegulatoryParticle>();
-    ////////////////////////////////
+	////////////////////////////////
+
+	[SerializeField]
+	private const float bumpcooldown = 2.0f;
+	private float cooldown = 2.0f;
 
     [SerializeField]
     SpriteRenderer render = null;
@@ -36,8 +40,9 @@ public class RegulatoryCell : MonoBehaviour
     void Update()
     {
 		if (GlobalGameData.isGameplayPaused) return;
-
-        if (isMoving)
+		if (cooldown > 0.0f)
+			cooldown -= Time.deltaTime;
+        if (isMoving  && pathToFollow != null)
             Move();
     }
 
@@ -45,7 +50,7 @@ public class RegulatoryCell : MonoBehaviour
 	// MOVING
     public void StartMoving()
     {
-        if(pathToFollow == null)
+        if(pathToFollow == null && path != null)
         {
             pathToFollow = path.path;
             maxLengthDist = pathToFollow.length;
@@ -107,7 +112,8 @@ public class RegulatoryCell : MonoBehaviour
     {
         if (collider.GetComponent<KillerCell>() != null)
         {
-            StartCoroutine(BumpPlayer(collider.GetComponent<KillerCell>()));
+			if (cooldown <= 0.0f)
+				StartCoroutine(BumpPlayer(collider.GetComponent<KillerCell>()));
         }
     }
 
@@ -161,6 +167,7 @@ public class RegulatoryCell : MonoBehaviour
         transform.localScale = new Vector3(prevScale, prevScale, 1.0f);
         coll.radius = prevRadius;
         coll.isTrigger = true;
+		cooldown = bumpcooldown;
         yield return new WaitForSeconds(0.1f);
     }
 }
