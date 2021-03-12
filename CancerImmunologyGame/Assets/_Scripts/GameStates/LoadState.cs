@@ -4,6 +4,7 @@ using UnityEngine;
 using Player;
 using Tutorials;
 using Bloodflow;
+using CellpediaUI;
 
 namespace Core
 {
@@ -47,7 +48,7 @@ namespace Core
 				PlayerController.Instance.Initialise();
 				TutorialManager.Instance.Initialise();
 				BloodflowController.Instance.Initialise();
-				CellpediaUI.Cellpedia.Instance.Initialise();
+				Cellpedia.Instance.Initialise();
 			}
 		}
 	}

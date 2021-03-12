@@ -3089,6 +3089,7 @@ MonoBehaviour:
   MainMenuPanel: {fileID: 5251522715621172688}
   WinScreenPanel: {fileID: 4288497562990489178}
   GameMenuPanel: {fileID: 7733335820465154939}
+  SurveyPanel: {fileID: 2594856645310484345}
   SurveyURL: https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u
 --- !u!1 &5251522717489238912
 GameObject:

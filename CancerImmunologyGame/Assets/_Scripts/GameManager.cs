@@ -13,6 +13,10 @@ namespace Core
 	{
 		public class GameManager : Singleton<GameManager>
 		{
+
+			[SerializeField]
+			internal bool sceneLoaded = false;
+			[SerializeField]
 			private GameStateController stateController = new GameStateController();
 
 			void Update()
@@ -30,18 +34,26 @@ namespace Core
 
 				Time.timeScale = 1.0f;
 				SceneManager.activeSceneChanged += OnActiveSceneChanged;
-
 				SceneManager.sceneLoaded += OnSceneLoaded;
-				//StateUpdate = LevelMainMenu;
-				//StateFixedUpdate = NoLevelFixedRunning;
 
 				GlobalGameData.gameplaySpeed = 1.0f;
 				GlobalGameData.gameSpeed = 1.0f;
 				GlobalGameData.isInitialised = true;
 			}
 
+			public void InitialiseDebugScene()
+			{
 
-			internal bool sceneLoaded = false;
+				Time.timeScale = 1.0f;
+
+				GlobalGameData.gameplaySpeed = 1.0f;
+				GlobalGameData.gameSpeed = 1.0f;
+				GlobalGameData.isInitialised = true;
+
+				sceneLoaded = true;
+				stateController.SetState(new LoadState(stateController));
+
+			}
 			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
 			{
 				if (nextScene.buildIndex == 0) return;

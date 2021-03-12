@@ -14,6 +14,7 @@ public class UIManager : Singleton<UIManager>
 	[SerializeField] private GameObject MainMenuPanel = null;
 	[SerializeField] private GameObject WinScreenPanel = null;
 	[SerializeField] private GameObject GameMenuPanel = null;
+	[SerializeField] private GameObject SurveyPanel = null;
 	[SerializeField] private string SurveyURL = "";
 
 	public void WinScreen()
@@ -33,7 +34,7 @@ public class UIManager : Singleton<UIManager>
 		WinScreenPanel.SetActive(false);
 		MainMenuPanel.SetActive(false);
 		GameMenuPanel.SetActive(false);
-
+		SurveyPanel.SetActive(false);
 	}
 
 	// Main Menu Functionality buttons
