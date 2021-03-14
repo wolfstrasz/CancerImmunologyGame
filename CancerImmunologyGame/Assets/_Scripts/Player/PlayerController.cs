@@ -67,60 +67,9 @@ namespace Player
 			}
 		}
 
-		//TODO : REMOVE THIS
-		public void OnCameraOutroFinished()
-		{
-			heartOutroEnd = true;
-			heartOutroCamera = false;
-		}
-
-		public void StartHeartMovement()
-		{
-			heartOutro = true;
-			areControlsEnabled = false;
-		}
-		//----------------------------
-
 		// input
 		public void OnUpdate()
 		{
-
-		
-			if (heartOutro)
-			{
-				if (Vector3.SqrMagnitude(transform.position - HeartOutroPosition) > 1.0f)
-					transform.position = Vector3.Lerp(transform.position, HeartOutroPosition, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
-				else
-				{
-					heartOutro = false;
-					heartOutroCamera = true;
-					SmoothCamera.Instance.StartHeartOutro();
-
-				}
-				return;
-			}
-
-			if (heartOutroCamera)
-			{
-				return;
-			}
-
-			if (heartOutroEnd)
-			{
-				if (Vector3.SqrMagnitude(transform.position - kc.transform.position) > 1.0f)
-					transform.position = Vector3.Lerp(transform.position, kc.transform.position, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
-				else
-				{
-					transform.position = kc.transform.position;
-					heartOutroEnd = false;
-					areControlsEnabled = true;
-
-					//kc.IsKinematic = false;
-				}
-				return;
-			}
-			// -----------------------------------------
-
 			// TODO: manage it better
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;

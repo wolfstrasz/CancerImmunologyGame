@@ -21,6 +21,16 @@ namespace Tutorials
 		{
 			if (closestObjectTypeToFocusOn == FocusObjectType.NONE) return;
 
+			if (closestObjectTypeToFocusOn == FocusObjectType.HEART)
+			{
+				SmoothCamera.Instance.SetNewFocus(FindObjectOfType<TheHeart>().gameObject);
+			}
+
+			if (closestObjectTypeToFocusOn == FocusObjectType.HEART_CINEMATIC)
+			{
+				SmoothCamera.Instance.StartHeartOutro();
+			}
+
 			if (closestObjectTypeToFocusOn == FocusObjectType.INTRO)
 			{
 				SmoothCamera.Instance.StartIntro();
@@ -48,6 +58,7 @@ namespace Tutorials
 
 		}
 
+		// Should be templated
 		private void FindClosesDendritic()
 		{
 			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
@@ -119,6 +130,6 @@ namespace Tutorials
 			return false;
 		}
 
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, INTRO }
+		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, INTRO, HEART, HEART_CINEMATIC}
 	}
 }

@@ -29,6 +29,9 @@ public class SmoothCamera : Singleton<SmoothCamera>
 
 	[SerializeField]
 	private bool DebugForceSkip = false;
+	[SerializeField]
+	private bool inHeartOutro = false;
+	public bool InHeartOutro { get => inHeartOutro; }
 
 	public void Reset()
 	{
@@ -144,22 +147,26 @@ public class SmoothCamera : Singleton<SmoothCamera>
 		return false;
 	}
 
+
+	// Tutorial call
 	public void StartIntro()
 	{
 		cameraAnimator.SetTrigger("Intro");
 	}
 
+	// Animation callbacks
 	public void StartHeartOutro()
 	{
 		cameraAnimator.SetTrigger("HeartOutro");
+		inHeartOutro = true;
 	}
 
 	public void HeartOutroEnd()
 	{
-		PlayerController.Instance.OnCameraOutroFinished();
+		// Tell TUTOTIRIAL THAT IT FINISHED
 		cameraAnimator.SetTrigger("Idle");
 		transform.position = new Vector3(transform.position.x, transform.position.y, -6.0f);
-
+		inHeartOutro = false;
 	}
 
 	public void ReturnToIdle()
