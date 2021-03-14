@@ -7,9 +7,5 @@ namespace Player
 	public class PlayerRespawnArea : MonoBehaviour
 	{
 		public Vector3 Location => transform.position;
-		void Start()
-		{
-			GlobalGameData.RespawnAreas.Add(this);
-		}
 	}
 }
