@@ -23,22 +23,12 @@ namespace Tutorials
 
 			if (closestObjectTypeToFocusOn == FocusObjectType.HEART)
 			{
-				SmoothCamera.Instance.SetNewFocus(FindObjectOfType<TheHeart>().gameObject);
-			}
-
-			if (closestObjectTypeToFocusOn == FocusObjectType.HEART_CINEMATIC)
-			{
-				SmoothCamera.Instance.StartHeartOutro();
-			}
-
-			if (closestObjectTypeToFocusOn == FocusObjectType.INTRO)
-			{
-				SmoothCamera.Instance.StartIntro();
+				GameCamera2D.Instance.SetFocusTarget(FindObjectOfType<TheHeart>().gameObject);
 			}
 
 			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)
 			{
-				SmoothCamera.Instance.SetNewFocus(PlayerController.Instance.gameObject);
+				GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject);
 			}
 
 			if (closestObjectTypeToFocusOn == FocusObjectType.DENDRITIC_CELL)
@@ -77,7 +67,7 @@ namespace Tutorials
 				}
 			}
 
-			SmoothCamera.Instance.SetNewFocus(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
 		}
 
 		private void FindClosestCancer()
@@ -98,7 +88,7 @@ namespace Tutorials
 				}
 			}
 
-			SmoothCamera.Instance.SetNewFocus(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
 		}
 
 		private void FindClosestHelperCell()
@@ -118,18 +108,18 @@ namespace Tutorials
 				}
 			}
 
-			SmoothCamera.Instance.SetNewFocus(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			if (SmoothCamera.Instance.isCameraFocused)
+			if (GameCamera2D.Instance.IsCameraFocused)
 			{
 				return true;
 			}
 			return false;
 		}
 
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, INTRO, HEART, HEART_CINEMATIC}
+		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, HEART}
 	}
 }

@@ -41,7 +41,6 @@ namespace Core
 				GlobalGameData.ResetObjectPool(); // Maybe move to OnState enter
 
 				BackgroundMusic.Instance.Initialise();
-				SmoothCamera.Instance.Reset();
 				UIManager.Instance.ClosePanels();
 				
 

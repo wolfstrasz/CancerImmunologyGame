@@ -157,8 +157,6 @@ namespace Player
 			kc.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 
-			SmoothCamera.Instance.SetNewFocus(this.gameObject, true);
-
 			for (int i = 0; i < observers.Count; ++i)
 			{
 				observers[i].OnPlayerDeath();
