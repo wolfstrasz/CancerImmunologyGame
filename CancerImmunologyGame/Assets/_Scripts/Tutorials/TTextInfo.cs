@@ -14,6 +14,8 @@ namespace Tutorials
 
 		[Header("Skipping functionality")]
 		[SerializeField]
+		private bool shouldHideText = false;
+		[SerializeField]
 		private bool canSkipTxt = false;
 		[SerializeField]
 		private float waitBeforeSkip = 0.0f;
@@ -33,7 +35,10 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			TutorialManager.Instance.DisplayText(text);
+			if (!shouldHideText)
+			{
+				TutorialManager.Instance.DisplayText(text);
+			}
 
 			if (canSkipTxt)
 				StartCoroutine(WaitBeforeSkipButton());

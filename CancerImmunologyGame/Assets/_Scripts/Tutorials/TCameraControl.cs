@@ -7,10 +7,17 @@ using Player;
 
 namespace Tutorials
 {
-	public class TCameraFocus : TutorialEvent
+	public class TCameraControl : TutorialEvent
 	{
 		[SerializeField]
-		private FocusObjectType closestObjectTypeToFocusOn = FocusObjectType.NONE;
+		ControlFocusAttributes focusControl;
+
+		[SerializeField]
+		ControlZoomAttributes zoomControl;
+
+		[SerializeField]
+		ControlBlindAttributes blindControl;
+
 
 		protected override void OnEndEvent()
 		{
@@ -19,33 +26,63 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			if (closestObjectTypeToFocusOn == FocusObjectType.NONE) return;
-
-			if (closestObjectTypeToFocusOn == FocusObjectType.HEART)
+			if (focusControl.shouldFocus)
 			{
-				GameCamera2D.Instance.SetFocusTarget(FindObjectOfType<TheHeart>().gameObject);
+				SelectFocusTarget();
+			}
+			if (zoomControl.shouldZoom)
+			{
+				GameCamera2D.Instance.SetOrthographicZoom(zoomControl.zoomValue, zoomControl.instant);
+			}
+			if (blindControl.shouldBlind)
+			{
+				GameCamera2D.Instance.Blind();
+			}
+			if (blindControl.shouldUnBlind)
+			{
+				GameCamera2D.Instance.Unblind();
+			}
+		}
+
+		protected override bool OnUpdateEvent()
+		{
+			if (GameCamera2D.Instance.IsCameraFocusedAndFinishedZooming)
+			{
+				return true;
+			}
+			return false;
+		}
+
+
+		private void SelectFocusTarget()
+		{
+
+			if (focusControl.objectType == FocusObjectType.NONE) return;
+
+			if (focusControl.objectType == FocusObjectType.HEART)
+			{
+				GameCamera2D.Instance.SetFocusTarget(FindObjectOfType<TheHeart>().gameObject, zoomControl.instant);
 			}
 
-			if (closestObjectTypeToFocusOn == FocusObjectType.PLAYER)
+			if (focusControl.objectType == FocusObjectType.PLAYER)
 			{
-				GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject);
+				GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject, zoomControl.instant);
 			}
 
-			if (closestObjectTypeToFocusOn == FocusObjectType.DENDRITIC_CELL)
+			if (focusControl.objectType == FocusObjectType.DENDRITIC_CELL)
 			{
 				FindClosesDendritic();
 			}
 
-			if (closestObjectTypeToFocusOn == FocusObjectType.HELPER_CELL)
+			if (focusControl.objectType == FocusObjectType.HELPER_CELL)
 			{
 				FindClosestHelperCell();
 			}
 
-			if (closestObjectTypeToFocusOn == FocusObjectType.CANCER)
+			if (focusControl.objectType == FocusObjectType.CANCER)
 			{
 				FindClosestCancer();
 			}
-
 		}
 
 		// Should be templated
@@ -67,7 +104,7 @@ namespace Tutorials
 				}
 			}
 
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
 		}
 
 		private void FindClosestCancer()
@@ -88,7 +125,7 @@ namespace Tutorials
 				}
 			}
 
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
 		}
 
 		private void FindClosestHelperCell()
@@ -108,16 +145,30 @@ namespace Tutorials
 				}
 			}
 
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject);
+			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
 		}
 
-		protected override bool OnUpdateEvent()
+		[System.Serializable]
+		private struct ControlFocusAttributes
 		{
-			if (GameCamera2D.Instance.IsCameraFocused)
-			{
-				return true;
-			}
-			return false;
+			public bool shouldFocus;
+			public FocusObjectType objectType;
+			public bool instant;
+		}
+
+		[System.Serializable]
+		private struct ControlZoomAttributes
+		{
+			public bool shouldZoom;
+			public float zoomValue;
+			public bool instant;
+		}
+
+		[System.Serializable]
+		private struct ControlBlindAttributes
+		{
+			public bool shouldBlind;
+			public bool shouldUnBlind;
 		}
 
 		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, HEART}

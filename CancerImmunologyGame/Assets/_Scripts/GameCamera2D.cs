@@ -9,6 +9,8 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	[Header("Links")]
 	[SerializeField]
 	private new Camera camera = null;
+	[SerializeField]
+	private GameObject blind = null;
 
 	[Header("Attributes")]
 	[SerializeField]
@@ -33,15 +35,15 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	[SerializeField]
 	private Vector3 focusPosition = Vector3.zero;
 	[SerializeField]
-	private bool isCameraFocused = false;
+	private bool isFocused = false;
 	[SerializeField]
 	private float orthographicZoom = 6.0f;
 	[SerializeField]
-	private bool isCameraZoomed = false;
+	private bool isZooming = false;
 
-	public bool IsCameraZoomed => isCameraZoomed;
-	public bool IsCameraFocused => isCameraFocused;
-
+	public bool HasFinishedZooming => !isZooming;
+	public bool IsFocused => isFocused;
+	public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
 
 	void Update()
 	{
@@ -106,7 +108,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 		Vector3 targetPosition = focusTarget.transform.position;
 		float distance = Vector3.Distance(targetPosition, focusPosition);
 
-		isCameraFocused = distance < focusAcceptedTreshold ? true : false;
+		isFocused = distance < focusAcceptedTreshold ? true : false;
 
 		focusPosition = distance <= focusSkipTreshold ? targetPosition 
 			: Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusSpeed), Time.deltaTime));
@@ -115,7 +117,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	private void UpdateOrthographicZoom()
 	{
 		float gap = Mathf.Abs( orthographicZoom - camera.orthographicSize) ;
-		isCameraZoomed = gap < zoomAcceptedTreshold ? true : false;
+		isZooming = gap < zoomAcceptedTreshold ? false : true;
 		camera.orthographicSize = gap <= zoomSkipTreshold ? orthographicZoom
 			: Mathf.Lerp(orthographicZoom, camera.orthographicSize, (float) System.Math.Pow((1.0f - zoomSpeed), Time.deltaTime));
 	}
@@ -130,7 +132,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	public void SetFocusTarget(GameObject objectToFocusOn, bool shouldInstantlyFocus = false)
 	{
 		focusTarget = objectToFocusOn;
-		isCameraFocused = false;
+		isFocused = false;
 
 		if (shouldInstantlyFocus)
 		{
@@ -144,7 +146,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	public void SetOrthographicZoom(float orthographicZoom, bool shouldInstantlyZoom = false)
 	{
 		this.orthographicZoom = orthographicZoom;
-		isCameraZoomed = false;
+		isZooming = true;
 
 		if (shouldInstantlyZoom)
 		{
@@ -175,6 +177,16 @@ public class GameCamera2D : Singleton<GameCamera2D>
 			return true;
 
 		return false;
+	}
+
+	public void Blind()
+	{
+		blind.SetActive(true);
+	}
+
+	public void Unblind()
+	{
+		blind.SetActive(false);
 	}
 
 	[System.Serializable]

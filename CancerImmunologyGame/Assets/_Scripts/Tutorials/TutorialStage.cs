@@ -8,22 +8,20 @@ namespace Tutorials
 	{
 		[SerializeField]
 		private List<TutorialEvent> events = new List<TutorialEvent>();
-		[SerializeField]
 		private TutorialEvent currentEvent = null;
 		private int event_index = 0;
-		internal bool isFinished = false;
+		private bool isFinished = false;
 
-	
+
+		internal bool IsFinished { get => isFinished; }
+
 		internal void OnUpdate()
 		{
 			currentEvent.OnUpdate();
 		}
 
-
 		internal void InitialiseStage()
 		{
-			//events = new List<TutorialEvent>();
-			//events.AddRange(gameObject.GetComponentsInChildren<TutorialEvent>());
 			if (event_index < events.Count)
 			{
 				NextEvent();
