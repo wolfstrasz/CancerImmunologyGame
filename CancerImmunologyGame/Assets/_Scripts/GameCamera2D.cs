@@ -17,12 +17,16 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	private GameCameraControlState state = GameCameraControlState.IDLE;
 
 	[SerializeField, Range(0.5f, 1.0f)]
-	private float focusSpeed = 0.943f;
+	private float focusExponential = 0.943f;
+	[SerializeField, Range(0.0f, 1.0f)]
+	private float focusSpeed = 1.0f;
 	private const float focusAcceptedTreshold = 0.2f;
 	private const float focusSkipTreshold = 0.01f;
 
 	[SerializeField, Range(0.5f, 1.0f)]
-	private float zoomSpeed = 0.943f;
+	private float zoomExponential = 0.943f;
+	[SerializeField, Range(0.0f, 1.0f)]
+	private float zoomSpeed = 1.0f;
 	private const float zoomAcceptedTreshold = 0.2f;
 	private const float zoomSkipTreshold = 0.01f;
 
@@ -41,12 +45,12 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	[SerializeField]
 	private bool isZooming = false;
 
-	public bool HasFinishedZooming => !isZooming;
-	public bool IsFocused => isFocused;
 	public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
 
 	void Update()
 	{
+		if (Input.GetKey(KeyCode.Return)) state = GameCameraControlState.FREEROAM;
+
 		if (state == GameCameraControlState.FREEROAM)
 		{
 			if (Input.GetKey(KeyCode.W))
@@ -110,8 +114,9 @@ public class GameCamera2D : Singleton<GameCamera2D>
 
 		isFocused = distance < focusAcceptedTreshold ? true : false;
 
-		focusPosition = distance <= focusSkipTreshold ? targetPosition 
-			: Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusSpeed), Time.deltaTime));
+		focusPosition = distance <= focusSkipTreshold ? targetPosition
+			: Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusExponential), Time.deltaTime));
+
 	}
 
 	private void UpdateOrthographicZoom()
@@ -119,7 +124,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 		float gap = Mathf.Abs( orthographicZoom - camera.orthographicSize) ;
 		isZooming = gap < zoomAcceptedTreshold ? false : true;
 		camera.orthographicSize = gap <= zoomSkipTreshold ? orthographicZoom
-			: Mathf.Lerp(orthographicZoom, camera.orthographicSize, (float) System.Math.Pow((1.0f - zoomSpeed), Time.deltaTime));
+			: Mathf.Lerp(orthographicZoom, camera.orthographicSize, (float)System.Math.Pow((1.0f - zoomExponential), Time.deltaTime));
 	}
 
 	private void UpdatePositionByFocusPoint()
@@ -133,6 +138,7 @@ public class GameCamera2D : Singleton<GameCamera2D>
 	{
 		focusTarget = objectToFocusOn;
 		isFocused = false;
+		state = GameCameraControlState.FOLLOW;
 
 		if (shouldInstantlyFocus)
 		{
@@ -153,6 +159,17 @@ public class GameCamera2D : Singleton<GameCamera2D>
 			camera.orthographicSize = orthographicZoom;
 		}
 	}
+
+	public void Blind()
+	{
+		blind.SetActive(true);
+	}
+
+	public void Unblind()
+	{
+		blind.SetActive(false);
+	}
+
 
 	public bool IsInCameraViewBounds(Vector3 position, bool useHalfBoundsForX = false)
 	{
@@ -179,18 +196,8 @@ public class GameCamera2D : Singleton<GameCamera2D>
 		return false;
 	}
 
-	public void Blind()
-	{
-		blind.SetActive(true);
-	}
-
-	public void Unblind()
-	{
-		blind.SetActive(false);
-	}
-
-	[System.Serializable]
 	public enum GameCameraControlState { IDLE, FOLLOW, FREEROAM}
+
 }
 
 

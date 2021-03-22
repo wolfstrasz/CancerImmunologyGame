@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 6841571744899834371}
   - component: {fileID: 6841571744899834368}
   m_Layer: 0
-  m_Name: BlackLens
+  m_Name: Blind
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,12 +354,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPersistent: 0
   camera: {fileID: 6841571744527438345}
+  blind: {fileID: 6841571744899834370}
   state: 2
-  focusSpeed: 0.943
-  zoomSpeed: 0.943
+  focusExponential: 0.943
+  focusSpeed: 1
+  zoomExponential: 0.943
+  zoomSpeed: 0.809
   freeroamSpeedScale: 0.1
   focusTarget: {fileID: 0}
   focusPosition: {x: 0, y: 0, z: 0}
-  isCameraFocused: 0
+  isFocused: 0
   orthographicZoom: 10
-  isCameraZoomed: 0
+  isZooming: 0

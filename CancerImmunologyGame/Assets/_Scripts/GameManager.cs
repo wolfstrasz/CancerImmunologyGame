@@ -78,9 +78,9 @@ namespace Core
 				stateController.AddState(new GameplayPauseState(stateController));
 			}
 
-			public void RequestGameplayUnpause()
+			public void RequestGameplayUnpause(string callerName)
 			{
-				stateController.RemoveCurrentState();
+				stateController.RemoveCurrentState(callerName);
 			}
 
 			public void RequestGamePause()
@@ -88,9 +88,9 @@ namespace Core
 				stateController.AddState(new PauseState(stateController));
 			}
 
-			public void RequestGameUnpause()
+			public void RequestGameUnpause(string callerName)
 			{
-				stateController.RemoveCurrentState();
+				stateController.RemoveCurrentState(callerName);
 			}
 		}
 	}

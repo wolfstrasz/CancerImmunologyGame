@@ -9,15 +9,25 @@ namespace Tutorials
 {
 	public class TCameraControl : TutorialEvent
 	{
+		[Header("Focus")]
 		[SerializeField]
-		ControlFocusAttributes focusControl;
-
+		private bool shouldFocus = false;
 		[SerializeField]
-		ControlZoomAttributes zoomControl;
-
+		private FocusObjectType closestObjectType = FocusObjectType.NONE;
 		[SerializeField]
-		ControlBlindAttributes blindControl;
+		private bool instantFocus = false;
 
+		[Header("Zoom")]
+		[SerializeField]
+		private bool shouldZoom = false;
+		[SerializeField]
+		private float zoomValue = 6f;
+		[SerializeField]
+		private bool instantZoom = false;
+
+		[Header("Blinding")]
+		[SerializeField]
+		private CameraBlinding blinding = CameraBlinding.KEEP;
 
 		protected override void OnEndEvent()
 		{
@@ -26,21 +36,40 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			if (focusControl.shouldFocus)
+			if (shouldFocus)
 			{
-				SelectFocusTarget();
+				Vector3 location = PlayerController.Instance.gameObject.transform.position;
+				switch (closestObjectType)
+				{
+					case FocusObjectType.PLAYER:
+						GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject, instantFocus);
+						break;
+					case FocusObjectType.DENDRITIC_CELL:
+						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<DendriticCell> (location), instantFocus);
+						break;
+					case FocusObjectType.HEART:
+						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<TheHeart>(location), instantFocus);
+						break;
+					case FocusObjectType.HELPER_CELL:
+						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<HelperTCell>(location), instantFocus);
+						break;
+					case FocusObjectType.CANCER:
+						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<Cancer>(location), instantFocus);
+						break;
+					default: break;
+				}
 			}
-			if (zoomControl.shouldZoom)
+
+			if (shouldZoom)
 			{
-				GameCamera2D.Instance.SetOrthographicZoom(zoomControl.zoomValue, zoomControl.instant);
+				GameCamera2D.Instance.SetOrthographicZoom(zoomValue, instantZoom);
 			}
-			if (blindControl.shouldBlind)
+
+			switch (blinding)
 			{
-				GameCamera2D.Instance.Blind();
-			}
-			if (blindControl.shouldUnBlind)
-			{
-				GameCamera2D.Instance.Unblind();
+				case CameraBlinding.BLIND: GameCamera2D.Instance.Blind(); break;
+				case CameraBlinding.UNBLIND: GameCamera2D.Instance.Unblind(); break;
+				default: break;
 			}
 		}
 
@@ -53,124 +82,8 @@ namespace Tutorials
 			return false;
 		}
 
+		private enum CameraBlinding {KEEP, BLIND, UNBLIND}
+		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, HEART }
 
-		private void SelectFocusTarget()
-		{
-
-			if (focusControl.objectType == FocusObjectType.NONE) return;
-
-			if (focusControl.objectType == FocusObjectType.HEART)
-			{
-				GameCamera2D.Instance.SetFocusTarget(FindObjectOfType<TheHeart>().gameObject, zoomControl.instant);
-			}
-
-			if (focusControl.objectType == FocusObjectType.PLAYER)
-			{
-				GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject, zoomControl.instant);
-			}
-
-			if (focusControl.objectType == FocusObjectType.DENDRITIC_CELL)
-			{
-				FindClosesDendritic();
-			}
-
-			if (focusControl.objectType == FocusObjectType.HELPER_CELL)
-			{
-				FindClosestHelperCell();
-			}
-
-			if (focusControl.objectType == FocusObjectType.CANCER)
-			{
-				FindClosestCancer();
-			}
-		}
-
-		// Should be templated
-		private void FindClosesDendritic()
-		{
-			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
-			DendriticCell[] dendriticCells = FindObjectsOfType<DendriticCell>();
-
-			float closestDist = Vector3.SqrMagnitude(dendriticCells[0].gameObject.transform.position - playerPos);
-			DendriticCell closestCell = dendriticCells[0];
-
-			foreach (DendriticCell cell in dendriticCells)
-			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
-				if (dist < closestDist)
-				{
-					closestDist = dist;
-					closestCell = cell;
-				}
-			}
-
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
-		}
-
-		private void FindClosestCancer()
-		{
-			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
-			Cancer[] cancers = FindObjectsOfType<Cancer>();
-
-			float closestDist = Vector3.SqrMagnitude(cancers[0].gameObject.transform.position - playerPos);
-			Cancer closestCell = cancers[0];
-
-			foreach (Cancer cell in cancers)
-			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
-				if (dist < closestDist)
-				{
-					closestDist = dist;
-					closestCell = cell;
-				}
-			}
-
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
-		}
-
-		private void FindClosestHelperCell()
-		{
-			Vector3 playerPos = PlayerController.Instance.gameObject.transform.position;
-			HelperTCell[] helperCells = GameObject.FindObjectsOfType<HelperTCell>();
-			float closestDist = Vector3.SqrMagnitude(helperCells[0].gameObject.transform.position - playerPos);
-			HelperTCell closestCell = helperCells[0];
-
-			foreach (HelperTCell cell in helperCells)
-			{
-				float dist = Vector3.SqrMagnitude(cell.gameObject.transform.position - playerPos);
-				if (dist < closestDist)
-				{
-					closestDist = dist;
-					closestCell = cell;
-				}
-			}
-
-			GameCamera2D.Instance.SetFocusTarget(closestCell.gameObject, zoomControl.instant);
-		}
-
-		[System.Serializable]
-		private struct ControlFocusAttributes
-		{
-			public bool shouldFocus;
-			public FocusObjectType objectType;
-			public bool instant;
-		}
-
-		[System.Serializable]
-		private struct ControlZoomAttributes
-		{
-			public bool shouldZoom;
-			public float zoomValue;
-			public bool instant;
-		}
-
-		[System.Serializable]
-		private struct ControlBlindAttributes
-		{
-			public bool shouldBlind;
-			public bool shouldUnBlind;
-		}
-
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, KILLER_CELL, HEART}
 	}
 }

@@ -8,15 +8,6 @@ namespace Player
 {
 	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathListener
 	{
-
-		// TODO: REMOVE THIS FROM HERE
-		[SerializeField]
-		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
-		private bool heartOutro = false;
-		private bool heartOutroEnd = false;
-		private bool heartOutroCamera = false;
-		// ---------------------------------------
-
 		[SerializeField]
 		private KillerCell kc = null;
 
@@ -42,6 +33,7 @@ namespace Player
 			PlayerUI.Instance.SetPlayerInfo(kc);
 			kc.Sense.controller = this;
 			kc.controller = this;
+			transform.position = kc.transform.position;
 			rangeDisplay.Initialise(kc);
 		}
 

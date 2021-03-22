@@ -57,13 +57,13 @@ namespace Core
 				activeState.OnStateEnter();
 			}
 
-			internal void RemoveCurrentState() // Removes the state and continues with the previous state
+			internal void RemoveCurrentState(string callerName) // Removes the state and continues with the previous state
 			{
-
+				Debug.Log("StackedFSM.RemoveCurrentState() requested by: " + callerName);
 				if (stateHistory.Count <= 0)
 				{
 					// On reaching this error means that your State machine will have had no STATE to exist in
-					Debug.LogError("StackedFSM.ExitState(): State machine in has no states in history to replace current state.");
+					Debug.LogError("StackedFSM.RemoveCurrentState(): State machine in has no states in history to replace current state. Caller Name: " + callerName);
 					return;
 				}
 
