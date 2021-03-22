@@ -18,15 +18,11 @@ public class GameCamera2D : Singleton<GameCamera2D>
 
 	[SerializeField, Range(0.5f, 1.0f)]
 	private float focusExponential = 0.943f;
-	[SerializeField, Range(0.0f, 1.0f)]
-	private float focusSpeed = 1.0f;
 	private const float focusAcceptedTreshold = 0.2f;
 	private const float focusSkipTreshold = 0.01f;
 
 	[SerializeField, Range(0.5f, 1.0f)]
 	private float zoomExponential = 0.943f;
-	[SerializeField, Range(0.0f, 1.0f)]
-	private float zoomSpeed = 1.0f;
 	private const float zoomAcceptedTreshold = 0.2f;
 	private const float zoomSkipTreshold = 0.01f;
 
