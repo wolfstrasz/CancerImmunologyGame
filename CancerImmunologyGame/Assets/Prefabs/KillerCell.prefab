@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 2046459777261753815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -200.19, y: -73.64, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2046459777060728080}
   - {fileID: 2046459777672622294}
@@ -271,6 +271,7 @@ MonoBehaviour:
   rb: {fileID: 2046459777261753813}
   sense: {fileID: 2046459777672622295}
   animator: {fileID: 2046459777261753809}
+  exhaustEffectReduction: 0.75
   speed: 5
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
@@ -283,7 +284,6 @@ MonoBehaviour:
   fov: 60
   rotationSpeed: 2
   isBusy: 0
-  isDead: 0
   queuePowerUp: 0
   movementVector: {x: 0, y: 0}
   flowVector: {x: 0, y: 0}

@@ -74,7 +74,7 @@ public class KillerCell : Cell
 		get => spriteObject.transform.rotation;
 		set 
 		{
-			Debug.Log(value.eulerAngles);
+			//Debug.Log(value.eulerAngles);
 			if (value == Quaternion.identity)
 			{
 				spriteObject.transform.localRotation = value;

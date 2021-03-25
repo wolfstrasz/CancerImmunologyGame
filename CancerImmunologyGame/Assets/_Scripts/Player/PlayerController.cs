@@ -8,15 +8,6 @@ namespace Player
 {
 	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathListener
 	{
-
-		// TODO: REMOVE THIS FROM HERE
-		[SerializeField]
-		private Vector3 HeartOutroPosition = new Vector3(0.0f, 0.0f, 0.0f);
-		private bool heartOutro = false;
-		private bool heartOutroEnd = false;
-		private bool heartOutroCamera = false;
-		// ---------------------------------------
-
 		[SerializeField]
 		private KillerCell kc = null;
 
@@ -42,6 +33,7 @@ namespace Player
 			PlayerUI.Instance.SetPlayerInfo(kc);
 			kc.Sense.controller = this;
 			kc.controller = this;
+			transform.position = kc.transform.position;
 			rangeDisplay.Initialise(kc);
 		}
 
@@ -67,60 +59,9 @@ namespace Player
 			}
 		}
 
-		//TODO : REMOVE THIS
-		public void OnCameraOutroFinished()
-		{
-			heartOutroEnd = true;
-			heartOutroCamera = false;
-		}
-
-		public void StartHeartMovement()
-		{
-			heartOutro = true;
-			areControlsEnabled = false;
-		}
-		//----------------------------
-
 		// input
 		public void OnUpdate()
 		{
-
-		
-			if (heartOutro)
-			{
-				if (Vector3.SqrMagnitude(transform.position - HeartOutroPosition) > 1.0f)
-					transform.position = Vector3.Lerp(transform.position, HeartOutroPosition, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
-				else
-				{
-					heartOutro = false;
-					heartOutroCamera = true;
-					SmoothCamera.Instance.StartHeartOutro();
-
-				}
-				return;
-			}
-
-			if (heartOutroCamera)
-			{
-				return;
-			}
-
-			if (heartOutroEnd)
-			{
-				if (Vector3.SqrMagnitude(transform.position - kc.transform.position) > 1.0f)
-					transform.position = Vector3.Lerp(transform.position, kc.transform.position, (float)System.Math.Pow((1.0f - 0.943f), Time.unscaledDeltaTime));
-				else
-				{
-					transform.position = kc.transform.position;
-					heartOutroEnd = false;
-					areControlsEnabled = true;
-
-					//kc.IsKinematic = false;
-				}
-				return;
-			}
-			// -----------------------------------------
-
 			// TODO: manage it better
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;
@@ -207,8 +148,6 @@ namespace Player
 			kc.AddEnergy(KillerCell.maxEnergy);
 			kc.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
-
-			SmoothCamera.Instance.SetNewFocus(this.gameObject, true);
 
 			for (int i = 0; i < observers.Count; ++i)
 			{

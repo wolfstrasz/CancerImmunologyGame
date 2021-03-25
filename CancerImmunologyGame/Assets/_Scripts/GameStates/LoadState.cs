@@ -1,10 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
-using Tutorials;
-using Bloodflow;
-using CellpediaUI;
+
 
 namespace Core
 {
@@ -12,6 +9,7 @@ namespace Core
 	{
 		public class LoadState : GameState
 		{
+			// Used for loading screen
 			public LoadState(GameStateController owner) : base(owner) { }
 
 			internal override void OnFixedUpdate()
@@ -31,25 +29,10 @@ namespace Core
 				if (GameManager.Instance.sceneLoaded)
 				{
 					GameManager.Instance.sceneLoaded = false;
-					InitialiseLevel();
 					owner.SetState(new PlayState(owner));
 				}
 			}
 
-			private void InitialiseLevel()
-			{
-				GlobalGameData.ResetObjectPool(); // Maybe move to OnState enter
-
-				BackgroundMusic.Instance.Initialise();
-				SmoothCamera.Instance.Reset();
-				UIManager.Instance.ClosePanels();
-				
-
-				PlayerController.Instance.Initialise();
-				TutorialManager.Instance.Initialise();
-				BloodflowController.Instance.Initialise();
-				Cellpedia.Instance.Initialise();
-			}
 		}
 	}
 }

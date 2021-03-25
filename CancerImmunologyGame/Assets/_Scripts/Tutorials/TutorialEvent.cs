@@ -45,7 +45,7 @@ namespace Tutorials
 			{
 				//GlobalGameData.isGameplayPaused = prevGameplayValue;
 				//Debug.Log("On end pasued: " + GlobalGameData.isGameplayPaused);
-				GameManager.Instance.RequestGameplayUnpause();
+				GameManager.Instance.RequestGameplayUnpause(gameObject.name);
 			}
 
 			OnEndEvent();

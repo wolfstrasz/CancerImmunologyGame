@@ -24,6 +24,7 @@ public static class GlobalGameData
 	public static void ResetObjectPool()
 	{
 		RespawnAreas.Clear();
+		RespawnAreas.AddRange(GameObject.FindObjectsOfType<PlayerRespawnArea>());
 		Cancers.Clear();
 		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>());
 		KillerCells.Clear();

@@ -28,7 +28,7 @@ namespace Tutorials
 				// If cancer is currently dividing
 				if (!cancer.CanDivide)
 				{
-					if (SmoothCamera.Instance.IsInCameraViewBounds(cancer.CellToDivide.transform.position))
+					if (GameCamera2D.Instance.IsInCameraViewBounds(cancer.CellToDivide.transform.position))
 					{
 						return true;
 					}

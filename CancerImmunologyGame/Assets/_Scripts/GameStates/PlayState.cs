@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
-using Bloodflow;
 using Tutorials;
+using Bloodflow;
+using CellpediaUI;
 
 namespace Core
 {
@@ -15,6 +16,13 @@ namespace Core
 
 			internal override void OnStateEnter()
 			{
+				GlobalGameData.ResetObjectPool(); // Maybe move to OnState enter
+				BackgroundMusic.Instance.Initialise();
+				UIManager.Instance.ClosePanels();
+				PlayerController.Instance.Initialise();
+				BloodflowController.Instance.Initialise();
+				Cellpedia.Instance.Initialise();
+				TutorialManager.Instance.Initialise();
 			}
 
 			internal override void OnStateExit()

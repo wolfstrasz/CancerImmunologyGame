@@ -25,7 +25,7 @@ namespace Tutorials
 
 			foreach (RegulatoryCell cell in regCells)
 			{
-				if (SmoothCamera.Instance.IsInCameraViewBounds(cell.gameObject.transform.position, true))
+				if (GameCamera2D.Instance.IsInCameraViewBounds(cell.gameObject.transform.position, true))
 				{
 					return true;
 				}

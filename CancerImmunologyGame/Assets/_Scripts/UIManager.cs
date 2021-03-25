@@ -112,7 +112,7 @@ public class UIManager : Singleton<UIManager>
 
 	public void OnCloseGameMenu()
 	{
-		Core.GameManagement.GameManager.Instance.RequestGameUnpause();
+		Core.GameManagement.GameManager.Instance.RequestGameUnpause(gameObject.name);
 	}
 
 	public void UseAutoAim()

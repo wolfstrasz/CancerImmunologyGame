@@ -73,7 +73,7 @@ public class BackgroundMusic : Singleton<BackgroundMusic>
 
 		if (timeInTransition < transitionTime)
 		{
-			Debug.Log("Should Transition: " + timeInTransition +  " : " + Time.deltaTime);
+			//Debug.Log("Should Transition: " + timeInTransition +  " : " + Time.deltaTime);
 			timeInTransition += Time.deltaTime;
 			sourceToIncrease.volume = timeInTransition / transitionTime;
 			sourceToDecrease.volume = 1.0f - timeInTransition / transitionTime;

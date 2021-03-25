@@ -34,7 +34,7 @@ namespace Tutorials
 		{
 			foreach (TutorialStage ts in StoryTutorials)
 			{
-				if (!ts.isFinished)
+				if (!ts.IsFinished)
 				{
 					ts.OnUpdate();
 				}

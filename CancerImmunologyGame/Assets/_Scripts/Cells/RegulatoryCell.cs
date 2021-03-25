@@ -20,7 +20,6 @@ public class RegulatoryCell : MonoBehaviour
     ////////////////////////////////
     public bool isShooting = false;
     public float shootDelay = 3.0f;
-    public List<RegulatoryParticle> particles = new List<RegulatoryParticle>();
 	////////////////////////////////
 
 	[SerializeField]
@@ -89,20 +88,16 @@ public class RegulatoryCell : MonoBehaviour
     {
         while (isShooting)
         {
-            yield return new WaitForSeconds(shootDelay * (particles.Count + 1) * 0.7f);
+            yield return new WaitForSeconds(5.0f);
             if (GlobalGameData.isGameplayPaused) continue;
 
-            if (particles.Count < 4)
-            {
                 float rotation = Random.Range(0, 360);
                 Vector3 spreadVector = new Vector3(2.5f, 0.0f, 0.0f);
                 spreadVector = Quaternion.Euler(0.0f, 0.0f, rotation) * spreadVector;
 
                 GameObject particle = Instantiate(particleToShoot, transform.position, Quaternion.identity);
                 RegulatoryParticle rp = particle.GetComponent<RegulatoryParticle>();
-                particles.Add(rp);
                 rp.Initialise(transform.position + spreadVector);
-            }
         }
     }
 
