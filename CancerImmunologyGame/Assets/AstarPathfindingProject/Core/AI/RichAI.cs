@@ -564,9 +564,6 @@ namespace Pathfinding {
 		}
 
 		protected override int OnUpgradeSerializedData (int version, bool unityThread) {
-#pragma warning disable 618
-			if (unityThread && animCompatibility != null) anim = animCompatibility;
-#pragma warning restore 618
 			return base.OnUpgradeSerializedData(version, unityThread);
 		}
 	}
