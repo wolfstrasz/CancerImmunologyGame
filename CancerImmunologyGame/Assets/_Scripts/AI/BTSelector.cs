@@ -1,26 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
-
-namespace BehaviorTreeBase
+using UnityEngine;
+namespace BehaviourTreeBase
 {
-	public class BTSelector : BTNode
+	public class BTSelector : BTComposite
 	{
 
-		// The child nodes for this selector
-		protected List<BTNode> nodes = new List<BTNode>();
-
 		/// <summary>
-		/// The constructor requires a lsit of child nodes to be passed in.
+		/// The constructor requires a list of child nodes to be passed in.
 		/// </summary>
-		public BTSelector(string name, List<BTNode> nodes)
-		{
-			this.name = name;
-			this.nodes = nodes;
-
-			Assert.IsTrue((nodes != null || nodes.Count > 0), "BTSelector (" + name + ") must have atleast one child node!");
-
-		}
+		public BTSelector(string name, List<BTNode> nodes) : base(name, nodes) { }
 
 
 		/// <summary>
@@ -29,7 +19,7 @@ namespace BehaviorTreeBase
 		/// it will report a failure instead.
 		/// </summary>
 		/// <returns></returns>
-		public override NodeState Evaluate()
+		internal override NodeState Evaluate()
 		{
 			foreach (BTNode node in nodes)
 			{
@@ -39,15 +29,18 @@ namespace BehaviorTreeBase
 						continue;
 					case NodeState.SUCCESS:
 						nodeState = NodeState.SUCCESS;
+						Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					case NodeState.RUNNING:
 						nodeState = NodeState.RUNNING;
+						Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					default:
 						continue;
 				}
 			}
 			nodeState = NodeState.FAILURE;
+			Debug.Log(name + "\t has been evaluated to " + nodeState);
 			return nodeState;
 		}
 	}

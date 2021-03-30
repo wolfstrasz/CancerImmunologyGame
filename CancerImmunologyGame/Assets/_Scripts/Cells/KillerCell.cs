@@ -25,6 +25,7 @@ public class KillerCell : Cell
 
 	[SerializeField]
 	public static float maxHealth = 100.0f;
+	[SerializeField]
 	private float health = 100.0f;
 	[SerializeField]
 	public static float maxEnergy = 100.0f;

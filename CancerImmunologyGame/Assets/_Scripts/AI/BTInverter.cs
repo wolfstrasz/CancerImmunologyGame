@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-namespace BehaviorTreeBase
+namespace BehaviourTreeBase
 {
-	public class BTInverter : BTNode
+	public class BTInverter : BTDecorator
 	{
 
-		protected BTNode node = null;
-
-		public BTInverter(string name, BTNode node)
+		public BTInverter(string name, BTNode node) : base (name, node)
 		{
-			this.node = node;
-			this.name = name;
 			Assert.IsTrue(node != null, "BTInverter (" + name + ") must have a child node!");
 		}
 
-		public override NodeState Evaluate()
+		internal override NodeState Evaluate()
 		{
 			switch (node.Evaluate())
 			{

@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-namespace BehaviorTreeBase
+namespace BehaviourTreeBase
 {
-	public class BTRepeater : BTNode
+	public class BTRepeater : BTDecorator
 	{
 		private int timesExecuted = 0;
 		private int timesToRepeat = 1;
 		private NodeState acceptedState = NodeState.RUNNING;
-		protected BTNode node = null;
 
-		public BTRepeater (string name, BTNode node, int timesToRepeat, NodeState acceptedState)
+		public BTRepeater (string name, BTNode node, int timesToRepeat, NodeState acceptedState) : base (name, node)
 		{
-			//this.name = name;
-			//this.node = node;
 			//this.timesToRepeat = timesToRepeat;
 			//this.acceptedState = acceptedState;
 
@@ -22,7 +19,7 @@ namespace BehaviorTreeBase
 			Assert.IsTrue(acceptedState != NodeState.RUNNING, "BTRepeater (" + name + ") must evaluate until a SUCCESS or FAILURE state. Currently set to RUNNING state.");
 		}
 
-		public override NodeState Evaluate()
+		internal override NodeState Evaluate()
 		{
 			if (timesExecuted < timesToRepeat)
 			{

@@ -73,10 +73,12 @@ public class GameCamera2D : Singleton<GameCamera2D>
 			if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Plus) || Input.GetAxis("Mouse ScrollWheel") > 0f)
 			{
 				orthographicZoom -= 1.0f;
+				if (orthographicZoom < 1.0f) orthographicZoom = 1.0f;
 			}
 			else if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.Minus) || Input.GetAxis("Mouse ScrollWheel") < 0f)
 			{
 				orthographicZoom += 1.0f;
+				if (orthographicZoom > 10.0f) orthographicZoom = 10.0f;
 			}
 		}
 	}
