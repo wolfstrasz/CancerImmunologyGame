@@ -8,15 +8,15 @@ namespace Cells
 	public class HelperSense : MonoBehaviour
 	{
 		[SerializeField]
-		private List<KillerCell> killerCells = new List<KillerCell>();
-		public List<KillerCell> KillerCells => killerCells;
+		private HelperTCell cell = null;
+
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
 			if (kc != null)
 			{
-				killerCells.Add(kc);
+				cell.StartHealingOnCellsNearby();
 			}
 		}
 
@@ -25,8 +25,12 @@ namespace Cells
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
 			if (kc != null)
 			{
-				killerCells.Remove(kc);
+				cell.TryToStopHealingOnCellLeaving();
 			}
+		}
+
+		void Update()
+		{
 		}
 
 	}

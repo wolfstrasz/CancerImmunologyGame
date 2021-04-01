@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4599394918203392536}
   - component: {fileID: 558590253671467358}
   - component: {fileID: 5533186655054886685}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HelperParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,13 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261601a7a054d8044957a85420c5afe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spreadPosition: {x: 0, y: 0, z: 0}
-  target: {fileID: 0}
-  lifeSpan: 0
+  collider: {fileID: 5533186655054886685}
+  render: {fileID: 4599394918203392536}
+  healthRegeneration: 5
+  energyRegeneration: 5
   speed: 1
-  distanceToReachSqr: 0.25
-  healthRegeneration: 20
-  energyRegeneration: 20
 --- !u!58 &5533186655054886685
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -117,4 +115,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 0.1

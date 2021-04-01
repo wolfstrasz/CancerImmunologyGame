@@ -827,6 +827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reevaluateTime: 2
+  timeToWaitBeforeReevaluation: 0
   rootNode:
     id: 0
   currentProcessingNode:
@@ -888,14 +889,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96953a358cbcf0b4ebf7aae66cbe605e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPosition: {fileID: 73535057}
-  controleePosition: {fileID: 0}
-  seeker: {fileID: 1114339793}
-  initialised: 0
-  reachedEndOfPath: 0
-  nextWaypointDistanceSQ: 1
+  tree:
+    instant: 0
+    rootNode:
+      id: 0
+    currentProcessingNode:
+      id: 0
   controlledCell: {fileID: 1045446957}
+  initialised: 0
+  seeker: {fileID: 1114339793}
+  target: {fileID: 0}
+  acceptableDistanceFromEndOfPath: 1
   movementVector: {x: 0, y: 0}
+  references:
+    version: 1
+    00000000:
+      type: {class: , ns: , asm: }
 --- !u!114 &1114339791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,12 +1183,12 @@ PrefabInstance:
     - target: {fileID: 4702413554772471883, guid: 4e06ce50866a6124495a8761bc2383b9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.1
+      value: -3.25
       objectReference: {fileID: 0}
     - target: {fileID: 4702413554772471883, guid: 4e06ce50866a6124495a8761bc2383b9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -20
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4702413554772471883, guid: 4e06ce50866a6124495a8761bc2383b9,
         type: 3}
