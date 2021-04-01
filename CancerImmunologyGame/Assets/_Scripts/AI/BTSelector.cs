@@ -19,27 +19,27 @@ namespace BehaviourTreeBase
 		/// it will report a failure instead.
 		/// </summary>
 		/// <returns></returns>
-		internal override NodeState Evaluate()
+		internal override NodeStates Evaluate()
 		{
 			foreach (BTNode node in nodes)
 			{
 				switch (node.Evaluate())
 				{
-					case NodeState.FAILURE:
+					case NodeStates.FAILURE:
 						continue;
-					case NodeState.SUCCESS:
-						nodeState = NodeState.SUCCESS;
+					case NodeStates.SUCCESS:
+						nodeState = NodeStates.SUCCESS;
 						Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
-					case NodeState.RUNNING:
-						nodeState = NodeState.RUNNING;
+					case NodeStates.RUNNING:
+						nodeState = NodeStates.RUNNING;
 						Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					default:
 						continue;
 				}
 			}
-			nodeState = NodeState.FAILURE;
+			nodeState = NodeStates.FAILURE;
 			Debug.Log(name + "\t has been evaluated to " + nodeState);
 			return nodeState;
 		}

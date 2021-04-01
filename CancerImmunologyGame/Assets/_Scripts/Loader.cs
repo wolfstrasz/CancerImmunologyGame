@@ -7,20 +7,9 @@ namespace Loader {
 
 	public class Loader : Singleton<Loader>
 	{
-
-		[SerializeField]
-		private bool isDebugScene = false;
-
 		void Awake()
 		{
-			if (isDebugScene)
-			{
-				GameManager.Instance.InitialiseDebugScene();
-			}
-			else
-			{
-				StartCoroutine(LoadGameAndInitialise());
-			}
+			StartCoroutine(LoadGameAndInitialise());
 		}
 
 		IEnumerator LoadGameAndInitialise()

@@ -12,21 +12,21 @@ namespace BehaviourTreeBase
 			Assert.IsTrue(node != null, "BTInverter (" + name + ") must have a child node!");
 		}
 
-		internal override NodeState Evaluate()
+		internal override NodeStates Evaluate()
 		{
 			switch (node.Evaluate())
 			{
-				case NodeState.FAILURE:
-					nodeState = NodeState.SUCCESS;
+				case NodeStates.FAILURE:
+					nodeState = NodeStates.SUCCESS;
 					return NodeState;
-				case NodeState.SUCCESS:
-					nodeState = NodeState.FAILURE;
+				case NodeStates.SUCCESS:
+					nodeState = NodeStates.FAILURE;
 					return nodeState;
-				case NodeState.RUNNING:
-					nodeState = NodeState.RUNNING;
+				case NodeStates.RUNNING:
+					nodeState = NodeStates.RUNNING;
 					return nodeState;
 				default:
-					nodeState = NodeState.FAILURE;
+					nodeState = NodeStates.FAILURE;
 					return nodeState;
 			}
 		}

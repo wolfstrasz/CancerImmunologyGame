@@ -18,7 +18,7 @@ namespace BehaviourTreeBase
 
 		internal override void ResetTreeNode()
 		{
-			nodeState = NodeState.RUNNING;
+			nodeState = NodeStates.RUNNING;
 			node.ResetTreeNode();
 		}
 	}

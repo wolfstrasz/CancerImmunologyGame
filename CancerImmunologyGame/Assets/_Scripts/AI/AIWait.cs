@@ -14,15 +14,15 @@ public class AIWait : BTActionNode
 		allowTreeToReevaluate = !force;
 	}
 
-	protected override NodeState OnEvaluateAction()
+	protected override NodeStates OnEvaluateAction()
 	{
 		timeWaited += Time.deltaTime;
 		if (timeWaited < timeToWait)
 		{
-			return NodeState.RUNNING;
+			return NodeStates.RUNNING;
 		}
 		timeWaited = 0f; // Reset
-		return NodeState.SUCCESS;
+		return NodeStates.SUCCESS;
 	}
 
 	protected override void OnResetTreeNode()

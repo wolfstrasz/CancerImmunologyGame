@@ -5,34 +5,36 @@ using UnityEngine;
 
 namespace BehaviourTreeBase
 {
-	public abstract class BehaviourTree : MonoBehaviour
+	[System.Serializable]
+	public class BehaviourTree
 	{
 		[Header("BehaviourTree")]
-		public float reevaluateTime = 2.0f;
-		protected float timeToWaitBeforeReevaluation = 0.0f;
-
+		public bool instant = false;
 		[SerializeReference]
 		public BTNode rootNode = null;
 		[SerializeReference]
 		public BTNode currentProcessingNode = null;
-		public bool instant = false;
 
-		protected virtual void ResetTree()
+		public BehaviourTree() {}
+
+		public BehaviourTree(BTNode rootNode)
+		{
+			this.rootNode = rootNode;
+			currentProcessingNode = null;
+			ResetTree();
+		}
+
+		public virtual void ResetTree()
 		{
 			currentProcessingNode = null;
 			rootNode.ResetTreeNode();
-		}
-
-		void Update()
-		{
-			Evaluate();
 		}
 
 		public void Evaluate()
 		{
 			Debug.Log("-------------------------");
 			Debug.Log("Evaluating tree");
-			if (rootNode.NodeState != NodeState.RUNNING)
+			if (rootNode.NodeState != NodeStates.RUNNING)
 			{
 				Debug.Log("Resseting tree");
 				ResetTree();
@@ -41,23 +43,11 @@ namespace BehaviourTreeBase
 			}
 
 
-			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeState.RUNNING)
+			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeStates.RUNNING)
 			{
-				timeToWaitBeforeReevaluation += Time.deltaTime;
-				if (timeToWaitBeforeReevaluation > reevaluateTime && currentProcessingNode.allowTreeToReevaluate)
-				{
-					Debug.Log("RE - Evaluating tree");
-
-					timeToWaitBeforeReevaluation = 0.0f;
-					ResetTree();
-					rootNode.Evaluate();
-					return;
-				}
-	
 				Debug.Log("Processing from middle");
 				currentProcessingNode.Evaluate();
 		
-
 				if (instant)
 				{
 					rootNode.Evaluate();

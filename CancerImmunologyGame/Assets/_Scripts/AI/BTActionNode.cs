@@ -9,17 +9,17 @@ namespace BehaviourTreeBase
 	{
 		public BehaviourTree owner = null;
 
-		protected abstract NodeState OnEvaluateAction();
+		protected abstract NodeStates OnEvaluateAction();
 		protected abstract void OnResetTreeNode();
 
-		internal override NodeState Evaluate()
+		internal override NodeStates Evaluate()
 		{
 			if (owner != null)
 			{
 				owner.currentProcessingNode = this;
 			}
 
-			if (nodeState != NodeState.RUNNING)
+			if (nodeState != NodeStates.RUNNING)
 			{
 				return NodeState;
 			}
@@ -31,7 +31,7 @@ namespace BehaviourTreeBase
 		 
 		internal override void ResetTreeNode()
 		{
-			nodeState = NodeState.RUNNING;
+			nodeState = NodeStates.RUNNING;
 			OnResetTreeNode();
 		}
 
@@ -41,5 +41,9 @@ namespace BehaviourTreeBase
 			this.owner = owner;
 		}
 
+		protected void ActionNodeLogWarning (string message)
+		{
+			Debug.LogWarning(name + " : " + message);
+		}
 	}
 }

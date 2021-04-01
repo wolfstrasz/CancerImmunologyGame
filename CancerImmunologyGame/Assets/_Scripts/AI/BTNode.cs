@@ -9,28 +9,25 @@ namespace BehaviourTreeBase
 	{
 		internal protected bool allowTreeToReevaluate = true;
 		// Delegate that returns the state of the node.
-		internal delegate NodeState NodeReturn();
+		internal delegate NodeStates NodeReturn();
 
 		// The current state of the node 
 		[SerializeReference]
-		protected NodeState nodeState = NodeState.RUNNING;
+		protected NodeStates nodeState = NodeStates.RUNNING;
 		[SerializeReference]
 		protected string name = "unknownNode";
 
-		public NodeState NodeState => nodeState;
+		public NodeStates NodeState => nodeState;
 
 		// The constructor for the node 
 		public BTNode() { }
 
 		//Implementing classes use this method to evaluate the desired set of conditions
-		internal abstract NodeState Evaluate();
+		internal abstract NodeStates Evaluate();
 
 		internal abstract void ResetTreeNode();
-
-
-	
 	}
 
 	[System.Serializable]
-	public enum NodeState { SUCCESS, FAILURE, RUNNING }
+	public enum NodeStates { SUCCESS, FAILURE, RUNNING }
 }

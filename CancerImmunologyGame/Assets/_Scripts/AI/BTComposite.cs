@@ -22,7 +22,7 @@ namespace BehaviourTreeBase
 
 		internal override void ResetTreeNode()
 		{
-			nodeState = NodeState.RUNNING;
+			nodeState = NodeStates.RUNNING;
 
 			foreach ( BTNode node in nodes)
 			{
