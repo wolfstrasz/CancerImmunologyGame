@@ -6,32 +6,48 @@ using BehaviourTreeBase;
 using Cells;
 
 [RequireComponent(typeof(Seeker))]
-public class AIController : MonoBehaviour, IAIMovementController
+public class AIController : MonoBehaviour, IAIKillerCellController
 {
 	[Header("AI Data")]
 	[SerializeField]
 	private BehaviourTree tree = null;
 	[SerializeField]
-	private KillerCell controlledCell = null;
-	[SerializeField]
 	private bool initialised = false;
 
-	[Header("MovementControllInterface (Read Only)")]
+	[Header("Interface Data (Cell controll)")]
 	[SerializeField]
-	private Seeker seeker = null;
+	private KillerCell controlledCell = null;
+	public KillerCell ControlledCell { get => controlledCell; set => controlledCell = value; }
+
+	[Header("Interface Data (Targeting) (ReadOnly)")]
 	[SerializeField]
 	private GameObject target = null;
+	public GameObject Target { get => target; set => target = value; }
 	[SerializeField]
-	private float acceptableDistanceFromEndOfPath = 1.0f;
+	private float acceptableDistanceFromTarget = 1.0f;
+	public float AcceptableDistanceFromTarget { get => acceptableDistanceFromTarget; set => acceptableDistanceFromTarget = value; }
+
+	[Header("Interface Data (Movement) (ReadOnly)")]
 	[SerializeField]
-	private Vector2 movementVector = Vector2.zero;
+	private Vector2 movementDirection = Vector2.zero;
+	public Vector2 MovementDirection { get => movementDirection; set => movementDirection = value; }
 	private Vector2 zeroVector = Vector2.zero;
-	
+	[SerializeField]
+	private Seeker pathSeeker = null;
+	public Seeker PathSeeker { get => pathSeeker; set => pathSeeker = value; }
+
+	[Header ("Interface Data (Helper Booking) (Read Only)")]
+	[SerializeField]
+	private HelperTCell bookedHelperTcell = null;
+	public HelperTCell BookedHelperTCell { get => bookedHelperTcell; set => bookedHelperTcell = value; }
+	[SerializeField]
+	private GameObject bookingSpot = null;
+	public GameObject BookingSpot { get => bookingSpot; set => bookingSpot = value; }
 
 
 	public void Start()
 	{
-		seeker = GetComponent<Seeker>();
+		pathSeeker = GetComponent<Seeker>();
 		InitialiseBehaviourTree();
 
 		initialised = true;
@@ -42,8 +58,11 @@ public class AIController : MonoBehaviour, IAIMovementController
 		tree = new BehaviourTree();
 		// ACTIONS
 		BTActionNode hasToHeal = new AINeedToHealKillerCell("HasToHeal", tree, this);
-		BTActionNode findClosestHelper = new AIFindClosestTargetOfType<HelperTCell>("FindHelperCell", tree, this);
+		BTActionNode findClosestHelper = new AIBookHelperCellToReach("Booking HelperCell", tree, this);
 		BTActionNode goToHeal = new AIReachDestination("Reach Healer", tree, this);
+		BTActionNode canFight = new AICanFight("Can Fight", tree, this);
+		BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this);
+		BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
 		// GO AND HEAL
 		List<BTNode> shouldHealList = new List<BTNode>();
@@ -52,71 +71,32 @@ public class AIController : MonoBehaviour, IAIMovementController
 		shouldHealList.Add(goToHeal);
 		BTSequence shouldHeal = new BTSequence("HealSequence", shouldHealList);
 
+		// GO TO BASE
+		List<BTNode> shouldGoToBaseList = new List<BTNode>();
+		shouldGoToBaseList.Add(canFight);
+		shouldGoToBaseList.Add(findBase);
+		shouldGoToBaseList.Add(goToBase);
+		BTSequence shouldGoToBase = new BTSequence("GoToBaseSequence", shouldGoToBaseList);
+
 		// Set ROOT 
 		List<BTNode> rootSelectorList = new List<BTNode>();
 		rootSelectorList.Add(shouldHeal);
+		rootSelectorList.Add(shouldGoToBase);
 		tree.rootNode = new BTSelector("rootNode", rootSelectorList);
 	}
 
 	void Update()
 	{
 		if (!initialised) return;
-		movementVector = zeroVector;
+		movementDirection = zeroVector;
 		tree.Evaluate();
 	}
 
 
 	void FixedUpdate()
 	{
-		controlledCell.MovementVector = movementVector;
+		controlledCell.MovementVector = movementDirection;
 	}
 
 
-	// IAI Movement Controller
-	public Seeker GetSeeker()
-	{
-		return seeker;
-	}
-
-	public void UpdateMovementDirection(Vector3 directionVector)
-	{
-		movementVector.x = directionVector.x;
-		movementVector.y = directionVector.y;
-	}
-
-	public float GetAcceptableDistanceFromTarget()
-	{
-		return acceptableDistanceFromEndOfPath;
-	}
-
-	// IAIKillerCellController
-	public KillerCell GetControlledCell()
-	{
-		return controlledCell;
-	}
-
-	public Transform GetControlledCellTransform()
-	{
-		if (controlledCell == null)
-			return null;
-		else return controlledCell.transform;
-	}
-
-	// IAIObjectiveHolder
-	public GameObject GetTarget()
-	{
-		return target;
-	}
-
-	public void SetTarget(GameObject target)
-	{
-		this.target = target;
-	}
-
-	public Transform GetTargetTransform()
-	{
-		if (target == null)
-			return null;
-		else return target.transform;
-	}
 }

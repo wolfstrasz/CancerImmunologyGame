@@ -2,21 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Cells;
 
-public interface IAIMovementController : IAIKillerCellController
+// Final Interface
+public interface IAIKillerCellController : 
+	IAIMovementController, 
+	IAIHelperCellInteractor
 {
-	Seeker GetSeeker();
-	void UpdateMovementDirection(Vector3 directionVector);
-	float GetAcceptableDistanceFromTarget();
 }
 
-public interface IAIKillerCellController
+// Complex interfaces
+public interface IAIMovementController : 
+	IAICellController, IAITargetHandler
 {
-	KillerCell GetControlledCell();
-	Transform GetControlledCellTransform();
+	Seeker PathSeeker { get; set; }
+	Vector2 MovementDirection { get; set; }
+}
 
-	GameObject GetTarget();
-	Transform GetTargetTransform();
 
-	void SetTarget(GameObject target);
+public interface IAIHelperCellInteractor : 
+	IAICellController, IAITargetHandler
+{
+	HelperTCell BookedHelperTCell { get; set; }
+	GameObject BookingSpot { get; set; }
+}
+
+
+// Base interfaces
+public interface IAITargetHandler : IAICellController
+{
+	GameObject Target { get; set; }
+	float AcceptableDistanceFromTarget { get; set; }
+}
+
+public interface IAICellController
+{
+	KillerCell ControlledCell { get; set; }
 }

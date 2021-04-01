@@ -7,16 +7,16 @@ using BehaviourTreeBase;
 public class AIFindClosestTargetOfType<TypeOfTarget> : BTActionNode where TypeOfTarget : MonoBehaviour
 {
 
-	private IAIKillerCellController controller;
+	private IAITargetHandler controller;
 
-	public AIFindClosestTargetOfType(string name, BehaviourTree owner, IAIKillerCellController controller) : base(name, owner, "AIFindClosestTarget")
+	public AIFindClosestTargetOfType(string name, BehaviourTree owner, IAITargetHandler controller) : base(name, owner, "AIFindClosestTarget")
 	{
 		this.controller = controller;
 	}
 
 	protected override NodeStates OnEvaluateAction()
 	{
-		GameObject objectFound = Utils.FindClosestGameObjectOfType<TypeOfTarget>(controller.GetControlledCellTransform().position);
+		GameObject objectFound = Utils.FindClosestGameObjectOfType<TypeOfTarget>(controller.ControlledCell.transform.position);
 
 		if (objectFound == null)
 		{
@@ -24,7 +24,8 @@ public class AIFindClosestTargetOfType<TypeOfTarget> : BTActionNode where TypeOf
 			return nodeState;
 		} else
 		{
-			controller.SetTarget(objectFound);
+			controller.Target = objectFound;
+			controller.AcceptableDistanceFromTarget = 1f;
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;
 		}

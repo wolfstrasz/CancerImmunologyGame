@@ -15,6 +15,9 @@ namespace BehaviourTreeBase
 		[SerializeReference]
 		public BTNode currentProcessingNode = null;
 
+		public float reevaluateTime = 2.0f;
+		protected float timeToWaitBeforeReevaluation = 0.0f;
+
 		public BehaviourTree() {}
 
 		public BehaviourTree(BTNode rootNode)
@@ -45,6 +48,18 @@ namespace BehaviourTreeBase
 
 			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeStates.RUNNING)
 			{
+
+				timeToWaitBeforeReevaluation += Time.deltaTime;
+				if (timeToWaitBeforeReevaluation > reevaluateTime && currentProcessingNode.allowTreeToReevaluate)
+				{
+					Debug.Log("RE - Evaluating tree");
+
+					timeToWaitBeforeReevaluation = 0.0f;
+					ResetTree();
+					rootNode.Evaluate();
+					return;
+				}
+
 				Debug.Log("Processing from middle");
 				currentProcessingNode.Evaluate();
 		

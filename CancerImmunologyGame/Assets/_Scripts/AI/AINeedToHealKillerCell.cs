@@ -5,16 +5,20 @@ using BehaviourTreeBase;
 
 public class AINeedToHealKillerCell : BTActionNode
 {
-	IAIKillerCellController controller;
+	IAICellController controller;
 
-	public AINeedToHealKillerCell(string name, BehaviourTree owner, IAIKillerCellController controller) : base(name, owner, "")
+	public AINeedToHealKillerCell(string name, BehaviourTree owner, IAICellController controller) : base(name, owner, "NeedToHeal")
 	{
 		this.controller = controller;
 	}
 
 	protected override NodeStates OnEvaluateAction()
 	{
-		if (controller.GetControlledCell().Health * 2 < KillerCell.maxHealth)
+		if (controller.ControlledCell.Health * 3 < KillerCell.maxHealth)
+		{
+			return NodeStates.SUCCESS;
+		}
+		else if (controller.ControlledCell.Energy * 3 < KillerCell.maxEnergy)
 		{
 			return NodeStates.SUCCESS;
 		}

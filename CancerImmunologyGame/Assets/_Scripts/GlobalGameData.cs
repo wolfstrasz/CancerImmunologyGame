@@ -4,7 +4,7 @@ using UnityEngine;
 using Player;
 using System;
 using Cancers;
-
+using Cells;
 public static class GlobalGameData
 {
 	public static bool autoAim = false;
@@ -17,6 +17,7 @@ public static class GlobalGameData
 	// Shared object pool
 	public static List<Cancer> Cancers = new List<Cancer>();
 	public static List<KillerCell> KillerCells = new List<KillerCell>();
+	public static List<HelperTCell> HelperTCells = new List<HelperTCell>(); 
 	public static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 
 	public static bool isPowerUpOn = false;
@@ -29,5 +30,7 @@ public static class GlobalGameData
 		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>());
 		KillerCells.Clear();
 		KillerCells.AddRange(GameObject.FindObjectsOfType<KillerCell>());
+		HelperTCells.Clear();
+		HelperTCells.AddRange(GameObject.FindObjectsOfType<HelperTCell>());
 	}
 }

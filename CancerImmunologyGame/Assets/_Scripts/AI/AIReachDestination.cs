@@ -64,7 +64,7 @@ public class AIReachDestination : BTActionNode
 			// MOVE THE CELL
 			// Normalize it so that it has a length of 1 world unit
 			Vector3 dir = (path.vectorPath[currentWaypoint] - targetToMove.position).normalized;
-			controller.UpdateMovementDirection(dir);
+			controller.MovementDirection = dir;
 			nodeState = NodeStates.RUNNING;
 			return nodeState;
 		}
@@ -83,21 +83,22 @@ public class AIReachDestination : BTActionNode
 
 		if (pathState == AIPathState.EMPTY)
 		{
-			targetToMove = controller.GetControlledCellTransform();
+			targetToMove = controller.ControlledCell.transform;
 			if (targetToMove == null)
 			{
 				ActionNodeLogWarning("Did not receive a targed to move in movement data");
 			}
 
-			targetToReach = controller.GetTargetTransform();
+			targetToReach = controller.Target.transform;
 			if (targetToReach == null)
 			{
 				ActionNodeLogWarning("Did not receive a targed to reach in movement data");
 			}
 
-			distanceSq = controller.GetAcceptableDistanceFromTarget();
+			distanceSq = controller.AcceptableDistanceFromTarget;
 			distanceSq *= distanceSq;
 
+			Debug.Log("HOWDY: " + targetToReach.gameObject.name + " -> " + targetToReach.localPosition + " " + targetToReach.position);
 			if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
 			{
 				nodeState = NodeStates.SUCCESS;
@@ -106,7 +107,7 @@ public class AIReachDestination : BTActionNode
 			} else
 			{
 				pathState = AIPathState.SEARCHING;
-				controller.GetSeeker().StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
+				controller.PathSeeker.StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
 				nodeState = NodeStates.RUNNING;
 			}
 			
