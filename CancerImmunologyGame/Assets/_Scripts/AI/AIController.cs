@@ -4,6 +4,7 @@ using UnityEngine;
 using Pathfinding;
 using BehaviourTreeBase;
 using Cells;
+using Pathfinding.RVO;
 
 [RequireComponent(typeof(Seeker))]
 public class AIController : MonoBehaviour, IAIKillerCellController, ICellController
@@ -35,7 +36,22 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	[SerializeField]
 	private Seeker pathSeeker = null;
 	public Seeker PathSeeker { get => pathSeeker; set => pathSeeker = value; }
-
+	[SerializeField]
+	private float repathRate = 1.0f;
+	public float RepathRate => repathRate;
+	[SerializeField]
+	private float movementLookAhead = 1.0f;
+	public float MovementLookAhead => movementLookAhead;
+	[SerializeField]
+	private float slowdownDistance = 0.5f;
+	public float SlowdownDistance => slowdownDistance;
+	[SerializeField]
+	private RVOController rvoController = null;
+	public RVOController RVOController => rvoController;
+	[SerializeField]
+	private GameObject graphObstacle;
+	public GameObject GraphObstacle => graphObstacle;
+	
 	[Header ("Interface Data (Helper Booking) (Read Only)")]
 	[SerializeField]
 	private HelperTCell bookedHelperTcell = null;
@@ -57,7 +73,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 
 	private void InitialiseBehaviourTree()
 	{
-		tree = new BehaviourTree();
+		tree = new BehaviourTree(); // Garbage collection will clean it if something requires reinitialisation
 		// ACTIONS
 		BTActionNode hasToHeal = new AINeedToHealKillerCell("HasToHeal", tree, this);
 		BTActionNode findClosestHelper = new AIBookHelperCellToReach("Booking HelperCell", tree, this);
@@ -92,12 +108,13 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 		if (!initialised) return;
 		movementDirection = zeroVector;
 		tree.Evaluate();
+		controlledCell.MovementVector = movementDirection;
+
 	}
 
 
 	void FixedUpdate()
 	{
-		controlledCell.MovementVector = movementDirection;
 	}
 
 	public void OnCellDeath()

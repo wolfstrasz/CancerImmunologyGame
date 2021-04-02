@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
 using Pathfinding;
+using Pathfinding.RVO;
+
 public class AIReachDestination : BTActionNode
 {
 	// Data obtained from controller
@@ -13,75 +15,164 @@ public class AIReachDestination : BTActionNode
 
 	// Data to work with
 	private Path path = null;
-	private AIPathState pathState;
+	private AIPathState aiPathState;
 	private int currentWaypoint = 0;
+	private List<Vector3> vectorPath = new List<Vector3>();
+	private float repathRate = 1f;
+	private float timePassedForRepath = 0f;
+	private float movementLookAhead = 0f;
+	private float slowdownDistance = 0f;
+	RVOController rvoController = null;
 
-
-	protected enum AIPathState { EMPTY, FOUND, ERROR, SEARCHING, ENDED }
+	protected enum AIPathState { NEEDTOSEARCH, FOUND, ERROR, SEARCHING, ENDED }
 
 	public AIReachDestination(string name, BehaviourTree owner, IAIMovementController controller) : base (name, owner, "AIReachDestination")
 	{ 
 		this.controller = controller;
+		rvoController = controller.RVOController;
+		repathRate = controller.RepathRate;
+		movementLookAhead = controller.MovementLookAhead;
+		slowdownDistance = controller.SlowdownDistance;
 	}
 
-	protected override NodeStates OnEvaluateAction()
-	{
 
-		// PathState has been found 
-		if (pathState == AIPathState.FOUND)
+	private NodeStates MoveTarget()
+	{
+		if (path == null)
 		{
-			if (path == null)
-			{
-				Debug.LogError("Path is null but path was found!");
-				nodeState = NodeStates.RUNNING;
-				return nodeState;
-			}
+			Debug.LogError("Path is null but path was found!");
+			nodeState = NodeStates.RUNNING;
+			return nodeState;
+		}
+
+		// Cache the value for more optimised use
+		Vector3 currentTargetToMovePosition = targetToMove.position;
+
+		if ( Vector3.SqrMagnitude(currentTargetToMovePosition - targetToReach.position) <= distanceSq)
+		{
+			//rvoController.locked = true;
+			nodeState = NodeStates.SUCCESS;
+			aiPathState = AIPathState.ENDED;
+			timePassedForRepath = 0.0f;
+			path.Release(this);
+			path = null;
+
+			controller.GraphObstacle.SetActive(true);
+			rvoController.locked = true;
+
+			return nodeState;
+		}
+
+		if (vectorPath == null || vectorPath.Count == 0)
+		{
+			//rvoController.lockWhenNotMoving = true;
+			//rvoController.locked = true;
+			float speed = controller.ControlledCell.movementSpeed;
+			rvoController.SetTarget(currentTargetToMovePosition, speed,speed);
+		}
+		else
+		{
+			rvoController.locked = false;
+			controller.GraphObstacle.SetActive(false);
+			//rvoController.lockWhenNotMoving = false;
+			//rvoController.locked = false;
 
 			// Check in a loop if we are close enough to the current waypoint to switch to the next one.
 			// We do this in a loop because many waypoints might be close to each other and we may reach
 			// several of them in the same frame.
-			while (true)
+			float distanceToNextWaypointSQ = Vector3.SqrMagnitude(currentTargetToMovePosition - path.vectorPath[currentWaypoint]);
+			while (distanceToNextWaypointSQ < movementLookAhead * movementLookAhead && currentWaypoint != (vectorPath.Count - 1))
 			{
-
-				float distanceToNextWaypointSQ = Vector3.SqrMagnitude(targetToMove.position - path.vectorPath[currentWaypoint]);
-				if (distanceToNextWaypointSQ <= distanceSq)
-				{
-
-					currentWaypoint++;
-					if (currentWaypoint >= path.vectorPath.Count)
-					{
-						pathState = AIPathState.ENDED;
-						nodeState = NodeStates.SUCCESS;
-						return nodeState;
-					}
-				}
-				else
-				{
-					break;
-				}
+				currentWaypoint++;
+				distanceToNextWaypointSQ = Vector3.SqrMagnitude(currentTargetToMovePosition - path.vectorPath[currentWaypoint]);
 			}
 
-			// MOVE THE CELL
-			// Normalize it so that it has a length of 1 world unit
-			Vector3 dir = (path.vectorPath[currentWaypoint] - targetToMove.position).normalized;
-			controller.MovementDirection = dir;
-			nodeState = NodeStates.RUNNING;
-			return nodeState;
+			// Obtain path point at MovementLookAhead distance
+			// Current path segment goes from vectorPath[wp-1] to vectorPath[wp]
+			// We want to find the point on that segment that is 'moveNextDist' from our current position.
+			// This can be visualized as finding the intersection of a circle with radius 'moveNextDist'
+			// centered at our current position with that segment.
+			var p1 = (currentWaypoint > 0) ? vectorPath[currentWaypoint - 1] : vectorPath[0];
+			var p2 = vectorPath[currentWaypoint];
+
+			// Calculate the intersection with the circle. This involves some math.
+			var t = VectorMath.LineCircleIntersectionFactor(currentTargetToMovePosition, p1, p2, movementLookAhead);
+
+			// Clamp to a point on the segment
+			t = Mathf.Clamp01(t);
+			Vector3 intersectionWaypoint = Vector3.Lerp(p1, p2, t);
+
+			//Vector3 intersectionWaypoint = vectorPath[currentWaypoint];
+			Debug.Log("Controller of: " + controller.ControlledCell.gameObject.name + " has found current waypoint to be: " + intersectionWaypoint);
+			// Obtain the remaining distance to goal
+			float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude + (intersectionWaypoint - p2).magnitude;
+			//float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude;
+			for (int i = currentWaypoint; i < vectorPath.Count - 1; i++)
+			{
+				remainingDistance += (vectorPath[i + 1] - vectorPath[i]).magnitude;
+			}
+
+			// Obtain weight vector for local avoidance, where remainingDistance is the weight, 
+			var direction = (intersectionWaypoint - currentTargetToMovePosition).normalized;
+			var rvoTarget = direction * remainingDistance + currentTargetToMovePosition;
+			var desiredSpeed = Mathf.Clamp01(remainingDistance / slowdownDistance) * controller.ControlledCell.movementSpeed;
+
+			rvoController.SetTarget(rvoTarget, controller.ControlledCell.movementSpeed, controller.ControlledCell.movementSpeed);
+
 		}
 
-		if (pathState == AIPathState.SEARCHING)
+		// Process RVO data
+
+		// Get a processed movement delta from the rvo controller and move the character.
+		// This is based on information from earlier frames.
+		var movementDelta = rvoController.CalculateMovementDelta(Time.deltaTime);
+
+		// Transform into raw direction vector (non-normalized) that afterwards the cell will use to move to the same position
+		// after AIController applies it
+		Vector2 raw;
+		raw.x = movementDelta.x;// / controller.ControlledCell.movementSpeed;
+		raw.y = movementDelta.y;// / controller.ControlledCell.movementSpeed;
+		controller.MovementDirection = raw.normalized;
+
+		nodeState = NodeStates.RUNNING;
+		return nodeState;
+	}
+
+
+	protected override NodeStates OnEvaluateAction()
+	{
+		if (!(aiPathState == AIPathState.SEARCHING))
+		{
+			timePassedForRepath -= Time.deltaTime;
+
+			if (targetToReach != controller.Target.transform || timePassedForRepath <= 0f)
+			{
+				timePassedForRepath = repathRate;
+				aiPathState = AIPathState.NEEDTOSEARCH;
+			}
+		}
+
+		// PathState has been found 
+		if (aiPathState == AIPathState.FOUND)
+		{
+			return MoveTarget();
+		}
+
+		if (aiPathState == AIPathState.SEARCHING)
 		{
 			nodeState = NodeStates.RUNNING;
 			return nodeState;
 		}
 
-		if (pathState == AIPathState.ENDED)
+		if (aiPathState == AIPathState.ENDED)
 		{
 			nodeState = NodeStates.SUCCESS;
+			controller.GraphObstacle.SetActive(true);
+			rvoController.locked = true;
 			return nodeState;
 		}
 
-		if (pathState == AIPathState.EMPTY)
+		if (aiPathState == AIPathState.NEEDTOSEARCH)
 		{
 			targetToMove = controller.ControlledCell.transform;
 			if (targetToMove == null)
@@ -98,15 +189,18 @@ public class AIReachDestination : BTActionNode
 			distanceSq = controller.AcceptableDistanceFromTarget;
 			distanceSq *= distanceSq;
 
-			//Debug.Log("HOWDY: " + targetToReach.gameObject.name + " -> " + targetToReach.localPosition + " " + targetToReach.position);
 			if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
 			{
 				nodeState = NodeStates.SUCCESS;
-				pathState = AIPathState.ENDED;
+				aiPathState = AIPathState.ENDED;
+				controller.GraphObstacle.SetActive(true);
+				rvoController.locked = true;
 				return nodeState;
 			} else
 			{
-				pathState = AIPathState.SEARCHING;
+				controller.GraphObstacle.SetActive(false);
+				rvoController.locked = false;
+				aiPathState = AIPathState.SEARCHING;
 				controller.PathSeeker.StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
 				nodeState = NodeStates.RUNNING;
 			}
@@ -114,7 +208,7 @@ public class AIReachDestination : BTActionNode
 			return nodeState;
 		}
 
-		if (pathState == AIPathState.ERROR)
+		if (aiPathState == AIPathState.ERROR)
 		{
 			nodeState = NodeStates.FAILURE;
 			return nodeState;
@@ -128,28 +222,33 @@ public class AIReachDestination : BTActionNode
 
 	protected override void OnResetTreeNode()
 	{
-		currentWaypoint = 0;
-		pathState = AIPathState.EMPTY;
-		path = null;
-		targetToMove = null;
-		targetToReach = null;
-		distanceSq = 1.0f;
+
 	}
 
 
 	public void OnPathComplete(Path p)
 	{
-		if (!p.error)
+
+		aiPathState = AIPathState.FOUND;
+
+		if (path != null) path.Release(this);
+		path = p;
+		p.Claim(this);
+
+		if (p.error)
 		{
-			path = p;
 			currentWaypoint = 0;
-			pathState = AIPathState.FOUND; 
+			vectorPath = null;
+			aiPathState = AIPathState.ERROR;
 		}
-		else
-		{
-			path = null;
-			pathState = AIPathState.ERROR;
-		}
+
+		// else
+		currentWaypoint = 0;
+		vectorPath = p.vectorPath;
+
+		aiPathState = AIPathState.FOUND; 
+		
+
 	}
 
 }

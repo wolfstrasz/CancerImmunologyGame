@@ -30,6 +30,21 @@ public class AIGraphObstacle : MonoBehaviour
 			DoUpdateGraphs();
 		}
 	}
+
+	void OnDisable()
+	{
+		coll.enabled = false;
+		DoUpdateGraphs();
+	}
+
+	void OnEnable()
+	{
+		if (AstarPath.active)
+		{
+			coll.enabled = true;
+			DoUpdateGraphs();
+		}
+	}
 	// Update is called once per frame
 	void Update()
 	{
@@ -64,6 +79,7 @@ public class AIGraphObstacle : MonoBehaviour
 	/// </summary>
 	public void DoUpdateGraphs()
 	{
+		if (AstarPath.active == null) return;
 		Bounds newBounds = coll.bounds;
 		// Send two update request to update the nodes inside the 'prevBounds' and 'newBounds' volumes
 		AstarPath.active.UpdateGraphs(newBounds);

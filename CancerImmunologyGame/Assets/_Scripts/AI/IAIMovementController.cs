@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Pathfinding.RVO;
 using Cells;
 
 // Final Interface
@@ -17,7 +18,13 @@ public interface IAIMovementController :
 {
 	Seeker PathSeeker { get; set; }
 	Vector2 MovementDirection { get; set; }
+	float RepathRate { get;}
+	float MovementLookAhead { get; }
+	float SlowdownDistance { get; }
+	RVOController RVOController { get; }
+	GameObject GraphObstacle { get; }
 }
+
 
 
 public interface IAIHelperCellInteractor : 

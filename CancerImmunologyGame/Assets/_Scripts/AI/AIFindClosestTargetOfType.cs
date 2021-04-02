@@ -25,7 +25,7 @@ public class AIFindClosestTargetOfType<TypeOfTarget> : BTActionNode where TypeOf
 		} else
 		{
 			controller.Target = objectFound;
-			controller.AcceptableDistanceFromTarget = 1f;
+			controller.AcceptableDistanceFromTarget = 0.2f;
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;
 		}

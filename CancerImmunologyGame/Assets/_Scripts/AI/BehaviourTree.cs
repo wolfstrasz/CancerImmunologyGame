@@ -23,7 +23,6 @@ namespace BehaviourTreeBase
 		public BehaviourTree(BTNode rootNode)
 		{
 			this.rootNode = rootNode;
-			currentProcessingNode = null;
 			ResetTree();
 		}
 
@@ -42,19 +41,17 @@ namespace BehaviourTreeBase
 				return;
 			}
 
+			timeToWaitBeforeReevaluation += Time.deltaTime;
+			if (timeToWaitBeforeReevaluation > reevaluateTime && currentProcessingNode.allowTreeToReevaluate)
+			{
+				timeToWaitBeforeReevaluation = 0.0f;
+				ResetTree();
+				rootNode.Evaluate();
+				return;
+			}
 
 			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeStates.RUNNING)
 			{
-				timeToWaitBeforeReevaluation += Time.deltaTime;
-				if (timeToWaitBeforeReevaluation > reevaluateTime && currentProcessingNode.allowTreeToReevaluate)
-				{
-
-					timeToWaitBeforeReevaluation = 0.0f;
-					ResetTree();
-					rootNode.Evaluate();
-					return;
-				}
-
 				currentProcessingNode.Evaluate();
 		
 				if (instant)

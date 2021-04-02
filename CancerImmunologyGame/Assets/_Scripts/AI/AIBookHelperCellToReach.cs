@@ -58,7 +58,7 @@ public class AIBookHelperCellToReach : BTActionNode
 		interactor.BookedHelperTCell = helperCells[helperId - 1];
 		interactor.BookingSpot = bookedSpot;
 		interactor.Target = bookedSpot;
-		interactor.AcceptableDistanceFromTarget = 0.1f;
+		interactor.AcceptableDistanceFromTarget = 0.2f;
 		nodeState = NodeStates.SUCCESS;
 		return nodeState;
 	}
