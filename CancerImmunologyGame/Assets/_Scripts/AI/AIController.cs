@@ -6,7 +6,7 @@ using BehaviourTreeBase;
 using Cells;
 
 [RequireComponent(typeof(Seeker))]
-public class AIController : MonoBehaviour, IAIKillerCellController
+public class AIController : MonoBehaviour, IAIKillerCellController, ICellController
 {
 	[Header("AI Data")]
 	[SerializeField]
@@ -49,6 +49,8 @@ public class AIController : MonoBehaviour, IAIKillerCellController
 	{
 		pathSeeker = GetComponent<Seeker>();
 		InitialiseBehaviourTree();
+		controlledCell.controller = this;
+		controlledCell.Sense.controller = this;
 
 		initialised = true;
 	}
@@ -98,5 +100,20 @@ public class AIController : MonoBehaviour, IAIKillerCellController
 		controlledCell.MovementVector = movementDirection;
 	}
 
+	public void OnCellDeath()
+	{
+		Debug.LogWarning("AI Controller found " + controlledCell + " to die");
+	}
 
+	public void OnEnemiesInRange()
+	{
+		Debug.LogWarning("AI Controller found " + controlledCell + " to reached enemies");
+
+	}
+
+	public void OnEnemiesOutOfRange()
+	{
+		Debug.LogWarning("AI Controller found " + controlledCell + " to went away from enemies");
+
+	}
 }

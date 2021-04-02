@@ -93,7 +93,8 @@ namespace Cells
 
 			// Spawn booking spots
 			bookingSpotCount = 0;
-			while (spawnAngleDegrees < initialRotationOffset + 360f)
+			float fullRotation = 360 + initialRotationOffset - spreadAngleInDegrees;
+			while (spawnAngleDegrees <= fullRotation)
 			{
 				// Calculate booking spot position
 				Vector3 spawnPosition = Quaternion.Euler(0f, 0f, spawnAngleDegrees) * spawnDirection * bookingSpotDistance;
