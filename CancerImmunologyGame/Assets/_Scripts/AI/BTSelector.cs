@@ -29,18 +29,18 @@ namespace BehaviourTreeBase
 						continue;
 					case NodeStates.SUCCESS:
 						nodeState = NodeStates.SUCCESS;
-						Debug.Log(name + "\t has been evaluated to " + nodeState);
+						//Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					case NodeStates.RUNNING:
 						nodeState = NodeStates.RUNNING;
-						Debug.Log(name + "\t has been evaluated to " + nodeState);
+						//Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					default:
 						continue;
 				}
 			}
 			nodeState = NodeStates.FAILURE;
-			Debug.Log(name + "\t has been evaluated to " + nodeState);
+			//Debug.Log(name + "\t has been evaluated to " + nodeState);
 			return nodeState;
 		}
 	}

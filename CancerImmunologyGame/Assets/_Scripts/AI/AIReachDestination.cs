@@ -98,7 +98,7 @@ public class AIReachDestination : BTActionNode
 			distanceSq = controller.AcceptableDistanceFromTarget;
 			distanceSq *= distanceSq;
 
-			Debug.Log("HOWDY: " + targetToReach.gameObject.name + " -> " + targetToReach.localPosition + " " + targetToReach.position);
+			//Debug.Log("HOWDY: " + targetToReach.gameObject.name + " -> " + targetToReach.localPosition + " " + targetToReach.position);
 			if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
 			{
 				nodeState = NodeStates.SUCCESS;

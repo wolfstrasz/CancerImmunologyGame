@@ -29,17 +29,14 @@ namespace BehaviourTreeBase
 
 		public virtual void ResetTree()
 		{
-			currentProcessingNode = null;
 			rootNode.ResetTreeNode();
+			currentProcessingNode = null;
 		}
 
 		public void Evaluate()
 		{
-			Debug.Log("-------------------------");
-			Debug.Log("Evaluating tree");
 			if (rootNode.NodeState != NodeStates.RUNNING)
 			{
-				Debug.Log("Resseting tree");
 				ResetTree();
 				rootNode.Evaluate();
 				return;
@@ -48,11 +45,9 @@ namespace BehaviourTreeBase
 
 			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeStates.RUNNING)
 			{
-
 				timeToWaitBeforeReevaluation += Time.deltaTime;
 				if (timeToWaitBeforeReevaluation > reevaluateTime && currentProcessingNode.allowTreeToReevaluate)
 				{
-					Debug.Log("RE - Evaluating tree");
 
 					timeToWaitBeforeReevaluation = 0.0f;
 					ResetTree();
@@ -60,7 +55,6 @@ namespace BehaviourTreeBase
 					return;
 				}
 
-				Debug.Log("Processing from middle");
 				currentProcessingNode.Evaluate();
 		
 				if (instant)
@@ -70,11 +64,8 @@ namespace BehaviourTreeBase
 			} 
 			else
 			{
-				Debug.Log("Processing without being instant");
 				rootNode.Evaluate();
 			}
-			Debug.Log("Finished Tree Evaluation");
-			Debug.Log("-------------------------");
 
 		}
 

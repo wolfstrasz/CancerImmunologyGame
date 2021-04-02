@@ -25,7 +25,7 @@ namespace BehaviourTreeBase
 			}
 
 			nodeState = OnEvaluateAction();
-			Debug.Log(name + "\t has been evaluated to " + nodeState);
+			//Debug.Log(name + "\t has been evaluated to " + nodeState);
 			return nodeState;
 		}
 		 

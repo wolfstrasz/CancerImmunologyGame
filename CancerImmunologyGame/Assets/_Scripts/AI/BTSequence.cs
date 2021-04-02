@@ -26,23 +26,23 @@ namespace BehaviourTreeBase
 				{
 					case NodeStates.FAILURE:
 						nodeState = NodeStates.FAILURE;
-						Debug.Log(name + "\t has been evaluated to " + nodeState);
+						//Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					case NodeStates.SUCCESS:
 						continue;
 					case NodeStates.RUNNING:
 						nodeState = NodeStates.RUNNING;
-						Debug.Log(name + "\t has been evaluated to " + nodeState);
+						//Debug.Log(name + "\t has been evaluated to " + nodeState);
 						return nodeState;
 					default:
 						nodeState = NodeStates.SUCCESS;
-						Debug.Log(name + "\t has been evaluated to " + nodeState);
+						//Debug.Log(name + "\t has been evaluated to " + nodeState);
 
 						return nodeState;
 				}
 			}
 			nodeState = NodeStates.SUCCESS;
-			Debug.Log(name + "\t has been evaluated to " + nodeState);
+			//Debug.Log(name + "\t has been evaluated to " + nodeState);
 			return nodeState;
 		}
 	}

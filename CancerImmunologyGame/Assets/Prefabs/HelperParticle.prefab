@@ -97,8 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 5533186655054886685}
   render: {fileID: 4599394918203392536}
-  healthRegeneration: 5
-  energyRegeneration: 5
+  healthRegeneration: 15
+  energyRegeneration: 15
   speed: 1
 --- !u!58 &5533186655054886685
 CircleCollider2D:
