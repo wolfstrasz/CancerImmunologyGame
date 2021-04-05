@@ -29,6 +29,7 @@ public class KillerCell : Cell
 	private float health = 100.0f;
 	[SerializeField]
 	public static float maxEnergy = 100.0f;
+	[SerializeField]
 	private float energy = 100.0f;
 
 	[Header("Normal Attack")]

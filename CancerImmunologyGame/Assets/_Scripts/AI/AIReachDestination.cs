@@ -141,15 +141,81 @@ public class AIReachDestination : BTActionNode
 
 	protected override NodeStates OnEvaluateAction()
 	{
+		if (controller.Target == null)
+		{
+			nodeState = NodeStates.FAILURE;
+			return nodeState;
+		}
+
+
 		if (!(aiPathState == AIPathState.SEARCHING))
 		{
-			timePassedForRepath -= Time.deltaTime;
 
-			if (targetToReach != controller.Target.transform || timePassedForRepath <= 0f)
+			timePassedForRepath -= Time.deltaTime;
+			if (targetToReach != controller.Target.transform)
 			{
+				Debug.Log("Different target to reach and controller target. -> Will Search for new path");
 				timePassedForRepath = repathRate;
 				aiPathState = AIPathState.NEEDTOSEARCH;
 			}
+			if (timePassedForRepath <= 0f)
+			{
+				Debug.Log("Repathing");
+				timePassedForRepath = repathRate;
+				aiPathState = AIPathState.NEEDTOSEARCH;
+			}
+		}
+
+		if (aiPathState == AIPathState.NEEDTOSEARCH)
+		{
+			Debug.Log("Need to search for new path!");
+			targetToMove = controller.ControlledCell.transform;
+			if (targetToMove == null)
+			{
+				ActionNodeLogWarning("Did not receive a targed to move in movement data");
+				nodeState = NodeStates.FAILURE;
+				return nodeState;
+			}
+
+			targetToReach = controller.Target.transform;
+			if (targetToReach == null)
+			{
+				ActionNodeLogWarning("Did not receive a targed to reach in movement data");
+				nodeState = NodeStates.FAILURE;
+				return nodeState;
+			}
+
+			distanceSq = controller.AcceptableDistanceFromTarget;
+			distanceSq *= distanceSq;
+
+			if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
+			{
+				Debug.Log("Already reached target position");
+
+				nodeState = NodeStates.SUCCESS;
+				aiPathState = AIPathState.ENDED;
+				controller.GraphObstacle.SetActive(true);
+				rvoController.locked = true;
+				return nodeState;
+			}
+			else
+			{
+				Debug.Log("Searching for new path");
+
+				controller.GraphObstacle.SetActive(false);
+				rvoController.locked = false;
+				aiPathState = AIPathState.SEARCHING;
+				controller.PathSeeker.StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
+				nodeState = NodeStates.RUNNING;
+			}
+
+			return nodeState;
+		}
+
+		if (targetToMove == null || targetToReach == null)
+		{
+			nodeState = NodeStates.FAILURE;
+			return nodeState;
 		}
 
 		// PathState has been found 
@@ -166,47 +232,14 @@ public class AIReachDestination : BTActionNode
 
 		if (aiPathState == AIPathState.ENDED)
 		{
+			targetToReach = null;
 			nodeState = NodeStates.SUCCESS;
 			controller.GraphObstacle.SetActive(true);
 			rvoController.locked = true;
 			return nodeState;
 		}
 
-		if (aiPathState == AIPathState.NEEDTOSEARCH)
-		{
-			targetToMove = controller.ControlledCell.transform;
-			if (targetToMove == null)
-			{
-				ActionNodeLogWarning("Did not receive a targed to move in movement data");
-			}
-
-			targetToReach = controller.Target.transform;
-			if (targetToReach == null)
-			{
-				ActionNodeLogWarning("Did not receive a targed to reach in movement data");
-			}
-
-			distanceSq = controller.AcceptableDistanceFromTarget;
-			distanceSq *= distanceSq;
-
-			if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
-			{
-				nodeState = NodeStates.SUCCESS;
-				aiPathState = AIPathState.ENDED;
-				controller.GraphObstacle.SetActive(true);
-				rvoController.locked = true;
-				return nodeState;
-			} else
-			{
-				controller.GraphObstacle.SetActive(false);
-				rvoController.locked = false;
-				aiPathState = AIPathState.SEARCHING;
-				controller.PathSeeker.StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
-				nodeState = NodeStates.RUNNING;
-			}
-			
-			return nodeState;
-		}
+	
 
 		if (aiPathState == AIPathState.ERROR)
 		{

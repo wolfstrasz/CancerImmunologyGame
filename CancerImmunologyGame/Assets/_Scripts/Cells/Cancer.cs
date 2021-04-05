@@ -19,6 +19,8 @@ namespace Cancers
 
 		[Header("Generation attributes")]
 		[SerializeField]
+		private bool isAlive = true;
+		[SerializeField]
 		private int cellsToGenerate = 0;
 
 		[Header("Spawn Attributes")]
@@ -102,6 +104,7 @@ namespace Cancers
 
 		public void OnUpdate()
 		{
+			if (!isAlive) return;
 
 			if (cancerCells.Count >= maximumCells) return;
 
@@ -339,10 +342,12 @@ namespace Cancers
 					deathListeners[i].OnCancerDeath();
 				}
 
+				isAlive = false;
 				canDivide = false;
-				GlobalGameData.Cancers.Remove(this);
 
-				Destroy(gameObject);
+				//GlobalGameData.Cancers.Remove(this);
+
+				//Destroy(gameObject);
 				return;
 			}
 		}

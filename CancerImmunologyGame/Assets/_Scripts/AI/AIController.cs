@@ -5,6 +5,7 @@ using Pathfinding;
 using BehaviourTreeBase;
 using Cells;
 using Pathfinding.RVO;
+using Cancers;
 
 [RequireComponent(typeof(Seeker))]
 public class AIController : MonoBehaviour, IAIKillerCellController, ICellController
@@ -60,6 +61,10 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	private GameObject bookingSpot = null;
 	public GameObject BookingSpot { get => bookingSpot; set => bookingSpot = value; }
 
+	[Header("Interface Data (Cancer Attacking) (Read Only)")]
+	[SerializeField]
+	private CancerCell targetedCancerCell = null;
+	public CancerCell TargetedCancerCell { get => targetedCancerCell; set => targetedCancerCell = value; }
 
 	public void Start()
 	{
@@ -91,8 +96,8 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 						// CriticalCondition Selector
 						BTSelector inCriticalCondition = new BTSelector("isInCriticalCondition", 2);
 						{
-							BTActionNode criticalHealth = new AIHealthConditional("LowHealth", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 25f);
-							BTActionNode criticalEnergy = new AIEnergyConditional("LowEnergy", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 45f);
+							BTActionNode criticalHealth = new AIHealthConditional("LowHealth", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 35f);
+							BTActionNode criticalEnergy = new AIEnergyConditional("LowEnergy", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 40f);
 							inCriticalCondition.AddNode(criticalHealth);
 							inCriticalCondition.AddNode(criticalEnergy);
 						}
@@ -113,7 +118,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 				{
 					BTSequence readyToFight = new BTSequence("StopHealing", 3);
 					{
-						BTActionNode perfectHealth = new AIHealthConditional("perfectHealth", tree, this, ValueConditionalOperator.MORE_THAN, 75f);
+						BTActionNode perfectHealth = new AIHealthConditional("perfectHealth", tree, this, ValueConditionalOperator.MORE_THAN, 70f);
 						BTActionNode perfectEnergy = new AIEnergyConditional("perfectEnergy", tree, this, ValueConditionalOperator.MORE_THAN, 75f);
 						BTActionNode freeHealingTarget = new AIReleaseHelperTarget("ReleaseHealingTarget", tree, this);
 
@@ -133,10 +138,29 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 			}
 
 
+			BTSequence attackingState = new BTSequence("Attacking", 3);
+			{
+				// Currently healing actions
+				BTActionNode getAKillTarget = new AIFindCancerCellTarget("FindAKillTarget", tree, this);
+
+				BTSelector inRangeSelector = new BTSelector("CheckRange", 2);
+				{
+					BTActionNode isInRangeOfKillerCell = new AICanAttackCancerCell("CanAttackCell", tree, this);
+					BTActionNode reachKillTarget = new AIReachDestination("ReachKillTarget", tree, this);
+				//	inRangeSelector.AddNode(isInRangeOfKillerCell);
+					inRangeSelector.AddNode(reachKillTarget);
+				}
+				BTActionNode attackCancerCell = new AIAttackCancerCell("AttackingCancerCell", tree, this);
+
+				attackingState.AddNode(getAKillTarget);
+				attackingState.AddNode(inRangeSelector);
+				attackingState.AddNode(attackCancerCell);
+			}
+
 			// Should be last
 			BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
 			{
-				BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this);
+				BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this, true);
 				BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
 				goToBaseSequence.AddNode(findBase);
@@ -146,6 +170,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 
 
 			root.AddNode(healingState);
+			root.AddNode(attackingState);
 			root.AddNode(goToBaseSequence);
 		}
 

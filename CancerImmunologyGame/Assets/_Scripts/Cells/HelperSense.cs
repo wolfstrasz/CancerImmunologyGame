@@ -10,6 +10,8 @@ namespace Cells
 		[SerializeField]
 		private HelperTCell cell = null;
 
+		[SerializeField]
+		private List<KillerCell> kcNearby = new List<KillerCell>();
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
@@ -17,6 +19,7 @@ namespace Cells
 			if (kc != null)
 			{
 				cell.StartHealingOnCellsNearby();
+				kcNearby.Add(kc);
 			}
 		}
 
@@ -25,7 +28,11 @@ namespace Cells
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
 			if (kc != null)
 			{
-				cell.TryToStopHealingOnCellLeaving();
+				kcNearby.Remove(kc);
+				if (kcNearby.Count == 0)
+				{
+					cell.TryToStopHealingOnCellLeaving();
+				}
 			}
 		}
 

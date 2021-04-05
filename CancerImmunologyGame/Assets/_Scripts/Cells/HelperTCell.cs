@@ -44,6 +44,12 @@ namespace Cells
 		private float timeToPassForFullRotation = 5f;
 		private float timePassedForFullRotation = 0f;
 
+		[SerializeField]
+		private List<Transform> patrolPoints = new List<Transform>();
+		[SerializeField]
+		private int patrolIndex = 0;
+		[SerializeField]
+		private float speed = 2;
 
 		private void Start()
 		{
@@ -54,6 +60,8 @@ namespace Cells
 		private void Update()
 		{
 			FakeRotateBookingSpots();
+
+
 
 			timeBeforeNextSpawn -= Time.deltaTime;
 			if (timeBeforeNextSpawn < 0f)
@@ -78,7 +86,27 @@ namespace Cells
 		}
 
 
+		private void FixedUpdate()
+		{
 
+			if (!hasSpotBeenReserved)
+			{
+				MoveToNextPatrolPoint();
+			}
+		}
+
+		private void MoveToNextPatrolPoint()
+		{
+			Vector3 direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
+
+			transform.position += direction * Time.deltaTime * speed;
+
+			if (Vector3.SqrMagnitude(transform.position - patrolPoints[patrolIndex].position) < 2.0f)
+   			{
+				patrolIndex++;
+				patrolIndex %= patrolPoints.Count;
+			}
+		}
 
 		/// --------------------------------------
 		/// BOOKING SPOTS
@@ -170,10 +198,11 @@ namespace Cells
 
 		public void TryToStopHealingOnCellLeaving()
 		{
+			shouldHeal = false;
+
 			if (freeBookingSpots.Count == bookingSpots.Count)
 			{
 				hasSpotBeenReserved = false;
-				shouldHeal = false;
 			}
 		}
 		

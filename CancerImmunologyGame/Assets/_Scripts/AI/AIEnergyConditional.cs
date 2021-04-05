@@ -26,19 +26,19 @@ public class AIEnergyConditional : BTActionNode
 		switch (op)
 		{
 			case ValueConditionalOperator.LESS_THAN:
-				result = (controller.ControlledCell.Health < value);
+				result = (controller.ControlledCell.Energy < value);
 				break;
 			case ValueConditionalOperator.LESS_THAN_EQUAL:
-				result = (controller.ControlledCell.Health <= value);
+				result = (controller.ControlledCell.Energy <= value);
 				break;
 			case ValueConditionalOperator.EQUAL:
-				result = (controller.ControlledCell.Health == value);
+				result = (controller.ControlledCell.Energy == value);
 				break;
 			case ValueConditionalOperator.MORE_THAN:
-				result = (controller.ControlledCell.Health > value);
+				result = (controller.ControlledCell.Energy > value);
 				break;
 			case ValueConditionalOperator.MORE_THAN_EQUAL:
-				result = (controller.ControlledCell.Health >= value);
+				result = (controller.ControlledCell.Energy >= value);
 				break;
 			default: result = false; break;
 		}
