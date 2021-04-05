@@ -49,7 +49,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	private RVOController rvoController = null;
 	public RVOController RVOController => rvoController;
 	[SerializeField]
-	private GameObject graphObstacle;
+	private GameObject graphObstacle = null;
 	public GameObject GraphObstacle => graphObstacle;
 	
 	[Header ("Interface Data (Helper Booking) (Read Only)")]
@@ -74,33 +74,83 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	private void InitialiseBehaviourTree()
 	{
 		tree = new BehaviourTree(); // Garbage collection will clean it if something requires reinitialisation
-		// ACTIONS
-		BTActionNode hasToHeal = new AINeedToHealKillerCell("HasToHeal", tree, this);
-		BTActionNode findClosestHelper = new AIBookHelperCellToReach("Booking HelperCell", tree, this);
-		BTActionNode goToHeal = new AIReachDestination("Reach Healer", tree, this);
-		BTActionNode canFight = new AICanFight("Can Fight", tree, this);
-		BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this);
-		BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
-		// GO AND HEAL
-		List<BTNode> shouldHealList = new List<BTNode>();
-		shouldHealList.Add(hasToHeal);
-		shouldHealList.Add(findClosestHelper);
-		shouldHealList.Add(goToHeal);
-		BTSequence shouldHeal = new BTSequence("HealSequence", shouldHealList);
+		BTSelector root = new BTSelector("Root", 2);
+		{
+			BTSequence healingState = new BTSequence("HealingState", 3);
+			{
+				BTSelector isCurrentlyInNeedOfHealing = new BTSelector("isCurrentlyInNeedOfHealing", 2);
+				{
+					// Currently healing actions
+					BTActionNode hasAHealingTarget = new AIHasHealingTarget("hasAHealingTarget", tree, this);
 
-		// GO TO BASE
-		List<BTNode> shouldGoToBaseList = new List<BTNode>();
-		shouldGoToBaseList.Add(canFight);
-		shouldGoToBaseList.Add(findBase);
-		shouldGoToBaseList.Add(goToBase);
-		BTSequence shouldGoToBase = new BTSequence("GoToBaseSequence", shouldGoToBaseList);
+					// Should Set healer target
+					BTSequence shouldSetHealingTarget = new BTSequence("shouldSetHealingTarget", 2);
+					{
 
-		// Set ROOT 
-		List<BTNode> rootSelectorList = new List<BTNode>();
-		rootSelectorList.Add(shouldHeal);
-		rootSelectorList.Add(shouldGoToBase);
-		tree.rootNode = new BTSelector("rootNode", rootSelectorList);
+						// CriticalCondition Selector
+						BTSelector inCriticalCondition = new BTSelector("isInCriticalCondition", 2);
+						{
+							BTActionNode criticalHealth = new AIHealthConditional("LowHealth", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 25f);
+							BTActionNode criticalEnergy = new AIEnergyConditional("LowEnergy", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 45f);
+							inCriticalCondition.AddNode(criticalHealth);
+							inCriticalCondition.AddNode(criticalEnergy);
+						}
+
+						BTActionNode setInitialHealerTarget = new AIBookHelperCellToReach("Booking HelperCell", tree, this);
+
+						shouldSetHealingTarget.AddNode(inCriticalCondition);
+						shouldSetHealingTarget.AddNode(setInitialHealerTarget);
+					}
+
+					isCurrentlyInNeedOfHealing.AddNode(hasAHealingTarget);
+					isCurrentlyInNeedOfHealing.AddNode(shouldSetHealingTarget);
+				}
+
+				BTActionNode goToHealer = new AIReachDestination("Reach Healer", tree, this);
+
+				BTSelector healingWaitOrGo = new BTSelector("Healing (Wait or Go)", 2);
+				{
+					BTSequence readyToFight = new BTSequence("StopHealing", 3);
+					{
+						BTActionNode perfectHealth = new AIHealthConditional("perfectHealth", tree, this, ValueConditionalOperator.MORE_THAN, 75f);
+						BTActionNode perfectEnergy = new AIEnergyConditional("perfectEnergy", tree, this, ValueConditionalOperator.MORE_THAN, 75f);
+						BTActionNode freeHealingTarget = new AIReleaseHelperTarget("ReleaseHealingTarget", tree, this);
+
+						readyToFight.AddNode(perfectHealth);
+						readyToFight.AddNode(perfectEnergy);
+						readyToFight.AddNode(freeHealingTarget);
+					}
+
+					BTActionNode waitToHeal = new AIWait("WaitToHeal", tree, 100f, false);
+					healingWaitOrGo.AddNode(readyToFight);
+					healingWaitOrGo.AddNode(waitToHeal);
+				}
+
+				healingState.AddNode(isCurrentlyInNeedOfHealing);
+				healingState.AddNode(goToHealer);
+				healingState.AddNode(healingWaitOrGo);
+			}
+
+
+			// Should be last
+			BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
+			{
+				BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this);
+				BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
+
+				goToBaseSequence.AddNode(findBase);
+				goToBaseSequence.AddNode(goToBase);
+			}
+
+
+
+			root.AddNode(healingState);
+			root.AddNode(goToBaseSequence);
+		}
+
+
+		tree.rootNode = root;
 	}
 
 	void Update()
@@ -109,7 +159,6 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 		movementDirection = zeroVector;
 		tree.Evaluate();
 		controlledCell.MovementVector = movementDirection;
-
 	}
 
 

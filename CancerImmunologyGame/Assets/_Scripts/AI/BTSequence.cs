@@ -11,6 +11,7 @@ namespace BehaviourTreeBase
 		/// The constructor requires a list of child nodes to be passed in.
 		/// </summary>
 		public BTSequence(string name, List<BTNode> nodes) : base (name, nodes) { }
+		public BTSequence(string name, int nodeCount) : base(name, nodeCount) { }
 
 		/// <summary>
 		/// If any of the children reports a failure, the sequence will

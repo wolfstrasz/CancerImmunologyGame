@@ -152,6 +152,7 @@ namespace Cells
 
 		public void FreeBookingSpot(GameObject bookingSpotToFree)
 		{
+			Debug.Log("Releasing booking spot");
 			freeBookingSpots.Add(bookingSpotToFree);
 			if (freeBookingSpots.Count == bookingSpots.Count)
 				hasSpotBeenReserved = false;

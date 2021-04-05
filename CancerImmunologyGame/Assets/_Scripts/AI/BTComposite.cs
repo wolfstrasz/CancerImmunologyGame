@@ -11,14 +11,24 @@ namespace BehaviourTreeBase
 		/// <summary>
 		/// The constructor requires a name and list of child nodes to be passed in.
 		/// </summary>
-		public BTComposite(string namea, List<BTNode> nodes)
+		protected BTComposite(string name, List<BTNode> nodes)
 		{
-			this.name = namea;
+			this.name = name;
 			this.nodes = nodes;
 
-			Assert.IsTrue((nodes != null || nodes.Count > 0), "BTComposite (" + name + ") must have atleast one child node!");
+			//Assert.IsTrue((nodes != null || nodes.Count > 0), "BTComposite (" + base.name + ") must have atleast one child node!");
 		}
 
+		protected BTComposite(string name, int nodeCount)
+		{
+			this.name = name;
+			nodes = new List<BTNode>(nodeCount);
+		}
+
+		public void AddNode(BTNode node)
+		{
+			nodes.Add(node);
+		}
 
 		internal override void ResetTreeNode()
 		{

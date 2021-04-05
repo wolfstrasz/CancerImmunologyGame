@@ -7,9 +7,9 @@ public class HelperCellParticle : MonoBehaviour
 {
 	[Header("Helper Cell Particle Attributes")]
 	[SerializeField]
-	private new Collider2D collider;
+	private new Collider2D collider = null;
 	[SerializeField]
-	private SpriteRenderer render;
+	private SpriteRenderer render = null;
 
 	[SerializeField]
 	private float healthRegeneration = 0.35f;

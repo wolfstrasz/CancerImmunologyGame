@@ -103,7 +103,7 @@ public class AIReachDestination : BTActionNode
 			Vector3 intersectionWaypoint = Vector3.Lerp(p1, p2, t);
 
 			//Vector3 intersectionWaypoint = vectorPath[currentWaypoint];
-			Debug.Log("Controller of: " + controller.ControlledCell.gameObject.name + " has found current waypoint to be: " + intersectionWaypoint);
+			//Debug.Log("Controller of: " + controller.ControlledCell.gameObject.name + " has found current waypoint to be: " + intersectionWaypoint);
 			// Obtain the remaining distance to goal
 			float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude + (intersectionWaypoint - p2).magnitude;
 			//float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude;

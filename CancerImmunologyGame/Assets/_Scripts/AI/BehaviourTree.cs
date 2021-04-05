@@ -52,9 +52,9 @@ namespace BehaviourTreeBase
 
 			if (currentProcessingNode != null && currentProcessingNode.NodeState == NodeStates.RUNNING)
 			{
-				currentProcessingNode.Evaluate();
+				NodeStates nodestate =currentProcessingNode.Evaluate();
 		
-				if (instant)
+				if (nodestate != NodeStates.RUNNING && instant)
 				{
 					rootNode.Evaluate();
 				}
