@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cells;
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TSpawnObject : TutorialEvent
 	{

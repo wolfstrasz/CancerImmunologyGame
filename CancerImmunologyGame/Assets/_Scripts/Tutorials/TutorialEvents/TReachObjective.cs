@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tutorials {
+namespace ImmunotherapyGame.Tutorials
+{ 
 	public class TReachObjective : TutorialEvent
 	{
 		[SerializeField]

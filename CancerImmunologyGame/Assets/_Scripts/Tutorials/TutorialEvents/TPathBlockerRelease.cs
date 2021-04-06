@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TPathBlockerRelease : TutorialEvent
 	{

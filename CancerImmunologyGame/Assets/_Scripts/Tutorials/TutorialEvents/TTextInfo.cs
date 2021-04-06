@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TTextInfo : TutorialEvent
 	{

@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
-using Player;
-using Tutorials;
-using Bloodflow;
-using Cancers;
+
 
 namespace Core
 {

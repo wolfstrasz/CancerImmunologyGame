@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Player;
-using CellpediaUI;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TActivatePlayerUIComponent : TutorialEvent
 	{

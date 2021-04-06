@@ -1,32 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CellpediaUI;
 
-
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
-	public class TMonitorCancer : TutorialEvent
+	public class TDiscoverNewCell : TutorialEvent
 	{
 		[Header("Attributes")]
 		[SerializeField]
-		private int cancer_number = 0;
+		private CellpediaCells cellToDiscover = CellpediaCells.NONE;
 
 		protected override void OnEndEvent()
 		{
-
 		}
 
 		protected override void OnStartEvent()
 		{
-			
+			Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			if (GlobalGameData.Cancers.Count == cancer_number)
-				return true;
-
-			return false;
+			return true;
 		}
 	}
 }

@@ -160,7 +160,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 			// Should be last
 			BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
 			{
-				BTActionNode findBase = new AIFindClosestTargetOfType<Tutorials.TutorialPopup>("Find Base", tree, this, true);
+				BTActionNode findBase = new AIFindClosestTargetOfType<ImmunotherapyGame.Tutorials.TutorialPopup>("Find Base", tree, this, true);
 				BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
 				goToBaseSequence.AddNode(findBase);

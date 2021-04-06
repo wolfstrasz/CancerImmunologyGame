@@ -5,7 +5,7 @@ using Cells;
 using Cancers;
 using Player;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TCameraControl : TutorialEvent
 	{

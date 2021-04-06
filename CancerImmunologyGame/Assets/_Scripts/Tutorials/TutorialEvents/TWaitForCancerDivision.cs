@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cancers;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TWaitForCancerDivision : TutorialEvent
 	{
