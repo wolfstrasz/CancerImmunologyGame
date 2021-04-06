@@ -18,20 +18,21 @@ namespace Core
 			internal bool sceneLoaded = false;
 			[SerializeField]
 			private GameStateController stateController = new GameStateController();
+			[SerializeField]
+			private bool isTestScene = false;
 
-			void Update()
+			void Start()
 			{
-				stateController.OnUpdate();
+				if (isTestScene) 
+					InitialiseTestScene();
 			}
 
-			void FixedUpdate()
-			{
-				stateController.OnFixedUpdate();
-			}
+			void Update() { stateController.OnUpdate(); }
+
+			void FixedUpdate() { stateController.OnFixedUpdate(); }
 
 			public void Initialise()
 			{
-
 				Time.timeScale = 1.0f;
 				SceneManager.activeSceneChanged += OnActiveSceneChanged;
 				SceneManager.sceneLoaded += OnSceneLoaded;
@@ -41,9 +42,8 @@ namespace Core
 				GlobalGameData.isInitialised = true;
 			}
 
-			public void InitialiseDebugScene()
+			public void InitialiseTestScene()
 			{
-
 				Time.timeScale = 1.0f;
 
 				GlobalGameData.gameplaySpeed = 1.0f;
@@ -51,9 +51,9 @@ namespace Core
 				GlobalGameData.isInitialised = true;
 
 				sceneLoaded = true;
-				stateController.SetState(new LoadState(stateController));
-
+				stateController.SetState(new PlayTestState(stateController));
 			}
+
 			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
 			{
 				if (nextScene.buildIndex == 0) return;

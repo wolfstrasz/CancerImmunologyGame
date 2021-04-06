@@ -19,6 +19,7 @@ TagManager:
   - CellBody
   - Player
   - PlayerInteractiveElement
+  - CellParticles
   - 
   - 
   - 
@@ -35,9 +36,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - Walls
+  - DynamicObstacle
+  - StaticObstacle
   m_SortingLayers:
   - name: Default
     uniqueID: 0

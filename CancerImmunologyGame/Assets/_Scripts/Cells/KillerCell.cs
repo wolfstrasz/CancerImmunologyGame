@@ -17,7 +17,7 @@ public class KillerCell : Cell
 	[SerializeField]
 	private float exhaustEffectReduction = 0.75f;
 	[SerializeField]
-	private float speed = 4.0f;
+	public float movementSpeed = 4.0f;
 	[SerializeField]
 	private float immunotherapySpeedMultiplier = 1.66f;
 	[SerializeField]
@@ -25,9 +25,11 @@ public class KillerCell : Cell
 
 	[SerializeField]
 	public static float maxHealth = 100.0f;
+	[SerializeField]
 	private float health = 100.0f;
 	[SerializeField]
 	public static float maxEnergy = 100.0f;
+	[SerializeField]
 	private float energy = 100.0f;
 
 	[Header("Normal Attack")]
@@ -211,7 +213,7 @@ public class KillerCell : Cell
 	/// </summary>
 	private void Move()
 	{
-		movementVector = movementVector * speed * Time.fixedDeltaTime * ExhaustionEffect();
+		movementVector = movementVector * movementSpeed * Time.fixedDeltaTime * ExhaustionEffect();
 		rb.MovePosition(movementVector + flowVector + rb.position);
 		movementVector = Vector3.zero;
 	}

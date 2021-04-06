@@ -48,16 +48,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sense: {fileID: 6947273459215185762}
-  isActivated: 0
-  body: {fileID: 4702413554881257943}
-  sprite: {fileID: 4702413555579791003}
-  particle: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
+  hasSpotBeenReserved: 0
+  shouldHeal: 0
+  particlePrefab: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
     type: 3}
   timeBetweenSpawns: 1.5
-  spreadDistance: 1.5
-  spreadAngle: 30
-  spawning: 0
-  spawnTimePassed: 0
+  particlesLifetime: 1
+  timeBeforeNextSpawn: 0
+  spreadAngleInDegrees: 60
+  bookingSpotDistance: 1
+  forcedFreeSpots: 1
+  bookingSpots: []
+  freeBookingSpots: []
+  timeToPassForFullRotation: 5
 --- !u!95 &6287359040158972595
 Animator:
   serializedVersion: 3
@@ -66,7 +69,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4702413554772471880}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: b4097936cc6a89c4d8bc082738a4bdb2, type: 2}
   m_CullingMode: 0
@@ -94,7 +97,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4702413554856043946
 Transform:
   m_ObjectHideFlags: 0
@@ -137,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662d2040b43e004488ee694999afdb2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killerCells: []
+  cell: {fileID: 88521630074490748}
 --- !u!1 &4702413554881257943
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4702413554881257942
 Transform:
   m_ObjectHideFlags: 0
@@ -201,7 +204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4702413555579791002
 Transform:
   m_ObjectHideFlags: 0
