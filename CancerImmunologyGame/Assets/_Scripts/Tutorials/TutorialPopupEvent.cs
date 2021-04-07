@@ -2,31 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace ImmunotherapyGame.Tutorials
-{
-	public class TMonitorCancer : TutorialEvent
+{ 
+	public class TutorialPopupEvent : TutorialEvent
 	{
-		[Header("Attributes")]
 		[SerializeField]
-		private int cancer_number = 0;
+		private TutorialPopup popupObject = null;
 
 		protected override void OnEndEvent()
 		{
-
 		}
 
 		protected override void OnStartEvent()
 		{
-			
+			popupObject.Activate();
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			if (GlobalGameData.Cancers.Count == cancer_number)
-				return true;
-
-			return false;
+			return popupObject.triggered;
 		}
 	}
 }

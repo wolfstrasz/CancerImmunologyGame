@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Tutorials
 {
-	public class TutorialPathBlocker : MonoBehaviour
+	[RequireComponent(typeof(Collider2D))]
+	public class TutorialPathblocker : MonoBehaviour
 	{
 	}
 }

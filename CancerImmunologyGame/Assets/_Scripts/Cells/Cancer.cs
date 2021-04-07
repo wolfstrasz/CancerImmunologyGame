@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
 
 namespace Cancers
 {
-
-
 	public class Cancer : MonoBehaviour
 	{
 		[Header("Prefabs Linking")]
@@ -74,8 +71,10 @@ namespace Cancers
 		private Dictionary<Vector3, CancerCell> spawnOwners = new Dictionary<Vector3, CancerCell>();
 
 		// Listeners
-		private List<ICancerDeathListener> deathListeners = new List<ICancerDeathListener>();
+		private List<ICancerDeathObserver> onDeathObservers = new List<ICancerDeathObserver>();
+		private List<ICancerDivisionObserver> onDivisionObservers = new List<ICancerDivisionObserver>();
 
+		public bool IsAlive => isAlive;
 		public bool CanDivide => canDivide;
 		public GameObject CellToDivide => cellToDivide.gameObject;
 
@@ -337,9 +336,9 @@ namespace Cancers
 			if (cancerCells.Count == 0)
 			{
 				// notify listeners
-				for (int i = 0; i < deathListeners.Count; ++i)
+				for (int i = 0; i < onDeathObservers.Count; ++i)
 				{
-					deathListeners[i].OnCancerDeath();
+					onDeathObservers[i].OnCancerDeath();
 				}
 
 				isAlive = false;
@@ -354,15 +353,28 @@ namespace Cancers
 
 
 		// Listener functionality
-		public void SubscribeListener(ICancerDeathListener listener)
+		public void SubscribeDeathObserver(ICancerDeathObserver observer)
 		{
-			deathListeners.Add(listener);
+			if (!onDeathObservers.Contains(observer))
+				onDeathObservers.Add(observer);
 		}
 
-		public void UnsubscribeListener(ICancerDeathListener listener)
+		public void UnsubscribeDeathObserver(ICancerDeathObserver observer)
 		{
-			deathListeners.Remove(listener);
+			if (onDeathObservers.Contains(observer))
+				onDeathObservers.Remove(observer);
 		}
 
+		public void SubscribeDivisionObserver(ICancerDivisionObserver observer)
+		{
+			if (!onDivisionObservers.Contains(observer))
+				onDivisionObservers.Add(observer);
+		}
+
+		public void UnsubscribeDivisionObserver(ICancerDivisionObserver observer)
+		{
+			if (onDivisionObservers.Contains(observer))
+				onDivisionObservers.Remove(observer);
+		}
 	}
 }

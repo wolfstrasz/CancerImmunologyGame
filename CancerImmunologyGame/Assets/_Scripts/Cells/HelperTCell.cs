@@ -7,9 +7,6 @@ namespace Cells
 {
 	public class HelperTCell : Cell
 	{
-		[SerializeField]
-		private HelperSense sense = null;
-
 		// Spawning particles functionality
 		[Header("Functionality info (Read Only)")]
 		[SerializeField]

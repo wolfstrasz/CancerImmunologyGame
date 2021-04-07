@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Tutorials
 {
-	public class TTextInfo : TutorialEvent
+	public class TutorialText : TutorialEvent
 	{
 
 		[Header("Text Displayed")]

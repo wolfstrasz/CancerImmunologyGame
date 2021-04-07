@@ -160,7 +160,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 			// Should be last
 			BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
 			{
-				BTActionNode findBase = new AIFindClosestTargetOfType<ImmunotherapyGame.Tutorials.TutorialPopup>("Find Base", tree, this, true);
+				BTActionNode findBase = new AIFindClosestTargetOfType<AIGraphControlPoint>("Find Base", tree, this, false);
 				BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
 				goToBaseSequence.AddNode(findBase);
@@ -193,7 +193,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 
 	public void OnCellDeath()
 	{
-		Debug.LogWarning("AI Controller found " + controlledCell + " to die");
+		Debug.LogWarning("AI Controller found " + controlledCell + " to die at time " + Time.time);
 	}
 
 	public void OnEnemiesInRange()

@@ -7,7 +7,7 @@ using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Tutorials
 {
-	public class TCameraControl : TutorialEvent
+	public class TutorialCameraControl : TutorialEvent
 	{
 		[Header("Focus")]
 		[SerializeField]
