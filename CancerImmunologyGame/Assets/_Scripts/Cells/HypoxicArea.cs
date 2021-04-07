@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
 
 [RequireComponent(typeof(Collider2D))]
 public class HypoxicArea : MonoBehaviour

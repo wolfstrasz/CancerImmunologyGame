@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Player
+namespace ImmunotherapyGame.Player
 {
 	public class PlayerUI : Singleton<PlayerUI>
 	{
