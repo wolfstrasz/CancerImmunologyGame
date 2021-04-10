@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Cells;
 using Cancers;
 
-namespace Player
+namespace ImmunotherapyGame.Player
 {
-	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathListener
+	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver
 	{
 		[SerializeField]
 		private KillerCell kc = null;
@@ -44,7 +44,7 @@ namespace Player
 			if (cancer != null)
 			{
 				BackgroundMusic.Instance.PlayBattleMusic();
-				cancer.SubscribeListener(this);
+				cancer.SubscribeDeathObserver(this);
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace Player
 			{
 
 				BackgroundMusic.Instance.PlayNormalMusic();
-				cancer.UnsubscribeListener(this);
+				cancer.UnsubscribeDeathObserver(this);
 			}
 		}
 

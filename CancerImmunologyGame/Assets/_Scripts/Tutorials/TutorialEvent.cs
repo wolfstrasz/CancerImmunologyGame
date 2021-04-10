@@ -3,48 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Core.GameManagement;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public abstract class TutorialEvent : MonoBehaviour
 	{
 		[SerializeField]
-		private bool skip = false;
+		internal int order = 0;
 
 		[SerializeField]
-		internal TutorialStage owner = null;
-
-		[SerializeField]
-		protected bool pauseGameplay;
-
-		private bool finished = true;
+		protected bool shouldPauseGameplay;
 
 		public void StartEvent()
 		{
-			if (skip)
-			{
-				finished = true;
-				owner.OnEventFinished();
-				return;
-			}
-
-			if (pauseGameplay)
+			if (shouldPauseGameplay)
 			{
 				GameManager.Instance.RequestGameplayPause();
-				//prevGameplayValue = GlobalGameData.isGameplayPaused;
-				//Debug.Log("On start gameplay: " + prevGameplayValue);
-				//GlobalGameData.isGameplayPaused = true;
 			}
 
 			OnStartEvent();
-			finished = false;
 		}
 
 		public void EndEvent()
 		{
-			if (pauseGameplay)
+			if (shouldPauseGameplay)
 			{
-				//GlobalGameData.isGameplayPaused = prevGameplayValue;
-				//Debug.Log("On end pasued: " + GlobalGameData.isGameplayPaused);
 				GameManager.Instance.RequestGameplayUnpause(gameObject.name);
 			}
 
@@ -57,15 +39,9 @@ namespace Tutorials
 
 		protected abstract void OnEndEvent();
 
-		internal void OnUpdate()
+		internal bool OnUpdate()
 		{
-			if (finished) return;
-			if (OnUpdateEvent())
-			{
-				EndEvent();
-				finished = true;
-				owner.OnEventFinished();
-			}
+			return OnUpdateEvent();
 		}
 	}
 }

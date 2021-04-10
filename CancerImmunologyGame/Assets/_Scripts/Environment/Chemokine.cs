@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Player;
 
 namespace Chemokines
 {
@@ -15,12 +14,10 @@ namespace Chemokines
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == PlayerController.Instance.gameObject)
-			{
-				audio.Play();
-				render.enabled = false;
-				glow.SetActive(false);
-			}
+
+			audio.Play();
+			render.enabled = false;
+			glow.SetActive(false);
 		}
 
 		internal void Remove()

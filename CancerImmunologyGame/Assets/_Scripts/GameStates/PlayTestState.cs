@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using Player;
-using Tutorials;
+using ImmunotherapyGame.Player;
 using Bloodflow;
 using CellpediaUI;
 

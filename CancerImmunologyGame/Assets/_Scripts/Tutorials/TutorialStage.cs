@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TutorialStage : MonoBehaviour
 	{
 		[SerializeField]
-		private List<TutorialEvent> events = new List<TutorialEvent>();
+		private List<TutorialEvent> events = null;
 		private TutorialEvent currentEvent = null;
 		private int event_index = 0;
 		private bool isFinished = false;
@@ -17,44 +17,43 @@ namespace Tutorials
 
 		internal void OnUpdate()
 		{
-			currentEvent.OnUpdate();
+			if (isFinished) return;
+
+			// If event is finished
+			if (currentEvent.OnUpdate())
+			{
+				// Stop previous event
+				currentEvent.EndEvent();
+				currentEvent.gameObject.SetActive(false);
+				Debug.Log(gameObject.name + " event finished: " + currentEvent.name);
+
+				// Start next event
+				currentEvent = events[event_index];
+				currentEvent.gameObject.SetActive(true);    // Debugging
+				currentEvent.StartEvent();
+
+				// Update stage
+				++event_index;
+				isFinished = event_index >= events.Count;
+			}
 		}
 
 		internal void InitialiseStage()
 		{
-			if (event_index < events.Count)
-			{
-				NextEvent();
-			}
-			else
-			{
-				isFinished = true;
-			}
-		}
+			// Collect events and sort them by priority
+			List<TutorialEvent> eventsFound = new List<TutorialEvent>(GetComponentsInChildren<TutorialEvent>(true));
+			eventsFound.OrderBy(e => e.order);
+			events = eventsFound;
 
-		private void NextEvent()
-		{
-			currentEvent = events[event_index];
-			currentEvent.gameObject.SetActive(true);
-			++event_index;
-			currentEvent.owner = this;
-			currentEvent.StartEvent();
-
-		}
-
-		internal void OnEventFinished()
-		{
-			currentEvent.gameObject.SetActive(false);
-			Debug.Log(gameObject.name + ": On Event Finished");
-
-			if (event_index < events.Count)
+			// Run the first event
+			if (events.Count > 0)
 			{
-				NextEvent();
+				currentEvent = events[event_index];
+				currentEvent.gameObject.SetActive(true);	// Debugging
+				++event_index;
+				currentEvent.StartEvent();
 			}
-			else
-			{
-				isFinished = true;
-			}
+
 		}
 
 	}

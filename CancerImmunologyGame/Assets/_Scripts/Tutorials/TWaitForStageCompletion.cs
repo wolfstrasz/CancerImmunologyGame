@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TWaitForStageCompletion : TutorialEvent
 	{
@@ -16,7 +16,7 @@ namespace Tutorials
 
 		protected override void OnStartEvent()
 		{
-			if (pauseGameplay)
+			if (shouldPauseGameplay)
 			{
 				Debug.LogError("Event is waiting for a queue of events but is holding gamplay at pause! (Event: " + gameObject.name + ")");
 			}

@@ -1,31 +1,36 @@
 ﻿using UnityEngine;
-using Player;
 
-namespace Tutorials {
+namespace ImmunotherapyGame.Tutorials
+{
+	[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 	public class TutorialPopup : MonoBehaviour
 	{
+		private SpriteRenderer render = null;
 
 		[SerializeField]
-		private GameObject visual = null;
+		private bool isVisisble = false;
+		internal bool triggered = false;
 
-		private TReachObjective owner = null;
 
-
-		internal void SetAttributes(float size, bool isVisible, TReachObjective _owner)
+		void Start()
 		{
-			transform.localScale = Vector3.one * size;
-			visual.SetActive(isVisible);
-			owner = _owner;
+			gameObject.SetActive(false);
+			render = GetComponent<SpriteRenderer>();
+		}
+
+		internal void Activate()
+		{
+			gameObject.SetActive(true);
+			render.enabled = isVisisble;
+			triggered = false;
 		}
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (collider.gameObject == PlayerController.Instance.gameObject)
-			{
-				gameObject.SetActive(false);
-				Debug.Log("PopUpCollision");
-				owner.Notify();
-			}
+			Debug.Log("PopUpCollision");
+			render.enabled = false;
+			gameObject.SetActive(false);
+			triggered = true;
 		}
 	}
 }

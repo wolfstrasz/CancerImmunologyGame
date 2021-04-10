@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cells;
 using Cancers;
-using Player;
+using ImmunotherapyGame.Player;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
-	public class TCameraControl : TutorialEvent
+	public class TutorialCameraControl : TutorialEvent
 	{
 		[Header("Focus")]
 		[SerializeField]

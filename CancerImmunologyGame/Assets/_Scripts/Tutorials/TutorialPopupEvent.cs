@@ -1,15 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CellpediaUI;
 
 namespace ImmunotherapyGame.Tutorials
-{
-	public class TDiscoverNewCell : TutorialEvent
+{ 
+	public class TutorialPopupEvent : TutorialEvent
 	{
-		[Header("Attributes")]
 		[SerializeField]
-		private CellpediaCells cellToDiscover = CellpediaCells.NONE;
+		private TutorialPopup popupObject = null;
 
 		protected override void OnEndEvent()
 		{
@@ -17,12 +15,12 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
-			Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
+			popupObject.Activate();
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			return true;
+			return popupObject.triggered;
 		}
 	}
 }

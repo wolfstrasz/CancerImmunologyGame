@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Cells;
 using Cancers;
 
-namespace Player
+namespace ImmunotherapyGame.Player
 {
 	public class PlayerRangeDisplay : MonoBehaviour
 	{

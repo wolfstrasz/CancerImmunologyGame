@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Player;
-using System;
 
 public class GameCamera2D : Singleton<GameCamera2D>
 {

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using CellpediaUI;
-namespace Tutorials
+
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TWaitToOpenMicroscope : TutorialEvent
 	{

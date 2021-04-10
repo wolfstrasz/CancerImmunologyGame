@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
+using ImmunotherapyGame.Player;
 
-namespace Tutorials
+namespace ImmunotherapyGame.Tutorials
 {
 	public class TMonitorPlayerStats : TutorialEvent
 	{
