@@ -17,7 +17,8 @@ public static class GlobalGameData
 	// Shared object pool
 	public static List<Cancer> Cancers = new List<Cancer>();
 	public static List<KillerCell> KillerCells = new List<KillerCell>();
-	public static List<HelperTCell> HelperTCells = new List<HelperTCell>(); 
+	public static List<HelperTCell> HelperTCells = new List<HelperTCell>();
+	public static List<RegulatoryCell> RegulatoryCells = new List<RegulatoryCell>();
 	public static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 
 	public static bool isPowerUpOn = false;
@@ -25,12 +26,14 @@ public static class GlobalGameData
 	public static void ResetObjectPool()
 	{
 		RespawnAreas.Clear();
-		RespawnAreas.AddRange(GameObject.FindObjectsOfType<PlayerRespawnArea>());
+		RespawnAreas.AddRange(GameObject.FindObjectsOfType<PlayerRespawnArea>(true));
 		Cancers.Clear();
-		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>());
+		Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>(true));
 		KillerCells.Clear();
-		KillerCells.AddRange(GameObject.FindObjectsOfType<KillerCell>());
+		KillerCells.AddRange(GameObject.FindObjectsOfType<KillerCell>(true));
 		HelperTCells.Clear();
-		HelperTCells.AddRange(GameObject.FindObjectsOfType<HelperTCell>());
+		HelperTCells.AddRange(GameObject.FindObjectsOfType<HelperTCell>(true));
+		RegulatoryCells.Clear();
+		RegulatoryCells.AddRange(GameObject.FindObjectsOfType<RegulatoryCell>(true));
 	}
 }

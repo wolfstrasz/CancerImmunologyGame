@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RegulatorySense : AreaOfEffect
+public class RegulatorySense : MonoBehaviour
 {
 	public RegulatoryCell rc = null;
 
-	protected override void OnActivation()
+	private void OnTriggerEnter2D(Collider2D collider)
 	{
-		Debug.Log("Regulatory sensed player coming");
-		rc.isShooting = true;
-		rc.StartShooting();
+		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+		if (pc != null)
+		{
+			rc.StartShooting();
+		}
 	}
 
-	protected override void OnDeactivation()
+	private void OnTriggerExit2D(Collider2D collider)
 	{
-		rc.isShooting = false;
-		rc.StopShooting();
-		Debug.Log("Regulatory sensed player leaving");
-	}
-
-	protected override void OnEffectStatus()
-	{
-		return;
+		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+		if (pc != null)
+		{
+			rc.StopShooting();
+		}
 	}
 }

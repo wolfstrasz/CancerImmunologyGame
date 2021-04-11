@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Cells.Cancers
 {
-	public class Cancer : MonoBehaviour , IEvilCellObserver
+	public class Cancer : MonoBehaviour, IEvilCellObserver
 	{
 		[Header("Prefabs Linking")]
 		[SerializeField]
@@ -68,8 +68,6 @@ namespace Cells.Cancers
 		[SerializeField]
 		private List<CAFCell> cafCells = new List<CAFCell>();
 
-
-
 		// Division handling
 		[SerializeField]
 		private CancerCell cellToDivide;
@@ -92,16 +90,8 @@ namespace Cells.Cancers
 		public bool CanDivide => canDivide;
 		public GameObject CellToDivide => cellToDivide.gameObject;
 
-
-		private void PrepareForDivision()
-		{
-			ResetDivisionProcess();
-			FindAllSpotsAvailable();
-			FindSpawnSpot();
-		}
-
 		// Start is called before the first frame update
-		void Awake()
+		void Start()
 		{
 			locationToSpawn = transform.position;
 
@@ -112,21 +102,59 @@ namespace Cells.Cancers
 			bool old_debug = debugPlotting;
 			debugPlotting = false;
 
-			for (; cancerCells.Count < cellsToGenerate;)
+			while (cancerCells.Count < cellsToGenerate)
 			{
-				PrepareForDivision();
+				Debug.Log(cancerCells.Count + " " + cellsToGenerate);
 
-				if (canSpawnCafs && spawns == spawnsBeforeCafSpawn)
+				if (canSpawnCafs && spawns == spawnsBeforeCafSpawn) // Cav cell
 				{
-					spawns = 0;
-					AddNewCAFCell();
+					bool previousSetup = keepCellsPacked;
+					keepCellsPacked = true;
+
+					ResetDivisionProcess();
+					FindAllSpotsAvailable();
+					if (availableLocations.Count < 0)
+					{
+						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
+						timePassed = 0.0f;
+						canDivide = true;
+						keepCellsPacked = previousSetup;
+						continue;
+					}
+					else
+					{
+						FindSpawnSpot();
+						AddNewCAFCell();
+						spawns = 0;
+						timePassed = 0.0f;
+						canDivide = true;
+						keepCellsPacked = previousSetup;
+						continue;
+					}
 				}
-				else
+				else // CancerCell
 				{
-					AddNewCancerCell();
+					ResetDivisionProcess();
+					FindAllSpotsAvailable();
+					if (availableLocations.Count < 0)
+					{
+						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
+						timePassed = 0.0f;
+						canDivide = true;
+						continue;
+					}
+					else
+					{
+						FindSpawnSpot();
+						AddNewCancerCell();
+						canDivide = true;
+						if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
+							spawns++;
 
-					if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
-						spawns++;
+
+						continue;
+					}
+
 				}
 			}
 
@@ -135,7 +163,13 @@ namespace Cells.Cancers
 
 		public void OnUpdate()
 		{
+	
 			if (!isAlive) return;
+
+			for (int i = 0; i < cafCells.Count; ++i)
+			{
+				cafCells[i].OnUpdate();
+			}
 
 			if (cancerCells.Count >= maximumCells) return;
 
@@ -145,34 +179,65 @@ namespace Cells.Cancers
 				timepassed = timeBetweenDivisions;
 			}
 #else
+#endif
 			if (canDivide)
 			{
 				timePassed += Time.deltaTime;
 				if (timePassed > timeBetweenDivisions)
 				{
-					canDivide = false;
-					PrepareForDivision();
 
-					if (canSpawnCafs && spawns == spawnsBeforeCafSpawn)
+					canDivide = false;
+
+					if (canSpawnCafs && spawns == spawnsBeforeCafSpawn) // Cav cell
 					{
-						spawns = 0;
-						AddNewCAFCell();
+						bool previousSetup = keepCellsPacked;
+						keepCellsPacked = true;
+
+						ResetDivisionProcess();
+						FindAllSpotsAvailable();
+						if (availableLocations.Count < 0)
+						{
+							Debug.Log("Update frame setup prevents cancer from spawning cells");
+							timePassed = 0.0f;
+							canDivide = true;
+							keepCellsPacked = previousSetup;
+							return;
+						} else
+						{
+							FindSpawnSpot();
+							spawns = 0;
+							AddNewCAFCell();
+							timePassed = 0.0f;
+							canDivide = true;
+							keepCellsPacked = previousSetup;
+							return;
+						}
 					} 
-					else
+					else // CancerCell
 					{
-						StartDivision();
-						if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
-							spawns++;
+						ResetDivisionProcess();
+						FindAllSpotsAvailable();
+						if (availableLocations.Count < 0)
+						{
+							Debug.Log("Update frame setup prevents cancer from spawning cells");
+							timePassed = 0.0f;
+							canDivide = true;
+							return;
+						}
+						else
+						{
+							FindSpawnSpot();
+							StartDivision();
+							if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
+								spawns++;
+							return;
+						}
+
 					}
 				}
 			}
-#endif
 
-
-			for (int i = 0; i < cafCells.Count; ++i)
-			{
-				cafCells[i].OnUpdate();
-			}
+		
 		}
 
 		/// <summary>

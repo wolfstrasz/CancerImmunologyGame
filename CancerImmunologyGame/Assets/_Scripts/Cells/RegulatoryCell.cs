@@ -14,7 +14,6 @@ public class RegulatoryCell : MonoBehaviour
     public float distanceTravelled = 0.0f;
     public float maxLengthDist = 0.0f;
     public float speed = 1.0f;
-    public bool isMoving = false;
 
     ////////////////////////////////
     public bool isShooting = false;
@@ -30,44 +29,40 @@ public class RegulatoryCell : MonoBehaviour
 
     public GameObject particleToShoot = null;
 
-	void Awake()
+
+    void Awake()
 	{
-		StartMoving();
-	}
-
-    void Update()
-    {
-		if (GlobalGameData.isGameplayPaused) return;
-		if (cooldown > 0.0f)
-			cooldown -= Time.deltaTime;
-        if (isMoving  && pathToFollow != null)
-            Move();
-    }
-
-
-	// MOVING
-    public void StartMoving()
-    {
-        if(pathToFollow == null && path != null)
+        if (path != null)
         {
             pathToFollow = path.path;
             maxLengthDist = pathToFollow.length;
-        }
-        isMoving = true;
+        } else
+		{
+            Debug.LogError("Unassigned path to follow for regulatory cell!");
+		}
     }
 
-    public void StopMoving()
+    public void OnUpdate()
     {
-        isMoving = false;
+		if (cooldown > 0.0f)
+			cooldown -= Time.deltaTime;
     }
+
+    public void OnFixedUpdate()
+	{
+        Move();
+    }
+
 
     void Move()
     {
-        distanceTravelled += Time.deltaTime * speed;
+        distanceTravelled += Time.fixedDeltaTime * speed;
         if (distanceTravelled > maxLengthDist) distanceTravelled -= maxLengthDist;
         Vector3 newPos = pathToFollow.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.Loop);
-        Vector3 direction = newPos - transform.position;
         transform.position = newPos;
+
+        // Check for flipping
+        Vector3 direction = newPos - transform.position;
         render.flipX = direction.x < 0.0f;
     }
 
@@ -75,11 +70,13 @@ public class RegulatoryCell : MonoBehaviour
 
     public void StartShooting()
     {
+        isShooting = true;
         StartCoroutine(Shooting());
     }
 
     public void StopShooting()
     {
+        isShooting = false;
         StopCoroutine(Shooting());
     }
 
@@ -104,10 +101,11 @@ public class RegulatoryCell : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.GetComponent<KillerCell>() != null)
+        KillerCell collidedKillerCell = collider.GetComponent<KillerCell>();
+        if ( collidedKillerCell != null)
         {
 			if (cooldown <= 0.0f)
-				StartCoroutine(BumpPlayer(collider.GetComponent<KillerCell>()));
+				StartCoroutine(BumpPlayer(collidedKillerCell));
         }
     }
 
@@ -122,7 +120,7 @@ public class RegulatoryCell : MonoBehaviour
     {
         Debug.Log("STARTED BUMP");
 
-        StopMoving();
+        //StopMoving();
         prevRadius = coll.radius;
         prevScale = transform.localScale.x;
 
@@ -147,7 +145,7 @@ public class RegulatoryCell : MonoBehaviour
     IEnumerator StopBump()
     {
         Debug.Log("Stopping Bump");
-        StartMoving();
+        //StartMoving();
         float scaleToDecrease = transform.localScale.x - prevScale;
         float radiusToDecrease = coll.radius - prevRadius;
 

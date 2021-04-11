@@ -50,14 +50,19 @@ namespace Cells
 
 		public override bool isImmune => true;
 
+		private bool initialised = false;
+
 		private void Start()
 		{
+			initialised = true;
 			GenerateBookingSpots();
 		}
 
 
-		private void Update()
+		public void OnUpdate()
 		{
+			if (!initialised) return;
+
 			FakeRotateBookingSpots();
 
 
@@ -85,7 +90,7 @@ namespace Cells
 		}
 
 
-		private void FixedUpdate()
+		public void OnFixedUpdate()
 		{
 
 			if (!hasSpotBeenReserved)
