@@ -70,11 +70,14 @@ namespace Cells
 			if (isImmune) return;
 
 			health -= amount;
+			healthBar.Health = health;
+
 			if (health <= 0.0f)
 			{
 				isDying = true;
 				healthBar.gameObject.SetActive(false);
-				bodyBlocker.enabled = false;
+				if (bodyBlocker != null)
+					bodyBlocker.enabled = false;
 
 				OnDeath();
 

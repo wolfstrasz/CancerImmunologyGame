@@ -167,6 +167,12 @@ namespace Cells.Cancers
 				}
 			}
 #endif
+
+
+			for (int i = 0; i < cafCells.Count; ++i)
+			{
+				cafCells[i].OnUpdate();
+			}
 		}
 
 		/// <summary>

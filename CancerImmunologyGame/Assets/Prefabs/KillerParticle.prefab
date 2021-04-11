@@ -51,7 +51,7 @@ MonoBehaviour:
   speed: 1
   direction: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
-  distance: 1
+  distance: 2
   distanceSqr: 1
 --- !u!212 &7924667237588336933
 SpriteRenderer:

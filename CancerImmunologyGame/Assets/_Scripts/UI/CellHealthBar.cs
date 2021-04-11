@@ -26,7 +26,7 @@ public class CellHealthBar : MonoBehaviour
 		set
 		{
 			slider.value = value;
-			if (autoHide)
+			if (autoHide && value != slider.maxValue)
 			{
 				image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 			}

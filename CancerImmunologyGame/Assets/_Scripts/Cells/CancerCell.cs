@@ -22,9 +22,8 @@ namespace Cells.Cancers
 
 		public override bool isImmune => isDying || isInDivision;
 
-		/// <summary>
-		/// Sets the rendering sort order of the Cancer cell sprite
-		/// </summary>
+		
+		
 
 		void Awake()
 		{
@@ -110,6 +109,44 @@ namespace Cells.Cancers
 		public void RotateForReturn()
 		{
 			transform.rotation = Quaternion.identity;
+		}
+
+
+
+		// Matrix handling
+		// -------------------------------------------------
+		[Header("Debug(MatrixCell)")]
+		[SerializeField]
+		public MatrixCell matrix = null;
+		[SerializeField]
+		public Transform matrixAttachmentPoint = null; 
+
+
+
+		public override void HitCell(float amount)
+		{
+			if (isImmune) return;
+
+			if (matrix != null)
+			{
+				matrix.HitCell(amount);
+				healthBar.Health = health - 0.1f;
+			}
+			else
+			{
+				health -= amount;
+				healthBar.Health = health;
+				if (health <= 0.0f)
+				{
+					isDying = true;
+					healthBar.gameObject.SetActive(false);
+					bodyBlocker.enabled = false;
+
+					OnDeath();
+
+					NotifyObservers(this);
+				}
+			}
 		}
 	}
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1773598528092291959}
   - component: {fileID: 1773598528092291956}
+  - component: {fileID: 5451066785769465670}
   m_Layer: 9
   m_Name: CafSense
   m_TagString: Untagged
@@ -47,6 +48,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
+--- !u!114 &5451066785769465670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773598528092291958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 809d73e6484139b41925b5b1e89f23a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cancerCells: []
 --- !u!1 &2146564722571298056
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1941438127151787296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -276,7 +290,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 361818013
   m_SortingOrder: 50
   m_TargetDisplay: 0
 --- !u!114 &8862406595065975539
@@ -467,7 +481,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -491,8 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -521,6 +535,7 @@ GameObject:
   - component: {fileID: 3018821964909077380}
   - component: {fileID: 6204581631179808506}
   - component: {fileID: 9164334349910430275}
+  - component: {fileID: 12692528351063033}
   m_Layer: 10
   m_Name: CafCell
   m_TagString: BlocksCancerSpawns
@@ -602,4 +617,30 @@ MonoBehaviour:
   energy: 100
   healthBar: {fileID: 6795614192915132712}
   isDying: 0
+  sense: {fileID: 5451066785769465670}
+  matrixPrefab: {fileID: 4851716123014601265, guid: 327775f6947bc154a9ad8867ba8a1cec,
+    type: 3}
+  timeBetweenMatrixSpawns: 14
+  timePassedForMatrixSpawns: 0
   cancerOwner: {fileID: 0}
+--- !u!50 &12692528351063033
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164334349910430274}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
