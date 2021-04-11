@@ -259,7 +259,7 @@ public class KillerCell : Cell
 
 	public override void HitCell(float amount)
 	{
-		if (isImmune) return;
+		//if (isImmune) return;
 
 		health -= amount;
 		if (health <= 0.0f)
@@ -273,7 +273,7 @@ public class KillerCell : Cell
 	{
 		if (GlobalGameData.isInPowerUpMode) return;
 
-		if (isImmune) return;
+		//if (isImmune) return;
 
 		// moved to Exhaust Effect
 		// animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);

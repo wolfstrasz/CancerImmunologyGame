@@ -82,8 +82,13 @@ MonoBehaviour:
     type: 3}
   cancerCellPrefab: {fileID: 1070459107712460833, guid: 4e2983c11d3771641aedecdfd8d8140d,
     type: 3}
+  cafCellPrefab: {fileID: 9164334349910430274, guid: 272c5ee7e9399eb4184efab5a3c2179e,
+    type: 3}
   isAlive: 1
+  canSpawnCafs: 0
   cellsToGenerate: 8
+  spawnsBeforeCafSpawn: 5
+  CAFBalanceRatio: 3
   maximumCells: 20
   radius: 0.3
   radiusThinner: 0.15
@@ -95,8 +100,10 @@ MonoBehaviour:
   debugPlotSpawn: {fileID: 3824674062909241644}
   nextSortOrder: 0
   timePassed: 0
+  spawns: 0
   allPlottingObjects: []
   cancerCells: []
+  cafCells: []
   cellToDivide: {fileID: 0}
   locationToSpawn: {x: 0, y: 0, z: 0}
   canDivide: 0
