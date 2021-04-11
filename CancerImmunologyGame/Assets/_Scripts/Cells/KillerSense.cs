@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cancers;
-
+using Cells;
 namespace Cells
 {
 	[RequireComponent(typeof(CircleCollider2D))]
-	public class KillerSense : MonoBehaviour, ICancerCellObserver
+	public class KillerSense : MonoBehaviour, IEvilCellObserver
 	{
 		[SerializeField]
 		private KillerCell owner = null;
@@ -23,8 +22,8 @@ namespace Cells
 
 		[Header("Debug (Read only)")]
 		[SerializeField]
-		private List<CancerCell> cancerCellsInRange = new List<CancerCell>();
-		public List<CancerCell> CancerCellsInRange => cancerCellsInRange;
+		private List<EvilCell> evilCellsInRange = new List<EvilCell>();
+		public List<EvilCell> EvilCellsInRange => evilCellsInRange;
 
 		void Awake()
 		{
@@ -34,12 +33,12 @@ namespace Cells
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			Debug.Log(collider.gameObject);
-			CancerCell cc = collider.GetComponent<CancerCell>();
-			if (cc != null)
+			EvilCell evilCell = collider.GetComponent<EvilCell>();
+			if (evilCell != null)
 			{
-				Debug.Log("Collided with cc body");
-				cancerCellsInRange.Add(cc);
-				cc.AddObserver(this);
+				Debug.Log("Collided with Evil body");
+				evilCellsInRange.Add(evilCell);
+				evilCell.AddObserver(this);
 
 				// On cells in range
 				controller.OnEnemiesInRange();
@@ -48,23 +47,23 @@ namespace Cells
 
 		void OnTriggerExit2D(Collider2D collider)
 		{
-			CancerCell cc = collider.GetComponent<CancerCell>();
-			if (cc != null)
+			EvilCell evilCell = collider.GetComponent<EvilCell>();
+			if (evilCell != null)
 			{
-				Debug.Log("UN-Collided with cc body");
-				cancerCellsInRange.Remove(cc);
-				cc.RemoveObserver(this);
-				if (cancerCellsInRange.Count <= 0)
+				Debug.Log("UN-Collided with Evil body");
+				evilCellsInRange.Remove(evilCell);
+				evilCell.RemoveObserver(this);
+				if (evilCellsInRange.Count <= 0)
 				{
 					controller.OnEnemiesOutOfRange();
 				}
 			}
 		}
 
-		public void NotifyOfDeath(CancerCell cc)
+		public void NotifyOfDeath(EvilCell evilCell)
 		{
-			cancerCellsInRange.Remove(cc);
-			if (cancerCellsInRange.Count <= 0)
+			evilCellsInRange.Remove(evilCell);
+			if (evilCellsInRange.Count <= 0)
 			{
 				controller.OnEnemiesOutOfRange();
 			}

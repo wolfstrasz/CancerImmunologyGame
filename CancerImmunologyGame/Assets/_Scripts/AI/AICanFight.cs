@@ -17,7 +17,7 @@ public class AICanFight : BTActionNode
 	protected override NodeStates OnEvaluateAction()
 	{
 		
-		if (controller.ControlledCell.Health == KillerCell.maxHealth && controller.ControlledCell.Energy == KillerCell.maxEnergy)
+		if (controller.ControlledCell.Health == controller.ControlledCell.maxHealth && controller.ControlledCell.Energy == controller.ControlledCell.maxEnergy)
 		{
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;

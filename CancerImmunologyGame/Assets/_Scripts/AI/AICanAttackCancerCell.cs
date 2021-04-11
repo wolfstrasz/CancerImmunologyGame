@@ -15,13 +15,13 @@ public class AICanAttackCancerCell : BTActionNode
 
 	protected override NodeStates OnEvaluateAction()
 	{
-		if (interactor.TargetedCancerCell == null || interactor.Target == null)
+		if (interactor.TargetedEvilCell == null || interactor.Target == null)
 		{
 			nodeState = NodeStates.FAILURE;
 			return nodeState;
 		}
 
-		if (Vector3.SqrMagnitude(interactor.ControlledCell.transform.position - interactor.TargetedCancerCell.transform.position) < interactor.ControlledCell.Range * interactor.ControlledCell.Range)
+		if (Vector3.SqrMagnitude(interactor.ControlledCell.transform.position - interactor.TargetedEvilCell.transform.position) < interactor.ControlledCell.Range * interactor.ControlledCell.Range)
 		{
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;

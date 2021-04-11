@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
-using Cancers;
+using Cells.Cancers;
 
 
 public class AIAttackCancerCell : BTActionNode
@@ -18,9 +18,9 @@ public class AIAttackCancerCell : BTActionNode
 	protected override NodeStates OnEvaluateAction()
 	{
 
-		if (interactor.TargetedCancerCell != null)
+		if (interactor.TargetedEvilCell != null)
 		{
-			interactor.ControlledCell.Attack(interactor.TargetedCancerCell.transform.position);
+			interactor.ControlledCell.Attack(interactor.TargetedEvilCell.transform.position);
 
 			nodeState = NodeStates.RUNNING;
 			return nodeState;

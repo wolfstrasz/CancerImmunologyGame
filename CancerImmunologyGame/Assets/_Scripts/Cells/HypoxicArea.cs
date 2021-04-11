@@ -38,7 +38,7 @@ public class HypoxicArea : MonoBehaviour
 
 		foreach (KillerCell cell in killerCells)
 		{
-			cell.AddHealth(-dmg);
+			cell.HitCell(dmg);
 		}
 	}
 

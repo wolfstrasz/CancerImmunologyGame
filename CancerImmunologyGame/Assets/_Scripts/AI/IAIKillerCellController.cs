@@ -4,7 +4,6 @@ using UnityEngine;
 using Pathfinding;
 using Pathfinding.RVO;
 using Cells;
-using Cancers;
 
 // Final Interface
 public interface IAIKillerCellController : 
@@ -38,7 +37,7 @@ public interface IAIHelperCellInteractor :
 
 public interface IAICancerCellInteractor : IAICellController, IAITargetHandler
 {
-	CancerCell TargetedCancerCell { get; set; }
+	EvilCell TargetedEvilCell { get; set; }
 }
 
 // Base interfaces

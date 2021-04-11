@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Cells;
-using Cancers;
+using Cells.Cancers;
 
 namespace ImmunotherapyGame.Player
 {
@@ -49,18 +49,18 @@ namespace ImmunotherapyGame.Player
 
 			if (GlobalGameData.autoAim)
 			{
-				if (!(killerSense.CancerCellsInRange.Count > 0)) return;
+				if (!(killerSense.EvilCellsInRange.Count > 0)) return;
 
-				CancerCell closestCell = killerSense.CancerCellsInRange[0];
+				EvilCell closestCell = killerSense.EvilCellsInRange[0];
 				float minDist = Vector3.SqrMagnitude(closestCell.transform.position - transform.position);
 
-				for (int i = 1; i < killerSense.CancerCellsInRange.Count; ++i)
+				for (int i = 1; i < killerSense.EvilCellsInRange.Count; ++i)
 				{
-					float dist = Vector3.SqrMagnitude(killerSense.CancerCellsInRange[i].transform.position - transform.position);
+					float dist = Vector3.SqrMagnitude(killerSense.EvilCellsInRange[i].transform.position - transform.position);
 					if (dist < minDist)
 					{
 						minDist = dist;
-						closestCell = killerSense.CancerCellsInRange[i];
+						closestCell = killerSense.EvilCellsInRange[i];
 					}
 				}
 

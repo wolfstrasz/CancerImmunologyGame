@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Player;
 using System;
-using Cancers;
+using Cells.Cancers;
 using Cells;
 public static class GlobalGameData
 {

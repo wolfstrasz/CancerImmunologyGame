@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using Cells;
-using Cancers;
+using Cells.Cancers;
 
 namespace ImmunotherapyGame.Player
 {
@@ -144,8 +143,8 @@ namespace ImmunotherapyGame.Player
 				}
 			}
 
-			kc.AddHealth(KillerCell.maxHealth);
-			kc.AddEnergy(KillerCell.maxEnergy);
+			kc.AddHealth(kc.maxHealth);
+			kc.AddEnergy(kc.maxEnergy);
 			kc.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 

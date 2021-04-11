@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cells;
-using Cancers;
 
 public class KillerCell : Cell
 {
@@ -10,8 +9,6 @@ public class KillerCell : Cell
 	private Rigidbody2D rb = null;
 	[SerializeField]
 	private KillerSense sense = null;
-	[SerializeField]
-	private Animator animator = null;
 
 	[Header("Attributes")]
 	[SerializeField]
@@ -22,15 +19,6 @@ public class KillerCell : Cell
 	private float immunotherapySpeedMultiplier = 1.66f;
 	[SerializeField]
 	private float immunotherapyEnergyRegain = 3.33f;
-
-	[SerializeField]
-	public static float maxHealth = 100.0f;
-	[SerializeField]
-	private float health = 100.0f;
-	[SerializeField]
-	public static float maxEnergy = 100.0f;
-	[SerializeField]
-	private float energy = 100.0f;
 
 	[Header("Normal Attack")]
 	[SerializeField]
@@ -110,6 +98,8 @@ public class KillerCell : Cell
 
 #if BLOODFLOW_ROTATION
 	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
+
+	public override bool isImmune => throw new System.NotImplementedException();
 #else
 #endif
 
@@ -169,20 +159,14 @@ public class KillerCell : Cell
 
 	public void AddEnergy(float value)
 	{
-		if (GlobalGameData.isInPowerUpMode && value <= 0.0f) return;
-
 		energy += value;
-
 		if (energy >= maxEnergy)
 		{
 			energy = maxEnergy;
 		}
-		else if (energy <= 0.0f)
-		{
-			controller.OnCellDeath();
-		}
 
-		animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
+		// moved to Exhaust Effect
+		// animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
 	}
 
 	public void AddHealth(float value)
@@ -193,15 +177,14 @@ public class KillerCell : Cell
 			health = maxHealth;
 			return;
 		}
-
-		if (health <= 0.0f)
-		{
-			controller.OnCellDeath();
-		}
 	}
 
 	private float ExhaustionEffect()
 	{
+		// moved from Add Energy
+		animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
+
+		// before
 		if (GlobalGameData.isInPowerUpMode)
 			return immunotherapySpeedMultiplier;
 		return  1.0f - (maxEnergy - energy) / maxEnergy * exhaustEffectReduction;
@@ -237,7 +220,7 @@ public class KillerCell : Cell
 		bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
 		var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f); 
 		bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, range, color);
-		AddEnergy(normalAttackEnergyCost);
+		ExhaustCell(Mathf.Abs(normalAttackEnergyCost));
 
 	}
 
@@ -272,5 +255,34 @@ public class KillerCell : Cell
 	{
 		animator.SetTrigger("PowerUpFinished");
 		animator.speed = 1.0f;
+	}
+
+	public override void HitCell(float amount)
+	{
+		if (isImmune) return;
+
+		health -= amount;
+		if (health <= 0.0f)
+		{
+			health = 0.0f;
+			controller.OnCellDeath();
+		}
+	}
+
+	public override void ExhaustCell(float amount)
+	{
+		if (GlobalGameData.isInPowerUpMode) return;
+
+		if (isImmune) return;
+
+		// moved to Exhaust Effect
+		// animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
+		energy -= amount;
+		if (energy <= 0.0f)
+		{
+			energy = 0.0f;
+			controller.OnCellDeath();
+		}
+
 	}
 }

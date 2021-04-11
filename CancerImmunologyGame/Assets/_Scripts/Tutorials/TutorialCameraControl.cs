@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cells;
-using Cancers;
+using Cells.Cancers;
 using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Tutorials

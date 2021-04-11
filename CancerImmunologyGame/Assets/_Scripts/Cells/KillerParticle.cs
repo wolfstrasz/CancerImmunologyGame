@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cancers;
-
+using Cells;
 public class KillerParticle : MonoBehaviour
 {
 
@@ -57,13 +56,11 @@ public class KillerParticle : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		CancerCell cc = collider.gameObject.GetComponent<CancerCell>();
-		if (cc)
+		EvilCell evilCell = collider.gameObject.GetComponent<EvilCell>();
+		if (evilCell)
 		{
-			if (cc.HitCell(damage))
-			{
-				Destroy(gameObject);
-			}
+			evilCell.HitCell(damage);
+			Destroy(gameObject);
 		}
 	}
 

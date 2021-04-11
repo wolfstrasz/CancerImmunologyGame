@@ -270,15 +270,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d669b08ce074d44b9a5baa90963119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 0}
+  animator: {fileID: 2046459777261753809}
+  bodyBlocker: {fileID: 0}
+  maxHealth: 100
+  health: 100
+  maxEnergy: 100
+  energy: 100
+  healthBar: {fileID: 0}
+  isDying: 0
   rb: {fileID: 2046459777261753813}
   sense: {fileID: 2046459777672622295}
-  animator: {fileID: 2046459777261753809}
   exhaustEffectReduction: 0.75
   movementSpeed: 4
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  health: 100
-  energy: 100
   attackSpawnObject: {fileID: 1244794201}
   killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
     type: 3}
@@ -355,4 +361,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 2046459777990927748}
   rangeCollider: {fileID: 2046459777672622292}
-  cancerCellsInRange: []
+  evilCellsInRange: []

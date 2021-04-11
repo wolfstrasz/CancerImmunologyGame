@@ -2,108 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cancers
+namespace Cells.Cancers
 {
-	public class CancerCell : MonoBehaviour
+	public class CancerCell : EvilCell
 	{
 		[Header("Links")]
-		[SerializeField]
-		private CircleCollider2D bodyBlocker = null;
 		[SerializeField]
 		public CircleCollider2D divisionBodyBlocker = null;
 		[SerializeField]
 		private GameObject hypoxicArea = null;
 		[SerializeField]
-		private Animator animator = null;
-		[SerializeField]
-		private SpriteRenderer render = null;
-		[SerializeField]
-		private CellHealthBar healthbar = null;
-
-		[Header("Attributes")]
-		[SerializeField]
-		private float maxHealth = 100.0f;
-		[SerializeField]
-		private float health = 100;
+		internal Cancer cancerOwner = null;
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
-		internal Cancer cancer = null;
-		[SerializeField]
 		private float rotationAngle = 0.0f;
 		[SerializeField]
-		private bool inDivision = false;
-		[SerializeField]
-		internal bool isDying = false;
+		private bool isInDivision = false;
 
-		public bool InDivision => inDivision;
+		public override bool isImmune => isDying || isInDivision;
+
 		/// <summary>
 		/// Sets the rendering sort order of the Cancer cell sprite
 		/// </summary>
-		internal int RenderSortOrder { set => render.sortingOrder = value; }
-
-		private List<ICancerCellObserver> observers = new List<ICancerCellObserver>();
 
 		void Awake()
 		{
 			hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
-			healthbar.MaxHealth = maxHealth;
-			healthbar.Health = health;
+			healthBar.MaxHealth = maxHealth;
+			healthBar.Health = health;
 		}
 
-		public void AddObserver(ICancerCellObserver observer)
+		protected override void OnDeath()
 		{
-			observers.Add(observer);
-		}
-		public void RemoveObserver(ICancerCellObserver observer)
-		{
-			observers.Remove(observer);
+			animator.SetTrigger("Apoptosis");
+			divisionBodyBlocker.enabled = false;
 		}
 
-		public bool HitCell(float amount)
-		{
-			if (isDying || inDivision) return false;
-
-			health -= amount;
-			if (health <= 0.0f)
-			{
-				isDying = true;
-
-				if (cancer != null)
-				{
-					cancer.RemoveCell(this);
-				}
-				healthbar.gameObject.SetActive(false);
-				bodyBlocker.enabled = false;
-				divisionBodyBlocker.enabled = false;
-				animator.SetTrigger("Apoptosis");
-
-				for (int i = 0; i < observers.Count; ++i)
-				{
-					observers[i].NotifyOfDeath(this);
-				}
-				return true;
-			}
-
-			healthbar.Health = health;
-			return false;
-		}
-
-		// Cancer cell division animation flow functions
-		// Control calls
+		// DIVISION HANDLERS
+		// -----------------------------------------------------------------
 		internal void StartPrepareDivision(float _rotationAngle)
 		{
-			inDivision = true;
+			isInDivision = true;
 
 			divisionBodyBlocker.gameObject.SetActive(true);
 			animator.SetTrigger("PrepareToDivide");
 			rotationAngle = _rotationAngle;
 		}
 
-
 		internal void StartDivision()
 		{
-			healthbar.gameObject.SetActive(false);
+			healthBar.gameObject.SetActive(false);
 			animator.SetTrigger("Divide");
 		}
 
@@ -112,13 +61,12 @@ namespace Cancers
 			animator.SetTrigger("ReturnFromDivision");
 		}
 
-
 		/// <summary>
 		/// Callback to use in division animation.
 		/// </summary>
 		public void FinishedDivisionPreparation()
 		{
-			cancer.OnFinishDivisionPreparation();
+			cancerOwner.OnFinishDivisionPreparation();
 		}
 
 		/// <summary>
@@ -126,9 +74,9 @@ namespace Cancers
 		/// </summary>
 		public void FinishedDivision()
 		{
-			healthbar.gameObject.SetActive(true);
+			healthBar.gameObject.SetActive(true);
 			divisionBodyBlocker.gameObject.SetActive(false);
-			cancer.OnFinishDivision();
+			cancerOwner.OnFinishDivision();
 		}
 
 		/// <summary>
@@ -136,7 +84,7 @@ namespace Cancers
 		/// </summary>
 		public void CellSpawned()
 		{
-			inDivision = false;
+			isInDivision = false;
 			isDying = false;
 			if (!hypoxicArea.activeSelf)
 			{
@@ -146,14 +94,6 @@ namespace Cancers
 
 				//   UIManager.Instance.allCancerCells.Add(this);
 			}
-		}
-
-		/// <summary>
-		/// Callback to use in division animation.
-		/// </summary>
-		public void CellDied()
-		{
-			Destroy(gameObject);
 		}
 
 		/// <summary>

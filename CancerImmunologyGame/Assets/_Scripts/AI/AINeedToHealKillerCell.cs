@@ -14,11 +14,11 @@ public class AINeedToHealKillerCell : BTActionNode
 
 	protected override NodeStates OnEvaluateAction()
 	{
-		if (controller.ControlledCell.Health * 3 < KillerCell.maxHealth)
+		if (controller.ControlledCell.Health * 3 < controller.ControlledCell.maxHealth)
 		{
 			return NodeStates.SUCCESS;
 		}
-		else if (controller.ControlledCell.Energy * 3 < KillerCell.maxEnergy)
+		else if (controller.ControlledCell.Energy * 3 < controller.ControlledCell.maxEnergy)
 		{
 			return NodeStates.SUCCESS;
 		}

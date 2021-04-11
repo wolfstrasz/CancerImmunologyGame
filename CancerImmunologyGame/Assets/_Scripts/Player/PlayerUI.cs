@@ -46,13 +46,13 @@ namespace ImmunotherapyGame.Player
 		{
 			if (healthBar != null)
 			{
-				healthBar.SetMaxValue(KillerCell.maxHealth);
+				healthBar.SetMaxValue(kc.maxHealth);
 			}
 			else Debug.LogWarning("Health bar is not linked to global data");
 
 			if (energyBar != null)
 			{
-				energyBar.SetMaxValue(KillerCell.maxEnergy);
+				energyBar.SetMaxValue(kc.maxEnergy);
 			}
 			else Debug.LogWarning("Exhaust bar is not linked to global data");
 

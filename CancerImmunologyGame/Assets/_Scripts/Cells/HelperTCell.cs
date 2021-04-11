@@ -48,6 +48,8 @@ namespace Cells
 		[SerializeField]
 		private float speed = 2;
 
+		public override bool isImmune => true;
+
 		private void Start()
 		{
 			GenerateBookingSpots();
@@ -202,8 +204,17 @@ namespace Cells
 				hasSpotBeenReserved = false;
 			}
 		}
-		
 
+		public override void HitCell(float amount)
+		{
+			Debug.LogWarning("Helper cell got hit but it is not implemented!");
+		}
+
+		public override void ExhaustCell(float amount)
+		{
+			Debug.LogWarning("Helper cell got hit but it is not implemented!");
+
+		}
 	}
 
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cancers
+namespace Cells.Cancers
 {
-	public class Cancer : MonoBehaviour
+	public class Cancer : MonoBehaviour , IEvilCellObserver
 	{
 		[Header("Prefabs Linking")]
 		[SerializeField]
@@ -13,12 +13,20 @@ namespace Cancers
 		private GameObject spawnPointPrefab = null;
 		[SerializeField]
 		private GameObject cancerCellPrefab = null;
+		[SerializeField]
+		private GameObject cafCellPrefab = null;
 
 		[Header("Generation attributes")]
 		[SerializeField]
 		private bool isAlive = true;
 		[SerializeField]
+		private bool canSpawnCafs = false;
+		[SerializeField]
 		private int cellsToGenerate = 0;
+		[SerializeField]
+		private int spawnsBeforeCafSpawn = 5;
+		[SerializeField]
+		private int CAFBalanceRatio = 3;
 
 		[Header("Spawn Attributes")]
 		[SerializeField]
@@ -49,12 +57,18 @@ namespace Cancers
 		private int nextSortOrder = 0;
 		[SerializeField]
 		private float timePassed = 0.0f;
+		[SerializeField]
+		private int spawns = 0;
 
 		// Debug containers
 		[SerializeField]
 		private List<GameObject> allPlottingObjects = new List<GameObject>();
 		[SerializeField]
 		private List<CancerCell> cancerCells = new List<CancerCell>();
+		[SerializeField]
+		private List<CAFCell> cafCells = new List<CAFCell>();
+
+
 
 		// Division handling
 		[SerializeField]
@@ -78,13 +92,21 @@ namespace Cancers
 		public bool CanDivide => canDivide;
 		public GameObject CellToDivide => cellToDivide.gameObject;
 
+
+		private void PrepareForDivision()
+		{
+			ResetDivisionProcess();
+			FindAllSpotsAvailable();
+			FindSpawnSpot();
+		}
+
 		// Start is called before the first frame update
 		void Awake()
 		{
 			locationToSpawn = transform.position;
 
 			// Generates the initial cancer
-			AddNewCell();
+			AddNewCancerCell();
 			canDivide = true;
 
 			bool old_debug = debugPlotting;
@@ -92,10 +114,20 @@ namespace Cancers
 
 			for (int i = 0; i < cellsToGenerate; ++i)
 			{
-				ResetDivisionProcess();
-				FindAllSpotsAvailable();
-				FindSpawnSpot();
-				AddNewCell();
+				PrepareForDivision();
+
+				if (canSpawnCafs && spawns == spawnsBeforeCafSpawn)
+				{
+					spawns = 0;
+					AddNewCAFCell();
+				}
+				else
+				{
+					AddNewCancerCell();
+
+					if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
+						spawns++;
+				}
 			}
 
 			debugPlotting = old_debug;
@@ -119,10 +151,19 @@ namespace Cancers
 				if (timePassed > timeBetweenDivisions)
 				{
 					canDivide = false;
-					ResetDivisionProcess();
-					FindAllSpotsAvailable();
-					FindSpawnSpot();
-					StartDivision();
+					PrepareForDivision();
+
+					if (canSpawnCafs && spawns == spawnsBeforeCafSpawn)
+					{
+						spawns = 0;
+						AddNewCAFCell();
+					} 
+					else
+					{
+						StartDivision();
+						if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
+							spawns++;
+					}
 				}
 			}
 #endif
@@ -131,13 +172,26 @@ namespace Cancers
 		/// <summary>
 		/// Adds new cell at the determined locationToSpawn position
 		/// </summary>
-		private void AddNewCell()
+		private void AddNewCancerCell()
 		{
 			CancerCell newCell = Instantiate(cancerCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CancerCell>();
-			newCell.cancer = this;
+			newCell.AddObserver(this);
 			newCell.RenderSortOrder = nextSortOrder;
+			newCell.cancerOwner = this;
 			++nextSortOrder;
 			cancerCells.Add(newCell);
+		}
+
+
+
+		private void AddNewCAFCell()
+		{
+			CAFCell newCell = Instantiate(cafCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CAFCell>();
+			newCell.AddObserver(this);
+			newCell.RenderSortOrder = nextSortOrder;
+			newCell.cancerOwner = this;
+			++nextSortOrder;
+			cafCells.Add(newCell);
 		}
 
 
@@ -147,7 +201,7 @@ namespace Cancers
 			float distance = radius * 2.0f + offsetOfAnimation;
 			for (int i = 0; i < cancerCells.Count; i++)
 			{
-				if (cancerCells[i].isDying)
+				if (cancerCells[i].isImmune)
 				{
 					continue;
 				}
@@ -308,7 +362,7 @@ namespace Cancers
 		internal void OnFinishDivision()
 		{
 			// Request new cell to spawn and make the spawning cell return to its previous
-			AddNewCell();
+			AddNewCancerCell();
 			cellToDivide.StartReturnFromDivision();
 			Debug.Log("OnFinsishDivision");
 			timePassed = 0.0f;
@@ -328,29 +382,6 @@ namespace Cancers
 			allPlottingObjects.Clear();
 			spawnOwners.Clear();
 		}
-
-		internal void RemoveCell(CancerCell cc)
-		{
-			cancerCells.Remove(cc);
-
-			if (cancerCells.Count == 0)
-			{
-				// notify listeners
-				for (int i = 0; i < onDeathObservers.Count; ++i)
-				{
-					onDeathObservers[i].OnCancerDeath();
-				}
-
-				isAlive = false;
-				canDivide = false;
-
-				//GlobalGameData.Cancers.Remove(this);
-
-				//Destroy(gameObject);
-				return;
-			}
-		}
-
 
 		// Listener functionality
 		public void SubscribeDeathObserver(ICancerDeathObserver observer)
@@ -375,6 +406,39 @@ namespace Cancers
 		{
 			if (onDivisionObservers.Contains(observer))
 				onDivisionObservers.Remove(observer);
+		}
+
+		// Subscriber Evil cells
+		public void NotifyOfDeath(EvilCell evilCell)
+		{
+			CancerCell cell = evilCell.gameObject.GetComponent<CancerCell>();
+			if (cell != null)
+			{
+				cancerCells.Remove(cell);
+			}
+
+			CAFCell cafCell = evilCell.gameObject.GetComponent<CAFCell>();
+
+			if (cafCell != null)
+			{
+				cafCells.Remove(cafCell);
+			}
+
+			if (cancerCells.Count == 0)
+			{
+				// notify listeners
+				for (int i = 0; i < onDeathObservers.Count; ++i)
+				{
+					onDeathObservers[i].OnCancerDeath();
+				}
+
+				isAlive = false;
+				canDivide = false;
+				gameObject.SetActive(false);
+				//GlobalGameData.Cancers.Remove(this);
+				//Destroy(gameObject);
+				return;
+			}
 		}
 	}
 }

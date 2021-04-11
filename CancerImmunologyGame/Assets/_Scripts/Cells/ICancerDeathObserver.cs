@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Cancers 
+namespace Cells.Cancers 
 { 
 	public interface ICancerDeathObserver
 	{

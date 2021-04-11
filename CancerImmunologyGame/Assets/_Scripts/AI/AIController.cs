@@ -5,7 +5,7 @@ using Pathfinding;
 using BehaviourTreeBase;
 using Cells;
 using Pathfinding.RVO;
-using Cancers;
+using Cells.Cancers;
 
 [RequireComponent(typeof(Seeker))]
 public class AIController : MonoBehaviour, IAIKillerCellController, ICellController
@@ -63,8 +63,8 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 
 	[Header("Interface Data (Cancer Attacking) (Read Only)")]
 	[SerializeField]
-	private CancerCell targetedCancerCell = null;
-	public CancerCell TargetedCancerCell { get => targetedCancerCell; set => targetedCancerCell = value; }
+	private EvilCell targetedEvilCell = null;
+	public EvilCell TargetedEvilCell { get => targetedEvilCell; set => targetedEvilCell = value; }
 
 	public void Start()
 	{
@@ -141,7 +141,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 			BTSequence attackingState = new BTSequence("Attacking", 3);
 			{
 				// Currently healing actions
-				BTActionNode getAKillTarget = new AIFindCancerCellTarget("FindAKillTarget", tree, this);
+				BTActionNode getAKillTarget = new AIFindEvilCellTarget("FindAKillTarget", tree, this);
 
 				BTSelector inRangeSelector = new BTSelector("CheckRange", 2);
 				{

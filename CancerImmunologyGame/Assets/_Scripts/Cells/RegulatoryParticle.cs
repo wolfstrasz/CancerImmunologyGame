@@ -111,7 +111,7 @@ public class RegulatoryParticle : MonoBehaviour
 				glow.SetActive(true);
 			} else
 			{
-				cell.AddEnergy(energyDmg);
+				cell.ExhaustCell(Mathf.Abs(energyDmg));
 				StateAction = Dead;
 				Destroy(gameObject);
 			}

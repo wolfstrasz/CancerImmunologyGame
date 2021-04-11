@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
-using Cancers;
+using Cells;
 
 
-public class AIFindCancerCellTarget : BTActionNode
+public class AIFindEvilCellTarget : BTActionNode
 {
 
 	private IAICancerCellInteractor interactor;
 
-	public AIFindCancerCellTarget(string name, BehaviourTree owner, IAICancerCellInteractor interactor) : base(name, owner, "AIFindClosestTarget")
+	public AIFindEvilCellTarget(string name, BehaviourTree owner, IAICancerCellInteractor interactor) : base(name, owner, "AIFindClosestTarget")
 	{
 		this.interactor = interactor;
 	}
@@ -25,7 +25,7 @@ public class AIFindCancerCellTarget : BTActionNode
 		//	return nodeState;
 		//}
 
-		GameObject objectFound = Utils.FindClosestGameObjectOfType<CancerCell>(interactor.ControlledCell.transform.position);
+		GameObject objectFound = Utils.FindClosestGameObjectOfType<EvilCell>(interactor.ControlledCell.transform.position);
 
 		if (objectFound == null)
 		{
@@ -36,7 +36,7 @@ public class AIFindCancerCellTarget : BTActionNode
 		{
 			interactor.Target = objectFound;
 			interactor.AcceptableDistanceFromTarget = interactor.ControlledCell.Range;
-			interactor.TargetedCancerCell = objectFound.GetComponent<CancerCell>();
+			interactor.TargetedEvilCell = objectFound.GetComponent<EvilCell>();
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;
 		}
