@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4682276515228393965}
   - component: {fileID: 81269597679612959}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BodyCollider
-  m_TagString: Untagged
+  m_TagString: BlocksCancerSpawns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 7363393212331211721}
   - component: {fileID: 7363393212331211726}
   - component: {fileID: 7363393212331211727}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,10 +154,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -175,8 +176,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1262964005
+  m_SortingLayer: 3
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 8e0b454822f04d742b49860d395da896, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -247,7 +248,6 @@ MonoBehaviour:
   isMoving: 0
   isShooting: 0
   shootDelay: 4.5
-  particles: []
   render: {fileID: 7363393212739880087}
   particleToShoot: {fileID: 7457939708117967971, guid: 4825efb6d8d62ca4d8768ca64ec40332,
     type: 3}

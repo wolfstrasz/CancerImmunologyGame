@@ -46,10 +46,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -67,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1262964005
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 13bc84f4bada953448065a79c11b27cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -147,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08056fc1d5403b42a5d3c6e07160125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dcArea: {fileID: 5140317927337743145}
-  chemokinePath: {fileID: 0}
+  chemokinePaths: []
   interacted: 0
 --- !u!1 &467450090308355577
 GameObject:
@@ -160,9 +160,9 @@ GameObject:
   m_Component:
   - component: {fileID: 467450090308355582}
   - component: {fileID: 467450090308355583}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BodyBlocker
-  m_TagString: Untagged
+  m_TagString: BlocksCancerSpawns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

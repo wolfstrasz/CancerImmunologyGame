@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0812730e0ffed4ab43a0f3c2f38b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sense: {fileID: 6947273459215185762}
   hasSpotBeenReserved: 0
   shouldHeal: 0
   particlePrefab: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
@@ -61,6 +60,9 @@ MonoBehaviour:
   bookingSpots: []
   freeBookingSpots: []
   timeToPassForFullRotation: 5
+  patrolPoints: []
+  patrolIndex: 0
+  speed: 2
 --- !u!95 &6287359040158972595
 Animator:
   serializedVersion: 3
@@ -141,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cell: {fileID: 88521630074490748}
+  kcNearby: []
 --- !u!1 &4702413554881257943
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,9 +154,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4702413554881257942}
   - component: {fileID: 3034418294530964983}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BodyBlocker
-  m_TagString: Untagged
+  m_TagString: BlocksCancerSpawns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -234,10 +237,11 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -255,8 +259,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1262964005
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de,
     type: 3}
