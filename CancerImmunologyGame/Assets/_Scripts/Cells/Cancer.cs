@@ -112,7 +112,7 @@ namespace Cells.Cancers
 			bool old_debug = debugPlotting;
 			debugPlotting = false;
 
-			for (int i = 0; i < cellsToGenerate; ++i)
+			for (; cancerCells.Count < cellsToGenerate;)
 			{
 				PrepareForDivision();
 

@@ -78,7 +78,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8348068909554520086
 Transform:
   m_ObjectHideFlags: 0
@@ -86,7 +86,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8348068909554520080}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.1099854, y: -8.380001, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chemokinePrefab: {fileID: 3205355822767766336, guid: 6ee49439fbd56e3428e957096671e1f1,
     type: 3}
-  minSpacing: 3
-  maxSpacing: 10
+  minSpacing: 6
+  maxSpacing: 9
   chemokinePathEnd: {fileID: 8348068908097070440}
   chemokines: []

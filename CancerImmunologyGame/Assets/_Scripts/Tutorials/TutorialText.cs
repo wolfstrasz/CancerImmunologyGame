@@ -42,12 +42,21 @@ namespace ImmunotherapyGame.Tutorials
 
 			if (canSkipTxt)
 				StartCoroutine(WaitBeforeSkipButton());
-			if (timed)
-				StartCoroutine(WaitBeforeFinish());
 		}
 
 		protected override bool OnUpdateEvent()
 		{
+			if (timed)
+			{
+				Debug.LogWarning("HELLO TIMED");
+
+				timeBeforeFinish -= Time.deltaTime;
+				if (timeBeforeFinish <= 0f)
+				{
+					allowFinish = true;
+				}
+			}
+
 			if (allowSkip)
 			{
 				if (Input.GetKeyDown(KeyCode.Space))
@@ -65,12 +74,6 @@ namespace ImmunotherapyGame.Tutorials
 			yield return new WaitForSecondsRealtime(waitBeforeSkip);
 			allowSkip = true;
 			TutorialManager.Instance.DisplaySkipButton();
-		}
-
-		IEnumerator WaitBeforeFinish()
-		{
-			yield return new WaitForSecondsRealtime(timeBeforeFinish);
-			allowFinish = true;
 		}
 	}
 }

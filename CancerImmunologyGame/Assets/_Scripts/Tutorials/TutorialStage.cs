@@ -8,10 +8,12 @@ namespace ImmunotherapyGame.Tutorials
 	{
 		[SerializeField]
 		private List<TutorialEvent> events = null;
+		[SerializeField]
 		private TutorialEvent currentEvent = null;
-		private int event_index = 0;
+		[SerializeField]
+		private int currentEventIndex = 0;
+		[SerializeField]
 		private bool isFinished = false;
-
 
 		internal bool IsFinished { get => isFinished; }
 
@@ -26,15 +28,19 @@ namespace ImmunotherapyGame.Tutorials
 				currentEvent.EndEvent();
 				currentEvent.gameObject.SetActive(false);
 				Debug.Log(gameObject.name + " event finished: " + currentEvent.name);
+				currentEventIndex++;
+
+				// Finish stage if reached last event
+				if (currentEventIndex >= events.Count)
+				{
+					isFinished = true;
+					return;
+				}
 
 				// Start next event
-				currentEvent = events[event_index];
+				currentEvent = events[currentEventIndex];
 				currentEvent.gameObject.SetActive(true);    // Debugging
 				currentEvent.StartEvent();
-
-				// Update stage
-				++event_index;
-				isFinished = event_index >= events.Count;
 			}
 		}
 
@@ -48,9 +54,8 @@ namespace ImmunotherapyGame.Tutorials
 			// Run the first event
 			if (events.Count > 0)
 			{
-				currentEvent = events[event_index];
+				currentEvent = events[currentEventIndex];
 				currentEvent.gameObject.SetActive(true);	// Debugging
-				++event_index;
 				currentEvent.StartEvent();
 			}
 
