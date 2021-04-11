@@ -44,6 +44,7 @@ namespace ImmunotherapyGame.Player
 		/// </summary>
 		internal void Initialise()
 		{
+			kc = PlayerController.Instance.KC;
 			if (healthBar != null)
 			{
 				healthBar.SetMaxValue(kc.maxHealth);

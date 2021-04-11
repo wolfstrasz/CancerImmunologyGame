@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ImmunotherapyGame.Tutorials
 {
-	public class TDCInteract : TutorialEvent
+	public class TDCInteract : TutorialPopupEvent
 	{
 
 		DendriticCell cellToInteractWithPlayer = null;
@@ -14,12 +14,13 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
+			base.OnStartEvent();
 			cellToInteractWithPlayer = FindObjectOfType<DendriticCell>();
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			return cellToInteractWithPlayer.HasInteracted;
+			return cellToInteractWithPlayer.HasInteracted && base.OnUpdateEvent();
 		}
 	}
 }

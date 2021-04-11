@@ -90,7 +90,8 @@ namespace Cells
 
 			if (!hasSpotBeenReserved)
 			{
-				MoveToNextPatrolPoint();
+				if (patrolPoints.Count > 0)
+					MoveToNextPatrolPoint();
 			}
 		}
 

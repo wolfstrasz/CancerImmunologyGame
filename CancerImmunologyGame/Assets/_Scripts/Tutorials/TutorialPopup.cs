@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -8,20 +9,25 @@ namespace ImmunotherapyGame.Tutorials
 		private SpriteRenderer render = null;
 
 		[SerializeField]
+		private Light2D spotlight = null;
+		[SerializeField]
 		private bool isVisisble = false;
+		[SerializeField]
 		internal bool triggered = false;
-
 
 		void Start()
 		{
 			gameObject.SetActive(false);
 			render = GetComponent<SpriteRenderer>();
+			render.enabled = false;
+			spotlight.enabled = false;
 		}
 
 		internal void Activate()
 		{
 			gameObject.SetActive(true);
-			render.enabled = isVisisble;
+			//render.enabled = isVisisble;
+			spotlight.enabled = isVisisble;
 			triggered = false;
 		}
 
@@ -29,6 +35,7 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			Debug.Log("PopUpCollision");
 			render.enabled = false;
+			spotlight.enabled = false;
 			gameObject.SetActive(false);
 			triggered = true;
 		}
