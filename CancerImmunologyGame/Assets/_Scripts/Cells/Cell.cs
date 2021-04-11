@@ -4,7 +4,9 @@ using UnityEngine;
 
 namespace Cells
 {
-	public abstract class Cell : MonoBehaviour
+	public class Cell : MonoBehaviour
 	{ 
+
+
 	}
 }
