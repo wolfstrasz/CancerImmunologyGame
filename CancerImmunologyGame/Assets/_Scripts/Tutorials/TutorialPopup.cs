@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -33,11 +34,14 @@ namespace ImmunotherapyGame.Tutorials
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			Debug.Log("PopUpCollision");
-			render.enabled = false;
-			spotlight.enabled = false;
-			gameObject.SetActive(false);
-			triggered = true;
+			if (collider.gameObject == PlayerController.Instance.gameObject)
+			{
+				Debug.Log("PopUpCollision");
+				render.enabled = false;
+				spotlight.enabled = false;
+				gameObject.SetActive(false);
+				triggered = true;
+			}
 		}
 	}
 }

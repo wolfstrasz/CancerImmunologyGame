@@ -15,9 +15,21 @@ public class UIManager : Singleton<UIManager>
 	[SerializeField] private GameObject WinScreenPanel = null;
 	[SerializeField] private GameObject GameMenuPanel = null;
 	[SerializeField] private GameObject SurveyPanel = null;
+	[SerializeField] private GameObject WinScene1Panel = null;
+
 	[SerializeField] private string SurveyURL = "";
 
 	public void WinScreen()
+	{
+		WinScreenPanel.SetActive(true);
+	}
+
+	public void OpenWinScenePanel1()
+	{
+		WinScene1Panel.SetActive(true);
+	}
+
+	public void OpenWinScenePanel2()
 	{
 		WinScreenPanel.SetActive(true);
 	}
@@ -27,6 +39,7 @@ public class UIManager : Singleton<UIManager>
 		WinScreenPanel.SetActive(false);
 		MainMenuPanel.SetActive(true);
 		GameMenuPanel.SetActive(false);
+		WinScene1Panel.SetActive(false);
 	}
 
 	public void ClosePanels()
@@ -35,6 +48,8 @@ public class UIManager : Singleton<UIManager>
 		MainMenuPanel.SetActive(false);
 		GameMenuPanel.SetActive(false);
 		SurveyPanel.SetActive(false);
+		WinScene1Panel.SetActive(false);
+
 	}
 
 	// Main Menu Functionality buttons
@@ -43,10 +58,10 @@ public class UIManager : Singleton<UIManager>
 		if (!available) return;
 		available = false;
 		Debug.Log("Play");
-		StartCoroutine(WaitToStart());
+		StartCoroutine(WaitToStart(FIRST_PLAY_SCENE_ID));
 	}
 
-	private IEnumerator WaitToStart()
+	private IEnumerator WaitToStart(int sceneId)
 	{
 		yield return new WaitForSecondsRealtime(0.2f);
 		available = true;
@@ -54,8 +69,9 @@ public class UIManager : Singleton<UIManager>
 		WinScreenPanel.SetActive(false);
 		GameMenuPanel.SetActive(false);
 
-		SceneManager.LoadScene(FIRST_PLAY_SCENE_ID);
+		SceneManager.LoadScene(sceneId);
 	}
+
 
 	public void OpenSettings()
 	{
@@ -82,6 +98,8 @@ public class UIManager : Singleton<UIManager>
 		yield return new WaitForSecondsRealtime(0.2f);
 		Application.Quit();
 	}
+
+
 	//public void ResetMainMenu()
 	//{
 	//	SettingsPanel.SetActive(false);
@@ -94,13 +112,20 @@ public class UIManager : Singleton<UIManager>
 		Application.OpenURL(SurveyURL);
 	}
 
+	public void ContinueToScene2()
+	{
+		if (!available) return;
+		available = false;
+		Debug.Log("Play");
+		StartCoroutine(WaitToStart(FIRST_PLAY_SCENE_ID + 1));
+	}
 
 	public void RestartGame()
     {
 		if (!available) return;
 		available = false;
 		Debug.Log("Play");
-		StartCoroutine(WaitToStart());
+		StartCoroutine(WaitToStart(SceneManager.GetActiveScene().buildIndex));
     }
 
 

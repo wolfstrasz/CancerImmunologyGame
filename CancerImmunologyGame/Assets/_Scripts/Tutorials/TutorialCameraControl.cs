@@ -56,6 +56,9 @@ namespace ImmunotherapyGame.Tutorials
 					case FocusObjectType.CANCER:
 						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<Cancer>(location), instantFocus);
 						break;
+					case FocusObjectType.CAF:
+						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<CAFCell>(location), instantFocus);
+						break;
 					default: break;
 				}
 			}
@@ -83,7 +86,7 @@ namespace ImmunotherapyGame.Tutorials
 		}
 
 		private enum CameraBlinding {KEEP, BLIND, UNBLIND}
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, HEART }
+		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, HEART, CAF }
 
 	}
 }
