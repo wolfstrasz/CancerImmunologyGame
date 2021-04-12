@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using ImmunotherapyGame.Player;
 
 namespace Chemokines {
 	public class ChemokinePathEnd : MonoBehaviour
@@ -9,10 +10,11 @@ namespace Chemokines {
 
 		void OnTriggerEnter2D(Collider2D collider)
 		{
-			//if (collider.gameObject == PlayerController.Instance.gameObject)
-			//{
+			if (collider.gameObject == PlayerController.Instance.gameObject)
+			{
+
 				owner.OnPlayerReachedEndOfPath();
-			//}
+			}
 		}
 		
 	}

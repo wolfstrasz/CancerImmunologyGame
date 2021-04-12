@@ -115,17 +115,19 @@ namespace Cells.Cancers
 
 					ResetDivisionProcess();
 					FindAllSpotsAvailable();
-					if (availableLocations.Count < 0)
+					if (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked)
 					{
 						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
 						timePassed = 0.0f;
 						canDivide = true;
 						keepCellsPacked = previousSetup;
+						cellsToGenerate--;
 						continue;
 					}
 					else
 					{
-						FindSpawnSpot();
+						if (!FindSpawnSpot()) continue;
+
 						AddNewCAFCell();
 						spawns = 0;
 						timePassed = 0.0f;
@@ -138,16 +140,19 @@ namespace Cells.Cancers
 				{
 					ResetDivisionProcess();
 					FindAllSpotsAvailable();
-					if (availableLocations.Count < 0)
+					if ((availableLocations.Count < 0 && !keepCellsPacked) || (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked))
 					{
 						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
 						timePassed = 0.0f;
 						canDivide = true;
+						cellsToGenerate--;
+
 						continue;
 					}
 					else
 					{
-						FindSpawnSpot();
+						if (!FindSpawnSpot()) continue;
+
 						AddNewCancerCell();
 						canDivide = true;
 						if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
@@ -197,7 +202,7 @@ namespace Cells.Cancers
 
 						ResetDivisionProcess();
 						FindAllSpotsAvailable();
-						if (availableLocations.Count < 0)
+						if (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked)
 						{
 							Debug.Log("Update frame setup prevents cancer from spawning cells");
 							timePassed = 0.0f;
@@ -206,7 +211,7 @@ namespace Cells.Cancers
 							return;
 						} else
 						{
-							FindSpawnSpot();
+							if (!FindSpawnSpot()) return;
 							spawns = 0;
 							AddNewCAFCell();
 							timePassed = 0.0f;
@@ -219,7 +224,7 @@ namespace Cells.Cancers
 					{
 						ResetDivisionProcess();
 						FindAllSpotsAvailable();
-						if (availableLocations.Count < 0)
+						if ((availableLocations.Count < 0 && !keepCellsPacked) || (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked))
 						{
 							Debug.Log("Update frame setup prevents cancer from spawning cells");
 							timePassed = 0.0f;
@@ -228,7 +233,7 @@ namespace Cells.Cancers
 						}
 						else
 						{
-							FindSpawnSpot();
+							if (!FindSpawnSpot()) return;
 							StartDivision();
 							if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
 								spawns++;
@@ -369,7 +374,7 @@ namespace Cells.Cancers
 			}
 		}
 
-		private void FindSpawnSpot()
+		private bool FindSpawnSpot()
 		{
 			// Packed algorithm to make cancer be more packed
 			if (keepCellsPacked)
@@ -394,16 +399,35 @@ namespace Cells.Cancers
 					}
 				}
 
+				if (possibleLocationsToSpawn.Count > 0)
+				{
+					int index = (int)UnityEngine.Random.Range(0, possibleLocationsToSpawn.Count);
+					locationToSpawn = possibleLocationsToSpawn[index];
+					return true;
+				} else
+				{
+					return false;
+					locationToSpawn = Vector3.zero;
+				}
 
-				int index = (int)UnityEngine.Random.Range(0.0f, possibleLocationsToSpawn.Count - 1);
 				//Debug.Log(possibleLocationsToSpawn.Count);
 				//Debug.Log("index = " + index);
-				locationToSpawn = possibleLocationsToSpawn[index];
 			}
 			else // Choose a random point to spawn next cell
 			{
-				int index = (int)UnityEngine.Random.Range(0.0f, availableLocations.Count - 1);
-				locationToSpawn = availableLocations[index];
+
+				if (availableLocations.Count > 0)
+				{
+					int index = (int)UnityEngine.Random.Range(0, availableLocations.Count);
+					locationToSpawn = availableLocations[index];
+					return true;
+				}
+				else
+				{
+					return false;
+					locationToSpawn = Vector3.zero;
+				}
+
 				//Debug.Log("Location to spawn: " + "( " + index + " ) " + locationToSpawn);
 
 			}
