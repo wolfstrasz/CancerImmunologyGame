@@ -7,7 +7,7 @@ namespace Cells.Cancers
 { 
 	public interface ICancerDeathObserver
 	{
-		void OnCancerDeath();
+		void OnCancerDeath(Cancer cancer);
 	}
 
 	public interface ICancerDivisionObserver

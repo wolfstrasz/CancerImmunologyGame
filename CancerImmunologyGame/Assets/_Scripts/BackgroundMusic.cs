@@ -48,28 +48,28 @@ public class BackgroundMusic : Singleton<BackgroundMusic>
 	void Update()
     {
 
-		if (Input.GetKeyDown(KeyCode.B))
-		{
-			correctType = BackgroundMusicType.BATTLE;
+		//if (Input.GetKeyDown(KeyCode.B))
+		//{
+		//	correctType = BackgroundMusicType.BATTLE;
 
-		}
+		//}
 
-		if (Input.GetKeyDown(KeyCode.N))
-		{
-			correctType = BackgroundMusicType.TRAVEL;
+		//if (Input.GetKeyDown(KeyCode.N))
+		//{
+		//	correctType = BackgroundMusicType.TRAVEL;
 
-		}
+		//}
 
-		if (Input.GetKeyDown(KeyCode.M))
-		{
-			correctType = BackgroundMusicType.NORMAL;
+		//if (Input.GetKeyDown(KeyCode.M))
+		//{
+		//	correctType = BackgroundMusicType.NORMAL;
 
-		}
+		//}
 
-		if (Input.GetKeyDown(KeyCode.L))
-		{
-			Initialise();
-		}
+		//if (Input.GetKeyDown(KeyCode.L))
+		//{
+		//	Initialise();
+		//}
 
 		if (timeInTransition < transitionTime)
 		{

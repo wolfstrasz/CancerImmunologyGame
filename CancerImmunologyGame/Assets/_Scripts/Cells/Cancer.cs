@@ -531,7 +531,7 @@ namespace Cells.Cancers
 				// notify listeners
 				for (int i = 0; i < onDeathObservers.Count; ++i)
 				{
-					onDeathObservers[i].OnCancerDeath();
+					onDeathObservers[i].OnCancerDeath(this);
 				}
 
 				isAlive = false;

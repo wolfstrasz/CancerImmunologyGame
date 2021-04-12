@@ -122,7 +122,7 @@ namespace ImmunotherapyGame.Tutorials
 			}
 		}
 
-		public void OnCancerDeath()
+		public void OnCancerDeath(Cancer cancer)
 		{
 			if (monitorValue == CancerMonitorValue.DEATH_COUNT)
 			{

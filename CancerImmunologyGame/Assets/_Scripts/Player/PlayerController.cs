@@ -23,6 +23,8 @@ namespace ImmunotherapyGame.Player
 		[SerializeField]
 		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
 
+		[SerializeField]
+		private List<Cancer> cancersNearby = new List<Cancer>();
 
 		public KillerCell KC => kc;
 
@@ -40,8 +42,9 @@ namespace ImmunotherapyGame.Player
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			Cancer cancer = collider.GetComponent<Cancer>();
-			if (cancer != null)
+			if (cancer != null && !cancersNearby.Contains(cancer))
 			{
+				cancersNearby.Add(cancer);
 				BackgroundMusic.Instance.PlayBattleMusic();
 				cancer.SubscribeDeathObserver(this);
 			}
@@ -50,11 +53,15 @@ namespace ImmunotherapyGame.Player
 		void OnTriggerExit2D(Collider2D collider)
 		{
 			Cancer cancer = collider.GetComponent<Cancer>();
-			if (cancer != null)
+			if (cancer != null && cancersNearby.Contains(cancer))
 			{
-
-				BackgroundMusic.Instance.PlayNormalMusic();
+				cancersNearby.Remove(cancer);
 				cancer.UnsubscribeDeathObserver(this);
+			}
+
+			if (cancersNearby.Count <= 0)
+			{
+				BackgroundMusic.Instance.PlayNormalMusic();
 			}
 		}
 
@@ -121,9 +128,17 @@ namespace ImmunotherapyGame.Player
 			canAttack = false;
 		}
 
-		public void OnCancerDeath()
+		public void OnCancerDeath(Cancer cancer)
 		{
-			BackgroundMusic.Instance.PlayNormalMusic();
+
+			if (cancersNearby.Contains(cancer))
+			{
+				cancersNearby.Remove(cancer);
+
+				if (cancersNearby.Count <= 0)
+					BackgroundMusic.Instance.PlayNormalMusic();
+
+			}
 		}
 
 		public void OnCellDeath()
