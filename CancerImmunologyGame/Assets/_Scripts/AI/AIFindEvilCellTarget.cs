@@ -19,15 +19,16 @@ public class AIFindEvilCellTarget : BTActionNode
 	protected override NodeStates OnEvaluateAction()
 	{
 
-		//if (controller.TargetedCancerCell != null)
-		//{
-		//	nodeState = NodeStates.SUCCESS;
-		//	return nodeState;
-		//}
+		if (interactor.Target != null && interactor.Target.GetComponent<EvilCell>() != null)
+		{
+			nodeState = NodeStates.SUCCESS;
+			return nodeState;
+		}
 
 		Debug.Log("Evaluating AIFindEVILCELLS0");
 
 		List<Cancer> possibleCancerTargets = new List<Cancer>();
+
 
 		for (int i = 0; i < interactor.TargetCancers.Count; ++i)
 		{
@@ -52,7 +53,19 @@ public class AIFindEvilCellTarget : BTActionNode
 		}
 		else
 		{
-			selectedCancer = possibleCancerTargets[Random.Range(0, possibleCancerTargets.Count)];
+
+			// Find one with the highest cells
+
+
+			int maxCount = 0;
+			foreach (Cancer cancer in possibleCancerTargets)
+			{
+				if (cancer.AllCells.Count > maxCount)
+				{
+					maxCount = cancer.AllCells.Count;
+					selectedCancer = cancer;
+				}
+			}
 		}
 
 		Debug.Log("Evaluating AIFindEVILCELLS2");
@@ -118,7 +131,7 @@ public class AIFindEvilCellTarget : BTActionNode
 		else
 		{
 			interactor.Target = objectFound;
-			interactor.AcceptableDistanceFromTarget = interactor.ControlledCell.Range;
+			interactor.AcceptableDistanceFromTarget = interactor.ControlledCell.Range * 0.7f;
 			interactor.TargetedEvilCell = objectFound.GetComponent<EvilCell>();
 			nodeState = NodeStates.SUCCESS;
 			return nodeState;
