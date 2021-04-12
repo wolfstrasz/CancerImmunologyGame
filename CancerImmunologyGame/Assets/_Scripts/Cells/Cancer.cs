@@ -451,6 +451,11 @@ namespace Cells.Cancers
 
 
 			cellToDivide.StartPrepareDivision(spawnRotationAngle);
+
+			foreach (ICancerDivisionObserver observer in onDivisionObservers)
+			{
+				observer.OnDivisionStart(this);
+			}
 		}
 
 		internal void OnFinishDivisionPreparation()
@@ -466,6 +471,11 @@ namespace Cells.Cancers
 			Debug.Log("OnFinsishDivision");
 			timePassed = 0.0f;
 			canDivide = true;
+
+			foreach (ICancerDivisionObserver observer in onDivisionObservers)
+			{
+				observer.OnDivisionEnd(this);
+			}
 		}
 		
 		private void ResetDivisionProcess()

@@ -21,7 +21,9 @@ namespace ImmunotherapyGame.Player
 		private float range = 1.0f;
 		[SerializeField]
 		private float fov = 90.0f;
-		
+		[SerializeField]
+		private float dull = 0.8f;
+
 		internal Quaternion orientation => transform.rotation;
 		KillerSense killerSense = null;
 		Vector3 worldPosition = Vector3.zero;
@@ -33,7 +35,7 @@ namespace ImmunotherapyGame.Player
 			range = kc.Range;
 			fovImage.fillAmount = kc.Fov / 360.0f;
 			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, kc.Fov / 2.0f);
-			outerCircle.localScale = new Vector3(kc.Range, kc.Range, 1.0f);
+			outerCircle.localScale = new Vector3(kc.Range * dull, kc.Range * dull, 1.0f);
 		}
 
 
@@ -43,7 +45,7 @@ namespace ImmunotherapyGame.Player
 #if UNITY_EDITOR
 			fovImage.fillAmount = fov / 360.0f;
 			outerCircle.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, fov / 2.0f);
-			outerCircle.localScale = new Vector3(range, range, 1.0f);
+			outerCircle.localScale = new Vector3(range * dull, range * dull, 1.0f);
 #endif
 
 

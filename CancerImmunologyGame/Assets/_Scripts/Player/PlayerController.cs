@@ -57,11 +57,11 @@ namespace ImmunotherapyGame.Player
 			{
 				cancersNearby.Remove(cancer);
 				cancer.UnsubscribeDeathObserver(this);
-			}
 
-			if (cancersNearby.Count <= 0)
-			{
-				BackgroundMusic.Instance.PlayNormalMusic();
+				if (cancersNearby.Count <= 0)
+				{
+					BackgroundMusic.Instance.PlayNormalMusic();
+				}
 			}
 		}
 
@@ -79,9 +79,10 @@ namespace ImmunotherapyGame.Player
 			DebugInput();
 #endif
 
+			kc.SpriteOrientation = rangeDisplay.orientation;
+
 			if (canAttack)
 			{
-				kc.SpriteOrientation = rangeDisplay.orientation;
 				if (Input.GetKey(KeyCode.Mouse0))
 				{
 					kc.Attack(rangeDisplay.centre.position);
@@ -90,7 +91,6 @@ namespace ImmunotherapyGame.Player
 			else
 			{
 				kc.StopAttack();
-				kc.SpriteOrientation = Quaternion.identity;
 			}
 		}
 

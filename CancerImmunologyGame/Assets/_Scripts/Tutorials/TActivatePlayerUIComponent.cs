@@ -27,6 +27,13 @@ namespace ImmunotherapyGame.Tutorials
 			{
 				PlayerUI.Instance.ActivatePlayerInfoPanelEnergyBar();
 			}
+			else if (panel == PlayerUIPanels.EVERYTHING)
+			{
+				PlayerUI.Instance.ActivateImmunotherapyPanel();
+				PlayerUI.Instance.ActivatePlayerInfoPanel();
+				PlayerUI.Instance.ActivatePlayerInfoPanelEnergyBar();
+
+			}
 		}
 
 		protected override bool OnUpdateEvent()
