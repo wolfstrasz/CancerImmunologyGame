@@ -15,7 +15,8 @@ namespace Core
 			private GameStateController stateController = new GameStateController();
 			[SerializeField]
 			private bool isTestScene = false;
-
+			[SerializeField]
+			private float gameSpeed = 1.2f;
 			void Start()
 			{
 				if (isTestScene) 
@@ -28,21 +29,21 @@ namespace Core
 
 			public void Initialise()
 			{
-				Time.timeScale = 1.0f;
+				Time.timeScale = gameSpeed;
 				SceneManager.activeSceneChanged += OnActiveSceneChanged;
 				SceneManager.sceneLoaded += OnSceneLoaded;
 
-				GlobalGameData.gameplaySpeed = 1.0f;
-				GlobalGameData.gameSpeed = 1.0f;
+				GlobalGameData.gameplaySpeed = gameSpeed;
+				GlobalGameData.gameSpeed = gameSpeed;
 				GlobalGameData.isInitialised = true;
 			}
 
 			public void InitialiseTestScene()
 			{
-				Time.timeScale = 1.0f;
+				Time.timeScale = gameSpeed;
 
-				GlobalGameData.gameplaySpeed = 1.0f;
-				GlobalGameData.gameSpeed = 1.0f;
+				GlobalGameData.gameplaySpeed = gameSpeed;
+				GlobalGameData.gameSpeed = gameSpeed;
 				GlobalGameData.isInitialised = true;
 
 				sceneLoaded = true;

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   render: {fileID: 7924667237588336933}
-  damage: 4
+  damage: 6
   speed: 1
   direction: {x: 0, y: 0, z: 0}
   startPos: {x: 0, y: 0, z: 0}
