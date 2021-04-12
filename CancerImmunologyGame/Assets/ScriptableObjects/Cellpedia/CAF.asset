@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e04e8c40321e1e4e99b9c9f017f1c50, type: 3}
+  m_Name: CAF
+  m_EditorClassIdentifier: 
+  cellname: Fibroblasts
+  description: 'Fibroblasts usually help heal wounds. During cancer, they can become
+    corrupted, behaving in ways that give cancer an advantage. These cells are termed
+    cancer associated fibroblasts (CAFs). CAFs release proteins and other structural
+    molecules that construct a dense and rigid web around the cancer called the extracellular
+    matrix. This stiff matrix shields the cancer from immune cells, making it more
+    difficult for T killer to do their job! For this reason, CAFs are currently being
+    extensively researched to see if we can target CAFs to improve survival in cancer
+    patients. '
+  animatorTrigger: CAF
+  sprite: {fileID: 2444381973209347862, guid: 2e53487c74083f74c9a00c6b54623506, type: 3}
+  scale: 1.2
+  note1: {fileID: 21300000, guid: 03c0ac7a8f7f59d4082306fbbd8e9587, type: 3}
+  note2: {fileID: 21300000, guid: 296d86464aa774640b59c07b73ae94e9, type: 3}
+  note3: {fileID: 21300000, guid: 01b6acceb385ffa4c957cbd3b58d8f17, type: 3}

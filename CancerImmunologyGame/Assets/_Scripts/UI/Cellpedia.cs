@@ -40,7 +40,8 @@ namespace CellpediaUI
 		[SerializeField]
 		private int dishIndex = 0;
 
-
+		[SerializeField]
+		private int cellsFound = 0;
 
 		// Used by Cellpedia popups
 		internal Transform PopupLayout => popupLayout.transform;
@@ -66,7 +67,7 @@ namespace CellpediaUI
 					dishIndex = 0;
 				}
 				currentCD = null;
-				microscopeButton.SetActive(false);
+				microscopeButton.SetActive(cellsFound > 0);
 
 			}
 		}
@@ -135,11 +136,14 @@ namespace CellpediaUI
 					CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
 					popup.SetInfo(cdLink.description);
 					microscopeAnimator.SetTrigger("NewItem");
+					cellsFound++;
 					continue;
 				}
 			}
 		}
 
+
+		
 		[System.Serializable]
 		public struct CellDescriptionLink
 		{
