@@ -77,6 +77,11 @@ namespace Core
 					GlobalGameData.Cancers[i].OnUpdate();
 				}
 
+				foreach (AIController controller in GlobalGameData.AIKillerCells)
+				{
+					controller.OnUpdate();
+				}
+
 				if (GlobalGameData.Cancers.Count == 0)
 				{
 					UIManager.Instance.WinScreen();

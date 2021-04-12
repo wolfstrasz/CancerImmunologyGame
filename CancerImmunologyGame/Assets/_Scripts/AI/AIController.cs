@@ -15,6 +15,8 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	private BehaviourTree tree = null;
 	[SerializeField]
 	private bool initialised = false;
+	[SerializeField]
+	private bool active = true;
 
 	[Header("Interface Data (Cell controll)")]
 	[SerializeField]
@@ -65,6 +67,18 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 	[SerializeField]
 	private EvilCell targetedEvilCell = null;
 	public EvilCell TargetedEvilCell { get => targetedEvilCell; set => targetedEvilCell = value; }
+
+	[Header("InterfaceData (Cancer Interacting) (Read Only)")]
+	[SerializeField]
+	GameObject basePoint = null;
+	[SerializeField]
+	List<GameObject> controlPoints = new List<GameObject>();
+	[SerializeField]
+	List<Cancer> targetedCancers = new List<Cancer>();
+
+	public GameObject BasePoint { get => basePoint; set => basePoint = value; }
+	public List<GameObject> ControlPoints { get => controlPoints; set => controlPoints = value; }
+	public List<Cancer> TargetCancers { get => targetedCancers; set => targetedCancers = value; }
 
 	public void Start()
 	{
@@ -145,9 +159,9 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 
 				BTSelector inRangeSelector = new BTSelector("CheckRange", 2);
 				{
-					BTActionNode isInRangeOfKillerCell = new AICanAttackCancerCell("CanAttackCell", tree, this);
+					BTActionNode isInRange = new AICanAttackEvilCell("CanAttackCell", tree, this);
 					BTActionNode reachKillTarget = new AIReachDestination("ReachKillTarget", tree, this);
-				//	inRangeSelector.AddNode(isInRangeOfKillerCell);
+					inRangeSelector.AddNode(isInRange);
 					inRangeSelector.AddNode(reachKillTarget);
 				}
 				BTActionNode attackCancerCell = new AIAttackCancerCell("AttackingCancerCell", tree, this);
@@ -160,7 +174,7 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 			// Should be last
 			BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
 			{
-				BTActionNode findBase = new AIFindClosestTargetOfType<AIGraphControlPoint>("Find Base", tree, this, false);
+				BTActionNode findBase = new AIGoToBaseTarget("Find Base", tree, this);
 				BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
 
 				goToBaseSequence.AddNode(findBase);
@@ -178,17 +192,21 @@ public class AIController : MonoBehaviour, IAIKillerCellController, ICellControl
 		tree.rootNode = root;
 	}
 
-	void Update()
+	public void OnUpdate()
 	{
 		if (!initialised) return;
+		if (!active) return;
+
+		if (Vector3.SqrMagnitude(controlledCell.transform.position - basePoint.transform.position) < 4f)
+		{
+			controlledCell.gameObject.SetActive(false);
+			active = false;
+			return;
+		}
+
 		movementDirection = zeroVector;
 		tree.Evaluate();
 		controlledCell.MovementVector = movementDirection;
-	}
-
-
-	void FixedUpdate()
-	{
 	}
 
 	public void OnCellDeath()

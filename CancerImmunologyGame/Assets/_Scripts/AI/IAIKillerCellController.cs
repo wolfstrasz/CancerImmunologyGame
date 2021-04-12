@@ -4,12 +4,13 @@ using UnityEngine;
 using Pathfinding;
 using Pathfinding.RVO;
 using Cells;
-
+using Cells.Cancers;
 // Final Interface
 public interface IAIKillerCellController : 
 	IAIMovementController, 
 	IAIHelperCellInteractor,
-	IAICancerCellInteractor
+	IAICancerCellInteractor,
+	IAICancerInteractor
 {
 }
 
@@ -27,6 +28,13 @@ public interface IAIMovementController :
 }
 
 
+public interface IAICancerInteractor:
+	IAICancerCellInteractor
+{
+	GameObject BasePoint { get; set; }
+	List<GameObject> ControlPoints { get; set; }
+	List<Cancer> TargetCancers { get; set; }
+}
 
 public interface IAIHelperCellInteractor : 
 	IAICellController, IAITargetHandler

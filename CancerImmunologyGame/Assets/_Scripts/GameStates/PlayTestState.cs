@@ -2,6 +2,7 @@
 using ImmunotherapyGame.Player;
 using Bloodflow;
 using CellpediaUI;
+using Cells;
 
 namespace Core
 {
@@ -23,6 +24,19 @@ namespace Core
 				{
 					kc.OnFixedUpdate();
 				}
+
+				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				{
+					if (rc.gameObject.activeSelf)
+						rc.OnFixedUpdate();
+				}
+
+				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				{
+					if (hc.gameObject.activeSelf)
+						hc.OnFixedUpdate();
+				}
+
 			}
 
 			internal override void OnStateEnter()
@@ -60,6 +74,22 @@ namespace Core
 					GlobalGameData.KillerCells[i].OnUpdate();
 				}
 
+
+				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				{
+					if (rc.gameObject.activeSelf)
+						rc.OnUpdate();
+				}
+
+				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				{
+					if (hc.gameObject.activeSelf)
+						hc.OnUpdate();
+				}
+				foreach (AIController controller in GlobalGameData.AIKillerCells)
+				{
+					controller.OnUpdate();
+				}
 				for (int i = 0; i < GlobalGameData.Cancers.Count; ++i)
 				{
 					GlobalGameData.Cancers[i].OnUpdate();

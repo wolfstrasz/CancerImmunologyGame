@@ -67,6 +67,8 @@ namespace Cells.Cancers
 		private List<CancerCell> cancerCells = new List<CancerCell>();
 		[SerializeField]
 		private List<CAFCell> cafCells = new List<CAFCell>();
+		[SerializeField]
+		public List<EvilCell> AllCells = new List<EvilCell>();
 
 		// Division handling
 		[SerializeField]
@@ -104,7 +106,7 @@ namespace Cells.Cancers
 
 			while (cancerCells.Count < cellsToGenerate)
 			{
-				Debug.Log(cancerCells.Count + " " + cellsToGenerate);
+				//Debug.Log(cancerCells.Count + " " + cellsToGenerate);
 
 				if (canSpawnCafs && spawns == spawnsBeforeCafSpawn) // Cav cell
 				{
@@ -251,6 +253,7 @@ namespace Cells.Cancers
 			newCell.cancerOwner = this;
 			++nextSortOrder;
 			cancerCells.Add(newCell);
+			AllCells.Add(newCell);
 		}
 
 
@@ -263,6 +266,7 @@ namespace Cells.Cancers
 			newCell.cancerOwner = this;
 			++nextSortOrder;
 			cafCells.Add(newCell);
+			AllCells.Add(newCell);
 		}
 
 
@@ -377,7 +381,7 @@ namespace Cells.Cancers
 					if (availableLocationsByDensity[key] > max)
 					{
 						max = availableLocationsByDensity[key];
-						Debug.Log("Found new max: " + max);
+						//Debug.Log("Found new max: " + max);
 					}
 				}
 
@@ -385,7 +389,7 @@ namespace Cells.Cancers
 				{
 					if (availableLocationsByDensity[key] == max)
 					{
-						Debug.Log("Found item with value(" + availableLocationsByDensity[key] + ") == " + max);
+						//Debug.Log("Found item with value(" + availableLocationsByDensity[key] + ") == " + max);
 						possibleLocationsToSpawn.Add(key);
 					}
 				}
@@ -482,6 +486,9 @@ namespace Cells.Cancers
 		// Subscriber Evil cells
 		public void NotifyOfDeath(EvilCell evilCell)
 		{
+
+			AllCells.Remove(evilCell);
+
 			CancerCell cell = evilCell.gameObject.GetComponent<CancerCell>();
 			if (cell != null)
 			{
