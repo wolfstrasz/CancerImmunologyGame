@@ -6,12 +6,19 @@ public class RegulatorySense : MonoBehaviour
 {
 	public RegulatoryCell rc = null;
 
+	private List<KillerCell> cells = new List<KillerCell>();
+
 	private void OnTriggerEnter2D(Collider2D collider)
 	{
 		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
 		if (pc != null)
 		{
-			rc.StartShooting();
+			if (!cells.Contains(pc))
+			{
+				cells.Add(pc);
+				rc.StartShooting();
+			}
+
 		}
 	}
 
@@ -20,7 +27,14 @@ public class RegulatorySense : MonoBehaviour
 		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
 		if (pc != null)
 		{
-			rc.StopShooting();
+			if (cells.Contains(pc))
+			{
+				cells.Remove(pc);
+
+				if (cells.Count == 0)
+					rc.StopShooting();
+
+			}
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class RegulatoryCell : MonoBehaviour
             maxLengthDist = pathToFollow.length;
         } else
 		{
-            Debug.LogError("Unassigned path to follow for regulatory cell!");
+            Debug.LogWarning("Unassigned path to follow for regulatory cell!");
 		}
     }
 
@@ -50,7 +50,8 @@ public class RegulatoryCell : MonoBehaviour
 
     public void OnFixedUpdate()
 	{
-        Move();
+        if (path != null)
+            Move();
     }
 
 
@@ -70,8 +71,12 @@ public class RegulatoryCell : MonoBehaviour
 
     public void StartShooting()
     {
-        isShooting = true;
-        StartCoroutine(Shooting());
+        if (!isShooting)
+		{
+            isShooting = true;
+            StartCoroutine(Shooting());
+        }
+  
     }
 
     public void StopShooting()
@@ -87,7 +92,7 @@ public class RegulatoryCell : MonoBehaviour
             yield return new WaitForSeconds(5.0f);
             if (GlobalGameData.isGameplayPaused) continue;
 
-                float rotation = Random.Range(0, 360);
+                float rotation = Random.Range(0, 360f);
                 Vector3 spreadVector = new Vector3(2.5f, 0.0f, 0.0f);
                 spreadVector = Quaternion.Euler(0.0f, 0.0f, rotation) * spreadVector;
 
