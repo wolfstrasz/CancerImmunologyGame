@@ -39,7 +39,9 @@ public static class Utils
 
 		return closestObject.gameObject;
 	}
-}
 
+	
+}
+public class ReadOnlyAttribute : PropertyAttribute { }
 public enum CellpediaCells { NONE, TKILLER, THELPER, DENDRITIC, REGULATORY, CANCER, CAF}
 public enum PlayerUIPanels { PLAYER_INFO_ENERGYBAR, PLAYER_INFO_HEALTHBAR, IMMUNOTHERAPY, EVERYTHING }

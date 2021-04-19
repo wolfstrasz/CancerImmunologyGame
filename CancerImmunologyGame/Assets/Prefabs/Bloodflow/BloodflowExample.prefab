@@ -1,0 +1,388 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &223521540134329804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223521540134329807}
+  - component: {fileID: 223521540134329801}
+  - component: {fileID: 223521540134329806}
+  m_Layer: 0
+  m_Name: ArteryBloodflow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223521540134329807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540134329804}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -47.86, y: 38.270004, z: -100.510704}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 223521541986207485}
+  - {fileID: 223521540783108574}
+  - {fileID: 223521540209485876}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &223521540134329801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540134329804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5ac92bc18f545cc84cd886ece82b4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  editorData:
+    _bezierPath:
+      points:
+      - {x: -0.06594849, y: 0.2804184, z: 0}
+      - {x: -0.5133209, y: -1.9564705, z: 0}
+      - {x: -0.037574254, y: -6.5012374, z: 0}
+      - {x: 0.003921509, y: -7.526184, z: 0}
+      - {x: 0.2990569, y: -14.816038, z: 0}
+      - {x: 1.1173859, y: -18.402716, z: 0}
+      - {x: 1.9357147, y: -21.989393, z: 0}
+      - {x: 3.019, y: -26.737358, z: 0}
+      - {x: 4.8520217, y: -28.615156, z: 0}
+      - {x: 6.6850433, y: -30.492954, z: 0}
+      - {x: 11.0797, y: -34.99496, z: 0}
+      - {x: 14.298601, y: -36.362316, z: 0}
+      - {x: 17.22107, y: -37.879044, z: 0}
+      - {x: 23.901718, y: -41.346222, z: 0}
+      - {x: 26.607819, y: -43.122093, z: 0}
+      - {x: 30.159561, y: -45.405357, z: 0}
+      - {x: 34.385326, y: -48.12192, z: 0}
+      - {x: 36.331573, y: -49.723423, z: 0}
+      - {x: 38.277817, y: -51.324924, z: 0}
+      - {x: 41.386417, y: -53.882893, z: 0}
+      - {x: 42.750343, y: -55.544334, z: 0}
+      - {x: 43.563873, y: -57.52111, z: 0}
+      - {x: 44.62544, y: -60.100582, z: 0}
+      - {x: 44.352722, y: -60.590797, z: 0}
+      - {x: 44.49846, y: -62.00715, z: 0}
+      - {x: 44.76953, y: -64.64157, z: 0}
+      - {x: 43.259598, y: -66.90463, z: 0}
+      - {x: 41.881607, y: -67.926216, z: 0}
+      - {x: 38.488968, y: -70.441376, z: 0}
+      - {x: 36.291153, y: -71.20874, z: 0}
+      - {x: 34.155655, y: -71.72688, z: 0}
+      - {x: 27.272121, y: -73.39706, z: 0}
+      - {x: 23.796495, y: -73.514626, z: 0}
+      - {x: 20.261414, y: -73.90759, z: 0}
+      - {x: 16.0746, y: -74.37301, z: 0}
+      - {x: 13.863205, y: -74.6994, z: 0}
+      - {x: 10.7612915, y: -75.21639, z: 0}
+      - {x: 5.9349575, y: -76.02079, z: 0}
+      - {x: 3.7561798, y: -76.16967, z: 0}
+      - {x: 0.10266113, y: -76.78797, z: 0}
+      - {x: -4.04643, y: -77.49014, z: 0}
+      - {x: -3.8559265, y: -77.28364, z: 0}
+      - {x: -7.901718, y: -78.826454, z: 0}
+      - {x: -10.155916, y: -79.686066, z: 0}
+      - {x: -11.229999, y: -80.637634, z: 0}
+      - {x: -12.057465, y: -81.65719, z: 0}
+      - {x: -13.485162, y: -83.41631, z: 0}
+      - {x: -13.847617, y: -84.51541, z: 0}
+      - {x: -14.109024, y: -85.70045, z: 0}
+      - {x: -14.415039, y: -87.0877, z: 0}
+      - {x: -14.063898, y: -89.748955, z: 0}
+      - {x: -13.762207, y: -91.06585, z: 0}
+      - {x: -13.225922, y: -93.40675, z: 0}
+      - {x: -12.725418, y: -94.65614, z: 0}
+      - {x: -12.517761, y: -95.83964, z: 0}
+      isClosed: 0
+      space: 1
+      controlMode: 0
+      autoControlLength: 0.3
+      boundsUpToDate: 0
+      bounds:
+        m_Center: {x: 1.1861115, y: 0.4488428, z: -0.00025516085}
+        m_Extent: {x: 1.5287933, y: 0.42856428, z: 0.00021701389}
+      perAnchorNormalsAngle:
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      - 0
+      globalNormalsAngle: 0
+      flipNormals: 1
+    vertexPathUpToDate: 1
+    vertexPathMaxAngleError: 0.3
+    vertexPathMinVertexSpacing: 0.01
+    showTransformTool: 1
+    showPathBounds: 0
+    showPerSegmentBounds: 0
+    displayAnchorPoints: 1
+    displayControlPoints: 1
+    bezierHandleScale: 1
+    globalDisplaySettingsFoldout: 0
+    keepConstantHandleSize: 0
+    showNormalsInVertexMode: 1
+    showBezierPathInVertexMode: 0
+    showDisplayOptions: 0
+    showPathOptions: 1
+    showVertexPathDisplayOptions: 1
+    showVertexPathOptions: 1
+    showNormals: 1
+    showNormalsHelpInfo: 0
+    tabIndex: 0
+  initialized: 1
+--- !u!114 &223521540134329806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540134329804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 333752ebabc0c7b44a04dd6a57501237, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathCreator: {fileID: 223521540134329801}
+  flow_speed: 69
+  rotation_speed: 2
+  fixNormal: 0
+--- !u!1 &223521540209485877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223521540209485876}
+  - component: {fileID: 223521540209485878}
+  - component: {fileID: 223521540209485879}
+  m_Layer: 12
+  m_Name: BloodflowEntrance2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223521540209485876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540209485877}
+  m_LocalRotation: {x: -0, y: -0, z: -0.99515146, w: 0.098354466}
+  m_LocalPosition: {x: -13.21, y: -92.89, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 223521540134329807}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -168.71101}
+--- !u!61 &223521540209485878
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540209485877}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &223521540209485879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540209485877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116e59947d31a6a4194d2f464265cf77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environment: {fileID: 223521540134329806}
+--- !u!1 &223521540783108575
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223521540783108574}
+  - component: {fileID: 223521540783108568}
+  - component: {fileID: 223521540783108569}
+  m_Layer: 12
+  m_Name: BloodflowEntrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223521540783108574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540783108575}
+  m_LocalRotation: {x: -0, y: -0, z: -0.9983543, w: -0.057347372}
+  m_LocalPosition: {x: -0.03, y: 0.14, z: 0}
+  m_LocalScale: {x: 20, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 223521540134329807}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -186.575}
+--- !u!61 &223521540783108568
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540783108575}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &223521540783108569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521540783108575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116e59947d31a6a4194d2f464265cf77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environment: {fileID: 223521540134329806}
+--- !u!1 &223521541986207458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223521541986207485}
+  - component: {fileID: 223521541986207487}
+  - component: {fileID: 223521541986207484}
+  m_Layer: 12
+  m_Name: BloodflowExit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &223521541986207485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521541986207458}
+  m_LocalRotation: {x: -0, y: -0, z: 0.07758361, w: 0.99698585}
+  m_LocalPosition: {x: -12.627, y: -95.256, z: 0}
+  m_LocalScale: {x: 2.2582333, y: 0.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 223521540134329807}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 8.899}
+--- !u!61 &223521541986207487
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521541986207458}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &223521541986207484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223521541986207458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb101b12b2e603419c54cf684c5a5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  environment: {fileID: 223521540134329806}
+  newEntrance: {fileID: 0}

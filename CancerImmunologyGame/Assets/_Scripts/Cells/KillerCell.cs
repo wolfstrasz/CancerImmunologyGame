@@ -37,12 +37,6 @@ public class KillerCell : Cell
 	[SerializeField]
 	private float fov = 90.0f;
 
-#if BLOODFLOW_ROTATION
-	[SerializeField]
-	private float rotationSpeed = 2.0f;
-#else
-#endif
-
 	[Header("Debug only")]
 	[SerializeField]
 	private bool isBusy = false;
@@ -51,7 +45,7 @@ public class KillerCell : Cell
 	[SerializeField]
 	private Vector2 movementVector = Vector2.zero;
 	[SerializeField]
-	private Vector2 flowVector = Vector2.zero;
+	private Quaternion movementRotation = Quaternion.identity;
 
 	[SerializeField]
 	private GameObject spriteObject = null;
@@ -83,46 +77,26 @@ public class KillerCell : Cell
 		} 
 	}
 
-#if BLOODFLOW_ROTATION
 	[SerializeField]
 	private Quaternion correctRotation = Quaternion.identity;
-#else
-#endif
+
 	public KillerSense Sense { get => sense; }
 	public float Range { get => range; }
 	public float Fov { get => fov; }
 	public float Health { get => health; set => health = value; }
 	public float Energy { get => energy; set => energy = value; }
 	public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
-	public Vector2 FlowVector { get => flowVector; set => flowVector = value; }
-
-#if BLOODFLOW_ROTATION
-	public Quaternion CorrectRotation { get => correctRotation; set => correctRotation = value; }
+	public Quaternion MovementRotation { get => movementRotation; set => movementRotation = value; }
 
 	public override bool isImmune => throw new System.NotImplementedException();
-#else
-#endif
 
 	public void OnFixedUpdate()
 	{
 
 		if (isBusy) return;
 		Move();
-#if BLOODFLOW_ROTATION
-		FixRotation();
-#else
-#endif
-	
 	}
 
-
-#if BLOODFLOW_ROTATION
-	private void FixRotation()
-	{
-		transform.rotation = Quaternion.Slerp(transform.rotation, correctRotation, rotationSpeed * Time.deltaTime);
-	}
-#else
-#endif
 
 	public void OnUpdate()
 	{
@@ -197,8 +171,11 @@ public class KillerCell : Cell
 	private void Move()
 	{
 		movementVector = movementVector * movementSpeed * Time.fixedDeltaTime * ExhaustionEffect();
-		rb.MovePosition(movementVector + flowVector + rb.position);
+
+		rb.MovePosition(movementVector + rb.position);
+		transform.rotation = movementRotation;
 		movementVector = Vector3.zero;
+		movementRotation = Quaternion.identity;
 	}
 
 
