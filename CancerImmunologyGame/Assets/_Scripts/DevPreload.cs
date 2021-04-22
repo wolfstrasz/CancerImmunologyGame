@@ -1,15 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DevPreload : MonoBehaviour
+namespace ImmunotherapyGame
 {
-    void Awake()
+    public class DevPreload : MonoBehaviour
     {
-        if (!GlobalGameData.isInitialised)
+        void Awake()
         {
-            Debug.Log("Loading _preload scene");
-            UnityEngine.SceneManagement.SceneManager.LoadScene("_preload"); 
+            if (!GlobalGameData.isInitialised)
+            {
+                Debug.Log("Loading _preload scene");
+                UnityEngine.SceneManagement.SceneManager.LoadScene("_preload");
+            }
         }
     }
 }

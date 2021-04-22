@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DDOL : MonoBehaviour
-{
-    void Awake()
+namespace ImmunotherapyGame
+{  
+    public class DDOL : MonoBehaviour
     {
-        DontDestroyOnLoad(this);
-        Debug.Log("DDOL: " + this.name);
+        void Awake()
+        {
+            DontDestroyOnLoad(this);
+            Debug.Log("DDOL: " + this.name);
+        }
     }
 }

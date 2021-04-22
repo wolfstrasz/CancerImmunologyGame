@@ -1,5 +1,6 @@
-﻿
-namespace Core
+﻿using ImmunotherapyGame.Tutorials;
+
+namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{

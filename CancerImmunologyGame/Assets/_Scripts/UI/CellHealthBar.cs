@@ -3,51 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CellHealthBar : MonoBehaviour
+
+namespace ImmunotherapyGame
 {
-
-	[SerializeField]
-	private Slider slider = null;
-	[SerializeField]
-	private bool autoHide = false;
-	[SerializeField]
-	private float autoHideScale = 1.0f;
-	[SerializeField]
-	private Image image = null;
-
-	public float MaxHealth
+	public class CellHealthBar : MonoBehaviour
 	{
-		get => slider.maxValue;
-		set => slider.maxValue = value;
-	}
 
-	public float Health { 
-		get => slider.value;
-		set
+		[SerializeField]
+		private Slider slider = null;
+		[SerializeField]
+		private bool autoHide = false;
+		[SerializeField]
+		private float autoHideScale = 1.0f;
+		[SerializeField]
+		private Image image = null;
+
+		public float MaxHealth
 		{
-			slider.value = value;
-			if (autoHide && value != slider.maxValue)
+			get => slider.maxValue;
+			set => slider.maxValue = value;
+		}
+
+		public float Health
+		{
+			get => slider.value;
+			set
 			{
-				image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+				slider.value = value;
+				if (autoHide && value != slider.maxValue)
+				{
+					image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+				}
+
 			}
 
 		}
 
-	}
-
-	void Update()
-	{
-
-		if (autoHide)
+		void Update()
 		{
-			float alpha = image.color.a;
-			if (alpha > 0.0f)
+
+			if (autoHide)
 			{
-				alpha -= autoHideScale * Time.deltaTime;
-				image.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+				float alpha = image.color.a;
+				if (alpha > 0.0f)
+				{
+					alpha -= autoHideScale * Time.deltaTime;
+					image.color = new Color(1.0f, 1.0f, 1.0f, alpha);
+				}
 			}
 		}
+
 	}
-
-
 }

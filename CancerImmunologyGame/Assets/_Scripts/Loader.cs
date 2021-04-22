@@ -1,32 +1,34 @@
 ﻿using System.Collections;
-using Core.GameManagement;
 using UnityEngine.SceneManagement;
-using UnityEngine;
+using ImmunotherapyGame.GameManagement;
 
-namespace Loader {
+namespace ImmunotherapyGame
+{
+	namespace Loader {
 
-	public class Loader : Singleton<Loader>
-	{
-		void Awake()
+		public class Loader : Singleton<Loader>
 		{
-			StartCoroutine(LoadGameAndInitialise());
+			void Awake()
+			{
+				StartCoroutine(LoadGameAndInitialise());
+			}
+
+			IEnumerator LoadGameAndInitialise()
+			{
+				GameManager.Instance.Initialise();
+				// Load datas
+
+
+				// call intro finish
+				Intro.Instance.FadeLogos();
+				yield return null;
+			}
+
+			internal void OnIntroFinished()
+			{
+				SceneManager.LoadScene("MainMenu");
+			}
 		}
 
-		IEnumerator LoadGameAndInitialise()
-		{
-			GameManager.Instance.Initialise();
-			// Load datas
-
-
-			// call intro finish
-			Intro.Instance.FadeLogos();
-			yield return null;
-		}
-
-		internal void OnIntroFinished()
-		{
-			SceneManager.LoadScene("MainMenu");
-		}
 	}
-
 }

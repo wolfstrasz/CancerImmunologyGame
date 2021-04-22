@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 using ImmunotherapyGame.Player;
-using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Bloodflow
 {

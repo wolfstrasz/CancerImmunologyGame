@@ -1,39 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BehaviourTreeBase;
-using Cells.Cancers;
+﻿using BehaviourTreeBase;
 
 
-public class AIAttackCancerCell : BTActionNode
-{
-	private IAICancerCellInteractor interactor = null;
-
-	public AIAttackCancerCell(string name, BehaviourTree owner, IAICancerCellInteractor interactor) : base(name, owner, "Attack Cancer Cell")
+namespace ImmunotherapyGame.AI
+{  
+	public class AIAttackCancerCell : BTActionNode
 	{
-		this.interactor = interactor;
-	}
+		private IAICancerCellInteractor interactor = null;
 
-
-	protected override NodeStates OnEvaluateAction()
-	{
-
-		if (interactor.TargetedEvilCell != null)
+		public AIAttackCancerCell(string name, BehaviourTree owner, IAICancerCellInteractor interactor) : base(name, owner, "Attack Cancer Cell")
 		{
-			interactor.ControlledCell.Attack(interactor.TargetedEvilCell.transform.position);
-
-			nodeState = NodeStates.RUNNING;
-			return nodeState;
+			this.interactor = interactor;
 		}
-		else
+
+
+		protected override NodeStates OnEvaluateAction()
 		{
-			nodeState = NodeStates.FAILURE;
-			return nodeState;
+
+			if (interactor.TargetedEvilCell != null)
+			{
+				interactor.ControlledCell.Attack(interactor.TargetedEvilCell.transform.position);
+
+				nodeState = NodeStates.RUNNING;
+				return nodeState;
+			}
+			else
+			{
+				nodeState = NodeStates.FAILURE;
+				return nodeState;
+			}
 		}
-	}
 
-	protected override void OnResetTreeNode()
-	{
-	}
+		protected override void OnResetTreeNode()
+		{
+		}
 
+	}
 }

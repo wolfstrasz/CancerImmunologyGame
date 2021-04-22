@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cells;
-using Cells.Cancers;
+﻿using UnityEngine;
+using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Tutorials

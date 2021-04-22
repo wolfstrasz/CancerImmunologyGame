@@ -4,15 +4,19 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class UIInvertImage : Image
+
+namespace ImmunotherapyGame
 {
-	public override Material materialForRendering
+	public class UIInvertImage : Image
 	{
-		get
+		public override Material materialForRendering
 		{
-			Material result = Instantiate(base.materialForRendering);
-			result.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
-			return result;
+			get
+			{
+				Material result = Instantiate(base.materialForRendering);
+				result.SetInt("_StencilComp", (int)CompareFunction.NotEqual);
+				return result;
+			}
 		}
 	}
 }

@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Cells.Cancers;
-
-namespace Cells
+namespace ImmunotherapyGame.Cancers
 {
     public class CAFSense : MonoBehaviour
     {

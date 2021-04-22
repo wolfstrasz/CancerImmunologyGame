@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using Cells.Cancers;
+using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame.Tutorials
 {

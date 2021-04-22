@@ -1,7 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class TheHeart : MonoBehaviour
+
+namespace ImmunotherapyGame
 {
+	public class TheHeart : MonoBehaviour
+	{
+	}
 }

@@ -2,38 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RegulatorySense : MonoBehaviour
+namespace ImmunotherapyGame
 {
-	public RegulatoryCell rc = null;
-
-	private List<KillerCell> cells = new List<KillerCell>();
-
-	private void OnTriggerEnter2D(Collider2D collider)
+	public class RegulatorySense : MonoBehaviour
 	{
-		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
-		if (pc != null)
+		public RegulatoryCell rc = null;
+
+		private List<KillerCell> cells = new List<KillerCell>();
+
+		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			if (!cells.Contains(pc))
+			KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+			if (pc != null)
 			{
-				cells.Add(pc);
-				rc.StartShooting();
+				if (!cells.Contains(pc))
+				{
+					cells.Add(pc);
+					rc.StartShooting();
+				}
+
 			}
-
 		}
-	}
 
-	private void OnTriggerExit2D(Collider2D collider)
-	{
-		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
-		if (pc != null)
+		private void OnTriggerExit2D(Collider2D collider)
 		{
-			if (cells.Contains(pc))
+			KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+			if (pc != null)
 			{
-				cells.Remove(pc);
+				if (cells.Contains(pc))
+				{
+					cells.Remove(pc);
 
-				if (cells.Count == 0)
-					rc.StopShooting();
+					if (cells.Count == 0)
+						rc.StopShooting();
 
+				}
 			}
 		}
 	}

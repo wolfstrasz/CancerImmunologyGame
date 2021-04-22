@@ -1,32 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using BehaviourTreeBase;
-using Cells;
+﻿using BehaviourTreeBase;
 
-public class AIHasHealingTarget : BTActionNode
+namespace ImmunotherapyGame.AI
 {
-	private IAIHelperCellInteractor handler;
-	public AIHasHealingTarget(string name, BehaviourTree owner, IAIHelperCellInteractor handler) : base (name, owner, "WaitingToHeal")
+	public class AIHasHealingTarget : BTActionNode
 	{
-		this.handler = handler;
-	}
-
-	protected override NodeStates OnEvaluateAction()
-	{
-		if (handler.Target == null || handler.BookedHelperTCell == null)
+		private IAIHelperCellInteractor handler;
+		public AIHasHealingTarget(string name, BehaviourTree owner, IAIHelperCellInteractor handler) : base(name, owner, "WaitingToHeal")
 		{
-			nodeState = NodeStates.FAILURE;
+			this.handler = handler;
+		}
+
+		protected override NodeStates OnEvaluateAction()
+		{
+			if (handler.Target == null || handler.BookedHelperTCell == null)
+			{
+				nodeState = NodeStates.FAILURE;
+				return nodeState;
+			}
+
+			nodeState = NodeStates.SUCCESS;
 			return nodeState;
 		}
-	
-		nodeState = NodeStates.SUCCESS;
-		return nodeState;
+
+		protected override void OnResetTreeNode()
+		{
+		}
+
+
 	}
-
-	protected override void OnResetTreeNode()
-	{
-	}
-
-
 }

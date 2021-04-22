@@ -1,25 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DCInteractArea : AreaOfEffect
+
+namespace ImmunotherapyGame
 {
-	[SerializeField]
-	DendriticCell owner = null;
-
-	protected override void OnActivation()
+	public class DCInteractArea : AreaOfEffect
 	{
-		owner.StartInteraction();
-	}
+		[SerializeField]
+		DendriticCell owner = null;
 
-	protected override void OnDeactivation()
-	{
-		return;
-	}
+		protected override void OnActivation()
+		{
+			owner.StartInteraction();
+		}
 
-	protected override void OnEffectStatus()
-	{
-		return;
-	}
+		protected override void OnDeactivation()
+		{
+			return;
+		}
 
+		protected override void OnEffectStatus()
+		{
+			return;
+		}
+
+	}
 }

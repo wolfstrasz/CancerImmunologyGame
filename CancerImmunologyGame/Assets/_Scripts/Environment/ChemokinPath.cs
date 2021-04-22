@@ -4,7 +4,7 @@ using UnityEngine;
 using PathCreation;
 
 
-namespace Chemokines
+namespace ImmunotherapyGame.Chemokines
 {
 	public class ChemokinPath : MonoBehaviour
 	{

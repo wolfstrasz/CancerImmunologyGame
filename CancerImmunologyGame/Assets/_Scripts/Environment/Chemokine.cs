@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Chemokines
+namespace ImmunotherapyGame.Chemokines
 {
 	public class Chemokine : MonoBehaviour
 	{

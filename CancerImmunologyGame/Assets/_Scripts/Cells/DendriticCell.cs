@@ -1,33 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Chemokines;
+using ImmunotherapyGame.Chemokines;
 
-public class DendriticCell : MonoBehaviour
+namespace ImmunotherapyGame
 {
-
-	[SerializeField]
-	private List<ChemokinPath> chemokinePaths = new List<ChemokinPath>();
-
-	[SerializeField]
-	private bool interacted = false;
-	public bool HasInteracted => interacted;
-
-	public void StartInteraction()
+	public class DendriticCell : MonoBehaviour
 	{
-		// Start the interaction
 
-		// TODO: remove this after adding the interaction animation/video/ect.
-		FinishInteraction();
-	}
+		[SerializeField]
+		private List<ChemokinPath> chemokinePaths = new List<ChemokinPath>();
 
+		[SerializeField]
+		private bool interacted = false;
+		public bool HasInteracted => interacted;
 
-	private void FinishInteraction()
-	{
-		foreach (ChemokinPath path in chemokinePaths)
+		public void StartInteraction()
 		{
-			path.ActivateChemokines();
+			// Start the interaction
+
+			// TODO: remove this after adding the interaction animation/video/ect.
+			FinishInteraction();
 		}
-		interacted = true;
+
+
+		private void FinishInteraction()
+		{
+			foreach (ChemokinPath path in chemokinePaths)
+			{
+				path.ActivateChemokines();
+			}
+			interacted = true;
+		}
 	}
 }

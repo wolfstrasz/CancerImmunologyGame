@@ -2,44 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public class HypoxicArea : MonoBehaviour
+
+namespace ImmunotherapyGame
 {
-	[Header("Attributes")]
-	[SerializeField]
-	private float dmg = 0.5f;
 
-	[Header("Debug (Read only)")]
-	[SerializeField]
-	List<KillerCell> killerCells = new List<KillerCell>();
-
-
-	private void OnTriggerEnter2D(Collider2D collider)
+	[RequireComponent(typeof(Collider2D))]
+	public class HypoxicArea : MonoBehaviour
 	{
-		KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
-		if (kc != null)
-		{
-			killerCells.Add(kc);
-		}
-	}
+		[Header("Attributes")]
+		[SerializeField]
+		private float dmg = 0.5f;
 
-	private void OnTriggerExit2D(Collider2D collider)
-	{
-		KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
-		if (kc != null)
-		{
-			killerCells.Remove(kc);
-		}
-	}
+		[Header("Debug (Read only)")]
+		[SerializeField]
+		List<KillerCell> killerCells = new List<KillerCell>();
 
-	void Update()
-	{
-		if (GlobalGameData.isGameplayPaused) return;
 
-		foreach (KillerCell cell in killerCells)
+		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			cell.HitCell(dmg);
+			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+			if (kc != null)
+			{
+				killerCells.Add(kc);
+			}
 		}
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
+			if (kc != null)
+			{
+				killerCells.Remove(kc);
+			}
+		}
+
+		void Update()
+		{
+			if (GlobalGameData.isGameplayPaused) return;
+
+			foreach (KillerCell cell in killerCells)
+			{
+				cell.HitCell(dmg);
+			}
+		}
+
 	}
 
 }

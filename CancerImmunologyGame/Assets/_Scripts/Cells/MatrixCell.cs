@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cells
+namespace ImmunotherapyGame
 {
     public class MatrixCell : Cell
     {

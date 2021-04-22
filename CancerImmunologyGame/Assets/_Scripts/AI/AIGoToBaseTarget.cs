@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTreeBase;
 
-namespace BehaviourTreeBase
+namespace ImmunotherapyGame.AI
 {
-    public class AIGoToBaseTarget : BTActionNode
+	public class AIGoToBaseTarget : BTActionNode
     {
 
 		private IAICancerInteractor interactor;

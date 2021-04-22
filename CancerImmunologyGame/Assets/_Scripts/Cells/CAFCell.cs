@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-namespace Cells.Cancers
+namespace ImmunotherapyGame.Cancers
 {
-    public class CAFCell : EvilCell
-    {
+	public class CAFCell : EvilCell
+	{
 
 		[Header("CAF Cell")]
 		[SerializeField]
@@ -53,8 +52,8 @@ namespace Cells.Cancers
 		private CancerCell FindACancerCellToSpawnMatrix()
 		{
 			List<CancerCell> possibleCells = new List<CancerCell>(sense.cancerCells.Count);
-			
-			for(int i = 0; i < sense.cancerCells.Count; ++i)
+
+			for (int i = 0; i < sense.cancerCells.Count; ++i)
 			{
 				if (!sense.cancerCells[i].isImmune && sense.cancerCells[i].matrix == null)
 				{

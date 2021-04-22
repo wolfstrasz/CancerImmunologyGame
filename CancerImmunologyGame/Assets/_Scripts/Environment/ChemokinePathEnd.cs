@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using ImmunotherapyGame.Player;
 
-namespace Chemokines {
+namespace ImmunotherapyGame.Chemokines {
 	public class ChemokinePathEnd : MonoBehaviour
 	{
 

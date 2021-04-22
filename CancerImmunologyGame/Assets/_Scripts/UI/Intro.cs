@@ -3,117 +3,121 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Loader
+namespace ImmunotherapyGame
 {
-	public class Intro : Singleton<Intro>
+	namespace Loader
 	{
-		[Header("Logos")]
-		[SerializeField]
-		private IntroFadeCallback logoAnimator = null;
-
-		[Header("Intro texts")]
-		[SerializeField]
-		private List<GameObject> texts = new List<GameObject>();
-
-		[Header("Skip functionality")]
-		[SerializeField]
-		private GameObject continueSpaceBar = null;
-		[SerializeField]
-		private Slider skipHoldSlider = null;
-		[SerializeField]
-		private float timeBeforeSkipAppears = 2.0f;
-		[SerializeField]
-		private float timeHoldToSkip = 2.0f;
-		[SerializeField]
-		private bool forceSkip = false;
-
-		private int text_index = 0;
-		private bool allowSkip = false;
-
-		[Header("Debug Attributes")]
-		[SerializeField]
-		private bool skipLogos = false;
-		[SerializeField]
-		private bool skipIntroTexts = false;
-
-		void Awake()
+		public class Intro : Singleton<Intro>
 		{
-			skipHoldSlider.maxValue = timeHoldToSkip;
-			if (forceSkip)
-				IntroFinished();
-		}
+			[Header("Logos")]
+			[SerializeField]
+			private IntroFadeCallback logoAnimator = null;
 
-		void Update()
-		{
-			if (allowSkip)
+			[Header("Intro texts")]
+			[SerializeField]
+			private List<GameObject> texts = new List<GameObject>();
+
+			[Header("Skip functionality")]
+			[SerializeField]
+			private GameObject continueSpaceBar = null;
+			[SerializeField]
+			private Slider skipHoldSlider = null;
+			[SerializeField]
+			private float timeBeforeSkipAppears = 2.0f;
+			[SerializeField]
+			private float timeHoldToSkip = 2.0f;
+			[SerializeField]
+			private bool forceSkip = false;
+
+			private int text_index = 0;
+			private bool allowSkip = false;
+
+			[Header("Debug Attributes")]
+			[SerializeField]
+			private bool skipLogos = false;
+			[SerializeField]
+			private bool skipIntroTexts = false;
+
+			void Awake()
 			{
-				if (Input.GetKey(KeyCode.Space))
+				skipHoldSlider.maxValue = timeHoldToSkip;
+				if (forceSkip)
+					IntroFinished();
+			}
+
+			void Update()
+			{
+				if (allowSkip)
 				{
-					//Debug.Log(skipHoldSlider.value + " : " + skipHoldSlider.maxValue);
-					skipHoldSlider.value = skipHoldSlider.value + Time.deltaTime;
-					if (skipHoldSlider.value == skipHoldSlider.maxValue)
+					if (Input.GetKey(KeyCode.Space))
 					{
-						IntroFinished();
+						//Debug.Log(skipHoldSlider.value + " : " + skipHoldSlider.maxValue);
+						skipHoldSlider.value = skipHoldSlider.value + Time.deltaTime;
+						if (skipHoldSlider.value == skipHoldSlider.maxValue)
+						{
+							IntroFinished();
+						}
 					}
-				} else
-				{
-					skipHoldSlider.value = 0;
+					else
+					{
+						skipHoldSlider.value = 0;
+					}
 				}
 			}
-		}
 
 
-		internal void ShowNextText()
-		{
-			if (text_index < texts.Count)
+			internal void ShowNextText()
 			{
-				texts[text_index].SetActive(true);
-				++text_index;
+				if (text_index < texts.Count)
+				{
+					texts[text_index].SetActive(true);
+					++text_index;
+				}
 			}
-		}
 
-		private void IntroFinished()
-		{
-			Loader.Instance.OnIntroFinished();
-		}
-
-		/// <summary>
-		/// Call to make logos fade away in the intro screen
-		/// </summary>
-		internal void FadeLogos()
-		{
-			if (skipLogos)
+			private void IntroFinished()
 			{
-				logoAnimator.gameObject.SetActive(false);
-				LogoFadeFinished();
-				return;
+				Loader.Instance.OnIntroFinished();
 			}
-			Debug.Log("Fade Logos");
-			logoAnimator.StartFade();
-		}
 
-
-		// Animation callbacks
-		internal void LogoFadeFinished()
-		{
-			if (skipIntroTexts)
+			/// <summary>
+			/// Call to make logos fade away in the intro screen
+			/// </summary>
+			internal void FadeLogos()
 			{
-				IntroFinished();
-				return;
+				if (skipLogos)
+				{
+					logoAnimator.gameObject.SetActive(false);
+					LogoFadeFinished();
+					return;
+				}
+				Debug.Log("Fade Logos");
+				logoAnimator.StartFade();
 			}
-			ShowNextText();
-			StartCoroutine(WaitToShowSkipButton());
-		}
 
 
-		IEnumerator WaitToShowSkipButton()
-		{
-			yield return new WaitForSeconds(timeBeforeSkipAppears);
-			continueSpaceBar.SetActive(true);
-			skipHoldSlider.gameObject.SetActive(true);
+			// Animation callbacks
+			internal void LogoFadeFinished()
+			{
+				if (skipIntroTexts)
+				{
+					IntroFinished();
+					return;
+				}
+				ShowNextText();
+				StartCoroutine(WaitToShowSkipButton());
+			}
 
-			allowSkip = true;
-			yield return null;
+
+			IEnumerator WaitToShowSkipButton()
+			{
+				yield return new WaitForSeconds(timeBeforeSkipAppears);
+				continueSpaceBar.SetActive(true);
+				skipHoldSlider.gameObject.SetActive(true);
+
+				allowSkip = true;
+				yield return null;
+			}
 		}
 	}
 }

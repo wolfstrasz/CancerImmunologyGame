@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Core
+namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{

@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Core.GameManagement;
+﻿using UnityEngine;
+using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame.Tutorials
 {

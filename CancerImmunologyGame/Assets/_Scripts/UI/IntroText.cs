@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 
-namespace Loader
+namespace ImmunotherapyGame.Loader
 {
 	public class IntroText : MonoBehaviour
 	{

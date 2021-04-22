@@ -2,156 +2,159 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundMusic : Singleton<BackgroundMusic>
+namespace ImmunotherapyGame
 {
-	[Header ("Music")]
-	[SerializeField]
-	private AudioSource normalMusic = null;
-	[SerializeField]
-	private AudioSource travelMusic = null;
-	[SerializeField]
-	private AudioSource battleMusic= null;
-
-	[Header ("Timing")]
-	[SerializeField]
-	private float transitionTime = 3.0f;
-	[SerializeField]
-	private float timeInTransition = 3.0f;
-	[SerializeField]
-	private float timeGapSafetyCheck = 10.0f;
-
-	[Header("DEBUG (READ ONLY)")]
-	[SerializeField]
-	AudioSource sourceToDecrease = null;
-	[SerializeField]
-	AudioSource sourceToIncrease = null;
-	
-	[SerializeField]
-	private BackgroundMusicType currentType = BackgroundMusicType.NORMAL;
-	[SerializeField]
-	private BackgroundMusicType correctType = BackgroundMusicType.NORMAL;
-
-	public void Initialise()
+	public class BackgroundMusic : Singleton<BackgroundMusic>
 	{
+		[Header("Music")]
+		[SerializeField]
+		private AudioSource normalMusic = null;
+		[SerializeField]
+		private AudioSource travelMusic = null;
+		[SerializeField]
+		private AudioSource battleMusic = null;
 
-		travelMusic.Stop();
-		battleMusic.Stop();
-		normalMusic.Play();
-		normalMusic.volume = 1.0f;
-		currentType = BackgroundMusicType.NORMAL;
-		correctType = BackgroundMusicType.NORMAL;
-		timeInTransition = transitionTime + timeGapSafetyCheck;
+		[Header("Timing")]
+		[SerializeField]
+		private float transitionTime = 3.0f;
+		[SerializeField]
+		private float timeInTransition = 3.0f;
+		[SerializeField]
+		private float timeGapSafetyCheck = 10.0f;
 
-	}
+		[Header("DEBUG (READ ONLY)")]
+		[SerializeField]
+		AudioSource sourceToDecrease = null;
+		[SerializeField]
+		AudioSource sourceToIncrease = null;
 
-	// Update is called once per frame
-	void Update()
-    {
+		[SerializeField]
+		private BackgroundMusicType currentType = BackgroundMusicType.NORMAL;
+		[SerializeField]
+		private BackgroundMusicType correctType = BackgroundMusicType.NORMAL;
 
-		//if (Input.GetKeyDown(KeyCode.B))
-		//{
-		//	correctType = BackgroundMusicType.BATTLE;
-
-		//}
-
-		//if (Input.GetKeyDown(KeyCode.N))
-		//{
-		//	correctType = BackgroundMusicType.TRAVEL;
-
-		//}
-
-		//if (Input.GetKeyDown(KeyCode.M))
-		//{
-		//	correctType = BackgroundMusicType.NORMAL;
-
-		//}
-
-		//if (Input.GetKeyDown(KeyCode.L))
-		//{
-		//	Initialise();
-		//}
-
-		if (timeInTransition < transitionTime)
+		public void Initialise()
 		{
-			//Debug.Log("Should Transition: " + timeInTransition +  " : " + Time.deltaTime);
-			timeInTransition += Time.deltaTime;
-			sourceToIncrease.volume = timeInTransition / transitionTime;
-			sourceToDecrease.volume = 1.0f - timeInTransition / transitionTime;
 
-			if (timeInTransition >= transitionTime)
+			travelMusic.Stop();
+			battleMusic.Stop();
+			normalMusic.Play();
+			normalMusic.volume = 1.0f;
+			currentType = BackgroundMusicType.NORMAL;
+			correctType = BackgroundMusicType.NORMAL;
+			timeInTransition = transitionTime + timeGapSafetyCheck;
+
+		}
+
+		// Update is called once per frame
+		void Update()
+		{
+
+			//if (Input.GetKeyDown(KeyCode.B))
+			//{
+			//	correctType = BackgroundMusicType.BATTLE;
+
+			//}
+
+			//if (Input.GetKeyDown(KeyCode.N))
+			//{
+			//	correctType = BackgroundMusicType.TRAVEL;
+
+			//}
+
+			//if (Input.GetKeyDown(KeyCode.M))
+			//{
+			//	correctType = BackgroundMusicType.NORMAL;
+
+			//}
+
+			//if (Input.GetKeyDown(KeyCode.L))
+			//{
+			//	Initialise();
+			//}
+
+			if (timeInTransition < transitionTime)
 			{
-				sourceToDecrease.Stop();
-				timeInTransition += timeGapSafetyCheck;
+				//Debug.Log("Should Transition: " + timeInTransition +  " : " + Time.deltaTime);
+				timeInTransition += Time.deltaTime;
+				sourceToIncrease.volume = timeInTransition / transitionTime;
+				sourceToDecrease.volume = 1.0f - timeInTransition / transitionTime;
+
+				if (timeInTransition >= transitionTime)
+				{
+					sourceToDecrease.Stop();
+					timeInTransition += timeGapSafetyCheck;
+				}
 			}
+
+			if (currentType != correctType && timeInTransition >= transitionTime + timeGapSafetyCheck)
+			{
+				timeInTransition = 0.0f;
+				StopCurrentType();
+				StartCorrectType();
+				currentType = correctType;
+			}
+
 		}
 
-		if ( currentType != correctType && timeInTransition >= transitionTime + timeGapSafetyCheck)
+
+		private void StopCurrentType()
 		{
-			timeInTransition = 0.0f;
-			StopCurrentType();
-			StartCorrectType();
-			currentType = correctType;
+			if (currentType == BackgroundMusicType.NORMAL)
+			{
+				sourceToDecrease = normalMusic;
+			}
+			if (currentType == BackgroundMusicType.BATTLE)
+			{
+				sourceToDecrease = battleMusic;
+			}
+			if (currentType == BackgroundMusicType.TRAVEL)
+			{
+				sourceToDecrease = travelMusic;
+			}
+
 		}
 
-	}
-
-
-	private void StopCurrentType()
-	{
-		if (currentType == BackgroundMusicType.NORMAL)
+		private void StartCorrectType()
 		{
-			sourceToDecrease = normalMusic;
+			if (correctType == BackgroundMusicType.NORMAL)
+			{
+				sourceToIncrease = normalMusic;
+			}
+			else if (correctType == BackgroundMusicType.BATTLE)
+			{
+				sourceToIncrease = battleMusic;
+			}
+			else if (correctType == BackgroundMusicType.TRAVEL)
+			{
+				sourceToIncrease = travelMusic;
+			}
+
+			sourceToIncrease.volume = 0.0f;
+			sourceToIncrease.Play();
 		}
-		if (currentType == BackgroundMusicType.BATTLE)
+
+
+		public void PlayBattleMusic()
 		{
-			sourceToDecrease = battleMusic;
+			correctType = BackgroundMusicType.BATTLE;
 		}
-		if (currentType == BackgroundMusicType.TRAVEL)
+
+		public void PlayNormalMusic()
 		{
-			sourceToDecrease = travelMusic;
+			correctType = BackgroundMusicType.NORMAL;
 		}
 
-	}
-
-	private void StartCorrectType()
-	{
-		if (correctType == BackgroundMusicType.NORMAL)
+		public void PlayTravelMusic()
 		{
-			sourceToIncrease = normalMusic;
+			correctType = BackgroundMusicType.TRAVEL;
 		}
-		else if (correctType == BackgroundMusicType.BATTLE)
+
+		public void PlayMusic(BackgroundMusicType type)
 		{
-			sourceToIncrease = battleMusic;
-		}
-		else if (correctType == BackgroundMusicType.TRAVEL)
-		{
-			sourceToIncrease = travelMusic;
+			correctType = type;
 		}
 
-		sourceToIncrease.volume = 0.0f;
-		sourceToIncrease.Play();
+		public enum BackgroundMusicType { NORMAL, TRAVEL, BATTLE }
 	}
-
-
-	public void PlayBattleMusic()
-	{
-		correctType = BackgroundMusicType.BATTLE;
-	}
-
-	public void PlayNormalMusic()
-	{
-		correctType = BackgroundMusicType.NORMAL;
-	}
-
-	public void PlayTravelMusic()
-	{
-		correctType = BackgroundMusicType.TRAVEL;
-	}
-
-	public void PlayMusic(BackgroundMusicType type)
-	{
-		correctType = type;
-	}
-
-	public enum BackgroundMusicType { NORMAL, TRAVEL, BATTLE }
 }

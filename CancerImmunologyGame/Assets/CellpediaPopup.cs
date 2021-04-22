@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace CellpediaUI
+namespace ImmunotherapyGame.CellpediaUI
 {
 	public class CellpediaPopup : MonoBehaviour
 	{
@@ -18,8 +16,6 @@ namespace CellpediaUI
 		private TMP_Text text = null;
 		[SerializeField]
 		private Image cellImage = null;
-		[SerializeField]
-		private GameObject particleEffectPrefab = null;
 
 		internal void SetInfo(CellDescription cellDescription)
 		{

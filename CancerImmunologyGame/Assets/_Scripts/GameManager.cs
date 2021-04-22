@@ -1,8 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
-
-namespace Core
+namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{
@@ -19,7 +18,7 @@ namespace Core
 			private float gameSpeed = 1.2f;
 			void Start()
 			{
-				if (isTestScene) 
+				if (isTestScene)
 					InitialiseTestScene();
 			}
 

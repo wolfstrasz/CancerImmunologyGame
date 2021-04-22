@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Loader
+namespace ImmunotherapyGame
 {
-	public class IntroFadeCallback : MonoBehaviour
+	namespace Loader
 	{
-		[SerializeField]
-		private Animator animator = null;
-
-		internal void StartFade()
+		public class IntroFadeCallback : MonoBehaviour
 		{
-			animator.SetTrigger("Fade");
-		}
+			[SerializeField]
+			private Animator animator = null;
 
-		public void FadeFinished()
-		{
-			Intro.Instance.LogoFadeFinished();
+			internal void StartFade()
+			{
+				animator.SetTrigger("Fade");
+			}
+
+			public void FadeFinished()
+			{
+				Intro.Instance.LogoFadeFinished();
+			}
 		}
 	}
 }
-

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cells
+namespace ImmunotherapyGame
 {
 	[RequireComponent(typeof(Collider2D))]
 	public class HelperSense : MonoBehaviour
@@ -41,4 +41,5 @@ namespace Cells
 		}
 
 	}
+
 }

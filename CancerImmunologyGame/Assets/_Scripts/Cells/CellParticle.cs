@@ -1,112 +1,112 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Cells;
+﻿using UnityEngine;
 
-public abstract class CellParticle : MonoBehaviour
+namespace ImmunotherapyGame
 {
-	[Header("Cell Particle")]
-	protected Cell owner = null;
-
-	// Spreading
-	[SerializeField]
-	protected Vector3 spreadPosition;
-
-	// Targeting
-	[SerializeField]
-	protected KillerCell target = null;
-
-	// Attributes
-	[SerializeField]
-	protected float lifeSpan = 0.0f;
-	[SerializeField]
-	protected float speed = 1.0f;
-	[SerializeField]
-	protected float distanceToReachSqr = 0.5f;
-
-	// State 
-	delegate void Action();
-	private Action StateAction = null;
-
-	void Update()
+	public abstract class CellParticle : MonoBehaviour
 	{
-		if (GlobalGameData.isGameplayPaused) return;
-		OnUpdate();
-	}
+		[Header("Cell Particle")]
+		protected Cell owner = null;
 
-	public void OnUpdate()
-	{
-		StateAction();
-	}
+		// Spreading
+		[SerializeField]
+		protected Vector3 spreadPosition;
 
-	public void Initialise(Vector3 _spreadPosition, KillerCell _target = null)
-	{
-		spreadPosition = _spreadPosition;
-		target = _target;
-		StateAction = Spread;
-	}
+		// Targeting
+		[SerializeField]
+		protected KillerCell target = null;
 
-	private void Idle()
-	{
-		lifeSpan -= Time.deltaTime;
-		if (lifeSpan <= 0.0f)
+		// Attributes
+		[SerializeField]
+		protected float lifeSpan = 0.0f;
+		[SerializeField]
+		protected float speed = 1.0f;
+		[SerializeField]
+		protected float distanceToReachSqr = 0.5f;
+
+		// State 
+		delegate void Action();
+		private Action StateAction = null;
+
+		void Update()
 		{
-			OnDeathEffect();
+			if (GlobalGameData.isGameplayPaused) return;
+			OnUpdate();
 		}
-	}
 
-	// State machine
-	private void Spread()
-	{
-		Vector3 directionVector = spreadPosition - transform.position;
-		if (Vector3.SqrMagnitude(directionVector) >= 1.0f)
+		public void OnUpdate()
 		{
-			transform.position += directionVector.normalized * Time.unscaledDeltaTime
-				* speed * GlobalGameData.gameplaySpeed;
+			StateAction();
 		}
-		else if (target != null)
+
+		public void Initialise(Vector3 _spreadPosition, KillerCell _target = null)
 		{
-			StateAction = FollowTarget;
+			spreadPosition = _spreadPosition;
+			target = _target;
+			StateAction = Spread;
 		}
-		else
+
+		private void Idle()
 		{
-			StateAction = Idle;
+			lifeSpan -= Time.deltaTime;
+			if (lifeSpan <= 0.0f)
+			{
+				OnDeathEffect();
+			}
 		}
-	}
 
-	private void FollowTarget()
-	{
-		Vector3 directionVector = target.transform.position - transform.position;
-		if (Vector3.SqrMagnitude(directionVector) <= distanceToReachSqr)
+		// State machine
+		private void Spread()
 		{
-			OnReachTarget();
-		} 
-		else
-		{
-			transform.position += directionVector.normalized * Time.unscaledDeltaTime
-				* speed * GlobalGameData.gameplaySpeed;
+			Vector3 directionVector = spreadPosition - transform.position;
+			if (Vector3.SqrMagnitude(directionVector) >= 1.0f)
+			{
+				transform.position += directionVector.normalized * Time.unscaledDeltaTime
+					* speed * GlobalGameData.gameplaySpeed;
+			}
+			else if (target != null)
+			{
+				StateAction = FollowTarget;
+			}
+			else
+			{
+				StateAction = Idle;
+			}
 		}
-	}
 
-	private void Dead() { }
-
-	protected abstract void OnReachTarget();
-
-	protected virtual void OnDeathEffect()
-	{
-		StateAction = Dead;
-		Destroy(gameObject);
-	}
-
-	void OnTriggerEnter2D(Collider2D collider)
-	{
-		if (target != null) return;
-
-		KillerCell cell = collider.GetComponent<KillerCell>();
-		if (cell != null)
+		private void FollowTarget()
 		{
-			target = cell;
-			StateAction = FollowTarget;
+			Vector3 directionVector = target.transform.position - transform.position;
+			if (Vector3.SqrMagnitude(directionVector) <= distanceToReachSqr)
+			{
+				OnReachTarget();
+			}
+			else
+			{
+				transform.position += directionVector.normalized * Time.unscaledDeltaTime
+					* speed * GlobalGameData.gameplaySpeed;
+			}
+		}
+
+		private void Dead() { }
+
+		protected abstract void OnReachTarget();
+
+		protected virtual void OnDeathEffect()
+		{
+			StateAction = Dead;
+			Destroy(gameObject);
+		}
+
+		void OnTriggerEnter2D(Collider2D collider)
+		{
+			if (target != null) return;
+
+			KillerCell cell = collider.GetComponent<KillerCell>();
+			if (cell != null)
+			{
+				target = cell;
+				StateAction = FollowTarget;
+			}
 		}
 	}
 }

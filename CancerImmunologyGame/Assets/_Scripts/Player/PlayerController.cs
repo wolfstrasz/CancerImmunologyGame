@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using Cells.Cancers;
-using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame.Player
 {

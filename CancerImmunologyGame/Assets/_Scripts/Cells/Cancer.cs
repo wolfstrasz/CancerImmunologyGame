@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Cells.Cancers
+namespace ImmunotherapyGame.Cancers
 {
 	public class Cancer : MonoBehaviour, IEvilCellObserver
 	{
@@ -403,11 +403,16 @@ namespace Cells.Cancers
 				{
 					int index = (int)UnityEngine.Random.Range(0, possibleLocationsToSpawn.Count);
 					locationToSpawn = possibleLocationsToSpawn[index];
+
+					// Instantiate plot choice dot
+					if (debugPlotting)
+						allPlottingObjects.Add(Instantiate(spawnPointPrefab, locationToSpawn, Quaternion.identity, debugPlotSpawn));
+
 					return true;
 				} else
 				{
-					return false;
 					locationToSpawn = Vector3.zero;
+					return false;
 				}
 
 				//Debug.Log(possibleLocationsToSpawn.Count);
@@ -420,21 +425,24 @@ namespace Cells.Cancers
 				{
 					int index = (int)UnityEngine.Random.Range(0, availableLocations.Count);
 					locationToSpawn = availableLocations[index];
+
+					// Instantiate plot choice dot
+					if (debugPlotting)
+						allPlottingObjects.Add(Instantiate(spawnPointPrefab, locationToSpawn, Quaternion.identity, debugPlotSpawn));
+
 					return true;
 				}
 				else
 				{
-					return false;
 					locationToSpawn = Vector3.zero;
+					return false;
 				}
 
 				//Debug.Log("Location to spawn: " + "( " + index + " ) " + locationToSpawn);
 
 			}
 
-			// Instantiate plot choice dot
-			if (debugPlotting)
-				allPlottingObjects.Add(Instantiate(spawnPointPrefab, locationToSpawn, Quaternion.identity, debugPlotSpawn));
+	
 		}
 
 		private void StartDivision()

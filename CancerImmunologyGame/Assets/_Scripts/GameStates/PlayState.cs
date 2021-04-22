@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using ImmunotherapyGame.Player;
-using CellpediaUI;
-using Cells;
+﻿using ImmunotherapyGame.Player;
+using ImmunotherapyGame.Bloodflow;
+using ImmunotherapyGame.CellpediaUI;
+using ImmunotherapyGame.Tutorials;
+using ImmunotherapyGame.AI;
 
-namespace Core
+namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{
@@ -56,7 +55,7 @@ namespace Core
 				{
 					GlobalGameData.KillerCells[i].OnUpdate();
 				}
-				
+
 				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
 				{
 					if (rc.gameObject.activeSelf)

@@ -3,30 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
 
-public class AINeedToHealKillerCell : BTActionNode
+namespace ImmunotherapyGame.AI
 {
-	IAICellController controller;
-
-	public AINeedToHealKillerCell(string name, BehaviourTree owner, IAICellController controller) : base(name, owner, "NeedToHeal")
+	public class AINeedToHealKillerCell : BTActionNode
 	{
-		this.controller = controller;
-	}
+		IAICellController controller;
 
-	protected override NodeStates OnEvaluateAction()
-	{
-		if (controller.ControlledCell.Health * 3 < controller.ControlledCell.maxHealth)
+		public AINeedToHealKillerCell(string name, BehaviourTree owner, IAICellController controller) : base(name, owner, "NeedToHeal")
 		{
-			return NodeStates.SUCCESS;
+			this.controller = controller;
 		}
-		else if (controller.ControlledCell.Energy * 3 < controller.ControlledCell.maxEnergy)
+
+		protected override NodeStates OnEvaluateAction()
 		{
-			return NodeStates.SUCCESS;
+			if (controller.ControlledCell.Health * 3 < controller.ControlledCell.maxHealth)
+			{
+				return NodeStates.SUCCESS;
+			}
+			else if (controller.ControlledCell.Energy * 3 < controller.ControlledCell.maxEnergy)
+			{
+				return NodeStates.SUCCESS;
+			}
+			return NodeStates.FAILURE;
 		}
-		return NodeStates.FAILURE;
-	}
 
-	protected override void OnResetTreeNode()
-	{
-	}
+		protected override void OnResetTreeNode()
+		{
+		}
 
+	}
 }

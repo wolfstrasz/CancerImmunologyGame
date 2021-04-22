@@ -1,63 +1,64 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using ImmunotherapyGame.Tutorials;
 
-
-public class TutorialManager : Singleton<TutorialManager>
+namespace ImmunotherapyGame.Tutorials
 {
-	[Header("UI Elements Linking")]
-	[SerializeField]
-	private GameObject tutorialPanel = null;
-	[SerializeField]
-	private TMP_Text tutorialTxt = null;
-	[SerializeField]
-	private GameObject skipTextButton = null;
-
-	[SerializeField]
-	private List<TutorialStage> StoryTutorials = new List<TutorialStage>();
-
-	public void Initialise()
+	public class TutorialManager : Singleton<TutorialManager>
 	{
-		StoryTutorials = new List<TutorialStage>();
-		StoryTutorials.AddRange(FindObjectsOfType<TutorialStage>());
+		[Header("UI Elements Linking")]
+		[SerializeField]
+		private GameObject tutorialPanel = null;
+		[SerializeField]
+		private TMP_Text tutorialTxt = null;
+		[SerializeField]
+		private GameObject skipTextButton = null;
 
-		foreach (TutorialStage ts in StoryTutorials)
-		{
-			ts.InitialiseStage();
-		}
-	}
+		[SerializeField]
+		private List<TutorialStage> StoryTutorials = new List<TutorialStage>();
 
-	public void OnUpdate()
-	{
-		foreach (TutorialStage ts in StoryTutorials)
+		public void Initialise()
 		{
-			if (!ts.IsFinished)
+			StoryTutorials = new List<TutorialStage>();
+			StoryTutorials.AddRange(FindObjectsOfType<TutorialStage>());
+
+			foreach (TutorialStage ts in StoryTutorials)
 			{
-				ts.OnUpdate();
+				ts.InitialiseStage();
 			}
 		}
+
+		public void OnUpdate()
+		{
+			foreach (TutorialStage ts in StoryTutorials)
+			{
+				if (!ts.IsFinished)
+				{
+					ts.OnUpdate();
+				}
+			}
+		}
+
+		internal void HideText()
+		{
+			tutorialPanel.SetActive(false);
+			skipTextButton.SetActive(false);
+			tutorialTxt.gameObject.SetActive(false);
+		}
+
+		internal void DisplayText(string text)
+		{
+			tutorialPanel.SetActive(true);
+			tutorialTxt.text = text;
+			tutorialTxt.gameObject.SetActive(true);
+		}
+
+		internal void DisplaySkipButton()
+		{
+			skipTextButton.SetActive(true);
+		}
+
 	}
 
-	internal void HideText()
-	{
-		tutorialPanel.SetActive(false);
-		skipTextButton.SetActive(false);
-		tutorialTxt.gameObject.SetActive(false);
-	}
-
-	internal void DisplayText(string text)
-	{
-		tutorialPanel.SetActive(true);
-		tutorialTxt.text = text;
-		tutorialTxt.gameObject.SetActive(true);
-	}
-
-	internal void DisplaySkipButton()
-	{
-		skipTextButton.SetActive(true);
-	}
 
 }
-
-

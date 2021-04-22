@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using ImmunotherapyGame.Player;
-using CellpediaUI;
-using Cells;
+using ImmunotherapyGame.Bloodflow;
+using ImmunotherapyGame.CellpediaUI;
+using ImmunotherapyGame.Tutorials;
+using ImmunotherapyGame.AI;
 
-namespace Core
+namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{

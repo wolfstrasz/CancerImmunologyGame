@@ -1,36 +1,40 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
-public abstract class AreaOfEffect : MonoBehaviour
+
+namespace ImmunotherapyGame
 {
-
-	private void Update()
+	[RequireComponent(typeof(Collider2D))]
+	public abstract class AreaOfEffect : MonoBehaviour
 	{
-		OnEffectStatus();
-	}
 
-	private void OnTriggerEnter2D(Collider2D collider)
-	{
-		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
-		if (pc != null)
+		private void Update()
 		{
-			OnActivation();
+			OnEffectStatus();
 		}
-	}
 
-	private void OnTriggerExit2D(Collider2D collider)
-	{
-		KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
-		if (pc != null)
+		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			OnDeactivation();
+			KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+			if (pc != null)
+			{
+				OnActivation();
+			}
 		}
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			KillerCell pc = collider.gameObject.GetComponent<KillerCell>();
+			if (pc != null)
+			{
+				OnDeactivation();
+			}
+		}
+
+		protected abstract void OnActivation();
+
+		protected abstract void OnDeactivation();
+
+		protected abstract void OnEffectStatus();
+
 	}
-
-	protected abstract void OnActivation();
-
-	protected abstract void OnDeactivation();
-
-	protected abstract void OnEffectStatus();
-
 }

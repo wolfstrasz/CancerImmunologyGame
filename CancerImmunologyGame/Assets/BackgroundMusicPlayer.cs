@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Player;
 
-public class BackgroundMusicPlayer : MonoBehaviour
+namespace ImmunotherapyGame
 {
-
-	[SerializeField]
-	private BackgroundMusic.BackgroundMusicType type = BackgroundMusic.BackgroundMusicType.NORMAL;
-
-	void OnTriggerEnter2D(Collider2D collider)
+	public class BackgroundMusicPlayer : MonoBehaviour
 	{
-		if (collider.GetComponent<PlayerController>()!= null)
+
+		[SerializeField]
+		private BackgroundMusic.BackgroundMusicType type = BackgroundMusic.BackgroundMusicType.NORMAL;
+
+		void OnTriggerEnter2D(Collider2D collider)
 		{
-			BackgroundMusic.Instance.PlayMusic(type);
+			if (collider.GetComponent<PlayerController>() != null)
+			{
+				BackgroundMusic.Instance.PlayMusic(type);
+			}
 		}
 	}
 }

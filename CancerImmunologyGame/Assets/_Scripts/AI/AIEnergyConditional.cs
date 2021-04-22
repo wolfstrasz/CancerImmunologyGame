@@ -3,51 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
 
-public class AIEnergyConditional : BTActionNode
+namespace ImmunotherapyGame.AI
 {
-	IAICellController controller;
-	ValueConditionalOperator op;
-	float value;
-
-	public AIEnergyConditional(string name, BehaviourTree owner, IAICellController controller, ValueConditionalOperator op, float value) : base (name, owner, "EnergyConditional")
+	public class AIEnergyConditional : BTActionNode
 	{
-		this.name = name;
-		this.owner = owner;
-		this.controller = controller;
-		this.value = value;
-		this.op = op;
+		IAICellController controller;
+		ValueConditionalOperator op;
+		float value;
 
-	}
-
-	protected override NodeStates OnEvaluateAction()
-	{
-		bool result = false;
-
-		switch (op)
+		public AIEnergyConditional(string name, BehaviourTree owner, IAICellController controller, ValueConditionalOperator op, float value) : base(name, owner, "EnergyConditional")
 		{
-			case ValueConditionalOperator.LESS_THAN:
-				result = (controller.ControlledCell.Energy < value);
-				break;
-			case ValueConditionalOperator.LESS_THAN_EQUAL:
-				result = (controller.ControlledCell.Energy <= value);
-				break;
-			case ValueConditionalOperator.EQUAL:
-				result = (controller.ControlledCell.Energy == value);
-				break;
-			case ValueConditionalOperator.MORE_THAN:
-				result = (controller.ControlledCell.Energy > value);
-				break;
-			case ValueConditionalOperator.MORE_THAN_EQUAL:
-				result = (controller.ControlledCell.Energy >= value);
-				break;
-			default: result = false; break;
+			this.name = name;
+			this.owner = owner;
+			this.controller = controller;
+			this.value = value;
+			this.op = op;
+
 		}
 
-		nodeState = result ? NodeStates.SUCCESS : NodeStates.FAILURE;
-		return nodeState;
-	}
+		protected override NodeStates OnEvaluateAction()
+		{
+			bool result = false;
 
-	protected override void OnResetTreeNode()
-	{
+			switch (op)
+			{
+				case ValueConditionalOperator.LESS_THAN:
+					result = (controller.ControlledCell.Energy < value);
+					break;
+				case ValueConditionalOperator.LESS_THAN_EQUAL:
+					result = (controller.ControlledCell.Energy <= value);
+					break;
+				case ValueConditionalOperator.EQUAL:
+					result = (controller.ControlledCell.Energy == value);
+					break;
+				case ValueConditionalOperator.MORE_THAN:
+					result = (controller.ControlledCell.Energy > value);
+					break;
+				case ValueConditionalOperator.MORE_THAN_EQUAL:
+					result = (controller.ControlledCell.Energy >= value);
+					break;
+				default: result = false; break;
+			}
+
+			nodeState = result ? NodeStates.SUCCESS : NodeStates.FAILURE;
+			return nodeState;
+		}
+
+		protected override void OnResetTreeNode()
+		{
+		}
 	}
 }

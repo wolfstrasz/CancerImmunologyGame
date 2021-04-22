@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ImmunotherapyGame.Core
+namespace ImmunotherapyGame
 {
 	public interface IControllerMovementOverride
 	{
