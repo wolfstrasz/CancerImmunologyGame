@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4189095983323802907}
   - component: {fileID: 4189095983323802905}
   - component: {fileID: 1389133098206696872}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BloodCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.89, y: -41.07, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 561412295162104300}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,14 +96,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae803e694e0f6a4fadd258935fe24e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodCellSprites:
-  - {fileID: 21300000, guid: 47556199546658645a54651afd122801, type: 3}
-  - {fileID: 21300000, guid: 1a11063baa80222459e60d248a82a55f, type: 3}
-  - {fileID: 21300000, guid: 3a5a16d2e69ff304aa5d2d4eda369236, type: 3}
-  render: {fileID: 0}
-  endOfPathInstruction: 0
   speed: 5.5
   rotationSpeed: 90
   distanceTravelled: 0
-  distanceToEnd: 0
-  isMoving: 0
+  endDistance: 0
+--- !u!1 &8961164018188152043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 561412295162104300}
+  - component: {fileID: 2404223191524825656}
+  - component: {fileID: 6739765554560976276}
+  m_Layer: 7
+  m_Name: Body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &561412295162104300
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961164018188152043}
+  m_LocalRotation: {x: 0, y: 0, z: -0.37921387, w: 0.92530906}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4189095983323802907}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -44.57}
+--- !u!70 &2404223191524825656
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961164018188152043}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.58, y: 0.83}
+  m_Direction: 0
+--- !u!50 &6739765554560976276
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8961164018188152043}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7

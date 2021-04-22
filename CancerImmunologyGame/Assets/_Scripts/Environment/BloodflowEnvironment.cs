@@ -2,78 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using ImmunotherapyGame.Player;
+using ImmunotherapyGame.Core;
 
-namespace Bloodflow
+namespace ImmunotherapyGame.Bloodflow
 {
-	public class BloodflowEnvironment : MonoBehaviour
+	public class BloodflowEnvironment : MonoBehaviour, IControllerMovementOverride
 	{
-		[Header("Attributes")]
-		[SerializeField]
-		private PathCreator pathCreator = null;
 		private VertexPath path = null;
-		[SerializeField]
-		private float flow_speed = 7.0f;
+		[Header("Attributes")]
+		[SerializeField] private PathCreator pathCreator = null;
+		[SerializeField] private float flow_speed = 7.0f;
+		[SerializeField] private float rotation_speed = 2.0f;
+		[SerializeField][ReadOnly] private float fixNormal = 0.0f;
 
-		[Header("Debug (Read Only)")]
-		[SerializeField]
-		private List<KillerCell> killerCells = new List<KillerCell>();
-		internal List<KillerCell> KillerCells => killerCells;
-
-#if BLOODFLOW_ROTATION
-		[SerializeField]
-		private float rotationMultiplier = 0.0f;
-#endif
-
-
-		internal void Initialise()
+		internal void Awake()
 		{
 			path = pathCreator.path;
-
-#if BLOODFLOW_ROTATION
-			rotationMultiplier = pathCreator.bezierPath.FlipNormals ? -1.0f : 1.0f;
-#endif
+			fixNormal = pathCreator.bezierPath.FlipNormals ? -1.0f : 1.0f;
 		}
 
-		internal void OnFixedUpdate()
+		public void ApplyOverride(ref Vector2 movementVector, ref Quaternion newRotation, ref Vector3 position)
 		{
+			// Find normal at position
+			float time = path.GetClosestTimeOnPath(position);
+			Debug.Log(time);
+			Vector2 direction = path.GetDirection(time);
+			Debug.Log(direction);
 
-			foreach (KillerCell kc in killerCells)
-			{
+			Vector2 constraintNormal = path.GetNormal(time) * fixNormal;
 
-				// Collect needed data
-				float time = path.GetClosestTimeOnPath(kc.transform.position);
-				Vector2 direction = path.GetDirection(time);
-#if BLOODFLOW_ROTATION
-				Vector2 constraintNormal = path.GetNormal(time) * rotationMultiplier;
-#else
-				Vector2 constraintNormal = path.GetNormal(time);
-#endif
-				// Calculate flow movement
-				Vector2 flowMoveVector = new Vector2(direction.x, direction.y) * flow_speed * Time.deltaTime;
-				kc.FlowVector = flowMoveVector;
+			// Calculate flow movement
+			Vector2 flowMoveVector = direction * flow_speed * Time.fixedDeltaTime;
 
-				Vector2 movementVector = kc.MovementVector;
+			// Calculate rotation
+			var rotationAngle = Mathf.Atan2(constraintNormal.y, constraintNormal.x) * Mathf.Rad2Deg;
+			newRotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
 
-#if BLOODFLOW_ROTATION
-
-				// Obtain correct rotation
-				var rotationAngle = Mathf.Atan2(constraintNormal.y, constraintNormal.x) * Mathf.Rad2Deg;
-				var rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
-				kc.CorrectRotation = rotation;
-
-				// Constraint only in Left - Right axis, then rotate
-				movementVector.y = 0.0f;
-				movementVector = kc.transform.rotation * movementVector;
-				kc.MovementVector = movementVector.normalized;
-
-#else
-
-				Vector2 projection = Vector2.Dot(movementVector, constraintNormal) * constraintNormal;
-				// normalize
-				kc.MovementVector = projection.normalized;
-
-#endif
-			}
+			// Update movement vector
+			movementVector.y = 0.0f;
+			movementVector = newRotation * movementVector;
+			movementVector += flowMoveVector;
 		}
 	}
 }

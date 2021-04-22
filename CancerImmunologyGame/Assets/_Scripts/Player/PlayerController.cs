@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cells.Cancers;
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Player
 {
-	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver
+	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver, IControllerMovementOverridable
 	{
 		[SerializeField]
 		private KillerCell kc = null;
@@ -17,11 +18,9 @@ namespace ImmunotherapyGame.Player
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
-		private Vector2 movementVector = Vector2.zero;
-		[SerializeField]
-		private bool areControlsEnabled = true;
-		[SerializeField]
 		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
+		[SerializeField]
+		private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
 
 		[SerializeField]
 		private List<Cancer> cancersNearby = new List<Cancer>();
@@ -79,7 +78,7 @@ namespace ImmunotherapyGame.Player
 			DebugInput();
 #endif
 
-			kc.SpriteOrientation = rangeDisplay.orientation;
+			//kc.SpriteOrientation = rangeDisplay.orientation;
 
 			if (canAttack)
 			{
@@ -96,12 +95,7 @@ namespace ImmunotherapyGame.Player
 
 		public void OnFixedUpdate()
 		{
-			if (!areControlsEnabled)
-			{
-				kc.MovementVector = Vector2.zero;
-				return;
-			}
-
+			Vector2 movementVector = new Vector2();
 			// Collect input 
 			movementVector.x = Input.GetAxisRaw("Horizontal");
 			movementVector.y = Input.GetAxisRaw("Vertical");
@@ -112,7 +106,16 @@ namespace ImmunotherapyGame.Player
 				movementVector = movementVector * 0.74f;
 			}
 
+			Vector3 position = kc.transform.position;
+			Quaternion newRotation = Quaternion.identity;
+
+			for (int i = 0; i < movementOverrides.Count; i++)
+			{
+				movementOverrides[i].ApplyOverride(ref movementVector, ref newRotation, ref position);
+			}
+
 			kc.MovementVector = movementVector;
+			kc.MovementRotation = Quaternion.Slerp(kc.transform.rotation, newRotation, Time.fixedDeltaTime * 2f);
 		}
 
 		// Subscribtions
@@ -178,6 +181,22 @@ namespace ImmunotherapyGame.Player
 		public void UnsubscribeObserver(IPlayerObserver observer)
 		{
 			observers.Remove(observer);
+		}
+
+		public void SubscribeMovementOverride(IControllerMovementOverride controllerOverride)
+		{
+			if (!movementOverrides.Contains(controllerOverride))
+			{
+				movementOverrides.Add(controllerOverride);
+			}
+		}
+
+		public void UnsubscribMovementOverride(IControllerMovementOverride controllerOverride)
+		{
+			if (movementOverrides.Contains(controllerOverride))
+			{
+				movementOverrides.Remove(controllerOverride);
+			}
 		}
 
 #if PLAYER_DEBUG

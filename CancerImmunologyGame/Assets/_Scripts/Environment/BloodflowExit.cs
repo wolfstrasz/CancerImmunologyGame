@@ -1,36 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Core;
 
-
-namespace Bloodflow
+namespace ImmunotherapyGame.Bloodflow
 {
 	[RequireComponent(typeof(Collider2D))]
 	public class BloodflowExit : MonoBehaviour
 	{
 		[Header("Attributes")]
-		[SerializeField]
-		private BloodflowEnvironment environment = null;
-
+		[SerializeField] private BloodflowEnvironment environment = null;
+		[SerializeField] private BloodflowEntrance newEntrance = null;
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
-			if (kc != null && environment.KillerCells.Contains(kc))
+			IControllerMovementOverridable overridable = collider.gameObject.GetComponent<IControllerMovementOverridable>();
+			if (overridable != null)
 			{
-				environment.KillerCells.Remove(kc);
-				kc.FlowVector = Vector2.zero;
-
-#if BLOODFLOW_ROTATION
-				kc.CorrectRotation = Quaternion.identity;
-#endif
+				overridable.UnsubscribMovementOverride(environment);
 			}
-		}
-
-		internal void OnForcedExit(KillerCell kc)
-		{
-			if (environment.KillerCells.Contains(kc))
-				environment.KillerCells.Remove(kc);
 		}
 	}
 }

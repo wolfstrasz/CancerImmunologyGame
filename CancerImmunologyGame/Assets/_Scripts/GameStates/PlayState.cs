@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Player;
-using Bloodflow;
 using CellpediaUI;
 using Cells;
 
@@ -20,7 +19,6 @@ namespace Core
 				BackgroundMusic.Instance.Initialise();
 				UIManager.Instance.ClosePanels();
 				PlayerController.Instance.Initialise();
-				BloodflowController.Instance.Initialise();
 				Cellpedia.Instance.Initialise();
 				TutorialManager.Instance.Initialise();
 			}
@@ -32,7 +30,6 @@ namespace Core
 			internal override void OnFixedUpdate()
 			{
 				PlayerController.Instance.OnFixedUpdate();
-				BloodflowController.Instance.OnFixedUpdate();
 				foreach (KillerCell kc in GlobalGameData.KillerCells)
 				{
 					kc.OnFixedUpdate();

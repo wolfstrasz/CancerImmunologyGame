@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using ImmunotherapyGame.Player;
-using Bloodflow;
 using CellpediaUI;
 using Cells;
 
@@ -16,9 +15,6 @@ namespace Core
 			{
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.OnFixedUpdate();
-
-				if (GameObject.FindObjectOfType<BloodflowController>() != null)
-					BloodflowController.Instance.OnFixedUpdate();
 
 				foreach (KillerCell kc in GlobalGameData.KillerCells)
 				{
@@ -49,8 +45,6 @@ namespace Core
 					UIManager.Instance.ClosePanels();
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.Initialise();
-				if (GameObject.FindObjectOfType<BloodflowController>() != null)
-					BloodflowController.Instance.Initialise();
 				if (GameObject.FindObjectOfType<Cellpedia>() != null)
 					Cellpedia.Instance.Initialise();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
