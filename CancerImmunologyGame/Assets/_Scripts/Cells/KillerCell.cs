@@ -105,7 +105,6 @@ namespace ImmunotherapyGame
 		public void OnUpdate()
 		{
 
-
 			if (GlobalGameData.isInPowerUpMode)
 			{
 				float value = immunotherapyEnergyRegain * Time.deltaTime;

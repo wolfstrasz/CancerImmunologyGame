@@ -18,18 +18,18 @@ namespace ImmunotherapyGame
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.OnFixedUpdate();
 
-				foreach (KillerCell kc in GlobalGameData.KillerCells)
+				foreach (KillerCell kc in GlobalLevelData.KillerCells)
 				{
 					kc.OnFixedUpdate();
 				}
 
-				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				foreach (RegulatoryCell rc in GlobalLevelData.RegulatoryCells)
 				{
 					if (rc.gameObject.activeSelf)
 						rc.OnFixedUpdate();
 				}
 
-				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				foreach (HelperTCell hc in GlobalLevelData.HelperTCells)
 				{
 					if (hc.gameObject.activeSelf)
 						hc.OnFixedUpdate();
@@ -40,7 +40,7 @@ namespace ImmunotherapyGame
 			internal override void OnStateEnter()
 			{
 				Debug.Log("Play test state");
-				GlobalGameData.ResetObjectPool();
+				GlobalLevelData.UpdateLevelData();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
 					BackgroundMusic.Instance.Initialise();
 				if (GameObject.FindObjectOfType<UIManager>() != null)
@@ -65,30 +65,30 @@ namespace ImmunotherapyGame
 					TutorialManager.Instance.OnUpdate();
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.OnUpdate();
-				for (int i = 0; i < GlobalGameData.KillerCells.Count; ++i)
+				for (int i = 0; i < GlobalLevelData.KillerCells.Count; ++i)
 				{
-					GlobalGameData.KillerCells[i].OnUpdate();
+					GlobalLevelData.KillerCells[i].OnUpdate();
 				}
 
 
-				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				foreach (RegulatoryCell rc in GlobalLevelData.RegulatoryCells)
 				{
 					if (rc.gameObject.activeSelf)
 						rc.OnUpdate();
 				}
 
-				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				foreach (HelperTCell hc in GlobalLevelData.HelperTCells)
 				{
 					if (hc.gameObject.activeSelf)
 						hc.OnUpdate();
 				}
-				foreach (AIController controller in GlobalGameData.AIKillerCells)
+				foreach (AIController controller in GlobalLevelData.AIKillerCells)
 				{
 					controller.OnUpdate();
 				}
-				for (int i = 0; i < GlobalGameData.Cancers.Count; ++i)
+				for (int i = 0; i < GlobalLevelData.Cancers.Count; ++i)
 				{
-					GlobalGameData.Cancers[i].OnUpdate();
+					GlobalLevelData.Cancers[i].OnUpdate();
 				}
 			}
 		}

@@ -14,7 +14,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
-				GlobalGameData.ResetObjectPool(); // Maybe move to OnState enter
+				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.Initialise();
 				UIManager.Instance.ClosePanels();
 				PlayerController.Instance.Initialise();
@@ -29,18 +29,18 @@ namespace ImmunotherapyGame
 			internal override void OnFixedUpdate()
 			{
 				PlayerController.Instance.OnFixedUpdate();
-				foreach (KillerCell kc in GlobalGameData.KillerCells)
+				foreach (KillerCell kc in GlobalLevelData.KillerCells)
 				{
 					kc.OnFixedUpdate();
 				}
 
-				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				foreach (RegulatoryCell rc in GlobalLevelData.RegulatoryCells)
 				{
 					if (rc.gameObject.activeSelf)
 						rc.OnFixedUpdate();
 				}
 
-				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				foreach (HelperTCell hc in GlobalLevelData.HelperTCells)
 				{
 					if (hc.gameObject.activeSelf)
 						hc.OnFixedUpdate();
@@ -51,34 +51,34 @@ namespace ImmunotherapyGame
 			{
 				TutorialManager.Instance.OnUpdate();
 				PlayerController.Instance.OnUpdate();
-				for (int i = 0; i < GlobalGameData.KillerCells.Count; ++i)
+				for (int i = 0; i < GlobalLevelData.KillerCells.Count; ++i)
 				{
-					GlobalGameData.KillerCells[i].OnUpdate();
+					GlobalLevelData.KillerCells[i].OnUpdate();
 				}
 
-				foreach (RegulatoryCell rc in GlobalGameData.RegulatoryCells)
+				foreach (RegulatoryCell rc in GlobalLevelData.RegulatoryCells)
 				{
 					if (rc.gameObject.activeSelf)
 						rc.OnUpdate();
 				}
 
-				foreach (HelperTCell hc in GlobalGameData.HelperTCells)
+				foreach (HelperTCell hc in GlobalLevelData.HelperTCells)
 				{
 					if (hc.gameObject.activeSelf)
 						hc.OnUpdate();
 				}
 
-				for (int i = 0; i < GlobalGameData.Cancers.Count; ++i)
+				for (int i = 0; i < GlobalLevelData.Cancers.Count; ++i)
 				{
-					GlobalGameData.Cancers[i].OnUpdate();
+					GlobalLevelData.Cancers[i].OnUpdate();
 				}
 
-				foreach (AIController controller in GlobalGameData.AIKillerCells)
+				foreach (AIController controller in GlobalLevelData.AIKillerCells)
 				{
 					controller.OnUpdate();
 				}
 
-				if (GlobalGameData.Cancers.Count == 0)
+				if (GlobalLevelData.Cancers.Count == 0)
 				{
 					UIManager.Instance.WinScreen();
 					owner.SetState(new MainMenuState(owner));

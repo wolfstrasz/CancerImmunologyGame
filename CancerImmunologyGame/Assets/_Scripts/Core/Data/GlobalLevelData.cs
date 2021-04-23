@@ -1,20 +1,13 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+using System.Collections.Generic;
 using ImmunotherapyGame.Player;
 using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.AI;
+using UnityEngine;
 
 namespace ImmunotherapyGame
 {
-	public static class GlobalGameData
-	{
-		public static bool autoAim = false;
-		public static bool isGameplayPaused = false;
-		public static bool isInitialised = false;
-		public static bool isInPowerUpMode = false;
-		public static float gameplaySpeed = 1.0f;
-		public static float gameSpeed = 1.0f;
-
+    public static class GlobalLevelData
+    {
 		// Shared object pool
 		public static List<Cancer> Cancers = new List<Cancer>();
 		public static List<KillerCell> KillerCells = new List<KillerCell>();
@@ -22,9 +15,10 @@ namespace ImmunotherapyGame
 		public static List<RegulatoryCell> RegulatoryCells = new List<RegulatoryCell>();
 		public static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 		public static List<AIController> AIKillerCells = new List<AIController>();
-		public static bool isPowerUpOn = false;
 
-		public static void ResetObjectPool()
+
+
+		public static void UpdateLevelData()
 		{
 			RespawnAreas.Clear();
 			RespawnAreas.AddRange(GameObject.FindObjectsOfType<PlayerRespawnArea>(true));
