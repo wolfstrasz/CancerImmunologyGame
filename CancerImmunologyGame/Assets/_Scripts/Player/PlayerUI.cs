@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ImmunotherapyGame.Core;
+
 
 namespace ImmunotherapyGame.Player
 {
@@ -174,4 +176,7 @@ namespace ImmunotherapyGame.Player
 			}
 		}
 	}
+
+	public enum PlayerUIPanels { PLAYER_INFO_ENERGYBAR, PLAYER_INFO_HEALTHBAR, IMMUNOTHERAPY, EVERYTHING }
+
 }

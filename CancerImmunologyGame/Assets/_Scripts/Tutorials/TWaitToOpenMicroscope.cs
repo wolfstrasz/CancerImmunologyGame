@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ImmunotherapyGame.CellpediaUI;
+using ImmunotherapyGame.CellpediaSystem;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -17,7 +17,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override bool OnUpdateEvent()
 		{
-			if (Cellpedia.Instance.IsCellpediaOpened)
+			if (CellpediaSystem.Cellpedia.Instance.IsCellpediaOpened)
 				return true;
 			return false;
 		}

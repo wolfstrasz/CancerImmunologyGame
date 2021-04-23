@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
-using ImmunotherapyGame.Player;
+using ImmunotherapyGame.Core;
+
 
 namespace ImmunotherapyGame.Bloodflow
 {
@@ -12,7 +13,6 @@ namespace ImmunotherapyGame.Bloodflow
 		[Header("Attributes")]
 		[SerializeField] private PathCreator pathCreator = null;
 		[SerializeField] private float flow_speed = 7.0f;
-		[SerializeField] private float rotation_speed = 2.0f;
 		[SerializeField][ReadOnly] private float fixNormal = 0.0f;
 
 		internal void Awake()

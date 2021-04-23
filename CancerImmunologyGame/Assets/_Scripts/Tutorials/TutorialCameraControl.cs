@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.Player;
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -10,9 +11,9 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private bool shouldFocus = false;
 		[SerializeField]
-		private FocusObjectType closestObjectType = FocusObjectType.NONE;
-		[SerializeField]
 		private bool instantFocus = false;
+		[SerializeField]
+		private GameObject focusTarget = null;
 
 		[Header("Zoom")]
 		[SerializeField]
@@ -36,28 +37,7 @@ namespace ImmunotherapyGame.Tutorials
 			if (shouldFocus)
 			{
 				Vector3 location = PlayerController.Instance.gameObject.transform.position;
-				switch (closestObjectType)
-				{
-					case FocusObjectType.PLAYER:
-						GameCamera2D.Instance.SetFocusTarget(PlayerController.Instance.gameObject, instantFocus);
-						break;
-					case FocusObjectType.DENDRITIC_CELL:
-						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<DendriticCell> (location), instantFocus);
-						break;
-					case FocusObjectType.HEART:
-						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<TheHeart>(location), instantFocus);
-						break;
-					case FocusObjectType.HELPER_CELL:
-						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<HelperTCell>(location), instantFocus);
-						break;
-					case FocusObjectType.CANCER:
-						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<Cancer>(location), instantFocus);
-						break;
-					case FocusObjectType.CAF:
-						GameCamera2D.Instance.SetFocusTarget(Utils.FindClosestGameObjectOfType<CAFCell>(location), instantFocus);
-						break;
-					default: break;
-				}
+				GameCamera2D.Instance.SetFocusTarget(focusTarget, instantFocus);
 			}
 
 			if (shouldZoom)
@@ -83,7 +63,6 @@ namespace ImmunotherapyGame.Tutorials
 		}
 
 		private enum CameraBlinding {KEEP, BLIND, UNBLIND}
-		private enum FocusObjectType { NONE, PLAYER, DENDRITIC_CELL, HELPER_CELL, CANCER, HEART, CAF }
 
 	}
 }

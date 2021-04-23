@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using ImmunotherapyGame.CellpediaUI;
+﻿using UnityEngine;
+using ImmunotherapyGame.CellpediaSystem;
 
 namespace ImmunotherapyGame.Tutorials
 {

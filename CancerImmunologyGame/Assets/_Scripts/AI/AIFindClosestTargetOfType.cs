@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTreeBase;
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.AI
 {

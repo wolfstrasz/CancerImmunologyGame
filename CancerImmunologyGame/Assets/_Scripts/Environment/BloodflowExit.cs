@@ -10,7 +10,6 @@ namespace ImmunotherapyGame.Bloodflow
 	{
 		[Header("Attributes")]
 		[SerializeField] private BloodflowEnvironment environment = null;
-		[SerializeField] private BloodflowEntrance newEntrance = null;
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{

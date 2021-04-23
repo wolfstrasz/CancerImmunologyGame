@@ -1,8 +1,8 @@
 ﻿using ImmunotherapyGame.Player;
-using ImmunotherapyGame.Bloodflow;
-using ImmunotherapyGame.CellpediaUI;
+using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.Tutorials;
 using ImmunotherapyGame.AI;
+using ImmunotherapyGame.Audio;
 
 namespace ImmunotherapyGame
 {
