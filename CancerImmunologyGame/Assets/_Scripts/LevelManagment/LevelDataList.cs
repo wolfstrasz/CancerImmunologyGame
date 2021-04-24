@@ -7,10 +7,26 @@ namespace ImmunotherapyGame.LevelManagement
 {
 
     [CreateAssetMenu(menuName = "LevelDataList")]
-    [System.Serializable]
     public class LevelDataList : ScriptableObject
     {
         public List<LevelData> levels = null;
+        internal void ResetLevelData()
+		{
+            if (levels.Count <= 0)
+			{
+                Debug.LogError("Level list is empty! Not possible to reset it!");
+                return;
+			}
+
+            levels[0].isLocked = false;
+            levels[0].isCompleted = false;
+
+            for (int i = 1; i < levels.Count; ++i)
+			{
+                levels[i].isLocked = true;
+                levels[i].isCompleted = false;
+			}
+		}
     }
 
     [System.Serializable]
@@ -25,16 +41,16 @@ namespace ImmunotherapyGame.LevelManagement
     [System.Serializable]
     public class SerializableLevelDataList : SavableObject
 	{
-        public List<LevelData> levels = new List<LevelData>();
+        public List<LevelData> Levels = new List<LevelData>();
 
         public SerializableLevelDataList(List<LevelData> levels)
 		{
-            this.levels = levels;
+            this.Levels = levels;
 		}
 
         public SerializableLevelDataList()
 		{
-            levels = new List<LevelData>();
+            Levels = new List<LevelData>();
 		}
 	}
 }

@@ -9,9 +9,11 @@ namespace ImmunotherapyGame.LevelManagement
     public class LevelManager : Singleton<LevelManager>
     {
         [SerializeField]
-        private LevelDataList levelList = null;
+        private LevelDataList levelData = null;
+		private SerializableLevelDataList savedLevelData = null;
 
-        public List<LevelData> Levels => levelList.levels;
+        private List<LevelData> Levels => levelData.levels;
+		private List<LevelData> SavedLevels => savedLevelData.Levels;
 
 		private void Update()
 		{
@@ -23,19 +25,23 @@ namespace ImmunotherapyGame.LevelManagement
 			if (Input.GetKeyDown(KeyCode.L))
 			{
 				LoadLevelData();
-				LevelManagerUI.Instance.Initialise();
 			}
 
-			if (Input.GetKeyDown(KeyCode.Alpha3))
+			if (Input.GetKeyDown(KeyCode.Backspace))
 			{
-				OnLevelComplete(3);
-			}
-			if (Input.GetKeyDown(KeyCode.Alpha2))
-			{
-				OnLevelComplete(2);
+				SaveManager.Instance.ClearSaveData<SerializableLevelDataList>();
 			}
 
+			// TODO: remove from run
+			for (int i = 1; i < 10; ++i)
+			{
+				if (Input.GetKeyDown((KeyCode)(48 + i)))
+				{
+					OnLevelComplete(i + 1); // Hardcoded cuz level = scenebuildIndex + 1 (code is active only atm)
+				}
+			}
 		}
+
 		private void Start()
 		{
 			Initialise();
@@ -46,9 +52,7 @@ namespace ImmunotherapyGame.LevelManagement
 			LoadLevelData();
 
 			// Initilise the Level Manager UI
-			LevelManagerUI.Instance.Initialise();
 		}
-
 
         public void OnLevelComplete(int sceneIndex)
 		{
@@ -60,6 +64,7 @@ namespace ImmunotherapyGame.LevelManagement
 					Levels[i].isCompleted = true;
 					LevelManagerUI.Instance.UpdateLevelItem(i);
 
+					// If next level unlock it
 					if (i < Levels.Count -1)
 					{
 						Levels[i + 1].isLocked = false;
@@ -67,65 +72,59 @@ namespace ImmunotherapyGame.LevelManagement
 					}
 				}
 			}
-		}
-
-        public void OnLevelRestart()
-		{
-
-		}
-
-        public void OnLevelStart()
-		{
-
+			SaveLevelData();
 		}
 
         private void SaveLevelData()
 		{
 			// If success make current SO have that data
-			SaveManager.Instance.SaveData<SerializableLevelDataList>(new SerializableLevelDataList(Levels));
+			savedLevelData = new SerializableLevelDataList(Levels);
+			SaveManager.Instance.SaveData<SerializableLevelDataList>(savedLevelData);
 		}
 
         private void LoadLevelData()
 		{
 			// Try to load levels
-			SerializableLevelDataList loadList = SaveManager.Instance.LoadData<SerializableLevelDataList>();
-			if (loadList != null)
+			savedLevelData = SaveManager.Instance.LoadData<SerializableLevelDataList>();
+			Debug.Log("HELLO");
+
+			if (savedLevelData == null)
 			{
-				Debug.Log("Success in loading");
-				for (int i = 0; i < loadList.levels.Count; ++i)
-				{
-					Debug.Log(loadList.levels[i]);
-				}
-				
-				for (int i = 0; i < loadList.levels.Count; ++i)
-				{
-					levelList.levels[i].isCompleted = loadList.levels[i].isCompleted;
-					levelList.levels[i].isLocked = loadList.levels[i].isLocked;
-					levelList.levels[i].sceneIndex = loadList.levels[i].sceneIndex;
-					levelList.levels[i].levelIndex = loadList.levels[i].levelIndex;
-				}
-
-				int loadedLevelCount = loadList.levels.Count;
-
-				if (loadedLevelCount < levelList.levels.Count)
-				{
-					if (loadList.levels[loadedLevelCount - 1].isCompleted)
-					{
-						levelList.levels[loadedLevelCount].isLocked = false;
-					}
-					SaveLevelData();
-				}
+				Debug.Log("No previous saved data found. Creating new level data save.");
+			}
+			else if (SavedLevels.Count > levelData.levels.Count)
+			{
+				Debug.LogWarning("Saved level data is larger than current level data! Creating new level data save.");
 			}
 			else
 			{
-				SaveLevelData();
-			}
+				int savedLevelsCount = SavedLevels.Count;
+				for (int i = 0; i < savedLevelsCount; ++i)
+				{
+					Levels[i].isCompleted = SavedLevels[i].isCompleted;
+					Levels[i].isLocked = SavedLevels[i].isLocked;
+					Levels[i].sceneIndex = SavedLevels[i].sceneIndex;
+					Levels[i].levelIndex = SavedLevels[i].levelIndex;
+				}
 
+				if (savedLevelsCount < Levels.Count)
+				{
+					Debug.Log("New levels uploaded. Checking to unlock first new level.");
+					if (SavedLevels[savedLevelsCount - 1].isCompleted)
+					{
+						Debug.Log("Unlocking first new level.");
+						Levels[savedLevelsCount].isLocked = false;
+					}
+				}
+			}
+			SaveLevelData();
+			LevelManagerUI.Instance.Initialise(levelData);
 		}
 
 		public void ResetLevelData()
 		{
-
+			levelData.ResetLevelData();
+			SaveLevelData();
 		}
 
 	}

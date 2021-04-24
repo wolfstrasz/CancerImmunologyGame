@@ -16,7 +16,6 @@ namespace ImmunotherapyGame
 			{
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.Initialise();
-				UIManager.Instance.ClosePanels();
 				PlayerController.Instance.Initialise();
 				Cellpedia.Instance.Initialise();
 				TutorialManager.Instance.Initialise();
@@ -76,13 +75,6 @@ namespace ImmunotherapyGame
 				foreach (AIController controller in GlobalLevelData.AIKillerCells)
 				{
 					controller.OnUpdate();
-				}
-
-				if (GlobalLevelData.Cancers.Count == 0)
-				{
-					UIManager.Instance.WinScreen();
-					owner.SetState(new MainMenuState(owner));
-					return;
 				}
 			}
 		}

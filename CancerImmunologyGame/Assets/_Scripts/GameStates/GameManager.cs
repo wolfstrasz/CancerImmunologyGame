@@ -52,16 +52,16 @@ namespace ImmunotherapyGame
 
 			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
 			{
-				if (nextScene.buildIndex == 0) return;
-				if (nextScene.buildIndex == 1)
+				if (nextScene.buildIndex <= 1)
 				{
 					stateController.SetState(new MainMenuState(stateController));
-					UIManager.Instance.OpenMainMenu();
 					return;
 				}
-
-				sceneLoaded = false;
-				stateController.SetState(new LoadState(stateController));
+				else
+				{
+					sceneLoaded = false;
+					stateController.SetState(new LoadState(stateController));
+				}
 			}
 
 			private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

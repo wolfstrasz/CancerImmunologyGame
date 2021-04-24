@@ -6,32 +6,31 @@ namespace ImmunotherapyGame
 {
 	public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 	{
+		[Header("Menu Button Attributes")]
 		[SerializeField]
 		private AudioSource audioSource = null;
 		[SerializeField]
 		private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
 
 		// When highlighted with mouse.
-		public void OnPointerEnter(PointerEventData eventData)
+		public virtual void OnPointerEnter(PointerEventData eventData)
 		{
 			// Do something.
 			audioSource.Play();
 			gameObject.transform.localScale = scaling;
-			Debug.Log("<color=red>Event:</color> Completed mouse highlight.");
 		}
 
-		public void OnPointerExit(PointerEventData eventData)
+		public virtual void OnPointerExit(PointerEventData eventData)
 		{
 			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		}
 
 		// When selected.
-		public void OnPointerClick(PointerEventData eventData)
+		public virtual void OnPointerClick(PointerEventData eventData)
 		{
 			// Do something.
 			audioSource.Play();
 			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-			Debug.Log("<color=red>Event:</color> Completed selection.");
 		}
 
 	}

@@ -35,6 +35,24 @@ namespace ImmunotherapyGame
                 }
             }
 
+            public void ClearSaveData<SaveDataType>()
+			{
+                if (Directory.Exists(saveDirectory))
+                {
+                    string filePath = saveDirectory + Utils.RemoveNamespacesFromAssemblyType(typeof(SaveDataType).ToString()) + ".savefile";
+                    if (File.Exists(filePath))
+					{
+                        File.Delete(filePath);
+					} else
+					{
+                        Debug.Log("File (" + filePath + ") cannot be deleted as it does not exist.");
+					}
+                }
+                else
+                {
+                    Debug.Log("Save directory file not found in " + saveDirectory);
+                }
+            }
 
             /// <summary>
             /// The save data type must be a serializable data!

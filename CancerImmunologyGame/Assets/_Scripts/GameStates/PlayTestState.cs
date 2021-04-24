@@ -43,8 +43,6 @@ namespace ImmunotherapyGame
 				GlobalLevelData.UpdateLevelData();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
 					BackgroundMusic.Instance.Initialise();
-				if (GameObject.FindObjectOfType<UIManager>() != null)
-					UIManager.Instance.ClosePanels();
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.Initialise();
 				if (GameObject.FindObjectOfType<Cellpedia>() != null)
