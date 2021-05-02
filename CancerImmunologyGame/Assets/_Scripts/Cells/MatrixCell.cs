@@ -27,7 +27,7 @@ namespace ImmunotherapyGame
 				if (timePassed > timeToReach)
 				{
 					timePassed = timeToReach;
-					transform.parent = endPosition;
+					//transform.parent = endPosition;
 				}
 
 				transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timePassed / timePassed);
@@ -73,7 +73,7 @@ namespace ImmunotherapyGame
 		{
 			this.startPosition = startPosition;
 			endPosition = targetPosition;
-			render.sortingOrder = SortLayerID + 1;
+			//render.sortingOrder = SortLayerID + 1;
 		}
 
 		public void OnDestroyMatrixCell()

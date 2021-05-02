@@ -216,7 +216,7 @@ MonoBehaviour:
   coll: {fileID: 3613750851713389194}
   animator: {fileID: 8592794062118892716}
   damage: 2
-  speed: 1
+  speed: 4
   eatSpeed: 0.5
 --- !u!95 &8592794062118892716
 Animator:
