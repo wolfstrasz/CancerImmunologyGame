@@ -74,8 +74,15 @@ namespace ImmunotherapyGame.Core
 			return name;
 		}
 
+		public static void LookAt2D (this Transform trans, Vector3 position)
+		{
+			Quaternion rotation = Quaternion.LookRotation (position, trans.TransformDirection(Vector3.up));
+			trans.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+		}
+
 	}
     
+
     public class ReadOnlyAttribute : PropertyAttribute { }
 }
 

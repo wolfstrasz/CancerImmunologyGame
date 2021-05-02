@@ -86,6 +86,10 @@ namespace ImmunotherapyGame.Player
 				{
 					kc.Attack(rangeDisplay.centre.position);
 				}
+				if (Input.GetKeyDown(KeyCode.Mouse1))
+				{
+					kc.SpecialAttack(rangeDisplay.centre.position);
+				}
 			}
 			else
 			{

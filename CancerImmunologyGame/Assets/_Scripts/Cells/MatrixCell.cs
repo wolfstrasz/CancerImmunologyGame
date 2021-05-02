@@ -48,22 +48,25 @@ namespace ImmunotherapyGame
 			health -= amount;
 			healthBar.Health = health;
 
-
-			if (health * 3f <= maxHealth)
+			if (health <= 0.0f)
 			{
-				animator.SetTrigger("AlmostDestroyed");
+				animator.Play("Destroyed");
+				// Make destruction sound
+				isDying = true;
+
+			}
+			else if (health * 3f <= maxHealth)
+			{
+				animator.Play("AlmostDestroyed");
 				// Make destruction sound
 			}
 			else if (health * 1.5f <= maxHealth)
 			{
-				animator.SetTrigger("Damaged");
+				animator.Play("Damaged");
 				// Make destruction sound
+
 			}
-			else if (health <= 0.0f)
-			{
-				isDying = true;
-				Destroy(gameObject);
-			}
+
 		}
 
 		public void SetMatrixData(Transform targetPosition, Transform startPosition, int SortLayerID)
@@ -71,6 +74,11 @@ namespace ImmunotherapyGame
 			this.startPosition = startPosition;
 			endPosition = targetPosition;
 			render.sortingOrder = SortLayerID + 1;
+		}
+
+		public void OnDestroyMatrixCell()
+		{
+			Destroy(gameObject);
 		}
     }
 }
