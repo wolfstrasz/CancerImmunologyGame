@@ -210,5 +210,10 @@ namespace ImmunotherapyGame.Core
                 difficultyDropdown.value = 0;
         }
 
+        public void Open()
+		{
+            gameObject.SetActive(true);
+		}
+
     }
 }
