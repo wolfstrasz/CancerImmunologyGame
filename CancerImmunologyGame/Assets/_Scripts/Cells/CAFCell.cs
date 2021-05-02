@@ -41,7 +41,7 @@ namespace ImmunotherapyGame.Cancers
 				if (cellToSpawn != null)
 				{
 					MatrixCell matrix = Instantiate(matrixPrefab, transform.position, Quaternion.identity).GetComponent<MatrixCell>();
-					matrix.SetMatrixData(cellToSpawn.transform, this.transform);
+					matrix.SetMatrixData(cellToSpawn.transform, this.transform, cellToSpawn.RenderSortOrder);
 					cellToSpawn.matrix = matrix;
 				}
 

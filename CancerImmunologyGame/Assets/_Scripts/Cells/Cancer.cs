@@ -181,12 +181,14 @@ namespace ImmunotherapyGame.Cancers
 			if (cancerCells.Count >= maximumCells) return;
 
 #if CANCER_DEBUG_DIVISION_PROCESS
-			if (Input.GetKeyDown(KeyCode.Alpha0))
-			{
-				timepassed = timeBetweenDivisions;
-			}
+			
 #else
 #endif
+			if (Input.GetKeyDown(KeyCode.Alpha0))
+			{
+				timePassed = timeBetweenDivisions;
+			}
+
 			if (canDivide)
 			{
 				timePassed += Time.deltaTime;

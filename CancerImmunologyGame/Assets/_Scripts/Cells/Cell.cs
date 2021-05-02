@@ -33,7 +33,7 @@ namespace ImmunotherapyGame
 		public abstract void ExhaustCell(float amount);
 		public abstract bool isImmune { get; }
 
-		public int RenderSortOrder { set => render.sortingOrder = value; }
+		public int RenderSortOrder { get => render.sortingOrder;  set => render.sortingOrder = value; }
 
 	}
 
