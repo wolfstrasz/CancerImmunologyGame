@@ -19,6 +19,9 @@ namespace ImmunotherapyGame
 			{
 				GlobalGameData.dataManagers = new List<IDataManager>(2);
 
+				// Load Settings
+				SettingsManager.Instance.Initialise();
+
 				// Load Game Data
 				Debug.Log("Loader: Game Manager");
 				GameManager.Instance.Initialise();

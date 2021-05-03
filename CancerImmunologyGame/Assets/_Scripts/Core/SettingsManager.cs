@@ -9,7 +9,8 @@ namespace ImmunotherapyGame.Core
 {
     public class SettingsManager : Singleton<SettingsManager>
     {
-
+        [SerializeField]
+        private GameObject panel = null;
         [SerializeField]
         private AudioMixer audioMixer = null;
         [SerializeField]
@@ -29,18 +30,14 @@ namespace ImmunotherapyGame.Core
 
         [SerializeField]
         private Toggle fullscreenToggle = null;
-
-		private void Start()
-		{
-            Initialise();
-		}
+        private int currentResolutionIndex = 0;
 
         public void Initialise()
 		{
             resolutionDropdown.ClearOptions();
             List<string> options = new List<string>();
             resolutions = Screen.resolutions;
-            int currentResolutionIndex = 0;
+            currentResolutionIndex = 0;
 
 
             for (int i = 0; i < resolutions.Length; i++)
@@ -60,6 +57,8 @@ namespace ImmunotherapyGame.Core
             LoadVolumeSettings();
 
             LoadDifficultySettings();
+
+            panel.SetActive(false);
         }
 
 
@@ -212,7 +211,7 @@ namespace ImmunotherapyGame.Core
 
         public void Open()
 		{
-            gameObject.SetActive(true);
+            panel.SetActive(true);
 		}
 
     }
