@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 1
-  levelList: {fileID: 11400000, guid: 9b300165ffcf50f4095f5b264f36dd50, type: 2}
+  levelData: {fileID: 11400000, guid: 9b300165ffcf50f4095f5b264f36dd50, type: 2}

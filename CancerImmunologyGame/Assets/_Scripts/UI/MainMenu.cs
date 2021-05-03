@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Core.SystemInterfaces;
 
 namespace ImmunotherapyGame.UI
 {
-    public class MainMenu : Singleton<MainMenu>
+    public class MainMenu : MonoBehaviour
     {
-
 		[SerializeField]
 		private GameObject newGamePrompt = null;
 		[SerializeField]
 		private GameObject continueButtonObj = null;
 
+
+		private void Awake()
+		{
+			continueButtonObj.SetActive(PlayerPrefs.HasKey("GameInProgress"));
+		}
 
 		public void TryToStartNewGame()
 		{
@@ -29,13 +32,27 @@ namespace ImmunotherapyGame.UI
 		public void StartNewGame()
 		{
 			// Reset data
-			// Start new game
+			foreach (IDataManager manager in GlobalGameData.dataManagers)
+			{
+				manager.ResetData();
+			}
+
+			foreach (IDataManager manager in GlobalGameData.dataManagers)
+			{
+				manager.SaveData();
+			}
+
+			PlayerPrefs.SetInt("GameInProgress", 1);
+
+			// Open Level Selection
+			LevelSelectScreen.Instance.Open();
 		}
 
 
 		public void ContinueGame()
 		{
-
+			// Open Level Selection
+			LevelSelectScreen.Instance.Open();
 		}
 
 		public void OpenSettings()
@@ -46,6 +63,11 @@ namespace ImmunotherapyGame.UI
 		public void Quit()
 		{
 			// Save data
+			foreach(IDataManager manager in GlobalGameData.dataManagers)
+			{
+				manager.SaveData();
+			}
+
 			// Quit
 			Application.Quit();
 		}

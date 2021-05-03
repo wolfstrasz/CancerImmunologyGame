@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
+using ImmunotherapyGame.Core.SystemInterfaces;
 
 namespace ImmunotherapyGame
 {
@@ -14,5 +17,7 @@ namespace ImmunotherapyGame
 		public static bool isPowerUpOn = false;
 		public static bool isInPowerUpMode = false;
 
+
+		public static List<IDataManager> dataManagers;
 	}
 }

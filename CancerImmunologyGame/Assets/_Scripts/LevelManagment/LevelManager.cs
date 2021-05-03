@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
 
 namespace ImmunotherapyGame.LevelManagement
 {
-    public class LevelManager : Singleton<LevelManager>
+    public class LevelManager : Singleton<LevelManager>, IDataManager
     {
         [SerializeField]
-        private LevelDataList levelData = null;
-		private SerializableLevelDataList savedLevelData = null;
+        private LevelData levelData = null;
+		private SerializableLevelData savedLevelData = null;
 
-        private List<LevelData> Levels => levelData.levels;
-		private List<LevelData> SavedLevels => savedLevelData.Levels;
+        private List<LevelDataObject> Levels => levelData.levels;
+		private List<LevelDataObject> SavedLevels => savedLevelData.levels;
 
 		private void Update()
 		{
@@ -29,7 +32,7 @@ namespace ImmunotherapyGame.LevelManagement
 
 			if (Input.GetKeyDown(KeyCode.Backspace))
 			{
-				SaveManager.Instance.ClearSaveData<SerializableLevelDataList>();
+				SaveManager.Instance.ClearSaveData<SerializableLevelData>();
 			}
 
 			// TODO: remove from run
@@ -42,33 +45,18 @@ namespace ImmunotherapyGame.LevelManagement
 			}
 		}
 
-		private void Start()
-		{
-			Initialise();
-		}
-
-		public void Initialise()
-		{
-			LoadLevelData();
-
-			// Initilise the Level Manager UI
-		}
-
         public void OnLevelComplete(int sceneIndex)
 		{
 			for (int i = 0; i < Levels.Count; i++)
 			{
 				if (Levels[i].sceneIndex == sceneIndex)
 				{
-					Debug.Log("Levels [" + i + "] has scene index = " + sceneIndex);
 					Levels[i].isCompleted = true;
-					LevelManagerUI.Instance.UpdateLevelItem(i);
 
 					// If next level unlock it
-					if (i < Levels.Count -1)
+					if (i < Levels.Count - 1)
 					{
 						Levels[i + 1].isLocked = false;
-						LevelManagerUI.Instance.UpdateLevelItem(i + 1);
 					}
 				}
 			}
@@ -78,15 +66,14 @@ namespace ImmunotherapyGame.LevelManagement
         private void SaveLevelData()
 		{
 			// If success make current SO have that data
-			savedLevelData = new SerializableLevelDataList(Levels);
-			SaveManager.Instance.SaveData<SerializableLevelDataList>(savedLevelData);
+			savedLevelData = new SerializableLevelData(levelData);
+			SaveManager.Instance.SaveData<SerializableLevelData>(savedLevelData);
 		}
 
         private void LoadLevelData()
 		{
 			// Try to load levels
-			savedLevelData = SaveManager.Instance.LoadData<SerializableLevelDataList>();
-			Debug.Log("HELLO");
+			savedLevelData = SaveManager.Instance.LoadData<SerializableLevelData>();
 
 			if (savedLevelData == null)
 			{
@@ -98,34 +85,30 @@ namespace ImmunotherapyGame.LevelManagement
 			}
 			else
 			{
-				int savedLevelsCount = SavedLevels.Count;
-				for (int i = 0; i < savedLevelsCount; ++i)
-				{
-					Levels[i].isCompleted = SavedLevels[i].isCompleted;
-					Levels[i].isLocked = SavedLevels[i].isLocked;
-					Levels[i].sceneIndex = SavedLevels[i].sceneIndex;
-					Levels[i].levelIndex = SavedLevels[i].levelIndex;
-				}
-
-				if (savedLevelsCount < Levels.Count)
-				{
-					Debug.Log("New levels uploaded. Checking to unlock first new level.");
-					if (SavedLevels[savedLevelsCount - 1].isCompleted)
-					{
-						Debug.Log("Unlocking first new level.");
-						Levels[savedLevelsCount].isLocked = false;
-					}
-				}
+				savedLevelData.CopyTo(levelData);
 			}
 			SaveLevelData();
-			LevelManagerUI.Instance.Initialise(levelData);
 		}
 
 		public void ResetLevelData()
 		{
 			levelData.ResetLevelData();
+			PlayerPrefs.DeleteKey("GameInProgress");
+		}
+
+		public void LoadData()
+		{
+			LoadLevelData();
+		}
+
+		public void SaveData()
+		{
 			SaveLevelData();
 		}
 
+		public void ResetData()
+		{
+			ResetLevelData();
+		}
 	}
 }

@@ -108,11 +108,12 @@ namespace ImmunotherapyGame
             {
                 if (!Directory.Exists(saveDirectory))
                 {
-                    Debug.Log("Save directory file not found in " + saveDirectory);
+                    Debug.Log("Load directory file not found in " + saveDirectory);
 
                     return null;
                 }
 
+                Debug.Log("Save Manager: Loading from directory: " + saveDirectory);
                 string filePath = saveDirectory + Utils.RemoveNamespacesFromAssemblyType(typeof(LoadDataType).ToString()) + ".savefile";
 
                 if (!File.Exists(filePath))
@@ -123,7 +124,6 @@ namespace ImmunotherapyGame
                 else
                 {
                     FileStream file = File.Open(filePath, FileMode.Open);
-                    Debug.Log(file);
                     BinaryFormatter bf = new BinaryFormatter();
                     LoadDataType storeDataContainer = (LoadDataType)bf.Deserialize(file);
 

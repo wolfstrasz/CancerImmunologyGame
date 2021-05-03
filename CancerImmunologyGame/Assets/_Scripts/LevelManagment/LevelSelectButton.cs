@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.EventSystems;
+
 using UnityEngine;
-using TMPro;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-namespace ImmunotherapyGame.LevelManagement
+using TMPro;
+
+using ImmunotherapyGame.LevelManagement;
+
+namespace ImmunotherapyGame.UI
 {
     public class LevelSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
@@ -27,7 +29,7 @@ namespace ImmunotherapyGame.LevelManagement
             if (lockedOverlay.activeSelf) return;
             // TODO: Play Audio
             gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            LevelManagerUI.Instance.Close();
+            LevelSelectScreen.Instance.Close();
             SceneManager.LoadScene(sceneIndex);
         }
 
@@ -47,7 +49,7 @@ namespace ImmunotherapyGame.LevelManagement
             gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
-		internal void UpdateData(LevelData data)
+		internal void UpdateData(LevelDataObject data)
 		{
             completedOverlay.SetActive(data.isCompleted);
             lockedOverlay.SetActive(data.isLocked);
