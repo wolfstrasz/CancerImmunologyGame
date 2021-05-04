@@ -11,6 +11,8 @@ namespace ImmunotherapyGame
         private Collider2D coll = null;
         [SerializeField]
         private Animator animator = null;
+        [SerializeField]
+        private SpriteRenderer render = null;
 
         [Header ("Attributes")]
         [SerializeField]
@@ -44,6 +46,8 @@ namespace ImmunotherapyGame
 		public void SetData(Vector3 direction, float distance)
 		{
             this.direction = direction;
+            render.flipY = direction.x <= 0;
+
             this.distance = distance;
             hitMatrix = null;
             transform.right = direction;
@@ -60,6 +64,7 @@ namespace ImmunotherapyGame
                 coll.enabled = false;
                 direction = matrix.transform.position - transform.position;
                 transform.right = direction;
+                render.flipY = direction.x <= 0;
                 animator.SetTrigger("Eat");
 			}
 		}
