@@ -1,7 +1,13 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
-using ImmunotherapyGame.GameManagement;
+
 using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Core.SystemInterfaces;
+using ImmunotherapyGame.LevelManagement;
+using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame
 {
@@ -11,19 +17,31 @@ namespace ImmunotherapyGame
 		{
 			void Awake()
 			{
-				StartCoroutine(LoadGameAndInitialise());
-			}
+				GlobalGameData.dataManagers = new List<IDataManager>(2);
 
-			IEnumerator LoadGameAndInitialise()
-			{
+				// Load Settings
+				SettingsManager.Instance.Initialise();
+
+				// Load Game Data
+				Debug.Log("Loader: Game Manager");
 				GameManager.Instance.Initialise();
-				// Load datas
+				GameManager.Instance.LoadData();
+				GlobalGameData.dataManagers.Add(GameManager.Instance);
+
+				// Load Level Data
+				Debug.Log("Loader: Level Manager");
+				LevelManager.Instance.LoadData();
+				GlobalGameData.dataManagers.Add(LevelManager.Instance);
 
 
 				// call intro finish
+				Debug.Log("Fading Logos");
 				Intro.Instance.FadeLogos();
-				yield return null;
+
+				Debug.Log("Loader finished");
 			}
+
+		
 
 			internal void OnIntroFinished()
 			{

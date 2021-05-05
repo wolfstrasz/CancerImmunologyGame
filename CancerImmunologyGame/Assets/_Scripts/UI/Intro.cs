@@ -92,7 +92,6 @@ namespace ImmunotherapyGame
 					LogoFadeFinished();
 					return;
 				}
-				Debug.Log("Fade Logos");
 				logoAnimator.StartFade();
 			}
 

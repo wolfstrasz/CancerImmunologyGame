@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 1
+  data: {fileID: 0}
+  sceneLoaded: 0
+  isTestScene: 0

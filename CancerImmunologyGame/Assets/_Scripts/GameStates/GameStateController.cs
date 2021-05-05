@@ -15,7 +15,7 @@ namespace ImmunotherapyGame
 			internal GameStateController()
 			{
 				stateHistory = new Stack<GameState>();
-				AddState(new MainMenuState(this));
+				AddState(new EmptyState(this));
 			}
 
 			internal void OnUpdate()

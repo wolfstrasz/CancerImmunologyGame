@@ -151,7 +151,7 @@ namespace ImmunotherapyGame.Player
 		public void OnCellDeath()
 		{ 
 			// Find closest spawn location
-			List < PlayerRespawnArea > respawnLocations = GlobalGameData.RespawnAreas;
+			List < PlayerRespawnArea > respawnLocations = GlobalLevelData.RespawnAreas;
 			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
 			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Location);
 

@@ -27,7 +27,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
-			cancers = GlobalGameData.Cancers;
+			cancers = GlobalLevelData.Cancers;
 
 			Subscribe();
 			detectionValue = 0;

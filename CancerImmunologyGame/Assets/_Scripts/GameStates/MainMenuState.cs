@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Core;
+using ImmunotherapyGame.UI;
 
 namespace ImmunotherapyGame
 { 
@@ -12,6 +14,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnFixedUpdate()
 			{
+
 			}
 
 			internal override void OnStateEnter()
@@ -20,10 +23,12 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateExit()
 			{
+
 			}
 
 			internal override void OnUpdate()
 			{
+
 			}
 		}
 	}

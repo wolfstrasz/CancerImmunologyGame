@@ -18,7 +18,7 @@ namespace ImmunotherapyGame.AI
 		protected override NodeStates OnEvaluateAction()
 		{
 			Transform cellTransform = interactor.ControlledCell.transform;
-			List<HelperTCell> helperCells = new List<HelperTCell>(GlobalGameData.HelperTCells);
+			List<HelperTCell> helperCells = new List<HelperTCell>(GlobalLevelData.HelperTCells);
 			helperCells.Sort(delegate (HelperTCell a, HelperTCell b)
 			{
 				return Vector3.SqrMagnitude(a.transform.position - cellTransform.position)
