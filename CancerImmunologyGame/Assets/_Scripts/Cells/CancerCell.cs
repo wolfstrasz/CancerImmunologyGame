@@ -127,12 +127,7 @@ namespace ImmunotherapyGame.Cancers
 		{
 			if (isImmune) return;
 
-			if (matrix != null)
-			{
-				matrix.HitCell(amount);
-				healthBar.Health = health - 0.1f;
-			}
-			else
+			if (matrix == null)
 			{
 				health -= amount;
 				healthBar.Health = health;

@@ -27,10 +27,14 @@ namespace ImmunotherapyGame
 				if (timePassed > timeToReach)
 				{
 					timePassed = timeToReach;
+					//transform.parent = endPosition;
 				}
 
 				transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timePassed / timePassed);
 			}
+
+	
+			
 		}
 
 		public override void ExhaustCell(float amount)
@@ -46,15 +50,35 @@ namespace ImmunotherapyGame
 
 			if (health <= 0.0f)
 			{
+				animator.Play("Destroyed");
+				// Make destruction sound
 				isDying = true;
-				Destroy(gameObject);
+
 			}
+			else if (health * 3f <= maxHealth)
+			{
+				animator.Play("AlmostDestroyed");
+				// Make destruction sound
+			}
+			else if (health * 1.5f <= maxHealth)
+			{
+				animator.Play("Damaged");
+				// Make destruction sound
+
+			}
+
 		}
 
-		public void SetMatrixData(Transform targetPosition, Transform startPosition)
+		public void SetMatrixData(Transform targetPosition, Transform startPosition, int SortLayerID)
 		{
 			this.startPosition = startPosition;
 			endPosition = targetPosition;
+			//render.sortingOrder = SortLayerID + 1;
+		}
+
+		public void OnDestroyMatrixCell()
+		{
+			Destroy(gameObject);
 		}
     }
 }

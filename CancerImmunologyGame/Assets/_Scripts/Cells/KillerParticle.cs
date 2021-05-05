@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame
 {  
@@ -58,10 +59,10 @@ namespace ImmunotherapyGame
 
 		void OnTriggerEnter2D(Collider2D collider)
 		{
-			EvilCell evilCell = collider.gameObject.GetComponent<EvilCell>();
-			if (evilCell)
+			CancerCell cancerCell = collider.gameObject.GetComponent<CancerCell>();
+			if (cancerCell)
 			{
-				evilCell.HitCell(damage);
+				cancerCell.HitCell(damage);
 				Destroy(gameObject);
 			}
 		}

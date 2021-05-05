@@ -1,76 +1,79 @@
 fileFormatVersion: 2
-guid: d4c8788c60fb78940ab58e5c2119b79a
+guid: 8c93fd3fa7ec0174dbfc68e81a47209f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6932247548946265727
-    second: CancerCell_DyingSprite_0
+      213: 2776160412301928476
+    second: PacMan_flySprite_0
   - first:
-      213: -2634218071832726571
-    second: CancerCell_DyingSprite_1
+      213: -6166290860511727497
+    second: PacMan_flySprite_1
   - first:
-      213: 6254756766776974370
-    second: CancerCell_DyingSprite_2
+      213: -6981863032709011439
+    second: PacMan_flySprite_2
   - first:
-      213: -4727793297506988934
-    second: CancerCell_DyingSprite_3
+      213: -4225377836571489012
+    second: PacMan_flySprite_3
   - first:
-      213: -8562490590279293592
-    second: CancerCell_DyingSprite_4
+      213: -9201273095313579478
+    second: PacMan_flySprite_4
   - first:
-      213: 4188882596893710417
-    second: CancerCell_DyingSprite_5
+      213: 7762012836275675544
+    second: PacMan_flySprite_5
   - first:
-      213: 17745676443144801
-    second: CancerCell_DyingSprite_6
+      213: 1346383998674764429
+    second: PacMan_flySprite_6
   - first:
-      213: -6927275996065939318
-    second: CancerCell_DyingSprite_7
+      213: -656654150510662428
+    second: PacMan_flySprite_7
   - first:
-      213: 1303077002072869816
-    second: CancerCell_DyingSprite_8
+      213: -2683512001780256244
+    second: PacMan_flySprite_8
   - first:
-      213: 2109012693511230388
-    second: CancerCell_DyingSprite_9
+      213: 62338534503591026
+    second: PacMan_flySprite_9
   - first:
-      213: 1591846453403150410
-    second: CancerCell_DyingSprite_10
+      213: -9068799896516782586
+    second: PacMan_flySprite_10
   - first:
-      213: -4308809270600919600
-    second: CancerCell_DyingSprite_11
+      213: 1841272949746509174
+    second: PacMan_flySprite_11
   - first:
-      213: 4356069375417524763
-    second: CancerCell_DyingSprite_12
+      213: -749876806397232359
+    second: PacMan_flySprite_12
   - first:
-      213: -6270680313663360787
-    second: CancerCell_DyingSprite_13
+      213: 1278211735567051825
+    second: PacMan_flySprite_13
   - first:
-      213: -794883810551487373
-    second: CancerCell_DyingSprite_14
+      213: 2450389976560556043
+    second: PacMan_flySprite_14
   - first:
-      213: -8427075016080035987
-    second: CancerCell_DyingSprite_15
+      213: 4089902098824760513
+    second: PacMan_flySprite_15
   - first:
-      213: 7146266025617783348
-    second: CancerCell_DyingSprite_16
+      213: 8184465971326703462
+    second: PacMan_flySprite_16
   - first:
-      213: 3812825206910989300
-    second: CancerCell_DyingSprite_17
+      213: 8654476427374768888
+    second: PacMan_flySprite_17
   - first:
-      213: 8852623924502646474
-    second: CancerCell_DyingSprite_18
+      213: 6001683241977913306
+    second: PacMan_flySprite_18
   - first:
-      213: -398592719778163011
-    second: CancerCell_DyingSprite_19
+      213: -8894253505474239384
+    second: PacMan_flySprite_19
   - first:
-      213: 2399486336800904543
-    second: CancerCell_DyingSprite_20
+      213: -1590389809807065402
+    second: PacMan_flySprite_20
   - first:
-      213: -7448695485334858770
-    second: CancerCell_DyingSprite_21
+      213: 5375569868304105978
+    second: PacMan_flySprite_21
   - first:
-      213: -342232734773220593
-    second: CancerCell_DyingSprite_22
+      213: 6938608668144308357
+    second: PacMan_flySprite_22
+  - first:
+      213: -1178415944585445976
+    second: PacMan_flySprite_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -208,7 +211,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_0
+      name: PacMan_flySprite_0
       rect:
         serializedVersion: 2
         x: 0
@@ -222,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1894cf53595bbcf90800000000000000
-      internalID: -6932247548946265727
+      spriteID: c1822ceaf27e68620800000000000000
+      internalID: 2776160412301928476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_1
+      name: PacMan_flySprite_1
       rect:
         serializedVersion: 2
         x: 512
@@ -243,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d3fe7fce90617bd0800000000000000
-      internalID: -2634218071832726571
+      spriteID: 770f57df12fec6aa0800000000000000
+      internalID: -6166290860511727497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_2
+      name: PacMan_flySprite_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -264,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22c5638e32c5dc650800000000000000
-      internalID: 6254756766776974370
+      spriteID: 118a2f030907b1f90800000000000000
+      internalID: -6981863032709011439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_3
+      name: PacMan_flySprite_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -285,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7c8f9a7b01836eb0800000000000000
-      internalID: -4727793297506988934
+      spriteID: c0d0951ae317c55c0800000000000000
+      internalID: -4225377836571489012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_4
+      name: PacMan_flySprite_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -306,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86527c59c2ceb2980800000000000000
-      internalID: -8562490590279293592
+      spriteID: a22a978ced28e4080800000000000000
+      internalID: -9201273095313579478
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_5
+      name: PacMan_flySprite_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -327,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1585aa93786e12a30800000000000000
-      internalID: 4188882596893710417
+      spriteID: 891eb38bc8538bb60800000000000000
+      internalID: 7762012836275675544
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_6
+      name: PacMan_flySprite_6
       rect:
         serializedVersion: 2
         x: 0
@@ -348,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16251b4499b0f3000800000000000000
-      internalID: 17745676443144801
+      spriteID: d8287440d115fa210800000000000000
+      internalID: 1346383998674764429
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_7
+      name: PacMan_flySprite_7
       rect:
         serializedVersion: 2
         x: 512
@@ -369,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8046611f2f5ddf90800000000000000
-      internalID: -6927275996065939318
+      spriteID: 4eca68a778813e6f0800000000000000
+      internalID: -656654150510662428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_8
+      name: PacMan_flySprite_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -390,14 +393,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bbc88f11a5751210800000000000000
-      internalID: 1303077002072869816
+      spriteID: c02f36f5d0042cad0800000000000000
+      internalID: -2683512001780256244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_9
+      name: PacMan_flySprite_9
       rect:
         serializedVersion: 2
         x: 1536
@@ -411,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b3d687eed7b44d10800000000000000
-      internalID: 2109012693511230388
+      spriteID: 27ca7ec11987dd000800000000000000
+      internalID: 62338534503591026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_10
+      name: PacMan_flySprite_10
       rect:
         serializedVersion: 2
         x: 2048
@@ -432,14 +435,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a486f085aef571610800000000000000
-      internalID: 1591846453403150410
+      spriteID: 606940dea86252280800000000000000
+      internalID: -9068799896516782586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_11
+      name: PacMan_flySprite_11
       rect:
         serializedVersion: 2
         x: 2560
@@ -453,14 +456,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d51ce42cc80434c0800000000000000
-      internalID: -4308809270600919600
+      spriteID: 6752d280ef38d8910800000000000000
+      internalID: 1841272949746509174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_12
+      name: PacMan_flySprite_12
       rect:
         serializedVersion: 2
         x: 0
@@ -474,14 +477,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1228ba740ed37c30800000000000000
-      internalID: 4356069375417524763
+      spriteID: 91b73618407e795f0800000000000000
+      internalID: -749876806397232359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_13
+      name: PacMan_flySprite_13
       rect:
         serializedVersion: 2
         x: 512
@@ -495,14 +498,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de07f0c6a711af8a0800000000000000
-      internalID: -6270680313663360787
+      spriteID: 13ca53e1dce1db110800000000000000
+      internalID: 1278211735567051825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_14
+      name: PacMan_flySprite_14
       rect:
         serializedVersion: 2
         x: 1024
@@ -516,14 +519,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 374ae52c26108f4f0800000000000000
-      internalID: -794883810551487373
+      spriteID: b08d11273b8810220800000000000000
+      internalID: 2450389976560556043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_15
+      name: PacMan_flySprite_15
       rect:
         serializedVersion: 2
         x: 1536
@@ -537,14 +540,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6feaf2ebe30d0b80800000000000000
-      internalID: -8427075016080035987
+      spriteID: 1cc03962a4042c830800000000000000
+      internalID: 4089902098824760513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_16
+      name: PacMan_flySprite_16
       rect:
         serializedVersion: 2
         x: 2048
@@ -558,14 +561,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43af3677613ac2360800000000000000
-      internalID: 7146266025617783348
+      spriteID: 66753311070159170800000000000000
+      internalID: 8184465971326703462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_17
+      name: PacMan_flySprite_17
       rect:
         serializedVersion: 2
         x: 2560
@@ -579,14 +582,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f3b5901350e9e430800000000000000
-      internalID: 3812825206910989300
+      spriteID: 8f23aa21570ea1870800000000000000
+      internalID: 8654476427374768888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_18
+      name: PacMan_flySprite_18
       rect:
         serializedVersion: 2
         x: 0
@@ -600,14 +603,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aceca1e5e86dada70800000000000000
-      internalID: 8852623924502646474
+      spriteID: adf128c3c134a4350800000000000000
+      internalID: 6001683241977913306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_19
+      name: PacMan_flySprite_19
       rect:
         serializedVersion: 2
         x: 512
@@ -621,14 +624,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6d09f780ae77af0800000000000000
-      internalID: -398592719778163011
+      spriteID: 8646fef7f83419480800000000000000
+      internalID: -8894253505474239384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_20
+      name: PacMan_flySprite_20
       rect:
         serializedVersion: 2
         x: 1024
@@ -642,14 +645,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f55db6c3c10bc4120800000000000000
-      internalID: 2399486336800904543
+      spriteID: 6ce7c0ce4eccde9e0800000000000000
+      internalID: -1590389809807065402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_21
+      name: PacMan_flySprite_21
       rect:
         serializedVersion: 2
         x: 1536
@@ -663,14 +666,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee35f84cbeae0a890800000000000000
-      internalID: -7448695485334858770
+      spriteID: af14f81705cd99a40800000000000000
+      internalID: 5375569868304105978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_22
+      name: PacMan_flySprite_22
       rect:
         serializedVersion: 2
         x: 2048
@@ -684,8 +687,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0be4551425204bf0800000000000000
-      internalID: -342232734773220593
+      spriteID: 580103442d3ea4060800000000000000
+      internalID: 6938608668144308357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PacMan_flySprite_23
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8adf35121fc65afe0800000000000000
+      internalID: -1178415944585445976
       vertices: []
       indices: 
       edges: []
@@ -693,7 +717,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 53b771356c514b84fb235c05e438cc46
     internalID: 0
     vertices: []
     indices: 

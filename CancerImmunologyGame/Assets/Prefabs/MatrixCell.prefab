@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041433453743887346}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.15, z: 0}
+  m_LocalPosition: {x: 0.038, y: -0.047, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4851716123014601266}
@@ -70,8 +70,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1262964005
   m_SortingLayer: 3
-  m_SortingOrder: 200
-  m_Sprite: {fileID: -6060429903306733599, guid: a0cc74b25c4e01740a8cff21db2414c2,
+  m_SortingOrder: 49
+  m_Sprite: {fileID: -1772543674311518927, guid: 4d8a0fabb63db074c9412b3bf403f8c4,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -182,6 +182,8 @@ GameObject:
   - component: {fileID: 4851716123014601266}
   - component: {fileID: 1558105866590039031}
   - component: {fileID: 4851716123014601267}
+  - component: {fileID: 248959172395795517}
+  - component: {fileID: 4830379638426490206}
   m_Layer: 10
   m_Name: MatrixCell
   m_TagString: BlocksCancerSpawns
@@ -197,8 +199,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4851716123014601265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -51.478123, y: -10.137707, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2774359641747459434}
   - {fileID: 2777555634399765843}
@@ -239,8 +241,8 @@ MonoBehaviour:
   render: {fileID: 7502233451923882394}
   animator: {fileID: 1558105866590039031}
   bodyBlocker: {fileID: 0}
-  maxHealth: 75
-  health: 75
+  maxHealth: 6
+  health: 6
   maxEnergy: 100
   energy: 100
   healthBar: {fileID: 7076382655458015579}
@@ -249,9 +251,43 @@ MonoBehaviour:
   timePassed: 0
   startPosition: {fileID: 0}
   endPosition: {fileID: 0}
-  spos: {x: 0, y: 0, z: 0}
-  epos: {x: 0, y: 0, z: 0}
-  direction: {x: 0, y: 0, z: 0}
+--- !u!58 &248959172395795517
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4851716123014601265}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.35
+--- !u!50 &4830379638426490206
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4851716123014601265}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &5044407210104160461
 GameObject:
   m_ObjectHideFlags: 0

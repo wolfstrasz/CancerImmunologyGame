@@ -105,7 +105,7 @@ namespace ImmunotherapyGame
 		public void OnUpdate()
 		{
 
-
+			passedCooldown -= Time.deltaTime;
 			if (GlobalGameData.isInPowerUpMode)
 			{
 				float value = immunotherapyEnergyRegain * Time.deltaTime;
@@ -186,8 +186,7 @@ namespace ImmunotherapyGame
 		private float spread = 0.0f;
 		public void Attack(Vector3 targetPosition)
 		{
-			if (isBusy) return;
-			if (!canAttack) return;
+			if (isBusy || !canAttack) return;
 
 			animator.SetBool("IsAttacking", true);
 			attackDowntime = 0.0f;
@@ -208,6 +207,52 @@ namespace ImmunotherapyGame
 		public void StopAttack()
 		{
 			animator.SetBool("IsAttacking", false);
+		}
+
+		[Header("Special Attack Attributes")]
+		[SerializeField]
+		private float spreadAngle = 35f;
+		[SerializeField]
+		private int bulletAmount = 5;
+		[SerializeField]
+		private float specialAttackRange = 3;
+		[SerializeField]
+		private GameObject pacParticlePrefab = null;
+		[SerializeField]
+		private float gapDistance = 1f;
+		[SerializeField]
+		private float cooldown = 10f;
+		[SerializeField]
+		private float passedCooldown = 0;
+
+		public void SpecialAttack(Vector3 targetPosition)
+		{
+			if (isBusy || !canAttack || passedCooldown >= 0f) return;
+
+			float anglePerBullet = spreadAngle / (bulletAmount - 1);
+
+			float baseStartRotation = -0.5f * spreadAngle;
+
+			Vector3 shootDirection = (targetPosition - transform.position);
+
+			for (int i = 0; i < bulletAmount; ++i)
+			{
+				Debug.Log("Particle: " + i);
+				// Find base angle
+				float baseRotation = baseStartRotation + i * anglePerBullet;
+
+				// Find angle offset
+				float angleOffset = Random.Range(0f, anglePerBullet);
+
+				float angleToRotate = baseRotation - 0.5f * anglePerBullet + angleOffset;
+				// Find direction vector
+				Vector3 direction = Quaternion.Euler(0.0f, 0.0f, angleToRotate) * shootDirection;
+
+				// Find position to instantiate
+				PacParticle particle = Instantiate(pacParticlePrefab, transform.position + direction * gapDistance, Quaternion.identity).GetComponent<PacParticle>();
+				particle.SetData(direction, specialAttackRange);
+			}
+			passedCooldown = cooldown;
 		}
 
 		// POWER UP IMMUNOTHERAPY

@@ -90,7 +90,7 @@ MonoBehaviour:
   spawnsBeforeCafSpawn: 5
   CAFBalanceRatio: 3
   maximumCells: 20
-  radius: 0.3
+  radius: 0.25
   radiusThinner: 0.15
   angleRotation: 60
   offsetOfAnimation: 0.2

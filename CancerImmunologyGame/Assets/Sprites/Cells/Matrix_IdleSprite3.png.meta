@@ -1,151 +1,151 @@
 fileFormatVersion: 2
-guid: d6c6d95c499c7d6468e7415148eac0ed
+guid: a303f7be93d2b5e49acecdc0190a7489
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2487138818442988084
-    second: CancerCell_IdleSprite_0
+      213: -8271482084220389546
+    second: Matrix_IdleSprite3_0
   - first:
-      213: -5301426525363809135
-    second: CancerCell_IdleSprite_1
+      213: -2254744183807894489
+    second: Matrix_IdleSprite3_1
   - first:
-      213: 7978126484732865572
-    second: CancerCell_IdleSprite_2
+      213: 4499425676056188245
+    second: Matrix_IdleSprite3_2
   - first:
-      213: -4104233413063435926
-    second: CancerCell_IdleSprite_3
+      213: -2442625796630499833
+    second: Matrix_IdleSprite3_3
   - first:
-      213: -6284629407836892627
-    second: CancerCell_IdleSprite_4
+      213: -762529521972220123
+    second: Matrix_IdleSprite3_4
   - first:
-      213: 5906934742851275745
-    second: CancerCell_IdleSprite_5
+      213: 2417278968735797018
+    second: Matrix_IdleSprite3_5
   - first:
-      213: -7141967517549340614
-    second: CancerCell_IdleSprite_6
+      213: 6828376160602772779
+    second: Matrix_IdleSprite3_6
   - first:
-      213: -8679752983687464276
-    second: CancerCell_IdleSprite_7
+      213: 4903663809437623808
+    second: Matrix_IdleSprite3_7
   - first:
-      213: 7361946742857898678
-    second: CancerCell_IdleSprite_8
+      213: 7928199603504066747
+    second: Matrix_IdleSprite3_8
   - first:
-      213: 8986707350158369482
-    second: CancerCell_IdleSprite_9
+      213: 534050732922916044
+    second: Matrix_IdleSprite3_9
   - first:
-      213: 5779292893490109745
-    second: CancerCell_IdleSprite_10
+      213: -8502984884024258043
+    second: Matrix_IdleSprite3_10
   - first:
-      213: 301925785533716700
-    second: CancerCell_IdleSprite_11
+      213: -3808884655099216726
+    second: Matrix_IdleSprite3_11
   - first:
-      213: 7250912958518057045
-    second: CancerCell_IdleSprite_12
+      213: 5889433379941436321
+    second: Matrix_IdleSprite3_12
   - first:
-      213: -9098650636010205021
-    second: CancerCell_IdleSprite_13
+      213: 865531921616176136
+    second: Matrix_IdleSprite3_13
   - first:
-      213: 3622806421388172927
-    second: CancerCell_IdleSprite_14
+      213: -2463326346680203023
+    second: Matrix_IdleSprite3_14
   - first:
-      213: 4243124404722352949
-    second: CancerCell_IdleSprite_15
+      213: 6490241848247221351
+    second: Matrix_IdleSprite3_15
   - first:
-      213: 2194929947952000848
-    second: CancerCell_IdleSprite_16
+      213: 2775916625423600309
+    second: Matrix_IdleSprite3_16
   - first:
-      213: 1322570338342224417
-    second: CancerCell_IdleSprite_17
+      213: -7161082494649858810
+    second: Matrix_IdleSprite3_17
   - first:
-      213: 5498412998685981528
-    second: CancerCell_IdleSprite_18
+      213: 3038761353167499709
+    second: Matrix_IdleSprite3_18
   - first:
-      213: -7107991612677846002
-    second: CancerCell_IdleSprite_19
+      213: -8787455338866918455
+    second: Matrix_IdleSprite3_19
   - first:
-      213: 1904430186644891963
-    second: CancerCell_IdleSprite_20
+      213: 110743975407820655
+    second: Matrix_IdleSprite3_20
   - first:
-      213: -2818469091619794195
-    second: CancerCell_IdleSprite_21
+      213: -807101182663951506
+    second: Matrix_IdleSprite3_21
   - first:
-      213: 7662983324383527604
-    second: CancerCell_IdleSprite_22
+      213: -8961434551367683912
+    second: Matrix_IdleSprite3_22
   - first:
-      213: -6403771358123967804
-    second: CancerCell_IdleSprite_23
+      213: 1383573089443902047
+    second: Matrix_IdleSprite3_23
   - first:
-      213: -7001495226458602688
-    second: CancerCell_IdleSprite_24
+      213: 3586482932582134644
+    second: Matrix_IdleSprite3_24
   - first:
-      213: -3851204184358807532
-    second: CancerCell_IdleSprite_25
+      213: 5269883587173885066
+    second: Matrix_IdleSprite3_25
   - first:
-      213: -3476691925794055181
-    second: CancerCell_IdleSprite_26
+      213: -6448971665104240800
+    second: Matrix_IdleSprite3_26
   - first:
-      213: -1155397722906801600
-    second: CancerCell_IdleSprite_27
+      213: 7692670207658782380
+    second: Matrix_IdleSprite3_27
   - first:
-      213: 591613881915009570
-    second: CancerCell_IdleSprite_28
+      213: -6754068622470777392
+    second: Matrix_IdleSprite3_28
   - first:
-      213: 559022727601059720
-    second: CancerCell_IdleSprite_29
+      213: 7609658242468041453
+    second: Matrix_IdleSprite3_29
   - first:
-      213: 9157316560823841280
-    second: CancerCell_IdleSprite_30
+      213: -352086670325671639
+    second: Matrix_IdleSprite3_30
   - first:
-      213: 3904423821498185432
-    second: CancerCell_IdleSprite_31
+      213: -440059544901543891
+    second: Matrix_IdleSprite3_31
   - first:
-      213: 2197255853927738194
-    second: CancerCell_IdleSprite_32
+      213: 2778396648327825710
+    second: Matrix_IdleSprite3_32
   - first:
-      213: 7599365787315479473
-    second: CancerCell_IdleSprite_33
+      213: 7431529936643659675
+    second: Matrix_IdleSprite3_33
   - first:
-      213: 6392894209350574978
-    second: CancerCell_IdleSprite_34
+      213: -5286403731982396926
+    second: Matrix_IdleSprite3_34
   - first:
-      213: 4910411948080674466
-    second: CancerCell_IdleSprite_35
+      213: -3265139586968976683
+    second: Matrix_IdleSprite3_35
   - first:
-      213: -644797348489031819
-    second: CancerCell_IdleSprite_36
+      213: -4179700444645640534
+    second: Matrix_IdleSprite3_36
   - first:
-      213: 2854997920882170088
-    second: CancerCell_IdleSprite_37
+      213: -3011976650261300242
+    second: Matrix_IdleSprite3_37
   - first:
-      213: 5443599262683174549
-    second: CancerCell_IdleSprite_38
+      213: 2138195471995294457
+    second: Matrix_IdleSprite3_38
   - first:
-      213: -6101549409279798145
-    second: CancerCell_IdleSprite_39
+      213: 6924068823462240529
+    second: Matrix_IdleSprite3_39
   - first:
-      213: -6801548109049694415
-    second: CancerCell_IdleSprite_40
+      213: -8694006916088857084
+    second: Matrix_IdleSprite3_40
   - first:
-      213: 2747167270429325021
-    second: CancerCell_IdleSprite_41
+      213: 7125022884768375968
+    second: Matrix_IdleSprite3_41
   - first:
-      213: 7283702777086794131
-    second: CancerCell_IdleSprite_42
+      213: 3575976707304120368
+    second: Matrix_IdleSprite3_42
   - first:
-      213: -2618614193996371488
-    second: CancerCell_IdleSprite_43
+      213: -4821435934754722529
+    second: Matrix_IdleSprite3_43
   - first:
-      213: 5487276281310654332
-    second: CancerCell_IdleSprite_44
+      213: -1879084031755035291
+    second: Matrix_IdleSprite3_44
   - first:
-      213: -1502826874371499916
-    second: CancerCell_IdleSprite_45
+      213: 1134443360145746676
+    second: Matrix_IdleSprite3_45
   - first:
-      213: 113331499298910680
-    second: CancerCell_IdleSprite_46
+      213: -538801116365486344
+    second: Matrix_IdleSprite3_46
   - first:
-      213: 5846269718809588541
-    second: CancerCell_IdleSprite_47
+      213: 6521106797164110361
+    second: Matrix_IdleSprite3_47
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -283,7 +283,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_0
+      name: Matrix_IdleSprite3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -297,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc5fe9b0c68eb7dd0800000000000000
-      internalID: -2487138818442988084
+      spriteID: 657390c5edac53d80800000000000000
+      internalID: -8271482084220389546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_1
+      name: Matrix_IdleSprite3_1
       rect:
         serializedVersion: 2
         x: 512
@@ -318,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1945bd0d9ac8d66b0800000000000000
-      internalID: -5301426525363809135
+      spriteID: 72c90c86c1a85b0e0800000000000000
+      internalID: -2254744183807894489
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_2
+      name: Matrix_IdleSprite3_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -339,14 +339,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42c63a794cff7be60800000000000000
-      internalID: 7978126484732865572
+      spriteID: 555d99a30db217e30800000000000000
+      internalID: 4499425676056188245
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_3
+      name: Matrix_IdleSprite3_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -360,14 +360,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a69901bb475da07c0800000000000000
-      internalID: -4104233413063435926
+      spriteID: 70e22a097cc0a1ed0800000000000000
+      internalID: -2442625796630499833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_4
+      name: Matrix_IdleSprite3_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -381,14 +381,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2298e8d9d288c8a0800000000000000
-      internalID: -6284629407836892627
+      spriteID: 52fe8189073fa65f0800000000000000
+      internalID: -762529521972220123
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_5
+      name: Matrix_IdleSprite3_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -402,14 +402,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1eb40133ad5a9f150800000000000000
-      internalID: 5906934742851275745
+      spriteID: a1f058e2a66eb8120800000000000000
+      internalID: 2417278968735797018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_6
+      name: Matrix_IdleSprite3_6
       rect:
         serializedVersion: 2
         x: 0
@@ -423,14 +423,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a38d71fe162a2ec90800000000000000
-      internalID: -7141967517549340614
+      spriteID: b25597590f343ce50800000000000000
+      internalID: 6828376160602772779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_7
+      name: Matrix_IdleSprite3_7
       rect:
         serializedVersion: 2
         x: 512
@@ -444,14 +444,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: caafb2d06a25b8780800000000000000
-      internalID: -8679752983687464276
+      spriteID: 006e77301405d0440800000000000000
+      internalID: 4903663809437623808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_8
+      name: Matrix_IdleSprite3_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -465,14 +465,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ba936fae83ea2660800000000000000
-      internalID: 7361946742857898678
+      spriteID: bb0b043b88f960e60800000000000000
+      internalID: 7928199603504066747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_9
+      name: Matrix_IdleSprite3_9
       rect:
         serializedVersion: 2
         x: 1536
@@ -486,14 +486,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac2e49aa8b237bc70800000000000000
-      internalID: 8986707350158369482
+      spriteID: ccc48e3ef44596700800000000000000
+      internalID: 534050732922916044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_10
+      name: Matrix_IdleSprite3_10
       rect:
         serializedVersion: 2
         x: 2048
@@ -507,14 +507,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13dda61444c243050800000000000000
-      internalID: 5779292893490109745
+      spriteID: 502d7397c445ff980800000000000000
+      internalID: -8502984884024258043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_11
+      name: Matrix_IdleSprite3_11
       rect:
         serializedVersion: 2
         x: 2560
@@ -528,14 +528,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd8944bf6e7a03400800000000000000
-      internalID: 301925785533716700
+      spriteID: aacff56269f142bc0800000000000000
+      internalID: -3808884655099216726
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_12
+      name: Matrix_IdleSprite3_12
       rect:
         serializedVersion: 2
         x: 0
@@ -549,14 +549,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 558deb53bea60a460800000000000000
-      internalID: 7250912958518057045
+      spriteID: 1abccbb94787bb150800000000000000
+      internalID: 5889433379941436321
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_13
+      name: Matrix_IdleSprite3_13
       rect:
         serializedVersion: 2
         x: 512
@@ -570,14 +570,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a0da3904791bb180800000000000000
-      internalID: -9098650636010205021
+      spriteID: 80481b962bcf20c00800000000000000
+      internalID: 865531921616176136
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_14
+      name: Matrix_IdleSprite3_14
       rect:
         serializedVersion: 2
         x: 1024
@@ -591,14 +591,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7e98dcee3bc64230800000000000000
-      internalID: 3622806421388172927
+      spriteID: 1f8044c2db180ddd0800000000000000
+      internalID: -2463326346680203023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_15
+      name: Matrix_IdleSprite3_15
       rect:
         serializedVersion: 2
         x: 1536
@@ -612,14 +612,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53344414a2b92ea30800000000000000
-      internalID: 4243124404722352949
+      spriteID: 76c762ff298f11a50800000000000000
+      internalID: 6490241848247221351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_16
+      name: Matrix_IdleSprite3_16
       rect:
         serializedVersion: 2
         x: 2048
@@ -633,14 +633,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05fab8e8825f57e10800000000000000
-      internalID: 2194929947952000848
+      spriteID: 5ba8970a679068620800000000000000
+      internalID: 2775916625423600309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_17
+      name: Matrix_IdleSprite3_17
       rect:
         serializedVersion: 2
         x: 2560
@@ -654,14 +654,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1224b5727b6ba5210800000000000000
-      internalID: 1322570338342224417
+      spriteID: 60580238969be9c90800000000000000
+      internalID: -7161082494649858810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_18
+      name: Matrix_IdleSprite3_18
       rect:
         serializedVersion: 2
         x: 0
@@ -675,14 +675,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 85b711f8d794e4c40800000000000000
-      internalID: 5498412998685981528
+      spriteID: db1fbb4c959db2a20800000000000000
+      internalID: 3038761353167499709
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_19
+      name: Matrix_IdleSprite3_19
       rect:
         serializedVersion: 2
         x: 512
@@ -696,14 +696,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0c81ebb9475b5d90800000000000000
-      internalID: -7107991612677846002
+      spriteID: 9cb3a3f5defac0680800000000000000
+      internalID: -8787455338866918455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_20
+      name: Matrix_IdleSprite3_20
       rect:
         serializedVersion: 2
         x: 1024
@@ -717,14 +717,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b39ef762a25ed6a10800000000000000
-      internalID: 1904430186644891963
+      spriteID: f6f92331f01798100800000000000000
+      internalID: 110743975407820655
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_21
+      name: Matrix_IdleSprite3_21
       rect:
         serializedVersion: 2
         x: 1536
@@ -738,14 +738,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de295974b49c2e8d0800000000000000
-      internalID: -2818469091619794195
+      spriteID: e6b748520c99cc4f0800000000000000
+      internalID: -807101182663951506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_22
+      name: Matrix_IdleSprite3_22
       rect:
         serializedVersion: 2
         x: 2048
@@ -759,14 +759,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b24f99bbb2685a60800000000000000
-      internalID: 7662983324383527604
+      spriteID: 8b031d751c692a380800000000000000
+      internalID: -8961434551367683912
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_23
+      name: Matrix_IdleSprite3_23
       rect:
         serializedVersion: 2
         x: 2560
@@ -780,14 +780,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ca3330e0eb3127a0800000000000000
-      internalID: -6403771358123967804
+      spriteID: f52f715f460733310800000000000000
+      internalID: 1383573089443902047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_24
+      name: Matrix_IdleSprite3_24
       rect:
         serializedVersion: 2
         x: 0
@@ -801,14 +801,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0438752ef21b5de90800000000000000
-      internalID: -7001495226458602688
+      spriteID: 4733f85a93fb5c130800000000000000
+      internalID: 3586482932582134644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_25
+      name: Matrix_IdleSprite3_25
       rect:
         serializedVersion: 2
         x: 512
@@ -822,14 +822,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4189bc9e236cd8ac0800000000000000
-      internalID: -3851204184358807532
+      spriteID: a8429259333622940800000000000000
+      internalID: 5269883587173885066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_26
+      name: Matrix_IdleSprite3_26
       rect:
         serializedVersion: 2
         x: 1024
@@ -843,14 +843,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3fb93912d1f40cfc0800000000000000
-      internalID: -3476691925794055181
+      spriteID: 06ff6ee4076a086a0800000000000000
+      internalID: -6448971665104240800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_27
+      name: Matrix_IdleSprite3_27
       rect:
         serializedVersion: 2
         x: 1536
@@ -864,14 +864,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 04a48df74e337ffe0800000000000000
-      internalID: -1155397722906801600
+      spriteID: cae6bbddbcad1ca60800000000000000
+      internalID: 7692670207658782380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_28
+      name: Matrix_IdleSprite3_28
       rect:
         serializedVersion: 2
         x: 2048
@@ -885,14 +885,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22aebbbe0b5d53800800000000000000
-      internalID: 591613881915009570
+      spriteID: 0d574095f5ab442a0800000000000000
+      internalID: -6754068622470777392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_29
+      name: Matrix_IdleSprite3_29
       rect:
         serializedVersion: 2
         x: 2560
@@ -906,14 +906,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 887f70c753c02c700800000000000000
-      internalID: 559022727601059720
+      spriteID: de25e649adfea9960800000000000000
+      internalID: 7609658242468041453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_30
+      name: Matrix_IdleSprite3_30
       rect:
         serializedVersion: 2
         x: 0
@@ -927,14 +927,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 002f4bff4e2551f70800000000000000
-      internalID: 9157316560823841280
+      spriteID: 929961de9032d1bf0800000000000000
+      internalID: -352086670325671639
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_31
+      name: Matrix_IdleSprite3_31
       rect:
         serializedVersion: 2
         x: 512
@@ -948,14 +948,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d6f8f477cc4f2630800000000000000
-      internalID: 3904423821498185432
+      spriteID: d289f1aec2894e9f0800000000000000
+      internalID: -440059544901543891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_32
+      name: Matrix_IdleSprite3_32
       rect:
         serializedVersion: 2
         x: 1024
@@ -969,14 +969,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25ba20ebe883e7e10800000000000000
-      internalID: 2197255853927738194
+      spriteID: e2947b4f709de8620800000000000000
+      internalID: 2778396648327825710
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_33
+      name: Matrix_IdleSprite3_33
       rect:
         serializedVersion: 2
         x: 1536
@@ -990,14 +990,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b3223f9bee567960800000000000000
-      internalID: 7599365787315479473
+      spriteID: b97935b7a19122760800000000000000
+      internalID: 7431529936643659675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_34
+      name: Matrix_IdleSprite3_34
       rect:
         serializedVersion: 2
         x: 2048
@@ -1011,14 +1011,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2832ef2996f18b850800000000000000
-      internalID: 6392894209350574978
+      spriteID: 202d3e770dbe2a6b0800000000000000
+      internalID: -5286403731982396926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_35
+      name: Matrix_IdleSprite3_35
       rect:
         serializedVersion: 2
         x: 2560
@@ -1032,14 +1032,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a6be2a76a9452440800000000000000
-      internalID: 4910411948080674466
+      spriteID: 5d206a858d4efa2d0800000000000000
+      internalID: -3265139586968976683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_36
+      name: Matrix_IdleSprite3_36
       rect:
         serializedVersion: 2
         x: 0
@@ -1053,14 +1053,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57f82335a383d07f0800000000000000
-      internalID: -644797348489031819
+      spriteID: aa6ba513798bef5c0800000000000000
+      internalID: -4179700444645640534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_37
+      name: Matrix_IdleSprite3_37
       rect:
         serializedVersion: 2
         x: 512
@@ -1074,14 +1074,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e819ac8b7dfe9720800000000000000
-      internalID: 2854997920882170088
+      spriteID: eeb7769d13f4336d0800000000000000
+      internalID: -3011976650261300242
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_38
+      name: Matrix_IdleSprite3_38
       rect:
         serializedVersion: 2
         x: 1024
@@ -1095,14 +1095,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5961fcf10bc8b8b40800000000000000
-      internalID: 5443599262683174549
+      spriteID: 9f2d0a004756cad10800000000000000
+      internalID: 2138195471995294457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_39
+      name: Matrix_IdleSprite3_39
       rect:
         serializedVersion: 2
         x: 1536
@@ -1116,14 +1116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f741260c321f25ba0800000000000000
-      internalID: -6101549409279798145
+      spriteID: 111e2ded8eb371060800000000000000
+      internalID: 6924068823462240529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_40
+      name: Matrix_IdleSprite3_40
       rect:
         serializedVersion: 2
         x: 2048
@@ -1137,14 +1137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 137fc5de70c0c91a0800000000000000
-      internalID: -6801548109049694415
+      spriteID: 40efbbbc5cea85780800000000000000
+      internalID: -8694006916088857084
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_41
+      name: Matrix_IdleSprite3_41
       rect:
         serializedVersion: 2
         x: 2560
@@ -1158,14 +1158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd6f48cc316ef1620800000000000000
-      internalID: 2747167270429325021
+      spriteID: 0a4e52f409a21e260800000000000000
+      internalID: 7125022884768375968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_42
+      name: Matrix_IdleSprite3_42
       rect:
         serializedVersion: 2
         x: 0
@@ -1179,14 +1179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 399d8c5c519e41560800000000000000
-      internalID: 7283702777086794131
+      spriteID: 030eee37edb60a130800000000000000
+      internalID: 3575976707304120368
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_43
+      name: Matrix_IdleSprite3_43
       rect:
         serializedVersion: 2
         x: 512
@@ -1200,14 +1200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e9ec0bb340d8abd0800000000000000
-      internalID: -2618614193996371488
+      spriteID: f1d24a9ff81d61db0800000000000000
+      internalID: -4821435934754722529
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_44
+      name: Matrix_IdleSprite3_44
       rect:
         serializedVersion: 2
         x: 1024
@@ -1221,14 +1221,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7fa2fb74b8b62c40800000000000000
-      internalID: 5487276281310654332
+      spriteID: 56dd12867072ce5e0800000000000000
+      internalID: -1879084031755035291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_45
+      name: Matrix_IdleSprite3_45
       rect:
         serializedVersion: 2
         x: 1536
@@ -1242,14 +1242,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4781d2a8be2e42be0800000000000000
-      internalID: -1502826874371499916
+      spriteID: 4faa94bb93a5ebf00800000000000000
+      internalID: 1134443360145746676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_46
+      name: Matrix_IdleSprite3_46
       rect:
         serializedVersion: 2
         x: 2048
@@ -1263,14 +1263,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d1f29de562a29100800000000000000
-      internalID: 113331499298910680
+      spriteID: 8f683764d3bc588f0800000000000000
+      internalID: -538801116365486344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_IdleSprite_47
+      name: Matrix_IdleSprite3_47
       rect:
         serializedVersion: 2
         x: 2560
@@ -1284,8 +1284,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d33b4ca955f122150800000000000000
-      internalID: 5846269718809588541
+      spriteID: 9122a5be410af7a50800000000000000
+      internalID: 6521106797164110361
       vertices: []
       indices: 
       edges: []
@@ -1293,7 +1293,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1f54af95777aeca4bb6a8f3aeaf8470e
     internalID: 0
     vertices: []
     indices: 

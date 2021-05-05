@@ -1,76 +1,79 @@
 fileFormatVersion: 2
-guid: d4c8788c60fb78940ab58e5c2119b79a
+guid: e6975b770bd8df249b4b4b6db935d3d3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6932247548946265727
-    second: CancerCell_DyingSprite_0
+      213: -7720926715501327562
+    second: PacMan_spawnSprite_0
   - first:
-      213: -2634218071832726571
-    second: CancerCell_DyingSprite_1
+      213: -6635313436857341685
+    second: PacMan_spawnSprite_1
   - first:
-      213: 6254756766776974370
-    second: CancerCell_DyingSprite_2
+      213: -2564978871734492847
+    second: PacMan_spawnSprite_2
   - first:
-      213: -4727793297506988934
-    second: CancerCell_DyingSprite_3
+      213: -9022782323188277782
+    second: PacMan_spawnSprite_3
   - first:
-      213: -8562490590279293592
-    second: CancerCell_DyingSprite_4
+      213: 9145265207343430791
+    second: PacMan_spawnSprite_4
   - first:
-      213: 4188882596893710417
-    second: CancerCell_DyingSprite_5
+      213: 7554473826544468929
+    second: PacMan_spawnSprite_5
   - first:
-      213: 17745676443144801
-    second: CancerCell_DyingSprite_6
+      213: 1279338023661834016
+    second: PacMan_spawnSprite_6
   - first:
-      213: -6927275996065939318
-    second: CancerCell_DyingSprite_7
+      213: -8163449324586814945
+    second: PacMan_spawnSprite_7
   - first:
-      213: 1303077002072869816
-    second: CancerCell_DyingSprite_8
+      213: 9217793645868903546
+    second: PacMan_spawnSprite_8
   - first:
-      213: 2109012693511230388
-    second: CancerCell_DyingSprite_9
+      213: 4979051212197809244
+    second: PacMan_spawnSprite_9
   - first:
-      213: 1591846453403150410
-    second: CancerCell_DyingSprite_10
+      213: 2058554561342813280
+    second: PacMan_spawnSprite_10
   - first:
-      213: -4308809270600919600
-    second: CancerCell_DyingSprite_11
+      213: -8239057849081938412
+    second: PacMan_spawnSprite_11
   - first:
-      213: 4356069375417524763
-    second: CancerCell_DyingSprite_12
+      213: 5492477709433555515
+    second: PacMan_spawnSprite_12
   - first:
-      213: -6270680313663360787
-    second: CancerCell_DyingSprite_13
+      213: -1909323012697235602
+    second: PacMan_spawnSprite_13
   - first:
-      213: -794883810551487373
-    second: CancerCell_DyingSprite_14
+      213: 5557636475648434696
+    second: PacMan_spawnSprite_14
   - first:
-      213: -8427075016080035987
-    second: CancerCell_DyingSprite_15
+      213: 3204326450953359920
+    second: PacMan_spawnSprite_15
   - first:
-      213: 7146266025617783348
-    second: CancerCell_DyingSprite_16
+      213: 941713919139198820
+    second: PacMan_spawnSprite_16
   - first:
-      213: 3812825206910989300
-    second: CancerCell_DyingSprite_17
+      213: 2942682861903391816
+    second: PacMan_spawnSprite_17
   - first:
-      213: 8852623924502646474
-    second: CancerCell_DyingSprite_18
+      213: -6372730561716029153
+    second: PacMan_spawnSprite_18
   - first:
-      213: -398592719778163011
-    second: CancerCell_DyingSprite_19
+      213: 8571185482895130370
+    second: PacMan_spawnSprite_19
   - first:
-      213: 2399486336800904543
-    second: CancerCell_DyingSprite_20
+      213: -3142324511889473820
+    second: PacMan_spawnSprite_20
   - first:
-      213: -7448695485334858770
-    second: CancerCell_DyingSprite_21
+      213: -2761885170262653446
+    second: PacMan_spawnSprite_21
   - first:
-      213: -342232734773220593
-    second: CancerCell_DyingSprite_22
+      213: -3306266634484775702
+    second: PacMan_spawnSprite_22
+  - first:
+      213: -9190239767264564179
+    second: PacMan_spawnSprite_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -208,7 +211,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_0
+      name: PacMan_spawnSprite_0
       rect:
         serializedVersion: 2
         x: 0
@@ -222,14 +225,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1894cf53595bbcf90800000000000000
-      internalID: -6932247548946265727
+      spriteID: 63b48b93f02c9d490800000000000000
+      internalID: -7720926715501327562
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_1
+      name: PacMan_spawnSprite_1
       rect:
         serializedVersion: 2
         x: 512
@@ -243,14 +246,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d3fe7fce90617bd0800000000000000
-      internalID: -2634218071832726571
+      spriteID: b09edb6a591aae3a0800000000000000
+      internalID: -6635313436857341685
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_2
+      name: PacMan_spawnSprite_2
       rect:
         serializedVersion: 2
         x: 1024
@@ -264,14 +267,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22c5638e32c5dc650800000000000000
-      internalID: 6254756766776974370
+      spriteID: 15122e55e4d576cd0800000000000000
+      internalID: -2564978871734492847
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_3
+      name: PacMan_spawnSprite_3
       rect:
         serializedVersion: 2
         x: 1536
@@ -285,14 +288,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7c8f9a7b01836eb0800000000000000
-      internalID: -4727793297506988934
+      spriteID: aed50b42843a8c280800000000000000
+      internalID: -9022782323188277782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_4
+      name: PacMan_spawnSprite_4
       rect:
         serializedVersion: 2
         x: 2048
@@ -306,14 +309,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86527c59c2ceb2980800000000000000
-      internalID: -8562490590279293592
+      spriteID: 78cb17c90428aee70800000000000000
+      internalID: 9145265207343430791
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_5
+      name: PacMan_spawnSprite_5
       rect:
         serializedVersion: 2
         x: 2560
@@ -327,14 +330,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1585aa93786e12a30800000000000000
-      internalID: 4188882596893710417
+      spriteID: 1c34b208be1e6d860800000000000000
+      internalID: 7554473826544468929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_6
+      name: PacMan_spawnSprite_6
       rect:
         serializedVersion: 2
         x: 0
@@ -348,14 +351,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16251b4499b0f3000800000000000000
-      internalID: 17745676443144801
+      spriteID: 02f8300872f11c110800000000000000
+      internalID: 1279338023661834016
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_7
+      name: PacMan_spawnSprite_7
       rect:
         serializedVersion: 2
         x: 512
@@ -369,14 +372,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a8046611f2f5ddf90800000000000000
-      internalID: -6927275996065939318
+      spriteID: f12b912571a95be80800000000000000
+      internalID: -8163449324586814945
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_8
+      name: PacMan_spawnSprite_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -390,14 +393,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8bbc88f11a5751210800000000000000
-      internalID: 1303077002072869816
+      spriteID: a7c6ed2ab7e2cef70800000000000000
+      internalID: 9217793645868903546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_9
+      name: PacMan_spawnSprite_9
       rect:
         serializedVersion: 2
         x: 1536
@@ -411,14 +414,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b3d687eed7b44d10800000000000000
-      internalID: 2109012693511230388
+      spriteID: c5c478582b4291540800000000000000
+      internalID: 4979051212197809244
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_10
+      name: PacMan_spawnSprite_10
       rect:
         serializedVersion: 2
         x: 2048
@@ -432,14 +435,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a486f085aef571610800000000000000
-      internalID: 1591846453403150410
+      spriteID: 06439938774719c10800000000000000
+      internalID: 2058554561342813280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_11
+      name: PacMan_spawnSprite_11
       rect:
         serializedVersion: 2
         x: 2560
@@ -453,14 +456,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d51ce42cc80434c0800000000000000
-      internalID: -4308809270600919600
+      spriteID: 41eb395e98cf8ad80800000000000000
+      internalID: -8239057849081938412
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_12
+      name: PacMan_spawnSprite_12
       rect:
         serializedVersion: 2
         x: 0
@@ -474,14 +477,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1228ba740ed37c30800000000000000
-      internalID: 4356069375417524763
+      spriteID: b3ac9875063393c40800000000000000
+      internalID: 5492477709433555515
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_13
+      name: PacMan_spawnSprite_13
       rect:
         serializedVersion: 2
         x: 512
@@ -495,14 +498,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de07f0c6a711af8a0800000000000000
-      internalID: -6270680313663360787
+      spriteID: e6fd3b206d8b085e0800000000000000
+      internalID: -1909323012697235602
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_14
+      name: PacMan_spawnSprite_14
       rect:
         serializedVersion: 2
         x: 1024
@@ -516,14 +519,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 374ae52c26108f4f0800000000000000
-      internalID: -794883810551487373
+      spriteID: 80267c1dde0b02d40800000000000000
+      internalID: 5557636475648434696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_15
+      name: PacMan_spawnSprite_15
       rect:
         serializedVersion: 2
         x: 1536
@@ -537,14 +540,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6feaf2ebe30d0b80800000000000000
-      internalID: -8427075016080035987
+      spriteID: 032967d0eed087c20800000000000000
+      internalID: 3204326450953359920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_16
+      name: PacMan_spawnSprite_16
       rect:
         serializedVersion: 2
         x: 2048
@@ -558,14 +561,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 43af3677613ac2360800000000000000
-      internalID: 7146266025617783348
+      spriteID: 467355ee1d3a11d00800000000000000
+      internalID: 941713919139198820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_17
+      name: PacMan_spawnSprite_17
       rect:
         serializedVersion: 2
         x: 2560
@@ -579,14 +582,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f3b5901350e9e430800000000000000
-      internalID: 3812825206910989300
+      spriteID: 84ca16ec87286d820800000000000000
+      internalID: 2942682861903391816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_18
+      name: PacMan_spawnSprite_18
       rect:
         serializedVersion: 2
         x: 0
@@ -600,14 +603,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aceca1e5e86dada70800000000000000
-      internalID: 8852623924502646474
+      spriteID: f19f3ab71538f87a0800000000000000
+      internalID: -6372730561716029153
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_19
+      name: PacMan_spawnSprite_19
       rect:
         serializedVersion: 2
         x: 512
@@ -621,14 +624,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6d09f780ae77af0800000000000000
-      internalID: -398592719778163011
+      spriteID: 20ff2fbd8c7f2f670800000000000000
+      internalID: 8571185482895130370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_20
+      name: PacMan_spawnSprite_20
       rect:
         serializedVersion: 2
         x: 1024
@@ -642,14 +645,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f55db6c3c10bc4120800000000000000
-      internalID: 2399486336800904543
+      spriteID: 4ee33d351883464d0800000000000000
+      internalID: -3142324511889473820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_21
+      name: PacMan_spawnSprite_21
       rect:
         serializedVersion: 2
         x: 1536
@@ -663,14 +666,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee35f84cbeae0a890800000000000000
-      internalID: -7448695485334858770
+      spriteID: af5431c1210dba9d0800000000000000
+      internalID: -2761885170262653446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CancerCell_DyingSprite_22
+      name: PacMan_spawnSprite_22
       rect:
         serializedVersion: 2
         x: 2048
@@ -684,8 +687,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0be4551425204bf0800000000000000
-      internalID: -342232734773220593
+      spriteID: ae40fc66308cd12d0800000000000000
+      internalID: -3306266634484775702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PacMan_spawnSprite_23
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 512
+        height: 512
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2ce687af95b57080800000000000000
+      internalID: -9190239767264564179
       vertices: []
       indices: 
       edges: []
@@ -693,7 +717,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 0600d5bd91257264fbfb33c9708733bc
     internalID: 0
     vertices: []
     indices: 

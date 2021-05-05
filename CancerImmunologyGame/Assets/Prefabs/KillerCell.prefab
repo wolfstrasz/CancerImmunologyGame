@@ -292,13 +292,20 @@ MonoBehaviour:
   attackCooldown: 0.2
   range: 2
   fov: 60
-  rotationSpeed: 2
   isBusy: 0
   queuePowerUp: 0
   movementVector: {x: 0, y: 0}
-  flowVector: {x: 0, y: 0}
+  movementRotation: {x: 0, y: 0, z: 0, w: 1}
   spriteObject: {fileID: 2046459777060728083}
   correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  spreadAngle: 35
+  bulletAmount: 5
+  specialAttackRange: 3
+  pacParticlePrefab: {fileID: 5293642523950685746, guid: 3f83288741d54c44fade1f6953906016,
+    type: 3}
+  gapDistance: 0.4
+  cooldown: 10
+  passedCooldown: 0
 --- !u!1 &2046459777672622313
 GameObject:
   m_ObjectHideFlags: 0
