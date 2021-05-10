@@ -17,8 +17,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		[Header("Petridish")]
 		[SerializeField]
-		private GameObject glow = null;
-		[SerializeField]
 		private Image cellImage = null;
 
 
@@ -49,7 +47,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 		{
 			isActivated = false;
 			cellImage.color = Color.black;
-			glow.SetActive(false);
 		}
 
 		internal void SelectCell()
@@ -63,11 +60,10 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 					if (selected != null)
 					{
-						selected.Deselect();
+						selected.DeselectCell();
 					}
 
 					gameObject.transform.localScale = scaling;
-					glow.SetActive(true);
 					selected = this;
 				}
 				return;
@@ -75,18 +71,16 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 			selected = this;
 			gameObject.transform.localScale = scaling;
-			glow.SetActive(true);
 
 		}
 
+		internal void DeselectCell()
+		{
+			gameObject.transform.localScale = initialScaling;
+		}
 
 		// BUTTON FUNCTIONALITY
 
-		internal void Deselect()
-		{
-			gameObject.transform.localScale = initialScaling;
-			glow.SetActive(false);
-		}
 
 		// When highlighted with mouse.
 		public void OnPointerEnter(PointerEventData eventData)
