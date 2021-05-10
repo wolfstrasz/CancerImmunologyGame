@@ -13,12 +13,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 
         internal void Initialise()
 		{
-            if (dishIndex != 0)
-            {
-                petridishes[0].Reset();
-                petridishes[1].Reset();
-                dishIndex = 0;
-            }
+            petridishes[0].Reset();
+            petridishes[1].Reset();
         }
 
         internal void OnClose()
@@ -29,8 +25,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 
         internal void OnOpen(CellpediaObject objToInitialise)
 		{
-            petridishes[0].Reset();
-            petridishes[1].Reset();
+            //petridishes[0].Reset();
+            //petridishes[1].Reset();
             petridishes[dishIndex].SetVisual(objToInitialise);
         }
 

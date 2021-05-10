@@ -25,8 +25,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 				PetridishButton button = Instantiate(cellbarButtonPrefab, buttonsLayout).GetComponent<PetridishButton>();
 				petridishButtons.Add(cellData[i], button);
 				button.Initialise(cellData[i]);
+				// Setting it multile times so that there is no need to check for null multiple times in OnOpen()
+				// But we always need selected to be != null for the first time OnOpen() is called
+				//PetridishButton.selected = button;
 
-				if (cellData[0].isUnlocked)
+				if (cellData[i].isUnlocked)
 					button.Activate();
 				else button.Deactivate();
 			}
@@ -35,12 +38,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		internal void OnOpen(CellpediaObject cellObject)
 		{
+			if (cellObject == null) return;
+			if (PetridishButton.selected != null)
+				PetridishButton.selected.DeselectCell();
 			PetridishButton.selected = petridishButtons[cellObject];
-		}
-
-        internal void OnClose()
-		{
-
+			PetridishButton.selected.SelectCell();
 		}
 
         internal void ActivateButton(CellpediaObject cellObject)
