@@ -11,23 +11,19 @@ namespace ImmunotherapyGame.LevelManagement
 {
     public class LevelManager : Singleton<LevelManager>, IDataManager
     {
-        [SerializeField]
-        private LevelData levelData = null;
-		private SerializableLevelData savedLevelData = null;
-
-        private List<LevelDataObject> Levels => levelData.levels;
-		private List<LevelDataObject> SavedLevels => savedLevelData.levels;
+        [SerializeField] private LevelData data = null;
+		private SerializableLevelData savedData = null;
 
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.S))
 			{
-				SaveLevelData();
+				SaveData();
 			}
 
 			if (Input.GetKeyDown(KeyCode.L))
 			{
-				LoadLevelData();
+				LoadData();
 			}
 
 			if (Input.GetKeyDown(KeyCode.Backspace))
@@ -47,68 +43,48 @@ namespace ImmunotherapyGame.LevelManagement
 
         public void OnLevelComplete(int sceneIndex)
 		{
-			for (int i = 0; i < Levels.Count; i++)
+			for (int i = 0; i < data.levels.Count; i++)
 			{
-				if (Levels[i].sceneIndex == sceneIndex)
+				if (data.levels[i].sceneIndex == sceneIndex)
 				{
-					Levels[i].isCompleted = true;
+					data.levels[i].isCompleted = true;
 
 					// If next level unlock it
-					if (i < Levels.Count - 1)
+					if (i < data.levels.Count - 1)
 					{
-						Levels[i + 1].isLocked = false;
+						data.levels[i + 1].isLocked = false;
 					}
 				}
 			}
-			SaveLevelData();
-		}
-
-        private void SaveLevelData()
-		{
-			// If success make current SO have that data
-			savedLevelData = new SerializableLevelData(levelData);
-			SaveManager.Instance.SaveData<SerializableLevelData>(savedLevelData);
-		}
-
-        private void LoadLevelData()
-		{
-			// Try to load levels
-			savedLevelData = SaveManager.Instance.LoadData<SerializableLevelData>();
-
-			if (savedLevelData == null)
-			{
-				Debug.Log("No previous saved data found. Creating new level data save.");
-			}
-			else if (SavedLevels.Count > levelData.levels.Count)
-			{
-				Debug.LogWarning("Saved level data is larger than current level data! Creating new level data save.");
-			}
-			else
-			{
-				savedLevelData.CopyTo(levelData);
-			}
-			SaveLevelData();
-		}
-
-		public void ResetLevelData()
-		{
-			levelData.ResetLevelData();
-			PlayerPrefs.DeleteKey("GameInProgress");
+			SaveData();
 		}
 
 		public void LoadData()
 		{
-			LoadLevelData();
+			// Try to load levels
+			savedData = SaveManager.Instance.LoadData<SerializableLevelData>();
+
+			if (savedData == null)
+			{
+				Debug.Log("No previous saved data found. Creating new level data save.");
+			}
+			else
+			{
+				savedData.CopyTo(data);
+			}
+			SaveData();
 		}
 
 		public void SaveData()
 		{
-			SaveLevelData();
+			// If success make current SO have that data
+			savedData = new SerializableLevelData(data);
+			SaveManager.Instance.SaveData<SerializableLevelData>(savedData);
 		}
 
 		public void ResetData()
 		{
-			ResetLevelData();
+			data.ResetData();
 		}
 	}
 }

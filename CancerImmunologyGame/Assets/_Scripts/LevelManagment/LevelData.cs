@@ -12,7 +12,7 @@ namespace ImmunotherapyGame.LevelManagement
         public int currentLevel = 0;
         public List<LevelDataObject> levels = null;
 
-        internal void ResetLevelData()
+        internal void ResetData()
 		{
 			currentLevel = 0;
             if (levels.Count <= 0)
