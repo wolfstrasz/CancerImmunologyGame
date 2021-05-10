@@ -110,13 +110,12 @@ namespace ImmunotherapyGame.CellpediaSystem
 			isShifting = true;
 		}
 
-		internal void SetVisual(CellDescription cd)
+		internal void SetVisual(CellpediaObject cd)
 		{
-			Debug.Log("Setting visual for: " + gameObject.name);
-			float scaleValue = scalingFactor * cd.scale;
-			cellVisual.transform.localScale = new Vector3(scaleValue, scaleValue, 1.0f);
-			//cellVisualAnimator.SetTrigger(cd.animatorTrigger);
+			Vector3 scaleVector = scalingFactor * cd.spriteUIScaleVector;
+			cellVisual.transform.localScale = scaleVector;
 			cellVisualAnimator.Play(cd.animatorTrigger);
+
 			cellVisualSprite.sprite = cd.sprite;
 		}
 

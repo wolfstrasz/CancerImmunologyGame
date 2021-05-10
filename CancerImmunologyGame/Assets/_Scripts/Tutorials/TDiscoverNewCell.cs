@@ -7,7 +7,7 @@ namespace ImmunotherapyGame.Tutorials
 	{
 		[Header("Attributes")]
 		[SerializeField]
-		private CellpediaCells cellToDiscover = CellpediaCells.NONE;
+		private CellpediaItemTypes cellToDiscover = CellpediaItemTypes.NONE;
 
 		protected override void OnEndEvent()
 		{

@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7badfdd8002204791edc11129edaf5, type: 3}
+  m_Name: CellpediaData
+  m_EditorClassIdentifier: 
+  cellpediaItems:
+  - type: 1
+    cellname: T Killer cell
+    description: "When T Killer cells like you are given the license to act by Dendritic
+      cells, they gain the ability to see \u2018breadcrumb trails\u2019 of chemokines.
+      These direct them to the source of danger. When they find the cell that is
+      the source of danger, T Killer cells spit little granules that act like tiny
+      missiles, damaging the surface of their target, resulting in the death of their
+      target cell."
+    sprite: {fileID: 6302297073078170139, guid: e6ce9d7497a7ffc43bf576db10c98937,
+      type: 3}
+    spriteUIScale: 1
+    noteSprite1: {fileID: 21300000, guid: 2e5f9b7a983a9084e98d8897817f4890, type: 3}
+    noteSprite2: {fileID: 21300000, guid: 8ccfc98f2cf2c594eaad498b18165218, type: 3}
+    noteSprite3: {fileID: 21300000, guid: 2ed97cb939e2b7b4faa82bba83d33860, type: 3}
+    animatorTrigger: TKiller
+    isUnlocked: 0
+  - type: 2
+    cellname: T Helper cell
+    description: Everybody needs a helping hand once in a while! As their name suggest,
+      T Helper cells are a kind of T cell that help other immune cells. They do this
+      by releasing litter molecular messages called cytokines. When other immune
+      cells pick up these cytokines, their behaviour is altered depending on the
+      content of the message (e.g. cytokines can make other immune cells multiple,
+      or can tell them to change into a different cell type).
+    sprite: {fileID: 3349681605021059337, guid: ff72e38478d87ae4584b5ba7e9d000de,
+      type: 3}
+    spriteUIScale: 1
+    noteSprite1: {fileID: 21300000, guid: c4f488eaa4e37b740891bdf111eba2d0, type: 3}
+    noteSprite2: {fileID: 21300000, guid: 053d8db1a85f4354cb3e147564222a63, type: 3}
+    noteSprite3: {fileID: 0}
+    animatorTrigger: THelper
+    isUnlocked: 0
+  - type: 3
+    cellname: Dendritic cell
+    description: "Dendritic cells, the scouts of your body, are always on the lookout
+      for intruders or signs of danger in every corner of the body. When they spot
+      something, the move to the lymph node, where they present evidence of their
+      findings to T cells. If a T cell recognises the evidence too, it becomes activated,
+      gaining \u2018license\u2019 to begin performing its function."
+    sprite: {fileID: 452115995815455089, guid: a3bcce0b71d67974395e31a86f02f18a, type: 3}
+    spriteUIScale: 1
+    noteSprite1: {fileID: 21300000, guid: 38fadbf4f57841b43947ccf483bc72fc, type: 3}
+    noteSprite2: {fileID: 21300000, guid: a3f37bb674aa1e14fb78c61d7073a1e7, type: 3}
+    noteSprite3: {fileID: 0}
+    animatorTrigger: Dendritic
+    isUnlocked: 0
+  - type: 4
+    cellname: T Regulatory cell
+    description: "T Regulatory cells are super important in the body since they have
+      the ability to tell other immune cells to stop what they are doing. This role
+      is crucial in preventing immune cells from accidentally attacking the body,
+      which would result in autoimmunity. However,\r T Regulatory cells can be \u2018bribed\u2019
+      to protect cancer cells from immune attack. This makes T Regulatory cells an
+      interesting cell: both friend and foe depending on the scenario!\r\n"
+    sprite: {fileID: 3821337718258041553, guid: 0edfca347b3b6c948aec4d2fa7801bd7,
+      type: 3}
+    spriteUIScale: 1
+    noteSprite1: {fileID: 21300000, guid: 68896455f10ba5c448ad41aeac47648f, type: 3}
+    noteSprite2: {fileID: 21300000, guid: 412e178a0f001f94a842896f5590aa8f, type: 3}
+    noteSprite3: {fileID: 0}
+    animatorTrigger: Regulatory
+    isUnlocked: 0
+  - type: 5
+    cellname: Cancer cells
+    description: "The ability that cancer cells have to follow conventional rules
+      followed by other cells is the result of damage to the genetic instructions
+      (genes) that dictate how and when our cells divide. These \u2018damages\u2019
+      are called mutations. Many factors can lead to mutations in genes, although
+      not all mutations are bad and not mutations cause disease. Some mutations are
+      inherited from our parents, or they can appear early only in life from mistakes
+      that occur when cells divide. Other mutations are the result of influences
+      from the environment. These are well known and can include cigarettes, alcohol
+      and exposure to radiation such as UV radiation from the sun."
+    sprite: {fileID: 21300000, guid: 849d79dfc5f0ca84180043e34fece5e2, type: 3}
+    spriteUIScale: 0
+    noteSprite1: {fileID: 21300000, guid: 37e520372a2c85741a591fbe13958d65, type: 3}
+    noteSprite2: {fileID: 21300000, guid: a534aae819730564dbb98af6a7aacae2, type: 3}
+    noteSprite3: {fileID: 21300000, guid: 936a9da5358b3e34ab920977cb009016, type: 3}
+    animatorTrigger: Cancer
+    isUnlocked: 0
+  - type: 6
+    cellname: Cancer Associated Fibroblast
+    description: Fibroblasts usually help heal wounds. However, during cancer, fibroblasts 
+      can become corrupted, behaving in ways that give cancer an advantage. When
+      this occurs, these cells are termed cancer associated fibroblasts (CAFs). In
+      the environment surrounding the cancer, CAFs release proteins and other structural
+      molecules that construct a dense and rigid web around the cells called the
+      extracellular matrix. This stiff extracellular matrix shields the cancer from
+      immune cells, making it more difficult for T Killer cells to do their job!
+      For this reason, CAFs are currently being extensively researched to see if
+      we can target CAFs to improve survival in cancer patients.
+    sprite: {fileID: 2444381973209347862, guid: 2e53487c74083f74c9a00c6b54623506,
+      type: 3}
+    spriteUIScale: 1
+    noteSprite1: {fileID: 21300000, guid: 03c0ac7a8f7f59d4082306fbbd8e9587, type: 3}
+    noteSprite2: {fileID: 21300000, guid: 296d86464aa774640b59c07b73ae94e9, type: 3}
+    noteSprite3: {fileID: 21300000, guid: 01b6acceb385ffa4c957cbd3b58d8f17, type: 3}
+    animatorTrigger: CAF
+    isUnlocked: 0
