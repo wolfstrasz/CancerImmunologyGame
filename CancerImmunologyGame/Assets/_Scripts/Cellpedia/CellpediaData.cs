@@ -55,10 +55,10 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public SerializableCellpediaData(CellpediaData data)
 		{
 			count = data.cellpediaItems.Count;
-			isUnlocked = new List<bool>(count);
+			isUnlocked = new List<bool>();
 			for (int i = 0; i < count; ++i)
 			{
-				isUnlocked[i] = data.cellpediaItems[i].isUnlocked;
+				isUnlocked.Add(data.cellpediaItems[i].isUnlocked);
 			}
 		}
 

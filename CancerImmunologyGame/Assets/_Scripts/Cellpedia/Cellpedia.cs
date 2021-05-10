@@ -76,17 +76,14 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public void Initialise()
 		{
 			selectedCellObject = null;
-			microscope.Initialise();
 			buttonsBar.Initialise();
-			notepad.Initialise();
+			microscope.Initialise();
 		}
 
 		// UI Button callbacks
 		public void CloseView()
 		{
-			notepad.OnClose();
 			microscope.OnClose();
-			buttonsBar.OnClose();
 			cellpediaView.SetActive(false);
 		}
 
@@ -94,8 +91,21 @@ namespace ImmunotherapyGame.CellpediaSystem
 		{
 			cellpediaView.SetActive(true);
 
-			selectedCellObject = data.cellpediaItems[0];
-
+			if (PetridishButton.selected == null)
+			{
+				for (int i = 0; i < data.cellpediaItems.Count; ++i)
+				{
+					if (data.cellpediaItems[i].isUnlocked)
+					{
+						selectedCellObject = data.cellpediaItems[i];
+						break;
+					}
+				}
+			}
+			else
+			{
+				selectedCellObject = PetridishButton.selected.cellObject;
+			}
 			buttonsBar.OnOpen(selectedCellObject);
 			microscope.OnOpen(selectedCellObject);
 			notepad.OnOpen(selectedCellObject);
@@ -149,6 +159,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		public void SaveData()
 		{
+			Debug.Log(data.cellpediaItems.Count);
 			savedData = new SerializableCellpediaData(data);
 			SaveManager.Instance.SaveData<SerializableCellpediaData>(savedData);
 
