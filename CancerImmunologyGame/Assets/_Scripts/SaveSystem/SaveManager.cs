@@ -76,10 +76,13 @@ namespace ImmunotherapyGame
                     }
                 }
 
+                DirectoryInfo directory = new DirectoryInfo(saveDirectory);
+                Debug.Log(directory.FullName);
+
                 FileStream file = null;
                 try
                 {
-                    file = File.Create(saveDirectory + Utils.RemoveNamespacesFromAssemblyType(typeof(SaveDataType).ToString()) + ".savefile");
+                    file = File.Create(saveDirectory + "\\" + Utils.RemoveNamespacesFromAssemblyType(typeof(SaveDataType).ToString()) + ".savefile");
                 }
                 catch
                 {
@@ -113,8 +116,12 @@ namespace ImmunotherapyGame
                     return null;
                 }
 
+
                 Debug.Log("Save Manager: Loading from directory: " + saveDirectory);
-                string filePath = saveDirectory + Utils.RemoveNamespacesFromAssemblyType(typeof(LoadDataType).ToString()) + ".savefile";
+                FileInfo directory = new FileInfo(saveDirectory);
+                Debug.Log(directory.FullName);
+
+                string filePath = saveDirectory + "\\" +  Utils.RemoveNamespacesFromAssemblyType(typeof(LoadDataType).ToString()) + ".savefile";
 
                 if (!File.Exists(filePath))
                 {
