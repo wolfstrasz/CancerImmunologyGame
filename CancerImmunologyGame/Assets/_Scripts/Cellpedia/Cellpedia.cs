@@ -1,30 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Core.SystemInterfaces;
+using ImmunotherapyGame.SaveSystem;
 
 namespace ImmunotherapyGame.CellpediaSystem
 {
-	public class Cellpedia : Singleton<Cellpedia>
+	public class Cellpedia : Singleton<Cellpedia>, IDataManager
 	{
-		[Header("Cellpedia View Data")]
+		[Header("Data")]
+		[SerializeField]
+		internal CellpediaData data = null;
+		private SerializableCellpediaData savedData = null;
+		[ReadOnly]
+		private CellpediaObject selectedCellObject = null;
+
+		[Header("Cellpedia UI")]
 		[SerializeField]
 		private GameObject cellpediaView = null;
 		[SerializeField]
-		private CellpediaNotepad notepad = null;
+		internal CellpediaNotepad notepad = null;
 		[SerializeField]
-		private List<Petridish> petridishes = new List<Petridish>();
+		internal CellpediaMicroscope microscope = null;
 		[SerializeField]
-		private GameObject leftBtn = null;
-		[SerializeField]
-		private GameObject rightBtn = null;
-
-		[SerializeField]
-		private List<CellDescriptionLink> cellDescriptions = new List<CellDescriptionLink>();
-		[Header ("Game UI")]
-		[SerializeField]
-		private GameObject microscopeButton = null;
-		[SerializeField]
-		private Animator microscopeAnimator = null;
+		internal CellpediaButtonsBar buttonsBar = null;
 
 		[Header ("Popups")]
 		[SerializeField]
@@ -32,14 +31,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[SerializeField]
 		private GameObject popupPrefab = null;
 
-		[Header("Debugging (Read Only")]
+		[Header ("Game UI")]
 		[SerializeField]
-		private CellDescription currentCD = null;
+		private GameObject microscopeButton = null;
 		[SerializeField]
-		private int dishIndex = 0;
-
-		[SerializeField]
-		private int cellsFound = 0;
+		private Animator microscopeButtonAnimator = null;
 
 		// Used by Cellpedia popups
 		internal Transform PopupLayout => popupLayout.transform;
@@ -49,33 +45,46 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public bool IsCellpediaOpened => cellpediaView.gameObject.activeSelf;
 
 
+		public void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Q))
+			{
+				UnlockCellDescription(CellpediaItemTypes.TKILLER);
+			}
+			if (Input.GetKeyDown(KeyCode.W))
+			{
+				UnlockCellDescription(CellpediaItemTypes.DENDRITIC);
+			}
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				UnlockCellDescription(CellpediaItemTypes.THELPER);
+			}
+			if (Input.GetKeyDown(KeyCode.R))
+			{
+				UnlockCellDescription(CellpediaItemTypes.CANCER);
+			}
+			if (Input.GetKeyDown(KeyCode.T))
+			{
+				UnlockCellDescription(CellpediaItemTypes.REGULATORY);
+			}
+			if (Input.GetKeyDown(KeyCode.Y))
+			{
+				UnlockCellDescription(CellpediaItemTypes.CAF);
+			}
+		}
+
 		public void Initialise()
 		{
-			leftBtn.SetActive(false);
-			rightBtn.SetActive(false);
-			foreach (CellDescriptionLink cdl in cellDescriptions)
-			{
-				cdl.button.Initialise(cdl.description.sprite);
-				cdl.button.Deactivate();
-				PetridishButton.selected = null;
-				if (dishIndex != 0)
-				{
-					petridishes[0].Reset();
-					petridishes[1].Reset();
-					dishIndex = 0;
-				}
-				currentCD = null;
-				microscopeButton.SetActive(cellsFound > 0);
-
-			}
+			selectedCellObject = null;
+			buttonsBar.Initialise();
+			microscope.Initialise();
 		}
 
 		// UI Button callbacks
 		public void CloseView()
 		{
+			microscope.OnClose();
 			cellpediaView.SetActive(false);
-			petridishes[0].SkipAnimation();
-			petridishes[1].SkipAnimation();
 		}
 
 		public void OpenView()
@@ -84,72 +93,82 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 			if (PetridishButton.selected == null)
 			{
-				currentCD = cellDescriptions[0].description;
-				PetridishButton.selected = cellDescriptions[0].button;
-				PetridishButton.selected.Select();
-				petridishes[dishIndex].SetVisual(currentCD);
-				notepad.SetVisual(currentCD);
-			}
-			petridishes[dishIndex].SetVisual(currentCD);
-			notepad.SetVisual(currentCD);
-
-
-			microscopeAnimator.SetTrigger("Opened");
-		}
-
-		internal bool NextPetridish(PetridishButton buttonClicked)
-		{
-
-			if (petridishes[0].isShifting || petridishes[1].isShifting) return false;
-			dishIndex ^= 1;
-
-			for (int i = 0; i < cellDescriptions.Count; ++i)
-			{
-				CellDescriptionLink cdLink = cellDescriptions[i];
-				if (cdLink.button == buttonClicked)
+				for (int i = 0; i < data.cellpediaItems.Count; ++i)
 				{
-					currentCD = cdLink.description;
-					petridishes[dishIndex].SetVisual(currentCD);
-					notepad.SetVisual(currentCD);
-
-					petridishes[0].ShiftLeft();
-					petridishes[1].ShiftLeft();
-					continue;
+					if (data.cellpediaItems[i].isUnlocked)
+					{
+						selectedCellObject = data.cellpediaItems[i];
+						break;
+					}
 				}
 			}
-			return true;
+			else
+			{
+				selectedCellObject = PetridishButton.selected.cellObject;
+			}
+			buttonsBar.OnOpen(selectedCellObject);
+			microscope.OnOpen(selectedCellObject);
+			notepad.OnOpen(selectedCellObject);
+
+			microscopeButtonAnimator.SetTrigger("Opened");
 		}
 
-		public void UnlockCellDescription(CellpediaCells cc)
+
+		public void UnlockCellDescription(CellpediaItemTypes type)
 		{
-			if (cc == CellpediaCells.NONE) return;
-			
-			for (int i = 0; i< cellDescriptions.Count; ++i)
+			var items = data.cellpediaItems;
+			CellpediaObject item = null;
+
+			// Search for item
+			for (int i = 0; i < items.Count; ++i)
 			{
-				CellDescriptionLink cdLink = cellDescriptions[i];
-				if (cdLink.cell == cc)
+				if (items[i].type == type)
 				{
-					microscopeButton.SetActive(true);
-					cdLink.button.Activate();
-					CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
-					popup.SetInfo(cdLink.description);
-					microscopeAnimator.SetTrigger("NewItem");
-					cellsFound++;
-					continue;
+					item = items[i];
+					break;
 				}
 			}
+
+			if (item.isUnlocked) return;
+
+
+			item.isUnlocked = true;
+			microscopeButton.SetActive(true);
+			buttonsBar.ActivateButton(item);
+
+			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
+			popup.SetInfo(item);
+			microscopeButtonAnimator.SetTrigger("NewItem");
+			SaveData();
 		}
 
-
-		
-		[System.Serializable]
-		public struct CellDescriptionLink
+		public void LoadData()
 		{
-			public CellDescription description;
-			public CellpediaCells cell;
-			public PetridishButton button;
+			savedData = SaveManager.Instance.LoadData<SerializableCellpediaData>();
+
+			if (savedData == null)
+			{
+				Debug.Log("No previous saved data found. Creating new level data save.");
+			}
+			else
+			{
+				savedData.CopyTo(data);
+			}
+			SaveData();
+		}
+
+		public void SaveData()
+		{
+			Debug.Log(data.cellpediaItems.Count);
+			savedData = new SerializableCellpediaData(data);
+			SaveManager.Instance.SaveData<SerializableCellpediaData>(savedData);
+
+		}
+
+		public void ResetData()
+		{
+			data.ResetData();
 		}
 	}
 
-	public enum CellpediaCells { NONE, TKILLER, THELPER, DENDRITIC, REGULATORY, CANCER, CAF }
 }

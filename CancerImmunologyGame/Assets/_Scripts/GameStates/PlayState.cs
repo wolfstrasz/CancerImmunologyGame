@@ -17,7 +17,6 @@ namespace ImmunotherapyGame
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.Initialise();
 				PlayerController.Instance.Initialise();
-				Cellpedia.Instance.Initialise();
 				TutorialManager.Instance.Initialise();
 			}
 

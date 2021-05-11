@@ -45,8 +45,6 @@ namespace ImmunotherapyGame
 					BackgroundMusic.Instance.Initialise();
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.Initialise();
-				if (GameObject.FindObjectOfType<Cellpedia>() != null)
-					Cellpedia.Instance.Initialise();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
 					TutorialManager.Instance.Initialise();
 			}
