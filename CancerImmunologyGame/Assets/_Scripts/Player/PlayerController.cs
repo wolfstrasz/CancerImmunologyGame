@@ -14,10 +14,21 @@ namespace ImmunotherapyGame.Player
 	{
 		[SerializeField]
 		private KillerCell kc = null;
-
-		[Header("Range functionality")]
+		[Header("Aiming")]
 		[SerializeField]
-		private PlayerRangeDisplay rangeDisplay = null;
+		private GameObject crosshairCanvas = null;
+		[SerializeField]
+		private Transform crosshair = null;
+		internal Quaternion CrosshairRotation { get; set; }
+
+		[Header("AutoAim")]
+		[SerializeField]
+		private GameObject autoAimerPrefab = null;
+		[SerializeField]
+		private bool useAutoAim = false;
+		[SerializeField]
+		private PlayerAutoAimer autoAimer = null;
+
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
@@ -37,7 +48,15 @@ namespace ImmunotherapyGame.Player
 			kc.Sense.controller = this;
 			kc.controller = this;
 			transform.position = kc.transform.position;
-			rangeDisplay.Initialise(kc);
+			transform.rotation = kc.transform.rotation;
+			CrosshairRotation = Quaternion.identity;
+			// Auto aiming
+			useAutoAim = GlobalGameData.autoAim;
+			if (useAutoAim && autoAimer == null)
+			{
+				autoAimer = Instantiate(autoAimerPrefab, transform).GetComponent<PlayerAutoAimer>();
+				autoAimer.owner = this;
+			}
 		}
 
 
@@ -70,24 +89,23 @@ namespace ImmunotherapyGame.Player
 		// input
 		public void OnUpdate()
 		{
-			// TODO: manage it better
+
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;
-
+			if (autoAimer != null)
+				autoAimer.OnUpdate();
+			crosshairCanvas.transform.rotation = CrosshairRotation;
 			PlayerUI.Instance.OnUpdate();
-			rangeDisplay.OnUpdate();
-
-			//kc.SpriteOrientation = rangeDisplay.orientation;
 
 			if (CanAttack)
 			{
 				if (InitiatePrimaryAttack)
 				{
-					kc.Attack(rangeDisplay.centre.position);
+					kc.Attack(crosshair.position);
 				}
 				if (InitiateSpecialAttack)
 				{
-					kc.SpecialAttack(rangeDisplay.centre.position);
+					kc.SpecialAttack(crosshair.position);
 				}
 			}
 		}
@@ -114,12 +132,12 @@ namespace ImmunotherapyGame.Player
 		// Subscribtions
 		public void OnEnemiesInRange()
 		{
-			rangeDisplay.gameObject.SetActive(true);
+			crosshairCanvas.SetActive(true);
 		}
 
 		public void OnEnemiesOutOfRange()
 		{
-			rangeDisplay.gameObject.SetActive(false);
+			crosshairCanvas.SetActive(false);
 		}
 
 		public void OnCancerDeath(Cancer cancer)
@@ -193,7 +211,7 @@ namespace ImmunotherapyGame.Player
 
 		private bool InitiatePrimaryAttack { get; set; }
 		private bool InitiateSpecialAttack { get; set; }
-		private bool CanAttack => rangeDisplay.gameObject.activeInHierarchy;
+		private bool CanAttack => crosshairCanvas.activeInHierarchy;
 
 		// Movement properties
 		private bool IsMoving => MoveDirection != Vector2.zero;
@@ -250,6 +268,31 @@ namespace ImmunotherapyGame.Player
 		void OnSecondaryAttack(InputValue value)
 		{
 			InitiateSpecialAttack = value.isPressed;
+		}
+
+		void OnAim(InputValue value)
+		{
+			// Get 2D direction
+			Vector2 direction = value.Get<Vector2>();
+
+			// Calculate rotation
+			float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+		}
+
+		void OnMouseAim(InputValue value)
+		{
+			// Obtain pointer position
+			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+			worldPosition.z = 0.0f;
+
+			// Get 2D direction
+			Vector3 diff = worldPosition - transform.position;
+			diff.Normalize();
+
+			// Calculate rotation
+			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
 		}
 	}
 }
