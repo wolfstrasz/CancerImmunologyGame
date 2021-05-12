@@ -6,8 +6,10 @@ using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Audio;
 
+
 namespace ImmunotherapyGame.Player
 {
+	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver, IControllerMovementOverridable
 	{
 		[SerializeField]
@@ -79,11 +81,11 @@ namespace ImmunotherapyGame.Player
 
 			if (CanAttack)
 			{
-				if (PrimaryAttack)
+				if (InitiatePrimaryAttack)
 				{
 					kc.Attack(rangeDisplay.centre.position);
 				}
-				if (SpecialAttack)
+				if (InitiateSpecialAttack)
 				{
 					kc.SpecialAttack(rangeDisplay.centre.position);
 				}
@@ -189,26 +191,8 @@ namespace ImmunotherapyGame.Player
 		}
 
 
-
-		// Action properties
-		private bool PrimaryAttack
-		{
-			get 
-			{
-				bool pressed = Mouse.current.leftButton.isPressed;
-				return pressed; 
-			}
-		}
-
-		private bool SpecialAttack
-		{
-			get
-			{
-				bool pressed = Mouse.current.rightButton.isPressed;
-				return pressed;
-			}
-		}
-
+		private bool InitiatePrimaryAttack { get; set; }
+		private bool InitiateSpecialAttack { get; set; }
 		private bool CanAttack => rangeDisplay.gameObject.activeInHierarchy;
 
 		// Movement properties
@@ -249,14 +233,23 @@ namespace ImmunotherapyGame.Player
 				return vertical;
 			}
 		}
-		private Vector2 MoveDirection
+		private Vector2 MoveDirection { get; set; }
+
+		// Action Callbacks
+		void OnMovement(InputValue value)
 		{
-			get
-			{
-				Vector2 value = new Vector2(Horizontal, Vertical).normalized;
-				return value;
-			}
+			var direction = value.Get<Vector2>();
+			MoveDirection = new Vector2(direction.x, direction.y);
 		}
 
+		void OnPrimaryAttack(InputValue value)
+		{
+			InitiatePrimaryAttack = value.isPressed;
+		}
+
+		void OnSecondaryAttack(InputValue value)
+		{
+			InitiateSpecialAttack = value.isPressed;
+		}
 	}
 }
