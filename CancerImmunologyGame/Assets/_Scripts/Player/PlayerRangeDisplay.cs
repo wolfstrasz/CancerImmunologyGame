@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using ImmunotherapyGame.Cancers;
-
 namespace ImmunotherapyGame.Player
 {
 	public class PlayerRangeDisplay : MonoBehaviour
@@ -67,8 +67,8 @@ namespace ImmunotherapyGame.Player
 			}
 			else
 			{
-
-				worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+				//worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			}
 			
 			worldPosition.z = 0.0f;

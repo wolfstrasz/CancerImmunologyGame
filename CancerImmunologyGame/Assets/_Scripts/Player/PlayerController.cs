@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+
 using System.Collections.Generic;
 using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.Core;
@@ -192,8 +194,8 @@ namespace ImmunotherapyGame.Player
 		private bool PrimaryAttack
 		{
 			get 
-			{ 
-				bool pressed = Input.GetKey(KeyCode.Mouse0);
+			{
+				bool pressed = Mouse.current.leftButton.isPressed;
 				return pressed; 
 			}
 		}
@@ -202,7 +204,7 @@ namespace ImmunotherapyGame.Player
 		{
 			get
 			{
-				bool pressed = Input.GetKeyDown(KeyCode.Mouse1);
+				bool pressed = Mouse.current.rightButton.isPressed;
 				return pressed;
 			}
 		}
@@ -211,10 +213,42 @@ namespace ImmunotherapyGame.Player
 
 		// Movement properties
 		private bool IsMoving => MoveDirection != Vector2.zero;
+		private float Horizontal
+		{
+			get
+			{
+				var keyboard = Keyboard.current;
+				var horizontal = 0f;
+				if (keyboard.dKey.isPressed)
+				{
+					horizontal += 1f;
+				}
+				if (keyboard.aKey.isPressed)
+				{
+					horizontal -= 1f;
+				}
+				return horizontal;
+			}
+		}
+		private float Vertical
+		{
+			get
+			{
+				var keyboard = Keyboard.current;
+				var vertical = 0f;
 
+				if (keyboard.wKey.isPressed)
+				{
+					vertical += 1f;
+				}
 
-		private float Horizontal => Input.GetAxisRaw("Horizontal");
-		private float Vertical => Input.GetAxisRaw("Vertical");
+				if (keyboard.sKey.isPressed)
+				{
+					vertical -= 1f;
+				}
+				return vertical;
+			}
+		}
 		private Vector2 MoveDirection
 		{
 			get
