@@ -14,7 +14,6 @@ namespace ImmunotherapyGame.Player
 		[Header("Range functionality")]
 		[SerializeField]
 		private PlayerRangeDisplay rangeDisplay = null;
-		private bool canAttack = false;
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
@@ -74,65 +73,49 @@ namespace ImmunotherapyGame.Player
 			PlayerUI.Instance.OnUpdate();
 			rangeDisplay.OnUpdate();
 
-#if PLAYER_DEBUG
-			DebugInput();
-#endif
-
 			//kc.SpriteOrientation = rangeDisplay.orientation;
 
-			if (canAttack)
+			if (CanAttack)
 			{
-				if (Input.GetKey(KeyCode.Mouse0))
+				if (PrimaryAttack)
 				{
 					kc.Attack(rangeDisplay.centre.position);
 				}
-				if (Input.GetKeyDown(KeyCode.Mouse1))
+				if (SpecialAttack)
 				{
 					kc.SpecialAttack(rangeDisplay.centre.position);
 				}
-			}
-			else
-			{
-				kc.StopAttack();
 			}
 		}
 
 		public void OnFixedUpdate()
 		{
-			Vector2 movementVector = new Vector2();
-			// Collect input 
-			movementVector.x = Input.GetAxisRaw("Horizontal");
-			movementVector.y = Input.GetAxisRaw("Vertical");
 
-			// Damping if both axis are pressed. sqare root of 2.
-			if (Mathf.Abs(movementVector.x) == 1 && Mathf.Abs(movementVector.y) == 1)
+			if (IsMoving)
 			{
-				movementVector = movementVector * 0.74f;
+				Vector2 movementVector = MoveDirection;
+				Vector3 position = kc.transform.position;
+				Quaternion rotation = Quaternion.identity;
+
+				for (int i = 0; i < movementOverrides.Count; i++)
+				{
+					movementOverrides[i].ApplyOverride(ref movementVector, ref rotation, ref position);
+				}
+
+				kc.MovementVector = movementVector;
+				kc.MovementRotation = Quaternion.Slerp(kc.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 			}
-
-			Vector3 position = kc.transform.position;
-			Quaternion newRotation = Quaternion.identity;
-
-			for (int i = 0; i < movementOverrides.Count; i++)
-			{
-				movementOverrides[i].ApplyOverride(ref movementVector, ref newRotation, ref position);
-			}
-
-			kc.MovementVector = movementVector;
-			kc.MovementRotation = Quaternion.Slerp(kc.transform.rotation, newRotation, Time.fixedDeltaTime * 2f);
 		}
 
 		// Subscribtions
 		public void OnEnemiesInRange()
 		{
 			rangeDisplay.gameObject.SetActive(true);
-			canAttack = true;
 		}
 
 		public void OnEnemiesOutOfRange()
 		{
 			rangeDisplay.gameObject.SetActive(false);
-			canAttack = false;
 		}
 
 		public void OnCancerDeath(Cancer cancer)
@@ -203,26 +186,43 @@ namespace ImmunotherapyGame.Player
 			}
 		}
 
-#if PLAYER_DEBUG
-		private void DebugInput()
+
+
+		// Action properties
+		private bool PrimaryAttack
 		{
-			if (Input.GetKeyDown(KeyCode.Keypad7))
-			{
-				kc.AddHealth(-20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad9))
-			{
-				kc.AddHealth(+20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad4))
-			{
-				kc.AddEnergy(-20.0f);
-			}
-			if (Input.GetKeyDown(KeyCode.Keypad6))
-			{
-				kc.AddEnergy(+20.0f);
+			get 
+			{ 
+				bool pressed = Input.GetKey(KeyCode.Mouse0);
+				return pressed; 
 			}
 		}
-#endif
+
+		private bool SpecialAttack
+		{
+			get
+			{
+				bool pressed = Input.GetKeyDown(KeyCode.Mouse1);
+				return pressed;
+			}
+		}
+
+		private bool CanAttack => rangeDisplay.gameObject.activeInHierarchy;
+
+		// Movement properties
+		private bool IsMoving => MoveDirection != Vector2.zero;
+
+
+		private float Horizontal => Input.GetAxisRaw("Horizontal");
+		private float Vertical => Input.GetAxisRaw("Vertical");
+		private Vector2 MoveDirection
+		{
+			get
+			{
+				Vector2 value = new Vector2(Horizontal, Vertical).normalized;
+				return value;
+			}
+		}
+
 	}
 }

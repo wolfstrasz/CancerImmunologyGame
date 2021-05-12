@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d669b08ce074d44b9a5baa90963119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 0}
+  render: {fileID: 2046459777060728081}
   animator: {fileID: 2046459777261753809}
   bodyBlocker: {fileID: 0}
   maxHealth: 100
@@ -281,31 +281,26 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 2046459777261753813}
   sense: {fileID: 2046459777672622295}
-  exhaustEffectReduction: 0.75
   movementSpeed: 4
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 1244794201}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
+  normalAttackParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
     type: 3}
+  normalAttackSpawnTransform: {fileID: 1244794202}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -1.1
-  attackCooldown: 0.2
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 2046459777060728083}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
-  spreadAngle: 35
-  bulletAmount: 5
-  specialAttackRange: 3
-  pacParticlePrefab: {fileID: 5293642523950685746, guid: 3f83288741d54c44fade1f6953906016,
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 5293642523950685746, guid: 3f83288741d54c44fade1f6953906016,
     type: 3}
+  specialAttackSpawnTransform: {fileID: 2046459777261753811}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
   gapDistance: 0.4
-  cooldown: 10
-  passedCooldown: 0
+  bulletAmount: 5
 --- !u!1 &2046459777672622313
 GameObject:
   m_ObjectHideFlags: 0
