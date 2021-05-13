@@ -12,8 +12,6 @@ namespace ImmunotherapyGame
         public class SaveManager : Singleton<SaveManager>
         {
             [SerializeField]
-            private string buildString = "build4";
-            [SerializeField]
             private string saveDirectory = "GameData";
             [SerializeField]
             private bool debugToJason = true;

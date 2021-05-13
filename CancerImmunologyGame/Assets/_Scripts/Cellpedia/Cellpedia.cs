@@ -3,7 +3,6 @@ using UnityEngine;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
-
 namespace ImmunotherapyGame.CellpediaSystem
 {
 	public class Cellpedia : Singleton<Cellpedia>, IDataManager

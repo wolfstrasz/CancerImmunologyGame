@@ -4,43 +4,23 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
+using ImmunotherapyGame.UI;
+
 namespace ImmunotherapyGame.Core
 {
-	public static class InputHandlerUtils
+	public static class UIUtils
 	{
-
-		public static List<string> GetAllKeybindsStrings(InputAction action)
-		{
-			List<string> strs = new List<string>();
-
-
-			if (InputSystem.GetDevice<Keyboard>() != null)
-			{
-				var keyboardIndex = action.GetBindingIndex(group: "Keyboard + Mouse");
-				var keyboardString = action.GetBindingDisplayString(keyboardIndex);
-				strs.Add(keyboardString);
-			}
-
-			if (InputSystem.GetDevice<Gamepad>() != null)
-			{
-				var gamepadIndex = action.GetBindingIndex(group: "Gamepad");
-				var gamepadString = action.GetBindingDisplayString(gamepadIndex);
-				strs.Add(gamepadString);
-			}
-
-			return strs;
-		}
 
 		private static Stack<UINavigationFirstSelected> callerStack = new Stack<UINavigationFirstSelected>();
 
-		public static void RequestUIControl(UINavigationFirstSelected caller)
+		public static void RequestUINavigationControl(UINavigationFirstSelected caller)
 		{
 			Debug.Log("Control Requested: " + caller.gameObject);
 			EventSystem.current.SetSelectedGameObject(caller.gameObject);
 			callerStack.Push(caller);
 		}
 
-		public static void FreeUIControl(UINavigationFirstSelected caller)
+		public static void FreeUINavigationControl(UINavigationFirstSelected caller)
 		{
 			Debug.Log("Control Freed: " + caller.gameObject );
 

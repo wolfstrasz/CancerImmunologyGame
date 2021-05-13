@@ -71,7 +71,7 @@ namespace ImmunotherapyGame.Loader
 			Debug.Log(playerInput.currentActionMap.FindAction("Skip").ToString());
 			SkipAction = playerInput.currentActionMap.FindAction("Skip", true);
 
-			List<string> bindings = InputHandlerUtils.GetAllKeybindsStrings(SkipAction);
+			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);
 
 			if (bindings.Count == 0) return;
 			string displayStr = "Hold [" + bindings[0];

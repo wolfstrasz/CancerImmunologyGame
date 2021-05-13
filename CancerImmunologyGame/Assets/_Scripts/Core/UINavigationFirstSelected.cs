@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Core;
 
-namespace ImmunotherapyGame.Core
+namespace ImmunotherapyGame.UI
 {
 	public class UINavigationFirstSelected : MonoBehaviour
 	{
 		private void OnEnable()
 		{
-			InputHandlerUtils.RequestUIControl(this);
+			UIUtils.RequestUINavigationControl(this);
 		}
 
 		private void OnDisable()
 		{
-			InputHandlerUtils.FreeUIControl(this);
+			UIUtils.FreeUINavigationControl(this);
 		}
 	}
 }

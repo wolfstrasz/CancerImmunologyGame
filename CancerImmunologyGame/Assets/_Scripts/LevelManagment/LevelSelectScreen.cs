@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-
 using UnityEngine;
 
 using ImmunotherapyGame.Core;
@@ -17,7 +16,6 @@ namespace ImmunotherapyGame.UI
         private GameObject levelItemLayout = null;
         [SerializeField]
         private List<LevelSelectButton> levelSelectButtons = null;
-        [ReadOnly]
         private bool initialised = false;
 
         public void Initialise()
