@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace ImmunotherapyGame
 {
-	public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+	public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler, ICancelHandler
 	{
 		[Header("Menu Button Attributes")]
 		[SerializeField]
@@ -33,5 +33,21 @@ namespace ImmunotherapyGame
 			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		}
 
+		public void OnSelect(BaseEventData eventData)
+		{
+			// Do something.
+			audioSource.Play();
+			gameObject.transform.localScale = scaling;
+		}
+
+		public void OnDeselect(BaseEventData eventData)
+		{
+			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		}
+
+		public void OnCancel(BaseEventData eventData)
+		{
+			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		}
 	}
 }

@@ -489,6 +489,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
         type: 3}
+      propertyPath: skipLogos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
+        type: 3}
       propertyPath: action.m_Id
       value: 25179b11-75eb-498a-96e2-03d244521e55
       objectReference: {fileID: 0}
