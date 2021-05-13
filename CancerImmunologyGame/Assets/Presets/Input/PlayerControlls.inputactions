@@ -224,6 +224,44 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Systems",
+            "id": "efaaa96d-4419-4c3e-b143-a29ce25d469b",
+            "actions": [
+                {
+                    "name": "Skip",
+                    "type": "Value",
+                    "id": "5a04c15c-4244-440e-b2b5-85c9ef1b33d3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fa7a6d26-1564-435a-a497-2de0c5b41f50",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard + Mouse",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4ce8cb4-88fc-464e-97e2-bd3cbc3715dd",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Skip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
