@@ -2,52 +2,61 @@
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-namespace ImmunotherapyGame
+using ImmunotherapyGame.Audio;
+
+namespace ImmunotherapyGame.UI
 {
 	public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler, ICancelHandler
 	{
-		[Header("Menu Button Attributes")]
 		[SerializeField]
-		private AudioSource audioSource = null;
+		private GameObject selectedView = null;
 		[SerializeField]
-		private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
+		private UIAudioClipKey audioClipKey = UIAudioClipKey.NONE;
+
+
+		private void ApplySelect()
+		{
+			selectedView.SetActive(true);
+			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
+		}
+
+		private void ApplyDeselect()
+		{
+			selectedView.SetActive(false);
+		}
 
 		// When highlighted with mouse.
 		public virtual void OnPointerEnter(PointerEventData eventData)
 		{
-			// Do something.
-			audioSource.Play();
-			gameObject.transform.localScale = scaling;
+			EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
 		public virtual void OnPointerExit(PointerEventData eventData)
 		{
-			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			OnDeselect(eventData);
 		}
 
 		// When selected.
 		public virtual void OnPointerClick(PointerEventData eventData)
 		{
-			// Do something.
-			audioSource.Play();
-			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			//// Do something.
+			//audioSource.Play();
+			//gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		}
 
 		public void OnSelect(BaseEventData eventData)
 		{
-			// Do something.
-			audioSource.Play();
-			gameObject.transform.localScale = scaling;
+			ApplySelect();
 		}
 
 		public void OnDeselect(BaseEventData eventData)
 		{
-			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			ApplyDeselect();
 		}
 
 		public void OnCancel(BaseEventData eventData)
 		{
-			gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+			ApplyDeselect();
 		}
 	}
 }
