@@ -16,6 +16,10 @@ namespace ImmunotherapyGame.UI
 
 		private void ApplySelect()
 		{
+			if (selectedView == null)
+			{
+				Debug.LogError("THAT IS NULL MAN CANT APPLY SELECT: " + gameObject);
+			}
 			selectedView.SetActive(true);
 			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
 		}

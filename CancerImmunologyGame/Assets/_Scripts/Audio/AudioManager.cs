@@ -39,6 +39,8 @@ namespace ImmunotherapyGame.Audio
 
 		public void PlayUISoundClip(UIAudioClipKey key, GameObject caller)
 		{
+			if (uiAudioLibrary == null) return;
+
 			if (uiAudioLibrary.ContainsKey(key))
 			{
 				uiSource.Stop();
