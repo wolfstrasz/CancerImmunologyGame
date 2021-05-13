@@ -47,30 +47,30 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		public void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Q))
-			{
-				UnlockCellDescription(CellpediaItemTypes.TKILLER);
-			}
-			if (Input.GetKeyDown(KeyCode.W))
-			{
-				UnlockCellDescription(CellpediaItemTypes.DENDRITIC);
-			}
-			if (Input.GetKeyDown(KeyCode.E))
-			{
-				UnlockCellDescription(CellpediaItemTypes.THELPER);
-			}
-			if (Input.GetKeyDown(KeyCode.R))
-			{
-				UnlockCellDescription(CellpediaItemTypes.CANCER);
-			}
-			if (Input.GetKeyDown(KeyCode.T))
-			{
-				UnlockCellDescription(CellpediaItemTypes.REGULATORY);
-			}
-			if (Input.GetKeyDown(KeyCode.Y))
-			{
-				UnlockCellDescription(CellpediaItemTypes.CAF);
-			}
+			//if (Input.GetKeyDown(KeyCode.Q))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.TKILLER);
+			//}
+			//if (Input.GetKeyDown(KeyCode.W))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.DENDRITIC);
+			//}
+			//if (Input.GetKeyDown(KeyCode.E))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.THELPER);
+			//}
+			//if (Input.GetKeyDown(KeyCode.R))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.CANCER);
+			//}
+			//if (Input.GetKeyDown(KeyCode.T))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.REGULATORY);
+			//}
+			//if (Input.GetKeyDown(KeyCode.Y))
+			//{
+			//	UnlockCellDescription(CellpediaItemTypes.CAF);
+			//}
 		}
 
 		public void Initialise()
