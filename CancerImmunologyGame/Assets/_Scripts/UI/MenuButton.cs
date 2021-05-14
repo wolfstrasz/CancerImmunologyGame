@@ -8,25 +8,8 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
 	[RequireComponent(typeof(Button))]
-	public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IDeselectHandler
+	public class MenuButton : UIMenuNode, IPointerEnterHandler, ISelectHandler, IDeselectHandler
 	{
-		[Header("OnSelect")]
-		[SerializeField]
-		private List<GameObject> viewObjectsOnSelect = null;
-		[SerializeField]
-		private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
-
-		private bool OnSelectView
-		{
-			set
-			{
-				foreach (GameObject obj in viewObjectsOnSelect)
-				{
-					obj.SetActive(value);
-				}
-			}
-		}
-
 		// When highlighted with mouse.
 		public virtual void OnPointerEnter(PointerEventData eventData)
 			=> EventSystem.current.SetSelectedGameObject(gameObject);

@@ -10,14 +10,9 @@ using TMPro;
 
 namespace ImmunotherapyGame.UI
 {
-    public class MenuDropdown : Selectable, IPointerClickHandler, IEventSystemHandler, ISubmitHandler
+    [RequireComponent(typeof(Selectable))]
+    public class MenuDropdown : UIMenuNode, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, IPointerEnterHandler, ISelectHandler, IDeselectHandler
     {
-        [Header("OnSelect")]
-        [SerializeField]
-        private List<GameObject> viewObjectsOnSelect = null;
-        [SerializeField]
-        private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
-
         [Header("Dropdown")]
         [SerializeField]
         internal GameObject view = null;
@@ -35,23 +30,13 @@ namespace ImmunotherapyGame.UI
         [ReadOnly]
         private MenuDropdownItem selectedItem = null;
 
-        private bool OnSelectView
-        {
-            set
-            {
-                foreach (GameObject obj in viewObjectsOnSelect)
-                {
-                    obj.SetActive(value);
-                }
-            }
-        }
 
         // Accessors
         public int CurrentValue { get => selectedItem.ItemValue; set => selectedItem = dropdownItems[value].GetComponent<MenuDropdownItem>(); }
         public string CurrentValueName { get => selectedItem.ItemName; }
 
-        // Events
-        public delegate void OnValueChanged();
+		// Events
+		public delegate void OnValueChanged();
         public OnValueChanged onValueChanged;
 
         internal void OnItemSubmitted(MenuDropdownItem item)
@@ -82,21 +67,19 @@ namespace ImmunotherapyGame.UI
         }
 
 #region Selectable Overrides
-        public override void OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
 		{
-            base.OnPointerEnter(eventData);
             EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
-		public override void OnDeselect(BaseEventData eventData)
+		public void OnDeselect(BaseEventData eventData)
 		{
-            base.OnDeselect(eventData);
             OnSelectView = false;
         }
 
-		public override void OnSelect(BaseEventData eventData)
+		public  void OnSelect(BaseEventData eventData)
 		{
-            base.OnSelect(eventData);
+      
             OnSelectView = true;
             AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
         }

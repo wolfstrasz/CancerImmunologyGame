@@ -8,27 +8,10 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
     [RequireComponent(typeof(Slider))]
-    public class MenuSlider : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler
+    public class MenuSlider : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler
     {
-        [Header("OnSelect")]
-        [SerializeField]
-        private List<GameObject> viewObjectsOnSelect = null;
-        [SerializeField]
-        private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
-
-        private bool OnSelectView 
-        { 
-            set 
-            {
-                foreach (GameObject obj in viewObjectsOnSelect)
-				{
-                    obj.SetActive(value);
-				}
-			} 
-        }
-
-        // Cached objects
-        private Slider slider = null;
+		// Cached objects
+		private Slider slider = null;
 
         // Private methods
         private void OnValueChanged() 

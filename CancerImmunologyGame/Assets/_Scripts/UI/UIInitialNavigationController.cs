@@ -4,17 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-using ImmunotherapyGame.Core;
-
+using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
 	[RequireComponent(typeof(Selectable))]
-	public class UIInitialControlNode : MonoBehaviour/*, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerClickHandler*/
+	public class UIInitialNavigationController : MonoBehaviour/*, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerClickHandler*/
 	{
 		[SerializeField]
 		private GameObject initialiserGameObject;
 		[SerializeField]
-		private Selectable initialiserSelectable;
+		private UIMenuNode initialiserNode;
 
 		private GameObject previouslySelectedGameObject;
 
@@ -29,8 +28,8 @@ namespace ImmunotherapyGame.UI
 				previouslySelectedGameObject = EventSystem.current.currentSelectedGameObject;
 				EventSystem.current.SetSelectedGameObject(null);
 				EventSystem.current.SetSelectedGameObject(initialiserGameObject);
+				initialiserNode.OnSelectView = true;
 			}
-			//RequestUINavigationControl(this);
 		}
 
 		void OnDisable()
@@ -39,11 +38,28 @@ namespace ImmunotherapyGame.UI
 			{
 				EventSystem.current.SetSelectedGameObject(null);
 				EventSystem.current.SetSelectedGameObject(previouslySelectedGameObject);
-				EventSystem.current.gameObject.GetComponent<Selectable>(); //.OnSelect(new BaseEventData(EventSystem.current));
 			}
-			//FreeUINavigationControl(this);
 		}
 
 	}
 
+	public abstract class UIMenuNode : MonoBehaviour
+	{
+		[Header("OnSelect")]
+		[SerializeField]
+		protected List<GameObject> viewObjectsOnSelect = null;
+		[SerializeField]
+		protected UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
+
+		public bool OnSelectView
+		{
+			set
+			{
+				foreach (GameObject obj in viewObjectsOnSelect)
+				{
+					obj.SetActive(value);
+				}
+			}
+		}
+	}
 }

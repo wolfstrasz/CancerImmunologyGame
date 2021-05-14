@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using ImmunotherapyGame.Audio;
 using ImmunotherapyGame.Core;
 using TMPro;
 
 namespace ImmunotherapyGame.UI
 {
 	[System.Serializable]
-    public class MenuDropdownItem : Selectable, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, ICancelHandler
+    public class MenuDropdownItem : UIMenuNode, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, ICancelHandler, IMoveHandler, IPointerEnterHandler, ISelectHandler, IDeselectHandler
 	{
-		[SerializeField]
-		private List<GameObject> onSelectActivateGameObjects = null;
+		[Header("Attributes")]
 		[SerializeField]
 		private TMP_Text itemText = null;
 
@@ -22,15 +22,13 @@ namespace ImmunotherapyGame.UI
 
 		private List<GameObject> dropdownItems => owner.dropdownItems;
 
-		public override void OnMove(AxisEventData eventData)
+		public void OnMove(AxisEventData eventData)
 		{
-			
-			base.OnMove(eventData);
 			Debug.Log(gameObject + ": OnMove (" + eventData.moveVector);
 
 			if (eventData.moveDir == MoveDirection.Up)
 			{
-				if (ItemValue > 1)
+				if (ItemValue > 0)
 				{
 					EventSystem.current.SetSelectedGameObject(dropdownItems[ItemValue - 1]);
 				}
@@ -53,32 +51,29 @@ namespace ImmunotherapyGame.UI
 			}
 		}
 
-		public override void OnPointerEnter(PointerEventData eventData)
+		public void OnPointerEnter(PointerEventData eventData)
 		{
-			base.OnPointerEnter(eventData);
 			Debug.Log(gameObject + ": OnPointerEnter");
 
 			EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
-		public override void OnSelect(BaseEventData eventData)
+		public void OnSelect(BaseEventData eventData)
 		{
-			base.OnSelect(eventData);
 			Debug.Log(gameObject + ": OnSelect");
 			
-			foreach (var obj in onSelectActivateGameObjects)
+			foreach (var obj in viewObjectsOnSelect)
 			{
 				obj.SetActive(true);
 			}
 		}
 
 
-		public override void OnDeselect(BaseEventData eventData)
+		public void OnDeselect(BaseEventData eventData)
 		{
-			base.OnDeselect(eventData);
 			Debug.Log(gameObject + ": OnDeselect");
 			
-			foreach (var obj in onSelectActivateGameObjects)
+			foreach (var obj in viewObjectsOnSelect)
 			{
 				obj.SetActive(false);
 			}
