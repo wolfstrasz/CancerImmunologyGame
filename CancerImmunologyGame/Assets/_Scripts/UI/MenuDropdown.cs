@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,21 +10,21 @@ using TMPro;
 
 namespace ImmunotherapyGame.UI
 {
-    public class MenuDropdown : Selectable, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, ICancelHandler
+    public class MenuDropdown : Selectable, IPointerClickHandler, IEventSystemHandler, ISubmitHandler
     {
-        [Header("Menu")]
+        [Header("OnSelect")]
         [SerializeField]
-        private List<GameObject> onSelectedActivateGameObjects = null;
+        private List<GameObject> viewObjectsOnSelect = null;
         [SerializeField]
         private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
 
         [Header("Dropdown")]
         [SerializeField]
-        internal GameObject dropdownView = null;
+        internal GameObject view = null;
         [SerializeField]
         private Transform content = null;
         [SerializeField]
-        private GameObject templateObject = null;
+        private GameObject templateItem = null;
         internal List<GameObject> dropdownItems = null;
 
         [Header("Selected Item")]
@@ -35,16 +34,23 @@ namespace ImmunotherapyGame.UI
         private int initialValue = -1;
         [ReadOnly]
         private MenuDropdownItem selectedItem = null;
-  
 
-
-     
+        private bool OnSelectView
+        {
+            set
+            {
+                foreach (GameObject obj in viewObjectsOnSelect)
+                {
+                    obj.SetActive(value);
+                }
+            }
+        }
 
         // Accessors
         public int CurrentValue { get => selectedItem.ItemValue; set => selectedItem = dropdownItems[value].GetComponent<MenuDropdownItem>(); }
         public string CurrentValueName { get => selectedItem.ItemName; }
 
-
+        // Events
         public delegate void OnValueChanged();
         public OnValueChanged onValueChanged;
 
@@ -61,76 +67,37 @@ namespace ImmunotherapyGame.UI
 			{
                 Debug.Log("Same value selected");
 			}
-            dropdownView.SetActive(false);
+            view.SetActive(false);
             EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
         public void OnPointerClick(PointerEventData eventData)
-        {
-            Debug.Log(gameObject + ": OnPointerClick");
-        }
+            => OnSubmit(eventData);
 
         public void OnSubmit(BaseEventData eventData)
 		{
-            Debug.Log(gameObject + ": OnSubmit");
-
-            dropdownView.SetActive(true);
+            view.SetActive(true);
             EventSystem.current.SetSelectedGameObject(selectedItem.gameObject);
-
-            foreach (var obj in onSelectedActivateGameObjects)
-            {
-                obj.SetActive(true);
-            }
+            OnSelectView = true;
         }
-
-        public void OnCancel(BaseEventData eventData)
-        {
-            Debug.Log(gameObject + ": OnCancel");
-
-            dropdownView.SetActive(false);
-        }
-
 
 #region Selectable Overrides
         public override void OnPointerEnter(PointerEventData eventData)
 		{
             base.OnPointerEnter(eventData);
-            Debug.Log(gameObject + ": OnPointerEnter");
-
-            OnSelect(eventData);
-		}
-
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-            base.OnPointerExit(eventData);
-            Debug.Log(gameObject + ": OnPointerExit");
-
-			OnDeselect(eventData);
+            EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
 		public override void OnDeselect(BaseEventData eventData)
 		{
             base.OnDeselect(eventData);
-            Debug.Log(gameObject + ": OnDeselect");
-
-           
-            foreach (var obj in onSelectedActivateGameObjects)
-			{
-                obj.SetActive(false);
-			}
-
-           // dropdownView.SetActive(false);
+            OnSelectView = false;
         }
 
 		public override void OnSelect(BaseEventData eventData)
 		{
             base.OnSelect(eventData);
-            Debug.Log(gameObject + ": OnSelect");
-
-            foreach (var obj in onSelectedActivateGameObjects)
-            {
-                obj.SetActive(true);
-            }
+            OnSelectView = true;
             AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
         }
 #endregion
@@ -146,20 +113,18 @@ namespace ImmunotherapyGame.UI
 
         public void AddOptions(List<string> options)
 		{
-  
             initialValue = options.Count - 1;
             dropdownItems = new List< GameObject>(options.Count);
 
             for (int i = 0; i < options.Count; ++i)
 			{
-                MenuDropdownItem newItem = Instantiate(templateObject, content).GetComponent<MenuDropdownItem>();
+                MenuDropdownItem newItem = Instantiate(templateItem, content).GetComponent<MenuDropdownItem>();
                 newItem.ItemName = options[i];
                 newItem.ItemValue = i;
                 newItem.owner = this;
                 newItem.gameObject.SetActive(true);
                 newItem.gameObject.name = "Item " + i.ToString() + ": " + options;
                 dropdownItems.Add(newItem.gameObject);
-
             }
 		}
 
@@ -172,7 +137,8 @@ namespace ImmunotherapyGame.UI
                     selectedItem = dropdownItems[initialValue].GetComponent<MenuDropdownItem>();
                     selectedDisplayText.text = selectedItem.ItemName;
                 }
-            } else
+            } 
+            else
 			{
                 selectedDisplayText.text = selectedItem.ItemName;
 			}

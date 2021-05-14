@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,63 +8,53 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
     [RequireComponent(typeof(Slider))]
-    public class MenuSlider : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler, ISubmitHandler
+    public class MenuSlider : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler
     {
-        private Slider slider = null;
+        [Header("OnSelect")]
         [SerializeField]
-        private List<GameObject> onSelectActivateObjects = new List<GameObject>();
+        private List<GameObject> viewObjectsOnSelect = null;
         [SerializeField]
         private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
 
-        void Awake()
-		{
-            slider = GetComponent<Slider>();
-            slider.onValueChanged.AddListener(delegate { OnValueChanged(); });
-		}
-
-        private void OnValueChanged()
-		{
-            AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
+        private bool OnSelectView 
+        { 
+            set 
+            {
+                foreach (GameObject obj in viewObjectsOnSelect)
+				{
+                    obj.SetActive(value);
+				}
+			} 
         }
+
+        // Cached objects
+        private Slider slider = null;
+
+        // Private methods
+        private void OnValueChanged() 
+            => AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
+
+        // Protected methods
+        void Awake() 
+            => slider = GetComponent<Slider>();
+        void OnEnable() 
+            => slider.onValueChanged.AddListener(delegate { OnValueChanged(); });
+        void OnDisable() 
+            => slider.onValueChanged.RemoveListener(delegate { OnValueChanged(); });
+
+        // Public methods
+        public void OnPointerEnter(PointerEventData eventData)
+            => EventSystem.current.SetSelectedGameObject(gameObject);
 
         public void OnDeselect(BaseEventData eventData)
-		{
-            foreach(var obj in onSelectActivateObjects)
-			{
-                obj.SetActive(false);
-			}
-            Debug.Log(gameObject + ": OnDeselect");
-
-        }
+		    => OnSelectView = false;
 
         public void OnSelect(BaseEventData eventData)
 		{
-            foreach (var obj in onSelectActivateObjects)
-            {
-                obj.SetActive(true);
-            }
+            OnSelectView = true;
             AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
-            Debug.Log(gameObject + ": OnSelect");
-
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-		{
-            OnSelect(eventData);
-		}
-
-        public void OnPointerExit (PointerEventData eventData)
-		{
-            OnDeselect(eventData);
-		}
-
-		public void OnSubmit(BaseEventData eventData)
-		{
-            Debug.Log(gameObject + ": OnSubmit");
-            foreach (var obj in onSelectActivateObjects)
-            {
-                obj.SetActive(true);
-            }
-        }
+     
 	}
 }

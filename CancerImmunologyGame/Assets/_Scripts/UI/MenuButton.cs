@@ -1,66 +1,45 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 using ImmunotherapyGame.Audio;
 
 namespace ImmunotherapyGame.UI
 {
-	public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, ISelectHandler, IDeselectHandler, ICancelHandler
+	[RequireComponent(typeof(Button))]
+	public class MenuButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler, IDeselectHandler
 	{
+		[Header("OnSelect")]
 		[SerializeField]
-		private GameObject selectedView = null;
+		private List<GameObject> viewObjectsOnSelect = null;
 		[SerializeField]
-		private UIAudioClipKey audioClipKey = UIAudioClipKey.NONE;
+		private UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
 
-
-		private void ApplySelect()
+		private bool OnSelectView
 		{
-			if (selectedView == null)
+			set
 			{
-				Debug.LogError("THAT IS NULL MAN CANT APPLY SELECT: " + gameObject);
+				foreach (GameObject obj in viewObjectsOnSelect)
+				{
+					obj.SetActive(value);
+				}
 			}
-			selectedView.SetActive(true);
-			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
-		}
-
-		private void ApplyDeselect()
-		{
-			selectedView.SetActive(false);
 		}
 
 		// When highlighted with mouse.
 		public virtual void OnPointerEnter(PointerEventData eventData)
-		{
-			EventSystem.current.SetSelectedGameObject(gameObject);
-		}
-
-		public virtual void OnPointerExit(PointerEventData eventData)
-		{
-			OnDeselect(eventData);
-		}
-
-		// When selected.
-		public virtual void OnPointerClick(PointerEventData eventData)
-		{
-			//// Do something.
-			//audioSource.Play();
-			//gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-		}
-
+			=> EventSystem.current.SetSelectedGameObject(gameObject);
+		
 		public void OnSelect(BaseEventData eventData)
 		{
-			ApplySelect();
+			OnSelectView = true;
+			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
 		}
 
 		public void OnDeselect(BaseEventData eventData)
 		{
-			ApplyDeselect();
-		}
-
-		public void OnCancel(BaseEventData eventData)
-		{
-			ApplyDeselect();
+			OnSelectView = false;
 		}
 	}
 }

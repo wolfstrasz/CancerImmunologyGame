@@ -92,7 +92,7 @@ namespace ImmunotherapyGame.UI
 
 			owner.OnItemSubmitted(this);
 			EventSystem.current.SetSelectedGameObject(owner.gameObject);
-			owner.dropdownView.SetActive(false);
+			owner.view.SetActive(false);
 
 		}
 
@@ -101,7 +101,7 @@ namespace ImmunotherapyGame.UI
 			Debug.Log(gameObject + "OnCancel");
 
 			EventSystem.current.SetSelectedGameObject(owner.gameObject);
-			owner.dropdownView.SetActive(false);
+			owner.view.SetActive(false);
 		}
 
 	
