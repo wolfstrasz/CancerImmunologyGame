@@ -36,17 +36,37 @@ namespace ImmunotherapyGame.UI
         
         internal void SelectObjectOnButtonMove(MoveDirection dir, int buttonID)
         {
-            int buttonCount = levelSelectButtons.Count;
-            switch (dir)
-            {
-                case MoveDirection.Up: buttonID -= itemsPerRow; break;
-                case MoveDirection.Down: buttonID += itemsPerRow; break;
-                case MoveDirection.Left: --buttonID; break;
-                case MoveDirection.Right: ++buttonID; break;
-                default: break;
-            }
-            buttonID += buttonCount;
-            buttonID = + buttonID - buttonCount * (buttonID / buttonCount); // modulo
+            int buttonsCount = levelSelectButtons.Count;
+            if (dir == MoveDirection.Left)
+			{
+                buttonID = buttonID > 0 ? --buttonID : (buttonsCount - 1);
+			} 
+            else if (dir == MoveDirection.Right)
+			{
+                buttonID = buttonID < (buttonsCount - 1) ? ++buttonID : 0;
+			}
+            else if (dir == MoveDirection.Up)
+			{
+                buttonID -= 8;
+
+                if (buttonID < 0)
+				{
+                    buttonID += layoutRows.Count * itemsPerRow;
+                    if (buttonID >= buttonsCount)
+                        buttonID -= 8;
+				}
+			}
+            else if (dir == MoveDirection.Down)
+			{
+                buttonID += 8;
+
+                if (buttonID >= buttonsCount)
+				{
+                    buttonID %= itemsPerRow;
+				}
+			}
+
+            buttonID = + buttonID - buttonsCount * (buttonID / buttonsCount); // modulo
             EventSystem.current.SetSelectedGameObject(levelSelectButtons[buttonID].gameObject);
         }
     
@@ -71,11 +91,15 @@ namespace ImmunotherapyGame.UI
             levelSelectButtons = new List<LevelSelectButton>(itemCount);
             layoutRows = new List<Transform>();
 
+            GameObject rowGo = null;
+            Transform row = null;
             // Populate first N-1 rows as they will probably be full
             for (int i = 0; i < rowCount - 1; ++i)
             {
                 // Create a row
-                var row = Instantiate(horizontalLayoutPrefab, verticalLayout).transform;
+                rowGo = Instantiate(horizontalLayoutPrefab, verticalLayout);
+                rowGo.name = "Row: " + (i + 1);
+                row = rowGo.transform;
 
                 // Add items on row
                 for (int j = 0; j < itemsPerRow; ++j)
@@ -90,30 +114,33 @@ namespace ImmunotherapyGame.UI
             }
 
             // Populate last row
-            var lastRow = Instantiate(horizontalLayoutPrefab, verticalLayout).transform;
+            rowGo = Instantiate(horizontalLayoutPrefab, verticalLayout);
+            rowGo.name = "Row: " + rowCount;
+            row = rowGo.transform;
 
             for (int i = 0; i < lastRowItemCount; ++i)
             {
-                var item = Instantiate(levelItemPrefab, lastRow).GetComponent<LevelSelectButton>();
+                var item = Instantiate(levelItemPrefab, row).GetComponent<LevelSelectButton>();
                 item.SetData(levelData.levels[levelDataIndex], levelDataIndex);
                 levelSelectButtons.Add(item);
                 ++levelDataIndex;
             }
 
-            layoutRows.Add(lastRow);
+            layoutRows.Add(row);
 
 
             // Populate empty space of row with empty items to constrict the forced expansion of items on it.
             for (int i = 0; i < lastRowEmptyItemsCount; ++i)
             {
-                Instantiate(emptyItemPrefab, lastRow);
+                Instantiate(emptyItemPrefab, row);
             }
 
             initialised = true;
         }
 
-        public void Open()
+		public void Open()
 		{
+            
             if (!initialised)
             {
                 AddOptions();
@@ -122,6 +149,7 @@ namespace ImmunotherapyGame.UI
             RefreshOptions();
 
             gameObject.SetActive(true);
+            EventSystem.current.SetSelectedGameObject(levelSelectButtons[0].gameObject);
 		}
 
         public void Close()

@@ -9,51 +9,36 @@ namespace ImmunotherapyGame.UI
     /// Credit zero3growlithe
     /// sourced from: http://forum.unity3d.com/threads/scripts-useful-4-6-scripts-collection.264161/page-2#post-2011648
 
-    /*USAGE:
-    Simply place the script on the ScrollRect that contains the selectable children we'll be scroling to
-    and drag'n'drop the RectTransform of the options "container" that we'll be scrolling.*/
-
-
     [RequireComponent(typeof(ScrollRect))]
-    [AddComponentMenu("UI/Extensions/UIScrollToSelection")]
     public class UIScrollToSelection : MonoBehaviour
     {
-
-        //*** ATTRIBUTES ***//
-        [Header("[ Settings ]")]
+        [Header("Settings")]
+        [SerializeField]
+        private ScrollType scrollDirection;
         [SerializeField]
         private float scrollSpeed = 10f;
         [SerializeField]
-        private int childDepth = 1;
+        private int childDepthCheck = 1;
 
-        //*** PROPERTIES ***//
-        // REFERENCES
-        protected RectTransform TargetScrollRectContent
+        // SCROLL REFERENCES
+        protected RectTransform ScrollWindow { get; set; }
+        protected ScrollRect TargetScrollRect { get; set; }
+        protected RectTransform TargetScrollContent
         {
             get { return TargetScrollRect != null ? TargetScrollRect.content : null; }
         }
 
-        // SETTINGS
-        protected float ScrollSpeed => scrollSpeed;
-
-
-        //// INPUT
-        //protected bool CancelScrollOnInput => cancelScrollOnInput;
-  
-        // CACHED REFERENCES
-        protected RectTransform ScrollWindow { get; set; }
-        protected ScrollRect TargetScrollRect { get; set; }
-
-        // SCROLLING
+        // EVENT SYSTEM SELECTION
         protected EventSystem CurrentEventSystem => EventSystem.current;
         protected GameObject LastCheckedGameObject { get; set; }
         protected GameObject CurrentSelectedGameObject => EventSystem.current.currentSelectedGameObject;
 
+        // SCROLLING
         protected RectTransform CurrentTargetRectTransform { get; set; }
-        protected bool IsManualScrollingAvailable { get; set; }
+        private bool scrollToVerticalSelection = false;
+        private bool scrollToHorizontalSelection = false;
 
-        //*** METHODS - PUBLIC ***//
-
+        private bool MainReferencesMissing => (TargetScrollRect == null || TargetScrollContent == null || ScrollWindow == null);
 
         //*** METHODS - PROTECTED ***//
         protected virtual void Awake()
@@ -62,114 +47,123 @@ namespace ImmunotherapyGame.UI
             ScrollWindow = TargetScrollRect.GetComponent<RectTransform>();
         }
 
-        protected virtual void Start()
-        {
-
-        }
-
         protected virtual void Update()
         {
+            if (MainReferencesMissing)
+                return;
+
             UpdateReferences();
-            ScrollRectToLevelSelection();
+
+            RectTransform selection = CurrentTargetRectTransform;
+            if (selection == null)
+                return;
+
+			if (scrollToHorizontalSelection)
+				UpdateHorizontalScrollPosition(selection);
+
+			if (scrollToVerticalSelection)
+                UpdateVerticalScrollPosition(selection);
         }
 
         //*** METHODS - PRIVATE ***//
         private void UpdateReferences()
         {
             // update current selected rect transform
-            if (CurrentSelectedGameObject != LastCheckedGameObject)
+            if (CurrentSelectedGameObject != LastCheckedGameObject && CurrentSelectedGameObject != null)
             {
-                CurrentTargetRectTransform = (CurrentSelectedGameObject != null) ?
-                    CurrentSelectedGameObject.GetComponent<RectTransform>() :
-                    null;
+                Transform targetTransform = CurrentSelectedGameObject.transform;
 
-                // unlock automatic scrolling
-                if (CurrentSelectedGameObject != null &&
-                    CurrentSelectedGameObject.transform.parent == TargetScrollRectContent.transform)
+                // Find object that is a child of the scroll rect but a parent of the target object at maximum height parentHeight
+                int depth = childDepthCheck;
+
+                while (targetTransform != null && depth > 0 && targetTransform.parent != transform)
+				{
+                    targetTransform = targetTransform.parent;
+                    --depth;
+
+                }
+
+                CurrentTargetRectTransform = targetTransform == null ? null 
+                    : targetTransform.GetComponent<RectTransform>();
+            
+                LastCheckedGameObject = CurrentSelectedGameObject;
+
+                switch (scrollDirection)
                 {
-                    IsManualScrollingAvailable = false;
+                    case ScrollType.VERTICAL:
+                        scrollToVerticalSelection = true;
+                        scrollToHorizontalSelection = false;
+                        break;
+                    case ScrollType.HORIZONTAL:
+                        scrollToHorizontalSelection = true;
+                        scrollToVerticalSelection = false;
+
+                        break;
+                    case ScrollType.BOTH:
+                        scrollToVerticalSelection = true;
+                        scrollToHorizontalSelection = true;
+                        break;
                 }
             }
-
-            LastCheckedGameObject = CurrentSelectedGameObject;
         }
 
-
-        private void ScrollRectToLevelSelection()
-        {
-            // check main references
-            bool referencesAreIncorrect = (TargetScrollRect == null || TargetScrollRectContent == null || ScrollWindow == null);
-
-            if (referencesAreIncorrect == true || IsManualScrollingAvailable == true)
-            {
-                return;
-            }
-
-            RectTransform selection = CurrentTargetRectTransform;
-
-            if (selection == null)
-			{
-                return;
-			}
-
-
-            RectTransform selectionTransform = selection;
-            Transform parentTransform = null;
-
-            // Select parent rect transform
-            parentTransform = selection.transform.parent;
-            int depth = childDepth;
-            depth--;
-
-            // Go up the tree and update where to look
-            while (depth > 0)
-			{
-                selectionTransform = selection.parent.GetComponent<RectTransform>();
-                parentTransform = parentTransform.transform.parent;
-                --depth;
-			}
-
-
-            // check if scrolling is possible
-            if (parentTransform != TargetScrollRectContent.transform)
-            {
-                return;
-            }
-
-            // Updates the scroll rect depending on the scroll rect child that howds the selectable
-            UpdateVerticalScrollPosition(selectionTransform);
-        }
 
         private void UpdateVerticalScrollPosition(RectTransform selection)
         {
-            Debug.Log("Updating scroll position");
             // move the current scroll rect to correct position
-            float selectionPosition = -selection.anchoredPosition.y - (selection.rect.height * (1 - selection.pivot.y));
-
-            float elementHeight = selection.rect.height;
-            float maskHeight = ScrollWindow.rect.height;
-            float listAnchorPosition = TargetScrollRectContent.anchoredPosition.y;
+            float selectionCentrePosition = -selection.anchoredPosition.y - (selection.rect.height * (0.5f - selection.pivot.y));
+            float elementHalfHeight = selection.rect.height / 2f;
+            float windowHeight = ScrollWindow.rect.height;
+            float contentAnchorPosition = TargetScrollContent.anchoredPosition.y;
 
             // get the element offset value depending on the cursor move direction
-            float offlimitsValue = GetScrollOffset(selectionPosition, listAnchorPosition, elementHeight, maskHeight);
+            float offlimitsValue = GetScrollOffset(selectionCentrePosition, contentAnchorPosition, elementHalfHeight, windowHeight);
 
             // move the target scroll rect
-            TargetScrollRect.verticalNormalizedPosition +=
-                (offlimitsValue / TargetScrollRectContent.rect.height);// * Time.unscaledDeltaTime * scrollSpeed;
+            TargetScrollRect.verticalNormalizedPosition += (offlimitsValue / TargetScrollContent.rect.height);
+            if (Mathf.Abs(offlimitsValue) < 1f)
+                scrollToVerticalSelection = false;
         }
 
-        private float GetScrollOffset(float position, float listAnchorPosition, float targetLength, float maskLength)
+        private void UpdateHorizontalScrollPosition(RectTransform selection)
         {
-            if (position < listAnchorPosition + (targetLength / 2))
-            {
-                return (listAnchorPosition + maskLength) - (position - targetLength);
-            }
-            else if (position + targetLength > listAnchorPosition + maskLength)
-            {
-                return (listAnchorPosition + maskLength) - (position + targetLength);
-            }
+            // move the current scroll rect to correct position
+            float selectionPosition = -selection.anchoredPosition.x - (selection.rect.width * (0.5f - selection.pivot.x));
 
-            return 0;
+            float elementWidth = selection.rect.width;
+            float maskWidth = ScrollWindow.rect.width;
+            float contentAnchorPosition = -TargetScrollContent.anchoredPosition.x;
+            
+            // get the element offset value depending on the cursor move direction
+            float offlimitsValue = -GetScrollOffset(selectionPosition, contentAnchorPosition, elementWidth, maskWidth);
+            // move the target scroll rect
+            TargetScrollRect.horizontalNormalizedPosition += (offlimitsValue / TargetScrollContent.rect.width);
+
+            if (Mathf.Abs(offlimitsValue) < 1f)
+                scrollToHorizontalSelection = false;
+        }
+
+        private float GetScrollOffset(float targetPosition, float contentAnchorPosition, float targetHalfLength, float windowLength)
+        {
+            
+            if (targetPosition - targetHalfLength < contentAnchorPosition)
+            {
+                return (contentAnchorPosition - targetPosition + targetHalfLength) ;
+            }
+			else if (targetPosition + targetHalfLength > contentAnchorPosition + windowLength)
+			{
+				return (contentAnchorPosition + windowLength) - (targetPosition + targetHalfLength);
+			}
+
+			return 0;
+        }
+
+
+        public enum ScrollType
+        {
+            VERTICAL,
+            HORIZONTAL,
+            BOTH
         }
     }
 

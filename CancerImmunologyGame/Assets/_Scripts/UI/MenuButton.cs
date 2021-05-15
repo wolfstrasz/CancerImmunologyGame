@@ -8,11 +8,12 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
 	[RequireComponent(typeof(Button))]
-	public class MenuButton : UIMenuNode, IPointerEnterHandler, ISelectHandler, IDeselectHandler
+	public class MenuButton : UIMenuNode, IPointerEnterHandler, ISelectHandler, IDeselectHandler, IPointerExitHandler
 	{
 		// When highlighted with mouse.
-		public virtual void OnPointerEnter(PointerEventData eventData)
-			=> EventSystem.current.SetSelectedGameObject(gameObject);
+		public void OnPointerEnter(PointerEventData eventData)
+			=> OnSelect(eventData);
+
 		
 		public void OnSelect(BaseEventData eventData)
 		{
@@ -24,5 +25,8 @@ namespace ImmunotherapyGame.UI
 		{
 			OnSelectView = false;
 		}
+
+		public void OnPointerExit(PointerEventData eventData)
+			 => OnDeselect(eventData);
 	}
 }
