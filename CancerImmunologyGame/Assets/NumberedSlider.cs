@@ -16,7 +16,8 @@ namespace ImmunotherapyGame
 		{
             slider = GetComponent<Slider>();
             slider.onValueChanged.AddListener(delegate { UpdateScrollbarValue(); });
-		}
+            sliderTextValue.text = Mathf.FloorToInt(slider.value * 100f).ToString();
+        }
 
 		private void UpdateScrollbarValue()
 		{

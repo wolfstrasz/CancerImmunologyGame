@@ -64,7 +64,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -75,7 +75,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -86,7 +86,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -97,7 +97,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -163,7 +163,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Primary Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -185,7 +185,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Secondary Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -218,7 +218,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "MouseAim",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -245,7 +245,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard + Mouse",
+                    "groups": "Keys+Mouse",
                     "action": "Skip",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -266,8 +266,8 @@
     ],
     "controlSchemes": [
         {
-            "name": "Keyboard + Mouse",
-            "bindingGroup": "Keyboard + Mouse",
+            "name": "Keys+Mouse",
+            "bindingGroup": "Keys+Mouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",

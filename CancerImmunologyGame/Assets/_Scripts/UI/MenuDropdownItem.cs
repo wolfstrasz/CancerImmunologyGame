@@ -20,7 +20,7 @@ namespace ImmunotherapyGame.UI
 		internal string ItemName { get => itemText.text; set => itemText.text = value; }
 		internal int ItemValue { get; set; }
 
-		private List<GameObject> dropdownItems => owner.dropdownItems;
+		private List<MenuDropdownItem> dropdownItems => owner.dropdownItems;
 
 		public void OnMove(AxisEventData eventData)
 		{
@@ -28,11 +28,11 @@ namespace ImmunotherapyGame.UI
 			{
 				if (ItemValue > 0)
 				{
-					EventSystem.current.SetSelectedGameObject(dropdownItems[ItemValue - 1]);
+					EventSystem.current.SetSelectedGameObject(dropdownItems[ItemValue - 1].gameObject);
 				}
 				else
 				{
-					EventSystem.current.SetSelectedGameObject(dropdownItems[owner.dropdownItems.Count - 1]);
+					EventSystem.current.SetSelectedGameObject(dropdownItems[owner.dropdownItems.Count - 1].gameObject);
 				}
 			}
 
@@ -40,29 +40,31 @@ namespace ImmunotherapyGame.UI
 			{
 				if (ItemValue < owner.dropdownItems.Count - 1)
 				{
-					EventSystem.current.SetSelectedGameObject(dropdownItems[ItemValue + 1]);
+					EventSystem.current.SetSelectedGameObject(dropdownItems[ItemValue + 1].gameObject);
 				}
 				else
 				{
-					EventSystem.current.SetSelectedGameObject(dropdownItems[0]);
+					EventSystem.current.SetSelectedGameObject(dropdownItems[0].gameObject);
 				}
 			}
 		}
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			Debug.Log("ITEM: CLICK");
 			OnSubmit(eventData);
 
 		}
 
 		public void OnSubmit(BaseEventData eventData)
 		{
-			Debug.Log("->>>>>>>>>>>>>>>>>>>>>Item submitted");
 			owner.OnItemSubmitted(this);
 			EventSystem.current.SetSelectedGameObject(owner.gameObject);
 			owner.view.SetActive(false);
 
+		}
+
+		public override void OnPointerExit(PointerEventData eventData)
+		{
 		}
 
 		public override void OnCancel(BaseEventData eventData)
@@ -72,6 +74,10 @@ namespace ImmunotherapyGame.UI
 			base.OnCancel(eventData);
 		}
 
+		internal void SilentDeselect()
+		{
+			OnSelectView = false;
+		}
 
 
 	}

@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Core
 
 			if (InputSystem.GetDevice<Keyboard>() != null)
 			{
-				var keyboardIndex = action.GetBindingIndex(group: "Keyboard + Mouse");
+				var keyboardIndex = action.GetBindingIndex(group: "Keys+Mouse");
 				var keyboardString = action.GetBindingDisplayString(keyboardIndex);
 				strs.Add(keyboardString);
 			}

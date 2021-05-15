@@ -20,37 +20,39 @@ namespace ImmunotherapyGame.UI
         private Transform content = null;
         [SerializeField]
         private GameObject templateItem = null;
-        internal List<GameObject> dropdownItems = null;
+        internal List<MenuDropdownItem> dropdownItems = null;
 
         [Header("Selected Item")]
         [SerializeField]
         private TMP_Text selectedDisplayText = null;
         [ReadOnly]
-        private int initialValue = -1;
+        private int possibleInitialValue = -1;
         [ReadOnly]
         private MenuDropdownItem selectedItem = null;
 
 
         // Accessors
-        public int CurrentValue { get => selectedItem.ItemValue; set => selectedItem = dropdownItems[value].GetComponent<MenuDropdownItem>(); }
-        public string CurrentValueName { get => selectedItem.ItemName; }
-
-		// Events
-		public delegate void OnValueChanged();
-        public OnValueChanged onValueChanged;
+        public int CurrentValue 
+        { 
+            get => selectedItem.ItemValue; 
+            set 
+            {
+                if (selectedItem != null)
+                    selectedItem.SilentDeselect();
+                selectedItem = dropdownItems[value];
+                RefreshShownValue(); 
+            } 
+        }
 
         internal void OnItemSubmitted(MenuDropdownItem item)
 		{
             if (selectedItem != item)
             {
-                Debug.Log("New item selected");
                 selectedItem = item;
-                RefreshShowValue();
-                onValueChanged();
+                RefreshShownValue();
             }
             else
 			{
-                Debug.Log("Same value selected");
 			}
             view.SetActive(false);
             EventSystem.current.SetSelectedGameObject(gameObject);
@@ -59,11 +61,15 @@ namespace ImmunotherapyGame.UI
 		public override void OnPointerExit(PointerEventData eventData)
 		{
 			base.OnPointerExit(eventData);
+            foreach (MenuDropdownItem item in dropdownItems)
+			{
+                item.SilentDeselect();
+			}
             view.SetActive(false);
 		}
+
 		public void OnPointerClick(PointerEventData eventData)
 		{
-            Debug.Log("MENUDROPDOWN CLICK");
             OnSubmit(eventData);
         }
 
@@ -75,7 +81,6 @@ namespace ImmunotherapyGame.UI
 
                 return;
             }
-            Debug.Log("MENUDROPDOWN SUBMIT");
 
             view.SetActive(true);
             EventSystem.current.SetSelectedGameObject(selectedItem.gameObject);
@@ -92,8 +97,8 @@ namespace ImmunotherapyGame.UI
 
         public void AddOptions(List<string> options)
 		{
-            initialValue = options.Count - 1;
-            dropdownItems = new List< GameObject>(options.Count);
+            possibleInitialValue = options.Count - 1;
+            dropdownItems = new List< MenuDropdownItem>(options.Count);
 
             for (int i = 0; i < options.Count; ++i)
 			{
@@ -103,24 +108,18 @@ namespace ImmunotherapyGame.UI
                 newItem.owner = this;
                 newItem.gameObject.SetActive(true);
                 newItem.gameObject.name = "Item " + i.ToString() + ": " + options;
-                dropdownItems.Add(newItem.gameObject);
+                dropdownItems.Add(newItem);
             }
+
+            if (possibleInitialValue > 1)
+			{
+                selectedItem = dropdownItems[0];
+			}
 		}
 
-        public void RefreshShowValue()
+        public void RefreshShownValue()
         {
-            if (selectedItem == null)
-            {
-                if (initialValue >= 0 && initialValue < dropdownItems.Count)
-                {
-                    selectedItem = dropdownItems[initialValue].GetComponent<MenuDropdownItem>();
-                    selectedDisplayText.text = selectedItem.ItemName;
-                }
-            } 
-            else
-			{
-                selectedDisplayText.text = selectedItem.ItemName;
-			}
+            selectedDisplayText.text = selectedItem.ItemName;
 		}
 #endregion
 

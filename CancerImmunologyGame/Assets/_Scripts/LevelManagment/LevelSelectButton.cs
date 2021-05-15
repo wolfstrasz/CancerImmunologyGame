@@ -77,7 +77,7 @@ namespace ImmunotherapyGame.LevelManagement
 				{
                     Debug.Log("Completed level loading");
 				}
-				//SceneManager.LoadScene(data.sceneIndex);
+				SceneManager.LoadScene(data.sceneIndex);
 			}
 			else
 			{
@@ -95,7 +95,9 @@ namespace ImmunotherapyGame.LevelManagement
             LoadLevel();
 		}
 
-
+		public override void OnPointerExit(PointerEventData eventData)
+		{
+		}
 		public void OnMove(AxisEventData eventData)
 		{
             LevelSelectScreen.Instance.SelectObjectOnButtonMove(eventData.moveDir, buttonID);
