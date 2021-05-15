@@ -10,7 +10,7 @@ using TMPro;
 namespace ImmunotherapyGame.UI
 {
 	[System.Serializable]
-    public class MenuDropdownItem : UIMenuNode, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, ICancelHandler, IMoveHandler, IPointerEnterHandler, ISelectHandler, IDeselectHandler
+    public class MenuDropdownItem : UIMenuNode, IEventSystemHandler, IPointerClickHandler, ISubmitHandler, IMoveHandler
 	{
 		[Header("Attributes")]
 		[SerializeField]
@@ -24,8 +24,6 @@ namespace ImmunotherapyGame.UI
 
 		public void OnMove(AxisEventData eventData)
 		{
-			Debug.Log(gameObject + ": OnMove (" + eventData.moveVector);
-
 			if (eventData.moveDir == MoveDirection.Up)
 			{
 				if (ItemValue > 0)
@@ -51,54 +49,30 @@ namespace ImmunotherapyGame.UI
 			}
 		}
 
-		public void OnPointerEnter(PointerEventData eventData)
+		public void OnPointerClick(PointerEventData eventData)
 		{
-			Debug.Log(gameObject + ": OnPointerEnter");
+			Debug.Log("ITEM: CLICK");
+			OnSubmit(eventData);
 
-			EventSystem.current.SetSelectedGameObject(gameObject);
 		}
-
-		public void OnSelect(BaseEventData eventData)
-		{
-			Debug.Log(gameObject + ": OnSelect");
-			
-			foreach (var obj in viewObjectsOnSelect)
-			{
-				obj.SetActive(true);
-			}
-		}
-
-
-		public void OnDeselect(BaseEventData eventData)
-		{
-			Debug.Log(gameObject + ": OnDeselect");
-			
-			foreach (var obj in viewObjectsOnSelect)
-			{
-				obj.SetActive(false);
-			}
-		}
-
-		public void OnPointerClick(PointerEventData eventData) => OnSubmit(eventData);
 
 		public void OnSubmit(BaseEventData eventData)
 		{
-			Debug.Log(gameObject + "OnSubmit");
-
+			Debug.Log("->>>>>>>>>>>>>>>>>>>>>Item submitted");
 			owner.OnItemSubmitted(this);
 			EventSystem.current.SetSelectedGameObject(owner.gameObject);
 			owner.view.SetActive(false);
 
 		}
 
-		public void OnCancel(BaseEventData eventData)
+		public override void OnCancel(BaseEventData eventData)
 		{
-			Debug.Log(gameObject + "OnCancel");
-
 			EventSystem.current.SetSelectedGameObject(owner.gameObject);
 			owner.view.SetActive(false);
+			base.OnCancel(eventData);
 		}
 
-	
+
+
 	}
 }

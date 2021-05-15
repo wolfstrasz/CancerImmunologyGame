@@ -11,7 +11,7 @@ using TMPro;
 namespace ImmunotherapyGame.UI
 {
     [RequireComponent(typeof(Selectable))]
-    public class MenuDropdown : UIMenuNode, IPointerClickHandler, IEventSystemHandler, ISubmitHandler, IPointerEnterHandler, ISelectHandler, IDeselectHandler
+    public class MenuDropdown : UIMenuNode, IPointerClickHandler, ISubmitHandler, IPointerExitHandler
     {
         [Header("Dropdown")]
         [SerializeField]
@@ -56,36 +56,32 @@ namespace ImmunotherapyGame.UI
             EventSystem.current.SetSelectedGameObject(gameObject);
 		}
 
-        public void OnPointerClick(PointerEventData eventData)
-            => OnSubmit(eventData);
+		public override void OnPointerExit(PointerEventData eventData)
+		{
+			base.OnPointerExit(eventData);
+            view.SetActive(false);
+		}
+		public void OnPointerClick(PointerEventData eventData)
+		{
+            Debug.Log("MENUDROPDOWN CLICK");
+            OnSubmit(eventData);
+        }
 
         public void OnSubmit(BaseEventData eventData)
 		{
+            if (view.activeInHierarchy)
+            {
+                view.SetActive(false);
+
+                return;
+            }
+            Debug.Log("MENUDROPDOWN SUBMIT");
+
             view.SetActive(true);
             EventSystem.current.SetSelectedGameObject(selectedItem.gameObject);
-            OnSelectView = true;
         }
 
-#region Selectable Overrides
-        public void OnPointerEnter(PointerEventData eventData)
-		{
-            EventSystem.current.SetSelectedGameObject(gameObject);
-		}
-
-		public void OnDeselect(BaseEventData eventData)
-		{
-            OnSelectView = false;
-        }
-
-		public  void OnSelect(BaseEventData eventData)
-		{
-      
-            OnSelectView = true;
-            AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
-        }
-#endregion
-
-#region Menu Dropdown Functionality
+		#region Menu Dropdown Functionality
 		public void ClearOptions()
 		{
             if (dropdownItems != null)

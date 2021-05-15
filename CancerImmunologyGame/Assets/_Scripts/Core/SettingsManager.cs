@@ -17,6 +17,8 @@ namespace ImmunotherapyGame.Core
         private GameObject panel = null;
         [SerializeField]
         private AudioMixer audioMixer = null;
+        [SerializeField]
+        private List<UIMenuNode> cancelNodes = null;
 
         [Header("UI Audio Control")]
         [SerializeField]
@@ -86,6 +88,7 @@ namespace ImmunotherapyGame.Core
             inputDropdown.RefreshShowValue();
             inputDropdown.onValueChanged += delegate { SetInputPreference(); };
             panel.SetActive(false);
+
         }
 
 		private void SetMasterVolume()
@@ -241,8 +244,7 @@ namespace ImmunotherapyGame.Core
             panel.SetActive(true);
 		}
 
-
-        [Header("DropdownPopulations")]
+		[Header("DropdownPopulations")]
         [SerializeField]
         List<string> textInputDropdownPopulationValues;
 

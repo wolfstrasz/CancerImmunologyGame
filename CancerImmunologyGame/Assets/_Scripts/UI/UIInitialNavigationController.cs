@@ -42,23 +42,5 @@ namespace ImmunotherapyGame.UI
 
 	}
 
-	public abstract class UIMenuNode : MonoBehaviour
-	{
-		[Header("OnSelect")]
-		[SerializeField]
-		protected List<GameObject> viewObjectsOnSelect = null;
-		[SerializeField]
-		protected UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
 
-		public bool OnSelectView
-		{
-			set
-			{
-				foreach (GameObject obj in viewObjectsOnSelect)
-				{
-					obj.SetActive(value);
-				}
-			}
-		}
-	}
 }

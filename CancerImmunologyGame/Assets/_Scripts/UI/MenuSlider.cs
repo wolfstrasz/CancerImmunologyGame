@@ -8,7 +8,7 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
     [RequireComponent(typeof(Slider))]
-    public class MenuSlider : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler
+    public class MenuSlider : UIMenuNode
     {
         [SerializeField]
         private float sliderSoundTimeout = 0.1f;
@@ -33,7 +33,6 @@ namespace ImmunotherapyGame.UI
         {
             timeout = sliderSoundTimeout;
         }
-           
 
         // Protected methods
         void Awake() 
@@ -43,19 +42,5 @@ namespace ImmunotherapyGame.UI
         void OnDisable() 
             => slider.onValueChanged.RemoveListener(delegate { OnValueChanged(); });
 
-        // Public methods
-        public void OnPointerEnter(PointerEventData eventData)
-            => EventSystem.current.SetSelectedGameObject(gameObject);
-
-        public void OnDeselect(BaseEventData eventData)
-		    => OnSelectView = false;
-
-        public void OnSelect(BaseEventData eventData)
-		{
-            OnSelectView = true;
-            AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
-        }
-
-     
 	}
 }
