@@ -10,12 +10,30 @@ namespace ImmunotherapyGame.UI
     [RequireComponent(typeof(Slider))]
     public class MenuSlider : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler
     {
+        [SerializeField]
+        private float sliderSoundTimeout = 0.1f;
+        private float timeout = 0f;
+
+        void Update()
+		{
+            if (timeout > 0f)
+			{
+                timeout -= Time.deltaTime;
+                if (timeout < 0f)
+                {
+                    AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
+                }
+            }
+		}
 		// Cached objects
 		private Slider slider = null;
 
         // Private methods
-        private void OnValueChanged() 
-            => AudioManager.Instance.PlayUISoundClip(audioClipKey, this.gameObject);
+        private void OnValueChanged()
+        {
+            timeout = sliderSoundTimeout;
+        }
+           
 
         // Protected methods
         void Awake() 

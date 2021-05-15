@@ -1,60 +1,119 @@
 
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 using TMPro;
 
-using ImmunotherapyGame.LevelManagement;
+using ImmunotherapyGame.UI;
+using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Audio;
 
-namespace ImmunotherapyGame.UI
+namespace ImmunotherapyGame.LevelManagement
 {
-    public class LevelSelectButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    [RequireComponent(typeof(Selectable))]
+    public class LevelSelectButton : UIMenuNode, IPointerEnterHandler, IPointerClickHandler, ISubmitHandler, ISelectHandler, IDeselectHandler, IMoveHandler
     {
-        [Header("Menu Button Attributes")]
-        [SerializeField]
-        private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
-        [SerializeField]
-        private GameObject completedOverlay = null;
-        [SerializeField]
-        private GameObject lockedOverlay = null;
-        [SerializeField]
-        private TMP_Text text = null;
-        [SerializeField]
-        private int sceneIndex = 0;
+        [ReadOnly]
+        private LevelDataObject data = null;
+        [ReadOnly]
+        private int buttonID = 0;
+        
 
-		public void OnPointerClick(PointerEventData eventData)
+        [Header("Attributes")]
+        [SerializeField]
+        TMP_Text levelText = null;
+
+        [Header("Views")]
+        [SerializeField]
+        private List<GameObject> levelCompletedView = null;
+        private bool LevelCompletedView
 		{
-            Debug.Log("OnClick");
-            if (lockedOverlay.activeSelf) return;
-            // TODO: Play Audio
-            gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-            LevelSelectScreen.Instance.Close();
-            SceneManager.LoadScene(sceneIndex);
-        }
-
-		public void OnPointerEnter(PointerEventData eventData)
-		{
-            Debug.Log("OnEnter");
-            if (lockedOverlay.activeSelf) return;
-
-            // TODO: Play Audio
-            gameObject.transform.localScale = scaling;
-        }
-
-		public void OnPointerExit(PointerEventData eventData)
-		{
-            Debug.Log("OnExit");
-
-            gameObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
-
-		internal void UpdateData(LevelDataObject data)
-		{
-            completedOverlay.SetActive(data.isCompleted);
-            lockedOverlay.SetActive(data.isLocked);
-            sceneIndex = data.sceneIndex;
-            text.text = data.levelIndex.ToString();
+            set
+			{
+                foreach (GameObject obj in levelCompletedView)
+				{
+                    obj.SetActive(value);
+				}
+			}
 		}
+
+        [SerializeField]
+        private List<GameObject> levelLockedView = null;
+        private bool LevelLockedView
+        {
+            set
+            {
+                foreach (GameObject obj in levelLockedView)
+                {
+                    obj.SetActive(value);
+                }
+            }
+        }
+
+
+        internal void SetData(LevelDataObject data, int id)
+        {
+            this.data = data;
+            buttonID = id;
+            RefreshView();
+        }
+
+        internal void RefreshView()
+        {
+            LevelCompletedView = data.isCompleted;
+            LevelLockedView = data.isLocked;
+            levelText.text = data.levelIndex.ToString();
+        }
+
+        private void LoadLevel()
+		{
+            if (!data.isLocked)
+            {
+                Debug.Log("Level Loading");
+                if (data.isCompleted)
+				{
+                    Debug.Log("Completed level loading");
+				}
+				//SceneManager.LoadScene(data.sceneIndex);
+			}
+			else
+			{
+                Debug.Log("Level Locked");
+			}
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+		{
+            LoadLevel();
+        }
+
+        public void OnSubmit (BaseEventData eventData)
+		{
+            LoadLevel();
+		}
+
+        public void OnPointerEnter(PointerEventData eventData)
+            => EventSystem.current.SetSelectedGameObject(gameObject);
+	
+        public void OnSelect(BaseEventData eventData)
+        {
+            OnSelectView = true;
+            AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
+        }
+
+        public void OnDeselect(BaseEventData eventData)
+        {
+            OnSelectView = false;
+        }
+
+		public void OnMove(AxisEventData eventData)
+		{
+            LevelSelectScreen.Instance.SelectObjectOnButtonMove(eventData.moveDir, buttonID);
+		}
+
+
     }
 }

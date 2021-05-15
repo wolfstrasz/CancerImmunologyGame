@@ -23,7 +23,8 @@ namespace ImmunotherapyGame.UI
         [Header("[ Settings ]")]
         [SerializeField]
         private float scrollSpeed = 10f;
-
+        [SerializeField]
+        private int childDepth = 1;
 
         //*** PROPERTIES ***//
         // REFERENCES
@@ -106,19 +107,42 @@ namespace ImmunotherapyGame.UI
 
             RectTransform selection = CurrentTargetRectTransform;
 
+            if (selection == null)
+			{
+                return;
+			}
+
+
+            RectTransform selectionTransform = selection;
+            Transform parentTransform = null;
+
+            // Select parent rect transform
+            parentTransform = selection.transform.parent;
+            int depth = childDepth;
+            depth--;
+
+            // Go up the tree and update where to look
+            while (depth > 0)
+			{
+                selectionTransform = selection.parent.GetComponent<RectTransform>();
+                parentTransform = parentTransform.transform.parent;
+                --depth;
+			}
+
+
             // check if scrolling is possible
-            if (selection == null || selection.transform.parent != TargetScrollRectContent.transform)
+            if (parentTransform != TargetScrollRectContent.transform)
             {
                 return;
             }
 
- 
-            UpdateVerticalScrollPosition(selection);
-       
+            // Updates the scroll rect depending on the scroll rect child that howds the selectable
+            UpdateVerticalScrollPosition(selectionTransform);
         }
 
         private void UpdateVerticalScrollPosition(RectTransform selection)
         {
+            Debug.Log("Updating scroll position");
             // move the current scroll rect to correct position
             float selectionPosition = -selection.anchoredPosition.y - (selection.rect.height * (1 - selection.pivot.y));
 

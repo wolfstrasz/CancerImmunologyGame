@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.UI
 {
-	[RequireComponent(typeof(Selectable))]
 	public class UIInitialNavigationController : MonoBehaviour/*, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerClickHandler*/
 	{
 		[SerializeField]
@@ -34,7 +33,7 @@ namespace ImmunotherapyGame.UI
 
 		void OnDisable()
 		{
-			if (previouslySelectedGameObject != null)
+			if (previouslySelectedGameObject != null && EventSystem.current != null)
 			{
 				EventSystem.current.SetSelectedGameObject(null);
 				EventSystem.current.SetSelectedGameObject(previouslySelectedGameObject);
