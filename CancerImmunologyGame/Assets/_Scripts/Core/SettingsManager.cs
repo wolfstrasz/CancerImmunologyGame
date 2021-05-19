@@ -80,9 +80,9 @@ namespace ImmunotherapyGame.Core
 
             resolutionDropdown.ClearOptions();
 			resolutionDropdown.AddOptions(options);
-            Debug.Log("Add resolution options" + "// -> " + currentResolution);
+            //Debug.Log("Add resolution options" + "// -> " + currentResolution);
             resolutionDropdown.CurrentValue = currentResolutionIndex;
-            Debug.Log("Select resolution: " + resolutionDropdown.CurrentValue);
+            //Debug.Log("Select resolution: " + resolutionDropdown.CurrentValue);
 			resolutionDropdown.RefreshShownValue();
 
             // Text Input Dropdown;
@@ -97,9 +97,9 @@ namespace ImmunotherapyGame.Core
 
             inputDropdown.ClearOptions();
             inputDropdown.AddOptions(options);
-            Debug.Log("Add input options");
+            //Debug.Log("Add input options");
             inputDropdown.CurrentValue = currentSchemeIndex;
-            Debug.Log("Select input option: " + inputDropdown.CurrentValue);
+            //Debug.Log("Select input option: " + inputDropdown.CurrentValue);
             inputDropdown.RefreshShownValue();
             panel.SetActive(false);
 
@@ -122,7 +122,7 @@ namespace ImmunotherapyGame.Core
 		{
             // Apply Input changes
             currentSchemeIndex = inputDropdown.CurrentValue;
-            Debug.Log("Setting new Input preference:" + currentSchemeIndex);
+            //Debug.Log("Setting new Input preference:" + currentSchemeIndex);
             // TODO: apply global scheme!
             PlayerPrefs.SetInt("InputPreference", currentSchemeIndex);
         }
@@ -133,21 +133,21 @@ namespace ImmunotherapyGame.Core
             currentResolutionIndex = resolutionDropdown.CurrentValue;
             Resolution resolution = resolutions[currentResolutionIndex];
             //Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-            Debug.Log("Setting new Resolution preference: " + resolution.width + " : " + resolution.height);
+            //Debug.Log("Setting new Resolution preference: " + resolution.width + " : " + resolution.height);
             PlayerPrefs.SetInt("ResolutionPreference", resolutionDropdown.CurrentValue);
 
             currentToggle = fullscreenToggle.isOn;
-            Debug.Log("Setting new fullscreen preference: " + currentToggle);
+            //Debug.Log("Setting new fullscreen preference: " + currentToggle);
             //Screen.fullScreen = isFullscreen;
-            Debug.Log(Screen.fullScreen);
+            //Debug.Log(Screen.fullScreen);
             PlayerPrefs.SetInt("FullscreenPreference", Convert.ToInt32(fullscreenToggle.isOn));
         }
 
         private void SetMasterVolume()
         {
             float volume = masterVolumeSlider.value;
-            Debug.Log("Master Volume: " + volume);
-            audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+			Debug.Log("Master Volume: " + volume);
+			audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("MasterVolumePreference", volume);
 
         }

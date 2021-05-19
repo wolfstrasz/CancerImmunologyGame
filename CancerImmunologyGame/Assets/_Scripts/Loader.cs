@@ -13,9 +13,20 @@ using ImmunotherapyGame.CellpediaSystem;
 
 namespace ImmunotherapyGame.Loader
 {
-	public class Loader : Singleton<Loader>
+	public class Loader : MonoBehaviour
 	{
+
+		[SerializeField]
+		private Intro intro = null;
+
+		private bool InitialisationHasFinished { get; set; }
+
 		void Awake()
+		{
+			StartCoroutine(InitialiseManagers());
+		}
+
+		private IEnumerator InitialiseManagers()
 		{
 			GlobalGameData.dataManagers = new List<IDataManager>(3);
 
@@ -34,22 +45,32 @@ namespace ImmunotherapyGame.Loader
 			GlobalGameData.dataManagers.Add(LevelManager.Instance);
 
 			// Load Cellpedia Data
+			Debug.Log("Loader: Cellpedia");
 			Cellpedia.Instance.LoadData();
 			Cellpedia.Instance.Initialise();
 			GlobalGameData.dataManagers.Add(Cellpedia.Instance);
 
-			// call intro finish
-			Debug.Log("Fading Logos");
-			Intro.Instance.FadeLogos();
+			InitialisationHasFinished = true;
+			intro.LoadingFinished = true;
+			Debug.Log("Loader: Loading finished");
 
-			Debug.Log("Loader finished");
+			// call intro finish
+			yield return null;
 		}
 
-		
-
-		internal void OnIntroFinished()
+		private void Update()
 		{
-			SceneManager.LoadScene("MainMenu");
+			if (intro.HasFinished && InitialisationHasFinished)
+			{
+				Debug.Log("Loader: Opening Main Menu scene");
+				Debug.Log("------------------------------------------------------------------");
+				SceneManager.LoadScene("MainMenu");
+			}
+		}
+
+		private void OnDisable()
+		{
+			StopAllCoroutines();
 		}
 	}
 

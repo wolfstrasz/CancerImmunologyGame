@@ -9,7 +9,7 @@ using ImmunotherapyGame.Core;
 namespace ImmunotherapyGame.Loader
 {
 
-	public class Intro : Singleton<Intro>
+	public class Intro : MonoBehaviour
 	{
 		[Header("Player Input")]
 		[SerializeField]
@@ -17,18 +17,22 @@ namespace ImmunotherapyGame.Loader
 		[SerializeField]
 		InputAction SkipAction = null;
 
+		[Header("Force skipping")]
+		[SerializeField]
+		private bool forceSkip = false;
+
 		[Header("Logos")]
 		[SerializeField]
-		private IntroFadeCallback logoAnimator = null;
+		private Animator logoAnimator = null;
+		[SerializeField]
+		private float timeBeforeLogoFade = 3.0f;
 
 		[Header("Intro texts")]
 		[SerializeField]
 		private List<GameObject> texts = new List<GameObject>();
 		private int text_index = 0;
 
-		[Header("Skip functionality")]
-		[SerializeField]
-		private GameObject continueSpaceBar = null;
+		[Header("Skip text functionality")]
 		[SerializeField]
 		private TMP_Text continueTxt = null;
 		[SerializeField]
@@ -40,13 +44,67 @@ namespace ImmunotherapyGame.Loader
 		[ReadOnly]
 		private bool allowSkip = false;
 
-		[Header("Force skipping")]
-		[SerializeField]
-		private bool forceSkip = false;
-		[SerializeField]
-		private bool skipLogos = false;
-		[SerializeField]
-		private bool skipIntroTexts = false;
+		
+
+		// Properties for intro text handling
+		internal bool HasFinished { get; set; }
+		private bool IsSkipping { get; set; }
+
+		// Properties for intro logos handling
+		internal bool LoadingFinished { get; set; }
+		private bool LogosCanFade { get; set; }
+
+		private void Awake()
+		{
+
+			skipHoldSlider.maxValue = timeHoldToSkip;
+
+			// Bind skip action
+			SkipAction = playerInput.currentActionMap.FindAction("Skip", true);
+
+			// Update skip text
+			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);
+			if (bindings.Count == 0) return;
+			string displayStr = "Hold [" + bindings[0];
+
+			for (int i = 1; i < bindings.Count; ++i)
+			{
+				displayStr += "] | [" + bindings[i];
+			}
+			displayStr += "] to skip. ";
+
+			continueTxt.text = displayStr;
+
+			HasFinished = forceSkip;
+			if (!forceSkip)
+			{
+				StartCoroutine(WaitForLogosInitialTime());
+			}
+		}
+
+		private void Update()
+		{
+			if (LogosCanFade && LoadingFinished)
+			{
+				Debug.Log("Intro: Starting Logo fade");
+				logoAnimator.SetTrigger("Fade");
+				LogosCanFade = false;
+				return;
+			}
+
+			if (IsSkipping)
+			{
+				skipHoldSlider.value += Time.deltaTime;
+			} else
+			{
+				skipHoldSlider.value = 0;
+			}
+
+			if (skipHoldSlider.value == skipHoldSlider.maxValue)
+			{
+				HasFinished = true;
+			}
+		}
 
 		private void OnEnable()
 		{
@@ -58,51 +116,10 @@ namespace ImmunotherapyGame.Loader
 		{
 			SkipAction.started -= OnSkipPressed;
 			SkipAction.canceled -= OnSkipPressed;
+			StopAllCoroutines();
 		}
 
-		void Awake()
-		{
-			skipHoldSlider.maxValue = timeHoldToSkip;
-			if (forceSkip)
-				IntroFinished();
-
-			Debug.Log("Searching for action");
-			Debug.Log(playerInput.currentActionMap.ToString());
-			Debug.Log(playerInput.currentActionMap.FindAction("Skip").ToString());
-			SkipAction = playerInput.currentActionMap.FindAction("Skip", true);
-
-			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);
-
-			if (bindings.Count == 0) return;
-			string displayStr = "Hold [" + bindings[0];
-
-			for (int i = 1; i < bindings.Count; ++i)
-			{
-				displayStr += "] | [" + bindings[i];
-			}
-			displayStr += "] to skip. ";
-
-			continueTxt.text = displayStr;
-		}
-
-
-		void Update()
-		{
-			if (Skipping)
-			{
-				skipHoldSlider.value += Time.deltaTime;
-			} else
-			{
-				skipHoldSlider.value = 0;
-			}
-
-			if (skipHoldSlider.value == skipHoldSlider.maxValue)
-			{
-				IntroFinished();
-			}
-		}
-
-
+		// Intro private methods
 		internal void ShowNextText()
 		{
 			if (text_index < texts.Count)
@@ -112,65 +129,43 @@ namespace ImmunotherapyGame.Loader
 			}
 		}
 
-		private void IntroFinished()
+		private IEnumerator WaitToShowSkipButton()
 		{
-			Loader.Instance.OnIntroFinished();
+			yield return new WaitForSeconds(timeBeforeSkipAppears);
+
+			continueTxt.gameObject.SetActive(true);
+			skipHoldSlider.gameObject.SetActive(true);
+			allowSkip = true;
+			yield return null;
 		}
 
-		/// <summary>
-		/// Call to make logos fade away in the intro screen
-		/// </summary>
-		internal void FadeLogos()
+		private IEnumerator WaitForLogosInitialTime()
 		{
-			if (skipLogos)
-			{
-				logoAnimator.gameObject.SetActive(false);
-				LogoFadeFinished();
-				return;
-			}
-			logoAnimator.StartFade();
+			yield return new WaitForSecondsRealtime(timeBeforeLogoFade);
+			LogosCanFade = true;
 		}
 
-
-		// Animation callbacks
-		internal void LogoFadeFinished()
+		// Logo animation fade callback
+		public void LogoFadeFinished()
 		{
-			if (skipIntroTexts)
-			{
-				IntroFinished();
-				return;
-			}
+			Debug.Log("Intro: Logo animation fade finished");
 			ShowNextText();
 			StartCoroutine(WaitToShowSkipButton());
 		}
 
 
-		IEnumerator WaitToShowSkipButton()
-		{
-			yield return new WaitForSeconds(timeBeforeSkipAppears);
-			continueSpaceBar.SetActive(true);
-			skipHoldSlider.gameObject.SetActive(true);
-
-			allowSkip = true;
-			yield return null;
-		}
-
-
-		private bool Skipping { get; set; }
-
-
+		// Input listeners functionality
 		void OnSkipPressed(InputAction.CallbackContext context)
 		{
 			Debug.Log("Skip called");
-			if (allowSkip)
-				Skipping = true;
+			IsSkipping = allowSkip;
 		}
 
 		void OnSkipReleased(InputAction.CallbackContext context)
 		{
 
 			Debug.Log("Skip released");
-			Skipping = false;
+			IsSkipping = false;
 		}
 	}
 	

@@ -158,10 +158,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		public void SaveData()
 		{
-			Debug.Log(data.cellpediaItems.Count);
 			savedData = new SerializableCellpediaData(data);
 			SaveManager.Instance.SaveData<SerializableCellpediaData>(savedData);
-
 		}
 
 		public void ResetData()

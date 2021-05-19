@@ -62,7 +62,7 @@ namespace ImmunotherapyGame.Core
 
 
 
-		private void Awake()
+		void Awake()
 		{
 			if (_isPersistent) DontDestroyOnLoad(this.gameObject);
 		}

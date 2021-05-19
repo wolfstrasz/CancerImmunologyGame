@@ -123,18 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &157329297 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1229615290543558492, guid: 788787e24acafeb4db486cee701f1d64,
-    type: 3}
-  m_PrefabInstance: {fileID: 638245657}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &194017736
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,86 +258,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &197617241 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1229615292104575028, guid: 788787e24acafeb4db486cee701f1d64,
-    type: 3}
-  m_PrefabInstance: {fileID: 638245657}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &197617242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197617241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 0eb0704b45491924bb0b24321dd0a0a2,
-    type: 3}
-  m_NotificationBehavior: 3
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0a8fae42-186d-4992-ab36-d6ba2b7305eb
-    m_ActionName: Gameplay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/dpad/up,/XInputControllerWindows/dpad/down,/XInputControllerWindows/dpad/left,/XInputControllerWindows/dpad/right]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2085d3e4-19ce-42a8-84ad-23ea5a8abc7b
-    m_ActionName: Gameplay/Primary Attack[/Mouse/leftButton,/XInputControllerWindows/rightShoulder]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 597bdb30-40af-4af2-ab5b-cd003fbaeea0
-    m_ActionName: Gameplay/Secondary Attack[/Mouse/rightButton,/XInputControllerWindows/rightTrigger]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4ecf0899-49c8-40c9-83fe-43e5b1fa0980
-    m_ActionName: Gameplay/Aim[/XInputControllerWindows/rightStick]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b9b9d053-85eb-4b72-9bb9-8575363df19d
-    m_ActionName: Gameplay/MouseAim[/Mouse/position]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 197617243}
-        m_TargetAssemblyTypeName: ImmunotherapyGame.Loader.Intro, Assembly-CSharp
-        m_MethodName: OnSkipPressed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 5a04c15c-4244-440e-b2b5-85c9ef1b33d3
-    m_ActionName: Systems/SkipPressed[/Keyboard/space,/XInputControllerWindows/leftTrigger]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
-  m_DefaultActionMap: Systems
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &197617243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
     type: 3}
   m_PrefabInstance: {fileID: 638245657}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 197617241}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bd09f5b00fdd684887b9c15a0d4a3af, type: 3}
@@ -487,56 +402,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Intro
       objectReference: {fileID: 0}
-    - target: {fileID: 1229615292104575028, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
         type: 3}
       propertyPath: forceSkip
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: skipLogos
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: action.m_Id
-      value: 25179b11-75eb-498a-96e2-03d244521e55
-      objectReference: {fileID: 0}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: actionAsset
-      value: 
-      objectReference: {fileID: -944628639613478452, guid: 0eb0704b45491924bb0b24321dd0a0a2,
-        type: 3}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: continueTxt
-      value: 
-      objectReference: {fileID: 157329297}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: playerInput
-      value: 
-      objectReference: {fileID: 197617242}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: action.m_Name
-      value: Action
-      objectReference: {fileID: 0}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: SkipAction.m_Id
-      value: a76356c0-5164-48ca-9610-c73eee64f6d4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
-        type: 3}
-      propertyPath: SkipAction.m_Name
-      value: Skip
       objectReference: {fileID: 0}
     - target: {fileID: 5734932588015689960, guid: 788787e24acafeb4db486cee701f1d64,
         type: 3}
@@ -914,6 +783,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Loader
       objectReference: {fileID: 0}
+    - target: {fileID: 3651367266682794695, guid: 4dfcc80476059134baa4668a2b3aa0d5,
+        type: 3}
+      propertyPath: intro
+      value: 
+      objectReference: {fileID: 197617243}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dfcc80476059134baa4668a2b3aa0d5, type: 3}
 --- !u!1001 &8789866187591024076
