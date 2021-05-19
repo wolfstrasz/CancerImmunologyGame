@@ -77,6 +77,7 @@ namespace ImmunotherapyGame.LevelManagement
 				{
                     Debug.Log("Completed level loading");
 				}
+                LevelSelectScreen.Instance.Close();
 				SceneManager.LoadScene(data.sceneIndex);
 			}
 			else
