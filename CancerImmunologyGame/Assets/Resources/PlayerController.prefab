@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3409340457423504397}
   - component: {fileID: 3409340457423504396}
   - component: {fileID: 2298911285699567152}
-  - component: {fileID: 5681148443862393213}
+  - component: {fileID: 436582578362720831}
   m_Layer: 11
   m_Name: PlayerController
   m_TagString: Untagged
@@ -168,19 +168,20 @@ MonoBehaviour:
   useAutoAim: 0
   autoAimer: {fileID: 0}
   cancersNearby: []
---- !u!114 &5681148443862393213
+--- !u!114 &436582578362720831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2298911285699567159}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
+  m_Actions: {fileID: -944628639613478452, guid: 0eb0704b45491924bb0b24321dd0a0a2,
+    type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &6371407695645343948

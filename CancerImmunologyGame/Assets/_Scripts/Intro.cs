@@ -11,11 +11,9 @@ namespace ImmunotherapyGame.Loader
 
 	public class Intro : MonoBehaviour
 	{
-		[Header("Player Input")]
-		[SerializeField]
-		PlayerInput playerInput = null;
-		[SerializeField]
-		InputAction SkipAction = null;
+		// Input handling
+		private PlayerControls playerControls = null;
+		private InputAction SkipAction = null;
 
 		[Header("Force skipping")]
 		[SerializeField]
@@ -56,11 +54,12 @@ namespace ImmunotherapyGame.Loader
 
 		private void Awake()
 		{
+			playerControls = new PlayerControls();
 
 			skipHoldSlider.maxValue = timeHoldToSkip;
 
 			// Bind skip action
-			SkipAction = playerInput.currentActionMap.FindAction("Skip", true);
+			SkipAction = playerControls.Systems.Skip;
 
 			// Update skip text
 			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);
@@ -110,6 +109,8 @@ namespace ImmunotherapyGame.Loader
 		{
 			SkipAction.started += OnSkipPressed;
 			SkipAction.canceled += OnSkipReleased;
+			playerControls.Enable();
+
 		}
 
 		private void OnDisable()
@@ -117,6 +118,7 @@ namespace ImmunotherapyGame.Loader
 			SkipAction.started -= OnSkipPressed;
 			SkipAction.canceled -= OnSkipPressed;
 			StopAllCoroutines();
+
 		}
 
 		// Intro private methods
