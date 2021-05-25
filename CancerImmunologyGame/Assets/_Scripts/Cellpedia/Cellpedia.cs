@@ -3,6 +3,8 @@ using UnityEngine;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
+using ImmunotherapyGame.UI;
+
 namespace ImmunotherapyGame.CellpediaSystem
 {
 	public class Cellpedia : Singleton<Cellpedia>, IDataManager
@@ -30,15 +32,13 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[SerializeField]
 		private GameObject popupPrefab = null;
 
-		[Header ("Game UI")]
+		[Header("Game UI")]
 		[SerializeField]
-		private GameObject microscopeButton = null;
-		[SerializeField]
-		private Animator microscopeButtonAnimator = null;
+		private InGameUIButtonData inGameUIButtonData = null;
+
 
 		// Used by Cellpedia popups
 		internal Transform PopupLayout => popupLayout.transform;
-		internal Vector3 MicroscopeButtonPosition => microscopeButton.transform.position;
 
 		// Used by tutorials
 		public bool IsCellpediaOpened => cellpediaView.gameObject.activeSelf;
@@ -46,30 +46,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		public void Update()
 		{
-			//if (Input.GetKeyDown(KeyCode.Q))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.TKILLER);
-			//}
-			//if (Input.GetKeyDown(KeyCode.W))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.DENDRITIC);
-			//}
-			//if (Input.GetKeyDown(KeyCode.E))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.THELPER);
-			//}
-			//if (Input.GetKeyDown(KeyCode.R))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.CANCER);
-			//}
-			//if (Input.GetKeyDown(KeyCode.T))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.REGULATORY);
-			//}
-			//if (Input.GetKeyDown(KeyCode.Y))
-			//{
-			//	UnlockCellDescription(CellpediaItemTypes.CAF);
-			//}
+
 		}
 
 		public void Initialise()
@@ -77,6 +54,27 @@ namespace ImmunotherapyGame.CellpediaSystem
 			selectedCellObject = null;
 			buttonsBar.Initialise();
 			microscope.Initialise();
+
+			for	(int i = 0; i < data.cellpediaItems.Count; ++i)
+			{
+				if (data.cellpediaItems[i].isUnlocked)
+				{
+					inGameUIButtonData.unlocked = true;
+					break;
+				}
+			}
+		}
+
+		private void OnEnable()
+		{
+			inGameUIButtonData.onOpenMenu += OpenView;
+			inGameUIButtonData.onCloseMenu += CloseView;
+		}
+
+		private void OnDisable()
+		{
+			inGameUIButtonData.onOpenMenu -= OpenView;
+			inGameUIButtonData.onCloseMenu -= CloseView;
 		}
 
 		// UI Button callbacks
@@ -109,7 +107,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 			microscope.OnOpen(selectedCellObject);
 			notepad.OnOpen(selectedCellObject);
 
-			microscopeButtonAnimator.SetTrigger("Opened");
 		}
 
 
@@ -132,12 +129,14 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 
 			item.isUnlocked = true;
-			microscopeButton.SetActive(true);
 			buttonsBar.ActivateButton(item);
 
 			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
 			popup.SetInfo(item);
-			microscopeButtonAnimator.SetTrigger("NewItem");
+
+			inGameUIButtonData.unlocked = true;
+			inGameUIButtonData.PingChangedStatus();
+
 			SaveData();
 		}
 
@@ -165,6 +164,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public void ResetData()
 		{
 			data.ResetData();
+			inGameUIButtonData.unlocked = false;
 		}
 	}
 

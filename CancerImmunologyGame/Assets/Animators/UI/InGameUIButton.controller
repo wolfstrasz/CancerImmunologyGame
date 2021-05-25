@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1107 &-1095939461479194334
 AnimatorStateMachine:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -33,10 +33,10 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Microscope
+  m_Name: InGameUIButton
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: NewItem
+  - m_Name: Pinged
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -63,12 +63,12 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
 --- !u!1102 &3554167724268939444
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MicroscopeIdle
+  m_Name: InGameUIIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -96,7 +96,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: NewItem
+    m_ConditionEvent: Pinged
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8952890962593804881}
@@ -139,12 +139,12 @@ AnimatorStateTransition:
   m_CanTransitionToSelf: 1
 --- !u!1102 &8952890962593804881
 AnimatorState:
-  serializedVersion: 5
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MicroscopeShake
+  m_Name: InGameUIShake
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

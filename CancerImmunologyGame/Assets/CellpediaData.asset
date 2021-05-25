@@ -28,7 +28,7 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: 8ccfc98f2cf2c594eaad498b18165218, type: 3}
     noteSprite3: {fileID: 21300000, guid: 2ed97cb939e2b7b4faa82bba83d33860, type: 3}
     animatorTrigger: TKiller
-    isUnlocked: 1
+    isUnlocked: 0
   - type: 2
     cellname: T Helper cell
     description: Everybody needs a helping hand once in a while! As their name suggest,
@@ -44,7 +44,7 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: 053d8db1a85f4354cb3e147564222a63, type: 3}
     noteSprite3: {fileID: 0}
     animatorTrigger: THelper
-    isUnlocked: 1
+    isUnlocked: 0
   - type: 3
     cellname: Dendritic cell
     description: "Dendritic cells, the scouts of your body, are always on the lookout
@@ -58,7 +58,7 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: a3f37bb674aa1e14fb78c61d7073a1e7, type: 3}
     noteSprite3: {fileID: 0}
     animatorTrigger: Dendritic
-    isUnlocked: 1
+    isUnlocked: 0
   - type: 4
     cellname: T Regulatory cell
     description: "T Regulatory cells are super important in the body since they have
@@ -74,7 +74,7 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: 412e178a0f001f94a842896f5590aa8f, type: 3}
     noteSprite3: {fileID: 0}
     animatorTrigger: Regulatory
-    isUnlocked: 1
+    isUnlocked: 0
   - type: 5
     cellname: Cancer cells
     description: "The ability that cancer cells have to follow conventional rules
@@ -92,7 +92,7 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: a534aae819730564dbb98af6a7aacae2, type: 3}
     noteSprite3: {fileID: 21300000, guid: 936a9da5358b3e34ab920977cb009016, type: 3}
     animatorTrigger: Cancer
-    isUnlocked: 1
+    isUnlocked: 0
   - type: 6
     cellname: Cancer Associated Fibroblast
     description: Fibroblasts usually help wounds heal. Around cancer, fibroblasts
@@ -109,4 +109,4 @@ MonoBehaviour:
     noteSprite2: {fileID: 21300000, guid: 296d86464aa774640b59c07b73ae94e9, type: 3}
     noteSprite3: {fileID: 21300000, guid: 01b6acceb385ffa4c957cbd3b58d8f17, type: 3}
     animatorTrigger: CAF
-    isUnlocked: 1
+    isUnlocked: 0
