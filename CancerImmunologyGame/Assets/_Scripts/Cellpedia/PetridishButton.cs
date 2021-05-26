@@ -1,17 +1,24 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 using ImmunotherapyGame.Core;
+using ImmunotherapyGame.UI;
 
 namespace ImmunotherapyGame.CellpediaSystem
 {
 	
-	public class PetridishButton : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+	[RequireComponent (typeof(Selectable))]
+	public class PetridishButton : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerClickHandler, ISubmitHandler, IMoveHandler
 	{
-		internal static PetridishButton selected = null;
+		internal static PetridishButton lastSubmitted = null;
+		internal static List<PetridishButton> allPetridishButtons = null;
 		[ReadOnly]
-		private bool isActivated = false;
+		private int id = -1;
+		[ReadOnly]
+		internal bool isActivated = false;
 		[ReadOnly]
 		internal CellpediaObject cellObject = null;
 
@@ -19,17 +26,15 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[SerializeField]
 		private Image cellImage = null;
 
-
-		[Header("Button Functionality")]
-		[SerializeField]
-		private AudioSource audioSource = null;
+		[Header("Scaling On Select")]
 		[SerializeField]
 		private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
 		[SerializeField]
 		private Vector3 initialScaling = new Vector3(1.0f, 1.0f, 1.0f);
 
-		internal void Initialise(CellpediaObject cellObject)
+		internal void Initialise(CellpediaObject cellObject, int id)
 		{
+			this.id = id;
 			this.cellObject = cellObject;
 			cellImage.sprite = cellObject.sprite;
 			cellImage.color = Color.black;
@@ -49,66 +54,120 @@ namespace ImmunotherapyGame.CellpediaSystem
 			cellImage.color = Color.black;
 		}
 
-		internal void SelectCell()
+		internal void SubmitCellData()
 		{
-			
-			if (selected != this)
+			if (lastSubmitted != this)
 			{
 				bool success = Cellpedia.Instance.microscope.NextPetridish(cellObject);
 				if (success)
 				{
 
-					if (selected != null)
+					if (lastSubmitted != null)
 					{
-						selected.DeselectCell();
+						lastSubmitted.cellImage.gameObject.SetActive(true);
 					}
 
-					gameObject.transform.localScale = scaling;
-					selected = this;
+					cellImage.gameObject.SetActive(false);
+					lastSubmitted = this;
 				}
-				return;
+			} else
+			{
+				cellImage.gameObject.SetActive(false);
 			}
-
-			selected = this;
-			gameObject.transform.localScale = scaling;
-
-		}
-
-		internal void DeselectCell()
-		{
-			gameObject.transform.localScale = initialScaling;
 		}
 
 		// BUTTON FUNCTIONALITY
-
-
-		// When highlighted with mouse.
-		public void OnPointerEnter(PointerEventData eventData)
+		
+		// When selected.
+		public override void OnSelect(BaseEventData eventData)
 		{
-			if (!isActivated || selected == this) return;
+			if (!isActivated) return;
+			base.OnSelect(eventData);
 			gameObject.transform.localScale = scaling;
-			audioSource.Play();
 		}
 
-		public void OnPointerExit(PointerEventData eventData)
+		public override void OnDeselect(BaseEventData eventData)
 		{
-			if (!isActivated || selected == this ) return;
+			base.OnDeselect(eventData);
+			if (!isActivated) return;
 			gameObject.transform.localScale = initialScaling;
 		}
 
-		// When selected.
-		public void OnSelect(BaseEventData eventData)
+		public override void OnPointerEnter(PointerEventData eventData)
 		{
-			if (!isActivated || selected == this) return;
-			gameObject.transform.localScale = scaling;
-			audioSource.Play();
+			if (!isActivated) return;
+			base.OnPointerEnter(eventData);
 		}
+
+		public override void OnPointerExit(PointerEventData eventData)
+		{
+		}
+
 
 		public void OnPointerClick(PointerEventData eventData)
 		{
-			if (!isActivated || selected == this) return;
-			SelectCell();
-			audioSource.Play();
+			if (!isActivated || lastSubmitted == this) return;
+			SubmitCellData();
+		}
+
+		public void OnSubmit(BaseEventData eventData)
+		{
+			if (!isActivated || lastSubmitted == this) return;
+			SubmitCellData();
+		}
+
+		public void OnMove(AxisEventData eventData)
+		{
+			if (eventData.moveDir == MoveDirection.Left)
+			{
+				int count = allPetridishButtons.Count;
+				int searchId = id - 1;
+
+				if (searchId < 0)
+					searchId = count - 1;
+
+				PetridishButton buttonToSelect = allPetridishButtons[searchId];
+
+				while (!buttonToSelect.isActivated && buttonToSelect != this)
+				{
+					--searchId;
+					if (searchId < 0)
+					{
+						searchId = count - 1;
+					}
+					buttonToSelect = allPetridishButtons[searchId];
+				}
+
+				if (buttonToSelect != this)
+				{
+					EventSystem.current.SetSelectedGameObject(buttonToSelect.gameObject);
+				}
+			}
+			else if (eventData.moveDir == MoveDirection.Right)
+			{
+				int count = allPetridishButtons.Count;
+				int searchId = id + 1;
+
+				if (searchId >= count)
+					searchId = 0;
+
+				PetridishButton buttonToSelect = allPetridishButtons[searchId];
+
+				while (!buttonToSelect.isActivated && buttonToSelect != this)
+				{
+					++searchId;
+					if (searchId >= count)
+					{
+						searchId = 0;
+					}
+					buttonToSelect = allPetridishButtons[searchId];
+				}
+
+				if (buttonToSelect != this)
+				{
+					EventSystem.current.SetSelectedGameObject(buttonToSelect.gameObject);
+				}
+			}
 		}
 	}
 }

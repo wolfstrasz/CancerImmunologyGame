@@ -63,5 +63,5 @@ namespace ImmunotherapyGame.Audio
 	}
 
 	[System.Serializable]
-	public enum UIAudioClipKey { NONE, BUTTON }
+	public enum UIAudioClipKey { NONE, BUTTON, ACHIEVEMENT }
 }
