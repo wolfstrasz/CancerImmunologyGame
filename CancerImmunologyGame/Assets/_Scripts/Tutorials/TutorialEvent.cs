@@ -14,7 +14,8 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldPauseGameplay)
 			{
-				TutorialManager.Instance.RequestGameplayPause();
+				Debug.Log(gameObject.name + " requests game pause");
+				TutorialManager.Instance.OpenPauseInterfacePanel();
 			}
 
 			OnStartEvent();
@@ -24,7 +25,9 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldPauseGameplay)
 			{
-				TutorialManager.Instance.RequestGameplayUnpause();
+				Debug.Log(gameObject.name + " requests game UN pause");
+
+				TutorialManager.Instance.ClosePauseIntefacePanel();
 			}
 
 			OnEndEvent();

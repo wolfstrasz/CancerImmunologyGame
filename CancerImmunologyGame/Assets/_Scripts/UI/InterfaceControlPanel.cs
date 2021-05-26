@@ -11,6 +11,8 @@ namespace ImmunotherapyGame.UI
         /// User interfaces with Levels < 0 request Gameplay Pause and with Levels >= 0 request Game Pause
         /// </summary>
         public int level;
+        [SerializeField]
+        private bool shouldCloseOnSceneChange = true;
         public UIMenuNode initialControlNode;
 
         public delegate void OnOpenInterface();
@@ -34,6 +36,7 @@ namespace ImmunotherapyGame.UI
             InterfaceManager.Instance.RequestClose(this);
 		}
 
+        public bool IsOpened => gameObject.activeInHierarchy;
 
 		private void OnEnable()
 		{
@@ -49,6 +52,10 @@ namespace ImmunotherapyGame.UI
             {
                 node.onCancelCall -= delegate { Close(); };
             }
+            if (shouldCloseOnSceneChange)
+			{
+                gameObject.SetActive(false);
+			}
         }
 
 

@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 2428062035381181798}
   - component: {fileID: 2428062035381181793}
   - component: {fileID: 2428062035381181797}
-  - component: {fileID: 2428062035381181796}
+  - component: {fileID: 5542653121181799777}
   m_Layer: 5
   m_Name: PauseMenuCanvas
   m_TagString: Untagged
@@ -207,7 +207,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &2428062035381181798
 MonoBehaviour:
@@ -261,7 +261,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &2428062035381181796
+--- !u!114 &5542653121181799777
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,11 +270,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2428062035381181821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8972454a5b32d6148aeb9e43bce5b5a7, type: 3}
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialiserGameObject: {fileID: 3395908815777889921}
-  initialiserNode: {fileID: 9115346182354184227}
+  level: 0
+  shouldCloseOnSceneChange: 1
+  initialControlNode: {fileID: 9115346182354184227}
+  nodesToListen:
+  - {fileID: 9115346182354184227}
+  - {fileID: 504436990520191813}
+  - {fileID: 2131731162142153026}
+  - {fileID: 5403863445840364338}
 --- !u!1 &2428062035636442619
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,10 +539,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 1
+  menuPanel: {fileID: 5542653121181799777}
   menuData: {fileID: 11400000, guid: 53a36a92266135a4d927648949a765c8, type: 2}
-  menuPanel: {fileID: 2428062035381181821}
   surveyData: {fileID: 11400000, guid: 792e83a331ce74547a03adaf94855baf, type: 2}
-  surveyPanel: {fileID: 2428062036877954129}
+  surveyPanel: {fileID: 8156430539944808921}
   surveyURL: https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u
 --- !u!1 &2428062036877954129
 GameObject:
@@ -553,7 +559,7 @@ GameObject:
   - component: {fileID: 2428062036877954132}
   - component: {fileID: 2428062036877954135}
   - component: {fileID: 2428062036877954137}
-  - component: {fileID: 2428062036877954136}
+  - component: {fileID: 8156430539944808921}
   m_Layer: 5
   m_Name: SurveyMenuCanvas
   m_TagString: Untagged
@@ -638,7 +644,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 101
   m_TargetDisplay: 0
 --- !u!114 &2428062036877954132
 MonoBehaviour:
@@ -692,7 +698,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &2428062036877954136
+--- !u!114 &8156430539944808921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -701,11 +707,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2428062036877954129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8972454a5b32d6148aeb9e43bce5b5a7, type: 3}
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialiserGameObject: {fileID: 6242157140731776480}
-  initialiserNode: {fileID: 504436990806956866}
+  level: 0
+  shouldCloseOnSceneChange: 1
+  initialControlNode: {fileID: 504436990806956866}
+  nodesToListen:
+  - {fileID: 504436989885640549}
+  - {fileID: 504436990806956866}
 --- !u!1 &2428062037079530798
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,16 +982,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2428062036002713751}
+      objectReference: {fileID: 8156430539944808921}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseSurveyView
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ImmunotherapyGame.UI.PauseMenu, Assembly-CSharp
+      value: ImmunotherapyGame.UI.InterfaceControlPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1112,18 +1122,12 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 2428062036310334462}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242157140731776480}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6242157140731776480 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2428062036310334462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2428062036630694905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1297,6 +1301,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &504436990520191813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2428062036630694905}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1458950515287322356 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
@@ -1448,6 +1464,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2428062037265182681}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &504436989885640549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2428062037265182681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4262451960107702782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1619,6 +1647,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2131731162142153026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4262451960107702782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1056739750138486003 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
@@ -1651,21 +1691,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 2684031123596949727}
+      objectReference: {fileID: 4587735226239568600}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2428062036002713751}
+      objectReference: {fileID: 5542653121181799777}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseMenuView
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ImmunotherapyGame.UI.PauseMenu, Assembly-CSharp
+      value: ImmunotherapyGame.UI.InterfaceControlPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1792,7 +1832,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6355173107884435615}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3395908815777889921}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -1804,7 +1844,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6355173107884435615}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3395908815777889921}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
@@ -1813,12 +1853,6 @@ MonoBehaviour:
 --- !u!224 &7908059297948904850 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 6355173107884435615}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3395908815777889921 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
     type: 3}
   m_PrefabInstance: {fileID: 6355173107884435615}
   m_PrefabAsset: {fileID: 0}
@@ -1838,7 +1872,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
-      objectReference: {fileID: 2684031123596949727}
+      objectReference: {fileID: 8238375682674205359}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_Navigation.m_WrapAround
@@ -1846,9 +1880,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
-      propertyPath: m_Navigation.m_SelectOnRight
+      propertyPath: m_Navigation.m_SelectOnDown
       value: 
       objectReference: {fileID: 5056065919149967806}
+    - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnRight
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1983,6 +2022,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f09489be23d36e46a429cecfce7948d, type: 3}
+--- !u!114 &5403863445840364338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 7803694063495316366}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8238375682674205359 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,

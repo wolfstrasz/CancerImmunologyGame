@@ -63,21 +63,15 @@ namespace ImmunotherapyGame.Tutorials
 		IEnumerator WaitBeforeSkipButton()
 		{
 			yield return new WaitForSecondsRealtime(waitBeforeSkip);
-			TutorialManager.Instance.DisplaySkipButton = true;
+			TutorialManager.Instance.DisplaySkipButton();
 		}
 
 		internal void Skip()
 		{
-			if (!shouldPauseGameplay)
-			{
-				isSkipped = true;
-			} else
-			{
-				TutorialManager.Instance.RequestGameplayUnpause();
-
-				isSkipped = TutorialManager.Instance.IsGameplayUnpaused;
-				shouldPauseGameplay = !isSkipped;
-			}
+			// Skips text
+			isSkipped = true;
+			// Panel is already closed so we should prevent a second close panel call
+			shouldPauseGameplay = false;
 		}
 	}
 }

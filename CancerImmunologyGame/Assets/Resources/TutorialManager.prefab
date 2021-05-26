@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4764412586671559103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ RectTransform:
   m_AnchorMin: {x: 0.05, y: 0.1}
   m_AnchorMax: {x: 0.2, y: 0.6}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -252.15182}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4764412586671559099
 CanvasRenderer:
@@ -468,13 +468,14 @@ GameObject:
   - component: {fileID: 4764412587630988833}
   - component: {fileID: 4764412587630988846}
   - component: {fileID: 5573618835607710338}
+  - component: {fileID: 4596875289449188139}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4764412587630988833
 RectTransform:
   m_ObjectHideFlags: 0
@@ -533,6 +534,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4596875289449188139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4764412587630988832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: -1
+  shouldCloseOnSceneChange: 1
+  initialControlNode: {fileID: 0}
+  nodesToListen: []
 --- !u!1 &4764412587923017516
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +664,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
-  tutorialPanel: {fileID: 4764412587630988832}
+  interfacePanel: {fileID: 4596875289449188139}
+  tutorialPanel: {fileID: 4764412586671559102}
   tutorialTxt: {fileID: 4764412587265709221}
   skipTextButton: {fileID: 4764412586051488068}
   StoryTutorials: []

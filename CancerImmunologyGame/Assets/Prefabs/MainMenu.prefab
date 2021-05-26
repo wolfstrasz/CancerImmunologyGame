@@ -509,6 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  shouldCloseOnSceneChange: 1
   initialControlNode: {fileID: 6605203517004532923}
   nodesToListen:
   - {fileID: 6605203517004532923}
@@ -677,6 +678,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  shouldCloseOnSceneChange: 1
   initialControlNode: {fileID: 7744851748961660399}
   nodesToListen:
   - {fileID: 7744851748961660399}
@@ -1045,6 +1047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  shouldCloseOnSceneChange: 0
   initialControlNode: {fileID: 6604847265374092684}
   nodesToListen: []
 --- !u!1 &9032391777156275974

@@ -146,7 +146,7 @@ namespace ImmunotherapyGame.UI
                 panel.nodesToListen.Add(btn);
 			}
 
-           // panel.initialControlNode = levelSelectButtons[0];
+            panel.initialControlNode = levelSelectButtons[0];
             initialised = true;
         }
 

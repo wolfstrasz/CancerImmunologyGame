@@ -57,5 +57,11 @@ namespace ImmunotherapyGame.UI
 		public virtual void OnPointerExit(PointerEventData eventData)
 			=> OnDeselect(eventData);
 
+
+		public void OnDisable()
+		{
+			OnSelectView = false;
+		}
+
 	}
 }

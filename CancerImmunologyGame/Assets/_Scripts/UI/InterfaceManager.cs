@@ -126,6 +126,7 @@ namespace ImmunotherapyGame.UI
 
 					// Close menu
 					ClosePanel(currentInterfaceOpened);
+					currentInterfaceOpened = null;
 
 					if (lowerInterface != null)
 					{
@@ -138,11 +139,6 @@ namespace ImmunotherapyGame.UI
 
 		public void OnSceneUnloaded(Scene currentScene)
 		{
-			for (int i = allOpenedInterfacePanels.Count -1 ; i >= 0; i--)
-			{
-				ClosePanel(allOpenedInterfacePanels[i]);
-			}
-
 			allOpenedInterfacePanels.Clear();
 			currentInterfaceOpened = null;
 		}
