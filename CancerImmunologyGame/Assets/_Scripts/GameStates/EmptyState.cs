@@ -19,6 +19,10 @@ namespace ImmunotherapyGame.GameManagement
 		{
 		}
 
+		internal override void OnStateReEnter()
+		{
+		}
+
 		internal override void OnUpdate()
 		{
 		}

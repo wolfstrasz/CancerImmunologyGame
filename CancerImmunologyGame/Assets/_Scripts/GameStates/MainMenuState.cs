@@ -26,6 +26,10 @@ namespace ImmunotherapyGame
 
 			}
 
+			internal override void OnStateReEnter()
+			{
+			}
+
 			internal override void OnUpdate()
 			{
 

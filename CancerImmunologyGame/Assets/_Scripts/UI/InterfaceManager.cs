@@ -12,6 +12,9 @@ namespace ImmunotherapyGame.UI
 {
 	public class InterfaceManager : Singleton<InterfaceManager>
 	{
+		[SerializeField]
+		private int LevelRequirementForFullPause = 0;
+
 		private List<InterfaceControlPanel> allOpenedInterfacePanels = new List<InterfaceControlPanel>();
 		private InterfaceControlPanel currentInterfaceOpened = null;
 		
@@ -25,6 +28,7 @@ namespace ImmunotherapyGame.UI
 		private void ClosePanel (InterfaceControlPanel interfacePanelToClose)
 		{
 			Debug.Log("Interface Manager: Closing Panel = " + interfacePanelToClose.gameObject.name);
+			GameManager.Instance.RequestGameStateUnpause(interfacePanelToClose.gameObject);
 
 			interfacePanelToClose.gameObject.SetActive(false);
 
@@ -41,7 +45,7 @@ namespace ImmunotherapyGame.UI
 		private void OpenPanel (InterfaceControlPanel interfacePanelToOpen, InterfaceControlPanel lowerLevelInterfaceObject)
 		{
 			Debug.Log("Interface Manager: Opening Panel = " + interfacePanelToOpen.gameObject.name);
-			if (interfacePanelToOpen.level >= 0)
+			if (interfacePanelToOpen.level >= LevelRequirementForFullPause)
 				GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.FULL, interfacePanelToOpen.gameObject);
 			else
 				GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, interfacePanelToOpen.gameObject);
@@ -119,20 +123,17 @@ namespace ImmunotherapyGame.UI
 		{
 			if (currentInterfaceOpened == interfaceToClose)
 			{
-				if (GameManager.Instance.RequestGameStateUnpause(interfaceToClose.gameObject))
+				// remember lower menu
+				InterfaceControlPanel lowerInterface = currentInterfaceOpened.LastLowerInterfacePanel;
+
+				// Close menu
+				ClosePanel(currentInterfaceOpened);
+				currentInterfaceOpened = null;
+
+				if (lowerInterface != null)
 				{
-					// remember lower menu
-					InterfaceControlPanel lowerInterface = currentInterfaceOpened.LastLowerInterfacePanel;
-
-					// Close menu
-					ClosePanel(currentInterfaceOpened);
-					currentInterfaceOpened = null;
-
-					if (lowerInterface != null)
-					{
-						// Nothing to reassign
-						OpenPanel(lowerInterface, null);
-					}
+					// Nothing to reassign
+					OpenPanel(lowerInterface, null);
 				}
 			}
 		}

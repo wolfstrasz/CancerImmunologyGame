@@ -11,16 +11,16 @@ namespace ImmunotherapyGame.UI.TopOverlay
         public Sprite icon;
         public Material glowMaterial;
 
-        public delegate void OnChangedStatus();
+        public delegate void OnChangedStatus(bool status);
         public OnChangedStatus onChangedStatus;
 
         public delegate void OnOpenMenu();
         public OnOpenMenu onOpenMenu;
 
-        public void PingChangedStatus()
+        public void PingChangedStatus(bool status)
 		{
             if (onChangedStatus != null)
-                onChangedStatus();
+                onChangedStatus(status);
 		}
 
     }

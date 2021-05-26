@@ -1,8 +1,8 @@
 ﻿using ImmunotherapyGame.Player;
-using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.Tutorials;
 using ImmunotherapyGame.AI;
 using ImmunotherapyGame.Audio;
+using ImmunotherapyGame.UI.TopOverlay;
 
 namespace ImmunotherapyGame
 {
@@ -18,6 +18,9 @@ namespace ImmunotherapyGame
 				BackgroundMusic.Instance.Initialise();
 				PlayerController.Instance.Initialise();
 				TutorialManager.Instance.LoadLevelTutorials();
+
+				TopOverlayUI.Instance.GamePaused = false;
+
 			}
 
 			internal override void OnStateExit()
@@ -75,6 +78,12 @@ namespace ImmunotherapyGame
 				{
 					controller.OnUpdate();
 				}
+			}
+
+			internal override void OnStateReEnter()
+			{
+				TopOverlayUI.Instance.GamePaused = false;
+
 			}
 		}
 	}

@@ -24,6 +24,10 @@ namespace ImmunotherapyGame
 			{
 			}
 
+			internal override void OnStateReEnter()
+			{
+			}
+
 			internal override void OnUpdate()
 			{
 				if (GameManager.Instance.sceneLoaded)

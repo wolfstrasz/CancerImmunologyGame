@@ -32,7 +32,6 @@ namespace ImmunotherapyGame.Tutorials
 		protected override void OnEndEvent() 
 		{
 			TutorialManager.Instance.onSkipDelegate -= Skip;
-			TutorialManager.Instance.HideText();
 		}
 
 		protected override void OnStartEvent()
@@ -70,8 +69,6 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			// Skips text
 			isSkipped = true;
-			// Panel is already closed so we should prevent a second close panel call
-			shouldPauseGameplay = false;
 		}
 	}
 }

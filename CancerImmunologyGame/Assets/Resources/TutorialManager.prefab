@@ -153,7 +153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4764412586671559103
 RectTransform:
   m_ObjectHideFlags: 0
@@ -664,8 +664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
-  interfacePanel: {fileID: 4596875289449188139}
-  tutorialPanel: {fileID: 4764412586671559102}
+  textDisplayPanel: {fileID: 4596875289449188139}
   tutorialTxt: {fileID: 4764412587265709221}
   skipTextButton: {fileID: 4764412586051488068}
   StoryTutorials: []

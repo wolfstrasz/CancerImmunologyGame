@@ -30,10 +30,18 @@ namespace ImmunotherapyGame.UI.TopOverlay
 		}
 
 
-        public void Animate()
+        public void Animate(bool shouldAnimate)
 		{
-            gameObject.SetActive(true);
-            anim.SetTrigger("Pinged");
+            if (shouldAnimate)
+			{
+                gameObject.SetActive(true);
+                anim.SetTrigger("Pinged");
+            }
+            else
+			{
+                anim.SetTrigger("Opened");
+            }
+
 		}
 
 		public void OnPointerClick(PointerEventData eventData)

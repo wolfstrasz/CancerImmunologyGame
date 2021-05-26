@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.UI;
+using ImmunotherapyGame.GameManagement;
 
 using UnityEngine.InputSystem;
 
@@ -11,15 +12,13 @@ namespace ImmunotherapyGame.Tutorials
 	public class TutorialManager : Singleton<TutorialManager>
 	{
 
-		[SerializeField]
-		private InterfaceControlPanel interfacePanel = null;
 		// Input handling
 		private PlayerControls playerControls;
 		private InputAction SkipAction = null;
 
 		[Header("UI Elements Linking")]
 		[SerializeField]
-		private GameObject tutorialPanel = null;
+		private InterfaceControlPanel textDisplayPanel = null;
 		[SerializeField]
 		private TMP_Text tutorialTxt = null;
 		[SerializeField]
@@ -30,7 +29,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		internal delegate void OnSkipDelegate();
 		internal OnSkipDelegate onSkipDelegate;
-		internal bool IsGameplayPaused => interfacePanel.IsOpened;
+		internal bool IsGameplayPaused => textDisplayPanel.IsOpened;
 
 		// Protected methods
 		protected override void Awake()
@@ -59,13 +58,13 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			playerControls.Enable();
 			SkipAction.started += OnSkipPressed;
-			interfacePanel.onCloseInterface += OnClosePauseInterfacePanel;
+			textDisplayPanel.onCloseInterface += OnClosePauseInterfacePanel;
 		}
 
 		protected void OnDisable()
 		{
 			SkipAction.started -= OnSkipPressed;
-			interfacePanel.onCloseInterface -= OnClosePauseInterfacePanel;
+			textDisplayPanel.onCloseInterface -= OnClosePauseInterfacePanel;
 		}
 
 
@@ -93,17 +92,10 @@ namespace ImmunotherapyGame.Tutorials
 		}
 
 	
-		// Internal methods for text displaying
-		internal void HideText()
-		{
-			skipTextButton.SetActive(false);
-			tutorialPanel.SetActive(false);
-		}
-
 		internal void DisplayText(string text)
 		{
 			tutorialTxt.text = text;
-			tutorialPanel.SetActive(true);
+			textDisplayPanel.Open();
 		}
 
 		internal void DisplaySkipButton()
@@ -111,23 +103,12 @@ namespace ImmunotherapyGame.Tutorials
 			skipTextButton.SetActive(true);
 		}
 
-
-		// Event requests gameplay pause
-		internal void OpenPauseInterfacePanel()
-		{
-			interfacePanel.Open();
-		}
-
-
-		internal void ClosePauseIntefacePanel()
-		{
-			interfacePanel.Close();
-		}
-
 		public void OnSkipPressed(InputAction.CallbackContext context)
 		{
 			if (skipTextButton.activeInHierarchy)
-				interfacePanel.Close();
+			{
+				textDisplayPanel.Close();
+			}
 		}
 
 		// Inteface Object callbacks
@@ -135,9 +116,24 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (onSkipDelegate != null)
 			{
+				skipTextButton.SetActive(false);
 				onSkipDelegate();
 			}
 		}
+
+		// Event requests gameplay pause
+		internal void RequestPause()
+		{
+			GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, gameObject);
+		}
+
+		internal void RequestUnpause()
+		{
+			GameManager.Instance.RequestGameStateUnpause(gameObject);
+		}
+
+
+
 
 	}
 

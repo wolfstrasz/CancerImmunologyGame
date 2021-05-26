@@ -44,6 +44,8 @@ namespace ImmunotherapyGame
 
 			internal void AddState(GameState state)  // Push new on stack
 			{
+				Debug.Log("GSC: Add new state " + state.ToString());
+
 				if (activeState != null)
 					stateHistory.Push(activeState);
 				activeState = state;
@@ -57,12 +59,15 @@ namespace ImmunotherapyGame
 				pauseStateCallers.Clear();
 
 				// Assign new state
+				Debug.Log("GSC: Set new state " + state.ToString());
 				activeState = state;
 				activeState.OnStateEnter();
 			}
 
 			internal bool AddPauseState(GameObject caller, GameState state)
 			{
+				Debug.Log("GSC: Add new pause state request from: " + caller.name);
+
 				AddState(state);
 				pauseStateCallers.Push(caller);
 				return true;
@@ -70,24 +75,25 @@ namespace ImmunotherapyGame
 
 			internal bool RemovePauseState (GameObject caller)
 			{
+				Debug.Log("GSC: Remove pause state request from: " + caller.name);
+
 				if (caller == pauseStateCallers.Peek())
 				{
 					if (pauseStateCallers.Count <= 0)
 					{
-						Debug.LogWarning("StackedFSM.RemovePauseState: State machine has an empty record of pause callers. Cannot free pause state requested from: " + caller.name);
-						pauseStateCallers.Pop();
+						Debug.LogWarning("GSC: State machine has an empty record of pause callers. Cannot free pause state requested from: " + caller.name);
 						return false;
 					}
 					return RemoveCurrentState(caller.name);
 				
 				}
-				Debug.LogWarning("StackedFSM.RemovePauseStat: Caller requesting to free pause is not the current owner");
+				Debug.LogWarning("GCS: Caller requesting to free pause is not the current owner. Owner: " + pauseStateCallers.Peek().name);
 				return false;
 			}
 
 			internal bool RemoveCurrentState(string callerName) // Removes the state and continues with the previous state
 			{
-				Debug.Log("StackedFSM.RemoveCurrentState() requested by: " + callerName);
+				Debug.Log("GSC: remove current state accepted for: " + callerName);
 				if (stateHistory.Count <= 0)
 				{
 					// On reaching this error means that your State machine will have had no STATE to exist in
@@ -97,6 +103,9 @@ namespace ImmunotherapyGame
 
 				activeState.OnStateExit();
 				activeState = stateHistory.Pop();
+				Debug.Log("GSC: returning to state " + activeState.ToString());
+				activeState.OnStateReEnter();
+				pauseStateCallers.Pop();
 				return true;
 			}
 
