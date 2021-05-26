@@ -10,6 +10,8 @@ namespace ImmunotherapyGame.UI
     public class LevelSelectScreen : Singleton<LevelSelectScreen>
     {
         [SerializeField]
+        private InterfaceControlPanel panel = null;
+        [SerializeField]
         private LevelData levelData = null;
         [SerializeField]
         private GameObject horizontalLayoutPrefab = null;
@@ -72,7 +74,7 @@ namespace ImmunotherapyGame.UI
         }
     
 
-        private void RefreshOptions()
+        private void RefreshViews()
 		{
             foreach (var btn in levelSelectButtons)
             {
@@ -136,6 +138,15 @@ namespace ImmunotherapyGame.UI
                 Instantiate(emptyItemPrefab, row);
             }
 
+
+            // Add initial button 
+
+            foreach (var btn in levelSelectButtons)
+			{
+                panel.nodesToListen.Add(btn);
+			}
+
+           // panel.initialControlNode = levelSelectButtons[0];
             initialised = true;
         }
 
@@ -145,18 +156,16 @@ namespace ImmunotherapyGame.UI
             if (!initialised)
             {
                 AddOptions();
-   
             }
 
-            RefreshOptions();
+            RefreshViews();
+            panel.Open();
 
-            gameObject.SetActive(true);
-            EventSystem.current.SetSelectedGameObject(levelSelectButtons[0].gameObject);
 		}
 
         public void Close()
 		{
-            gameObject.SetActive(false);
-		}
+            panel.Close();
+        }
 	}
 }

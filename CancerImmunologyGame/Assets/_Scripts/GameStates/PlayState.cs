@@ -17,7 +17,7 @@ namespace ImmunotherapyGame
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.Initialise();
 				PlayerController.Instance.Initialise();
-				TutorialManager.Instance.Initialise();
+				TutorialManager.Instance.LoadLevelTutorials();
 			}
 
 			internal override void OnStateExit()

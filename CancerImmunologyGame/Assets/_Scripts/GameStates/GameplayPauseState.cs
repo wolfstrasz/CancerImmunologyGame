@@ -1,4 +1,5 @@
-﻿using ImmunotherapyGame.Tutorials;
+﻿using UnityEngine;
+using ImmunotherapyGame.Tutorials;
 
 namespace ImmunotherapyGame
 {
@@ -7,7 +8,6 @@ namespace ImmunotherapyGame
 		public class GameplayPauseState : GameState
 		{
 			public GameplayPauseState(GameStateController owner) : base(owner) { }
-
 
 			internal override void OnFixedUpdate()
 			{

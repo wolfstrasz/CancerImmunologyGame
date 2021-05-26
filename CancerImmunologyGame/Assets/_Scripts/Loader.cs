@@ -9,7 +9,8 @@ using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.LevelManagement;
 using ImmunotherapyGame.GameManagement;
 using ImmunotherapyGame.CellpediaSystem;
-
+using ImmunotherapyGame.UI;
+using ImmunotherapyGame.UI.TopOverlay;
 
 namespace ImmunotherapyGame.Loader
 {
@@ -28,6 +29,7 @@ namespace ImmunotherapyGame.Loader
 
 		private IEnumerator InitialiseManagers()
 		{
+			InterfaceManager.Instance.Initialise();
 			GlobalGameData.dataManagers = new List<IDataManager>(3);
 
 			// Load Settings
@@ -50,6 +52,11 @@ namespace ImmunotherapyGame.Loader
 			Cellpedia.Instance.Initialise();
 			GlobalGameData.dataManagers.Add(Cellpedia.Instance);
 
+			// Load UIs
+			TopOverlayUI.Instance.Initialise();
+			PauseMenu.Instance.Initialise();
+
+			// Update
 			InitialisationHasFinished = true;
 			intro.LoadingFinished = true;
 			Debug.Log("Loader: Loading finished");

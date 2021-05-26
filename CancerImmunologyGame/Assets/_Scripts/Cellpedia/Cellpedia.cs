@@ -3,7 +3,7 @@ using UnityEngine;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
-using ImmunotherapyGame.UI;
+using ImmunotherapyGame.UI.TopOverlay;
 
 namespace ImmunotherapyGame.CellpediaSystem
 {
@@ -34,7 +34,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		[Header("Game UI")]
 		[SerializeField]
-		private InGameUIButtonData inGameUIButtonData = null;
+		private TopOverlayButtonData inGameUIButtonData = null;
 
 
 		// Used by Cellpedia popups
@@ -68,13 +68,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnEnable()
 		{
 			inGameUIButtonData.onOpenMenu += OpenView;
-			inGameUIButtonData.onCloseMenu += CloseView;
 		}
 
 		private void OnDisable()
 		{
 			inGameUIButtonData.onOpenMenu -= OpenView;
-			inGameUIButtonData.onCloseMenu -= CloseView;
 		}
 
 		// UI Button callbacks

@@ -99,16 +99,11 @@ namespace ImmunotherapyGame.LevelManagement
 		public override void OnPointerExit(PointerEventData eventData)
 		{
 		}
+
 		public void OnMove(AxisEventData eventData)
 		{
             LevelSelectScreen.Instance.SelectObjectOnButtonMove(eventData.moveDir, buttonID);
 		}
 
-		public override void OnCancel(BaseEventData eventData)
-		{
-            LevelSelectScreen.Instance.Close();
-            OnDeselect(eventData);
-            base.OnCancel(eventData);
-		}
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -15,7 +14,7 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldPauseGameplay)
 			{
-				GameManager.Instance.RequestGameplayPause();
+				TutorialManager.Instance.RequestGameplayPause();
 			}
 
 			OnStartEvent();
@@ -25,7 +24,7 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldPauseGameplay)
 			{
-				GameManager.Instance.RequestGameplayUnpause(gameObject.name);
+				TutorialManager.Instance.RequestGameplayUnpause();
 			}
 
 			OnEndEvent();

@@ -46,7 +46,7 @@ namespace ImmunotherapyGame
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.Initialise();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
-					TutorialManager.Instance.Initialise();
+					TutorialManager.Instance.LoadLevelTutorials();
 			}
 
 			internal override void OnStateExit()

@@ -6,22 +6,30 @@ namespace ImmunotherapyGame.UI
 {
     public class MainMenu : MonoBehaviour
     {
-		[SerializeField]
-		private GameObject newGamePrompt = null;
+		[Header("Main Menu")]
 		[SerializeField]
 		private GameObject continueButtonObj = null;
 
+		[SerializeField]
+		private InterfaceControlPanel mainMenuPanel = null;
+		[SerializeField]
+		private InterfaceControlPanel newGamePrompt = null;
+		[SerializeField]
+		private InterfaceControlPanel creditsPanel = null;
 
 		private void Awake()
 		{
 			continueButtonObj.SetActive(PlayerPrefs.HasKey("GameInProgress"));
+			mainMenuPanel.Open();
 		}
 
+		// Main menu buttons functionality
 		public void TryToStartNewGame()
 		{
 			if (continueButtonObj.activeInHierarchy)
 			{
-				newGamePrompt.SetActive(true);
+
+				newGamePrompt.Open();
 			}
 			else
 			{
@@ -31,6 +39,7 @@ namespace ImmunotherapyGame.UI
 
 		public void StartNewGame()
 		{
+
 			// Reset data
 			foreach (IDataManager manager in GlobalGameData.dataManagers)
 			{
@@ -44,14 +53,13 @@ namespace ImmunotherapyGame.UI
 
 			PlayerPrefs.SetInt("GameInProgress", 1);
 
-			// Open Level Selection
+			newGamePrompt.Close();
 			LevelSelectScreen.Instance.Open();
 		}
 
 
 		public void ContinueGame()
 		{
-			// Open Level Selection
 			LevelSelectScreen.Instance.Open();
 		}
 

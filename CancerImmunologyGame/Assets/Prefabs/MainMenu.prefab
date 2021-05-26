@@ -91,7 +91,6 @@ GameObject:
   - component: {fileID: 4483727589396405831}
   - component: {fileID: 4483727589396405824}
   - component: {fileID: 4483727589396405830}
-  - component: {fileID: 8543224655393630582}
   m_Layer: 5
   m_Name: MainMenu
   m_TagString: Untagged
@@ -232,27 +231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d4d48f2e61c2d42a9eed021dc8c340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGamePrompt: {fileID: 4483727590364956486}
   continueButtonObj: {fileID: 5397122256522053766}
---- !u!114 &8543224655393630582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4483727589396405839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b353ede6f01dd4f4faa40959e04336c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panelsToClose:
-  - {fileID: 4483727589935661711}
-  - {fileID: 4483727590364956486}
-  nodesToListen:
-  - {fileID: 6605203517004532923}
-  - {fileID: 7744851748961660399}
-  - {fileID: 3108374386922993970}
+  mainMenuPanel: {fileID: 486648938067200565}
+  newGamePrompt: {fileID: 911601089851650357}
+  creditsPanel: {fileID: 405976406791645604}
 --- !u!1 &4483727589781168891
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,8 +429,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4483727589935661710}
   - component: {fileID: 4483727589935661708}
-  - component: {fileID: 183554991971355157}
   - component: {fileID: 3180988568099280076}
+  - component: {fileID: 405976406791645604}
   m_Layer: 5
   m_Name: CreditsPanel
   m_TagString: Untagged
@@ -484,20 +466,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4483727589935661711}
   m_CullTransparentMesh: 1
---- !u!114 &183554991971355157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4483727589935661711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8972454a5b32d6148aeb9e43bce5b5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialiserGameObject: {fileID: 723640862492760601}
-  initialiserNode: {fileID: 6605203517004532923}
 --- !u!114 &3180988568099280076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +496,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &405976406791645604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483727589935661711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  initialControlNode: {fileID: 6605203517004532923}
+  nodesToListen:
+  - {fileID: 6605203517004532923}
 --- !u!1 &4483727590083980191
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,8 +597,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4483727590364956485}
   - component: {fileID: 4483727590364956603}
-  - component: {fileID: 1500467212774556870}
   - component: {fileID: 2081171244813470873}
+  - component: {fileID: 911601089851650357}
   m_Layer: 5
   m_Name: NewGamePromptBlocker
   m_TagString: Untagged
@@ -650,20 +634,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4483727590364956486}
   m_CullTransparentMesh: 1
---- !u!114 &1500467212774556870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4483727590364956486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8972454a5b32d6148aeb9e43bce5b5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialiserGameObject: {fileID: 4241189890950036301}
-  initialiserNode: {fileID: 7744851748961660399}
 --- !u!114 &2081171244813470873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,6 +664,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &911601089851650357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4483727590364956486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
+  initialControlNode: {fileID: 7744851748961660399}
+  nodesToListen:
+  - {fileID: 7744851748961660399}
+  - {fileID: 3108374386922993970}
 --- !u!1 &4483727590692404026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1008,8 +995,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5610702155260642187}
-  - component: {fileID: 2546916869279253710}
   - component: {fileID: 3052100089257277644}
+  - component: {fileID: 486648938067200565}
   m_Layer: 5
   m_Name: MainMenuBlocker
   m_TagString: Untagged
@@ -1037,20 +1024,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2546916869279253710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8160731084663704196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8972454a5b32d6148aeb9e43bce5b5a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialiserGameObject: {fileID: 723293407353826094}
-  initialiserNode: {fileID: 6604847265374092684}
 --- !u!222 &3052100089257277644
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1059,6 +1032,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8160731084663704196}
   m_CullTransparentMesh: 1
+--- !u!114 &486648938067200565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8160731084663704196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  initialControlNode: {fileID: 6604847265374092684}
+  nodesToListen: []
 --- !u!1 &9032391777156275974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1143,12 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1171,7 +1164,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 4483727590797366272}
+      objectReference: {fileID: 4483727590364956486}
+    - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -1185,12 +1183,22 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ImmunotherapyGame.UI.MainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1369,22 +1377,22 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4483727589935661711}
+      objectReference: {fileID: 405976406791645604}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: Open
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ImmunotherapyGame.UI.InterfaceControlPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1658,12 +1666,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f09489be23d36e46a429cecfce7948d, type: 3}
---- !u!224 &3135452720118368604 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2165760759489432657}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6349133445901680 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
@@ -1676,6 +1678,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3135452720118368604 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2165760759489432657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4464407873606508184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1825,6 +1833,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f09489be23d36e46a429cecfce7948d, type: 3}
+--- !u!1 &5397122256522053766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
+    type: 3}
+  m_PrefabInstance: {fileID: 4464407873606508184}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2588477016348065721 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
@@ -1840,12 +1854,6 @@ MonoBehaviour:
 --- !u!224 &610744641140874133 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 4464407873606508184}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5397122256522053766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
     type: 3}
   m_PrefabInstance: {fileID: 4464407873606508184}
   m_PrefabAsset: {fileID: 0}
@@ -2021,22 +2029,22 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4483727590364956486}
+      objectReference: {fileID: 911601089851650357}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ImmunotherapyGame.UI.InterfaceControlPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -2162,12 +2170,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f09489be23d36e46a429cecfce7948d, type: 3}
---- !u!1 &4241189890950036301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5605036406734990675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8666078688807954526 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
@@ -2180,7 +2182,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5605036406734990675}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4241189890950036301}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -2192,7 +2194,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 5605036406734990675}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4241189890950036301}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
@@ -2233,22 +2235,22 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4483727589935661711}
+      objectReference: {fileID: 405976406791645604}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ImmunotherapyGame.UI.InterfaceControlPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -2374,19 +2376,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f09489be23d36e46a429cecfce7948d, type: 3}
---- !u!1 &723640862492760601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 9014041316594109447}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6605203517004532923 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
     type: 3}
   m_PrefabInstance: {fileID: 9014041316594109447}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723640862492760601}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}
@@ -2398,7 +2394,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 9014041316594109447}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723640862492760601}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -2572,19 +2568,13 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9014810984596585776}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &723293407353826094 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8580110826644428318, guid: 6f09489be23d36e46a429cecfce7948d,
-    type: 3}
-  m_PrefabInstance: {fileID: 9014810984596585776}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6604847265374092684 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2788338724687970492, guid: 6f09489be23d36e46a429cecfce7948d,
     type: 3}
   m_PrefabInstance: {fileID: 9014810984596585776}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723293407353826094}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9ac1a8c39320d841b4684f4ef3b8b78, type: 3}

@@ -14,11 +14,9 @@ namespace ImmunotherapyGame.Core
     public class SettingsManager : Singleton<SettingsManager>
     {
         [SerializeField]
-        private GameObject panel = null;
+        private InterfaceControlPanel panel = null;
         [SerializeField]
         private AudioMixer audioMixer = null;
-        [SerializeField]
-        private List<UIMenuNode> cancelNodes = null;
 
         [Header("UI Audio Control")]
         [SerializeField]
@@ -101,7 +99,6 @@ namespace ImmunotherapyGame.Core
             inputDropdown.CurrentValue = currentSchemeIndex;
             //Debug.Log("Select input option: " + inputDropdown.CurrentValue);
             inputDropdown.RefreshShownValue();
-            panel.SetActive(false);
 
 
             LoadVolumeSettings();
@@ -109,6 +106,7 @@ namespace ImmunotherapyGame.Core
             LoadInputSettings(currentSchemeIndex);
 
             ApplyChangedSettings();
+            panel.gameObject.SetActive(false);
         }
 
         public void ApplyChangedSettings()
@@ -278,7 +276,7 @@ namespace ImmunotherapyGame.Core
         public void Open()
 		{
             ReloadValues();
-            panel.SetActive(true);
+            panel.Open();
 		}
 
         private void ReloadValues()
