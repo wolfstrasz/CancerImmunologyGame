@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using ImmunotherapyGame.Cancers;
-using ImmunotherapyGame.Player;
-using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Tutorials
 {
@@ -36,7 +33,6 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldFocus)
 			{
-				Vector3 location = PlayerController.Instance.gameObject.transform.position;
 				GameCamera2D.Instance.SetFocusTarget(focusTarget, instantFocus);
 			}
 

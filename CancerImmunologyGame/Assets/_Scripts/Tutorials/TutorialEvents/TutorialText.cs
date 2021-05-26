@@ -19,17 +19,19 @@ namespace ImmunotherapyGame.Tutorials
 		private bool canSkipTxt = false;
 		[SerializeField]
 		private float waitBeforeSkip = 0.0f;
-		private bool allowSkip = false;
 
 		[Header("Timing")]
 		[SerializeField]
-		private bool timed = false;
+		private bool isTimed = false;
 		[SerializeField]
 		private float timeBeforeFinish = 0.0f;
-		private bool allowFinish = false;
 
-		protected override void OnEndEvent()
+		private bool isSkipped = false;
+		private bool timedOut = false;
+
+		protected override void OnEndEvent() 
 		{
+			TutorialManager.Instance.onSkipDelegate -= Skip;
 			TutorialManager.Instance.HideText();
 		}
 
@@ -41,39 +43,41 @@ namespace ImmunotherapyGame.Tutorials
 			}
 
 			if (canSkipTxt)
+			{
+				TutorialManager.Instance.onSkipDelegate += Skip;
 				StartCoroutine(WaitBeforeSkipButton());
+			}
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			if (timed)
+			if (isTimed)
 			{
-				Debug.LogWarning("HELLO TIMED");
-
 				timeBeforeFinish -= Time.deltaTime;
-				if (timeBeforeFinish <= 0f)
-				{
-					allowFinish = true;
-				}
+				timedOut = timeBeforeFinish <= 0f;
 			}
 
-			if (allowSkip)
-			{
-				if (Input.GetKeyDown(KeyCode.Space))
-					return true;
-				return false;
-			}
-
-			if (allowFinish)
-				return true;
-			return false;
+			return (timedOut || isSkipped);
 		}
 
 		IEnumerator WaitBeforeSkipButton()
 		{
 			yield return new WaitForSecondsRealtime(waitBeforeSkip);
-			allowSkip = true;
-			TutorialManager.Instance.DisplaySkipButton();
+			TutorialManager.Instance.DisplaySkipButton = true;
+		}
+
+		internal void Skip()
+		{
+			if (!shouldPauseGameplay)
+			{
+				isSkipped = true;
+			} else
+			{
+				TutorialManager.Instance.RequestGameplayUnpause();
+
+				isSkipped = TutorialManager.Instance.IsGameplayUnpaused;
+				shouldPauseGameplay = !isSkipped;
+			}
 		}
 	}
 }
