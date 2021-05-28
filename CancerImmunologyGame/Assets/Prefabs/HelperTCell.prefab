@@ -47,21 +47,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab0812730e0ffed4ab43a0f3c2f38b62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  render: {fileID: 0}
-  animator: {fileID: 0}
-  bodyBlocker: {fileID: 0}
-  maxHealth: 0
-  health: 0
-  maxEnergy: 0
-  energy: 0
+  render: {fileID: 4702413555579790949}
+  animator: {fileID: 6287359040158972595}
+  bodyBlocker: {fileID: 3034418294530964983}
+  cellType: {fileID: 11400000, guid: 52a260b33337cee4788f0892ac777b82, type: 2}
   healthBar: {fileID: 0}
-  isDying: 0
   hasSpotBeenReserved: 0
   shouldHeal: 0
   particlePrefab: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
     type: 3}
   timeBetweenSpawns: 1.5
-  particlesLifetime: 1
+  range: 1
   timeBeforeNextSpawn: 0
   spreadAngleInDegrees: 60
   bookingSpotDistance: 1
@@ -71,7 +67,6 @@ MonoBehaviour:
   timeToPassForFullRotation: 5
   patrolPoints: []
   patrolIndex: 0
-  speed: 3
 --- !u!95 &6287359040158972595
 Animator:
   serializedVersion: 3

@@ -12,63 +12,32 @@ namespace ImmunotherapyGame
 		public Transform startPosition = null;
 		public Transform endPosition = null;
 
-		public override bool isImmune => isDying;
+		public override bool isImmune => isDying || !bodyBlocker.enabled;
+
 
 		private void Awake()
 		{
+			bodyBlocker.enabled = false;
 			healthBar.MaxHealth = maxHealth;
+			healthBar.owner = this;
+
 		}
 
-		private void Update()
+		private void FixedUpdate()
 		{
-			if (timePassed <  timeToReach)
+			if (timePassed < timeToReach)
 			{
-				timePassed += Time.deltaTime;
+				timePassed += Time.fixedDeltaTime;
 				if (timePassed > timeToReach)
 				{
 					timePassed = timeToReach;
-					//transform.parent = endPosition;
+					bodyBlocker.enabled = true;
 				}
 
 				transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timePassed / timePassed);
 			}
-
-	
-			
 		}
-
-		public override void ExhaustCell(float amount)
-		{
-			Debug.LogWarning("Trying to exhaust Matrix Cell but it is not implemented");
-		}
-
-		public override void HitCell(float amount)
-		{
-			if (isImmune) return;
-			health -= amount;
-			healthBar.Health = health;
-
-			if (health <= 0.0f)
-			{
-				animator.Play("Destroyed");
-				// Make destruction sound
-				isDying = true;
-
-			}
-			else if (health * 3f <= maxHealth)
-			{
-				animator.Play("AlmostDestroyed");
-				// Make destruction sound
-			}
-			else if (health * 1.5f <= maxHealth)
-			{
-				animator.Play("Damaged");
-				// Make destruction sound
-
-			}
-
-		}
-
+		
 		public void SetMatrixData(Transform targetPosition, Transform startPosition, int SortLayerID)
 		{
 			this.startPosition = startPosition;
@@ -80,5 +49,32 @@ namespace ImmunotherapyGame
 		{
 			Destroy(gameObject);
 		}
-    }
+
+
+		protected override void LateUpdate()
+		{
+			base.LateUpdate();
+
+			if (health == 0)
+				return;
+
+			if (health * 3f <= maxHealth)
+			{
+				animator.Play("AlmostDestroyed");
+				// Make destruction sound
+			}
+			else if (health * 1.5f <= maxHealth)
+			{
+				animator.Play("Damaged");
+				// Make destruction sound
+			}
+		}
+
+		protected override void OnCellDeath()
+		{
+			animator.Play("Destroyed");
+			// Make destruction sound
+		}
+
+	}
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Cancers
 {
-	public class CAFCell : EvilCell
+	public class CAFCell : Cell
 	{
 
 		[Header("CAF Cell")]
@@ -21,12 +21,13 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField]
 		internal Cancer cancerOwner = null;
 
-		public override bool isImmune => isDying;
 
 		void Awake()
 		{
 			healthBar.MaxHealth = maxHealth;
 			healthBar.Health = maxHealth;
+			healthBar.owner = this;
+
 		}
 
 		public void OnUpdate()
@@ -70,10 +71,10 @@ namespace ImmunotherapyGame.Cancers
 			return null;
 		}
 
-
-		protected override void OnDeath()
+		protected override void OnCellDeath()
 		{
 			animator.SetTrigger("Death");
 		}
+
 	}
 }

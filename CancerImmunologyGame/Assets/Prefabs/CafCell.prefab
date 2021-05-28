@@ -611,12 +611,8 @@ MonoBehaviour:
   render: {fileID: 6082051929947081193}
   animator: {fileID: 3018821964909077380}
   bodyBlocker: {fileID: 6204581631179808506}
-  maxHealth: 100
-  health: 100
-  maxEnergy: 100
-  energy: 100
+  cellType: {fileID: 11400000, guid: 7065388571043304ebb9fac9e0752db1, type: 2}
   healthBar: {fileID: 6795614192915132712}
-  isDying: 0
   sense: {fileID: 5451066785769465670}
   matrixPrefab: {fileID: 4851716123014601265, guid: 327775f6947bc154a9ad8867ba8a1cec,
     type: 3}

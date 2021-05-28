@@ -5,7 +5,7 @@ using PathCreation;
 
 namespace ImmunotherapyGame
 {
-    public class RegulatoryCell : MonoBehaviour
+    public class RegulatoryCell : Cell
     {
         public float shiftSpeed = 0.5f;
         public float energyDmg = -10.0f;
@@ -15,7 +15,6 @@ namespace ImmunotherapyGame
 
         public float distanceTravelled = 0.0f;
         public float maxLengthDist = 0.0f;
-        public float speed = 1.0f;
 
         ////////////////////////////////
         public bool isShooting = false;
@@ -25,9 +24,6 @@ namespace ImmunotherapyGame
         [SerializeField]
         private const float bumpcooldown = 2.0f;
         private float cooldown = 2.0f;
-
-        [SerializeField]
-        SpriteRenderer render = null;
 
         public GameObject particleToShoot = null;
 
@@ -97,11 +93,12 @@ namespace ImmunotherapyGame
 
                 float rotation = Random.Range(0, 360f);
                 Vector3 spreadVector = new Vector3(2.5f, 0.0f, 0.0f);
+                float range = 2.5f;
                 spreadVector = Quaternion.Euler(0.0f, 0.0f, rotation) * spreadVector;
 
                 GameObject particle = Instantiate(particleToShoot, transform.position, Quaternion.identity);
                 RegulatoryParticle rp = particle.GetComponent<RegulatoryParticle>();
-                rp.Initialise(transform.position + spreadVector);
+                rp.Initialise(spreadVector.normalized, range);
             }
         }
 
@@ -144,7 +141,7 @@ namespace ImmunotherapyGame
                 coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
             }
 
-            target.ExhaustCell(Mathf.Abs(energyDmg));
+            target.ApplyEnergyAmount(-Mathf.Abs(energyDmg));
             //PlayerUI.Instance.AddExhaustion(exhaust_dmg);
             yield return new WaitForSeconds(0.1f);
             StartCoroutine(StopBump());
@@ -170,6 +167,11 @@ namespace ImmunotherapyGame
             cooldown = bumpcooldown;
             yield return new WaitForSeconds(0.1f);
         }
-    }
+
+		protected override void OnCellDeath()
+		{
+			
+		}
+	}
 
 }

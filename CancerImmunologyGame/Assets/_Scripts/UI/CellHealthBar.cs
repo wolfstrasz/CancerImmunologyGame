@@ -18,6 +18,32 @@ namespace ImmunotherapyGame
 		[SerializeField]
 		private Image image = null;
 
+
+		public Cell owner
+		{
+			get
+			{
+				return owner;
+			}
+			set
+			{
+				owner = value;
+				if (autoHide)
+				{
+					owner.onUpdateHealth = UpdateHealthbar;
+				}
+			}
+		}
+
+		public void UpdateHealthbar()
+		{
+			slider.value = owner.Health;
+			if (slider.maxValue != owner.Health)
+			{
+				image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+			}
+		}
+
 		public float MaxHealth
 		{
 			get => slider.maxValue;
@@ -30,18 +56,12 @@ namespace ImmunotherapyGame
 			set
 			{
 				slider.value = value;
-				if (autoHide && value != slider.maxValue)
-				{
-					image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-				}
-
 			}
 
 		}
 
 		void Update()
 		{
-
 			if (autoHide)
 			{
 				float alpha = image.color.a;

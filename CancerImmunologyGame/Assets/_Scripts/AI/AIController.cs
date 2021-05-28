@@ -66,8 +66,8 @@ namespace ImmunotherapyGame.AI
 
 		[Header("Interface Data (Cancer Attacking) (Read Only)")]
 		[SerializeField]
-		private EvilCell targetedEvilCell = null;
-		public EvilCell TargetedEvilCell { get => targetedEvilCell; set => targetedEvilCell = value; }
+		private Cell targetedEvilCell = null;
+		public Cell TargetedEvilCell { get => targetedEvilCell; set => targetedEvilCell = value; }
 
 		[Header("InterfaceData (Cancer Interacting) (Read Only)")]
 		[SerializeField]
@@ -86,7 +86,6 @@ namespace ImmunotherapyGame.AI
 			pathSeeker = GetComponent<Seeker>();
 			InitialiseBehaviourTree();
 			controlledCell.controller = this;
-			controlledCell.Sense.controller = this;
 
 			initialised = true;
 		}

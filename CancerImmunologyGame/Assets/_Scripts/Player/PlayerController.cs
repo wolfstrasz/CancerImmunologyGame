@@ -21,15 +21,6 @@ namespace ImmunotherapyGame.Player
 		private Transform crosshair = null;
 		internal Quaternion CrosshairRotation { get; set; }
 
-		[Header("AutoAim")]
-		[SerializeField]
-		private GameObject autoAimerPrefab = null;
-		[SerializeField]
-		private bool useAutoAim = false;
-		[SerializeField]
-		private PlayerAutoAimer autoAimer = null;
-
-
 		[Header("Debug (Read Only)")]
 		[SerializeField]
 		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
@@ -45,18 +36,10 @@ namespace ImmunotherapyGame.Player
 		{
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.SetPlayerInfo(kc);
-			kc.Sense.controller = this;
 			kc.controller = this;
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;
 			CrosshairRotation = Quaternion.identity;
-			// Auto aiming
-			useAutoAim = GlobalGameData.autoAim;
-			if (useAutoAim && autoAimer == null)
-			{
-				autoAimer = Instantiate(autoAimerPrefab, transform).GetComponent<PlayerAutoAimer>();
-				autoAimer.owner = this;
-			}
 		}
 
 
@@ -92,8 +75,6 @@ namespace ImmunotherapyGame.Player
 
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;
-			if (autoAimer != null)
-				autoAimer.OnUpdate();
 			crosshairCanvas.transform.rotation = CrosshairRotation;
 			PlayerUI.Instance.OnUpdate();
 
@@ -170,8 +151,6 @@ namespace ImmunotherapyGame.Player
 				}
 			}
 
-			kc.AddHealth(kc.maxHealth);
-			kc.AddEnergy(kc.maxEnergy);
 			kc.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 

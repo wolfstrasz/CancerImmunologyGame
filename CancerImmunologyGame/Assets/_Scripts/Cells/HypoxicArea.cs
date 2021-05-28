@@ -42,7 +42,7 @@ namespace ImmunotherapyGame
 
 			foreach (KillerCell cell in killerCells)
 			{
-				cell.HitCell(dmg);
+				cell.ApplyHealthAmount(-Mathf.Abs(dmg));
 			}
 		}
 

@@ -20,7 +20,7 @@ namespace ImmunotherapyGame
 		[SerializeField]
 		private float timeBetweenSpawns = 2.0f;
 		[SerializeField]
-		private float particlesLifetime = 1f;
+		private float range = 1f;
 		[SerializeField]
 		private float timeBeforeNextSpawn = 0.0f;
 
@@ -45,15 +45,13 @@ namespace ImmunotherapyGame
 		private List<Transform> patrolPoints = new List<Transform>();
 		[SerializeField]
 		private int patrolIndex = 0;
-		[SerializeField]
-		private float speed = 2;
-
-		public override bool isImmune => true;
 
 		private bool initialised = false;
+		public override bool isImmune => true;
 
-		private void Start()
+		protected override void Start()
 		{
+			base.Start();
 			initialised = true;
 			GenerateBookingSpots();
 		}
@@ -64,8 +62,6 @@ namespace ImmunotherapyGame
 			if (!initialised) return;
 
 			FakeRotateBookingSpots();
-
-
 
 			timeBeforeNextSpawn -= Time.deltaTime;
 			if (timeBeforeNextSpawn < 0f)
@@ -81,7 +77,7 @@ namespace ImmunotherapyGame
 				{
 					Vector3 spawnDirection = (spot.transform.position - transform.position).normalized;
 					HelperCellParticle particle = Instantiate(particlePrefab, transform.position, Quaternion.identity).GetComponent<HelperCellParticle>();
-					particle.SetParticleData(spawnDirection, particlesLifetime);
+					particle.Shoot(spawnDirection, range);
 				}
 
 				// TODO: Add spawn sound;
@@ -211,15 +207,8 @@ namespace ImmunotherapyGame
 			}
 		}
 
-		public override void HitCell(float amount)
+		protected override void OnCellDeath()
 		{
-			Debug.LogWarning("Helper cell got hit but it is not implemented!");
-		}
-
-		public override void ExhaustCell(float amount)
-		{
-			Debug.LogWarning("Helper cell got hit but it is not implemented!");
-
 		}
 	}
 

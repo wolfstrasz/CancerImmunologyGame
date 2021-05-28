@@ -238,16 +238,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549a52dc58b2d8c439b10949adca8326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 7363393212739880087}
+  animator: {fileID: 7363393213812419701}
+  bodyBlocker: {fileID: 81269597679612959}
+  cellType: {fileID: 11400000, guid: 1354fec90caec264eae92cc474e7768a, type: 2}
+  healthBar: {fileID: 0}
   shiftSpeed: 0.5
   energyDmg: -10
   path: {fileID: 0}
   coll: {fileID: 7363393213812419706}
   distanceTravelled: 0
   maxLengthDist: 0
-  speed: 3
   isShooting: 0
   shootDelay: 2
-  render: {fileID: 7363393212739880087}
   particleToShoot: {fileID: 7457939708117967971, guid: 4825efb6d8d62ca4d8768ca64ec40332,
     type: 3}
   ScaleIncrease: 1.2

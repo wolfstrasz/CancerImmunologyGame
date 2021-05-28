@@ -11,8 +11,6 @@ namespace ImmunotherapyGame
 	{
 		[SerializeField]
 		private Rigidbody2D rb = null;
-		[SerializeField]
-		private KillerSense sense = null;
 
 		[Header("Attributes")]
 		[SerializeField]
@@ -71,14 +69,12 @@ namespace ImmunotherapyGame
 		private bool isInPowerUpAnimation = false;
 
 		// Public properties
-		public KillerSense Sense { get => sense; }
 		public float Range { get => normalAttackRange; }
 		public float Fov { get => normalAttackSpreadAngle; }
 		public float Health { get => health; set => health = value; }
 		public float Energy { get => energy; set => energy = value; }
 		public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 		public Quaternion MovementRotation { get => movementRotation; set => movementRotation = value; }
-		public override bool isImmune => isInPowerUpAnimation;
 
 		// Private proterties
 		private bool CannotUseNormalAttack => NormalAttackOnCooldown || isInPowerUpAnimation;
@@ -94,7 +90,7 @@ namespace ImmunotherapyGame
 			if (GlobalGameData.isInPowerUpMode)
 			{
 				float value = immunotherapyEnergyRegain * Time.deltaTime;
-				AddEnergy(value);
+				ApplyEnergyAmount(value);
 			}
 
 			if (NormalAttackOnCooldown)
@@ -144,52 +140,6 @@ namespace ImmunotherapyGame
 			return 1.0f - (maxEnergy - energy) / maxEnergy * exhaustEffectReduction;
 		}
 
-		// HEALTH
-		public void AddEnergy(float value)
-		{
-			energy += value;
-			if (energy >= maxEnergy)
-			{
-				energy = maxEnergy;
-			}
-		}
-
-		public override void HitCell(float amount)
-		{
-			if (isImmune) return;
-
-			health -= amount;
-			if (health <= 0.0f)
-			{
-				health = 0.0f;
-				controller.OnCellDeath();
-			}
-		}
-
-		// EXHAUSTION
-		public override void ExhaustCell(float amount)
-		{
-			if (GlobalGameData.isInPowerUpMode) return;
-			if (isImmune) return;
-
-			energy -= amount;
-			if (energy <= 0.0f)
-			{
-				energy = 0.0f;
-				controller.OnCellDeath();
-			}
-		}
-
-		public void AddHealth(float value)
-		{
-			health += value;
-			if (health > maxHealth)
-			{
-				health = maxHealth;
-				return;
-			}
-		}
-
 		public void Attack(Vector3 targetPosition)
 		{
 			float spread = 0.0f;
@@ -204,9 +154,17 @@ namespace ImmunotherapyGame
 			spread = Mathf.Lerp(Random.Range(-normalAttackSpreadAngle / 1.9f, normalAttackSpreadAngle / 1.9f), spread, Random.Range(0.2f, 0.8f));
 			//spread = Random.Range(-fov /2f, fov / 2f);
 			bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
-			var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f);
-			bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, normalAttackRange, color);
-			ExhaustCell(Mathf.Abs(normalAttackEnergyCost));
+
+			bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, normalAttackRange);
+
+			//var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f);
+			//if (GlobalGameData.isInPowerUpMode)
+			//{
+			//	bullet.GetComponent<KillerParticle>().SetMoreData(color, 2f);
+			//}
+			
+			
+			ApplyEnergyAmount(-Mathf.Abs(normalAttackEnergyCost));
 
 		}
 
@@ -236,7 +194,7 @@ namespace ImmunotherapyGame
 
 				// Find position to instantiate
 				PacParticle particle = Instantiate(specialAttackParticlePrefab, specialAttackSpawnTransform.position + direction * gapDistance, Quaternion.identity).GetComponent<PacParticle>();
-				particle.SetData(direction, specialAttackRange);
+				particle.Shoot(direction, specialAttackRange);
 			}
 			specialAttackDowntime = 0f;
 		}
@@ -260,6 +218,15 @@ namespace ImmunotherapyGame
 			animator.speed = 1.0f;
 		}
 
+		protected override void OnCellDeath()
+		{
+			controller.OnCellDeath();
+
+			ApplyHealthAmount(2 * maxHealth);
+			ApplyEnergyAmount(2 * maxEnergy);
+		}
+
+		public override bool isImmune => isInPowerUpAnimation || isDying;
 
 	}
 }

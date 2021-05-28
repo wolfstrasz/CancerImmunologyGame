@@ -147,7 +147,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2046459777060728080}
-  - {fileID: 2046459777672622294}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -272,15 +271,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   render: {fileID: 2046459777060728081}
   animator: {fileID: 2046459777261753809}
-  bodyBlocker: {fileID: 0}
-  maxHealth: 100
-  health: 100
-  maxEnergy: 100
-  energy: 100
+  bodyBlocker: {fileID: 2046459777261753808}
+  cellType: {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
   healthBar: {fileID: 0}
-  isDying: 0
   rb: {fileID: 2046459777261753813}
-  sense: {fileID: 2046459777672622295}
   movementSpeed: 4
   exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
@@ -301,66 +295,3 @@ MonoBehaviour:
   specialAttackCooldown: 10
   gapDistance: 0.4
   bulletAmount: 5
---- !u!1 &2046459777672622313
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2046459777672622294}
-  - component: {fileID: 2046459777672622292}
-  - component: {fileID: 2046459777672622295}
-  m_Layer: 9
-  m_Name: Sense
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2046459777672622294
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046459777672622313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2046459777261753811}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2046459777672622292
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046459777672622313}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.2
---- !u!114 &2046459777672622295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046459777672622313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 162432b7ffcbffe42ba9e7fc31415046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 2046459777990927748}
-  rangeCollider: {fileID: 2046459777672622292}
-  evilCellsInRange: []

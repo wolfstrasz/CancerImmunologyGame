@@ -238,19 +238,14 @@ MonoBehaviour:
   render: {fileID: 2707370824832365450}
   animator: {fileID: 6345655435669232103}
   bodyBlocker: {fileID: 2877328972284748953}
-  maxHealth: 80
-  health: 80
-  maxEnergy: 100
-  energy: 100
+  cellType: {fileID: 11400000, guid: 04569fb91e9f759478059a3c59bafcf2, type: 2}
   healthBar: {fileID: 3439508151896181579}
-  isDying: 0
   divisionBodyBlocker: {fileID: 482302453487780885}
   hypoxicArea: {fileID: 6835890743153242823}
   cancerOwner: {fileID: 0}
   rotationAngle: 0
   isInDivision: 0
   matrix: {fileID: 0}
-  matrixAttachmentPoint: {fileID: 3045021970876105005}
 --- !u!95 &6345655435669232103
 Animator:
   serializedVersion: 3

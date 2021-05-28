@@ -240,13 +240,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   render: {fileID: 7502233451923882394}
   animator: {fileID: 1558105866590039031}
-  bodyBlocker: {fileID: 0}
-  maxHealth: 6
-  health: 6
-  maxEnergy: 100
-  energy: 100
+  bodyBlocker: {fileID: 248959172395795517}
+  cellType: {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
   healthBar: {fileID: 7076382655458015579}
-  isDying: 0
   timeToReach: 1
   timePassed: 0
   startPosition: {fileID: 0}
