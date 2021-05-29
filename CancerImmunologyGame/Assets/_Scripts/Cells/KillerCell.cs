@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame
 {
@@ -15,9 +16,9 @@ namespace ImmunotherapyGame
 
 		[Header("Attributes")]
 		[SerializeField]
-		private float exhaustEffectReduction = 0.75f;
-		[SerializeField]
 		public float movementSpeed = 4.0f;
+		[SerializeField]
+		private float exhaustEffectReduction = 0.75f;
 		[SerializeField]
 		private float immunotherapySpeedMultiplier = 1.66f;
 		[SerializeField]
@@ -25,136 +26,111 @@ namespace ImmunotherapyGame
 
 		[Header("Normal Attack")]
 		[SerializeField]
-		private GameObject attackSpawnObject = null;
+		private GameObject normalAttackParticlePrefab = null;
 		[SerializeField]
-		private GameObject killerParticlePrefab = null;
+		private Transform normalAttackSpawnTransform = null;
+		[SerializeField]
+		private float normalAttackRange = 1.5f;
+		[SerializeField]
+		private float normalAttackSpreadAngle = 90.0f;
 		[SerializeField]
 		private float normalAttackEnergyCost = -7.5f;
 		[SerializeField]
-		private float attackCooldown = 0.2f;
-		private float attackDowntime = 0.0f;
-		private bool canAttack = true;
+		private float normalAttackCooldown = 0.2f;
+		[ReadOnly]
+		private float normalAttackDowntime = 0.0f;
 
+		[Header("Special Attack Attributes")]
 		[SerializeField]
-		private float range = 1.5f;
+		private GameObject specialAttackParticlePrefab = null;
 		[SerializeField]
-		private float fov = 90.0f;
+		private Transform specialAttackSpawnTransform = null;
+		[SerializeField]
+		private float specialAttackRange = 3;
+		[SerializeField]
+		private float specialAttackSpreadAngle = 35f;
+		[SerializeField]
+		private float specialAttackEnergyCost = 0f;
+		[SerializeField]
+		private float specialAttackCooldown = 10f;
+		[ReadOnly]
+		private float specialAttackDowntime = 0;
+		[SerializeField]
+		private float gapDistance = 1f;
+		[SerializeField]
+		private int bulletAmount = 5;
 
 		[Header("Debug only")]
-		[SerializeField]
-		private bool isBusy = false;
-		[SerializeField]
-		private bool queuePowerUp = false;
-		[SerializeField]
-		private Vector2 movementVector = Vector2.zero;
-		[SerializeField]
-		private Quaternion movementRotation = Quaternion.identity;
-
-		[SerializeField]
-		private GameObject spriteObject = null;
-
-		[SerializeField]
+		[ReadOnly]
 		public ICellController controller = null;
+		[ReadOnly]
+		private Vector2 movementVector = Vector2.zero;
+		[ReadOnly]
+		private Quaternion movementRotation = Quaternion.identity;
+		[ReadOnly]
+		private bool isInPowerUpAnimation = false;
 
-		public Quaternion SpriteOrientation
-		{
-			get => spriteObject.transform.rotation;
-			set
-			{
-				//Debug.Log(value.eulerAngles);
-				if (value == Quaternion.identity)
-				{
-					spriteObject.transform.localRotation = value;
-					spriteObject.transform.localScale = Vector3.one;
-				}
-				else if (value.eulerAngles.z >= 90.0f && value.eulerAngles.z <= 270.0f)
-				{
-					spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
-					spriteObject.transform.localScale = new Vector3(-1.0f, -1.0f, 1.0f);
-				}
-				else
-				{
-					spriteObject.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, value.eulerAngles.z);
-					spriteObject.transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-
-				}
-			}
-		}
-
-		[SerializeField]
-		private Quaternion correctRotation = Quaternion.identity;
-
+		// Public properties
 		public KillerSense Sense { get => sense; }
-		public float Range { get => range; }
-		public float Fov { get => fov; }
+		public float Range { get => normalAttackRange; }
+		public float Fov { get => normalAttackSpreadAngle; }
 		public float Health { get => health; set => health = value; }
 		public float Energy { get => energy; set => energy = value; }
 		public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 		public Quaternion MovementRotation { get => movementRotation; set => movementRotation = value; }
+		public override bool isImmune => isInPowerUpAnimation;
 
-		public override bool isImmune => throw new System.NotImplementedException();
-
-		public void OnFixedUpdate()
-		{
-
-			if (isBusy) return;
-			Move();
-		}
-
+		// Private proterties
+		private bool CannotUseNormalAttack => NormalAttackOnCooldown || isInPowerUpAnimation;
+		private bool CannotUseSpecialAttack => SpecialAttackOnCooldown || isInPowerUpAnimation;
+		private bool IsMoving => !isInPowerUpAnimation && MovementVector != Vector2.zero;
+		private bool NormalAttackOnCooldown => normalAttackDowntime < normalAttackCooldown;
+		private bool SpecialAttackOnCooldown => specialAttackDowntime < specialAttackCooldown;
 
 		public void OnUpdate()
 		{
+			float downTime = Time.deltaTime;
 
-			passedCooldown -= Time.deltaTime;
 			if (GlobalGameData.isInPowerUpMode)
 			{
 				float value = immunotherapyEnergyRegain * Time.deltaTime;
 				AddEnergy(value);
-
-				if (!canAttack)
-				{
-					attackDowntime += Time.deltaTime * immunotherapySpeedMultiplier;
-					if (attackDowntime >= attackCooldown)
-					{
-						canAttack = true;
-					}
-				}
-				return;
 			}
 
-			if (!canAttack)
+			if (NormalAttackOnCooldown)
 			{
-				attackDowntime += Time.deltaTime;
-				if (attackDowntime >= attackCooldown)
-				{
-					canAttack = true;
-				}
+				normalAttackDowntime += downTime;
 			}
-
-			if (!isBusy && canAttack)
+			else
+			{
 				animator.SetBool("IsAttacking", false);
-		}
-
-		public void AddEnergy(float value)
-		{
-			energy += value;
-			if (energy >= maxEnergy)
-			{
-				energy = maxEnergy;
 			}
 
-			// moved to Exhaust Effect
-			// animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
+
+			if (SpecialAttackOnCooldown)
+			{
+				specialAttackDowntime += downTime;
+			}
 		}
 
-		public void AddHealth(float value)
+		public void OnFixedUpdate()
 		{
-			health += value;
-			if (health > maxHealth)
-			{
-				health = maxHealth;
-				return;
-			}
+			if (IsMoving)
+				Move();
+		}
+
+		/// <summary>
+		/// Applies the movement and flow vectors to calculate the new position of the cell.
+		/// Note: All controllers must apply their effects before hand.
+		/// </summary>
+		private void Move()
+		{
+			movementVector *= movementSpeed * Time.fixedDeltaTime * ExhaustionEffect();
+
+			rb.MovePosition(movementVector + rb.position);
+			transform.rotation = movementRotation;
+			movementVector = Vector3.zero;
+			movementRotation = Quaternion.identity;
 		}
 
 		private float ExhaustionEffect()
@@ -168,70 +144,80 @@ namespace ImmunotherapyGame
 			return 1.0f - (maxEnergy - energy) / maxEnergy * exhaustEffectReduction;
 		}
 
-		/// <summary>
-		/// Applies the movement and flow vectors to calculate the new position of the cell.
-		/// Note: All controllers must apply their effects before hand.
-		/// </summary>
-		private void Move()
+		// HEALTH
+		public void AddEnergy(float value)
 		{
-			movementVector = movementVector * movementSpeed * Time.fixedDeltaTime * ExhaustionEffect();
-
-			rb.MovePosition(movementVector + rb.position);
-			transform.rotation = movementRotation;
-			movementVector = Vector3.zero;
-			movementRotation = Quaternion.identity;
+			energy += value;
+			if (energy >= maxEnergy)
+			{
+				energy = maxEnergy;
+			}
 		}
 
+		public override void HitCell(float amount)
+		{
+			if (isImmune) return;
 
-		private float spread = 0.0f;
+			health -= amount;
+			if (health <= 0.0f)
+			{
+				health = 0.0f;
+				controller.OnCellDeath();
+			}
+		}
+
+		// EXHAUSTION
+		public override void ExhaustCell(float amount)
+		{
+			if (GlobalGameData.isInPowerUpMode) return;
+			if (isImmune) return;
+
+			energy -= amount;
+			if (energy <= 0.0f)
+			{
+				energy = 0.0f;
+				controller.OnCellDeath();
+			}
+		}
+
+		public void AddHealth(float value)
+		{
+			health += value;
+			if (health > maxHealth)
+			{
+				health = maxHealth;
+				return;
+			}
+		}
+
 		public void Attack(Vector3 targetPosition)
 		{
-			if (isBusy || !canAttack) return;
+			float spread = 0.0f;
+			if (CannotUseNormalAttack) return;
 
 			animator.SetBool("IsAttacking", true);
-			attackDowntime = 0.0f;
-			canAttack = false;
-			GameObject bullet = Instantiate(killerParticlePrefab, attackSpawnObject.transform.position, Quaternion.identity);
+			normalAttackDowntime = 0.0f;
+			GameObject bullet = Instantiate(normalAttackParticlePrefab, normalAttackSpawnTransform.position, Quaternion.identity);
 
-			Vector3 bulletDirection = (targetPosition - attackSpawnObject.transform.position).normalized;
+			Vector3 bulletDirection = (targetPosition - normalAttackSpawnTransform.position).normalized;
 
-			spread = Mathf.Lerp(Random.Range(-fov / 1.9f, fov / 1.9f), spread, Random.Range(0.2f, 0.8f));
+			spread = Mathf.Lerp(Random.Range(-normalAttackSpreadAngle / 1.9f, normalAttackSpreadAngle / 1.9f), spread, Random.Range(0.2f, 0.8f));
 			//spread = Random.Range(-fov /2f, fov / 2f);
 			bulletDirection = Quaternion.Euler(0.0f, 0.0f, spread) * bulletDirection;
 			var color = Random.ColorHSV(0f, 1f, 0.3f, 0.6f, 0.5f, 1f);
-			bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, range, color);
+			bullet.GetComponent<KillerParticle>().Shoot(bulletDirection, normalAttackRange, color);
 			ExhaustCell(Mathf.Abs(normalAttackEnergyCost));
 
 		}
 
-		public void StopAttack()
-		{
-			animator.SetBool("IsAttacking", false);
-		}
-
-		[Header("Special Attack Attributes")]
-		[SerializeField]
-		private float spreadAngle = 35f;
-		[SerializeField]
-		private int bulletAmount = 5;
-		[SerializeField]
-		private float specialAttackRange = 3;
-		[SerializeField]
-		private GameObject pacParticlePrefab = null;
-		[SerializeField]
-		private float gapDistance = 1f;
-		[SerializeField]
-		private float cooldown = 10f;
-		[SerializeField]
-		private float passedCooldown = 0;
 
 		public void SpecialAttack(Vector3 targetPosition)
 		{
-			if (isBusy || !canAttack || passedCooldown >= 0f) return;
+			if (CannotUseSpecialAttack) return;
 
-			float anglePerBullet = spreadAngle / (bulletAmount - 1);
+			float anglePerBullet = specialAttackSpreadAngle / (bulletAmount - 1);
 
-			float baseStartRotation = -0.5f * spreadAngle;
+			float baseStartRotation = -0.5f * specialAttackSpreadAngle;
 
 			Vector3 shootDirection = (targetPosition - transform.position);
 
@@ -249,32 +235,23 @@ namespace ImmunotherapyGame
 				Vector3 direction = Quaternion.Euler(0.0f, 0.0f, angleToRotate) * shootDirection;
 
 				// Find position to instantiate
-				PacParticle particle = Instantiate(pacParticlePrefab, transform.position + direction * gapDistance, Quaternion.identity).GetComponent<PacParticle>();
+				PacParticle particle = Instantiate(specialAttackParticlePrefab, specialAttackSpawnTransform.position + direction * gapDistance, Quaternion.identity).GetComponent<PacParticle>();
 				particle.SetData(direction, specialAttackRange);
 			}
-			passedCooldown = cooldown;
+			specialAttackDowntime = 0f;
 		}
 
 		// POWER UP IMMUNOTHERAPY
-		//////////////////////////////////////////
 		public void EnterPowerUpMode()
 		{
-			if (isBusy)
-			{
-				queuePowerUp = true;
-				return;
-			}
-
-			isBusy = true;
+			isInPowerUpAnimation = true;
 			animator.SetTrigger("PowerUp");
 			animator.speed = immunotherapySpeedMultiplier;
 		}
 
 		public void OnFinishPowerUpAnimation()
 		{
-			isBusy = false;
-			if (queuePowerUp)
-				EnterPowerUpMode();
+			isInPowerUpAnimation = false;
 		}
 
 		public void ExitPowerUpMode()
@@ -283,33 +260,6 @@ namespace ImmunotherapyGame
 			animator.speed = 1.0f;
 		}
 
-		public override void HitCell(float amount)
-		{
-			//if (isImmune) return;
 
-			health -= amount;
-			if (health <= 0.0f)
-			{
-				health = 0.0f;
-				controller.OnCellDeath();
-			}
-		}
-
-		public override void ExhaustCell(float amount)
-		{
-			if (GlobalGameData.isInPowerUpMode) return;
-
-			//if (isImmune) return;
-
-			// moved to Exhaust Effect
-			// animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
-			energy -= amount;
-			if (energy <= 0.0f)
-			{
-				energy = 0.0f;
-				controller.OnCellDeath();
-			}
-
-		}
 	}
 }

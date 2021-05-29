@@ -18,6 +18,7 @@ namespace ImmunotherapyGame
 
 			internal abstract void OnStateExit();
 			internal abstract void OnStateEnter();
+			internal abstract void OnStateReEnter();
 			internal abstract void OnUpdate();
 			internal abstract void OnFixedUpdate();
 		}

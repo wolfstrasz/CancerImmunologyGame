@@ -4,6 +4,7 @@ using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.Tutorials;
 using ImmunotherapyGame.AI;
 using ImmunotherapyGame.Audio;
+using ImmunotherapyGame.UI.TopOverlay;
 
 namespace ImmunotherapyGame
 {
@@ -39,6 +40,8 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+				TopOverlayUI.Instance.GamePaused = false;
+
 				Debug.Log("Play test state");
 				GlobalLevelData.UpdateLevelData();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
@@ -46,12 +49,17 @@ namespace ImmunotherapyGame
 				if (GameObject.FindObjectOfType<PlayerController>() != null)
 					PlayerController.Instance.Initialise();
 				if (GameObject.FindObjectOfType<TutorialManager>() != null)
-					TutorialManager.Instance.Initialise();
+					TutorialManager.Instance.LoadLevelTutorials();
 			}
 
 			internal override void OnStateExit()
 			{
 				Debug.Log("Exit play test state");
+			}
+
+			internal override void OnStateReEnter()
+			{
+				TopOverlayUI.Instance.GamePaused = false;
 			}
 
 			internal override void OnUpdate()

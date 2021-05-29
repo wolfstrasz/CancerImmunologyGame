@@ -184,10 +184,10 @@ namespace ImmunotherapyGame.Cancers
 			
 #else
 #endif
-			if (Input.GetKeyDown(KeyCode.Alpha0))
-			{
-				timePassed = timeBetweenDivisions;
-			}
+			//if (Input.GetKeyDown(KeyCode.Alpha0))
+			//{
+			//	timePassed = timeBetweenDivisions;
+			//}
 
 			if (canDivide)
 			{

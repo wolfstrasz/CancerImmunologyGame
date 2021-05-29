@@ -1,4 +1,6 @@
-﻿using ImmunotherapyGame.Tutorials;
+﻿using UnityEngine;
+using ImmunotherapyGame.Tutorials;
+using ImmunotherapyGame.UI.TopOverlay;
 
 namespace ImmunotherapyGame
 {
@@ -8,7 +10,6 @@ namespace ImmunotherapyGame
 		{
 			public GameplayPauseState(GameStateController owner) : base(owner) { }
 
-
 			internal override void OnFixedUpdate()
 			{
 			}
@@ -16,11 +17,18 @@ namespace ImmunotherapyGame
 			internal override void OnStateEnter()
 			{
 				GlobalGameData.isGameplayPaused = true;
+				TopOverlayUI.Instance.GamePaused = true;
+
 			}
 
 			internal override void OnStateExit()
 			{
-				GlobalGameData.isGameplayPaused = false;
+				GlobalGameData.isGameplayPaused = true;
+			}
+
+			internal override void OnStateReEnter()
+			{
+				TopOverlayUI.Instance.GamePaused = true;
 			}
 
 			internal override void OnUpdate()

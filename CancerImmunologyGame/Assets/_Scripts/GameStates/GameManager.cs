@@ -15,7 +15,7 @@ namespace ImmunotherapyGame
 			[SerializeField]
 			internal bool sceneLoaded = false;
 			[SerializeField]
-			private GameStateController stateController = new GameStateController();
+			internal GameStateController stateController = new GameStateController();
 			[SerializeField]
 			private bool isTestScene = false;
 
@@ -70,62 +70,46 @@ namespace ImmunotherapyGame
 			}
 
 
-
-			private void LoadCurrentGameData()
+			public bool RequestGameStatePause(GameStatePauseRequestType requestType, GameObject callerObject)
 			{
+				if (requestType == GameStatePauseRequestType.GAMEPLAY)
+				{
+					return stateController.AddPauseState(callerObject, new GameplayPauseState(stateController));
+				}
+				else if (requestType == GameStatePauseRequestType.FULL)
+				{
+					return stateController.AddPauseState(callerObject, new PauseState(stateController));
+				}
 
+				return true;
 			}
 
-
-			private void SaveCurrentGameData()
+			public bool RequestGameStateUnpause (GameObject callerObject)
 			{
-
+				return stateController.RemovePauseState(callerObject);
 			}
-
-			private void ResetCurrentGameData()
-			{
-
-			}
-
-
-
-			public void RequestGameplayPause()
-			{
-				stateController.AddState(new GameplayPauseState(stateController));
-			}
-
-			public void RequestGameplayUnpause(string callerName)
-			{
-				stateController.RemoveCurrentState(callerName);
-			}
-
-			public void RequestGamePause()
-			{
-				stateController.AddState(new PauseState(stateController));
-			}
-
-			public void RequestGameUnpause(string callerName)
-			{
-				stateController.RemoveCurrentState(callerName);
-			}
-
 
 
 
 			public void LoadData()
 			{
-				LoadCurrentGameData();
+				//LoadCurrentGameData();
 			}
 
 			public void SaveData()
 			{
-				SaveCurrentGameData();
+				//SaveCurrentGameData();
 			}
 
 			public void ResetData()
 			{
-				ResetCurrentGameData();
+				//ResetCurrentGameData();
 			}
+
+
+			
 		}
+
+		public enum GameStatePauseRequestType { NONE, GAMEPLAY, FULL}
 	}
 }

@@ -16,12 +16,14 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private TMP_Text text = null;
 		[SerializeField]
 		private Image cellImage = null;
+		[SerializeField]
+		private float scaleBoost = 2f;
 
 		internal void SetInfo(CellpediaObject cellDescription)
 		{
 			text.text = cellDescription.cellname + " Unlocked!";
 			cellImage.sprite = cellDescription.sprite;
-			cellImage.gameObject.transform.localScale = cellDescription.spriteUIScaleVector;
+			cellImage.gameObject.transform.localScale = cellDescription.spriteUIScaleVector * 2f;
 
 			//if (particleEffectPrefab != null)
 			//{

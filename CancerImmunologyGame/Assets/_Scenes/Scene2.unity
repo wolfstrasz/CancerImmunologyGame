@@ -5307,23 +5307,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 580004930}
   sense: {fileID: 909938496}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 1917869943}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 2061789741}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &580004927
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -9176,23 +9177,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 927953414}
   sense: {fileID: 451581931}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 1095860616}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 1213731010}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &927953411
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11076,23 +11078,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 1140932584}
   sense: {fileID: 498110002}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 1765577521}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 971560700}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &1140932581
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -14094,16 +14097,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 1470661766}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &1470661768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14410,23 +14432,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 1543387662}
   sense: {fileID: 336803939}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 741741947}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 1155509284}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &1543387659
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -16550,23 +16573,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 1760268405}
   sense: {fileID: 1779422034}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 1034754042}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 627333421}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &1760268402
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -17994,23 +18018,24 @@ MonoBehaviour:
   isDying: 0
   rb: {fileID: 1859103805}
   sense: {fileID: 382248922}
-  exhaustEffectReduction: 0.75
   movementSpeed: 2
+  exhaustEffectReduction: 0.75
   immunotherapySpeedMultiplier: 1.66
   immunotherapyEnergyRegain: 3.33
-  attackSpawnObject: {fileID: 243867995}
-  killerParticlePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
-    type: 3}
+  normalAttackParticlePrefab: {fileID: 0}
+  normalAttackSpawnTransform: {fileID: 0}
+  normalAttackRange: 1.5
+  normalAttackSpreadAngle: 90
   normalAttackEnergyCost: -2
-  attackCooldown: 0.5
-  range: 2
-  fov: 60
-  isBusy: 0
-  queuePowerUp: 0
-  movementVector: {x: 0, y: 0}
-  movementRotation: {x: 0, y: 0, z: 0, w: 1}
-  spriteObject: {fileID: 1790739101}
-  correctRotation: {x: 0, y: 0, z: 0, w: 1}
+  normalAttackCooldown: 0.2
+  specialAttackParticlePrefab: {fileID: 0}
+  specialAttackSpawnTransform: {fileID: 0}
+  specialAttackRange: 3
+  specialAttackSpreadAngle: 35
+  specialAttackEnergyCost: 0
+  specialAttackCooldown: 10
+  gapDistance: 1
+  bulletAmount: 5
 --- !u!58 &1859103802
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -12,8 +12,6 @@ namespace ImmunotherapyGame
         public class SaveManager : Singleton<SaveManager>
         {
             [SerializeField]
-            private string buildString = "build4";
-            [SerializeField]
             private string saveDirectory = "GameData";
             [SerializeField]
             private bool debugToJason = true;
@@ -30,7 +28,7 @@ namespace ImmunotherapyGame
                 }
                 else
                 {
-                    Debug.Log("Save directory file not found in " + saveDirectory);
+                    Debug.Log("Save Manager: Save directory file not found in " + saveDirectory);
                     return false;
                 }
             }
@@ -45,12 +43,12 @@ namespace ImmunotherapyGame
                         File.Delete(filePath);
 					} else
 					{
-                        Debug.Log("File (" + filePath + ") cannot be deleted as it does not exist.");
+                        Debug.Log("Save Manager: File (" + filePath + ") cannot be deleted as it does not exist.");
 					}
                 }
                 else
                 {
-                    Debug.Log("Save directory file not found in " + saveDirectory);
+                    Debug.Log("Save Manager: Save directory file not found in " + saveDirectory);
                 }
             }
 
@@ -71,14 +69,13 @@ namespace ImmunotherapyGame
                     }
                     catch
                     {
-                        Debug.LogError("Did not manage to create save directory!");
+                        Debug.LogError("Save Manager: Did not manage to create save directory!");
                         return;
                     }
                 }
 
                 DirectoryInfo directory = new DirectoryInfo(saveDirectory);
-                Debug.Log(directory.FullName);
-
+    
                 FileStream file = null;
                 try
                 {
@@ -87,7 +84,7 @@ namespace ImmunotherapyGame
                 catch
                 {
                     file = null;
-                    Debug.LogWarning("Did not manage to save because file was not able to be created");
+                    Debug.LogWarning("Save Manager: Did not manage to save because file was not able to be created");
                     return;
                 }
 
@@ -99,7 +96,7 @@ namespace ImmunotherapyGame
                     if (debugToJason)
                     {
                         string jason = JsonUtility.ToJson(saveData);
-                        Debug.Log("Saving as JSON: " + jason);
+                        Debug.Log("Save Manager: Saving as JSON: " + jason);
                     }
                     file.Close();
                 }
@@ -111,21 +108,18 @@ namespace ImmunotherapyGame
             {
                 if (!Directory.Exists(saveDirectory))
                 {
-                    Debug.Log("Load directory file not found in " + saveDirectory);
-
+                    Debug.Log("Save Manager: Load directory file not found in " + saveDirectory);
                     return null;
                 }
 
-
                 Debug.Log("Save Manager: Loading from directory: " + saveDirectory);
                 FileInfo directory = new FileInfo(saveDirectory);
-                Debug.Log(directory.FullName);
 
                 string filePath = saveDirectory + "\\" +  Utils.RemoveNamespacesFromAssemblyType(typeof(LoadDataType).ToString()) + ".savefile";
 
                 if (!File.Exists(filePath))
                 {
-                    Debug.Log("Save file not found in " + filePath);
+                    Debug.Log("Save Manager: Save file not found in " + filePath);
                     return null;
                 }
                 else

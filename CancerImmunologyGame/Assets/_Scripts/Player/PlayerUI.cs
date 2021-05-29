@@ -17,11 +17,11 @@ namespace ImmunotherapyGame.Player
 		private GameObject playerPowerUpPanel = null;
 
 		[SerializeField]
-		private HealthBar healthBar = null;
+		private ResourceBar healthBar = null;
 		[SerializeField]
-		private EnergyBar energyBar = null;
+		private ResourceBar energyBar = null;
 		[SerializeField]
-		private ImmunotherapyBar powerUpBar = null;
+		private ResourceBar powerUpBar = null;
 		[SerializeField]
 		private Animator immunotherapyAnimator = null;
 
