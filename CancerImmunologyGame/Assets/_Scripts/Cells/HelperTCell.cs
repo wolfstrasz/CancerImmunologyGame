@@ -100,7 +100,7 @@ namespace ImmunotherapyGame
 		{
 			Vector3 direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
 
-			transform.position += direction * Time.deltaTime * speed;
+			transform.position += direction * Time.deltaTime * cellType.speedValue;
 
 			if (Vector3.SqrMagnitude(transform.position - patrolPoints[patrolIndex].position) < 2.0f)
    			{

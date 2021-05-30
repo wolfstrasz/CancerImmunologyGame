@@ -17,6 +17,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04569fb91e9f759478059a3c59bafcf2, type: 2}
   - {fileID: 11400000, guid: 7065388571043304ebb9fac9e0752db1, type: 2}
   - {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
-  initialMaxHealth: 100
-  initialMaxEnergy: 100
-  initialSpeed: 5
+  maxHealth: {fileID: 11400000, guid: d72b990a4873688418014e7cd9b5fae0, type: 2}
+  maxEnergy: {fileID: 11400000, guid: e756f5ef3b6b0954bb3acf7611c8547c, type: 2}
+  speed: {fileID: 11400000, guid: 13f09ef038fb4cc4e8f9be8489e97205, type: 2}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellName: Cancer-Assosiated Fibroblast (CAF)
   enemyCells: []
-  initialMaxHealth: 100
-  initialMaxEnergy: 100
-  initialSpeed: 5
+  maxHealth: {fileID: 11400000, guid: 83329cb9e172d7743a5118c18660092e, type: 2}
+  maxEnergy: {fileID: 11400000, guid: 5a9afb7901b3a5b4fbcd8ade664dfe56, type: 2}
+  speed: {fileID: 11400000, guid: f35aaf9984ee4d641a1554feb14f8b0a, type: 2}

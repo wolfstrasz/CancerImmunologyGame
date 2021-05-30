@@ -434,6 +434,7 @@ MonoBehaviour:
   autoHide: 1
   autoHideScale: 1
   image: {fileID: 3764657489024254674}
+  maxHealthAttribute: {fileID: 11400000, guid: 56ba46d1afed8184eacea3444fdd3b4a, type: 2}
 --- !u!1 &5898424761198485986
 GameObject:
   m_ObjectHideFlags: 0

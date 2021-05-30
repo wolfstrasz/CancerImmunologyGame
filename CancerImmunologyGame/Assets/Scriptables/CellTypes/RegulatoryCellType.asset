@@ -15,6 +15,6 @@ MonoBehaviour:
   cellName: Regulatory T Cell
   enemyCells:
   - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
-  initialMaxHealth: 100
-  initialMaxEnergy: 100
-  initialSpeed: 5
+  maxHealth: {fileID: 11400000, guid: 6b18df70c2d7d3b49985fcc50803d701, type: 2}
+  maxEnergy: {fileID: 11400000, guid: d3ed7348fb31edd46b0425bced770533, type: 2}
+  speed: {fileID: 11400000, guid: f3232548f3230c344b1523f9dbd1bee1, type: 2}

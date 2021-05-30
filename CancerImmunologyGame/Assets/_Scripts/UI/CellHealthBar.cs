@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame
 {
@@ -17,7 +18,8 @@ namespace ImmunotherapyGame
 		private float autoHideScale = 1.0f;
 		[SerializeField]
 		private Image image = null;
-
+		[SerializeField]
+		private StatAttribute maxHealthAttribute = null;
 
 		public Cell owner
 		{
@@ -28,26 +30,19 @@ namespace ImmunotherapyGame
 			set
 			{
 				owner = value;
-				if (autoHide)
-				{
-					owner.onUpdateHealth = UpdateHealthbar;
-				}
+				owner.onUpdateHealth = UpdateHealth;
 			}
 		}
 
-		public void UpdateHealthbar()
+		public void UpdateHealth(float value)
 		{
-			slider.value = owner.Health;
-			if (slider.maxValue != owner.Health)
-			{
-				image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-			}
+			slider.value = value;
+			image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 
-		public float MaxHealth
+		public void UpdateMaxHealth()
 		{
-			get => slider.maxValue;
-			set => slider.maxValue = value;
+			slider.maxValue = maxHealthAttribute.CurrentValue;
 		}
 
 		public float Health
@@ -73,5 +68,30 @@ namespace ImmunotherapyGame
 			}
 		}
 
+		private void OnEnable()
+		{
+			if (owner != null)
+			{
+				owner.onUpdateHealth += UpdateHealth;
+			}
+
+			if (maxHealthAttribute != null)
+			{
+				maxHealthAttribute.onValueChanged += UpdateMaxHealth;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (owner != null)
+			{
+				owner.onUpdateHealth -= UpdateHealth;
+			}
+
+			if (maxHealthAttribute != null)
+			{
+				maxHealthAttribute.onValueChanged -= UpdateMaxHealth;
+			}
+		}
 	}
 }

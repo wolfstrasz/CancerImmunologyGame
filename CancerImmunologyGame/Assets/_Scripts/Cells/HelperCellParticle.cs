@@ -5,65 +5,19 @@ using UnityEngine;
 namespace ImmunotherapyGame
 {
 	[RequireComponent(typeof(Collider2D))]
-	public class HelperCellParticle : MonoBehaviour
+	public class HelperCellParticle : CellParticle
 	{
-		[Header("Helper Cell Particle Attributes")]
-		[SerializeField]
-		private new Collider2D collider = null;
-		[SerializeField]
-		private SpriteRenderer render = null;
-
-		[SerializeField]
-		private float healthRegeneration = 0.35f;
-		[SerializeField]
-		private float energyRegeneration = 0.30f;
 
 
-		// Generic particle requirements
-		[SerializeField]
-		private float speed = 1f;
-
-		private Vector3 direction = Vector3.zero;
-		private float lifetime = 0f;
-
-		public void SetParticleData(Vector3 direction, float lifetime)
+		protected override void OnCollisionWithTarget(Cell cell)
 		{
-			this.direction = direction;
-			this.lifetime = lifetime;
+			//cell.AddEnergy(effectToEnergy);
+			//cell.AddHealth(effectToHealth);
+			//DestroyParticle();
+
 		}
 
-		void Update()
-		{
-			lifetime -= Time.deltaTime;
-			if (lifetime < 0f)
-			{
-				DestroyParticle();
-			}
-		}
 
-		void FixedUpdate()
-		{
-			transform.position = transform.position + direction * Time.fixedDeltaTime * speed;
-		}
-
-		void OnTriggerEnter2D(Collider2D collider)
-		{
-			KillerCell cell = collider.GetComponent<KillerCell>();
-			if (cell != null)
-			{
-				cell.AddEnergy(energyRegeneration);
-				cell.AddHealth(healthRegeneration);
-				DestroyParticle();
-			}
-		}
-
-		void DestroyParticle()
-		{
-			lifetime = 0f;
-			collider.enabled = false;
-			render.enabled = false;
-			Destroy(gameObject, 0.5f);
-		}
 	}
 
 }

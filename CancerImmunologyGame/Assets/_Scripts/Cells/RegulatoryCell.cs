@@ -56,7 +56,7 @@ namespace ImmunotherapyGame
 
         void Move()
         {
-            distanceTravelled += Time.fixedDeltaTime * speed;
+            distanceTravelled += Time.fixedDeltaTime * cellType.speedValue;
             if (distanceTravelled > maxLengthDist) distanceTravelled -= maxLengthDist;
             Vector3 newPos = pathToFollow.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.Loop);
             transform.position = newPos;

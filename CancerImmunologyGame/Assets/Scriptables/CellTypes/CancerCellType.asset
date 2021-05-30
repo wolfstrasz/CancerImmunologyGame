@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellName: Cancer Cell
   enemyCells: []
-  initialMaxHealth: 100
-  initialMaxEnergy: 100
-  initialSpeed: 5
+  maxHealth: {fileID: 11400000, guid: 56ba46d1afed8184eacea3444fdd3b4a, type: 2}
+  maxEnergy: {fileID: 11400000, guid: 7c1951d4499a45140b1b6ca6c3958062, type: 2}
+  speed: {fileID: 11400000, guid: 6ec324c2f0a13ca4d8e6bd67c6afb872, type: 2}

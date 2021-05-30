@@ -20,16 +20,17 @@ namespace ImmunotherapyGame
 		[Header("Cell Attributes")]
 		[SerializeField]
 		public CellType cellType;
+
 		[SerializeField]
 		protected CellHealthBar healthBar;
 
 		public delegate void OnDeathEvent(Cell cell);
 		public OnDeathEvent onDeathEvent;
 
-		public delegate void OnUpdateHealth();
+		public delegate void OnUpdateHealth(float newValue);
 		public OnUpdateHealth onUpdateHealth;
 
-		public delegate void OnUpdateEnergy();
+		public delegate void OnUpdateEnergy(float newValue);
 		public OnUpdateEnergy onUpdateEnergy;
 
 		[ReadOnly]
@@ -39,23 +40,19 @@ namespace ImmunotherapyGame
 		[ReadOnly]
 		protected bool isDying;
 
-		public float Health => health;
-		public float Energy => energy;
-		public float Speed => speed;
 
 		private float updateHealthValue = 0;
 		private float updateEnergyValue = 0;
 
 		public int RenderSortOrder { get => render.sortingOrder; set => render.sortingOrder = value; }
-		public float maxHealth => cellType.MaxHealth;
-		public float maxEnergy => cellType.MaxEnergy;
-		public float speed => cellType.Speed;
 		public virtual bool isImmune { get; }
 
 		protected virtual void Start()
 		{
-			health = maxHealth;
-			energy = maxEnergy;
+			health = 0;
+			energy = 0;
+			updateHealthValue += cellType.maxHealthValue;
+			updateEnergyValue += cellType.maxEnergyValue;
 		}
 
 		public virtual void ApplyHealthAmount(float amount)
@@ -78,18 +75,18 @@ namespace ImmunotherapyGame
 				if (updateHealthValue != 0)
 				{
 					health += updateHealthValue;
-					Mathf.Clamp(health, 0f, maxHealth);
+					Mathf.Clamp(health, 0f, cellType.maxHealthValue);
 
 					if (onUpdateHealth != null)
-						onUpdateHealth();
+						onUpdateHealth(health);
 				}
 
 				if (updateEnergyValue != 0)
 				{
 					energy += updateEnergyValue;
-					Mathf.Clamp(energy, 0f, maxEnergy);
+					Mathf.Clamp(energy, 0f, cellType.maxEnergyValue);
 					if (onUpdateEnergy != null)
-						onUpdateEnergy();
+						onUpdateEnergy(energy);
 				}
 			}
 

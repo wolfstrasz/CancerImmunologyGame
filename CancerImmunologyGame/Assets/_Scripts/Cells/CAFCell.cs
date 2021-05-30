@@ -21,13 +21,9 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField]
 		internal Cancer cancerOwner = null;
 
-
 		void Awake()
 		{
-			healthBar.MaxHealth = maxHealth;
-			healthBar.Health = maxHealth;
 			healthBar.owner = this;
-
 		}
 
 		public void OnUpdate()

@@ -18,9 +18,7 @@ namespace ImmunotherapyGame
 		private void Awake()
 		{
 			bodyBlocker.enabled = false;
-			healthBar.MaxHealth = maxHealth;
 			healthBar.owner = this;
-
 		}
 
 		private void FixedUpdate()
@@ -58,12 +56,12 @@ namespace ImmunotherapyGame
 			if (health == 0)
 				return;
 
-			if (health * 3f <= maxHealth)
+			if (health * 3f <= cellType.maxHealthValue)
 			{
 				animator.Play("AlmostDestroyed");
 				// Make destruction sound
 			}
-			else if (health * 1.5f <= maxHealth)
+			else if (health * 1.5f <= cellType.maxHealthValue)
 			{
 				animator.Play("Damaged");
 				// Make destruction sound

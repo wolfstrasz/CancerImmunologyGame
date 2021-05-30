@@ -19,11 +19,11 @@ namespace ImmunotherapyGame.AI
 		protected override NodeStates OnEvaluateAction()
 		{
 
-			if (controller.ControlledCell.Health == controller.ControlledCell.maxHealth && controller.ControlledCell.Energy == controller.ControlledCell.maxEnergy)
-			{
-				nodeState = NodeStates.SUCCESS;
-				return nodeState;
-			}
+			//if (controller.ControlledCell.Health == controller.ControlledCell.maxHealth && controller.ControlledCell.Energy == controller.ControlledCell.maxEnergy)
+			//{
+			//	nodeState = NodeStates.SUCCESS;
+			//	return nodeState;
+			//}
 
 			nodeState = NodeStates.FAILURE;
 			return nodeState;

@@ -131,6 +131,7 @@ namespace ImmunotherapyGame
 
 		private float ExhaustionEffect()
 		{
+			float maxEnergy = cellType.maxEnergyValue;
 			// moved from Add Energy
 			animator.SetFloat("ExhaustionRate", (maxEnergy - energy) / maxEnergy);
 
@@ -222,8 +223,8 @@ namespace ImmunotherapyGame
 		{
 			controller.OnCellDeath();
 
-			ApplyHealthAmount(2 * maxHealth);
-			ApplyEnergyAmount(2 * maxEnergy);
+			ApplyHealthAmount(cellType.maxHealthValue);
+			ApplyEnergyAmount(cellType.maxEnergyValue);
 		}
 
 		public override bool isImmune => isInPowerUpAnimation || isDying;

@@ -512,3 +512,4 @@ MonoBehaviour:
   autoHide: 1
   autoHideScale: 1
   image: {fileID: 8768801988207210690}
+  maxHealthAttribute: {fileID: 11400000, guid: 2ea1c593492e8a0458018fd5201d0cd7, type: 2}

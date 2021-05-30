@@ -9,36 +9,18 @@ namespace ImmunotherapyGame
 	[CreateAssetMenu]
 	public class CellType : ScriptableObject
 	{
-		[SerializeField]
-		private string cellName;
-		[SerializeField]
-		private List<CellType> enemyCells;
-		[SerializeField]
-		private float initialMaxHealth;
-		[SerializeField]
-		private float initialMaxEnergy;
-		[SerializeField]
-		private float initialSpeed;
+		public string cellName;
+		public List<CellType> enemyCells;
+		[Expandable]
+		public StatAttribute maxHealth;
+		[Expandable]
+		public StatAttribute maxEnergy;
+		[Expandable]
+		public StatAttribute speed;
 
-		[ReadOnly]
-		private float maxHealth;
-		[ReadOnly]
-		private float maxEnergy;
-		[ReadOnly]
-		private float speed;
-
-		public float Speed => speed;
-		public float MaxHealth => maxHealth;
-		public float MaxEnergy => maxEnergy;
-		private List<CellType> EnemyCells => enemyCells;
-
-		public void ResetData()
-		{
-			maxHealth = initialMaxHealth;
-			maxEnergy = initialMaxEnergy;
-			speed = initialSpeed;
-		}
-
+		public float maxHealthValue => maxHealth.CurrentValue;
+		public float maxEnergyValue => maxEnergy.CurrentValue;
+		public float speedValue => speed.CurrentValue;
 	}
 
 }

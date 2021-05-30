@@ -46,25 +46,27 @@ namespace ImmunotherapyGame.Player
 		/// </summary>
 		internal void Initialise()
 		{
+
+			// TODO: Fix it to work with the attributes
 			kc = PlayerController.Instance.KC;
-			if (healthBar != null)
-			{
-				healthBar.SetMaxValue(kc.maxHealth);
-			}
-			else Debug.LogWarning("Health bar is not linked to global data");
+			//if (healthBar != null)
+			//{
+			//	healthBar.SetMaxValue(kc.maxHealth);
+			//}
+			//else Debug.LogWarning("Health bar is not linked to global data");
 
-			if (energyBar != null)
-			{
-				energyBar.SetMaxValue(kc.maxEnergy);
-			}
-			else Debug.LogWarning("Exhaust bar is not linked to global data");
+			//if (energyBar != null)
+			//{
+			//	energyBar.SetMaxValue(kc.maxEnergy);
+			//}
+			//else Debug.LogWarning("Exhaust bar is not linked to global data");
 
-			if (powerUpBar != null)
-			{
-				powerUpBar.SetMaxValue(maxPowerUp);
-				powerUpBar.SetValue(powerUp = 0.0f);
-			}
-			else Debug.LogWarning("Power up bar is not linked to global data");
+			//if (powerUpBar != null)
+			//{
+			//	powerUpBar.SetMaxValue(maxPowerUp);
+			//	powerUpBar.SetValue(powerUp = 0.0f);
+			//}
+			//else Debug.LogWarning("Power up bar is not linked to global data");
 		}
 
 		/// <summary>

@@ -1,112 +1,95 @@
 ﻿using UnityEngine;
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame
 {
 	public abstract class CellParticle : MonoBehaviour
 	{
-		[Header("Cell Particle")]
-		protected Cell owner = null;
+		protected Animator animator = null;
+		protected SpriteRenderer render = null;
+		protected Collider2D coll = null;
 
-		// Spreading
-		[SerializeField]
-		protected Vector3 spreadPosition;
-
-		// Targeting
-		[SerializeField]
-		protected KillerCell target = null;
-
-		// Attributes
-		[SerializeField]
-		protected float lifeSpan = 0.0f;
 		[SerializeField]
 		protected float speed = 1.0f;
 		[SerializeField]
-		protected float distanceToReachSqr = 0.5f;
+		protected float effectToHealth = 2.0f;
+		[SerializeField]
+		protected float effectToEnergy = 2.0f;
+		[SerializeField]
+		protected float range;
+		[SerializeField]
+		protected float lifetime = 0;
 
-		// State 
-		delegate void Action();
-		private Action StateAction = null;
+		[ReadOnly]
+		protected Vector3 spawnPosition;
+		[ReadOnly]
+		protected Vector3 direction;
+		[ReadOnly]
+		protected float rangeSq;
 
-		void Update()
+		protected virtual void Start()
 		{
-			if (GlobalGameData.isGameplayPaused) return;
-			OnUpdate();
+			animator = GetComponent<Animator>();
+			render = GetComponent<SpriteRenderer>();
+			coll = GetComponent<Collider2D>();
 		}
 
-		public void OnUpdate()
+		protected virtual void FixedUpdate()
 		{
-			StateAction();
+			OnFixedUpdate();
 		}
 
-		public void Initialise(Vector3 _spreadPosition, KillerCell _target = null)
+
+		protected virtual void OnFixedUpdate()
 		{
-			spreadPosition = _spreadPosition;
-			target = _target;
-			StateAction = Spread;
+			if (Vector3.SqrMagnitude(transform.position - spawnPosition) > rangeSq)
+			{
+				DestroyParticle();
+				return;
+			}
+
+			transform.position += direction * speed * Time.fixedDeltaTime;
 		}
 
-		private void Idle()
+
+		public virtual void Shoot(Vector3 _direction, float _range)
 		{
-			lifeSpan -= Time.deltaTime;
-			if (lifeSpan <= 0.0f)
-			{
-				OnDeathEffect();
-			}
+			spawnPosition = transform.position;
+
+			range = _range;
+			rangeSq = _range * _range;
+
+			direction = _direction;
+			render.flipY = _direction.x <= 0;
+			transform.right = _direction;
 		}
 
-		// State machine
-		private void Spread()
+		protected virtual void DestroyParticle()
 		{
-			Vector3 directionVector = spreadPosition - transform.position;
-			if (Vector3.SqrMagnitude(directionVector) >= 1.0f)
-			{
-				transform.position += directionVector.normalized * Time.unscaledDeltaTime
-					* speed * GlobalGameData.gameplaySpeed;
-			}
-			else if (target != null)
-			{
-				StateAction = FollowTarget;
-			}
-			else
-			{
-				StateAction = Idle;
-			}
-		}
-
-		private void FollowTarget()
-		{
-			Vector3 directionVector = target.transform.position - transform.position;
-			if (Vector3.SqrMagnitude(directionVector) <= distanceToReachSqr)
-			{
-				OnReachTarget();
-			}
-			else
-			{
-				transform.position += directionVector.normalized * Time.unscaledDeltaTime
-					* speed * GlobalGameData.gameplaySpeed;
-			}
-		}
-
-		private void Dead() { }
-
-		protected abstract void OnReachTarget();
-
-		protected virtual void OnDeathEffect()
-		{
-			StateAction = Dead;
+			coll.enabled = false;
+			render.enabled = false;
 			Destroy(gameObject);
 		}
 
-		void OnTriggerEnter2D(Collider2D collider)
-		{
-			if (target != null) return;
 
-			KillerCell cell = collider.GetComponent<KillerCell>();
-			if (cell != null)
+		protected virtual void OnTriggerEnter2D(Collider2D collider)
+		{
+
+			Cell cell = collider.gameObject.GetComponent<Cell>();
+			if (cell)
 			{
-				target = cell;
-				StateAction = FollowTarget;
+				// for (int i = 0; i < targetCellTypes; ++i)
+				// {
+				//		if (targetCellTypes[i] == cell.cellType)
+				//		{
+				//			OnCollisionWithTarget(cell);
+				//			break;
+				//		}
+				// }
 			}
 		}
+
+		protected abstract void OnCollisionWithTarget(Cell cell);
+
 	}
 }

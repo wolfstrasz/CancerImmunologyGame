@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cellName: Helper T Cell
   enemyCells: []
-  initialMaxHealth: 100
-  initialMaxEnergy: 100
-  initialSpeed: 4
+  maxHealth: {fileID: 11400000, guid: 9dd00c47efbbba544bcd168c11c83b2b, type: 2}
+  maxEnergy: {fileID: 11400000, guid: 5a9afb7901b3a5b4fbcd8ade664dfe56, type: 2}
+  speed: {fileID: 11400000, guid: 5dad25c847168c44bba078cfea54617f, type: 2}
