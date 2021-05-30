@@ -105,7 +105,5 @@ namespace ImmunotherapyGame.Core
 
 	}
     
-
-    public class ReadOnlyAttribute : PropertyAttribute { }
 }
 
