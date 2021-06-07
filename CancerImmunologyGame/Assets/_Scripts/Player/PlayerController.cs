@@ -10,7 +10,7 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.Player
 {
 	[RequireComponent(typeof(PlayerInput))]
-	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver, IControllerMovementOverridable
+	public class PlayerController : Singleton<PlayerController>, ICancerDeathObserver, IControllerMovementOverridable
 	{
 		[SerializeField]
 		private KillerCell kc = null;
@@ -23,8 +23,6 @@ namespace ImmunotherapyGame.Player
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
-		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
-		[SerializeField]
 		private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
 
 		[SerializeField]
@@ -36,7 +34,6 @@ namespace ImmunotherapyGame.Player
 		{
 			PlayerUI.Instance.Initialise();
 			PlayerUI.Instance.SetPlayerInfo(kc);
-			kc.controller = this;
 			transform.position = kc.transform.position;
 			transform.rotation = kc.transform.rotation;
 			CrosshairRotation = Quaternion.identity;
@@ -82,11 +79,14 @@ namespace ImmunotherapyGame.Player
 			{
 				if (InitiatePrimaryAttack)
 				{
-					kc.Attack(crosshair.position);
+					kc.UsePrimaryAttack(crosshair.gameObject);
+				} else
+				{
+					kc.StopPrimaryAttack();
 				}
 				if (InitiateSpecialAttack)
 				{
-					kc.SpecialAttack(crosshair.position);
+					kc.SecondaryAttack(crosshair.gameObject);
 				}
 			}
 		}
@@ -110,17 +110,6 @@ namespace ImmunotherapyGame.Player
 			}
 		}
 
-		// Subscribtions
-		public void OnEnemiesInRange()
-		{
-			crosshairCanvas.SetActive(true);
-		}
-
-		public void OnEnemiesOutOfRange()
-		{
-			crosshairCanvas.SetActive(false);
-		}
-
 		public void OnCancerDeath(Cancer cancer)
 		{
 
@@ -136,6 +125,13 @@ namespace ImmunotherapyGame.Player
 
 		public void OnCellDeath()
 		{ 
+
+			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)
+			{
+				Debug.LogWarning("Zero respawn areas found on map. Respawning at same position");
+				return;
+			}
+
 			// Find closest spawn location
 			List < PlayerRespawnArea > respawnLocations = GlobalLevelData.RespawnAreas;
 			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
@@ -154,21 +150,6 @@ namespace ImmunotherapyGame.Player
 			kc.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 
-			for (int i = 0; i < observers.Count; ++i)
-			{
-				observers[i].OnPlayerDeath();
-			}
-		}
-
-		// Observers
-		public void SubscribeObserver(IPlayerObserver observer)
-		{
-			observers.Add(observer);
-		}
-
-		public void UnsubscribeObserver(IPlayerObserver observer)
-		{
-			observers.Remove(observer);
 		}
 
 		public void SubscribeMovementOverride(IControllerMovementOverride controllerOverride)

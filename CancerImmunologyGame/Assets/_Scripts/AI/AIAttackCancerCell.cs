@@ -18,7 +18,7 @@ namespace ImmunotherapyGame.AI
 
 			if (interactor.TargetedEvilCell != null)
 			{
-				interactor.ControlledCell.Attack(interactor.TargetedEvilCell.transform.position);
+				interactor.ControlledCell.UsePrimaryAttack(interactor.TargetedEvilCell.gameObject);
 
 				nodeState = NodeStates.RUNNING;
 				return nodeState;

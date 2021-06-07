@@ -13,13 +13,9 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private float healthValue = 50.0f;
 		[SerializeField]
-		private bool updateHealth = false;
-		[SerializeField]
 		private bool monitorEnergy = false;
 		[SerializeField]
 		private float energyValue = 50.0f;
-		[SerializeField]
-		private bool updateEnergy = false;
 		[SerializeField]
 		private bool invertChecks = false;
 
@@ -29,10 +25,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnEndEvent()
 		{
-			if (updateEnergy)
-				playerKC.Energy = energyValue;
-			if (updateHealth)
-				playerKC.Health = healthValue;
+
 		}
 
 		protected override void OnStartEvent()

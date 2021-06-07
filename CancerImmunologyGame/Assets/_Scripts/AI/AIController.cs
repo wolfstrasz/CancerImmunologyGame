@@ -9,7 +9,7 @@ using ImmunotherapyGame.Cancers;
 namespace ImmunotherapyGame.AI
 {
 	[RequireComponent(typeof(Seeker))]
-	public class AIController : MonoBehaviour, IAIKillerCellController, ICellController
+	public class AIController : MonoBehaviour, IAIKillerCellController
 	{
 		[Header("AI Data")]
 		[SerializeField]
@@ -85,8 +85,6 @@ namespace ImmunotherapyGame.AI
 		{
 			pathSeeker = GetComponent<Seeker>();
 			InitialiseBehaviourTree();
-			controlledCell.controller = this;
-
 			initialised = true;
 		}
 
@@ -209,22 +207,6 @@ namespace ImmunotherapyGame.AI
 			controlledCell.MovementVector = movementDirection;
 		}
 
-		public void OnCellDeath()
-		{
-			Debug.LogWarning("AI Controller found " + controlledCell + " to die at time " + Time.time);
-		}
-
-		public void OnEnemiesInRange()
-		{
-			Debug.LogWarning("AI Controller found " + controlledCell + " to reached enemies");
-
-		}
-
-		public void OnEnemiesOutOfRange()
-		{
-			Debug.LogWarning("AI Controller found " + controlledCell + " to went away from enemies");
-
-		}
 	}
 
 }
