@@ -58,7 +58,7 @@ namespace ImmunotherapyGame.UI
 			=> OnDeselect(eventData);
 
 
-		public void OnDisable()
+		protected virtual void OnDisable()
 		{
 			OnSelectView = false;
 		}
