@@ -10,17 +10,16 @@ namespace ImmunotherapyGame
 	public class CellType : ScriptableObject
 	{
 		public string cellName;
-		public List<CellType> enemyCells;
 		[Expandable]
 		public StatAttribute maxHealth;
 		[Expandable]
 		public StatAttribute maxEnergy;
 		[Expandable]
-		public StatAttribute speed;
+		public StatAttribute initialSpeed;
 
-		public float maxHealthValue => maxHealth.CurrentValue;
-		public float maxEnergyValue => maxEnergy.CurrentValue;
-		public float speedValue => speed.CurrentValue;
+		public float MaxHealth => maxHealth.CurrentValue;
+		public float MaxEnergy => maxEnergy.CurrentValue;
+		public float InitialSpeed => initialSpeed.CurrentValue;
 	}
 
 }

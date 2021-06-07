@@ -90,9 +90,15 @@ namespace ImmunotherapyGame
 				{
 					controller.OnUpdate();
 				}
+
 				for (int i = 0; i < GlobalLevelData.Cancers.Count; ++i)
 				{
 					GlobalLevelData.Cancers[i].OnUpdate();
+				}
+
+				for (int i = 0; i < GlobalLevelData.AbilityCasters.Count; ++i)
+				{
+					GlobalLevelData.AbilityCasters[i].OnUpdate();
 				}
 			}
 		}

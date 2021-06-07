@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame
 {
-
+	[System.Serializable]
 	public abstract class Cell : MonoBehaviour
 	{
-		[Header("Cell Links")]
+		[Header("GameObject Links")]
 		[SerializeField]
 		protected SpriteRenderer render = null;
 		[SerializeField]
@@ -18,80 +17,102 @@ namespace ImmunotherapyGame
 		protected Collider2D bodyBlocker = null;
 
 		[Header("Cell Attributes")]
-		[SerializeField]
 		public CellType cellType;
 
-		[SerializeField]
-		protected CellHealthBar healthBar;
+		[SerializeField] [ReadOnly] protected bool isDying;
+		[SerializeField] [ReadOnly] private float health;
+		[SerializeField] [ReadOnly] private float energy;
+		[SerializeField] [ReadOnly] private float speed;
+		[SerializeField] [ReadOnly] private float updateHealthValue;
+		[SerializeField] [ReadOnly] private float updateEnergyValue;
+		[SerializeField] [ReadOnly] private float updateSpeedValue;
 
 		public delegate void OnDeathEvent(Cell cell);
 		public OnDeathEvent onDeathEvent;
 
-		public delegate void OnUpdateHealth(float newValue);
+		public delegate void OnUpdateHealth();
 		public OnUpdateHealth onUpdateHealth;
 
-		public delegate void OnUpdateEnergy(float newValue);
+		public delegate void OnUpdateEnergy();
 		public OnUpdateEnergy onUpdateEnergy;
 
-		[ReadOnly]
-		protected float health;
-		[ReadOnly]
-		protected float energy;
-		[ReadOnly]
-		protected bool isDying;
+		public delegate void OnUpdateSpeed();
+		public OnUpdateSpeed onUpdateSpeed;
 
-
-		private float updateHealthValue = 0;
-		private float updateEnergyValue = 0;
+		public float CurrentHealth => Mathf.Clamp(health, 0f, cellType.MaxHealth);
+		public float CurrentEnergy => Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
+		public float CurrentSpeed => Mathf.Clamp(speed, 0f, speed);
 
 		public int RenderSortOrder { get => render.sortingOrder; set => render.sortingOrder = value; }
 		public virtual bool isImmune { get; }
 
 		protected virtual void Start()
 		{
-			health = 0;
-			energy = 0;
-			updateHealthValue += cellType.maxHealthValue;
-			updateEnergyValue += cellType.maxEnergyValue;
+			health = cellType.MaxHealth;
+			energy = cellType.MaxEnergy;
+			speed = cellType.InitialSpeed;
+
+			updateHealthValue = cellType.MaxHealth;
+			updateEnergyValue = cellType.MaxEnergy;
+			updateSpeedValue = 0;
 		}
 
 		public virtual void ApplyHealthAmount(float amount)
 		{
+			Debug.Log(this.gameObject.name + " got hit for: " + amount);
 			updateHealthValue += amount;
 		}
 
 		public virtual void ApplyEnergyAmount(float amount) 
 		{
+			Debug.Log(this.gameObject.name + " got exhausted for: " + amount);
 			updateEnergyValue += amount;
 		}
 
-		protected abstract void OnCellDeath();
+		public virtual void ApplySpeedAmount (float amount)
+		{
+			Debug.Log(this.gameObject.name + " got speed for: " + amount);
+			updateSpeedValue += amount;
+		}
+
+		protected virtual void OnCellDeath()
+		{
+			isDying = true;
+		}
 
 		protected virtual void LateUpdate()
 		{
+			//Debug.Log("HEALTH : ENERGY = " + health + " : " + energy);
 			if (!isImmune)
 			{
-
 				if (updateHealthValue != 0)
 				{
 					health += updateHealthValue;
-					Mathf.Clamp(health, 0f, cellType.maxHealthValue);
+					Mathf.Clamp(health, 0f, cellType.MaxHealth);
 
 					if (onUpdateHealth != null)
-						onUpdateHealth(health);
+						onUpdateHealth();
 				}
 
 				if (updateEnergyValue != 0)
 				{
 					energy += updateEnergyValue;
-					Mathf.Clamp(energy, 0f, cellType.maxEnergyValue);
+					Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
 					if (onUpdateEnergy != null)
-						onUpdateEnergy(energy);
+						onUpdateEnergy();
+				}
+
+				if (updateSpeedValue != 0)
+				{
+					speed += updateSpeedValue;
+					if (onUpdateSpeed != null)
+						onUpdateSpeed();
 				}
 			}
 
 			updateHealthValue = 0f;
 			updateEnergyValue = 0f;
+			updateSpeedValue = 0f;
 
 			if (health <= 0 || energy <= 0)
 			{

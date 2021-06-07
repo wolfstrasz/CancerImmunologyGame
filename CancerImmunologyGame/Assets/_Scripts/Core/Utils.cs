@@ -97,12 +97,46 @@ namespace ImmunotherapyGame.Core
 			return name;
 		}
 
-		public static void LookAt2D (this Transform trans, Vector3 position)
+		public static void LookAt2D (this Transform transformToRotate, Vector3 pointToLookAt)
 		{
-			Quaternion rotation = Quaternion.LookRotation (position, trans.TransformDirection(Vector3.up));
-			trans.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+			Quaternion rotation = Quaternion.LookRotation (pointToLookAt, transformToRotate.TransformDirection(Vector3.up));
+			transformToRotate.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
 		}
 
+
+		public static GameObject GetRandomGameObjectInRange(List<GameObject> possibleObjects, float range, GameObject fromObject)
+		{
+			List<GameObject> targetsInRange = new List<GameObject>();
+			float rangeSqrt = range * range;
+
+			for (int i = 0; i < possibleObjects.Count; ++i)
+			{
+				GameObject target = possibleObjects[i];
+
+				float distanceSqrt = (target.transform.position - fromObject.transform.position).sqrMagnitude;
+				if (distanceSqrt < 1.0f || distanceSqrt < rangeSqrt)
+				{
+					targetsInRange.Add(target);
+				}
+			}
+
+			return GetRandomGameObject(targetsInRange);
+		}
+
+		public static GameObject GetRandomGameObject(List<GameObject> possibleObjects)
+		{
+			int id = possibleObjects.Count;
+			if (id >= 1)
+			{
+				id = Random.Range(0, id);
+
+				return possibleObjects[id];
+			}
+			else
+			{
+				return null;
+			}
+		}
 	}
     
 }

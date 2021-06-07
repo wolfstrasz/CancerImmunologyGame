@@ -9,7 +9,8 @@ namespace ImmunotherapyGame
 {
 	public class CellHealthBar : MonoBehaviour
 	{
-
+		[SerializeField]
+		private Cell owner = null;
 		[SerializeField]
 		private Slider slider = null;
 		[SerializeField]
@@ -18,31 +19,17 @@ namespace ImmunotherapyGame
 		private float autoHideScale = 1.0f;
 		[SerializeField]
 		private Image image = null;
-		[SerializeField]
-		private StatAttribute maxHealthAttribute = null;
 
-		public Cell owner
+		public void UpdateHealth()
 		{
-			get
-			{
-				return owner;
-			}
-			set
-			{
-				owner = value;
-				owner.onUpdateHealth = UpdateHealth;
-			}
-		}
-
-		public void UpdateHealth(float value)
-		{
-			slider.value = value;
+			slider.value = owner.CurrentHealth;
 			image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		}
 
 		public void UpdateMaxHealth()
 		{
-			slider.maxValue = maxHealthAttribute.CurrentValue;
+			if (owner != null)
+				slider.maxValue = owner.cellType.MaxHealth;
 		}
 
 		public float Health
@@ -75,9 +62,9 @@ namespace ImmunotherapyGame
 				owner.onUpdateHealth += UpdateHealth;
 			}
 
-			if (maxHealthAttribute != null)
+			if (owner.cellType.maxHealth != null)
 			{
-				maxHealthAttribute.onValueChanged += UpdateMaxHealth;
+				owner.cellType.maxHealth.onValueChanged += UpdateMaxHealth;
 			}
 		}
 
@@ -88,9 +75,9 @@ namespace ImmunotherapyGame
 				owner.onUpdateHealth -= UpdateHealth;
 			}
 
-			if (maxHealthAttribute != null)
+			if (owner.cellType.maxHealth != null)
 			{
-				maxHealthAttribute.onValueChanged -= UpdateMaxHealth;
+				owner.cellType.maxHealth.onValueChanged -= UpdateMaxHealth;
 			}
 		}
 	}

@@ -1,67 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame
 {
     public class MatrixCell : Cell
     {
-		public float timeToReach = 1f;
-		public float timePassed = 0f;
+		[SerializeField] [ReadOnly] CancerCell cancerCell = null;
 
-		public Transform startPosition = null;
-		public Transform endPosition = null;
-
-		public override bool isImmune => isDying || !bodyBlocker.enabled;
-
-
-		private void Awake()
-		{
-			bodyBlocker.enabled = false;
-			healthBar.owner = this;
-		}
-
-		private void FixedUpdate()
-		{
-			if (timePassed < timeToReach)
-			{
-				timePassed += Time.fixedDeltaTime;
-				if (timePassed > timeToReach)
-				{
-					timePassed = timeToReach;
-					bodyBlocker.enabled = true;
-				}
-
-				transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timePassed / timePassed);
-			}
-		}
-		
-		public void SetMatrixData(Transform targetPosition, Transform startPosition, int SortLayerID)
-		{
-			this.startPosition = startPosition;
-			endPosition = targetPosition;
-			//render.sortingOrder = SortLayerID + 1;
-		}
-
-		public void OnDestroyMatrixCell()
-		{
-			Destroy(gameObject);
-		}
-
+		public override bool isImmune => isDying;
 
 		protected override void LateUpdate()
 		{
 			base.LateUpdate();
 
-			if (health == 0)
+			if (CurrentHealth == 0)
 				return;
 
-			if (health * 3f <= cellType.maxHealthValue)
+			if (CurrentHealth * 3f <= cellType.MaxHealth)
 			{
 				animator.Play("AlmostDestroyed");
 				// Make destruction sound
 			}
-			else if (health * 1.5f <= cellType.maxHealthValue)
+			else if (CurrentHealth * 1.5f <= cellType.MaxHealth)
 			{
 				animator.Play("Damaged");
 				// Make destruction sound
@@ -72,7 +34,22 @@ namespace ImmunotherapyGame
 		{
 			animator.Play("Destroyed");
 			// Make destruction sound
+			cancerCell.DetachMatrixCell(this);
 		}
 
+		public void AttachCancerCell (CancerCell cancerCell)
+		{
+			this.cancerCell = cancerCell;
+			RenderSortOrder = cancerCell.RenderSortOrder + 1;
+		}
+
+		public void DetachCancerCell (CancerCell cancerCell)
+		{
+			if (this.cancerCell == cancerCell)
+			{
+				cancerCell = null;
+				ApplyHealthAmount(-CurrentHealth);
+			}
+		}
 	}
 }

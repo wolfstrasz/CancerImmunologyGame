@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 690612214031318391}
   - component: {fileID: 422377755155147371}
   - component: {fileID: 8113210301320524461}
-  m_Layer: 12
+  m_Layer: 28
   m_Name: TutorialPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

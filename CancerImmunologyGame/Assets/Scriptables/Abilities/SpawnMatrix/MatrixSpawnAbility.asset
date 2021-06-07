@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b3378186c66d043b4e4f635ea7afde, type: 3}
+  m_Name: MatrixSpawnAbility
+  m_EditorClassIdentifier: 
+  name: 
+  thumbnail: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 0a4332531e50dda4ab9eab56fe56ba35, type: 3}
+  description: 
+  range: {fileID: 11400000, guid: 1107073e92b05264887e2dd8860937c1, type: 2}
+  energyCost: {fileID: 0}
+  cooldownTime: {fileID: 11400000, guid: c96643427b7477b42a2d785bb563e913, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: 04569fb91e9f759478059a3c59bafcf2, type: 2}
+  effectOnTargetCell:
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 0}
+    speedEffect: {fileID: 0}
+  applicableCellTypes: []
+  spawnObjectPrefab: {fileID: 4851716123014601265, guid: 327775f6947bc154a9ad8867ba8a1cec,
+    type: 3}

@@ -17,6 +17,10 @@ namespace ImmunotherapyGame
 		[SerializeField]
 		List<KillerCell> killerCells = new List<KillerCell>();
 
+		private void Awake()
+		{
+			transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
+		}
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{

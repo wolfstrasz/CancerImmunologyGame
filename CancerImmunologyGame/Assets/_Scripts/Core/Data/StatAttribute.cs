@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace ImmunotherapyGame.Core
 {
@@ -6,8 +7,10 @@ namespace ImmunotherapyGame.Core
     public class StatAttribute : ScriptableObject, ISerializationCallbackReceiver
     {
         public string attributeName;
-        public float initialValue;
-        private float currentValue;
+
+		[SerializeField] private float initialValue;
+        [SerializeField] [ReadOnly] private float currentValue;
+		[SerializeField] [ReadOnly] private List<StatAttribute> modifiers = new List<StatAttribute>();
 
 		public float CurrentValue
 		{
@@ -30,5 +33,30 @@ namespace ImmunotherapyGame.Core
 		}
 
 		public void OnBeforeSerialize() { }
+
+		public void AddModifier(StatAttribute modifier)
+		{
+			modifiers.Add(modifier);
+			currentValue += modifier.currentValue;
+			if (onValueChanged != null)
+				onValueChanged();
+		}
+
+		public void RemoveModifier(StatAttribute modifier)
+		{
+			int lastIndex = modifiers.Count - 1;
+			for (int i = lastIndex; i >= 0; --i)
+			{
+				if (modifiers[i] == modifier)
+				{
+					modifiers[i] = modifiers[lastIndex];
+					currentValue -= modifier.currentValue;
+					modifiers.RemoveAt(lastIndex);
+					if (onValueChanged != null)
+						onValueChanged();
+					break;
+				}
+			}
+		}
 	}
 }

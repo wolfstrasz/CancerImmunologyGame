@@ -3,37 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
+using ImmunotherapyGame.Abilities;
+using ImmunotherapyGame.Core;
+
 namespace ImmunotherapyGame
 {
+
     public class RegulatoryCell : Cell
     {
-        public float shiftSpeed = 0.5f;
-        public float energyDmg = -10.0f;
-        public PathCreator path = null;
-        public VertexPath pathToFollow = null;
-        public CircleCollider2D coll = null;
+        [Header("Skills")]
+		[SerializeField] private AbilityCaster primaryCaster = null;
+		[SerializeField] private AbilityCaster chargeCaster = null;
+		[SerializeField] private GameObject chargePathPivot = null;
+        [SerializeField] [ReadOnly] private Vector3 chargeAtTargetPosition;
+        [SerializeField] [ReadOnly] private GameObject chargeAtTarget;
 
-        public float distanceTravelled = 0.0f;
-        public float maxLengthDist = 0.0f;
+        [Header ("Patrol movement")]
+        [SerializeField] private PathCreator path = null;
+        [SerializeField] [ReadOnly] private VertexPath pathToFollow = null;
+        [SerializeField] [ReadOnly] private float distanceTravelled = 0.0f;
+        [SerializeField] [ReadOnly] private Vector3 closestPathPosition;
 
-        ////////////////////////////////
-        public bool isShooting = false;
-        public float shootDelay = 3.0f;
-        ////////////////////////////////
+        private float pathLengthDistance { get; set; }
 
-        [SerializeField]
-        private const float bumpcooldown = 2.0f;
-        private float cooldown = 2.0f;
+        [Header("State info")]
+        [SerializeField] [ReadOnly] private bool isPreparingForCharge = false;
+        [SerializeField] [ReadOnly] private bool isCharging = false;
+        [SerializeField] [ReadOnly] private bool isReturningFromCharge = false;
 
-        public GameObject particleToShoot = null;
-
+        private bool isBusy => isPreparingForCharge || isCharging || isReturningFromCharge;
 
         void Awake()
         {
             if (path != null)
             {
                 pathToFollow = path.path;
-                maxLengthDist = pathToFollow.length;
+                pathLengthDistance = pathToFollow.length;
             }
             else
             {
@@ -43,21 +48,89 @@ namespace ImmunotherapyGame
 
         public void OnUpdate()
         {
-            if (cooldown > 0.0f)
-                cooldown -= Time.deltaTime;
+            Utils.LookAt2D(chargePathPivot.transform, chargeCaster.transform.position);
+
+            if (primaryCaster != null && primaryCaster.HasTargetsInRange && !isBusy)
+			{
+				if (primaryCaster.CanCastAbility(CurrentEnergy))
+				{
+					GameObject targetToShoot = Utils.GetRandomGameObject(primaryCaster.TargetsInRange);
+                    primaryCaster.CastAbility(targetToShoot);
+				}
+			}
+
+			if (chargeCaster != null && chargeCaster.HasTargetsInRange && !isBusy)
+			{
+				// Add secondary skill here!
+				if (chargeCaster.CanCastAbility(CurrentEnergy) && !isCharging)
+				{
+                    chargeAtTarget = Utils.GetRandomGameObject(chargeCaster.TargetsInRange);
+
+					isPreparingForCharge = true;
+                    animator.SetTrigger("PrepareForCharge");
+
+                    chargeAtTargetPosition = chargeAtTarget.transform.position;
+                    Utils.LookAt2D(chargePathPivot.transform, chargeAtTargetPosition);
+				}
+			}
+
+		}
+
+        public void OnChargeExecution()
+		{
+            if (chargeCaster.CanCastAbility(CurrentEnergy))
+			{
+                chargeCaster.CastAbility(gameObject);
+			}
+
+            animator.SetTrigger("Charge");
+            isPreparingForCharge = false;
+            isCharging = true;
+		}
+
+        private void OnChargeFinish()
+		{
+            animator.SetTrigger("ReturnFromCharge");
+
+            isReturningFromCharge = true;
+            isCharging = false;
+
+            closestPathPosition = pathToFollow.GetClosestPointOnPath(transform.position);
+
         }
+
 
         public void OnFixedUpdate()
         {
-            if (path != null)
-                Move();
+            if (path == null)
+            {
+                return;
+            }
+
+
+            if (!isBusy)
+			{
+                MoveByPath();
+			} 
+            else if (isPreparingForCharge)
+			{
+                
+			} 
+            else if (isCharging)
+			{
+                MoveToChargeTarget();
+			}
+            else if (isReturningFromCharge)
+			{
+                MoveToPath();
+			}
         }
 
 
-        void Move()
+        private void MoveByPath()
         {
-            distanceTravelled += Time.fixedDeltaTime * cellType.speedValue;
-            if (distanceTravelled > maxLengthDist) distanceTravelled -= maxLengthDist;
+            distanceTravelled += Time.fixedDeltaTime * CurrentSpeed;
+            if (distanceTravelled > pathLengthDistance) distanceTravelled -= pathLengthDistance;
             Vector3 newPos = pathToFollow.GetPointAtDistance(distanceTravelled, EndOfPathInstruction.Loop);
             transform.position = newPos;
 
@@ -66,111 +139,52 @@ namespace ImmunotherapyGame
             render.flipX = direction.x < 0.0f;
         }
 
-        // SHOOTING
 
-        public void StartShooting()
-        {
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(Shooting());
-            }
-
-        }
-
-        public void StopShooting()
-        {
-            isShooting = false;
-            StopCoroutine(Shooting());
-        }
-
-        IEnumerator Shooting()
-        {
-            while (isShooting)
-            {
-                yield return new WaitForSeconds(5.0f);
-                if (GlobalGameData.isGameplayPaused) continue;
-
-                float rotation = Random.Range(0, 360f);
-                Vector3 spreadVector = new Vector3(2.5f, 0.0f, 0.0f);
-                float range = 2.5f;
-                spreadVector = Quaternion.Euler(0.0f, 0.0f, rotation) * spreadVector;
-
-                GameObject particle = Instantiate(particleToShoot, transform.position, Quaternion.identity);
-                RegulatoryParticle rp = particle.GetComponent<RegulatoryParticle>();
-                rp.Initialise(spreadVector.normalized, range);
-            }
-        }
-
-        // BUMPING
-
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            KillerCell collidedKillerCell = collider.GetComponent<KillerCell>();
-            if (collidedKillerCell != null)
-            {
-                if (cooldown <= 0.0f)
-                    StartCoroutine(BumpPlayer(collidedKillerCell));
-            }
-        }
-
-
-        public float ScaleIncrease;
-        public float RadiusIncrease;
-
-        public float prevRadius;
-        public float prevScale;
-
-        IEnumerator BumpPlayer(KillerCell target)
-        {
-            Debug.Log("STARTED BUMP");
-
-            //StopMoving();
-            prevRadius = coll.radius;
-            prevScale = transform.localScale.x;
-
-            float scaleToIncrease = ScaleIncrease - transform.localScale.x;
-            float radiusToIncrease = RadiusIncrease - coll.radius;
-
-            coll.radius = 0.1f;
-            coll.isTrigger = false;
-
-            while (transform.localScale.x < ScaleIncrease || coll.radius < RadiusIncrease)
-            {
-                transform.localScale += new Vector3(scaleToIncrease * Time.deltaTime * shiftSpeed, scaleToIncrease * Time.deltaTime * shiftSpeed, 0.0f);
-                coll.radius += radiusToIncrease * Time.deltaTime * shiftSpeed;
-            }
-
-            target.ApplyEnergyAmount(-Mathf.Abs(energyDmg));
-            //PlayerUI.Instance.AddExhaustion(exhaust_dmg);
-            yield return new WaitForSeconds(0.1f);
-            StartCoroutine(StopBump());
-        }
-
-        IEnumerator StopBump()
-        {
-            Debug.Log("Stopping Bump");
-            //StartMoving();
-            float scaleToDecrease = transform.localScale.x - prevScale;
-            float radiusToDecrease = coll.radius - prevRadius;
-
-            while (transform.localScale.x > prevScale || coll.radius > prevRadius)
-            {
-                transform.localScale -= new Vector3(scaleToDecrease * Time.deltaTime * shiftSpeed, scaleToDecrease * Time.deltaTime * shiftSpeed, 0.0f);
-                coll.radius -= radiusToDecrease * Time.deltaTime * shiftSpeed;
-
-            }
-
-            transform.localScale = new Vector3(prevScale, prevScale, 1.0f);
-            coll.radius = prevRadius;
-            coll.isTrigger = true;
-            cooldown = bumpcooldown;
-            yield return new WaitForSeconds(0.1f);
-        }
-
-		protected override void OnCellDeath()
+        private void MoveToPath()
 		{
-			
+            Vector3 distanceVector = closestPathPosition - transform.position;
+            Vector3 direction = distanceVector.normalized;
+            Vector3 movement = direction * Time.fixedDeltaTime * CurrentSpeed;
+
+            // Check for flipping
+            render.flipX = direction.x < 0.0f;
+
+            if (movement.magnitude < distanceVector.magnitude)
+			{
+
+                transform.position += movement;
+			}
+            else
+			{
+                transform.position = closestPathPosition;
+                float newDistanceAlongPath = pathToFollow.GetClosestDistanceAlongPath(closestPathPosition);
+                distanceTravelled = newDistanceAlongPath;
+                isReturningFromCharge = false;
+			}
+		}
+
+        private void MoveToChargeTarget()
+		{
+            Vector3 distanceVector = chargeAtTargetPosition - transform.position;
+            Vector3 direction = distanceVector.normalized;
+            Vector3 movement = direction * Time.fixedDeltaTime * CurrentSpeed;
+
+            // Check for flipping
+            render.flipX = direction.x < 0.0f;
+
+            if (movement.magnitude < distanceVector.magnitude)
+			{
+                transform.position += movement;
+
+			}
+            else
+            {
+                OnChargeFinish();
+            }
+        }
+
+        protected override void OnCellDeath()
+		{
 		}
 	}
 

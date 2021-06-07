@@ -1,70 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Abilities;
 
 namespace ImmunotherapyGame.Cancers
 {
 	public class CAFCell : Cell
 	{
-
 		[Header("CAF Cell")]
-		[SerializeField]
-		private CAFSense sense = null;
-		[SerializeField]
-		private GameObject matrixPrefab = null;
-		[SerializeField]
-		private float timeBetweenMatrixSpawns = 15f;
-		[SerializeField]
-		private float timePassedForMatrixSpawns = 0f;
-
-		[Header("Debug (Read Only)")]
-		[SerializeField]
-		internal Cancer cancerOwner = null;
-
-		void Awake()
-		{
-			healthBar.owner = this;
-		}
+		[SerializeField] AbilityCaster matrixSpawnCaster = null;
+		[SerializeField] [ReadOnly] internal Cancer cancerOwner = null;
+		[SerializeField] [ReadOnly] List<CancerCell> cancerCellNearby = new List<CancerCell>();
 
 		public void OnUpdate()
 		{
-			timePassedForMatrixSpawns += Time.deltaTime;
-			if (timePassedForMatrixSpawns >= timeBetweenMatrixSpawns)
+			if (matrixSpawnCaster.CanCastAbility(CurrentEnergy))
 			{
-				timePassedForMatrixSpawns = 0f;
-
-				CancerCell cellToSpawn = FindACancerCellToSpawnMatrix();
-
-				if (cellToSpawn != null)
+				for (int i = 0; i < matrixSpawnCaster.TargetsInRange.Count; ++i)
 				{
-					MatrixCell matrix = Instantiate(matrixPrefab, transform.position, Quaternion.identity).GetComponent<MatrixCell>();
-					matrix.SetMatrixData(cellToSpawn.transform, this.transform, cellToSpawn.RenderSortOrder);
-					cellToSpawn.matrix = matrix;
-				}
-
-			}
-		}
-
-
-		private CancerCell FindACancerCellToSpawnMatrix()
-		{
-			List<CancerCell> possibleCells = new List<CancerCell>(sense.cancerCells.Count);
-
-			for (int i = 0; i < sense.cancerCells.Count; ++i)
-			{
-				if (!sense.cancerCells[i].isImmune && sense.cancerCells[i].matrix == null)
-				{
-					possibleCells.Add(sense.cancerCells[i]);
+					CancerCell cell = matrixSpawnCaster.TargetsInRange[i].GetComponent<CancerCell>();
+					Debug.Log(cell);
+					if ( cell != null && cell.matrixCell == null)
+					{
+						matrixSpawnCaster.CastAbility(cell.gameObject);
+						break;
+					}
 				}
 			}
-
-			if (possibleCells.Count != 0)
-			{
-				int index = Random.Range(0, possibleCells.Count);
-				return possibleCells[index];
-			}
-
-			return null;
 		}
 
 		protected override void OnCellDeath()

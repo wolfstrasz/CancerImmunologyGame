@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14bed69b3e3b8748a8032ac6a1588ed, type: 3}
+  m_Name: HealAbility
+  m_EditorClassIdentifier: 
+  name: 
+  thumbnail: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 0a4332531e50dda4ab9eab56fe56ba35, type: 3}
+  description: 
+  range: {fileID: 11400000, guid: 1f77bfc05ee95fc4d9e7cf25b91976f5, type: 2}
+  energyCost: {fileID: 11400000, guid: b1d59b59207f5494fa2a199efaad5b73, type: 2}
+  cooldownTime: {fileID: 11400000, guid: 30454dc3143518c4098ba95e27de526c, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  effectOnTargetCell:
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 0}
+    speedEffect: {fileID: 0}
+  applicableCellTypes:
+  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  projectileRange: {fileID: 11400000, guid: 1f77bfc05ee95fc4d9e7cf25b91976f5, type: 2}
+  projectileCount: {fileID: 11400000, guid: 09fd05a2b2eb6a744a244f45a8531694, type: 2}
+  projectileSpread: {fileID: 11400000, guid: 2541049a39a16b04bb662d98b13a83eb, type: 2}
+  projectileLifetime: {fileID: 0}
+  projectilePrefab: {fileID: 4239677428159848085, guid: a21ea53b4bc372f49aa6c176e962ee17,
+    type: 3}
+  useRandomSpreadOffset: 0
+  spreadPerParticle: 5
+  baseStartRotation: -2.5
