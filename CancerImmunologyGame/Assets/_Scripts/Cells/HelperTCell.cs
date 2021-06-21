@@ -10,7 +10,7 @@ namespace ImmunotherapyGame
 	{
 		[Header("Healing")]
 		[SerializeField]
-		private AbilityCaster healCaster = null;
+		private RangedAbilityCaster healCaster = null;
 
 		[Header("AI Booking")]
 		[SerializeField]
@@ -69,7 +69,7 @@ namespace ImmunotherapyGame
 		{
 			if (healCaster.CanCastAbility(CurrentEnergy))
 			{
-				float energyCost = healCaster.CastAbilityOnAllTargetsInRange();
+				float energyCost = healCaster.CastAbility();
 				ApplyEnergyAmount(-energyCost);
 			}
 		}

@@ -158,11 +158,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f171b29fb0a7f8a4293c9242044befef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 523717820174548932}
   audioSource: {fileID: 5143452301588708680}
   ability: {fileID: 11400000, guid: 1a84fa68569732843bfce4e5351b0c71, type: 2}
   cellTypesToTarget:
   - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  currentCooldown: 0
+  coll: {fileID: 523717820174548932}
   targetsInRange: []
 --- !u!1 &4702413554772471880
 GameObject:

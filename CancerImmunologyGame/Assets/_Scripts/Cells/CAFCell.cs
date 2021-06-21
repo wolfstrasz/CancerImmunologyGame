@@ -8,7 +8,7 @@ namespace ImmunotherapyGame.Cancers
 	public class CAFCell : Cell
 	{
 		[Header("CAF Cell")]
-		[SerializeField] AbilityCaster matrixSpawnCaster = null;
+		[SerializeField] RangedAbilityCaster matrixSpawnCaster = null;
 		[SerializeField] [ReadOnly] internal Cancer cancerOwner = null;
 		[SerializeField] [ReadOnly] List<CancerCell> cancerCellNearby = new List<CancerCell>();
 

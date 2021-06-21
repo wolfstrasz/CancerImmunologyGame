@@ -70,7 +70,7 @@ namespace ImmunotherapyGame
 			owner = _owner;
 			ownerCell = _owner.GetComponent<Cell>();
 			statusEffectAbility = _statusEffectAbility;
-			lifetime = statusEffectAbility.StatusEffectLifetime;
+			lifetime = statusEffectAbility.Lifetime;
 			isEffectOverTime = statusEffectAbility.IsStatusEffectOverTime;
 
 			if (ownerCell == null)

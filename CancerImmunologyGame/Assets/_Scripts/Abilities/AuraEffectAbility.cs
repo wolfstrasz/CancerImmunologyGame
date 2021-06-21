@@ -9,7 +9,6 @@ namespace ImmunotherapyGame.Abilities
 
 	public class AuraEffectAbility : Ability
     {
-		[Expandable] public StatAttribute auraEffectLifetime;
 		[Expandable] public StatAttribute auraRange;
 
 		[SerializeField] private GameObject auraEffectPrefab;
@@ -17,8 +16,6 @@ namespace ImmunotherapyGame.Abilities
 
 
 		public float AuraRange => (auraRange != null ? auraRange.CurrentValue : 0f);
-		public float AuraEffectLifetime => (auraEffectLifetime != null ? auraEffectLifetime.CurrentValue : 0f);
-
 		public bool IsAuraEffectOverTime => isAuraEffectOverTime;
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target )

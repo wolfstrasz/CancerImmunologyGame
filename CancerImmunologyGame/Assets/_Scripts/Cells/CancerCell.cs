@@ -13,7 +13,7 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField]
 		public CircleCollider2D divisionBodyBlocker = null;
 		[SerializeField]
-		private AbilityCaster hypoxicCaster = null;
+		private RangedAbilityCaster hypoxicCaster = null;
 		[SerializeField]
 		internal Cancer cancerOwner = null;
 

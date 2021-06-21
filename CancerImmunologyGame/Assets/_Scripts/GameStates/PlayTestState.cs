@@ -100,6 +100,7 @@ namespace ImmunotherapyGame
 				{
 					GlobalLevelData.AbilityCasters[i].OnUpdate();
 				}
+
 			}
 		}
 	}

@@ -23,11 +23,11 @@ namespace ImmunotherapyGame
 
 		[Header("Normal Attack")]
 		[SerializeField]
-		private AbilityCaster primaryAbilityCaster = null;
+		private RangedAbilityCaster primaryAbilityCaster = null;
 
 		[Header("Secondary Attack Attributes")]
 		[SerializeField]
-		private AbilityCaster secondaryAbilityCaster = null;
+		private RangedAbilityCaster secondaryAbilityCaster = null;
 
 		[Header("Debug only")]
 		[ReadOnly]

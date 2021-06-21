@@ -446,10 +446,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f171b29fb0a7f8a4293c9242044befef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 7647799363815197524}
   audioSource: {fileID: 6471230918290665414}
   ability: {fileID: 11400000, guid: 043746347b80f1347baf7a5c0ba8e17f, type: 2}
   cellTypesToTarget: []
+  currentCooldown: 0
+  coll: {fileID: 7647799363815197524}
   targetsInRange: []
 --- !u!1 &6474572443872312062
 GameObject:

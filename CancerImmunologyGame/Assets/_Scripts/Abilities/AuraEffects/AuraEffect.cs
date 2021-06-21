@@ -110,7 +110,7 @@ namespace ImmunotherapyGame
 			ownerCell = _owner.GetComponent<Cell>();
 			auraEffectAbility = _auraEffectAbility;
 
-			lifetime = auraEffectAbility.AuraEffectLifetime;
+			lifetime = auraEffectAbility.Lifetime;
 			isEffectOverTime = auraEffectAbility.IsAuraEffectOverTime;
 			coll.radius = auraEffectAbility.AuraRange;
 			if (ownerCell == null)

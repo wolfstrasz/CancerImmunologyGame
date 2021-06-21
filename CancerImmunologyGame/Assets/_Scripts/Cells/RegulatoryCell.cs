@@ -12,8 +12,8 @@ namespace ImmunotherapyGame
     public class RegulatoryCell : Cell
     {
         [Header("Skills")]
-		[SerializeField] private AbilityCaster primaryCaster = null;
-		[SerializeField] private AbilityCaster chargeCaster = null;
+		[SerializeField] private RangedAbilityCaster primaryCaster = null;
+		[SerializeField] private RangedAbilityCaster chargeCaster = null;
 		[SerializeField] private GameObject chargePathPivot = null;
         [SerializeField] [ReadOnly] private Vector3 chargeAtTargetPosition;
         [SerializeField] [ReadOnly] private GameObject chargeAtTarget;

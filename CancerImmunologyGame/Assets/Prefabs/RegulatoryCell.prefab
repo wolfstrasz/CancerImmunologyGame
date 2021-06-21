@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632751297513646659}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.949997, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7363393213812419700}
@@ -157,11 +157,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f171b29fb0a7f8a4293c9242044befef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 5920873556677769375}
   audioSource: {fileID: 383209423579290685}
   ability: {fileID: 11400000, guid: edaa9f94e6b421542a3dd06d52b11dc2, type: 2}
   cellTypesToTarget:
   - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  currentCooldown: 0
+  coll: {fileID: 5920873556677769375}
   targetsInRange: []
 --- !u!1 &4240322819255814906
 GameObject:
@@ -190,7 +191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4240322819255814906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.95, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7363393213812419700}
@@ -320,11 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f171b29fb0a7f8a4293c9242044befef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 227803510720392732}
   audioSource: {fileID: 2932717841168860229}
   ability: {fileID: 11400000, guid: 020d4642391868348a2b025988134ecc, type: 2}
   cellTypesToTarget:
   - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  currentCooldown: 0
+  coll: {fileID: 227803510720392732}
   targetsInRange: []
 --- !u!1 &6354595738444303382
 GameObject:
@@ -853,6 +855,7 @@ MonoBehaviour:
   primaryCaster: {fileID: 3782982866615599119}
   chargeCaster: {fileID: 6062491730611907341}
   chargePathPivot: {fileID: 6354595738444303382}
+  chargeAtTargetPosition: {x: 0, y: 0, z: 0}
   chargeAtTarget: {fileID: 0}
   path: {fileID: 0}
   distanceTravelled: 0

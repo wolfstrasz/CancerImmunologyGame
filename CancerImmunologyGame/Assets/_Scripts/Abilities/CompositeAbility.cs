@@ -8,8 +8,7 @@ namespace ImmunotherapyGame.Abilities
 	public class CompositeAbility : Ability, ISerializationCallbackReceiver
 	{
 		[Header("Ability Components")]
-		[SerializeField] private List<Ability> abilities = new List<Ability>();
-
+		[SerializeField] protected List<Ability> abilities = new List<Ability>();
 		private bool alreadyCalled = false;
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
