@@ -11,7 +11,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 {
 	
 	[RequireComponent (typeof(Selectable))]
-	public class PetridishButton : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerClickHandler, ISubmitHandler, IMoveHandler
+	public class PetridishButton : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler, ISubmitHandler, IMoveHandler
 	{
 		internal static PetridishButton lastSubmitted = null;
 		internal static List<PetridishButton> allPetridishButtons = null;
@@ -99,17 +99,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 			base.OnPointerEnter(eventData);
 		}
 
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-		}
-
-
-		public void OnPointerClick(PointerEventData eventData)
-		{
-			if (!isActivated || lastSubmitted == this) return;
-			SubmitCellData();
-		}
-
 		public void OnSubmit(BaseEventData eventData)
 		{
 			if (!isActivated || lastSubmitted == this) return;
@@ -168,6 +157,12 @@ namespace ImmunotherapyGame.CellpediaSystem
 					EventSystem.current.SetSelectedGameObject(buttonToSelect.gameObject);
 				}
 			}
+		}
+
+		protected override void OnPointerLeftClick(PointerEventData eventData)
+		{
+			if (!isActivated || lastSubmitted == this) return;
+			SubmitCellData();
 		}
 	}
 }

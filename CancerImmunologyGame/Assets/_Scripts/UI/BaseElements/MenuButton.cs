@@ -10,8 +10,5 @@ namespace ImmunotherapyGame.UI
 	[RequireComponent(typeof(Button))]
 	public class MenuButton : UIMenuNode
 	{
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-		}
 	}
 }

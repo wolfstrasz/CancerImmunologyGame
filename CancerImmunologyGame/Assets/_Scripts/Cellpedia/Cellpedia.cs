@@ -39,7 +39,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[SerializeField]
 		private TopOverlayButtonData inGameUIButtonData = null;
 
-
 		// Input handling
 		PlayerControls playerControls = null;
 		InputAction openCellpediaAction = null;

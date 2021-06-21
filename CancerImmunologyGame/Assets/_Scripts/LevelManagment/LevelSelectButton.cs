@@ -14,7 +14,7 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.LevelManagement
 {
     [RequireComponent(typeof(Selectable))]
-    public class LevelSelectButton : UIMenuNode, IPointerClickHandler, ISubmitHandler, IMoveHandler, ICancelHandler
+    public class LevelSelectButton : UIMenuNode, ISubmitHandler, IMoveHandler, ICancelHandler
     {
         [ReadOnly]
         private LevelDataObject data = null;
@@ -86,24 +86,21 @@ namespace ImmunotherapyGame.LevelManagement
 			}
         }
 
-        public void OnPointerClick(PointerEventData eventData)
-		{
-            LoadLevel();
-        }
-
         public void OnSubmit (BaseEventData eventData)
 		{
             LoadLevel();
 		}
 
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-		}
 
 		public void OnMove(AxisEventData eventData)
 		{
             LevelSelectScreen.Instance.SelectObjectOnButtonMove(eventData.moveDir, buttonID);
 		}
+
+		protected override void OnPointerLeftClick(PointerEventData eventData)
+		{
+            LoadLevel();
+        }
 
 	}
 }

@@ -11,7 +11,7 @@ using TMPro;
 namespace ImmunotherapyGame.UI
 {
     [RequireComponent(typeof(Selectable))]
-    public class MenuDropdown : UIMenuNode, IPointerClickHandler, ISubmitHandler, IPointerExitHandler
+    public class MenuDropdown : UIMenuNode, ISubmitHandler, IPointerExitHandler
     {
         [Header("Dropdown")]
         [SerializeField]
@@ -60,7 +60,7 @@ namespace ImmunotherapyGame.UI
 
 		public override void OnPointerExit(PointerEventData eventData)
 		{
-			base.OnPointerExit(eventData);
+            OnDeselect(eventData);
             foreach (MenuDropdownItem item in dropdownItems)
 			{
                 item.SilentDeselect();
@@ -68,10 +68,6 @@ namespace ImmunotherapyGame.UI
             view.SetActive(false);
 		}
 
-		public void OnPointerClick(PointerEventData eventData)
-		{
-            OnSubmit(eventData);
-        }
 
         public void OnSubmit(BaseEventData eventData)
 		{
@@ -86,8 +82,12 @@ namespace ImmunotherapyGame.UI
             EventSystem.current.SetSelectedGameObject(selectedItem.gameObject);
         }
 
-		#region Menu Dropdown Functionality
-		public void ClearOptions()
+        protected override void OnPointerLeftClick(PointerEventData eventData)
+        {
+            OnSubmit(eventData);
+        }
+        #region Menu Dropdown Functionality
+        public void ClearOptions()
 		{
             if (dropdownItems != null)
 			{
@@ -121,7 +121,9 @@ namespace ImmunotherapyGame.UI
         {
             selectedDisplayText.text = selectedItem.ItemName;
 		}
-#endregion
+
+
+		#endregion
 
 	}
 }

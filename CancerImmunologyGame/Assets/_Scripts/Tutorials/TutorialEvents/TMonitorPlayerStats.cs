@@ -30,7 +30,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
-			playerKC = PlayerController.Instance.KC;
+			playerKC = PlayerController.Instance.ControlledCell;
 		}
 
 		protected override bool OnUpdateEvent()

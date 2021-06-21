@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 namespace ImmunotherapyGame.UI.TopOverlay
 {
     [RequireComponent (typeof(Selectable))]
-    public class TopOverlayButton : UIMenuNode, IPointerClickHandler
+    public class TopOverlayButton : UIMenuNode
     {
         [Header("Overlay Button")]
         [SerializeField]
@@ -44,20 +44,12 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
 		}
 
-		public void OnPointerClick(PointerEventData eventData)
-		{
-            anim.SetTrigger("Opened");
-            if (buttonData.onOpenMenu != null)
-			{
-                buttonData.onOpenMenu();
-			}
-        }
 
         public override void OnPointerEnter(PointerEventData eventData)
            => OnSelect(eventData);
 
 
-        void OnEnable()
+        protected override void OnEnable()
 		{
             buttonData.onChangedStatus += Animate;
 		}
@@ -66,5 +58,14 @@ namespace ImmunotherapyGame.UI.TopOverlay
 		{
             buttonData.onChangedStatus -= Animate;
 		}
-    }
+
+		protected override void OnPointerLeftClick(PointerEventData eventData)
+		{
+			anim.SetTrigger("Opened");
+            if (buttonData.onOpenMenu != null)
+            {
+                buttonData.onOpenMenu();
+            }
+        }
+	}
 }
