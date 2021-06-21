@@ -12,8 +12,11 @@ namespace ImmunotherapyGame.Player
 	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerController : Singleton<PlayerController>, ICancerDeathObserver, IControllerMovementOverridable
 	{
+		[SerializeField] private PlayerData playerData = null;
+		[SerializeField] private ImmunotherapyCaster immunotherapyCaster = null;
+
 		[SerializeField]
-		private KillerCell kc = null;
+		private KillerCell controlledCell = null;
 		[Header("Aiming")]
 		[SerializeField]
 		private GameObject crosshairCanvas = null;
@@ -28,15 +31,15 @@ namespace ImmunotherapyGame.Player
 		[SerializeField]
 		private List<Cancer> cancersNearby = new List<Cancer>();
 
-		public KillerCell KC => kc;
+		public KillerCell ControlledCell => controlledCell;
 
 		public void Initialise()
 		{
-			PlayerUI.Instance.Initialise();
-			PlayerUI.Instance.SetPlayerInfo(kc);
-			transform.position = kc.transform.position;
-			transform.rotation = kc.transform.rotation;
+			transform.position = controlledCell.transform.position;
+			transform.rotation = controlledCell.transform.rotation;
 			CrosshairRotation = Quaternion.identity;
+			playerData.CurrentCell = controlledCell;
+			playerData.CurrentCaster = immunotherapyCaster;
 		}
 
 
@@ -70,23 +73,22 @@ namespace ImmunotherapyGame.Player
 		public void OnUpdate()
 		{
 
-			transform.position = kc.transform.position;
-			transform.rotation = kc.transform.rotation;
+			transform.position = controlledCell.transform.position;
+			transform.rotation = controlledCell.transform.rotation;
 			crosshairCanvas.transform.rotation = CrosshairRotation;
-			PlayerUI.Instance.OnUpdate();
 
 			if (CanAttack)
 			{
 				if (InitiatePrimaryAttack)
 				{
-					kc.UsePrimaryAttack(crosshair.gameObject);
+					controlledCell.UsePrimaryAttack(crosshair.gameObject);
 				} else
 				{
-					kc.StopPrimaryAttack();
+					controlledCell.StopPrimaryAttack();
 				}
 				if (InitiateSpecialAttack)
 				{
-					kc.SecondaryAttack(crosshair.gameObject);
+					controlledCell.SecondaryAttack(crosshair.gameObject);
 				}
 			}
 		}
@@ -97,7 +99,7 @@ namespace ImmunotherapyGame.Player
 			if (IsMoving)
 			{
 				Vector2 movementVector = MoveDirection;
-				Vector3 position = kc.transform.position;
+				Vector3 position = controlledCell.transform.position;
 				Quaternion rotation = Quaternion.identity;
 
 				for (int i = 0; i < movementOverrides.Count; i++)
@@ -105,8 +107,8 @@ namespace ImmunotherapyGame.Player
 					movementOverrides[i].ApplyOverride(ref movementVector, ref rotation, ref position);
 				}
 
-				kc.MovementVector = movementVector;
-				kc.MovementRotation = Quaternion.Slerp(kc.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
+				controlledCell.MovementVector = movementVector;
+				controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 			}
 		}
 
@@ -147,7 +149,7 @@ namespace ImmunotherapyGame.Player
 				}
 			}
 
-			kc.gameObject.transform.position = closestRespawnLocation;
+			controlledCell.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 
 		}
@@ -253,6 +255,16 @@ namespace ImmunotherapyGame.Player
 			// Calculate rotation
 			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+		}
+
+
+		void OnImmunotherapy(InputValue value)
+		{
+			Debug.Log("Player: On Special Ability Use");
+			if (!immunotherapyCaster.IsOnCooldown)
+			{
+				immunotherapyCaster.CastAbility();
+			}
 		}
 	}
 }

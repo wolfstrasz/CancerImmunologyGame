@@ -44,6 +44,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Immunotherapy",
+                    "type": "Button",
+                    "id": "713b51d2-c4e7-4a1b-9dda-b2624b24ae8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -178,6 +186,61 @@
                     "action": "MouseAim",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "269db4a4-c543-4e20-ae1d-2c3da9f1978e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Immunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "3e219ad9-5b82-40a0-9db9-f73f7c88e32c",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Immunotherapy",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "738ad739-15fc-41a7-9f96-7eb17e67873a",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Immunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "a5427ccd-1c7a-4b55-9334-2a3bd9fa088b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Immunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "3dab9380-09b2-448b-880b-bf0081c9ae70",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Immunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -221,6 +284,14 @@
                     "name": "Survey",
                     "type": "Button",
                     "id": "15fe41de-d417-47c6-aede-50debb6161cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwitchImmunotherapy",
+                    "type": "Button",
+                    "id": "82770b89-7df3-421c-9897-83eb9c9a18f6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -334,6 +405,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Survey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f0c43b62-4637-4a7f-9b7d-f517458a97f4",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwitchImmunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c52b766f-1ae5-44df-8c15-81001aae61b5",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keys+Mouse",
+                    "action": "SwitchImmunotherapy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
