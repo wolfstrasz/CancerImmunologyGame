@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2126e6f1483a79a4d9934d80185b8ca6, type: 3}
+  m_Name: Immunotherapy1
+  m_EditorClassIdentifier: 
+  isUnlocked: 0
+  name: 
+  thumbnail: {fileID: 0}
+  audioClip: {fileID: 0}
+  description: 
+  range: {fileID: 11400000, guid: 771b41bea1cd0ee4cb8edcdcbe20e937, type: 2}
+  energyCost: {fileID: 11400000, guid: bbc043391880995448bc758154875c05, type: 2}
+  cooldownTime: {fileID: 11400000, guid: daf4c3f848c692b45832097778b7a444, type: 2}
+  lifetime: {fileID: 11400000, guid: fcb98e0bde8272f4f8c59245da36bff4, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  effectOnTargetCell:
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 0}
+    speedEffect: {fileID: 0}
+  applicableCellTypes: []
+  abilities: []
