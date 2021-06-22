@@ -10,6 +10,8 @@ namespace ImmunotherapyGame.CellpediaSystem
     public class CellpediaButtonsBar : MonoBehaviour
     {
 		[SerializeField]
+		private CellpediaData cellData = null;
+		[SerializeField]
 		private GameObject cellbarButtonPrefab = null;
 		[SerializeField]
 		private Transform buttonsLayout = null;
@@ -22,23 +24,23 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		internal void Initialise()
 		{
-			List<CellpediaObject> cellData = Cellpedia.Instance.data.cellpediaItems;
-			petridishButtonList = new List<PetridishButton>(cellData.Count);
-			petridishButtons = new Dictionary<CellpediaObject, PetridishButton>(cellData.Count);
+			List<CellpediaObject> cellDataList = cellData.cellpediaItems;
+			petridishButtonList = new List<PetridishButton>(cellDataList.Count);
+			petridishButtons = new Dictionary<CellpediaObject, PetridishButton>(cellDataList.Count);
 
 			// Create and init buttons
-			for (int i = 0; i < cellData.Count; ++i)
+			for (int i = 0; i < cellDataList.Count; ++i)
 			{
 				PetridishButton button = Instantiate(cellbarButtonPrefab, buttonsLayout).GetComponent<PetridishButton>();
-				petridishButtons.Add(cellData[i], button);
+				petridishButtons.Add(cellDataList[i], button);
 				petridishButtonList.Add(button);
-				button.Initialise(cellData[i], i);
-				button.gameObject.name = "PetridishButton: " + cellData[i].cellname;
+				button.Initialise(cellDataList[i], i);
+				button.gameObject.name = "PetridishButton: " + cellDataList[i].cellname;
 				// Setting it multile times so that there is no need to check for null multiple times in OnOpen()
 				// But we always need selected to be != null for the first time OnOpen() is called
 				//PetridishButton.selected = button;
 
-				if (cellData[i].isUnlocked)
+				if (cellDataList[i].isUnlocked)
 					button.Activate();
 				else button.Deactivate();
 			}

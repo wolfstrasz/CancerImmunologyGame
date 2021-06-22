@@ -24,6 +24,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
         void Awake()
 		{
+            buttonData.onChangedStatus += Activate;
             gameObject.SetActive(buttonData.unlocked);
             imageRender.sprite = buttonData.icon;
             glowImageRender.material = buttonData.glowMaterial;
@@ -44,19 +45,28 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
 		}
 
+        public void Activate(bool shouldActivate)
+		{
+            gameObject.SetActive(shouldActivate);
+		}
+
 
         public override void OnPointerEnter(PointerEventData eventData)
            => OnSelect(eventData);
 
-
-        protected override void OnEnable()
+		protected override void OnDisable()
 		{
-            buttonData.onChangedStatus += Animate;
+			base.OnDisable();
+            buttonData.onChangedAnimationStatus -= Animate;
+		}
+		protected override void OnEnable()
+		{
+			buttonData.onChangedAnimationStatus += Animate;
 		}
 
-        void OnDestroy()
+		void OnDestroy()
 		{
-            buttonData.onChangedStatus -= Animate;
+            buttonData.onChangedStatus -= Activate;
 		}
 
 		protected override void OnPointerLeftClick(PointerEventData eventData)

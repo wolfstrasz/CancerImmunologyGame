@@ -582,8 +582,6 @@ MonoBehaviour:
     type: 3}
   emptyItemPrefab: {fileID: 4371727669248031676, guid: 9393754d65b157846872618ebb1e86a8,
     type: 3}
-  cancelButtons:
-  - {fileID: 941471342904990866}
   verticalLayout: {fileID: 1744454142007105246}
   itemsPerRow: 8
 --- !u!1 &8472406054816774198
@@ -2127,22 +2125,22 @@ PrefabInstance:
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8472406054704761948}
+      objectReference: {fileID: 8472406054704761927}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
+      value: Close
       objectReference: {fileID: 0}
     - target: {fileID: 2168726691310313761, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: ImmunotherapyGame.UI.LevelSelectScreen, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}

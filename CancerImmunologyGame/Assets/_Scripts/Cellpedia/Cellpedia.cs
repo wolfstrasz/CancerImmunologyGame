@@ -128,7 +128,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		private void OnOpenView()
 		{
-			inGameUIButtonData.PingChangedStatus(false);
+			inGameUIButtonData.PingAnimationStatus(false);
+
 
 
 			if (PetridishButton.lastSubmitted != null)
@@ -146,10 +147,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 					}
 				}
 			}
-			
+
 			buttonsBar.OnOpen(selectedCellObject);
 			microscope.OnOpen(selectedCellObject);
 			notepad.OnOpen(selectedCellObject);
+
 			cellpediaPanel.initialControlNode = PetridishButton.lastSubmitted;
 		}
 
@@ -183,8 +185,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
 			popup.SetInfo(item);
 
-			inGameUIButtonData.unlocked = true;
-			inGameUIButtonData.PingChangedStatus(true);
+			inGameUIButtonData.PingUnlockStatus(true);
+			inGameUIButtonData.PingAnimationStatus(true);
 
 			SaveData();
 		}
@@ -214,7 +216,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public void ResetData()
 		{
 			data.ResetData();
-			inGameUIButtonData.unlocked = false;
+			inGameUIButtonData.PingUnlockStatus(false);
 		}
 	}
 

@@ -16,20 +16,12 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private TMP_Text text = null;
 		[SerializeField]
 		private Image cellImage = null;
-		[SerializeField]
-		private float scaleBoost = 2f;
 
 		internal void SetInfo(CellpediaObject cellDescription)
 		{
 			text.text = cellDescription.cellname + " Unlocked!";
 			cellImage.sprite = cellDescription.sprite;
-			cellImage.gameObject.transform.localScale = cellDescription.spriteUIScaleVector * 2f;
-
-			//if (particleEffectPrefab != null)
-			//{
-			//	CellpediaPopupEffect goEffect = Instantiate(particleEffectPrefab, cellImage.transform.position, Quaternion.identity, Cellpedia.Instance.PopupLayout).GetComponent<CellpediaPopupEffect>();
-			//	goEffect.SetData(Cellpedia.Instance.MicroscopeButtonPosition, cellDescription, cellImage.gameObject.GetComponent<RectTransform>());
-			//}
+			cellImage.gameObject.transform.localScale = cellDescription.spriteUIScaleVector;
 		}
 
 		// Update is called once per frame

@@ -86,7 +86,7 @@ namespace ImmunotherapyGame
 		// Target's position will change in Update, so camera should move focus here
 		void FixedUpdate()
 		{
-			if (state == GameCameraControlState.FOLLOW)
+			if (state == GameCameraControlState.FOLLOW && focusTarget != null)
 			{
 				UpdateFocusPoint();
 #if BLOODFLOW_ROTATION
@@ -107,6 +107,7 @@ namespace ImmunotherapyGame
 
 		private void UpdateFocusPoint()
 		{
+
 			Vector3 targetPosition = focusTarget.transform.position;
 			float distance = Vector3.Distance(targetPosition, focusPosition);
 
