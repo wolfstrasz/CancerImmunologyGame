@@ -8,9 +8,11 @@ using ImmunotherapyGame.SaveSystem;
 
 namespace ImmunotherapyGame.ResearchAdvancement
 {
+	[CreateAssetMenu (menuName = "Data/Research Advancement Data")]
     public class ResearchAdvancementData : ScriptableObject
     {
-        List<ResearchAdvancementObject> dataObjects;
+		public int points;
+        public List<StatUpgrade> dataObjects;
 
 		internal void Reset()
 		{
@@ -18,18 +20,10 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		}
     }
 
-
-    [System.Serializable]
-    public class ResearchAdvancementObject
-	{
-		// Object that stores data
-		// Maybe per upgrade
-	}
-
 	[System.Serializable]
 	public class SerializableResearchAdvancementData : SavableObject
 	{
-		public int count = 0;
+		public int points = 0;
 		public List<bool> isUnlocked = new List<bool>();
 
 		public SerializableResearchAdvancementData(ResearchAdvancementData data)

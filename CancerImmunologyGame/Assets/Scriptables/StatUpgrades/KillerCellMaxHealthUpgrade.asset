@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
+  m_Name: KillerCellMaxHealthUpgrade
+  m_EditorClassIdentifier: 
+  unlocked: 1
+  title: TK cell Max Health Upgrade
+  description: Upgrades the maximum health of all T Killer cells.
+  statThumbnailSprite: {fileID: 21300000, guid: 14a8c8fc76b1c1d4b81b16808e44db74,
+    type: 3}
+  generalThumbnailSprite: {fileID: 8526444965496520883, guid: 83060a317e155fe43b4fa7f38c66e842,
+    type: 3}
+  statAttribute: {fileID: 11400000, guid: d72b990a4873688418014e7cd9b5fae0, type: 2}
+  nextUpgradeIndex: 0
+  upgrades:
+  - cost: 1
+    valueChange: 5
+  - cost: 2
+    valueChange: 6
+  - cost: 3
+    valueChange: 7
+  - cost: 4
+    valueChange: 8
+  - cost: 5
+    valueChange: 9
+  - cost: 6
+    valueChange: 10

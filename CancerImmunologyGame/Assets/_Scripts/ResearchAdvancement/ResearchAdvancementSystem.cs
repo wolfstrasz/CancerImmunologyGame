@@ -12,7 +12,7 @@ using ImmunotherapyGame.UI;
 
 namespace ImmunotherapyGame.ResearchAdvancement
 {
-    public class ResearchAdvancement : Singleton<ResearchAdvancement>, IDataManager
+    public class ResearchAdvancementSystem : Singleton<ResearchAdvancementSystem>, IDataManager
     {
 		[Header("Data")]
 		[SerializeField]
@@ -22,6 +22,13 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		[Header("System UI")]
 		[SerializeField]
 		private InterfaceControlPanel researchAdvancementPanel = null;
+		[SerializeField]
+		private UpgradeDescriptionPanel upgradeDescriptionPanel = null;
+		[SerializeField]
+		private UpgradePurchasePanel upgradePurchasePanel = null;
+		[SerializeField]
+		internal GameObject currentSelectedStatUpgradeButton = null;
+
 
 		[Header("Game UI")]
 		[SerializeField]
@@ -30,8 +37,18 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		// Input handling
 		PlayerControls playerControls = null;
 		InputAction openReseachAdvancementAction = null;
-
 		private bool unlockedFeature = false;
+
+
+		private StatUpgrade currentStatUpgrade = null;
+		internal StatUpgrade CurrentStatUpgrade
+		{
+			get
+			{
+				return currentStatUpgrade;
+			}
+		}
+
 
 		protected override void Awake()
 		{
@@ -131,5 +148,21 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			data.Reset();
 			inGameUIButtonData.unlocked = false;
 		}
+
+
+		internal void SelectStatUpgrade(StatUpgradeButton button)
+		{
+			// Cache data
+			currentStatUpgrade = button.statUpgrade;
+			currentSelectedStatUpgradeButton = button.gameObject;
+
+			// Update panels
+			upgradeDescriptionPanel.gameObject.SetActive(true);
+			upgradeDescriptionPanel.UpdateDisplay();
+
+			upgradePurchasePanel.UpdateDisplay();
+		}
+
+
 	}
 }

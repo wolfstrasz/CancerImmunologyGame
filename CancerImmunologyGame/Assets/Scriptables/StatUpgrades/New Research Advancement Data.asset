@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
-  m_Name: KillerMaxHealth
+  m_Script: {fileID: 11500000, guid: 48fcb09522476684b937e05a49b5a9c7, type: 3}
+  m_Name: New Research Advancement Data
   m_EditorClassIdentifier: 
-  attributeName: Killer Cell Max Health
-  initialValue: 100
-  currentValue: 100
+  points: 0
+  dataObjects:
+  - {fileID: 11400000, guid: 6e4cc1a9393ef47448d312ebea6b4d8b, type: 2}
+  - {fileID: 11400000, guid: 628548c7b35e0464cb2652a89da94bbb, type: 2}

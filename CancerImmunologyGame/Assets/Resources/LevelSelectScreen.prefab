@@ -676,6 +676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 2
+  shouldCloseOnSceneChange: 1
   initialControlNode: {fileID: 941471342904990866}
   nodesToListen:
   - {fileID: 941471342904990866}

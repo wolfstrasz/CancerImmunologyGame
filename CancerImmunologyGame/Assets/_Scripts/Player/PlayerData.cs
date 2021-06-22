@@ -64,7 +64,6 @@ namespace ImmunotherapyGame.Player
 
 		protected void OnEnable()
 		{
-			
             for (int i = 0; i < allAbilities.Count; ++i)
 			{
                 if (allAbilities[i].isUnlocked)
@@ -76,7 +75,7 @@ namespace ImmunotherapyGame.Player
 		
 
             // If no ability is unlocked
-            Debug.LogError("No initial ability is unlocked in player data abilities!");
+            Debug.LogWarning("No initial ability is unlocked in player data abilities!");
 		}
 	}
 }

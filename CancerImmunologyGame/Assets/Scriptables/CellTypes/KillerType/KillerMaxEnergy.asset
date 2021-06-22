@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: KillerMaxEnergy
   m_EditorClassIdentifier: 
-  attributeName: 
+  attributeName: T Killer cell Max Health
   initialValue: 100
-  modifiers: []
+  currentValue: 100
