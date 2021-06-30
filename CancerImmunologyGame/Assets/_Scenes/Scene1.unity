@@ -2232,7 +2232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &288005175
 Transform:
   m_ObjectHideFlags: 0
@@ -3216,7 +3216,7 @@ MonoBehaviour:
   - {fileID: 32625935}
   - {fileID: 1315575662}
   - {fileID: 407445710}
-  - {fileID: 1323836529}
+  - {fileID: 0}
   currentEvent: {fileID: 0}
   currentEventIndex: 0
   isFinished: 0
@@ -6370,7 +6370,7 @@ MonoBehaviour:
   shouldHideText: 1
   canSkipTxt: 0
   waitBeforeSkip: 0
-  isTimed: 0
+  isTimed: 1
   timeBeforeFinish: 0.5
 --- !u!1 &870810008
 GameObject:
@@ -9942,58 +9942,6 @@ MonoBehaviour:
   spotlight: {fileID: 1369411392}
   isVisisble: 1
   triggered: 0
---- !u!1 &1323836528
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1323836530}
-  - component: {fileID: 1323836529}
-  m_Layer: 0
-  m_Name: Text(Bloodstream)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1323836529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323836528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  order: 25
-  shouldPauseGameplay: 0
-  text: Your cell has entered the bloodstream, the other major network of highways
-    of the body.
-  shouldHideText: 0
-  canSkipTxt: 0
-  waitBeforeSkip: 0
-  isTimed: 0
-  timeBeforeFinish: 2
---- !u!4 &1323836530
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1323836528}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2077891556}
-  m_RootOrder: 25
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1337832897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12871,7 +12819,7 @@ PrefabInstance:
     - target: {fileID: 7422789896145160011, guid: 703342faf6c67f04597c52a3b617a266,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7422789896145160011, guid: 703342faf6c67f04597c52a3b617a266,
         type: 3}
@@ -16643,7 +16591,6 @@ Transform:
   - {fileID: 32625936}
   - {fileID: 1315575663}
   - {fileID: 407445711}
-  - {fileID: 1323836530}
   m_Father: {fileID: 592698775}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -16,7 +16,11 @@ namespace ImmunotherapyGame
 			internal GameStateController()
 			{
 				stateHistory = new Stack<GameState>();
-				SetState(new EmptyState(this));
+				if (activeState == null)
+				{
+					Debug.Log("Game State Controller contructor: create empty state");
+					SetState(new EmptyState(this));
+				}
 			}
 
 			internal void OnUpdate()

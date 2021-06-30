@@ -12,6 +12,7 @@ using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.UI;
 using ImmunotherapyGame.UI.TopOverlay;
 using ImmunotherapyGame.ResearchAdvancement;
+using ImmunotherapyGame.Audio;
 
 
 namespace ImmunotherapyGame.Loader
@@ -31,10 +32,13 @@ namespace ImmunotherapyGame.Loader
 
 		private IEnumerator InitialiseManagers()
 		{
+			AudioManager.Instance.Initialise();
 			InterfaceManager.Instance.Initialise();
+
 			GlobalGameData.dataManagers = new List<IDataManager>(4);
 
 			// Load Settings
+			Debug.Log("Loader: Settings Manager");
 			SettingsManager.Instance.Initialise();
 
 			// Load Game Data

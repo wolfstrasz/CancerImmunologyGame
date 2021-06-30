@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Audio
 		[SerializeField]
 		private List<UIAudioClipBinding> uiAudioClipBindings = null;
 
-		private void Start()
+		public void Initialise()
 		{
 			if (uiAudioClipBindings != null)
 			{

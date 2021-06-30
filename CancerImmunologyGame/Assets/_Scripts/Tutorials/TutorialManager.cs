@@ -69,10 +69,10 @@ namespace ImmunotherapyGame.Tutorials
 
 
 		// Public methods
-		public void LoadLevelTutorials()
+		public void Initialise()
 		{
 			StoryTutorials = new List<TutorialStage>();
-			StoryTutorials.AddRange(FindObjectsOfType<TutorialStage>());
+			StoryTutorials.AddRange(FindObjectsOfType<TutorialStage>(false));
 
 			foreach (TutorialStage ts in StoryTutorials)
 			{

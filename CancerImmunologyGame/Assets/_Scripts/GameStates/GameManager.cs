@@ -38,6 +38,7 @@ namespace ImmunotherapyGame
 				{
 					Debug.Log("Game Manager: Initialise Test Scene");
 					sceneLoaded = true;
+					Debug.Log("Game Manager -> Test Scene: Set Play State");
 					stateController.SetState(new PlayState(stateController));
 				}
 			}
@@ -47,11 +48,12 @@ namespace ImmunotherapyGame
 				if (nextScene.buildIndex >= 2)
 				{
 					sceneLoaded = false;
+					Debug.Log("GameManager -> OnActiveSceneChanged: Set Load State");
 					stateController.SetState(new LoadState(stateController));
 				} else
 				{
+					Debug.Log("GameManager -> OnActiveSceneChanged: Set Empty State");
 					stateController.SetState(new EmptyState(stateController));
-
 				}
 			}
 
