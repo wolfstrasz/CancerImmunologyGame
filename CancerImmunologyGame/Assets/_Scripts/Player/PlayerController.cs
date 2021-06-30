@@ -102,8 +102,8 @@ namespace ImmunotherapyGame.Player
 		public void OnFixedUpdate()
 		{
 
-			if (IsMoving)
-			{
+			//if (IsMoving)
+			//{
 				Vector2 movementVector = MoveDirection;
 				Vector3 position = controlledCell.transform.position;
 				Quaternion rotation = Quaternion.identity;
@@ -115,7 +115,7 @@ namespace ImmunotherapyGame.Player
 
 				controlledCell.MovementVector = movementVector;
 				controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
-			}
+			//}
 		}
 
 		public void OnCancerDeath(Cancer cancer)
