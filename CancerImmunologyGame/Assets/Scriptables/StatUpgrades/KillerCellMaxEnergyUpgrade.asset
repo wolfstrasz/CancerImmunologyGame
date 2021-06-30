@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
   m_Name: KillerCellMaxEnergyUpgrade
   m_EditorClassIdentifier: 
+  initialUnlockValue: 0
   unlocked: 0
   title: TK cell Max Energy Upgrade
   description: Upgrades the maximum energy of all T Killer cells.

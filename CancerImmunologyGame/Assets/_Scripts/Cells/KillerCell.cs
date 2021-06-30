@@ -122,9 +122,9 @@ namespace ImmunotherapyGame
 		public void SecondaryAttack(GameObject target)
 		{
 			if (CannotUseSpecialAttack) return;
-			Debug.Log("Killer cell executes secondary attack!");
+			Debug.Log("Killer cell executes secondary attack! On Target: " + target);
 
-			float energyCost = secondaryAbilityCaster.CastAbility(attackTarget);
+			float energyCost = secondaryAbilityCaster.CastAbility(target);
 			ApplyEnergyAmount(-energyCost);
 		}
 

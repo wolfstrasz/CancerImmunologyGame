@@ -9,6 +9,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
     public class StatUpgrade : ScriptableObject
     {
         [Header("Description)")]
+        [SerializeField] private bool initialUnlockValue;
         public bool unlocked; // Data to save
         public string title;
         public string description;
@@ -34,6 +35,19 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		}
 
+
+        public void ApplyUpgradesFromStartToNextUpgradeIndex()
+		{
+            float fullValue = 0f;
+
+            for (int j = 0; j < nextUpgradeIndex; ++j)
+			{
+                fullValue += upgrades[j].valueChange;
+			}
+
+            statAttribute.CurrentValue = statAttribute.CurrentValue + fullValue;
+        } 
+
         public int ClearUpgradeAndReturnCost()
 		{
             float overallChange = 0f;
@@ -45,8 +59,16 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			}
 
             statAttribute.CurrentValue = statAttribute.CurrentValue - overallChange;
+            nextUpgradeIndex = 0;
             return overallCost;
 		}
+
+        public void Reset()
+		{
+            ClearUpgradeAndReturnCost();
+            unlocked = initialUnlockValue;
+		}
+
 
         [System.Serializable]
         public class UpgradeValues

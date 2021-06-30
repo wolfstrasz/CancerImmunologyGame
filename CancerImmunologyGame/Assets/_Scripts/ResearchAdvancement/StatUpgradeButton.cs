@@ -13,17 +13,25 @@ namespace ImmunotherapyGame.ResearchAdvancement
     public class StatUpgradeButton : UIMenuNode, IMoveHandler, ISubmitHandler
     {
 		[SerializeField] internal StatUpgrade statUpgrade = null;
-
 		[SerializeField] private GameObject lockedIcon = null;
 		[SerializeField] private GameObject statIcon = null;
+		[SerializeField] private Image statThumbnail = null;
+		[SerializeField] private Image generalThumbnail= null;
 
-		public void UpdateDisplay()
+		internal bool IsUnlocked => statUpgrade.unlocked;
+
+		internal void Initialise()
+		{
+			statThumbnail.sprite = statUpgrade.statThumbnailSprite;
+			generalThumbnail.sprite = statUpgrade.generalThumbnailSprite;
+		}
+
+		internal void UpdateDisplay()
 		{
 			bool isUnlocked = statUpgrade.unlocked;
 
 			lockedIcon.SetActive(!isUnlocked);
 			statIcon.SetActive(isUnlocked);
-
 		}
 
 		// Mouse navigation

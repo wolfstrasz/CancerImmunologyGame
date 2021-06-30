@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
@@ -28,11 +29,22 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		private UpgradePurchasePanel upgradePurchasePanel = null;
 		[SerializeField]
 		internal GameObject currentSelectedStatUpgradeButton = null;
-
+		[SerializeField]
+		private List<StatUpgradeButton> allButtons = new List<StatUpgradeButton>();
 
 		[Header("Game UI")]
 		[SerializeField]
 		private TopOverlayButtonData inGameUIButtonData = null;
+		[SerializeField]
+		private Animator machineAnimator = null;
+		[SerializeField]
+		private TMPro.TMP_Text currentPointsText = null;
+
+		[Header("Reset Points Panel")]
+		[SerializeField]
+		private GameObject resetPointsPanel = null;
+		[SerializeField]
+		private GameObject resetPointsPanelCancelButton = null;
 
 		// Input handling
 		PlayerControls playerControls = null;
@@ -55,15 +67,43 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			base.Awake();
 			playerControls = new PlayerControls();
 			playerControls.Enable();
-			//openReseachAdvancementAction = playerControls.Systems.Microscope;
+			openReseachAdvancementAction = playerControls.Systems.ResearchAdvancement;
 		}
 
 		public void Initialise()
 		{
+			unlockedFeature = false;
+			currentSelectedStatUpgradeButton = null;
+			upgradeDescriptionPanel.UpdateDisplay();
+			upgradePurchasePanel.UpdateDisplay();
+
+			researchAdvancementPanel.nodesToListen.Add(researchAdvancementPanel.initialControlNode);
+			// Apply data upgrades 
+			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			{
+				data.statUpgrades[i].ApplyUpgradesFromStartToNextUpgradeIndex();
+
+				// 4) Set if GameUI button is visible 
+				unlockedFeature |= data.statUpgrades[i].unlocked;
+			}
+			
 			// 1) Initialise all required components
-			// 2) Set if button is visible 
-			// 3) Add nodes to listen to#
+			for (int i = 0; i < allButtons.Count; ++i)
+			{
+				allButtons[i].Initialise();
+				// 2) update all buttons
+				allButtons[i].UpdateDisplay();
+
+				// 3) Add nodes to listen to
+				researchAdvancementPanel.nodesToListen.Add(allButtons[i]);
+			}
+
+			Debug.Log("RAS: unlocked = " + unlockedFeature);
+			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
+
 			// 4) Set initialiser node
+			//researchAdvancementPanel.initialControlNode = null;
+
 		}
 
 		private void OnEnable()
@@ -110,30 +150,113 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		public void OnOpenView()
 		{
+			currentPointsText.text = data.points.ToString();
 
+			inGameUIButtonData.PingAnimationStatus(false);
+
+			for (int i = 0; i< allButtons.Count; ++i)
+			{
+				allButtons[i].UpdateDisplay();
+			}
+		}
+
+		public void CloseResetPointsPanel()
+		{
+			resetPointsPanel.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(researchAdvancementPanel.initialControlNode.gameObject);
+		}
+
+		public void OpenResetPointsPanel()
+		{
+			resetPointsPanel.SetActive(true);
+			EventSystem.current.SetSelectedGameObject(resetPointsPanelCancelButton);
+		}
+
+		public void ResetPoints()
+		{
+			int sum = 0;
+			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			{
+				sum += data.statUpgrades[i].ClearUpgradeAndReturnCost();
+			}
+			data.points += sum;
+			currentPointsText.text = data.points.ToString();
+			CloseResetPointsPanel();
+			currentSelectedStatUpgradeButton = null;
+			currentStatUpgrade = null;
+			upgradeDescriptionPanel.UpdateDisplay();
+			upgradePurchasePanel.UpdateDisplay();
+
+		}
+
+		internal void BuyCurrentSelectedUpgrade()
+		{
+			if (currentStatUpgrade == null)
+			{
+				Debug.LogWarning("Buy Current Selected Upgrade is called but the value is currently null");
+				
+			}
+			else
+			{
+				machineAnimator.SetTrigger("UpgradeBuy");
+				data.points -= currentStatUpgrade.ApplyUpgradeAndReturnCost();
+				currentPointsText.text = data.points.ToString();
+
+				if (!currentStatUpgrade.HasAvailableUpgrade)
+				{
+					EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
+				}
+
+				upgradePurchasePanel.UpdateDisplay();
+				upgradeDescriptionPanel.UpdateDisplay();
+			}
+		}
+
+		public void UnlockUpgrades(List<StatUpgrade> upgradesToUnlock)
+		{
+
+			bool notNewUnlock = true;
+			for (int i = 0; i < upgradesToUnlock.Count; ++i)
+			{
+				notNewUnlock &= upgradesToUnlock[i].unlocked;
+				upgradesToUnlock[i].unlocked = true;
+			}
+
+			if (!notNewUnlock)
+			{
+				unlockedFeature = true;
+				inGameUIButtonData.PingUnlockStatus(unlockedFeature);
+				inGameUIButtonData.PingAnimationStatus(unlockedFeature);
+			}
+
+		}
+
+		public void AddPoints(int pointsToAdd)
+		{
+			data.points += pointsToAdd;
+			currentPointsText.text = data.points.ToString();
+			upgradePurchasePanel.UpdateDisplay();
 		}
 
 		public void OnCloseView()
 		{
-
+			resetPointsPanel.SetActive(false);
 		}
-
-		// Start is called before the first frame update
-		void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
 
 		public void LoadData()
 		{
-			throw new System.NotImplementedException();
+			savedData = SaveManager.Instance.LoadData<SerializableResearchAdvancementData>();
+
+			if (savedData == null)
+			{
+				Debug.Log("No previous saved data found. Creating new level data save.");
+			}
+			else
+			{
+				savedData.CopyTo(data);
+			}
+			SaveData();
+			
 		}
 
 
@@ -146,7 +269,8 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		public void ResetData()
 		{
 			data.Reset();
-			inGameUIButtonData.unlocked = false;
+
+			inGameUIButtonData.PingUnlockStatus(false);
 		}
 
 
@@ -163,6 +287,14 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			upgradePurchasePanel.UpdateDisplay();
 		}
 
+		internal void OnPurchaseButtonCancel()
+		{
+			EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
+			currentStatUpgrade = null;
+			currentSelectedStatUpgradeButton = null;
+			upgradeDescriptionPanel.UpdateDisplay();
+			upgradePurchasePanel.UpdateDisplay();
+		}
 
 	}
 }

@@ -12,42 +12,55 @@ namespace ImmunotherapyGame.ResearchAdvancement
     public class ResearchAdvancementData : ScriptableObject
     {
 		public int points;
-        public List<StatUpgrade> dataObjects;
+        public List<StatUpgrade> statUpgrades;
 
 		internal void Reset()
 		{
-
+			points = 0;
+			for (int i = 0; i < statUpgrades.Count; ++i)
+			{
+				statUpgrades[i].Reset();
+			}
 		}
     }
 
 	[System.Serializable]
-	public class SerializableResearchAdvancementData : SavableObject
+	public class SerializableResearchAdvancementData : SaveableObject
 	{
 		public int points = 0;
 		public List<bool> isUnlocked = new List<bool>();
+		public List<int> nextUpgradeIndex = new List<int>();
 
 		public SerializableResearchAdvancementData(ResearchAdvancementData data)
 		{
-			//count = data.cellpediaItems.Count;
-			//isUnlocked = new List<bool>();
-			//for (int i = 0; i < count; ++i)
-			//{
-			//	isUnlocked.Add(data.cellpediaItems[i].isUnlocked);
-			//}
+
+			points = data.points;
+			isUnlocked = new List<bool>();
+			nextUpgradeIndex = new List<int>();
+
+			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			{
+				isUnlocked.Add(data.statUpgrades[i].unlocked);
+				nextUpgradeIndex.Add(data.statUpgrades[i].nextUpgradeIndex);
+			}
 		}
 
 		public SerializableResearchAdvancementData()
 		{
-			//count = 0;
-			//isUnlocked = new List<bool>();
-		}
+			points = 0;
+			isUnlocked = new List<bool>();
+			nextUpgradeIndex = new List<int>();
 
-		public void CopyTo(ResearchAdvancementData data)
+	}
+
+	public void CopyTo(ResearchAdvancementData data)
+	{
+		data.points = points;
+		for (int i = 0; i < isUnlocked.Count; ++i)
 		{
-			//for (int i = 0; i < count; ++i)
-			//{
-			//	data.cellpediaItems[i].isUnlocked = isUnlocked[i];
-			//}
+			data.statUpgrades[i].unlocked = isUnlocked[i];
+			data.statUpgrades[i].nextUpgradeIndex = nextUpgradeIndex[i];
 		}
+	}
 	}
 }

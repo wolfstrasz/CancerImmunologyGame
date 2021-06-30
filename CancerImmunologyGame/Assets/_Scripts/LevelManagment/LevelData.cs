@@ -42,7 +42,7 @@ namespace ImmunotherapyGame.LevelManagement
 	}
 
     [System.Serializable]
-    public class SerializableLevelData : SavableObject
+    public class SerializableLevelData : SaveableObject
 	{
         public int currentLevel = 0;
         public List<LevelDataObject> levels = new List<LevelDataObject>();

@@ -1084,7 +1084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &143078353
 GameObject:
@@ -1197,7 +1197,7 @@ RectTransform:
   m_Children:
   - {fileID: 494667064}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1461,7 +1461,7 @@ Transform:
   - {fileID: 912999523}
   - {fileID: 8466356092736633834}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &213043742
 GameObject:
@@ -2072,7 +2072,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 14
+  order: 12
   shouldPauseGameplay: 1
   text: "Your interaction with the dendritic cell has turned you into a mature T
     Killer cell. This means that you have gained the ability to recognise molecules
@@ -2096,7 +2096,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &234755281
 PrefabInstance:
@@ -2216,6 +2216,55 @@ MonoBehaviour:
   spotlight: {fileID: 2009245705}
   isVisisble: 1
   triggered: 0
+--- !u!1 &288005174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288005175}
+  - component: {fileID: 288005176}
+  m_Layer: 0
+  m_Name: UnlockRAS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &288005175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288005174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2054380851}
+  - {fileID: 767725492}
+  m_Father: {fileID: 592698775}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &288005176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288005174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7b5c2555a41df408914eb613cb500f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events: []
+  currentEvent: {fileID: 0}
+  currentEventIndex: 0
+  isFinished: 0
 --- !u!1 &289914292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2419,7 +2468,7 @@ Transform:
   - {fileID: 108679665}
   - {fileID: 258542180}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &307768706
 GameObject:
@@ -3644,7 +3693,7 @@ Transform:
   - {fileID: 438204358}
   - {fileID: 1665469559}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &450887724
 GameObject:
@@ -3695,7 +3744,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &454073098
 GameObject:
@@ -4412,7 +4461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 21
+  order: 19
   shouldPauseGameplay: 1
   text: 'To switch to other cells that you have encountered, you can use the cell
     plates below. Give it a try by clicking on the one with a Dendritic Cell! '
@@ -4433,7 +4482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 21
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &542803273
 GameObject:
@@ -4550,7 +4599,7 @@ Transform:
   - {fileID: 827670655}
   - {fileID: 1083602250}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &560598038
 MonoBehaviour:
@@ -4692,8 +4741,9 @@ Transform:
   - {fileID: 715346403}
   - {fileID: 2137848268}
   - {fileID: 1093672937}
+  - {fileID: 288005175}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &606895977
 GameObject:
@@ -5144,7 +5194,7 @@ PrefabInstance:
     - target: {fileID: 4764412587923017513, guid: 521b70f22c3b2954088ec2a5493f523c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4764412587923017513, guid: 521b70f22c3b2954088ec2a5493f523c,
         type: 3}
@@ -5923,6 +5973,54 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 1.7406828, y: 1.2396568, z: -0.00005}
     m_Extent: {x: 4.246565, y: 1.8732784, z: 0.00005}
+--- !u!1 &767725491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767725492}
+  - component: {fileID: 767725493}
+  m_Layer: 0
+  m_Name: UnlockMaxHealth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &767725492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767725491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 288005175}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &767725493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767725491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed19630e18a3df41b8c8bcf541214e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 1
+  shouldPauseGameplay: 0
+  statUpgradesToUnlock:
+  - {fileID: 11400000, guid: 6e4cc1a9393ef47448d312ebea6b4d8b, type: 2}
+  - {fileID: 11400000, guid: d703fab5074d8e04c890e9bc3078587c, type: 2}
 --- !u!1 &776973367
 GameObject:
   m_ObjectHideFlags: 0
@@ -6081,7 +6179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 17
+  order: 15
   shouldPauseGameplay: 1
   text: "You\u2019ve unlocked the cellpedia feature! Accessible through the microscope
     button at the top left corner. The microscope will allow you to have a look at
@@ -6103,7 +6201,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827670654
 GameObject:
@@ -7463,7 +7561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf27fb11d9f6d2499c9e6a74a21a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 15
+  order: 13
   shouldPauseGameplay: 0
   cellToDiscover: 1
 --- !u!4 &984855086
@@ -7478,7 +7576,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &989759276
 GameObject:
@@ -8065,7 +8163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 20
+  order: 18
   shouldPauseGameplay: 1
   text: Looking through your microscope, you can see a T Killer Cell just like you!
     On the right hand side, you will find notes and more information about different
@@ -8087,7 +8185,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1151893562
 GameObject:
@@ -8169,8 +8267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b108d7c6b85ec9f4fbcd01e3f51bd1bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 19
-  shouldPauseGameplay: 1
+  order: 17
+  shouldPauseGameplay: 0
 --- !u!4 &1170183577
 Transform:
   m_ObjectHideFlags: 0
@@ -8183,7 +8281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177197233
 GameObject:
@@ -10208,7 +10306,7 @@ Transform:
   - {fileID: 1886906205}
   - {fileID: 1364020715}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355850536
 GameObject:
@@ -10563,7 +10661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf27fb11d9f6d2499c9e6a74a21a7bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 16
+  order: 14
   shouldPauseGameplay: 0
   cellToDiscover: 3
 --- !u!4 &1376618921
@@ -10578,7 +10676,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1381620018
 GameObject:
@@ -12055,7 +12153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873243b4b7e77994a86dbec573ca607c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 12
+  order: 20
   shouldPauseGameplay: 0
   pathBlockers:
   - {fileID: 1254235289}
@@ -12072,7 +12170,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 12
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1542017226
 MonoBehaviour:
@@ -14218,7 +14316,7 @@ Transform:
   - {fileID: 234755282}
   - {fileID: 1129042918}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1768292827
 GameObject:
@@ -16379,6 +16477,52 @@ MonoBehaviour:
   waitBeforeSkip: 0
   isTimed: 0
   timeBeforeFinish: 0
+--- !u!1 &2054380850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2054380851}
+  - component: {fileID: 2054380852}
+  m_Layer: 0
+  m_Name: Add10RasPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2054380851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054380850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 288005175}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2054380852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2054380850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3591ab8eaf7f3cd4b9600f12f7a57dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  shouldPauseGameplay: 0
+  pointsToAdd: 10
 --- !u!1 &2058213987
 GameObject:
   m_ObjectHideFlags: 0
@@ -16486,7 +16630,6 @@ Transform:
   - {fileID: 1896434212}
   - {fileID: 1555422697}
   - {fileID: 1366904993}
-  - {fileID: 1541126428}
   - {fileID: 450887726}
   - {fileID: 227118395}
   - {fileID: 984855086}
@@ -16496,6 +16639,7 @@ Transform:
   - {fileID: 1170183577}
   - {fileID: 1132607172}
   - {fileID: 541167154}
+  - {fileID: 1541126428}
   - {fileID: 32625936}
   - {fileID: 1315575663}
   - {fileID: 407445711}
@@ -17285,7 +17429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343ca021929f5bc40b376a664bfadec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 18
+  order: 16
   shouldPauseGameplay: 1
   text: "Everytime you encounter a new cell, your microscope will glow, meaning you
     will have unlocked that cell\u2019s information. Have a look!"
@@ -17306,7 +17450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077891556}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2118307786
 GameObject:
@@ -17455,8 +17599,87 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2127446937
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3824674063084145284, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_Name
+      value: Cancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145285, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: cellsToGenerate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145285, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: timeBetweenDivisions
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -348.12985
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18.879509
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824674063084145286, guid: c5213883a71b4354f811c53ae36e1130,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c5213883a71b4354f811c53ae36e1130, type: 3}
 --- !u!1 &2128889523
 GameObject:
   m_ObjectHideFlags: 0
@@ -18008,35 +18231,40 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 436582578362720831, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1187208518462918055, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.702
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208518462918055, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208518752215543, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -7.1764836
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208518854436316, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1187208519201117887, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -7.1764836
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208519539139700, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.4011447
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208519561618674, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
@@ -18046,11 +18274,16 @@ PrefabInstance:
     - target: {fileID: 1187208519825516550, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.661
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1187208519825516550, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2291530675824538912, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: barColour.a
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2298911285699567152, guid: 90a739a3a3a9c7a409d41aadb66021fc,
@@ -18131,7 +18364,7 @@ PrefabInstance:
     - target: {fileID: 2663318030104312094, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 74.00574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3098252992803547666, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
@@ -18156,22 +18389,32 @@ PrefabInstance:
     - target: {fileID: 3795112164323585156, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 59.20459
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4509846614770347891, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: barColour.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5722802272862938842, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722802272862938842, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5722802272862938842, guid: 90a739a3a3a9c7a409d41aadb66021fc,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.52900004
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929275778700224455, guid: 90a739a3a3a9c7a409d41aadb66021fc,
+        type: 3}
+      propertyPath: barColour.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90a739a3a3a9c7a409d41aadb66021fc, type: 3}

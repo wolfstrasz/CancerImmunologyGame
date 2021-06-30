@@ -39,6 +39,9 @@ namespace ImmunotherapyGame.Abilities
 						}
 					}
 				}
+			} else
+			{
+				coll.enabled = false;
 			}
 		}
 

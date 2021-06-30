@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a5ff5eb30a61741848545720e3fd45, type: 3}
   m_Name: HypoxicAreaAbility
   m_EditorClassIdentifier: 
+  isUnlocked: 0
   name: 
   thumbnail: {fileID: 0}
   audioClip: {fileID: 0}
@@ -19,12 +20,14 @@ MonoBehaviour:
   range: {fileID: 11400000, guid: a35e6fed4b49cbb439b938e40059cba2, type: 2}
   energyCost: {fileID: 11400000, guid: 39d747ea663d8ec41b6cddbcc3c48dcf, type: 2}
   cooldownTime: {fileID: 11400000, guid: ad26015ccd6934d42aaf1f94d7731970, type: 2}
+  lifetime: {fileID: 0}
+  typesToBeInRange:
+  - {fileID: 0}
   effectOnTargetCell:
     healthEffect: {fileID: 0}
     energyEffect: {fileID: 0}
     speedEffect: {fileID: 0}
   applicableCellTypes: []
-  auraEffectLifetime: {fileID: 0}
   auraRange: {fileID: 11400000, guid: a35e6fed4b49cbb439b938e40059cba2, type: 2}
   auraEffectPrefab: {fileID: 5717997335944468769, guid: 9dde72372df1edf418cdf6fe2cc83e15,
     type: 3}

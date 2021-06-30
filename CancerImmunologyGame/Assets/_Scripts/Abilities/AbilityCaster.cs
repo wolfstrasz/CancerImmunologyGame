@@ -64,7 +64,7 @@ namespace ImmunotherapyGame.Abilities
 
         public virtual float CastAbility(GameObject target)
         {
-            Debug.Log(this.name + ": casted ability on " + target.name);
+            Debug.Log(this + ": casted ability on " + target);
             ability.CastAbility(this.gameObject, target);
             currentCooldown = ability.CooldownTime;
             if (audioSource)

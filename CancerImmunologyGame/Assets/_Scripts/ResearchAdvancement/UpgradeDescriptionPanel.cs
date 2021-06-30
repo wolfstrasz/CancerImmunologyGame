@@ -19,7 +19,13 @@ namespace ImmunotherapyGame.ResearchAdvancement
         internal void UpdateDisplay()
 		{
             upgrade = ResearchAdvancementSystem.Instance.CurrentStatUpgrade;
-            if (upgrade != null) return;
+            if (upgrade == null)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
+            gameObject.SetActive(true);
 
             title.text = upgrade.title;
             description.text = upgrade.description;
@@ -31,7 +37,9 @@ namespace ImmunotherapyGame.ResearchAdvancement
             if (hasUpgrade)
             {
                 string text = "";
-                text = "Next Upgrade: " + upgrade.NextUpgradeValueChange + " " + upgrade.statAttribute.attributeName;
+                text = "Next Upgrade: ";
+                if (upgrade.NextUpgradeValueChange > 0) text += "+";
+                text += upgrade.NextUpgradeValueChange + " " + upgrade.statAttribute.attributeName;
                 upgradeValueText.text = text;
 			} else
 			{

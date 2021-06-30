@@ -32,6 +32,17 @@ namespace ImmunotherapyGame.ResearchAdvancement
             }
 
             gameObject.SetActive(true);
+            costText.text = statUpgrade.NextUpgradeCost.ToString();
+
+            if (!statUpgrade.unlocked)
+            {
+                purchaseButton.SetActive(false);
+                notEnoughPointsObject.SetActive(true);
+                notEnoughPointsText.text = "Locked";
+                return;
+            }
+
+
 
             if (data.points < statUpgrade.NextUpgradeCost)
 			{
@@ -44,7 +55,6 @@ namespace ImmunotherapyGame.ResearchAdvancement
             notEnoughPointsObject.SetActive(false);
             purchaseButton.SetActive(true);
 
-            costText.text = "Cost: " + statUpgrade.NextUpgradeCost;
             EventSystem.current.SetSelectedGameObject(purchaseButton);
 		}
     }

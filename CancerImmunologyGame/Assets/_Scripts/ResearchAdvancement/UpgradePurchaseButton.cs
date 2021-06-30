@@ -8,23 +8,24 @@ using UnityEngine.EventSystems;
 namespace ImmunotherapyGame.ResearchAdvancement
 {
 	[RequireComponent (typeof (Selectable))]
-    public class UpgradePurchaseButton : UIMenuNode
+    public class UpgradePurchaseButton : UIMenuNode, ISubmitHandler
     {
 
 		public override void OnCancel(BaseEventData eventData)
 		{
 			base.OnCancel(eventData);
-			EventSystem.current.SetSelectedGameObject(
-				ResearchAdvancementSystem.Instance.currentSelectedStatUpgradeButton
-				);
+			ResearchAdvancementSystem.Instance.OnPurchaseButtonCancel();
+		
 		}
-
 
 		protected override void OnPointerLeftClick(PointerEventData eventData)
 		{
-			
+			ResearchAdvancementSystem.Instance.BuyCurrentSelectedUpgrade();
 		}
 
-
+		public void OnSubmit(BaseEventData eventData)
+		{
+			ResearchAdvancementSystem.Instance.BuyCurrentSelectedUpgrade();
+		}
 	}
 }

@@ -25,6 +25,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
         void Awake()
 		{
             buttonData.onChangedStatus += Activate;
+            Debug.Log("ButtonData " + buttonData.name + " is unlocked = " + buttonData.unlocked);
             gameObject.SetActive(buttonData.unlocked);
             imageRender.sprite = buttonData.icon;
             glowImageRender.material = buttonData.glowMaterial;
@@ -47,6 +48,8 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
         public void Activate(bool shouldActivate)
 		{
+            Debug.Log("Activate:  " + buttonData.name + " is unlocked = " + buttonData.unlocked + " should Activate = " + shouldActivate);
+
             gameObject.SetActive(shouldActivate);
 		}
 

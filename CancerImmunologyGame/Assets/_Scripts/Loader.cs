@@ -11,6 +11,8 @@ using ImmunotherapyGame.GameManagement;
 using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.UI;
 using ImmunotherapyGame.UI.TopOverlay;
+using ImmunotherapyGame.ResearchAdvancement;
+
 
 namespace ImmunotherapyGame.Loader
 {
@@ -30,7 +32,7 @@ namespace ImmunotherapyGame.Loader
 		private IEnumerator InitialiseManagers()
 		{
 			InterfaceManager.Instance.Initialise();
-			GlobalGameData.dataManagers = new List<IDataManager>(3);
+			GlobalGameData.dataManagers = new List<IDataManager>(4);
 
 			// Load Settings
 			SettingsManager.Instance.Initialise();
@@ -51,6 +53,12 @@ namespace ImmunotherapyGame.Loader
 			Cellpedia.Instance.LoadData();
 			Cellpedia.Instance.Initialise();
 			GlobalGameData.dataManagers.Add(Cellpedia.Instance);
+
+			// Load Research Advancement
+			Debug.Log("Loader: Research Advancement");
+			ResearchAdvancementSystem.Instance.LoadData();
+			ResearchAdvancementSystem.Instance.Initialise();
+			GlobalGameData.dataManagers.Add(ResearchAdvancementSystem.Instance);
 
 			// Load UIs
 			TopOverlayUI.Instance.Initialise();

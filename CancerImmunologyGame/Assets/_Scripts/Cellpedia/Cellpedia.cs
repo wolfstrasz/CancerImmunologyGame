@@ -69,13 +69,10 @@ namespace ImmunotherapyGame.CellpediaSystem
 			// Set if button is visible
 			for	(int i = 0; i < data.cellpediaItems.Count; ++i)
 			{
-				if (data.cellpediaItems[i].isUnlocked)
-				{
-					inGameUIButtonData.unlocked = true;
-					unlockedFeature = true;
-					break;
-				}
+				unlockedFeature |= data.cellpediaItems[i].isUnlocked;
 			}
+
+			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
 
 			// Add nodes to listen to
 			for (int i = 0; i < buttonsBar.petridishButtonList.Count; ++i)
@@ -129,8 +126,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnOpenView()
 		{
 			inGameUIButtonData.PingAnimationStatus(false);
-
-
 
 			if (PetridishButton.lastSubmitted != null)
 			{

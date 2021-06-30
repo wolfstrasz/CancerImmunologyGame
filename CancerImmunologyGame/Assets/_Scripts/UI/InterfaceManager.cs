@@ -68,7 +68,7 @@ namespace ImmunotherapyGame.UI
 			// Update event system selected node to the new menu's initiliser node
 			EventSystem.current.SetSelectedGameObject(null);
 
-			if (interfacePanelToOpen.initialControlNode != null)
+			if (interfacePanelToOpen.initialControlNode != null && interfacePanelToOpen.initialControlNode.gameObject != null)
 			{
 				EventSystem.current.SetSelectedGameObject(interfacePanelToOpen.initialControlNode.gameObject);
 				interfacePanelToOpen.initialControlNode.OnSelectView = true;

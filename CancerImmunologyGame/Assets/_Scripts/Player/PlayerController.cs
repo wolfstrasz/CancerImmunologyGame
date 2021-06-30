@@ -33,6 +33,8 @@ namespace ImmunotherapyGame.Player
 
 		public KillerCell ControlledCell => controlledCell;
 
+		PlayerControls playerControls = null;
+
 		public void Initialise()
 		{
 			transform.position = controlledCell.transform.position;
@@ -266,5 +268,6 @@ namespace ImmunotherapyGame.Player
 				immunotherapyCaster.CastAbility();
 			}
 		}
+
 	}
 }
