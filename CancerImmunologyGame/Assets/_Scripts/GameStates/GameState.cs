@@ -16,7 +16,7 @@ namespace ImmunotherapyGame
 				this.owner = owner;
 			}
 
-			internal abstract void OnStateExit();
+			internal virtual void OnStateExit() { }
 			internal abstract void OnStateEnter();
 			internal abstract void OnStateReEnter();
 			internal abstract void OnUpdate();

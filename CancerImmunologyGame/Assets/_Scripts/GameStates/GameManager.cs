@@ -19,36 +19,27 @@ namespace ImmunotherapyGame
 			[SerializeField]
 			private bool isTestScene = false;
 
-
-			void Start()
-			{
-				if (isTestScene)
-					InitialiseTestScene();
-			}
+			void Start() { Initialise(isTestScene); }
 
 			void Update() { stateController.OnUpdate(); }
 
 			void FixedUpdate() { stateController.OnFixedUpdate(); }
 
-			public void Initialise()
+			public void Initialise(bool testScene = false)
 			{
+				Debug.Log("Game Manager: Initialise");
+
+				GlobalGameData.gameplaySpeed = 1.0f;
+				GlobalGameData.gameSpeed = 1.0f;
 				SceneManager.activeSceneChanged += OnActiveSceneChanged;
 				SceneManager.sceneLoaded += OnSceneLoaded;
 
-				GlobalGameData.gameplaySpeed = 1.0f;
-				GlobalGameData.gameSpeed = 1.0f;
-				GlobalGameData.isInitialised = true;
-			}
-
-			public void InitialiseTestScene()
-			{
-
-				GlobalGameData.gameplaySpeed = 1.0f;
-				GlobalGameData.gameSpeed = 1.0f;
-				GlobalGameData.isInitialised = true;
-
-				sceneLoaded = true;
-				stateController.SetState(new PlayTestState(stateController));
+				if (testScene)
+				{
+					Debug.Log("Game Manager: Initialise Test Scene");
+					sceneLoaded = true;
+					stateController.SetState(new PlayState(stateController));
+				}
 			}
 
 			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
