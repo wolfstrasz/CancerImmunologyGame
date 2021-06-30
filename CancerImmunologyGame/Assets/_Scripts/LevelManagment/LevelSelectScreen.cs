@@ -19,8 +19,6 @@ namespace ImmunotherapyGame.UI
         private GameObject levelItemPrefab = null;
         [SerializeField]
         private GameObject emptyItemPrefab = null;
-        [SerializeField]
-        private List<MenuButton> cancelButtons = null;
 
         [Header("Layout")]
         [SerializeField]

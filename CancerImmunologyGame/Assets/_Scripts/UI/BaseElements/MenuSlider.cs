@@ -34,17 +34,19 @@ namespace ImmunotherapyGame.UI
             timeout = sliderSoundTimeout;
         }
 
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-		}
 
 		// Protected methods
 		void Awake() 
             => slider = GetComponent<Slider>();
         void OnEnable() 
             => slider.onValueChanged.AddListener(delegate { OnValueChanged(); });
-        void OnDisable() 
-            => slider.onValueChanged.RemoveListener(delegate { OnValueChanged(); });
+
+
+        protected override void OnDisable()
+		{
+            base.OnDisable();
+            slider.onValueChanged.RemoveListener(delegate { OnValueChanged(); });
+        }
 
 	}
 }

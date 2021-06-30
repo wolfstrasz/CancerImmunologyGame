@@ -4,6 +4,8 @@ using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.AI;
 using UnityEngine;
 
+using ImmunotherapyGame.Abilities;
+
 namespace ImmunotherapyGame
 {
     public static class GlobalLevelData
@@ -15,8 +17,8 @@ namespace ImmunotherapyGame
 		public static List<RegulatoryCell> RegulatoryCells = new List<RegulatoryCell>();
 		public static List<PlayerRespawnArea> RespawnAreas = new List<PlayerRespawnArea>();
 		public static List<AIController> AIKillerCells = new List<AIController>();
-
-
+		public static List<AbilityCaster> AbilityCasters = new List<AbilityCaster>();
+		
 
 		public static void UpdateLevelData()
 		{

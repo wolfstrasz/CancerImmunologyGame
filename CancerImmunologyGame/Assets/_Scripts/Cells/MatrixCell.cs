@@ -1,84 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame
 {
     public class MatrixCell : Cell
     {
-		public float timeToReach = 1f;
-		public float timePassed = 0f;
-
-		public Transform startPosition = null;
-		public Transform endPosition = null;
+		[SerializeField] [ReadOnly] CancerCell cancerCell = null;
 
 		public override bool isImmune => isDying;
 
-		private void Awake()
+		protected override void LateUpdate()
 		{
-			healthBar.MaxHealth = maxHealth;
-		}
+			base.LateUpdate();
 
-		private void Update()
-		{
-			if (timePassed <  timeToReach)
-			{
-				timePassed += Time.deltaTime;
-				if (timePassed > timeToReach)
-				{
-					timePassed = timeToReach;
-					//transform.parent = endPosition;
-				}
+			if (CurrentHealth == 0)
+				return;
 
-				transform.position = Vector3.Lerp(startPosition.position, endPosition.position, timePassed / timePassed);
-			}
-
-	
-			
-		}
-
-		public override void ExhaustCell(float amount)
-		{
-			Debug.LogWarning("Trying to exhaust Matrix Cell but it is not implemented");
-		}
-
-		public override void HitCell(float amount)
-		{
-			if (isImmune) return;
-			health -= amount;
-			healthBar.Health = health;
-
-			if (health <= 0.0f)
-			{
-				animator.Play("Destroyed");
-				// Make destruction sound
-				isDying = true;
-
-			}
-			else if (health * 3f <= maxHealth)
+			if (CurrentHealth * 3f <= cellType.MaxHealth)
 			{
 				animator.Play("AlmostDestroyed");
 				// Make destruction sound
 			}
-			else if (health * 1.5f <= maxHealth)
+			else if (CurrentHealth * 1.5f <= cellType.MaxHealth)
 			{
 				animator.Play("Damaged");
 				// Make destruction sound
-
 			}
-
 		}
 
-		public void SetMatrixData(Transform targetPosition, Transform startPosition, int SortLayerID)
+		protected override void OnCellDeath()
 		{
-			this.startPosition = startPosition;
-			endPosition = targetPosition;
-			//render.sortingOrder = SortLayerID + 1;
+			animator.Play("Destroyed");
+			// Make destruction sound
+			cancerCell.DetachMatrixCell(this);
 		}
 
-		public void OnDestroyMatrixCell()
+		public void AttachCancerCell (CancerCell cancerCell)
 		{
-			Destroy(gameObject);
+			this.cancerCell = cancerCell;
+			RenderSortOrder = cancerCell.RenderSortOrder + 1;
 		}
-    }
+
+		public void DetachCancerCell (CancerCell cancerCell)
+		{
+			if (this.cancerCell == cancerCell)
+			{
+				cancerCell = null;
+				ApplyHealthAmount(-CurrentHealth);
+			}
+		}
+	}
 }

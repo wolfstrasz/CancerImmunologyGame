@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using ImmunotherapyGame.Core;
+using ImmunotherapyGame.Abilities;
+
 namespace ImmunotherapyGame.Cancers
 {
-	public class CancerCell : EvilCell
+	public class CancerCell : Cell
 	{
 		[Header("Links")]
 		[SerializeField]
 		public CircleCollider2D divisionBodyBlocker = null;
 		[SerializeField]
-		private GameObject hypoxicArea = null;
+		private RangedAbilityCaster hypoxicCaster = null;
 		[SerializeField]
 		internal Cancer cancerOwner = null;
 
@@ -20,22 +23,16 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField]
 		private bool isInDivision = false;
 
-		public override bool isImmune => isDying || isInDivision;
+		public override bool isImmune => isDying || isInDivision || matrixCell != null;
 
-		
-		
+		// Matrix handling
+		// -------------------------------------------------
+		[ReadOnly]
+		public MatrixCell matrixCell = null;
 
-		void Awake()
+		private void Awake()
 		{
-			hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0.0f, 360.0f));
-			healthBar.MaxHealth = maxHealth;
-			healthBar.Health = health;
-		}
-
-		protected override void OnDeath()
-		{
-			animator.SetTrigger("Apoptosis");
-			divisionBodyBlocker.enabled = false;
+			hypoxicCaster.CastAbility(gameObject);
 		}
 
 		// DIVISION HANDLERS
@@ -51,7 +48,6 @@ namespace ImmunotherapyGame.Cancers
 
 		internal void StartDivision()
 		{
-			healthBar.gameObject.SetActive(false);
 			animator.SetTrigger("Divide");
 		}
 
@@ -73,7 +69,6 @@ namespace ImmunotherapyGame.Cancers
 		/// </summary>
 		public void FinishedDivision()
 		{
-			healthBar.gameObject.SetActive(true);
 			divisionBodyBlocker.gameObject.SetActive(false);
 			cancerOwner.OnFinishDivision();
 		}
@@ -85,14 +80,6 @@ namespace ImmunotherapyGame.Cancers
 		{
 			isInDivision = false;
 			isDying = false;
-			if (!hypoxicArea.activeSelf)
-			{
-				float randomAngle = Random.Range(0.0f, 360.0f);
-				hypoxicArea.transform.rotation = Quaternion.Euler(0, 0, randomAngle);
-				hypoxicArea.SetActive(true);
-
-				//   UIManager.Instance.allCancerCells.Add(this);
-			}
 		}
 
 		/// <summary>
@@ -112,36 +99,30 @@ namespace ImmunotherapyGame.Cancers
 		}
 
 
-
-		// Matrix handling
-		// -------------------------------------------------
-		[Header("Debug(MatrixCell)")]
-		[SerializeField]
-		public MatrixCell matrix = null;
-		[SerializeField]
-		public Transform matrixAttachmentPoint = null; 
-
-
-
-		public override void HitCell(float amount)
+		protected override void OnCellDeath()
 		{
-			if (isImmune) return;
+			isDying = true;
+			animator.SetTrigger("Apoptosis");
+			divisionBodyBlocker.enabled = false;
 
-			if (matrix == null)
+			if (matrixCell != null)
 			{
-				health -= amount;
-				healthBar.Health = health;
-				if (health <= 0.0f)
-				{
-					isDying = true;
-					healthBar.gameObject.SetActive(false);
-					bodyBlocker.enabled = false;
-
-					OnDeath();
-
-					NotifyObservers(this);
-				}
+				matrixCell.DetachCancerCell(this);
 			}
 		}
+
+		public void AttachMatrixCell(MatrixCell matrixCell)
+		{
+			this.matrixCell = matrixCell;
+		}
+
+		public void DetachMatrixCell(MatrixCell matrixCell)
+		{
+			if (this.matrixCell == matrixCell)
+			{
+				this.matrixCell = null;
+			}
+		}
+
 	}
 }

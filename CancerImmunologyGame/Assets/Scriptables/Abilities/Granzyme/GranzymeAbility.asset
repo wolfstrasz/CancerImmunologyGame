@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14bed69b3e3b8748a8032ac6a1588ed, type: 3}
+  m_Name: GranzymeAbility
+  m_EditorClassIdentifier: 
+  name: Granzyme
+  thumbnail: {fileID: -327267549826252829, guid: e6ce9d7497a7ffc43bf576db10c98937,
+    type: 3}
+  audioClip: {fileID: 8300000, guid: 9df4c2e414fd7d847978300d2a2b0213, type: 3}
+  description: 
+  range: {fileID: 11400000, guid: ec07f361d1e1cf24ebe48eb3ffee6711, type: 2}
+  energyCost: {fileID: 11400000, guid: cf612f5ed7e059e45b7166ce020bf19b, type: 2}
+  cooldownTime: {fileID: 11400000, guid: 40f60f1bbb1fd1142ba58a633648462f, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: 04569fb91e9f759478059a3c59bafcf2, type: 2}
+  - {fileID: 11400000, guid: 7065388571043304ebb9fac9e0752db1, type: 2}
+  effectOnTargetCell:
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 0}
+    speedEffect: {fileID: 0}
+  applicableCellTypes: []
+  projectileRange: {fileID: 11400000, guid: 2fcbb6d828baa784a93f0da714f676a9, type: 2}
+  projectileCount: {fileID: 11400000, guid: 7efee93226dd19e45922945e5146e177, type: 2}
+  projectileSpread: {fileID: 11400000, guid: 7d89a2ea08f44e7479dff9775c8ec901, type: 2}
+  projectileLifetime: {fileID: 0}
+  projectilePrefab: {fileID: 5361938888785564022, guid: 0abcbddafd5a4c14c81fc6bb77eba09c,
+    type: 3}
+  useRandomSpreadOffset: 1
+  spreadPerParticle: 30
+  baseStartRotation: -15

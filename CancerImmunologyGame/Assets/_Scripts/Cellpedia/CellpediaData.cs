@@ -47,7 +47,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 	}
 
 	[System.Serializable]
-	public class SerializableCellpediaData : SavableObject
+	public class SerializableCellpediaData : SaveableObject
 	{
 		public int count = 0;
 		public List<bool> isUnlocked = new List<bool>();

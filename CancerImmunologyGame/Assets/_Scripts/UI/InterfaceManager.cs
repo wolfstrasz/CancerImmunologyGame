@@ -44,17 +44,23 @@ namespace ImmunotherapyGame.UI
 
 		private void OpenPanel (InterfaceControlPanel interfacePanelToOpen, InterfaceControlPanel lowerLevelInterfaceObject)
 		{
-			Debug.Log("Interface Manager: Opening Panel = " + interfacePanelToOpen.gameObject.name);
-			if (interfacePanelToOpen.level >= LevelRequirementForFullPause)
-				GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.FULL, interfacePanelToOpen.gameObject);
+			if (!interfacePanelToOpen.gameObject.activeInHierarchy)
+			{
+				Debug.Log("Interface Manager: Opening Panel = " + interfacePanelToOpen.gameObject.name);
+				if (interfacePanelToOpen.level >= LevelRequirementForFullPause)
+					GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.FULL, interfacePanelToOpen.gameObject);
+				else
+					GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, interfacePanelToOpen.gameObject);
+				// Open menu
+				interfacePanelToOpen.gameObject.SetActive(true);
+				if (interfacePanelToOpen.onOpenInterface != null)
+					interfacePanelToOpen.onOpenInterface();
+			}
 			else
-				GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, interfacePanelToOpen.gameObject);
-
-			// Open menu
-			interfacePanelToOpen.gameObject.SetActive(true);
-			if (interfacePanelToOpen.onOpenInterface != null)
-				interfacePanelToOpen.onOpenInterface();
-
+			{
+				Debug.Log("Interface Manager: Going back to Panel = " + interfacePanelToOpen.gameObject.name);
+			}
+		
 			// if we are sending a null => do not reasign (functionality is used for going down the menu tree)
 			if (lowerLevelInterfaceObject != null) 
 				interfacePanelToOpen.LastLowerInterfacePanel = lowerLevelInterfaceObject;
@@ -62,7 +68,7 @@ namespace ImmunotherapyGame.UI
 			// Update event system selected node to the new menu's initiliser node
 			EventSystem.current.SetSelectedGameObject(null);
 
-			if (interfacePanelToOpen.initialControlNode != null)
+			if (interfacePanelToOpen.initialControlNode != null && interfacePanelToOpen.initialControlNode.gameObject != null)
 			{
 				EventSystem.current.SetSelectedGameObject(interfacePanelToOpen.initialControlNode.gameObject);
 				interfacePanelToOpen.initialControlNode.OnSelectView = true;
@@ -70,7 +76,6 @@ namespace ImmunotherapyGame.UI
 
 			// Set the menu to current
 			currentInterfaceOpened = interfacePanelToOpen;
-		
 			allOpenedInterfacePanels.Add(currentInterfaceOpened);
 		}
 

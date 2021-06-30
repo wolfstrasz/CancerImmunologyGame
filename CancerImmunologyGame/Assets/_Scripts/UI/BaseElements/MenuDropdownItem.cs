@@ -10,7 +10,7 @@ using TMPro;
 namespace ImmunotherapyGame.UI
 {
 	[System.Serializable]
-    public class MenuDropdownItem : UIMenuNode, IEventSystemHandler, IPointerClickHandler, ISubmitHandler, IMoveHandler
+    public class MenuDropdownItem : UIMenuNode, IEventSystemHandler, ISubmitHandler, IMoveHandler
 	{
 		[Header("Attributes")]
 		[SerializeField]
@@ -49,12 +49,6 @@ namespace ImmunotherapyGame.UI
 			}
 		}
 
-		public void OnPointerClick(PointerEventData eventData)
-		{
-			OnSubmit(eventData);
-
-		}
-
 		public void OnSubmit(BaseEventData eventData)
 		{
 			owner.OnItemSubmitted(this);
@@ -63,9 +57,6 @@ namespace ImmunotherapyGame.UI
 
 		}
 
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-		}
 
 		public override void OnCancel(BaseEventData eventData)
 		{
@@ -79,6 +70,10 @@ namespace ImmunotherapyGame.UI
 			OnSelectView = false;
 		}
 
+		protected override void OnPointerLeftClick(PointerEventData eventData)
+		{
+			OnSubmit(eventData);
+		}
 
 	}
 }

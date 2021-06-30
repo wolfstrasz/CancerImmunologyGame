@@ -57,6 +57,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Immunotherapy"",
+                    ""type"": ""Button"",
+                    ""id"": ""713b51d2-c4e7-4a1b-9dda-b2624b24ae8e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -121,7 +129,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -191,6 +199,61 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""MouseAim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""269db4a4-c543-4e20-ae1d-2c3da9f1978e"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Immunotherapy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""3e219ad9-5b82-40a0-9db9-f73f7c88e32c"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Immunotherapy"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""738ad739-15fc-41a7-9f96-7eb17e67873a"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Immunotherapy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""a5427ccd-1c7a-4b55-9334-2a3bd9fa088b"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Immunotherapy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dab9380-09b2-448b-880b-bf0081c9ae70"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Immunotherapy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -234,6 +297,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": ""Survey"",
                     ""type"": ""Button"",
                     ""id"": ""15fe41de-d417-47c6-aede-50debb6161cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwitchImmunotherapy"",
+                    ""type"": ""Button"",
+                    ""id"": ""82770b89-7df3-421c-9897-83eb9c9a18f6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -347,6 +418,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Survey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0c43b62-4637-4a7f-9b7d-f517458a97f4"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SwitchImmunotherapy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c52b766f-1ae5-44df-8c15-81001aae61b5"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keys+Mouse"",
+                    ""action"": ""SwitchImmunotherapy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -890,6 +983,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_SecondaryAttack = m_Gameplay.FindAction("Secondary Attack", throwIfNotFound: true);
         m_Gameplay_Aim = m_Gameplay.FindAction("Aim", throwIfNotFound: true);
         m_Gameplay_MouseAim = m_Gameplay.FindAction("MouseAim", throwIfNotFound: true);
+        m_Gameplay_Immunotherapy = m_Gameplay.FindAction("Immunotherapy", throwIfNotFound: true);
         // Systems
         m_Systems = asset.FindActionMap("Systems", throwIfNotFound: true);
         m_Systems_Skip = m_Systems.FindAction("Skip", throwIfNotFound: true);
@@ -897,6 +991,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Systems_PauseMenu = m_Systems.FindAction("PauseMenu", throwIfNotFound: true);
         m_Systems_ResearchAdvancement = m_Systems.FindAction("ResearchAdvancement", throwIfNotFound: true);
         m_Systems_Survey = m_Systems.FindAction("Survey", throwIfNotFound: true);
+        m_Systems_SwitchImmunotherapy = m_Systems.FindAction("SwitchImmunotherapy", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -963,6 +1058,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_SecondaryAttack;
     private readonly InputAction m_Gameplay_Aim;
     private readonly InputAction m_Gameplay_MouseAim;
+    private readonly InputAction m_Gameplay_Immunotherapy;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -972,6 +1068,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @SecondaryAttack => m_Wrapper.m_Gameplay_SecondaryAttack;
         public InputAction @Aim => m_Wrapper.m_Gameplay_Aim;
         public InputAction @MouseAim => m_Wrapper.m_Gameplay_MouseAim;
+        public InputAction @Immunotherapy => m_Wrapper.m_Gameplay_Immunotherapy;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -996,6 +1093,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MouseAim.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseAim;
                 @MouseAim.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseAim;
                 @MouseAim.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMouseAim;
+                @Immunotherapy.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnImmunotherapy;
+                @Immunotherapy.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnImmunotherapy;
+                @Immunotherapy.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnImmunotherapy;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -1015,6 +1115,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @MouseAim.started += instance.OnMouseAim;
                 @MouseAim.performed += instance.OnMouseAim;
                 @MouseAim.canceled += instance.OnMouseAim;
+                @Immunotherapy.started += instance.OnImmunotherapy;
+                @Immunotherapy.performed += instance.OnImmunotherapy;
+                @Immunotherapy.canceled += instance.OnImmunotherapy;
             }
         }
     }
@@ -1028,6 +1131,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Systems_PauseMenu;
     private readonly InputAction m_Systems_ResearchAdvancement;
     private readonly InputAction m_Systems_Survey;
+    private readonly InputAction m_Systems_SwitchImmunotherapy;
     public struct SystemsActions
     {
         private @PlayerControls m_Wrapper;
@@ -1037,6 +1141,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_Systems_PauseMenu;
         public InputAction @ResearchAdvancement => m_Wrapper.m_Systems_ResearchAdvancement;
         public InputAction @Survey => m_Wrapper.m_Systems_Survey;
+        public InputAction @SwitchImmunotherapy => m_Wrapper.m_Systems_SwitchImmunotherapy;
         public InputActionMap Get() { return m_Wrapper.m_Systems; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1061,6 +1166,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Survey.started -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurvey;
                 @Survey.performed -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurvey;
                 @Survey.canceled -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurvey;
+                @SwitchImmunotherapy.started -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSwitchImmunotherapy;
+                @SwitchImmunotherapy.performed -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSwitchImmunotherapy;
+                @SwitchImmunotherapy.canceled -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSwitchImmunotherapy;
             }
             m_Wrapper.m_SystemsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1080,6 +1188,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Survey.started += instance.OnSurvey;
                 @Survey.performed += instance.OnSurvey;
                 @Survey.canceled += instance.OnSurvey;
+                @SwitchImmunotherapy.started += instance.OnSwitchImmunotherapy;
+                @SwitchImmunotherapy.performed += instance.OnSwitchImmunotherapy;
+                @SwitchImmunotherapy.canceled += instance.OnSwitchImmunotherapy;
             }
         }
     }
@@ -1214,6 +1325,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnSecondaryAttack(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnMouseAim(InputAction.CallbackContext context);
+        void OnImmunotherapy(InputAction.CallbackContext context);
     }
     public interface ISystemsActions
     {
@@ -1222,6 +1334,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnResearchAdvancement(InputAction.CallbackContext context);
         void OnSurvey(InputAction.CallbackContext context);
+        void OnSwitchImmunotherapy(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

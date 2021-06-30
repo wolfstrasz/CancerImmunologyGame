@@ -14,13 +14,28 @@ namespace ImmunotherapyGame.UI.TopOverlay
         public delegate void OnChangedStatus(bool status);
         public OnChangedStatus onChangedStatus;
 
+        public delegate void OnChangedAnimationStatus(bool status);
+        public OnChangedAnimationStatus onChangedAnimationStatus;
+
         public delegate void OnOpenMenu();
         public OnOpenMenu onOpenMenu;
 
-        public void PingChangedStatus(bool status)
+        public void PingAnimationStatus(bool status)
 		{
+            if (onChangedAnimationStatus != null)
+			{
+                onChangedAnimationStatus(status);
+			}
+		}
+
+        public void PingUnlockStatus(bool status)
+		{
+            unlocked = status;
+
             if (onChangedStatus != null)
+			{
                 onChangedStatus(status);
+			}
 		}
 
     }

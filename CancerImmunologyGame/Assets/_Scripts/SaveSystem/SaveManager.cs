@@ -58,7 +58,7 @@ namespace ImmunotherapyGame
             /// <typeparam name="SaveDataType"></typeparam>
             /// <param name="saveData"></param>
             /// <returns></returns>
-            public void SaveData<SaveDataType>(SaveDataType saveData) where SaveDataType : SavableObject
+            public void SaveData<SaveDataType>(SaveDataType saveData) where SaveDataType : SaveableObject
             {
 
                 if (!Directory.Exists(saveDirectory))
@@ -104,7 +104,7 @@ namespace ImmunotherapyGame
 
 
             // Load data
-            public LoadDataType LoadData<LoadDataType>() where LoadDataType : SavableObject
+            public LoadDataType LoadData<LoadDataType>() where LoadDataType : SaveableObject
             {
                 if (!Directory.Exists(saveDirectory))
                 {
@@ -139,7 +139,7 @@ namespace ImmunotherapyGame
         }
 
         [System.Serializable]
-        public abstract class SavableObject
+        public abstract class SaveableObject
 		{
 
 		}

@@ -12,13 +12,13 @@ namespace ImmunotherapyGame.AI
 		private KillerCell controlCell = null;
 
 		private float range = 1f;
-		private float rangeReducer = 0.8f;
+	//	private float rangeReducer = 0.8f;
 
 		public AICanAttackEvilCell(string name, BehaviourTree owner, IAICancerCellInteractor interactor) : base(name, owner, "CanAttackCancerCell")
 		{
 			this.interactor = interactor;
 			controlCell = interactor.ControlledCell;
-			range = controlCell.Range * rangeReducer;
+			//range = controlCell.Range * rangeReducer;
 		}
 
 
@@ -43,7 +43,7 @@ namespace ImmunotherapyGame.AI
 		protected override void OnResetTreeNode()
 		{
 			controlCell = interactor.ControlledCell;
-			range = controlCell.Range * rangeReducer;
+			//range = controlCell.Range * rangeReducer;
 		}
 
 	}

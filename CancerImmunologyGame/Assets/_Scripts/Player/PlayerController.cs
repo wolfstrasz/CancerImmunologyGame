@@ -10,10 +10,13 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.Player
 {
 	[RequireComponent(typeof(PlayerInput))]
-	public class PlayerController : Singleton<PlayerController> , ICellController, ICancerDeathObserver, IControllerMovementOverridable
+	public class PlayerController : Singleton<PlayerController>, ICancerDeathObserver, IControllerMovementOverridable
 	{
+		[SerializeField] private PlayerData playerData = null;
+		[SerializeField] private ImmunotherapyCaster immunotherapyCaster = null;
+
 		[SerializeField]
-		private KillerCell kc = null;
+		private KillerCell controlledCell = null;
 		[Header("Aiming")]
 		[SerializeField]
 		private GameObject crosshairCanvas = null;
@@ -21,42 +24,24 @@ namespace ImmunotherapyGame.Player
 		private Transform crosshair = null;
 		internal Quaternion CrosshairRotation { get; set; }
 
-		[Header("AutoAim")]
-		[SerializeField]
-		private GameObject autoAimerPrefab = null;
-		[SerializeField]
-		private bool useAutoAim = false;
-		[SerializeField]
-		private PlayerAutoAimer autoAimer = null;
-
-
 		[Header("Debug (Read Only)")]
-		[SerializeField]
-		private List<IPlayerObserver> observers = new List<IPlayerObserver>();
 		[SerializeField]
 		private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
 
 		[SerializeField]
 		private List<Cancer> cancersNearby = new List<Cancer>();
 
-		public KillerCell KC => kc;
+		public KillerCell ControlledCell => controlledCell;
+
+		PlayerControls playerControls = null;
 
 		public void Initialise()
 		{
-			PlayerUI.Instance.Initialise();
-			PlayerUI.Instance.SetPlayerInfo(kc);
-			kc.Sense.controller = this;
-			kc.controller = this;
-			transform.position = kc.transform.position;
-			transform.rotation = kc.transform.rotation;
+			transform.position = controlledCell.transform.position;
+			transform.rotation = controlledCell.transform.rotation;
 			CrosshairRotation = Quaternion.identity;
-			// Auto aiming
-			useAutoAim = GlobalGameData.autoAim;
-			if (useAutoAim && autoAimer == null)
-			{
-				autoAimer = Instantiate(autoAimerPrefab, transform).GetComponent<PlayerAutoAimer>();
-				autoAimer.owner = this;
-			}
+			playerData.CurrentCell = controlledCell;
+			playerData.CurrentCaster = immunotherapyCaster;
 		}
 
 
@@ -90,22 +75,22 @@ namespace ImmunotherapyGame.Player
 		public void OnUpdate()
 		{
 
-			transform.position = kc.transform.position;
-			transform.rotation = kc.transform.rotation;
-			if (autoAimer != null)
-				autoAimer.OnUpdate();
+			transform.position = controlledCell.transform.position;
+			transform.rotation = controlledCell.transform.rotation;
 			crosshairCanvas.transform.rotation = CrosshairRotation;
-			PlayerUI.Instance.OnUpdate();
 
 			if (CanAttack)
 			{
 				if (InitiatePrimaryAttack)
 				{
-					kc.Attack(crosshair.position);
+					controlledCell.UsePrimaryAttack(crosshair.gameObject);
+				} else
+				{
+					controlledCell.StopPrimaryAttack();
 				}
 				if (InitiateSpecialAttack)
 				{
-					kc.SpecialAttack(crosshair.position);
+					controlledCell.SecondaryAttack(crosshair.gameObject);
 				}
 			}
 		}
@@ -116,7 +101,7 @@ namespace ImmunotherapyGame.Player
 			if (IsMoving)
 			{
 				Vector2 movementVector = MoveDirection;
-				Vector3 position = kc.transform.position;
+				Vector3 position = controlledCell.transform.position;
 				Quaternion rotation = Quaternion.identity;
 
 				for (int i = 0; i < movementOverrides.Count; i++)
@@ -124,20 +109,9 @@ namespace ImmunotherapyGame.Player
 					movementOverrides[i].ApplyOverride(ref movementVector, ref rotation, ref position);
 				}
 
-				kc.MovementVector = movementVector;
-				kc.MovementRotation = Quaternion.Slerp(kc.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
+				controlledCell.MovementVector = movementVector;
+				controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 			}
-		}
-
-		// Subscribtions
-		public void OnEnemiesInRange()
-		{
-			crosshairCanvas.SetActive(true);
-		}
-
-		public void OnEnemiesOutOfRange()
-		{
-			crosshairCanvas.SetActive(false);
 		}
 
 		public void OnCancerDeath(Cancer cancer)
@@ -155,6 +129,13 @@ namespace ImmunotherapyGame.Player
 
 		public void OnCellDeath()
 		{ 
+
+			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)
+			{
+				Debug.LogWarning("Zero respawn areas found on map. Respawning at same position");
+				return;
+			}
+
 			// Find closest spawn location
 			List < PlayerRespawnArea > respawnLocations = GlobalLevelData.RespawnAreas;
 			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
@@ -170,26 +151,9 @@ namespace ImmunotherapyGame.Player
 				}
 			}
 
-			kc.AddHealth(kc.maxHealth);
-			kc.AddEnergy(kc.maxEnergy);
-			kc.gameObject.transform.position = closestRespawnLocation;
+			controlledCell.gameObject.transform.position = closestRespawnLocation;
 			gameObject.transform.position = closestRespawnLocation;
 
-			for (int i = 0; i < observers.Count; ++i)
-			{
-				observers[i].OnPlayerDeath();
-			}
-		}
-
-		// Observers
-		public void SubscribeObserver(IPlayerObserver observer)
-		{
-			observers.Add(observer);
-		}
-
-		public void UnsubscribeObserver(IPlayerObserver observer)
-		{
-			observers.Remove(observer);
 		}
 
 		public void SubscribeMovementOverride(IControllerMovementOverride controllerOverride)
@@ -294,5 +258,16 @@ namespace ImmunotherapyGame.Player
 			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
 		}
+
+
+		void OnImmunotherapy(InputValue value)
+		{
+			Debug.Log("Player: On Special Ability Use");
+			if (!immunotherapyCaster.IsOnCooldown)
+			{
+				immunotherapyCaster.CastAbility();
+			}
+		}
+
 	}
 }

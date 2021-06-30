@@ -3,109 +3,92 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+using ImmunotherapyGame.Abilities;
 namespace ImmunotherapyGame
 {
 	public class HelperTCell : Cell
 	{
-		// Spawning particles functionality
-		[Header("Functionality info (Read Only)")]
+		[Header("Healing")]
 		[SerializeField]
-		private bool hasSpotBeenReserved = false;
-		[SerializeField]
-		private bool shouldHeal = false;
+		private RangedAbilityCaster healCaster = null;
 
-		[Header("Particle Spawning")]
+		[Header("AI Booking")]
 		[SerializeField]
-		private GameObject particlePrefab = null;
-		[SerializeField]
-		private float timeBetweenSpawns = 2.0f;
-		[SerializeField]
-		private float particlesLifetime = 1f;
-		[SerializeField]
-		private float timeBeforeNextSpawn = 0.0f;
-
-		[Header("Booking spots")]
+		private int forcedFreeSpots = 1;
 		[SerializeField]
 		private float spreadAngleInDegrees = 60.0f;
 		[SerializeField]
 		private float bookingSpotDistance = 1.0f;
-		[SerializeField]
-		private int forcedFreeSpots = 1;
-		[SerializeField]
+
+		[SerializeField][ReadOnly]
+		private bool shouldHeal = false;
+		[SerializeField][ReadOnly]
+		private bool hasSpotBeenReserved = false;
+		[SerializeField][ReadOnly]
 		private List<GameObject> bookingSpots = null;
-		[SerializeField]
+		[SerializeField][ReadOnly]
 		private List<GameObject> freeBookingSpots = null;
 
 		[Header("Simulation of booking spot rotation")]
 		[SerializeField]
 		private float timeToPassForFullRotation = 5f;
+		[SerializeField][ReadOnly]
 		private float timePassedForFullRotation = 0f;
 
+		[Header("Patrol Movement")]
 		[SerializeField]
 		private List<Transform> patrolPoints = new List<Transform>();
-		[SerializeField]
+		[SerializeField][ReadOnly]
 		private int patrolIndex = 0;
-		[SerializeField]
-		private float speed = 2;
 
 		public override bool isImmune => true;
 
-		private bool initialised = false;
-
-		private void Start()
+		protected override void Start()
 		{
-			initialised = true;
+			base.Start();
 			GenerateBookingSpots();
 		}
 
 
 		public void OnUpdate()
 		{
-			if (!initialised) return;
+			shouldHeal = healCaster.HasTargetsInRange;
 
-			FakeRotateBookingSpots();
-
-
-
-			timeBeforeNextSpawn -= Time.deltaTime;
-			if (timeBeforeNextSpawn < 0f)
+			if (shouldHeal && healCaster.CanCastAbility(CurrentEnergy))
 			{
-				timeBeforeNextSpawn = 0f;
+				animator.SetBool("OnPrimarySkill", true);
+				// TODO: Make animation
+			} else
+			{
+				animator.SetBool("OnPrimarySkill", false);
 			}
 
+		}
 
-			if (shouldHeal && timeBeforeNextSpawn <= 0f)
+		public void OnPrimarySkillExecution()
+		{
+			if (healCaster.CanCastAbility(CurrentEnergy))
 			{
-				
-				foreach(GameObject spot in bookingSpots)
-				{
-					Vector3 spawnDirection = (spot.transform.position - transform.position).normalized;
-					HelperCellParticle particle = Instantiate(particlePrefab, transform.position, Quaternion.identity).GetComponent<HelperCellParticle>();
-					particle.SetParticleData(spawnDirection, particlesLifetime);
-				}
-
-				// TODO: Add spawn sound;
-				timeBeforeNextSpawn = timeBetweenSpawns;
+				float energyCost = healCaster.CastAbility();
+				ApplyEnergyAmount(-energyCost);
 			}
 		}
 
-
 		public void OnFixedUpdate()
 		{
-
-			if (!hasSpotBeenReserved)
+			if (!(hasSpotBeenReserved || shouldHeal))
 			{
-				if (patrolPoints.Count > 0)
+				if (patrolPoints.Count > 1)
 					MoveToNextPatrolPoint();
+
+				FakeRotateBookingSpots();
 			}
 		}
 
 		private void MoveToNextPatrolPoint()
 		{
 			Vector3 direction = (patrolPoints[patrolIndex].position - transform.position).normalized;
-
-			transform.position += direction * Time.deltaTime * speed;
-
+			transform.position += direction * Time.deltaTime * CurrentSpeed;
 			if (Vector3.SqrMagnitude(transform.position - patrolPoints[patrolIndex].position) < 2.0f)
    			{
 				patrolIndex++;
@@ -117,6 +100,7 @@ namespace ImmunotherapyGame
 		/// BOOKING SPOTS
 		private void GenerateBookingSpots()
 		{
+
 			// Reserve space
 			int bookingSpotCount = Mathf.RoundToInt(360f / spreadAngleInDegrees) + 1;
 			bookingSpots = new List<GameObject>(bookingSpotCount);
@@ -148,7 +132,7 @@ namespace ImmunotherapyGame
 
 		private void FakeRotateBookingSpots()
 		{
-			timePassedForFullRotation += Time.deltaTime;
+			timePassedForFullRotation += Time.fixedDeltaTime;
 			if (timePassedForFullRotation > timeToPassForFullRotation)
 				timePassedForFullRotation -= timeToPassForFullRotation;
 		}
@@ -171,6 +155,11 @@ namespace ImmunotherapyGame
 				FastSimulateBookingSpotRotations();
 			}
 
+			if (!gameObject.activeInHierarchy)
+			{
+				return null;
+			}
+
 			if (freeBookingSpots.Count > forcedFreeSpots)
 			{
 				int spotID = Random.Range(0, freeBookingSpots.Count);
@@ -180,6 +169,7 @@ namespace ImmunotherapyGame
 				hasSpotBeenReserved = true;
 				return spotToReserve;
 			}
+
 			return null;
 		}
 
@@ -189,37 +179,6 @@ namespace ImmunotherapyGame
 			freeBookingSpots.Add(bookingSpotToFree);
 			if (freeBookingSpots.Count == bookingSpots.Count)
 				hasSpotBeenReserved = false;
-		}
-
-		public void StartHealingOnCellsNearby()
-		{
-			if (!hasSpotBeenReserved)
-			{
-				FastSimulateBookingSpotRotations();
-				hasSpotBeenReserved = true;
-			}
-			shouldHeal = true;
-		}
-
-		public void TryToStopHealingOnCellLeaving()
-		{
-			shouldHeal = false;
-
-			if (freeBookingSpots.Count == bookingSpots.Count)
-			{
-				hasSpotBeenReserved = false;
-			}
-		}
-
-		public override void HitCell(float amount)
-		{
-			Debug.LogWarning("Helper cell got hit but it is not implemented!");
-		}
-
-		public override void ExhaustCell(float amount)
-		{
-			Debug.LogWarning("Helper cell got hit but it is not implemented!");
-
 		}
 	}
 

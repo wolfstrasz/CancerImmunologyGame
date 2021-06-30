@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Cancers
 {
-	public class Cancer : MonoBehaviour, IEvilCellObserver
+	public class Cancer : MonoBehaviour
 	{
 		[Header("Prefabs Linking")]
 		[SerializeField]
@@ -67,8 +67,7 @@ namespace ImmunotherapyGame.Cancers
 		private List<CancerCell> cancerCells = new List<CancerCell>();
 		[SerializeField]
 		private List<CAFCell> cafCells = new List<CAFCell>();
-		[SerializeField]
-		public List<EvilCell> AllCells = new List<EvilCell>();
+
 
 		// Division handling
 		[SerializeField]
@@ -254,26 +253,24 @@ namespace ImmunotherapyGame.Cancers
 		/// </summary>
 		private void AddNewCancerCell()
 		{
-			CancerCell newCell = Instantiate(cancerCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CancerCell>();
-			newCell.AddObserver(this);
-			newCell.RenderSortOrder = nextSortOrder;
-			newCell.cancerOwner = this;
+			CancerCell newCancerCell = Instantiate(cancerCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CancerCell>();
+			newCancerCell.onDeathEvent += OnCancerCellDeath;
+			newCancerCell.RenderSortOrder = nextSortOrder;
+			newCancerCell.cancerOwner = this;
 			++nextSortOrder;
-			cancerCells.Add(newCell);
-			AllCells.Add(newCell);
+			cancerCells.Add(newCancerCell);
 		}
 
 
 
 		private void AddNewCAFCell()
 		{
-			CAFCell newCell = Instantiate(cafCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CAFCell>();
-			newCell.AddObserver(this);
-			newCell.RenderSortOrder = nextSortOrder;
-			newCell.cancerOwner = this;
+			CAFCell newCAFCell = Instantiate(cafCellPrefab, locationToSpawn, Quaternion.identity, this.transform).GetComponent<CAFCell>();
+			newCAFCell.onDeathEvent += OnCAFCellDeath;
+			newCAFCell.RenderSortOrder = nextSortOrder;
+			newCAFCell.cancerOwner = this;
 			++nextSortOrder;
-			cafCells.Add(newCell);
-			AllCells.Add(newCell);
+			cafCells.Add(newCAFCell);
 		}
 
 
@@ -527,24 +524,10 @@ namespace ImmunotherapyGame.Cancers
 				onDivisionObservers.Remove(observer);
 		}
 
-		// Subscriber Evil cells
-		public void NotifyOfDeath(EvilCell evilCell)
+		public void OnCancerCellDeath(Cell cell)
 		{
-
-			AllCells.Remove(evilCell);
-
-			CancerCell cell = evilCell.gameObject.GetComponent<CancerCell>();
-			if (cell != null)
-			{
-				cancerCells.Remove(cell);
-			}
-
-			CAFCell cafCell = evilCell.gameObject.GetComponent<CAFCell>();
-
-			if (cafCell != null)
-			{
-				cafCells.Remove(cafCell);
-			}
+			CancerCell cancerCell = cell.GetComponent<CancerCell>();
+			cancerCells.Remove(cancerCell);
 
 			if (cancerCells.Count == 0)
 			{
@@ -557,10 +540,13 @@ namespace ImmunotherapyGame.Cancers
 				isAlive = false;
 				canDivide = false;
 				gameObject.SetActive(false);
-				//GlobalGameData.Cancers.Remove(this);
-				//Destroy(gameObject);
-				return;
 			}
+		}
+
+		public void OnCAFCellDeath(Cell cell)
+		{
+			CAFCell cafCell = cell.GetComponent<CAFCell>();
+			cafCells.Remove(cafCell);
 		}
 	}
 }

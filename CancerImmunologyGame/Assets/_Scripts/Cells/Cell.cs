@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 namespace ImmunotherapyGame
 {
+	[System.Serializable]
 	public abstract class Cell : MonoBehaviour
 	{
-		[Header("Cell Links")]
+		[Header("GameObject Links")]
 		[SerializeField]
 		protected SpriteRenderer render = null;
 		[SerializeField]
@@ -15,100 +17,115 @@ namespace ImmunotherapyGame
 		protected Collider2D bodyBlocker = null;
 
 		[Header("Cell Attributes")]
-		[SerializeField]
-		public float maxHealth;
-		[SerializeField]
-		protected float health;
-		[SerializeField]
-		public float maxEnergy;
-		[SerializeField]
-		protected float energy;
-		[SerializeField]
-		protected CellHealthBar healthBar;
-		[SerializeField]
-		protected bool isDying;
+		public CellType cellType;
 
+		[SerializeField] [ReadOnly] protected bool isDying;
+		[SerializeField] [ReadOnly] private float health;
+		[SerializeField] [ReadOnly] private float energy;
+		[SerializeField] [ReadOnly] private float speed;
+		[SerializeField] [ReadOnly] private float updateHealthValue;
+		[SerializeField] [ReadOnly] private float updateEnergyValue;
+		[SerializeField] [ReadOnly] private float updateSpeedValue;
 
-		public abstract void HitCell(float amount);
-		public abstract void ExhaustCell(float amount);
-		public abstract bool isImmune { get; }
+		public delegate void OnDeathEvent(Cell cell);
+		public OnDeathEvent onDeathEvent;
 
-		public int RenderSortOrder { get => render.sortingOrder;  set => render.sortingOrder = value; }
+		public delegate void OnUpdateHealth();
+		public OnUpdateHealth onUpdateHealth;
 
-	}
+		public delegate void OnUpdateEnergy();
+		public OnUpdateEnergy onUpdateEnergy;
 
+		public delegate void OnUpdateSpeed();
+		public OnUpdateSpeed onUpdateSpeed;
 
-	public abstract class EvilCell : Cell
-	{
-		[Header("Evil Cell")]
+		public float CurrentHealth => Mathf.Clamp(health, 0f, cellType.MaxHealth);
+		public float CurrentEnergy => Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
+		public float CurrentSpeed => Mathf.Clamp(speed, 0f, speed);
 
-		[Header ("Debug (Evil Cell)")]
-		[SerializeField]
-		protected List<IEvilCellObserver> observers = new List<IEvilCellObserver>();
+		public int RenderSortOrder { get => render.sortingOrder; set => render.sortingOrder = value; }
+		public virtual bool isImmune { get; }
 
-
-		public void AddObserver(IEvilCellObserver observer)
+		protected virtual void Start()
 		{
-			observers.Add(observer);
+			health = cellType.MaxHealth;
+			energy = cellType.MaxEnergy;
+			speed = cellType.InitialSpeed;
+
+			updateHealthValue = cellType.MaxHealth;
+			updateEnergyValue = cellType.MaxEnergy;
+			updateSpeedValue = 0;
 		}
 
-		public void RemoveObserver(IEvilCellObserver observer)
+		public virtual void ApplyHealthAmount(float amount)
 		{
-			observers.Remove(observer);
+			Debug.Log(this.gameObject.name + " got hit for: " + amount);
+			updateHealthValue += amount;
 		}
 
-		protected void NotifyObservers(EvilCell evilCell)
+		public virtual void ApplyEnergyAmount(float amount) 
 		{
-			for (int i = 0; i < observers.Count; ++i)
+			Debug.Log(this.gameObject.name + " got exhausted for: " + amount);
+			updateEnergyValue += amount;
+		}
+
+		public virtual void ApplySpeedAmount (float amount)
+		{
+			Debug.Log(this.gameObject.name + " got speed for: " + amount);
+			updateSpeedValue += amount;
+		}
+
+		protected virtual void OnCellDeath()
+		{
+			isDying = true;
+		}
+
+		protected virtual void LateUpdate()
+		{
+			//Debug.Log("HEALTH : ENERGY = " + health + " : " + energy);
+			if (!isImmune)
 			{
-				observers[i].NotifyOfDeath(evilCell);
+				if (updateHealthValue != 0)
+				{
+					health += updateHealthValue;
+					Mathf.Clamp(health, 0f, cellType.MaxHealth);
+
+					if (onUpdateHealth != null)
+						onUpdateHealth();
+				}
+
+				if (updateEnergyValue != 0)
+				{
+					energy += updateEnergyValue;
+					Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
+					if (onUpdateEnergy != null)
+						onUpdateEnergy();
+				}
+
+				if (updateSpeedValue != 0)
+				{
+					speed += updateSpeedValue;
+					if (onUpdateSpeed != null)
+						onUpdateSpeed();
+				}
+			}
+
+			updateHealthValue = 0f;
+			updateEnergyValue = 0f;
+			updateSpeedValue = 0f;
+
+			if (health <= 0 || energy <= 0)
+			{
+				if (onDeathEvent != null)
+					onDeathEvent(this);
+
+				OnCellDeath();
 			}
 		}
 
-		public override void HitCell(float amount)
-		{
-			if (isImmune) return;
-
-			health -= amount;
-			healthBar.Health = health;
-
-			if (health <= 0.0f)
-			{
-				isDying = true;
-				healthBar.gameObject.SetActive(false);
-				if (bodyBlocker != null)
-					bodyBlocker.enabled = false;
-
-				OnDeath();
-
-				NotifyObservers(this);
-			}
-		}
-
-		protected abstract void OnDeath();
-
-		public void CellDied()
-		{
-			Destroy(gameObject);
-		}
-
-
-		public override void ExhaustCell(float amount)
-		{
-			Debug.LogWarning("Evil Cell Exhaust is not implemented but it is called!");
-		}
 
 	}
 
-	public interface IEvilCellObserver
-	{
-		void NotifyOfDeath(EvilCell evilCell);
-	}
-
-	public abstract class GoodCell : Cell
-	{
-
-	}
-
+	
 
 }

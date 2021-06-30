@@ -7,7 +7,7 @@ using ImmunotherapyGame.Audio;
 
 namespace ImmunotherapyGame.UI
 {
-	public abstract class UIMenuNode : MonoBehaviour, ICancelHandler, IDeselectHandler, ISelectHandler, IPointerEnterHandler, IPointerExitHandler
+	public abstract class UIMenuNode : MonoBehaviour, ICancelHandler, IDeselectHandler, ISelectHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 	{
 		[Header("OnSelect")]
 		[SerializeField]
@@ -23,9 +23,12 @@ namespace ImmunotherapyGame.UI
 		{
 			set
 			{
-				foreach (GameObject obj in viewObjectsOnSelect)
+				if (viewObjectsOnSelect != null)
 				{
-					obj.SetActive(value);
+					foreach (GameObject obj in viewObjectsOnSelect)
+					{
+						obj.SetActive(value);
+					}
 				}
 			}
 		}
@@ -54,14 +57,33 @@ namespace ImmunotherapyGame.UI
 			=> EventSystem.current.SetSelectedGameObject(gameObject);
 
 
-		public virtual void OnPointerExit(PointerEventData eventData)
-			=> OnDeselect(eventData);
+		public virtual void OnPointerExit(PointerEventData eventData) { }
 
 
-		public void OnDisable()
+		protected virtual void OnDisable()
 		{
 			OnSelectView = false;
 		}
+
+		protected virtual void OnEnable()
+		{
+
+		}
+
+		public virtual void OnPointerClick(PointerEventData eventData)
+		{
+			switch (eventData.button)
+			{
+				case PointerEventData.InputButton.Left: OnPointerLeftClick(eventData); break;
+				case PointerEventData.InputButton.Right: OnPointerRightClick(eventData); break;
+				case PointerEventData.InputButton.Middle: OnPointerMiddleClick(eventData); break;
+				default: OnPointerLeftClick(eventData); break;
+			}
+		}
+
+		protected virtual void OnPointerLeftClick(PointerEventData eventData) { }
+		protected virtual void OnPointerRightClick(PointerEventData eventData) { }
+		protected virtual void OnPointerMiddleClick(PointerEventData eventData) { } 
 
 	}
 }

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2126e6f1483a79a4d9934d80185b8ca6, type: 3}
+  m_Name: SpeedAndBumpAbility
+  m_EditorClassIdentifier: 
+  name: Speed And Bump
+  thumbnail: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 6c28002dd9b25ad468c8df4daf38cb64, type: 3}
+  description: 
+  range: {fileID: 11400000, guid: bd2e22182318d684792bbbe506aca021, type: 2}
+  energyCost: {fileID: 11400000, guid: 25c5b1d5a7ededb4f987e9348159ce35, type: 2}
+  cooldownTime: {fileID: 11400000, guid: eafb7d58ff72e27409774e36f6558965, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  effectOnTargetCell:
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 0}
+    speedEffect: {fileID: 0}
+  applicableCellTypes:
+  - {fileID: 11400000, guid: 1354fec90caec264eae92cc474e7768a, type: 2}
+  abilities:
+  - {fileID: 11400000, guid: e07a6e29c23c60941a46b2ff98fa7341, type: 2}
+  - {fileID: 11400000, guid: 9d3fe9165d6f03a40a7fb1c8c1129c6c, type: 2}

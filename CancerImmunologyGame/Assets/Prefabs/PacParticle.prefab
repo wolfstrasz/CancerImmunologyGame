@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8592794062118892716}
   - component: {fileID: 3613750851713389194}
   - component: {fileID: 5040738678285961944}
-  m_Layer: 13
+  m_Layer: 9
   m_Name: PacParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75957e296f8ee0f4a96e1476fe5d3fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coll: {fileID: 3613750851713389194}
   animator: {fileID: 8592794062118892716}
   render: {fileID: 5040738678285961944}
-  damage: 2
+  coll: {fileID: 3613750851713389194}
   speed: 1
-  eatSpeed: 0.5
+  skillData: {fileID: 0}
+  secondStageSpeed: 1
 --- !u!95 &8592794062118892716
 Animator:
   serializedVersion: 3

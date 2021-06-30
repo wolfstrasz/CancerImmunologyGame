@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame
 {
 	public class CellHealthBar : MonoBehaviour
 	{
-
+		[SerializeField]
+		private Cell owner = null;
 		[SerializeField]
 		private Slider slider = null;
 		[SerializeField]
@@ -18,10 +20,16 @@ namespace ImmunotherapyGame
 		[SerializeField]
 		private Image image = null;
 
-		public float MaxHealth
+		public void UpdateHealth()
 		{
-			get => slider.maxValue;
-			set => slider.maxValue = value;
+			slider.value = owner.CurrentHealth;
+			image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		}
+
+		public void UpdateMaxHealth()
+		{
+			if (owner != null)
+				slider.maxValue = owner.cellType.MaxHealth;
 		}
 
 		public float Health
@@ -30,18 +38,12 @@ namespace ImmunotherapyGame
 			set
 			{
 				slider.value = value;
-				if (autoHide && value != slider.maxValue)
-				{
-					image.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-				}
-
 			}
 
 		}
 
 		void Update()
 		{
-
 			if (autoHide)
 			{
 				float alpha = image.color.a;
@@ -53,5 +55,30 @@ namespace ImmunotherapyGame
 			}
 		}
 
+		private void OnEnable()
+		{
+			if (owner != null)
+			{
+				owner.onUpdateHealth += UpdateHealth;
+			}
+
+			if (owner.cellType.maxHealth != null)
+			{
+				owner.cellType.maxHealth.onValueChanged += UpdateMaxHealth;
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (owner != null)
+			{
+				owner.onUpdateHealth -= UpdateHealth;
+			}
+
+			if (owner.cellType.maxHealth != null)
+			{
+				owner.cellType.maxHealth.onValueChanged -= UpdateMaxHealth;
+			}
+		}
 	}
 }

@@ -16,14 +16,14 @@ namespace ImmunotherapyGame.AI
 
 		protected override NodeStates OnEvaluateAction()
 		{
-			if (controller.ControlledCell.Health * 3 < controller.ControlledCell.maxHealth)
-			{
-				return NodeStates.SUCCESS;
-			}
-			else if (controller.ControlledCell.Energy * 3 < controller.ControlledCell.maxEnergy)
-			{
-				return NodeStates.SUCCESS;
-			}
+			//if (controller.ControlledCell.Health * 3 < controller.ControlledCell.maxHealth)
+			//{
+			//	return NodeStates.SUCCESS;
+			//}
+			//else if (controller.ControlledCell.Energy * 3 < controller.ControlledCell.maxEnergy)
+			//{
+			//	return NodeStates.SUCCESS;
+			//}
 			return NodeStates.FAILURE;
 		}
 

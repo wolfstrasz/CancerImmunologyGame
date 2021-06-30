@@ -47,7 +47,7 @@ namespace ImmunotherapyGame.AI
 
 	public interface IAICancerCellInteractor : IAICellController, IAITargetHandler
 	{
-		EvilCell TargetedEvilCell { get; set; }
+		Cell TargetedEvilCell { get; set; }
 	}
 
 	// Base interfaces
