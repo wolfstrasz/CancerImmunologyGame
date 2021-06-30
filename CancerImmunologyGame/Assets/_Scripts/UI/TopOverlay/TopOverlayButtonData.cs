@@ -22,6 +22,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
         public void PingAnimationStatus(bool status)
 		{
+            Debug.Log(name + " pinged animation status: " + status);
             if (onChangedAnimationStatus != null)
 			{
                 onChangedAnimationStatus(status);
@@ -30,6 +31,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
         public void PingUnlockStatus(bool status)
 		{
+            Debug.Log(name + " pinged unlock status: " + status);
             unlocked = status;
 
             if (onChangedStatus != null)

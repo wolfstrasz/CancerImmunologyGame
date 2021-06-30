@@ -78,6 +78,8 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			upgradePurchasePanel.UpdateDisplay();
 
 			researchAdvancementPanel.nodesToListen.Add(researchAdvancementPanel.initialControlNode);
+			Debug.Log("RES: " + " UnlockedFeature = " + unlockedFeature);
+
 			// Apply data upgrades 
 			for (int i = 0; i < data.statUpgrades.Count; ++i)
 			{
@@ -86,7 +88,9 @@ namespace ImmunotherapyGame.ResearchAdvancement
 				// 4) Set if GameUI button is visible 
 				unlockedFeature |= data.statUpgrades[i].unlocked;
 			}
-			
+
+			Debug.Log("RES: " + " UnlockedFeature = " + unlockedFeature);
+
 			// 1) Initialise all required components
 			for (int i = 0; i < allButtons.Count; ++i)
 			{
@@ -98,8 +102,9 @@ namespace ImmunotherapyGame.ResearchAdvancement
 				researchAdvancementPanel.nodesToListen.Add(allButtons[i]);
 			}
 
-			Debug.Log("RAS: unlocked = " + unlockedFeature);
+			Debug.Log("RES: " + " UnlockedFeature = " + unlockedFeature);
 			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
+			Debug.Log("RES: " + " UnlockedFeature = " + unlockedFeature);
 
 			// 4) Set initialiser node
 			//researchAdvancementPanel.initialControlNode = null;
