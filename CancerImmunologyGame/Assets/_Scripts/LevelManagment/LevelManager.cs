@@ -14,33 +14,6 @@ namespace ImmunotherapyGame.LevelManagement
         [SerializeField] private LevelData data = null;
 		private SerializableLevelData savedData = null;
 
-		private void Update()
-		{
-			//if (Input.GetKeyDown(KeyCode.S))
-			//{
-			//	SaveData();
-			//}
-
-			//if (Input.GetKeyDown(KeyCode.L))
-			//{
-			//	LoadData();
-			//}
-
-			//if (Input.GetKeyDown(KeyCode.Backspace))
-			//{
-			//	SaveManager.Instance.ClearSaveData<SerializableLevelData>();
-			//}
-
-			//// TODO: remove from run
-			//for (int i = 1; i < 10; ++i)
-			//{
-			//	if (Input.GetKeyDown((KeyCode)(48 + i)))
-			//	{
-			//		OnLevelComplete(i + 1); // Hardcoded cuz level = scenebuildIndex + 1 (code is active only atm)
-			//	}
-			//}
-		}
-
         public void OnLevelComplete(int sceneIndex)
 		{
 			for (int i = 0; i < data.levels.Count; i++)

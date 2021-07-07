@@ -14,22 +14,20 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
-				GlobalLevelData.UpdateLevelData();
-				BackgroundMusic.Instance.Initialise();
-				PlayerController.Instance.Initialise();
-				TutorialManager.Instance.LoadLevelTutorials();
-
 				TopOverlayUI.Instance.GamePaused = false;
+				GlobalLevelData.UpdateLevelData();
 
-			}
-
-			internal override void OnStateExit()
-			{
+				BackgroundMusic.Instance.Initialise();
+				TutorialManager.Instance.Initialise();
 			}
 
 			internal override void OnFixedUpdate()
 			{
-				PlayerController.Instance.OnFixedUpdate();
+				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
+				{
+					pc.OnFixedUpdate();
+				}
+
 				foreach (KillerCell kc in GlobalLevelData.KillerCells)
 				{
 					kc.OnFixedUpdate();
@@ -51,7 +49,12 @@ namespace ImmunotherapyGame
 			internal override void OnUpdate()
 			{
 				TutorialManager.Instance.OnUpdate();
-				PlayerController.Instance.OnUpdate();
+
+				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
+				{
+					pc.OnUpdate();
+				}
+
 				for (int i = 0; i < GlobalLevelData.KillerCells.Count; ++i)
 				{
 					GlobalLevelData.KillerCells[i].OnUpdate();

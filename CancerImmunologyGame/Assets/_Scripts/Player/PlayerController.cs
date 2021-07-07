@@ -35,15 +35,19 @@ namespace ImmunotherapyGame.Player
 
 		PlayerControls playerControls = null;
 
-		public void Initialise()
+		protected override void Awake()
 		{
-			transform.position = controlledCell.transform.position;
-			transform.rotation = controlledCell.transform.rotation;
+			base.Awake();
+			if (controlledCell != null)
+			{
+				transform.position = controlledCell.transform.position;
+				transform.rotation = controlledCell.transform.rotation;
+				playerData.CurrentCell = controlledCell;
+			}
+
 			CrosshairRotation = Quaternion.identity;
-			playerData.CurrentCell = controlledCell;
 			playerData.CurrentCaster = immunotherapyCaster;
 		}
-
 
 		void OnTriggerEnter2D(Collider2D collider)
 		{
@@ -98,8 +102,8 @@ namespace ImmunotherapyGame.Player
 		public void OnFixedUpdate()
 		{
 
-			if (IsMoving)
-			{
+			//if (IsMoving)
+			//{
 				Vector2 movementVector = MoveDirection;
 				Vector3 position = controlledCell.transform.position;
 				Quaternion rotation = Quaternion.identity;
@@ -111,7 +115,7 @@ namespace ImmunotherapyGame.Player
 
 				controlledCell.MovementVector = movementVector;
 				controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
-			}
+			//}
 		}
 
 		public void OnCancerDeath(Cancer cancer)

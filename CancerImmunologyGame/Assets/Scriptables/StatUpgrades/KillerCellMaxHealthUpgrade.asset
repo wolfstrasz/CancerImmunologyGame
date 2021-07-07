@@ -21,7 +21,7 @@ MonoBehaviour:
   generalThumbnailSprite: {fileID: 8526444965496520883, guid: 83060a317e155fe43b4fa7f38c66e842,
     type: 3}
   statAttribute: {fileID: 11400000, guid: daf4c3f848c692b45832097778b7a444, type: 2}
-  nextUpgradeIndex: 3
+  nextUpgradeIndex: 0
   upgrades:
   - cost: 1
     valueChange: 5

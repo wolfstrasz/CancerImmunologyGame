@@ -14,10 +14,22 @@ namespace ImmunotherapyGame
 		{
 			public PlayTestState(GameStateController owner) : base(owner) { }
 
+			internal override void OnStateEnter()
+			{
+				TopOverlayUI.Instance.GamePaused = false;
+				GlobalLevelData.UpdateLevelData();
+
+
+				TutorialManager.Instance.Initialise();
+				BackgroundMusic.Instance.Initialise();
+			}
+
 			internal override void OnFixedUpdate()
 			{
-				if (GameObject.FindObjectOfType<PlayerController>() != null)
-					PlayerController.Instance.OnFixedUpdate();
+				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
+				{
+					pc.OnFixedUpdate();
+				}
 
 				foreach (KillerCell kc in GlobalLevelData.KillerCells)
 				{
@@ -38,37 +50,15 @@ namespace ImmunotherapyGame
 
 			}
 
-			internal override void OnStateEnter()
-			{
-				TopOverlayUI.Instance.GamePaused = false;
-
-				Debug.Log("Play test state");
-				GlobalLevelData.UpdateLevelData();
-				if (GameObject.FindObjectOfType<TutorialManager>() != null)
-					BackgroundMusic.Instance.Initialise();
-				if (GameObject.FindObjectOfType<PlayerController>() != null)
-					PlayerController.Instance.Initialise();
-				if (GameObject.FindObjectOfType<TutorialManager>() != null)
-					TutorialManager.Instance.LoadLevelTutorials();
-			}
-
-			internal override void OnStateExit()
-			{
-				Debug.Log("Exit play test state");
-			}
-
-			internal override void OnStateReEnter()
-			{
-				TopOverlayUI.Instance.GamePaused = false;
-			}
-
 			internal override void OnUpdate()
 			{
+				TutorialManager.Instance.OnUpdate();
 
-				if (GameObject.FindObjectOfType<TutorialManager>() != null)
-					TutorialManager.Instance.OnUpdate();
-				if (GameObject.FindObjectOfType<PlayerController>() != null)
-					PlayerController.Instance.OnUpdate();
+				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
+				{
+					pc.OnUpdate();
+				}
+
 				for (int i = 0; i < GlobalLevelData.KillerCells.Count; ++i)
 				{
 					GlobalLevelData.KillerCells[i].OnUpdate();
@@ -102,6 +92,13 @@ namespace ImmunotherapyGame
 				}
 
 			}
+
+			internal override void OnStateReEnter()
+			{
+				TopOverlayUI.Instance.GamePaused = false;
+			}
+
+		
 		}
 	}
 }

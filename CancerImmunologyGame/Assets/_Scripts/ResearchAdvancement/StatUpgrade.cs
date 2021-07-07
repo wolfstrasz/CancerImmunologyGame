@@ -69,7 +69,6 @@ namespace ImmunotherapyGame.ResearchAdvancement
             unlocked = initialUnlockValue;
 		}
 
-
         [System.Serializable]
         public class UpgradeValues
         {
