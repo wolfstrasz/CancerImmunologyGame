@@ -435,7 +435,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &58796664
 MonoBehaviour:
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37f051d39dc99f4b883f97d15f21fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 5
+  order: 6
   shouldPauseGameplay: 0
   popupObject: {fileID: 408717188}
 --- !u!1001 &117685987
@@ -1543,7 +1543,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &231830829
 MonoBehaviour:
@@ -1557,12 +1557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5db4a7601308c478d13eb9f7808ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 3
+  order: 4
   shouldPauseGameplay: 0
-  levelTaskObject: {fileID: 11400000, guid: c1c084f2f74013e4ca30394d4868b480, type: 2}
-  title: Kill Cancer Cells
-  count: 6
-  awardPoints: 7
+  levelTask: {fileID: 11400000, guid: 75a601c3711613b438e2179ea2628d82, type: 2}
 --- !u!1001 &233921535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2306,6 +2303,7 @@ Transform:
   - {fileID: 825753030}
   - {fileID: 40858084}
   - {fileID: 408717189}
+  - {fileID: 1157796649}
   - {fileID: 1285968984}
   - {fileID: 1761683501}
   - {fileID: 1709454444}
@@ -2361,7 +2359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &999346118
 MonoBehaviour:
@@ -2375,12 +2373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5db4a7601308c478d13eb9f7808ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 4
+  order: 5
   shouldPauseGameplay: 0
-  levelTaskObject: {fileID: 11400000, guid: ca09bbb437d218f4f8f9ae9516a1adf7, type: 2}
-  title: That Cancer Deserves it
-  count: 1
-  awardPoints: 0
+  levelTask: {fileID: 11400000, guid: f3e8e8362bee67648bf0d29a6a503fa7, type: 2}
 --- !u!1001 &1078849166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2746,6 +2741,52 @@ Transform:
   m_Father: {fileID: 46993389}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1157796648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157796649}
+  - component: {fileID: 1157796650}
+  m_Layer: 0
+  m_Name: ReachDendriticTask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1157796649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157796648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 954986404}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157796650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157796648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5db4a7601308c478d13eb9f7808ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  order: 0
+  shouldPauseGameplay: 0
+  levelTask: {fileID: 11400000, guid: 21d73ae945422f747a30295cf44317b8, type: 2}
 --- !u!1001 &1264005583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2864,7 +2905,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1285968985
 MonoBehaviour:
@@ -2878,7 +2919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37f051d39dc99f4b883f97d15f21fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 0
+  order: 1
   shouldPauseGameplay: 0
   popupObject: {fileID: 825753029}
 --- !u!1001 &1382972772
@@ -3059,7 +3100,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1709454445
 MonoBehaviour:
@@ -3073,7 +3114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37f051d39dc99f4b883f97d15f21fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 2
+  order: 3
   shouldPauseGameplay: 0
   popupObject: {fileID: 40858083}
 --- !u!1 &1761683500
@@ -3105,7 +3146,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1761683502
 MonoBehaviour:
@@ -3119,12 +3160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5db4a7601308c478d13eb9f7808ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 1
+  order: 2
   shouldPauseGameplay: 0
-  levelTaskObject: {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
-  title: Collect Chemoklines
-  count: 5
-  awardPoints: 3
+  levelTask: {fileID: 11400000, guid: 7bcbbd3f35721934ba97a41a7a7eac2e, type: 2}
 --- !u!1 &1865711452
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,7 +3377,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954986404}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1995656986
 MonoBehaviour:
@@ -3353,9 +3391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f5db4a7601308c478d13eb9f7808ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  order: 6
+  order: 7
   shouldPauseGameplay: 0
-  levelTaskObject: {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
-  title: Colled Zi Chem And Win The Game
-  count: 2
-  awardPoints: 1
+  levelTask: {fileID: 11400000, guid: fa8273dc345d8ad469628378af3420d4, type: 2}

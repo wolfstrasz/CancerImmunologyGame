@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
+using ImmunotherapyGame.ResearchAdvancement;
+using ImmunotherapyGame.LevelTasks;
 
 namespace ImmunotherapyGame.LevelManagement
 {
@@ -14,21 +16,64 @@ namespace ImmunotherapyGame.LevelManagement
         [SerializeField] private LevelData data = null;
 		private SerializableLevelData savedData = null;
 
-        public void OnLevelComplete(int sceneIndex)
-		{
-			for (int i = 0; i < data.levels.Count; i++)
-			{
-				if (data.levels[i].sceneIndex == sceneIndex)
-				{
-					data.levels[i].isCompleted = true;
+		private int CurrentCompletedLevelID = -1;
 
-					// If next level unlock it
-					if (i < data.levels.Count - 1)
-					{
-						data.levels[i + 1].isLocked = false;
-					}
+        public void OnLevelComplete()
+		{
+			UpdateCompletedLevelID();
+			Debug.Log("Completed Level ID: " + CurrentCompletedLevelID);
+			data.levels[CurrentCompletedLevelID].isCompleted = true;
+
+			if (CurrentCompletedLevelID >= data.levels.Count)
+			{
+				Debug.LogError("Completed Level name does not match any Level ID in Level Data");
+				return;
+			}
+
+			bool HasNextLevel = CurrentCompletedLevelID < (data.levels.Count - 1);
+			Debug.Log("Has next level: (should unlock)" + HasNextLevel);
+
+			// Unlock levels
+			if (HasNextLevel)
+			{
+				data.levels[CurrentCompletedLevelID + 1].isLocked = false;
+			}
+
+			// Interact with level complete screen to assign points to the RAS system
+			int pointsEarned = LevelCompleteScreen.Instance.PopulateAndGetEarnedPoints(data.levels[CurrentCompletedLevelID]);
+			Debug.Log("Points earned: " + pointsEarned);
+
+			ResearchAdvancementSystem.Instance.AddPoints(pointsEarned);
+			// Save all data from level
+			for (int i = 0; i < GlobalGameData.dataManagers.Count; ++i)
+			{
+				GlobalGameData.dataManagers[i].SaveData();
+			}
+
+			// Clear tasks
+			LevelTaskSystem.Instance.Clear();
+
+			LevelCompleteScreen.Instance.Open(HasNextLevel);
+		}
+
+		private void UpdateCompletedLevelID()
+		{
+			string completedSceneName = SceneManager.GetActiveScene().name;
+			Debug.Log("Completed Scene Name: " + completedSceneName);
+			// Unlock next level;
+			int levelIndex;
+			for (levelIndex = 0; levelIndex < data.levels.Count; levelIndex++)
+			{
+				Debug.Log("level index: " + levelIndex);
+				if (data.levels[levelIndex].sceneName == completedSceneName)
+				{
+					Debug.Log("Found match for index: " + levelIndex);
+					CurrentCompletedLevelID = levelIndex;
+					return;
 				}
 			}
+
+			CurrentCompletedLevelID = levelIndex + 1;
 		}
 
 		public void LoadData()
@@ -57,6 +102,17 @@ namespace ImmunotherapyGame.LevelManagement
 		public void ResetData()
 		{
 			data.ResetData();
+		}
+
+		internal void LoadMainMenu()
+		{
+			SceneManager.LoadScene(1);
+		}
+
+		internal void LoadNextLevel()
+		{
+			Debug.Log("Load Next Level: " + data.levels[CurrentCompletedLevelID + 1].sceneName);
+			SceneManager.LoadScene(data.levels[CurrentCompletedLevelID + 1].sceneName);
 		}
 	}
 }

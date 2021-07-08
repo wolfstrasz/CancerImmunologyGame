@@ -406,6 +406,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Intro
       objectReference: {fileID: 0}
+    - target: {fileID: 1229615292104575028, guid: 788787e24acafeb4db486cee701f1d64,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3420139780043978660, guid: 788787e24acafeb4db486cee701f1d64,
         type: 3}
       propertyPath: forceSkip

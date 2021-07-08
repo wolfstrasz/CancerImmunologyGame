@@ -13,7 +13,7 @@ namespace ImmunotherapyGame.LevelTasks
     {
 
         [Header ("Data")]
-        [SerializeField] private List<LevelTaskObject> allLevelTaskObjects = null;
+        [SerializeField] private List<LevelTaskType> allLevelTaskObjects = null;
 
         [Header("UI Linking")]
         [SerializeField] private GameObject view = null;
@@ -21,13 +21,11 @@ namespace ImmunotherapyGame.LevelTasks
         [SerializeField] private GameObject levelTaskUIPrefab = null;
         [SerializeField] private RefreshLayouts layoutsRefresh = null;
 
-        private Dictionary<LevelTaskObject, List<LevelTask>> levelTaskTable = new Dictionary<LevelTaskObject, List<LevelTask>>();
+        private Dictionary<LevelTaskType, List<LevelTask>> levelTaskTable = new Dictionary<LevelTaskType, List<LevelTask>>();
         private Dictionary<LevelTask, LevelTaskVisual> levelTaskVisualTable = new Dictionary<LevelTask, LevelTaskVisual>();
         [SerializeField] [ReadOnly] private List<LevelTask> allTasks = new List<LevelTask>();
-        [SerializeField] [ReadOnly] private List<LevelTask> allCompletedTasks = new List<LevelTask>();
         [SerializeField] [ReadOnly] private List<LevelTask> allActiveTasks = new List<LevelTask>();
         [SerializeField] [ReadOnly] private List<LevelTaskVisual> allTaskVisuals = new List<LevelTaskVisual>();
-        public List<LevelTask> AllCompletedTasks => allCompletedTasks;
 
         [SerializeField] [ReadOnly] private TMP_Text currentLongestTaskText = null;
         [SerializeField] [ReadOnly] private int currentLongestLength = -1;
@@ -37,8 +35,8 @@ namespace ImmunotherapyGame.LevelTasks
         public void Initialise()
 		{
             // Generate empty levelTaskTable
-            levelTaskTable = new Dictionary<LevelTaskObject, List<LevelTask>>(allLevelTaskObjects.Count);
-            foreach (LevelTaskObject ltObject in allLevelTaskObjects)
+            levelTaskTable = new Dictionary<LevelTaskType, List<LevelTask>>(allLevelTaskObjects.Count);
+            foreach (LevelTaskType ltObject in allLevelTaskObjects)
 			{
                 levelTaskTable.Add(ltObject, new List<LevelTask>());
 			}
@@ -48,19 +46,20 @@ namespace ImmunotherapyGame.LevelTasks
 
         public void Clear()
 		{
-            var allVisualGameobjects = levelTaskUILayout.GetComponentsInChildren<GameObject>();
 
-            for (int i = 0; i < allVisualGameobjects.Length; ++i)
+            for (int i = 0; i < allTaskVisuals.Count; ++i)
 			{
-                Destroy(allVisualGameobjects[i]);
+                Destroy(allTaskVisuals[i].gameObject);
 			}
 
-            levelTaskTable.Clear();
+            foreach (var key in levelTaskTable.Keys)
+			{
+                levelTaskTable[key].Clear();
+			}
             levelTaskVisualTable.Clear();
 
             allTasks.Clear();
             allActiveTasks.Clear();
-            allCompletedTasks.Clear();
             allTaskVisuals.Clear();
 
             currentLongestTaskText = null;
@@ -71,26 +70,26 @@ namespace ImmunotherapyGame.LevelTasks
 		}
 
 
-        public void CreateTask(LevelTaskObject ltObject, string title, int count, int awardPoints)
+        public void CreateTask(LevelTask levelTask)
 		{
             view.SetActive(true);
-            LevelTask newLevelTask = new LevelTask(title, count, awardPoints);
-            levelTaskTable[ltObject].Add(newLevelTask);
+            levelTask.Initialise();
+            levelTaskTable[levelTask.levelTaskType].Add(levelTask);
             LevelTaskVisual newLevelTaskVisual = Instantiate(levelTaskUIPrefab, levelTaskUILayout.transform).GetComponent<LevelTaskVisual>();
-            newLevelTaskVisual.SetInfo(newLevelTask);
+            newLevelTaskVisual.SetInfo(levelTask);
             layoutsRefresh.shouldRefreshFromStart = true;
 
-            levelTaskVisualTable.Add(newLevelTask, newLevelTaskVisual);
+            levelTaskVisualTable.Add(levelTask, newLevelTaskVisual);
 
-            allTasks.Add(newLevelTask);
-            allActiveTasks.Add(newLevelTask);
+            allTasks.Add(levelTask);
+            allActiveTasks.Add(levelTask);
             allTaskVisuals.Add(newLevelTaskVisual);
 
             // Update size
-            if (title.Length > currentLongestLength)
+            if (levelTask.title.Length > currentLongestLength)
 			{
                 Debug.Log(this + ": new longer task msg -> RESIZING");
-                currentLongestLength = title.Length;
+                currentLongestLength = levelTask.title.Length;
                 currentLongestTaskText = newLevelTaskVisual.taskTitle;
 
                 for (int i = 0; i < allTaskVisuals.Count; i++)
@@ -105,7 +104,7 @@ namespace ImmunotherapyGame.LevelTasks
         }
 
 
-        internal void TaskObjectComplete(LevelTaskObject ltObject)
+        internal void TaskObjectComplete(LevelTaskType ltObject)
 		{
             Debug.Log("Task Object Complete: " + ltObject);
             if (!levelTaskTable.ContainsKey(ltObject))
@@ -131,7 +130,7 @@ namespace ImmunotherapyGame.LevelTasks
 
                     if (task.count == task.currentCount)
 					{
-                        task.isComplete = true;
+                        task.Complete();
                         ltVisual.OnTaskComplete();
 					}
 
@@ -141,7 +140,6 @@ namespace ImmunotherapyGame.LevelTasks
 
         internal void RemoveTaskFromList(LevelTask task, LevelTaskVisual taskVisual)
 		{
-            allCompletedTasks.Add(task);
             allActiveTasks.Remove(task);
             allTaskVisuals.Remove(taskVisual);
 
@@ -170,28 +168,10 @@ namespace ImmunotherapyGame.LevelTasks
             layoutsRefresh.shouldRefreshFromStart = true;
 
             // Update view
-            if (allCompletedTasks.Count == allTasks.Count)
+            if (allActiveTasks.Count <= 0)
             {
                 view.SetActive(false);
             }
         }
-    }
-
-    public class LevelTask
-    {
-        public string title;
-
-        public int count;
-        public int awardPoints;
-        public int currentCount = 0;
-
-        public bool isComplete = false;
-
-        public LevelTask(string title,int count, int awardPoints)
-		{
-            this.count = count;
-            this.awardPoints = awardPoints;
-            this.title = title;
-		}
     }
 }

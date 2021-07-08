@@ -7,10 +7,8 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TCreateLevelTask : TutorialEvent
 	{
-		[SerializeField] private LevelTaskObject levelTaskObject;
-		[SerializeField] private string title;
-		[SerializeField] private int count;
-		[SerializeField] private int awardPoints;
+		[SerializeField] private LevelTask levelTask;
+	
 
 		protected override void OnEndEvent()
 		{
@@ -18,7 +16,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
-			LevelTaskSystem.Instance.CreateTask(levelTaskObject, title, count, awardPoints);
+			LevelTaskSystem.Instance.CreateTask(levelTask);
 		}
 
 		protected override bool OnUpdateEvent()

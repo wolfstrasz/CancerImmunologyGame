@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.LevelTasks
 {
-    [CreateAssetMenu(menuName = "MyAssets/LevelTask")]
-    public class LevelTaskObject : ScriptableObject
+    [CreateAssetMenu(menuName = "MyAssets/Level Task Type")]
+    public class LevelTaskType : ScriptableObject
     {
     }
 }

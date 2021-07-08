@@ -172,7 +172,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6148371604872572627}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -339,6 +339,8 @@ MonoBehaviour:
   levelTaskUIPrefab: {fileID: 8471430405235140857, guid: fa2def6c157ef9f4ab14417d6b2bdf27,
     type: 3}
   layoutsRefresh: {fileID: 1929771200913071968}
+  allTasks: []
+  allActiveTasks: []
   allTaskVisuals: []
   currentLongestTaskText: {fileID: 0}
   currentLongestLength: -1
@@ -403,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9622642, g: 0.5492168, b: 0.5492168, a: 1}
+  m_Color: {r: 0.2509804, g: 0.7411765, b: 0.52156866, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

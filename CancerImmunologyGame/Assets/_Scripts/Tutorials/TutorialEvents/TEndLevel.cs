@@ -12,14 +12,7 @@ namespace ImmunotherapyGame.Tutorials
     {
 		protected override void OnEndEvent()
 		{
-			LevelManager.Instance.OnLevelComplete(SceneManager.GetActiveScene().buildIndex);
-
-			for(int i = 0; i < GlobalGameData.dataManagers.Count; ++i)
-			{
-				GlobalGameData.dataManagers[i].SaveData();
-			}
-
-
+			LevelManager.Instance.OnLevelComplete();
 		}
 
 		protected override void OnStartEvent()
