@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 6345655435669232103}
   - component: {fileID: 2877328972284748953}
   - component: {fileID: 1070459107712460835}
+  - component: {fileID: 4259308197312412249}
   m_Layer: 6
   m_Name: CancerCell
   m_TagString: BlocksCancerSpawns
@@ -287,6 +288,19 @@ MonoBehaviour:
   rotationAngle: 0
   isInDivision: 0
   matrixCell: {fileID: 0}
+--- !u!114 &4259308197312412249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070459107712460833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: c1c084f2f74013e4ca30394d4868b480, type: 2}
 --- !u!1 &1418384428002297823
 GameObject:
   m_ObjectHideFlags: 0

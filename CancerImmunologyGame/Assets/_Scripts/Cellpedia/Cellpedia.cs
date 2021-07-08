@@ -182,8 +182,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 			inGameUIButtonData.PingUnlockStatus(true);
 			inGameUIButtonData.PingAnimationStatus(true);
-
-			SaveData();
 		}
 
 		// Data handling

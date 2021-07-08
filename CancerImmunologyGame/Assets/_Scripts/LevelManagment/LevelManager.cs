@@ -29,7 +29,6 @@ namespace ImmunotherapyGame.LevelManagement
 					}
 				}
 			}
-			SaveData();
 		}
 
 		public void LoadData()

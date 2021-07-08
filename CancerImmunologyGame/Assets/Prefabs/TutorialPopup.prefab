@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 690612214031318391}
   - component: {fileID: 422377755155147371}
   - component: {fileID: 8113210301320524461}
+  - component: {fileID: 1952584078267033143}
   m_Layer: 28
   m_Name: TutorialPopup
   m_TagString: Untagged
@@ -157,3 +158,16 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1952584078267033143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690612214031318345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: 5e0a4b9d762ea704c85ef888baa75b33, type: 2}

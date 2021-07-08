@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f2518630831c5479a5da17ca8168e8, type: 3}
-  m_Name: MicroscopeButton
+  m_Script: {fileID: 11500000, guid: 499e4e700c7742b4a875e59d7440a30d, type: 3}
+  m_Name: CancerKill
   m_EditorClassIdentifier: 
-  unlocked: 1
-  icon: {fileID: 21300000, guid: d1a39a9ae85c1b940ba98f0fb8e898f8, type: 3}
-  glowMaterial: {fileID: 2100000, guid: f455331e489736440a90e6898981e592, type: 2}

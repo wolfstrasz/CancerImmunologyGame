@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3205355822767766343}
   - component: {fileID: 4010284065806789738}
   - component: {fileID: 6362610563469259432}
+  - component: {fileID: 8758788535140530072}
   m_Layer: 9
   m_Name: Chemokine
   m_TagString: Untagged
@@ -234,6 +235,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8758788535140530072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3205355822767766336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
 --- !u!1 &6188563708343863915
 GameObject:
   m_ObjectHideFlags: 0

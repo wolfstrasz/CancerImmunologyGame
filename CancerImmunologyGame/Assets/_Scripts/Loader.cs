@@ -13,13 +13,12 @@ using ImmunotherapyGame.UI;
 using ImmunotherapyGame.UI.TopOverlay;
 using ImmunotherapyGame.ResearchAdvancement;
 using ImmunotherapyGame.Audio;
-
+using ImmunotherapyGame.LevelTasks;
 
 namespace ImmunotherapyGame.Loader
 {
 	public class Loader : MonoBehaviour
 	{
-
 		[SerializeField]
 		private Intro intro = null;
 
@@ -65,6 +64,7 @@ namespace ImmunotherapyGame.Loader
 			GlobalGameData.dataManagers.Add(ResearchAdvancementSystem.Instance);
 
 			// Load UIs
+			LevelTaskSystem.Instance.Initialise();
 			TopOverlayUI.Instance.Initialise();
 			PauseMenu.Instance.Initialise();
 

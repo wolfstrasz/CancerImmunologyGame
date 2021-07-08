@@ -80,5 +80,10 @@ namespace ImmunotherapyGame.UI.TopOverlay
                 buttonData.onOpenMenu();
             }
         }
+
+		public override void OnPointerExit(PointerEventData eventData)
+		{
+            OnDeselect(eventData);
+		}
 	}
 }
