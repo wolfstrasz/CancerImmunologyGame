@@ -104,6 +104,7 @@ namespace ImmunotherapyGame.Cancers
 			isDying = true;
 			animator.SetTrigger("Apoptosis");
 			divisionBodyBlocker.enabled = false;
+			bodyBlocker.enabled = false;
 
 			if (matrixCell != null)
 			{
@@ -124,5 +125,9 @@ namespace ImmunotherapyGame.Cancers
 			}
 		}
 
+		public void OnApoptosisEnd()
+		{
+			Destroy(gameObject);
+		}
 	}
 }

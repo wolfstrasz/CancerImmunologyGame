@@ -45,6 +45,12 @@ namespace ImmunotherapyGame
 
 		protected virtual void OnFixedUpdate()
 		{
+			if (owner == null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			transform.position = owner.transform.position;
 			if (isEffectOverTime)
 			{

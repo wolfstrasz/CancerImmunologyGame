@@ -155,7 +155,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2
-    functionName: CellDied
+    functionName: OnApoptosisEnd
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
