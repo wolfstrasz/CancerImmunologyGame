@@ -8,9 +8,18 @@ namespace ImmunotherapyGame.LevelTasks
     public class LevelTaskActivator : MonoBehaviour
     {
         [SerializeField] private LevelTaskType taskObject = null;
+        [SerializeField] private bool isApplicationQuitting = false;
         protected void OnDisable()
 		{
-            LevelTaskSystem.Instance.TaskObjectComplete(taskObject);
+            if (!isApplicationQuitting)
+            {
+                LevelTaskSystem.Instance.TaskObjectComplete(taskObject);
+            }
 		}
-    }
+
+		private void OnApplicationQuit()
+		{
+            isApplicationQuitting = true;
+		}
+	}
 }

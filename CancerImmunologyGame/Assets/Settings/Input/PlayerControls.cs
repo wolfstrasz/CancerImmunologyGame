@@ -201,17 +201,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""269db4a4-c543-4e20-ae1d-2c3da9f1978e"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Immunotherapy"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""Button With One Modifier"",
                     ""id"": ""3e219ad9-5b82-40a0-9db9-f73f7c88e32c"",
                     ""path"": ""ButtonWithOneModifier"",
@@ -250,7 +239,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keys+Mouse"",
                     ""action"": ""Immunotherapy"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

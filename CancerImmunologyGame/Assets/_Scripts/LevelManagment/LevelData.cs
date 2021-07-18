@@ -30,7 +30,7 @@ namespace ImmunotherapyGame.LevelManagement
 
 				for (int taskID = 0; taskID < level.LevelTaskCompletions.Count; ++taskID)
 				{
-					Debug.Log("Level Data (" + level.sceneName + ") resetting tasks: " + level.LevelTaskCompletions[levelIndex].levelTask.title);
+					Debug.Log("Level Data (" + level.sceneName + ") resetting tasks: " + level.LevelTaskCompletions[taskID].levelTask.title);
 					level.LevelTaskCompletions[taskID].isCompleted = false;
 				}
 			}

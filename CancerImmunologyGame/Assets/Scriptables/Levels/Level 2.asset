@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: TransScene2
   levelID: 2
-  isCompleted: 1
-  isLocked: 0
+  isCompleted: 0
+  isLocked: 1
   LevelTaskCompletions: []
