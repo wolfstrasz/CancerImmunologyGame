@@ -24,8 +24,6 @@ namespace ImmunotherapyGame.Player
 		[SerializeField] private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
 		[SerializeField] private List<Cancer> cancersNearby = new List<Cancer>();
 
-		private PlayerControls playerControls = null;
-
 		protected override void Awake()
 		{
 			base.Awake();

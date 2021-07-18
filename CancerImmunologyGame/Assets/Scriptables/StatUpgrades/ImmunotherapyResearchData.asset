@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48fcb09522476684b937e05a49b5a9c7, type: 3}
-  m_Name: Research Advancement Data
+  m_Name: ImmunotherapyResearchData
   m_EditorClassIdentifier: 
   points: 3
   statUpgrades:

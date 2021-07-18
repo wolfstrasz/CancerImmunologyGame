@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     public class UpgradePurchasePanel : MonoBehaviour
     {
         [Header ("Data")]
-        [SerializeField] private ResearchAdvancementData data;
+        [SerializeField] private ImmunotherapyResearchData data;
         [SerializeField] private StatUpgrade statUpgrade = null;
 
         [Header("UI Elements")]
@@ -22,7 +22,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
         internal void UpdateDisplay()
 		{
-            statUpgrade = ResearchAdvancementSystem.Instance.CurrentStatUpgrade;
+            statUpgrade = ImmunotherapyResearch.Instance.CurrentStatUpgrade;
 
 
             if (statUpgrade == null || !statUpgrade.HasAvailableUpgrade)

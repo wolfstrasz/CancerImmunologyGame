@@ -38,8 +38,12 @@ namespace ImmunotherapyGame.UI
 		// Protected methods
 		void Awake() 
             => slider = GetComponent<Slider>();
-        void OnEnable() 
-            => slider.onValueChanged.AddListener(delegate { OnValueChanged(); });
+
+        override protected void OnEnable()
+		{
+            base.OnEnable();
+            slider.onValueChanged.AddListener(delegate { OnValueChanged(); });
+		}
 
 
         protected override void OnDisable()

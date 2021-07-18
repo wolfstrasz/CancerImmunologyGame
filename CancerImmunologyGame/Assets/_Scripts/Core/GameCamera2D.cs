@@ -26,9 +26,6 @@ namespace ImmunotherapyGame
 		private const float zoomAcceptedTreshold = 0.2f;
 		private const float zoomSkipTreshold = 0.01f;
 
-		[SerializeField]
-		private float freeroamSpeedScale = 4.0f;
-
 		[Header("Debug (Read only)")]
 		[SerializeField]
 		private GameObject focusTarget = null;
@@ -42,46 +39,6 @@ namespace ImmunotherapyGame
 		private bool isZooming = false;
 
 		public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
-
-		void Update()
-		{
-			//if (Input.GetKey(KeyCode.Return)) state = GameCameraControlState.FREEROAM;
-
-			//if (state == GameCameraControlState.FREEROAM)
-			//{
-			//	if (Input.GetKey(KeyCode.W))
-			//	{
-			//		//transform.position += new Vector3(0f, 1f, 0f) * freeroamSpeedScale;
-			//		focusPosition += new Vector3(0f, 1f, 0f) * freeroamSpeedScale;
-			//	}
-			//	else if (Input.GetKey(KeyCode.S))
-			//	{
-			//		//transform.position += new Vector3(0f, -1f, 0f) * freeroamSpeedScale;
-			//		focusPosition += new Vector3(0f, -1f, 0f) * freeroamSpeedScale;
-			//	}
-
-			//	if (Input.GetKey(KeyCode.D))
-			//	{
-			//		//transform.position += new Vector3(1f, 0f, 0f) * freeroamSpeedScale;
-			//		focusPosition += new Vector3(1f, 0f, 0f) * freeroamSpeedScale;
-			//	}
-			//	else if (Input.GetKey(KeyCode.A))
-			//	{
-			//		//transform.position += new Vector3(-1f, 0f, 0f) * freeroamSpeedScale;
-			//		focusPosition += new Vector3(-1f, 0f, 0f) * freeroamSpeedScale;
-			//	}
-			//	if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.Plus) || Input.GetAxis("Mouse ScrollWheel") > 0f)
-			//	{
-			//		orthographicZoom -= 1.0f;
-			//		if (orthographicZoom < 1.0f) orthographicZoom = 1.0f;
-			//	}
-			//	else if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.Minus) || Input.GetAxis("Mouse ScrollWheel") < 0f)
-			//	{
-			//		orthographicZoom += 1.0f;
-			//		if (orthographicZoom > 10.0f) orthographicZoom = 10.0f;
-			//	}
-			//}
-		}
 
 		// Target's position will change in Update, so camera should move focus here
 		void FixedUpdate()

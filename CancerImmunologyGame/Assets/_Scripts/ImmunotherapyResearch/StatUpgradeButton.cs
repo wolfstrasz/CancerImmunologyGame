@@ -7,7 +7,7 @@ using ImmunotherapyGame.UI;
 using UnityEngine.EventSystems;
 using ImmunotherapyGame.Audio;
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
 	[RequireComponent (typeof (Selectable))]
     public class StatUpgradeButton : UIMenuNode, IMoveHandler, ISubmitHandler
@@ -48,7 +48,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		public override void OnPointerClick(PointerEventData eventData)
 		{
-			ResearchAdvancementSystem.Instance.SelectStatUpgrade(this);
+			ImmunotherapyResearch.Instance.SelectStatUpgrade(this);
 		}
 
 		// Controller Navigation
@@ -59,7 +59,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		public void OnSubmit(BaseEventData eventData)
 		{
-			ResearchAdvancementSystem.Instance.SelectStatUpgrade(this);
+			ImmunotherapyResearch.Instance.SelectStatUpgrade(this);
 		}
 	}
 }

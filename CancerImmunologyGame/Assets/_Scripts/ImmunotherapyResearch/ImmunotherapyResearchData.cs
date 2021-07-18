@@ -6,10 +6,10 @@ using UnityEngine;
 using ImmunotherapyGame.SaveSystem;
 
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
 	[CreateAssetMenu (menuName = "Data/Research Advancement Data")]
-    public class ResearchAdvancementData : ScriptableObject
+    public class ImmunotherapyResearchData : ScriptableObject
     {
 		public int points;
         public List<StatUpgrade> statUpgrades;
@@ -25,13 +25,13 @@ namespace ImmunotherapyGame.ResearchAdvancement
     }
 
 	[System.Serializable]
-	public class SerializableResearchAdvancementData : SaveableObject
+	public class SerializableImmunotherapyResearchData : SaveableObject
 	{
 		public int points = 0;
 		public List<bool> isUnlocked = new List<bool>();
 		public List<int> nextUpgradeIndex = new List<int>();
 
-		public SerializableResearchAdvancementData(ResearchAdvancementData data)
+		public SerializableImmunotherapyResearchData(ImmunotherapyResearchData data)
 		{
 
 			points = data.points;
@@ -45,7 +45,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			}
 		}
 
-		public SerializableResearchAdvancementData()
+		public SerializableImmunotherapyResearchData()
 		{
 			points = 0;
 			isUnlocked = new List<bool>();
@@ -53,7 +53,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 	}
 
-	public void CopyTo(ResearchAdvancementData data)
+	public void CopyTo(ImmunotherapyResearchData data)
 	{
 		data.points = points;
 		for (int i = 0; i < isUnlocked.Count; ++i)

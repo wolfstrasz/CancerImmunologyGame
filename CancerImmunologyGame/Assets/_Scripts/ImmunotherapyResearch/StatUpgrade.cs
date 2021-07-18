@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Core;
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     [CreateAssetMenu (menuName = "Data/StatUpgrade")]
     public class StatUpgrade : ScriptableObject

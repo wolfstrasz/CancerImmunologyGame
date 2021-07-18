@@ -19,8 +19,6 @@ namespace ImmunotherapyGame.CellpediaSystem
         private Dictionary<CellpediaObject, PetridishButton> petridishButtons = null;
 		[ReadOnly]
 		internal List<PetridishButton> petridishButtonList = null;
-		[SerializeField]
-		private PetridishButton initialButton = null;
 
 		internal void Initialise()
 		{

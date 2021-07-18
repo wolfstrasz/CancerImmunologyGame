@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ImmunotherapyGame.ResearchAdvancement;
+using ImmunotherapyGame.ImmunotherapyResearchSystem;
 
 
 namespace ImmunotherapyGame.Tutorials
@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override void OnStartEvent()
 		{
-			ResearchAdvancementSystem.Instance.AddPoints(pointsToAdd);
+			ImmunotherapyResearch.Instance.AddPoints(pointsToAdd);
 		}
 
 		protected override bool OnUpdateEvent()

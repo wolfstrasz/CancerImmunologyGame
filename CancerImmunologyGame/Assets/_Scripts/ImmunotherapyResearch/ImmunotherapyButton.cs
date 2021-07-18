@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using ImmunotherapyGame.UI;
 using ImmunotherapyGame.Abilities;
 
-namespace ImmunotherapyGame.Player
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
 	// TODO: optimise use of caster (maybe by caching caster)
 	[RequireComponent (typeof(Selectable))]

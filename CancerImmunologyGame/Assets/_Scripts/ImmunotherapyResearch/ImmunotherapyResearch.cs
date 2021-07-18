@@ -11,14 +11,14 @@ using ImmunotherapyGame.UI.TopOverlay;
 using ImmunotherapyGame.UI;
 
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
-    public class ResearchAdvancementSystem : Singleton<ResearchAdvancementSystem>, IDataManager
+    public class ImmunotherapyResearch : Singleton<ImmunotherapyResearch>, IDataManager
     {
 		[Header("Data")]
 		[SerializeField]
-		internal ResearchAdvancementData data = null;
-		private SerializableResearchAdvancementData savedData = null;
+		internal ImmunotherapyResearchData data = null;
+		private SerializableImmunotherapyResearchData savedData = null;
 
 		[Header("System UI")]
 		[SerializeField]
@@ -48,7 +48,6 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		// Input handling
 		PlayerControls playerControls = null;
-		InputAction openReseachAdvancementAction = null;
 		private bool unlockedFeature = false;
 
 
@@ -67,7 +66,6 @@ namespace ImmunotherapyGame.ResearchAdvancement
 			base.Awake();
 			playerControls = new PlayerControls();
 			playerControls.Enable();
-			openReseachAdvancementAction = playerControls.Systems.ResearchAdvancement;
 		}
 
 		public void Initialise()
@@ -114,7 +112,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		private void OnEnable()
 		{
 			inGameUIButtonData.onOpenMenu += OpenView;
-			openReseachAdvancementAction.started += OpenView;
+			playerControls.Systems.ImmunotherapyResearchMenu.started += OpenView;
 			researchAdvancementPanel.onOpenInterface += OnOpenView;
 			researchAdvancementPanel.onCloseInterface += OnCloseView;
 		}
@@ -122,7 +120,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 		private void OnDisable()
 		{
 			inGameUIButtonData.onOpenMenu -= OpenView;
-			openReseachAdvancementAction.started -= OpenView;
+			playerControls.Systems.ImmunotherapyResearchMenu.started -= OpenView;
 			researchAdvancementPanel.onOpenInterface -= OnOpenView;
 			researchAdvancementPanel.onCloseInterface -= OnCloseView;
 		}
@@ -250,7 +248,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		public void LoadData()
 		{
-			savedData = SaveManager.Instance.LoadData<SerializableResearchAdvancementData>();
+			savedData = SaveManager.Instance.LoadData<SerializableImmunotherapyResearchData>();
 
 			if (savedData == null)
 			{
@@ -267,8 +265,8 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
 		public void SaveData()
 		{
-			savedData = new SerializableResearchAdvancementData(data);
-			SaveManager.Instance.SaveData<SerializableResearchAdvancementData>(savedData);
+			savedData = new SerializableImmunotherapyResearchData(data);
+			SaveManager.Instance.SaveData<SerializableImmunotherapyResearchData>(savedData);
 		}
 
 		public void ResetData()

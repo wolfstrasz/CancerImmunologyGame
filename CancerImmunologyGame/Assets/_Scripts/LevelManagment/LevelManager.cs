@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
-using ImmunotherapyGame.ResearchAdvancement;
+using ImmunotherapyGame.ImmunotherapyResearchSystem;
 using ImmunotherapyGame.LevelTasks;
 
 namespace ImmunotherapyGame.LevelManagement
@@ -43,7 +43,7 @@ namespace ImmunotherapyGame.LevelManagement
 			int pointsEarned = LevelCompleteScreen.Instance.PopulateAndGetEarnedPoints(data.levels[CurrentCompletedLevelID]);
 			Debug.Log("Points earned: " + pointsEarned);
 
-			ResearchAdvancementSystem.Instance.AddPoints(pointsEarned);
+			ImmunotherapyResearch.Instance.AddPoints(pointsEarned);
 			// Save all data from level
 			for (int i = 0; i < GlobalGameData.dataManagers.Count; ++i)
 			{

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 using ImmunotherapyGame.Core;
 
-namespace ImmunotherapyGame.Player
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     public class Immunotherapy : Singleton<Immunotherapy>
     {
@@ -96,7 +96,7 @@ namespace ImmunotherapyGame.Player
 			Debug.Log("Attach Activate Immunotherapy to  Immunotherapy Started");
 			controls = new PlayerControls();
 			controls.Enable();
-			controls.Gameplay.Immunotherapy.started += ActivateImmunotherapy;
+			controls.Gameplay.ActivateImmunotherapy.started += ActivateImmunotherapy;
 
 			cooldownBar.SetMaxValue(cooldownStat.CurrentValue);
 			cooldownBar.SetInverseValue(cooldownLeft);
@@ -144,7 +144,7 @@ namespace ImmunotherapyGame.Player
 		private void OnDisable()
 		{
 			controls.Disable();
-			controls.Gameplay.Immunotherapy.started -= ActivateImmunotherapy;
+			controls.Gameplay.ActivateImmunotherapy.started -= ActivateImmunotherapy;
 			lifetimeLeft = 0f;
 			cooldownLeft = 0f;
 			SwitchToCooldownBar();

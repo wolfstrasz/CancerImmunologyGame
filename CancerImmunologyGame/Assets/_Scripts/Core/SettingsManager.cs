@@ -30,9 +30,6 @@ namespace ImmunotherapyGame.Core
 
         [Header("Graphics & Input Control")]
         [SerializeField]
-        private GameObject applyButton = null;
-        
-        [SerializeField]
         private MenuDropdown inputDropdown = null;
         [SerializeField]
         private InputActionAsset inputAsset = null;

@@ -231,10 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d4d48f2e61c2d42a9eed021dc8c340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  continueButtonObj: {fileID: 5397122256522053766}
+  continueBtn: {fileID: 5397122256522053766}
   mainMenuPanel: {fileID: 486648938067200565}
-  newGamePrompt: {fileID: 911601089851650357}
-  creditsPanel: {fileID: 405976406791645604}
+  newGamePromptPanel: {fileID: 911601089851650357}
 --- !u!1 &4483727589781168891
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +600,7 @@ GameObject:
   - component: {fileID: 2081171244813470873}
   - component: {fileID: 911601089851650357}
   m_Layer: 5
-  m_Name: NewGamePromptBlocker
+  m_Name: NewGamePromptPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -910,7 +909,7 @@ GameObject:
   - component: {fileID: 4483727590797366278}
   - component: {fileID: 8711311945296516888}
   m_Layer: 5
-  m_Name: PromptBackground
+  m_Name: WhiteBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

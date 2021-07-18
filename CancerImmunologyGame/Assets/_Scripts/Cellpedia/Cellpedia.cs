@@ -78,7 +78,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnEnable()
 		{
 			inGameUIButtonData.onOpenMenu += OpenView;
-			playerControls.Systems.Microscope.started += OpenView;
+			playerControls.Systems.CellpediaMenu.started += OpenView;
 			cellpediaPanel.onOpenInterface += OnOpenView;
 			cellpediaPanel.onCloseInterface += OnCloseView;
 		}
@@ -86,7 +86,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnDisable()
 		{
 			inGameUIButtonData.onOpenMenu -= OpenView;
-			playerControls.Systems.Microscope.started -= OpenView;
+			playerControls.Systems.CellpediaMenu.started -= OpenView;
 			cellpediaPanel.onOpenInterface -= OnOpenView;
 			cellpediaPanel.onCloseInterface -= OnCloseView;
 		}

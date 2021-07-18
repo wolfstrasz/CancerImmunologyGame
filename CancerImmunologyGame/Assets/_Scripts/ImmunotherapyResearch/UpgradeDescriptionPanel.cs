@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 
 
-namespace ImmunotherapyGame.ResearchAdvancement
+namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     public class UpgradeDescriptionPanel : MonoBehaviour
     {
@@ -18,7 +18,7 @@ namespace ImmunotherapyGame.ResearchAdvancement
 
         internal void UpdateDisplay()
 		{
-            upgrade = ResearchAdvancementSystem.Instance.CurrentStatUpgrade;
+            upgrade = ImmunotherapyResearch.Instance.CurrentStatUpgrade;
             if (upgrade == null)
             {
                 gameObject.SetActive(false);

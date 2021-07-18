@@ -11,24 +11,21 @@ namespace ImmunotherapyGame.UI
 {
     public class PauseMenu : Singleton<PauseMenu>
     {
-
 		[Header("Menu")]
 		[SerializeField]
-		private InterfaceControlPanel menuPanel = null;
+		private InterfaceControlPanel pauseMenuPanel = null;
         [SerializeField]
-        private TopOverlayButtonData menuData = null;
+        private TopOverlayButtonData pauseMenuBtnData = null;
 
 		[Header ("Survey")]
 		[SerializeField]
-		private TopOverlayButtonData surveyData = null;
+		private InterfaceControlPanel surveyMenuPanel = null;
 		[SerializeField]
-		private InterfaceControlPanel surveyPanel = null;
+		private TopOverlayButtonData surveyMenuBtnData = null;
 		[SerializeField]
 		private string surveyURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u";
 
 		// Input handling
-		private InputAction PauseMenuAction = null;
-		private InputAction SurveyMenuAction = null;
 		private PlayerControls playerControls = null;
 
 		public void Initialise()
@@ -47,65 +44,60 @@ namespace ImmunotherapyGame.UI
 			base.Awake();
 			playerControls = new PlayerControls();
 			playerControls.Enable();
-			PauseMenuAction = playerControls.Systems.PauseMenu;
-			SurveyMenuAction = playerControls.Systems.Survey;
 		}
 
 		private void OnEnable()
 		{
-			menuData.onOpenMenu += OpenMenuView;
-			surveyData.onOpenMenu += OpenSurveyView;
-			PauseMenuAction.started += OpenMenuView;
-			SurveyMenuAction.started += OpenSurveyView;
+			pauseMenuBtnData.onOpenMenu += OpenMenuView;
+			surveyMenuBtnData.onOpenMenu += OpenSurveyView;
+			playerControls.Systems.PauseMenu.started += OpenMenuView;
+			playerControls.Systems.SurveyMenu.started += OpenSurveyView;
 		}
 
 		private void OnDisable()
 		{
-			menuData.onOpenMenu -= OpenMenuView;
-			surveyData.onOpenMenu -= OpenSurveyView;
-			PauseMenuAction.started -= OpenMenuView;
-			SurveyMenuAction.started -= OpenSurveyView;
-
+			pauseMenuBtnData.onOpenMenu -= OpenMenuView;
+			surveyMenuBtnData.onOpenMenu -= OpenSurveyView;
+			playerControls.Systems.PauseMenu.started -= OpenMenuView;
+			playerControls.Systems.SurveyMenu.started -= OpenSurveyView;
 		}
 
 		// Panel Openeing callbacks
 		public void OpenMenuView()
 		{
-			menuPanel.Open();
+			pauseMenuPanel.Open();
 		}
 
 		public void OpenMenuView(InputAction.CallbackContext context)
 		{
-			if (menuPanel.IsOpened)
+			if (pauseMenuPanel.IsOpened)
 			{
-				menuPanel.Close();
+				pauseMenuPanel.Close();
 			}
 
 			else
 			{
-				menuPanel.Open();
+				pauseMenuPanel.Open();
 			}
 		}
 
-
 		public void OpenSurveyView()
 		{
-			surveyPanel.Open();
+			surveyMenuPanel.Open();
 		}
 
 		public void OpenSurveyView(InputAction.CallbackContext context)
 		{
-			if (surveyPanel.IsOpened)
+			if (surveyMenuPanel.IsOpened)
 			{
-				surveyPanel.Close();
+				surveyMenuPanel.Close();
 			}
 
 			else
 			{
-				surveyPanel.Open();
+				surveyMenuPanel.Open();
 			}
 		}
-
 
 		// Buttons callbacks
 		public void RestartLevel()
@@ -127,8 +119,5 @@ namespace ImmunotherapyGame.UI
 		{
 			Application.OpenURL(surveyURL);
 		}
-
-	
-
 	}
 }

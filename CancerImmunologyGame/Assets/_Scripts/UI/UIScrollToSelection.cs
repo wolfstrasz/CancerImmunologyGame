@@ -15,8 +15,8 @@ namespace ImmunotherapyGame.UI
         [Header("Settings")]
         [SerializeField]
         private ScrollType scrollDirection;
-        [SerializeField]
-        private float scrollSpeed = 10f;
+        //[SerializeField]
+        //private float scrollSpeed = 10f;
         [SerializeField]
         private int childDepthCheck = 1;
 
