@@ -37,5 +37,12 @@ namespace ImmunotherapyGame
 			slider.value = value;
 			valueText.text = Mathf.Ceil(value / slider.maxValue * 100.0f).ToString() + percentCharacter;
 		}
+
+		public void SetInverseValue(float value)
+		{
+			float inverseValue = slider.maxValue - value;
+			slider.value = inverseValue;
+			valueText.text = Mathf.Ceil(inverseValue / slider.maxValue * 100.0f).ToString() + percentCharacter;
+		}
 	}
 }

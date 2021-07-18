@@ -15,112 +15,38 @@ namespace ImmunotherapyGame.Player
     {
 		[SerializeField] protected Image thumbnail = null;
 		[SerializeField] protected Animator animator = null;
-		[SerializeField] protected PlayerData playerData = null;
-		[SerializeField] protected InterfaceControlPanel abilitySwitcherPanel = null;
-		[Header("Debug Only")]
-		[SerializeField] protected ImmunotherapyCaster abilityCaster = null;
+
+		[SerializeField] [ReadOnly] bool activated = false;
+
+		public void Activate()
+		{
+			animator.SetBool("Available", true);
+			activated = true;
+		}
+
+		public void Deactivate()
+		{
+			animator.SetBool("Available", false);
+			activated = false;
+		}
 
 		protected override void OnEnable()
 		{
-			base.OnEnable();
-		
-			playerData.onCurrentCasterChanged += OnCasterChanged;
-			OnCasterChanged();
-
-
-			playerData.onCurrentAbilityChanged += OnAbilityChanged;
-			OnAbilityChanged();
-			
+			base.OnEnable();			
 		}
 
 		protected override void OnDisable()
 		{
 			base.OnDisable();
-			playerData.onCurrentCasterChanged -= OnCasterChanged;
-			playerData.onCurrentAbilityChanged -= OnAbilityChanged;
-
-			if (abilityCaster != null)
-			{
-				abilityCaster.onAbilityCasted -= OnAbilityCasted;
-				abilityCaster.onCooldownEnded -= OnCooldownFinished;
-				abilityCaster = null;
-			}
-			
+			activated = false;
 		}
-
-		// Player Data callbacks
-		private void OnAbilityChanged()
-		{
-			if (playerData.CurrentAbility != null)
-			{
-				thumbnail.sprite = playerData.CurrentAbility.thumbnail;
-			}
-		}
-
-		private void OnCasterChanged()
-		{
-			ClearCaster();
-			SetCaster();
-		}
-
-		private void SetCaster()
-		{
-			if (playerData.CurrentCaster != null)
-			{
-				abilityCaster = playerData.CurrentCaster;
-				abilityCaster.onAbilityCasted += OnAbilityCasted;
-				abilityCaster.onCooldownEnded += OnCooldownFinished;
-
-				if (abilityCaster.IsOnCooldown)
-				{
-					OnAbilityCasted();
-				}
-				else
-				{
-					OnCooldownFinished();
-				}
-			}
-
-		}
-
-		private void ClearCaster()
-		{
-			if (abilityCaster != null)
-			{
-				abilityCaster.onAbilityCasted -= OnAbilityCasted;
-				abilityCaster.onCooldownEnded -= OnCooldownFinished;
-				abilityCaster = null;
-			}
-		}
-
-		// Caster callbacks
-		private void OnCooldownFinished()
-		{
-			animator.SetTrigger("AbilityReady");
-		}
-
-		private void OnAbilityCasted()
-		{
-			animator.SetTrigger("AbilityCasted");
-		}
-
 
 		// UI Menu node button functionality overrides
 		protected override void OnPointerLeftClick(PointerEventData eventData)
 		{
+			if (!activated) return;
+			Immunotherapy.Instance.ActivateImmunotherapy();
 			base.OnPointerLeftClick(eventData);
-
-			if (abilityCaster && !abilityCaster.IsOnCooldown)
-			{
-				abilityCaster.CastAbility();
-			}
-		}
-
-		protected override void OnPointerRightClick(PointerEventData eventData)
-		{
-			base.OnPointerRightClick(eventData);
-
-			abilitySwitcherPanel.Open();
 		}
 
 		public override void OnPointerEnter(PointerEventData eventData)
