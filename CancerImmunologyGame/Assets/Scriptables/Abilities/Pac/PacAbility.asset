@@ -23,7 +23,6 @@ MonoBehaviour:
   lifetime: {fileID: 0}
   typesToBeInRange:
   - {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
-  - {fileID: 11400000, guid: 04569fb91e9f759478059a3c59bafcf2, type: 2}
   effectOnTargetCell:
     healthEffect: {fileID: 0}
     energyEffect: {fileID: 0}

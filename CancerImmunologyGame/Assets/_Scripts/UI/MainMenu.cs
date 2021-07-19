@@ -8,28 +8,27 @@ namespace ImmunotherapyGame.UI
     {
 		[Header("Main Menu")]
 		[SerializeField]
-		private GameObject continueButtonObj = null;
+		private GameObject continueBtn = null;
 
 		[SerializeField]
 		private InterfaceControlPanel mainMenuPanel = null;
 		[SerializeField]
-		private InterfaceControlPanel newGamePrompt = null;
+		private InterfaceControlPanel newGamePromptPanel = null;
 		[SerializeField]
 		private InterfaceControlPanel creditsPanel = null;
 
 		private void Awake()
 		{
-			continueButtonObj.SetActive(PlayerPrefs.HasKey("GameInProgress"));
+			continueBtn.SetActive(PlayerPrefs.HasKey("GameInProgress"));
 			mainMenuPanel.Open();
 		}
 
 		// Main menu buttons functionality
 		public void TryToStartNewGame()
 		{
-			if (continueButtonObj.activeInHierarchy)
+			if (continueBtn.activeInHierarchy)
 			{
-
-				newGamePrompt.Open();
+				newGamePromptPanel.Open();
 			}
 			else
 			{
@@ -39,7 +38,6 @@ namespace ImmunotherapyGame.UI
 
 		public void StartNewGame()
 		{
-
 			// Reset data
 			foreach (IDataManager manager in GlobalGameData.dataManagers)
 			{
@@ -52,8 +50,7 @@ namespace ImmunotherapyGame.UI
 			}
 
 			PlayerPrefs.SetInt("GameInProgress", 1);
-
-			newGamePrompt.Close();
+			newGamePromptPanel.Close();
 			LevelSelectScreen.Instance.Open();
 		}
 
@@ -66,6 +63,11 @@ namespace ImmunotherapyGame.UI
 		public void OpenSettings()
 		{
 			SettingsManager.Instance.Open();
+		}
+
+		public void OpenCredits()
+		{
+			creditsPanel.Open();
 		}
 
 		public void Quit()

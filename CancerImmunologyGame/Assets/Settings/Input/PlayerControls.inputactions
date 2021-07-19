@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Immunotherapy",
+                    "name": "ActivateImmunotherapy",
                     "type": "Button",
                     "id": "713b51d2-c4e7-4a1b-9dda-b2624b24ae8e",
                     "expectedControlType": "Button",
@@ -188,24 +188,13 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "269db4a4-c543-4e20-ae1d-2c3da9f1978e",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Immunotherapy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "Button With One Modifier",
                     "id": "3e219ad9-5b82-40a0-9db9-f73f7c88e32c",
                     "path": "ButtonWithOneModifier",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Immunotherapy",
+                    "action": "ActivateImmunotherapy",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -216,7 +205,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Immunotherapy",
+                    "action": "ActivateImmunotherapy",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -227,7 +216,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Immunotherapy",
+                    "action": "ActivateImmunotherapy",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -237,8 +226,8 @@
                     "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Immunotherapy",
+                    "groups": "Keys+Mouse",
+                    "action": "ActivateImmunotherapy",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -249,7 +238,7 @@
             "id": "efaaa96d-4419-4c3e-b143-a29ce25d469b",
             "actions": [
                 {
-                    "name": "Skip",
+                    "name": "SkipText",
                     "type": "Value",
                     "id": "5a04c15c-4244-440e-b2b5-85c9ef1b33d3",
                     "expectedControlType": "Button",
@@ -257,7 +246,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Microscope",
+                    "name": "CellpediaMenu",
                     "type": "Button",
                     "id": "03872c95-e1b2-4b3d-8d03-197bfe84c300",
                     "expectedControlType": "Button",
@@ -273,7 +262,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ResearchAdvancement",
+                    "name": "ImmunotherapyResearchMenu",
                     "type": "Button",
                     "id": "450bc7f5-9ac8-4eb4-901c-4f1979a8a742",
                     "expectedControlType": "Button",
@@ -281,17 +270,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Survey",
+                    "name": "SurveyMenu",
                     "type": "Button",
                     "id": "15fe41de-d417-47c6-aede-50debb6161cd",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "SwitchImmunotherapy",
-                    "type": "Button",
-                    "id": "82770b89-7df3-421c-9897-83eb9c9a18f6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -305,7 +286,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keys+Mouse",
-                    "action": "Skip",
+                    "action": "SkipText",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -316,7 +297,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Skip",
+                    "action": "SkipText",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -327,18 +308,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Microscope",
+                    "action": "CellpediaMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "d2a045c2-1698-47ae-b594-aeac0fcbf2d1",
-                    "path": "<Keyboard>/i",
+                    "path": "<Keyboard>/c",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keys+Mouse",
-                    "action": "Microscope",
+                    "action": "CellpediaMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -371,18 +352,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "ResearchAdvancement",
+                    "action": "ImmunotherapyResearchMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "cc439ae5-6231-400f-a6ea-904620b9d7d6",
-                    "path": "<Keyboard>/p",
+                    "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keys+Mouse",
-                    "action": "ResearchAdvancement",
+                    "action": "ImmunotherapyResearchMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -393,7 +374,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keys+Mouse",
-                    "action": "Survey",
+                    "action": "SurveyMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -404,29 +385,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Survey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f0c43b62-4637-4a7f-9b7d-f517458a97f4",
-                    "path": "<Gamepad>/dpad/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SwitchImmunotherapy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c52b766f-1ae5-44df-8c15-81001aae61b5",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keys+Mouse",
-                    "action": "SwitchImmunotherapy",
+                    "action": "SurveyMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -777,7 +736,7 @@
                     "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keys+Mouse;Gamepad",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -788,7 +747,7 @@
                     "path": "*/{Cancel}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keys+Mouse;Gamepad",
                     "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -799,7 +758,7 @@
                     "path": "<Mouse>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -810,7 +769,7 @@
                     "path": "<Pen>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -821,7 +780,7 @@
                     "path": "<Touchscreen>/touch*/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Touch",
+                    "groups": "Touch;Keys+Mouse",
                     "action": "Point",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -832,7 +791,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse;Gamepad",
                     "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -876,7 +835,7 @@
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse",
                     "action": "ScrollWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -887,7 +846,7 @@
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse",
                     "action": "MiddleClick",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -898,7 +857,7 @@
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": "Keyboard&Mouse;Keys+Mouse",
                     "action": "RightClick",
                     "isComposite": false,
                     "isPartOfComposite": false

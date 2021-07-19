@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/_Scenes/MainMenu.unity
     guid: 0be31019a003940478617eba98b02a19
   - enabled: 1
+    path: Assets/_Scenes/Trans1Scene.unity
+    guid: c6321ab9935041340a08a9a57a8dad5a
+  - enabled: 1
+    path: Assets/_Scenes/TransScene2.unity
+    guid: 1b2a89cd00df4c0408cee9542eaa998c
+  - enabled: 1
     path: Assets/_Scenes/Scene1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1

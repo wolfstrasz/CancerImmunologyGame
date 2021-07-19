@@ -13,27 +13,16 @@ namespace ImmunotherapyGame.Player
 	public class PlayerController : Singleton<PlayerController>, ICancerDeathObserver, IControllerMovementOverridable
 	{
 		[SerializeField] private PlayerData playerData = null;
-		[SerializeField] private ImmunotherapyCaster immunotherapyCaster = null;
+		[SerializeField] private KillerCell controlledCell = null;
 
-		[SerializeField]
-		private KillerCell controlledCell = null;
 		[Header("Aiming")]
-		[SerializeField]
-		private GameObject crosshairCanvas = null;
-		[SerializeField]
-		private Transform crosshair = null;
-		internal Quaternion CrosshairRotation { get; set; }
+		[SerializeField] private GameObject crosshairCanvas = null;
+		[SerializeField] private Transform crosshair = null;
+		protected Quaternion CrosshairRotation { get; set; }
 
 		[Header("Debug (Read Only)")]
-		[SerializeField]
-		private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
-
-		[SerializeField]
-		private List<Cancer> cancersNearby = new List<Cancer>();
-
-		public KillerCell ControlledCell => controlledCell;
-
-		PlayerControls playerControls = null;
+		[SerializeField] private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
+		[SerializeField] private List<Cancer> cancersNearby = new List<Cancer>();
 
 		protected override void Awake()
 		{
@@ -43,10 +32,10 @@ namespace ImmunotherapyGame.Player
 				transform.position = controlledCell.transform.position;
 				transform.rotation = controlledCell.transform.rotation;
 				playerData.CurrentCell = controlledCell;
+				PlayerUI.Instance.Activate();
 			}
 
 			CrosshairRotation = Quaternion.identity;
-			playerData.CurrentCaster = immunotherapyCaster;
 		}
 
 		void OnTriggerEnter2D(Collider2D collider)
@@ -101,26 +90,21 @@ namespace ImmunotherapyGame.Player
 
 		public void OnFixedUpdate()
 		{
+			Vector2 movementVector = MoveDirection;
+			Vector3 position = controlledCell.transform.position;
+			Quaternion rotation = Quaternion.identity;
 
-			//if (IsMoving)
-			//{
-				Vector2 movementVector = MoveDirection;
-				Vector3 position = controlledCell.transform.position;
-				Quaternion rotation = Quaternion.identity;
+			for (int i = 0; i < movementOverrides.Count; i++)
+			{
+				movementOverrides[i].ApplyOverride(ref movementVector, ref rotation, ref position);
+			}
 
-				for (int i = 0; i < movementOverrides.Count; i++)
-				{
-					movementOverrides[i].ApplyOverride(ref movementVector, ref rotation, ref position);
-				}
-
-				controlledCell.MovementVector = movementVector;
-				controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
-			//}
+			controlledCell.MovementVector = movementVector;
+			controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 		}
 
 		public void OnCancerDeath(Cancer cancer)
 		{
-
 			if (cancersNearby.Contains(cancer))
 			{
 				cancersNearby.Remove(cancer);
@@ -261,16 +245,6 @@ namespace ImmunotherapyGame.Player
 			// Calculate rotation
 			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
-		}
-
-
-		void OnImmunotherapy(InputValue value)
-		{
-			Debug.Log("Player: On Special Ability Use");
-			if (!immunotherapyCaster.IsOnCooldown)
-			{
-				immunotherapyCaster.CastAbility();
-			}
 		}
 
 	}

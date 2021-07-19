@@ -37,7 +37,7 @@ namespace ImmunotherapyGame.Tutorials
 			base.Awake();
 
 			playerControls = new PlayerControls();
-			SkipAction = playerControls.Systems.Skip;
+			SkipAction = playerControls.Systems.SkipText;
 
 			// Update skip text
 			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);

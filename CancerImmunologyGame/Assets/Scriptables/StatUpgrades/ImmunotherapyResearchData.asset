@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48fcb09522476684b937e05a49b5a9c7, type: 3}
+  m_Name: ImmunotherapyResearchData
+  m_EditorClassIdentifier: 
+  points: 3
+  statUpgrades:
+  - {fileID: 11400000, guid: 628548c7b35e0464cb2652a89da94bbb, type: 2}
+  - {fileID: 11400000, guid: 6e4cc1a9393ef47448d312ebea6b4d8b, type: 2}
+  - {fileID: 11400000, guid: d703fab5074d8e04c890e9bc3078587c, type: 2}

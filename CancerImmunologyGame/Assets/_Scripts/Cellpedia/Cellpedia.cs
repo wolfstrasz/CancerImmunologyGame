@@ -38,25 +38,19 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[Header("Game UI")]
 		[SerializeField]
 		private TopOverlayButtonData inGameUIButtonData = null;
+		[SerializeField] [ReadOnly] private bool unlockedFeature = false;
 
 		// Input handling
-		PlayerControls playerControls = null;
-		InputAction openCellpediaAction = null;
-
-		// Used by Cellpedia popups
-		internal Transform PopupLayout => popupLayout.transform;
-
+		private PlayerControls playerControls = null;
 		// Used by tutorials
 		public bool IsCellpediaOpened => cellpediaPanel.IsOpened;
 
-		private bool unlockedFeature = false;
 
 		protected override void Awake()
 		{
 			base.Awake();
 			playerControls = new PlayerControls();
 			playerControls.Enable();
-			openCellpediaAction = playerControls.Systems.Microscope;
 		}
 
 		public void Initialise()
@@ -84,7 +78,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnEnable()
 		{
 			inGameUIButtonData.onOpenMenu += OpenView;
-			openCellpediaAction.started += OpenView;
+			playerControls.Systems.CellpediaMenu.started += OpenView;
 			cellpediaPanel.onOpenInterface += OnOpenView;
 			cellpediaPanel.onCloseInterface += OnCloseView;
 		}
@@ -92,7 +86,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private void OnDisable()
 		{
 			inGameUIButtonData.onOpenMenu -= OpenView;
-			openCellpediaAction.started -= OpenView;
+			playerControls.Systems.CellpediaMenu.started -= OpenView;
 			cellpediaPanel.onOpenInterface -= OnOpenView;
 			cellpediaPanel.onCloseInterface -= OnCloseView;
 		}
@@ -111,14 +105,19 @@ namespace ImmunotherapyGame.CellpediaSystem
 		// Input callback
 		public void OpenView(InputAction.CallbackContext context)
 		{
+			Debug.Log("Button Call for Cellpedia");
 			if (!unlockedFeature) return; // TODO: remove hidden state
 
 			if (cellpediaPanel.IsOpened)
 			{
+				Debug.Log("Try to close Cellpedia");
+
 				cellpediaPanel.Close();
 			}
 			else
 			{
+				Debug.Log("Try to open Cellpedia");
+
 				cellpediaPanel.Open();
 			}
 		}
@@ -180,10 +179,9 @@ namespace ImmunotherapyGame.CellpediaSystem
 			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
 			popup.SetInfo(item);
 
-			inGameUIButtonData.PingUnlockStatus(true);
+			unlockedFeature = true;
+			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
 			inGameUIButtonData.PingAnimationStatus(true);
-
-			SaveData();
 		}
 
 		// Data handling

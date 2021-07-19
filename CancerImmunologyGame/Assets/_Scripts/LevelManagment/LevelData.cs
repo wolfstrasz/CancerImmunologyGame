@@ -9,67 +9,102 @@ namespace ImmunotherapyGame.LevelManagement
     [CreateAssetMenu(menuName = "LevelData")]
     public class LevelData : ScriptableObject
     {
-        public int currentLevel = 0;
+        public int currentReachedLevel = 0;
         public List<LevelDataObject> levels = null;
 
         internal void ResetData()
 		{
-			currentLevel = 0;
+			currentReachedLevel = 0;
             if (levels.Count <= 0)
 			{
                 Debug.LogError("Level list is empty! Not possible to reset it!");
                 return;
 			}
 
-            levels[0].isLocked = false;
-            levels[0].isCompleted = false;
-
-            for (int i = 1; i < levels.Count; ++i)
+            for (int levelIndex = 0; levelIndex < levels.Count; ++levelIndex)
 			{
-                levels[i].isLocked = true;
-                levels[i].isCompleted = false;
+				Debug.Log("Level Data: Resetting level: " + levels[levelIndex].sceneName);
+				var level = levels[levelIndex];
+				level.isLocked = levelIndex != 0;
+				level.isCompleted = false;
+
+				for (int taskID = 0; taskID < level.LevelTaskCompletions.Count; ++taskID)
+				{
+					Debug.Log("Level Data (" + level.sceneName + ") resetting tasks: " + level.LevelTaskCompletions[taskID].levelTask.title);
+					level.LevelTaskCompletions[taskID].isCompleted = false;
+				}
 			}
 		}
     }
 
-    [System.Serializable]
-    public class LevelDataObject
+	[System.Serializable]
+	public class LevelDataSerializableObject
 	{
-        public int sceneIndex;
-        public int levelIndex;
-        public bool isCompleted;
-        public bool isLocked;
+		public string sceneName;
+		public bool isCompleted;
+		public bool isLocked;
+		public List<bool> taskCompletions;
+
+		public LevelDataSerializableObject(LevelDataObject data)
+		{
+			sceneName = data.sceneName;
+			isCompleted = data.isCompleted;
+			isLocked = data.isLocked;
+			taskCompletions = new List<bool>();
+			for (int i = 0; i < data.LevelTaskCompletions.Count; ++i)
+			{
+				taskCompletions.Add(data.LevelTaskCompletions[i].isCompleted);
+			}
+		}
 	}
 
-    [System.Serializable]
+
+	[System.Serializable]
     public class SerializableLevelData : SaveableObject
 	{
-        public int currentLevel = 0;
-        public List<LevelDataObject> levels = new List<LevelDataObject>();
+        public int currentReachedLevel = 0;
+        public List<LevelDataSerializableObject> levels = new List<LevelDataSerializableObject>();
 
         public SerializableLevelData(LevelData data)
 		{
-            this.currentLevel = data.currentLevel;
-            this.levels = data.levels;
+            this.currentReachedLevel = data.currentReachedLevel;
+			this.levels = new List<LevelDataSerializableObject>();
+
+			for (int i = 0; i < data.levels.Count; ++i)
+			{
+				LevelDataSerializableObject ldso = new LevelDataSerializableObject(data.levels[i]);
+				levels.Add(ldso);
+			}
 		}
 
         public SerializableLevelData()
 		{
-            currentLevel = 0;
-            levels = new List<LevelDataObject>();
+            currentReachedLevel = 0;
+            levels = new List<LevelDataSerializableObject>();
 		}
 
         public void CopyTo(LevelData data)
 		{
-			data.currentLevel = currentLevel;
+			data.currentReachedLevel = currentReachedLevel;
 
 			int levelsCount = levels.Count;
 			for (int i = 0; i < levelsCount; ++i)
 			{
-				data.levels[i].isCompleted = levels[i].isCompleted;
-				data.levels[i].isLocked = levels[i].isLocked;
-				data.levels[i].sceneIndex = levels[i].sceneIndex;
-				data.levels[i].levelIndex = levels[i].levelIndex;
+				LevelDataObject dataLevelObject = data.levels[i];
+				LevelDataSerializableObject loadedLevelObject = levels[i];
+
+				if (dataLevelObject.sceneName != loadedLevelObject.sceneName)
+				{
+					Debug.LogWarning("Scene name mismatch when loading levels. -> " + dataLevelObject.sceneName + " tries to load " + loadedLevelObject.sceneName + ". Delete save");
+				}
+
+				dataLevelObject.isCompleted = loadedLevelObject.isCompleted;
+				dataLevelObject.isLocked = loadedLevelObject.isLocked;
+
+				for (int j = 0; j < loadedLevelObject.taskCompletions.Count; ++j)
+				{
+					dataLevelObject.LevelTaskCompletions[j].isCompleted = loadedLevelObject.taskCompletions[j];
+				}
 			}
 
 			if (levelsCount < levels.Count)

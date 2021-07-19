@@ -60,6 +60,8 @@ namespace ImmunotherapyGame.UI
 
 		public override void OnPointerExit(PointerEventData eventData)
 		{
+            Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
+
             OnDeselect(eventData);
             foreach (MenuDropdownItem item in dropdownItems)
 			{

@@ -11,15 +11,14 @@ using ImmunotherapyGame.GameManagement;
 using ImmunotherapyGame.CellpediaSystem;
 using ImmunotherapyGame.UI;
 using ImmunotherapyGame.UI.TopOverlay;
-using ImmunotherapyGame.ResearchAdvancement;
+using ImmunotherapyGame.ImmunotherapyResearchSystem;
 using ImmunotherapyGame.Audio;
-
+using ImmunotherapyGame.LevelTasks;
 
 namespace ImmunotherapyGame.Loader
 {
 	public class Loader : MonoBehaviour
 	{
-
 		[SerializeField]
 		private Intro intro = null;
 
@@ -60,11 +59,12 @@ namespace ImmunotherapyGame.Loader
 
 			// Load Research Advancement
 			Debug.Log("Loader: Research Advancement");
-			ResearchAdvancementSystem.Instance.LoadData();
-			ResearchAdvancementSystem.Instance.Initialise();
-			GlobalGameData.dataManagers.Add(ResearchAdvancementSystem.Instance);
+			ImmunotherapyResearch.Instance.LoadData();
+			ImmunotherapyResearch.Instance.Initialise();
+			GlobalGameData.dataManagers.Add(ImmunotherapyResearch.Instance);
 
 			// Load UIs
+			LevelTaskSystem.Instance.Initialise();
 			TopOverlayUI.Instance.Initialise();
 			PauseMenu.Instance.Initialise();
 

@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 
 using ImmunotherapyGame.UI;
-using ImmunotherapyGame.Core;
-using ImmunotherapyGame.Audio;
+
 
 namespace ImmunotherapyGame.LevelManagement
 {
@@ -65,7 +64,7 @@ namespace ImmunotherapyGame.LevelManagement
         {
             LevelCompletedView = data.isCompleted;
             LevelLockedView = data.isLocked;
-            levelText.text = data.levelIndex.ToString();
+            levelText.text = data.levelID.ToString();
         }
 
         private void LoadLevel()
@@ -78,7 +77,7 @@ namespace ImmunotherapyGame.LevelManagement
                     Debug.Log("Completed level loading");
 				}
                 LevelSelectScreen.Instance.Close();
-				SceneManager.LoadScene(data.sceneIndex);
+				SceneManager.LoadScene(data.sceneName);
 			}
 			else
 			{

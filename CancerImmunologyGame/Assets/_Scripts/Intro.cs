@@ -59,7 +59,7 @@ namespace ImmunotherapyGame.Loader
 			skipHoldSlider.maxValue = timeHoldToSkip;
 
 			// Bind skip action
-			SkipAction = playerControls.Systems.Skip;
+			SkipAction = playerControls.Systems.SkipText;
 
 			// Update skip text
 			List<string> bindings = Utils.GetAllKeybindsStrings(SkipAction);

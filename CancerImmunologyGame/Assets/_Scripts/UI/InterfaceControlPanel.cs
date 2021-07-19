@@ -23,8 +23,16 @@ namespace ImmunotherapyGame.UI
 
         [Header("Cancel listeners")]
         public List<UIMenuNode> nodesToListen = new List<UIMenuNode>();
+        [SerializeField] private Canvas canvas = null;
 
-        public void Open()
+		public void Start()
+		{
+            Debug.Log("Panel level index: " + gameObject.name + " = " + level);
+            canvas = gameObject.GetComponent<Canvas>();
+            canvas.sortingOrder = level;
+		}
+
+		public void Open()
 		{
             Debug.Log(gameObject.name + " requests OPEN");
             InterfaceManager.Instance.RequestOpen(this);

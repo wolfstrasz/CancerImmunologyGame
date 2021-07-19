@@ -9,6 +9,8 @@ namespace ImmunotherapyGame.Tutorials
 	{
 		[Header("Attributes")]
 		[SerializeField]
+		private PlayerData playerData = null;
+		[SerializeField]
 		private bool monitorHealth = false;
 		[SerializeField]
 		private float healthValue = 50.0f;
@@ -21,23 +23,48 @@ namespace ImmunotherapyGame.Tutorials
 
 		[Header("Debug (Read Only)")]
 		[SerializeField]
-		private KillerCell playerKC = null;
+		private Cell playerCell = null;
 
 		protected override void OnEndEvent()
 		{
-
+			if (playerData != null)
+			{
+				playerData.onCurrentCellChanged -= OnPlayerCellChanged;
+			}
+			else
+			{
+				Debug.Log("Monitoring Player Stats is missing Player Data object!");
+			}
 		}
 
 		protected override void OnStartEvent()
 		{
-			playerKC = PlayerController.Instance.ControlledCell;
+			if (playerData != null)
+			{
+				playerData.onCurrentCellChanged += OnPlayerCellChanged;
+				if (playerData.CurrentCell != null)
+				{
+					playerCell = playerData.CurrentCell;
+				}
+			} 
+			else
+			{
+				Debug.Log("Monitoring Player Stats is missing Player Data object!");
+			}
+		}
+
+		private void OnPlayerCellChanged()
+		{
+			playerCell = playerData.CurrentCell;
 		}
 
 		protected override bool OnUpdateEvent()
 		{
-			if (monitorHealth && playerKC.Health <= healthValue)
+			if (playerCell == null) return false;
+
+			if (monitorHealth && playerCell.CurrentHealth <= healthValue)
 				return true ^ invertChecks;
-			if (monitorEnergy && playerKC.Energy <= energyValue)
+			if (monitorEnergy && playerCell.CurrentEnergy <= energyValue)
 				return true ^ invertChecks;
 			
 

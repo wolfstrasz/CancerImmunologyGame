@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f82471079d1963458792b6a41c27423, type: 3}
+  m_Name: ReachDendriticCell
+  m_EditorClassIdentifier: 
+  levelTaskType: {fileID: 11400000, guid: 5e0a4b9d762ea704c85ef888baa75b33, type: 2}
+  title: Interact with Dendritic cell
+  count: 1
+  awardPoints: 0
+  currentCount: 1
+  isComplete: 1

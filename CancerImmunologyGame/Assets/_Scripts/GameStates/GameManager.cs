@@ -10,9 +10,6 @@ namespace ImmunotherapyGame
 		public class GameManager : Singleton<GameManager>, IDataManager
 		{
 			[SerializeField]
-			private CurrentGameData data = null;
-
-			[SerializeField]
 			internal bool sceneLoaded = false;
 			[SerializeField]
 			internal GameStateController stateController = new GameStateController();
