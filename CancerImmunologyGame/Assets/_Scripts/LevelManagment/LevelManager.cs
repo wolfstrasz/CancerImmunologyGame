@@ -104,15 +104,28 @@ namespace ImmunotherapyGame.LevelManagement
 			data.ResetData();
 		}
 
+		public void RestartLevel()
+		{
+			OnLevelExit();
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
+
 		internal void LoadMainMenu()
 		{
+			OnLevelExit();
 			SceneManager.LoadScene(1);
 		}
 
 		internal void LoadNextLevel()
 		{
+			OnLevelExit();
 			Debug.Log("Load Next Level: " + data.levels[CurrentCompletedLevelID + 1].sceneName);
 			SceneManager.LoadScene(data.levels[CurrentCompletedLevelID + 1].sceneName);
+		}
+
+		internal void OnLevelExit()
+		{
+			Immunotherapy.Instance.RemoveImmunotherapyEffects();
 		}
 	}
 }

@@ -49,17 +49,5 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			base.OnPointerLeftClick(eventData);
 		}
 
-		public override void OnPointerEnter(PointerEventData eventData)
-		{
-			// We dont want selection
-			// base.OnPointerEnter(eventData);
-		}
-
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-			// base.OnPointerExit(eventData);
-		}
-
-
 	}
 }

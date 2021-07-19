@@ -6,59 +6,81 @@ using ImmunotherapyGame.Core;
 namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     [CreateAssetMenu (menuName = "Data/StatUpgrade")]
-    public class StatUpgrade : ScriptableObject
+    public class StatUpgrade : ScriptableObject, ISerializationCallbackReceiver
     {
+
         [Header("Description)")]
-        [SerializeField] private bool initialUnlockValue;
-        public bool unlocked; // Data to save
         public string title;
         public string description;
         public Sprite statThumbnailSprite;
         public Sprite generalThumbnailSprite;
 
-        [Header("Functional")]
-        [Expandable]
-        public StatAttribute statAttribute;
-        public int nextUpgradeIndex = 0; // Data to save
-        public List<UpgradeValues> upgrades = new List<UpgradeValues>();
+        [Header("Status")]
+        [SerializeField] private bool initialUnlockValue;
+        [SerializeField] [ReadOnly] internal bool unlocked; // Data to save
 
-        public bool HasAvailableUpgrade => nextUpgradeIndex < upgrades.Count ? true : false;
-        public int NextUpgradeCost => upgrades[nextUpgradeIndex].cost;
-        public float NextUpgradeValueChange => upgrades[nextUpgradeIndex].valueChange;
+        [Header("Upgrades")]
+        [SerializeField] [Expandable] internal StatAttribute statAttribute;
+        [SerializeField] private List<UpgradeValues> upgrades = new List<UpgradeValues>();
+        [SerializeField] internal int nextUpgradeIndex = 0; // Data to save
 
-        public int ApplyUpgradeAndReturnCost()
+        [Header("Functional Values")]
+        [SerializeField] [ReadOnly] private float currentValue;
+        [SerializeField] [ReadOnly] private float appliedValue;
+
+        internal bool HasAvailableUpgrade => nextUpgradeIndex < upgrades.Count ? true : false;
+        internal float NextUpgradeValueChange => upgrades[nextUpgradeIndex].valueChange;
+        internal int NextUpgradeCost => upgrades[nextUpgradeIndex].cost;
+        internal float CurrentValue => currentValue;
+
+
+        internal void ApplyEffect()
 		{
+            appliedValue = currentValue;
+            statAttribute.CurrentValue += appliedValue; 
+		}
 
-            statAttribute.CurrentValue = statAttribute.CurrentValue + upgrades[nextUpgradeIndex].valueChange;
-            ++nextUpgradeIndex;
-            return upgrades[nextUpgradeIndex - 1].cost;
-
+        internal void RemoveEffect()
+		{
+            statAttribute.CurrentValue -= appliedValue;
+            appliedValue = 0f;
 		}
 
 
-        public void ApplyUpgradesFromStartToNextUpgradeIndex()
+        internal int ApplyUpgradeAndReturnCost()
 		{
-            float fullValue = 0f;
+            //statAttribute.CurrentValue = statAttribute.CurrentValue + upgrades[nextUpgradeIndex].valueChange;
+            currentValue += upgrades[nextUpgradeIndex].valueChange;
+            ++nextUpgradeIndex;
+            return upgrades[nextUpgradeIndex - 1].cost;
+		}
+
+
+        internal void ApplyUpgradesFromStartToNextUpgradeIndex()
+		{
+            currentValue = 0f;
 
             for (int j = 0; j < nextUpgradeIndex; ++j)
 			{
-                fullValue += upgrades[j].valueChange;
+                currentValue += upgrades[j].valueChange;
 			}
 
-            statAttribute.CurrentValue = statAttribute.CurrentValue + fullValue;
+            //statAttribute.CurrentValue = statAttribute.CurrentValue + fullValue;
         } 
 
-        public int ClearUpgradeAndReturnCost()
+        internal int ClearUpgradeAndReturnCost()
 		{
-            float overallChange = 0f;
             int overallCost = 0;
-            for (int i = 0; i <  nextUpgradeIndex; ++i)
+            float overallChange = 0f;
+
+            while (--nextUpgradeIndex >= 0)
 			{
-                overallChange += upgrades[i].valueChange;
-                overallCost += upgrades[i].cost;
+                overallChange += upgrades[nextUpgradeIndex].valueChange;
+                overallCost += upgrades[nextUpgradeIndex].cost;
 			}
 
-            statAttribute.CurrentValue = statAttribute.CurrentValue - overallChange;
+            //statAttribute.CurrentValue = statAttribute.CurrentValue - overallChange;
+            currentValue -= overallChange;
             nextUpgradeIndex = 0;
             return overallCost;
 		}
@@ -69,7 +91,15 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
             unlocked = initialUnlockValue;
 		}
 
-        [System.Serializable]
+		public void OnBeforeSerialize() { }
+
+		public void OnAfterDeserialize()
+		{
+            currentValue = 0;
+            unlocked = initialUnlockValue;
+		}
+
+		[System.Serializable]
         public class UpgradeValues
         {
             public int cost;

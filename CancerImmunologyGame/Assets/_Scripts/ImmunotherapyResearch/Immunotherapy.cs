@@ -9,7 +9,8 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
     public class Immunotherapy : Singleton<Immunotherapy>
     {
-		[Header ("Data")]
+		[Header("Data")]
+		[SerializeField] ImmunotherapyResearchData data = null;
 		[SerializeField] [Expandable] private StatAttribute lifetimeStat = null;
 		[SerializeField] [Expandable] private StatAttribute cooldownStat = null;
 
@@ -39,7 +40,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				if (lifetimeLeft <= 0f)
 				{
 					lifetimeLeft = 0f;
-					DeactivateImmunotherapyEffects();
+					RemoveImmunotherapyEffects();
 				}
 
 				lifetimeBar.SetValue(lifetimeLeft);
@@ -109,21 +110,32 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			button.Activate();
 		}
 
-		private void DeactivateImmunotherapyEffects()
-		{
-			SwitchToCooldownBar();
-			// Do deactivations
-			Debug.Log("IMMUNOTHERAPY: FINISHED");
-		}
-
 		private void ActivateImmunotherapyEffects()
 		{
 			// Do activations
 			// .....
+			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			{
+				data.statUpgrades[i].ApplyEffect();
+			}
+
 			SwitchToLifetimeBar();
 			Debug.Log("IMMUNOTHERAPY: ACTIVATED");
 		}
 
+		public void RemoveImmunotherapyEffects()
+		{ 
+			// Do deactivations
+			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			{
+				data.statUpgrades[i].RemoveEffect();
+			}
+
+			SwitchToCooldownBar();
+			Debug.Log("IMMUNOTHERAPY: FINISHED");
+		}
+
+	
 		private void ActivateImmunotherapy(InputAction.CallbackContext context)
 		{
 			Debug.Log("Activate Immunotherapy called");

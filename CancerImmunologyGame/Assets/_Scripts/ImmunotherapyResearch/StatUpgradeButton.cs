@@ -34,18 +34,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			statIcon.SetActive(isUnlocked);
 		}
 
-		// Mouse navigation
-		public override void OnPointerEnter(PointerEventData eventData)
-		{
-			OnSelectView = true;
-			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
-		}
-
-		public override void OnPointerExit(PointerEventData eventData)
-		{
-			OnSelectView = false;
-		}
-
 		public override void OnPointerClick(PointerEventData eventData)
 		{
 			ImmunotherapyResearch.Instance.SelectStatUpgrade(this);

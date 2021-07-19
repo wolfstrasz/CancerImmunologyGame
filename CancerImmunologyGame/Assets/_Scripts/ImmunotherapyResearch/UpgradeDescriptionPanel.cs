@@ -32,16 +32,16 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
             generalThumbnail.sprite = upgrade.generalThumbnailSprite;
             attributeThumbnail.sprite = upgrade.statThumbnailSprite;
 
-            bool hasUpgrade = upgrade.HasAvailableUpgrade;
-
-            if (hasUpgrade)
+            if (upgrade.HasAvailableUpgrade)
             {
-                string text = "";
-                text = "Next Upgrade: ";
-                if (upgrade.NextUpgradeValueChange > 0) text += "+";
-                text += upgrade.NextUpgradeValueChange + " " + upgrade.statAttribute.attributeName;
+                float valueIncrease = upgrade.NextUpgradeValueChange;
+                string sign = upgrade.NextUpgradeValueChange > 0 ? "+" : "-";
+                string text = "Next Upgrade: " + Mathf.Abs(valueIncrease).ToString()
+                            +" (" + sign + Mathf.Abs(valueIncrease + upgrade.CurrentValue).ToString()
+                            + ") " +  upgrade.statAttribute.attributeName;
                 upgradeValueText.text = text;
-			} else
+			} 
+            else
 			{
                 upgradeValueText.text = "Max Upgrade Reached";
 			}

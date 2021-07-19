@@ -50,7 +50,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 		PlayerControls playerControls = null;
 		private bool unlockedFeature = false;
 
-
 		private StatUpgrade currentStatUpgrade = null;
 		internal StatUpgrade CurrentStatUpgrade
 		{
