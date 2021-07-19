@@ -43,21 +43,31 @@ namespace ImmunotherapyGame.UI
 
 		public virtual void OnDeselect(BaseEventData eventData)
 		{
+			Debug.Log("UMN: DESELECT -> " + gameObject.name);
+
 			OnSelectView = false;
 		}
 
 		public virtual void OnSelect(BaseEventData eventData)
 		{
+			Debug.Log("UMN: SELECT -> " + gameObject.name);
 			OnSelectView = true;
 			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
 		}
 
 		// When highlighted with mouse.
 		public virtual void OnPointerEnter(PointerEventData eventData)
-			=> EventSystem.current.SetSelectedGameObject(gameObject);
+		{
+			Debug.Log("UMN: POINTER_ENTER -> " + gameObject.name);
+			EventSystem.current.SetSelectedGameObject(gameObject);
+
+		}
 
 
-		public virtual void OnPointerExit(PointerEventData eventData) { }
+		public virtual void OnPointerExit(PointerEventData eventData) 
+		{
+			Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
+		}
 
 
 		protected virtual void OnDisable()

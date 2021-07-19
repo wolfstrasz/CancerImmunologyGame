@@ -14,7 +14,8 @@ namespace ImmunotherapyGame.UI
 		private InterfaceControlPanel mainMenuPanel = null;
 		[SerializeField]
 		private InterfaceControlPanel newGamePromptPanel = null;
-
+		[SerializeField]
+		private InterfaceControlPanel creditsPanel = null;
 
 		private void Awake()
 		{
@@ -62,6 +63,11 @@ namespace ImmunotherapyGame.UI
 		public void OpenSettings()
 		{
 			SettingsManager.Instance.Open();
+		}
+
+		public void OpenCredits()
+		{
+			creditsPanel.Open();
 		}
 
 		public void Quit()

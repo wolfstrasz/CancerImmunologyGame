@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.UI.TopOverlay;
+using ImmunotherapyGame.LevelManagement;
 
 namespace ImmunotherapyGame.UI
 {
@@ -26,28 +26,14 @@ namespace ImmunotherapyGame.UI
 		private string surveyURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u";
 
 		// Input handling
-		private PlayerControls playerControls = null;
+		private PlayerControls playerControls;
 
-		public void Initialise()
-		{
-			SceneManager.activeSceneChanged += OnActiveSceneChanged;
-			gameObject.SetActive(SceneManager.GetActiveScene().buildIndex >= 2);
-		}
-
-		public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
-		{
-			gameObject.SetActive(nextScene.buildIndex >= 2);
-		}
-
-		protected override void Awake()
-		{
-			base.Awake();
-			playerControls = new PlayerControls();
-			playerControls.Enable();
-		}
+		public void Initialise() { }
 
 		private void OnEnable()
 		{
+			playerControls = new PlayerControls();
+			playerControls.Enable();
 			pauseMenuBtnData.onOpenMenu += OpenMenuView;
 			surveyMenuBtnData.onOpenMenu += OpenSurveyView;
 			playerControls.Systems.PauseMenu.started += OpenMenuView;
@@ -56,6 +42,7 @@ namespace ImmunotherapyGame.UI
 
 		private void OnDisable()
 		{
+			playerControls.Disable();
 			pauseMenuBtnData.onOpenMenu -= OpenMenuView;
 			surveyMenuBtnData.onOpenMenu -= OpenSurveyView;
 			playerControls.Systems.PauseMenu.started -= OpenMenuView;
@@ -102,7 +89,7 @@ namespace ImmunotherapyGame.UI
 		// Buttons callbacks
 		public void RestartLevel()
 		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			LevelManager.Instance.RestartLevel();
 		}
 
 		public void OpenSettings()
@@ -112,7 +99,7 @@ namespace ImmunotherapyGame.UI
 
 		public void BackToMainMenu()
 		{
-			SceneManager.LoadScene(1); // 1 = Main Menu Scene
+			LevelManager.Instance.LoadMainMenu();
 		}
 			
 		public void OpenSurveyOnWeb()

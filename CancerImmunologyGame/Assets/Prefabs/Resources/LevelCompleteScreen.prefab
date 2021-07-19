@@ -959,7 +959,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &190362931932304601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -999,7 +999,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &190362931932304581
 MonoBehaviour:
@@ -1057,6 +1057,7 @@ MonoBehaviour:
   shouldCloseOnSceneChange: 1
   initialControlNode: {fileID: 2600377263898659066}
   nodesToListen: []
+  canvas: {fileID: 0}
 --- !u!222 &190362931932304583
 CanvasRenderer:
   m_ObjectHideFlags: 0

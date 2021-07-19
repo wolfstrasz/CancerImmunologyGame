@@ -55,13 +55,17 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
 
         public override void OnPointerEnter(PointerEventData eventData)
-           => OnSelect(eventData);
+		{
+            Debug.Log("UMN: POINTER_ENTER -> " + gameObject.name);
+            OnSelect(eventData);
+        }
 
 		protected override void OnDisable()
 		{
 			base.OnDisable();
             buttonData.onChangedAnimationStatus -= Animate;
 		}
+
 		protected override void OnEnable()
 		{
 			buttonData.onChangedAnimationStatus += Animate;
@@ -83,6 +87,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
 		public override void OnPointerExit(PointerEventData eventData)
 		{
+            Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
             OnDeselect(eventData);
 		}
 	}

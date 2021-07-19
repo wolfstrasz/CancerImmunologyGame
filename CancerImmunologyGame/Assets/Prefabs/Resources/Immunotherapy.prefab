@@ -773,7 +773,7 @@ RectTransform:
   m_AnchorMin: {x: 0.75, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0.00012207031, y: 0}
-  m_SizeDelta: {x: 0, y: 0.000030517578}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1582279876819218411
 CanvasRenderer:
@@ -1043,7 +1043,7 @@ RectTransform:
   m_AnchorMin: {x: 0.69, y: 0.01}
   m_AnchorMax: {x: 0.99, y: 0.15}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 28.539406}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1582279877141769178
 CanvasRenderer:
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.003921569}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1343,7 +1343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1582279877914255053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1383,7 +1383,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -10
   m_TargetDisplay: 0
 --- !u!222 &1582279877914255055
 CanvasRenderer:
@@ -1446,6 +1446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 0
+  data: {fileID: 11400000, guid: bad6fae45d49e844da9e0e221c7c0e6e, type: 2}
   lifetimeStat: {fileID: 11400000, guid: 55479d13763f5664bbfecbfcb3f87bdd, type: 2}
   cooldownStat: {fileID: 11400000, guid: fe92c7d0bd8e73f4ab981809fc4a3afa, type: 2}
   cooldownBar: {fileID: 1582279876598350753}
@@ -1490,7 +1491,7 @@ RectTransform:
   m_AnchorMin: {x: 0.1, y: 0}
   m_AnchorMax: {x: 0.9, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5.251423, y: -10}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1582279877956127211
 CanvasRenderer:
