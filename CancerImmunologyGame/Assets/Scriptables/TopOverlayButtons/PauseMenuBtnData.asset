@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PauseMenuBtnData
   m_EditorClassIdentifier: 
   unlocked: 1
-  icon: {fileID: 21300000, guid: f56cfaaafbdb76142b2daa2a2bcbaaa6, type: 3}
+  icon: {fileID: 21300000, guid: a1f76fafbf2c18f41b99eb91fd3018c7, type: 3}
   glowMaterial: {fileID: 0}

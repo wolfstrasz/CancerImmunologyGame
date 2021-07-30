@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f2518630831c5479a5da17ca8168e8, type: 3}
   m_Name: ImmunotherapyResearchBtnData
   m_EditorClassIdentifier: 
-  unlocked: 0
-  icon: {fileID: 21300000, guid: 67cfaa1958461aa4d99b0d0014f10fce, type: 3}
-  glowMaterial: {fileID: 2100000, guid: 5c3a15295219f134bad89e50867bdb1e, type: 2}
+  unlocked: 1
+  icon: {fileID: 21300000, guid: 47a4f6d4e70676c469155a0a292a6c3e, type: 3}
+  glowMaterial: {fileID: 2100000, guid: 8bf788e565bae5e40a8cadcbdc4eca96, type: 2}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SurveyMenuBtnData
   m_EditorClassIdentifier: 
   unlocked: 1
-  icon: {fileID: 21300000, guid: d2e7beaa08e88a54d9d78fbc6c5de82d, type: 3}
+  icon: {fileID: 21300000, guid: a446565db7de8e04ab1782bc0a58ceac, type: 3}
   glowMaterial: {fileID: 0}
