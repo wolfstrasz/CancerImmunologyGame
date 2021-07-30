@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.UI.TopOverlay
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu (menuName = "MyAssets/Top Overlay Button Data")]
     public class TopOverlayButtonData : ScriptableObject
     {
         public bool unlocked;

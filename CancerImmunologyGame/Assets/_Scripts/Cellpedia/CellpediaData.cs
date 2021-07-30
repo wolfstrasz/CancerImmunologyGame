@@ -5,7 +5,7 @@ using ImmunotherapyGame.SaveSystem;
 
 namespace ImmunotherapyGame.CellpediaSystem
 {
-	[CreateAssetMenu(menuName = "Cellpedia Data")]
+	[CreateAssetMenu(menuName = "MyAssets/Cellpedia Data")]
 	public class CellpediaData : ScriptableObject
 	{
 		public List<CellpediaObject> cellpediaItems;

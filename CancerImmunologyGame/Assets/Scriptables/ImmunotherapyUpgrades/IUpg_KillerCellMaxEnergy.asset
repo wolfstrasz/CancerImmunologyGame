@@ -10,18 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
-  m_Name: KillerCellMaxEnergyUpgrade
+  m_Name: IUpg_KillerCellMaxEnergy
   m_EditorClassIdentifier: 
-  initialUnlockValue: 0
-  unlocked: 0
-  title: TK cell Max Energy Upgrade
-  description: Upgrades the maximum energy of all T Killer cells.
-  statThumbnailSprite: {fileID: 21300000, guid: 8fb227987c3443a428c776e6762f9d0f,
+  title: Increase mitochondrial biomass
+  description: The mitochondria is the cellular structure referred to as the powerhouse
+    of the cell, given it produces most of the energy inside cells. Increase the
+    amount of mitochondria in your T killer cell to become less vulnerable to the
+    effects of exhaustion!
+  statThumbnailSprite: {fileID: 21300000, guid: f0e860aebcc510044b04f40ad1465e26,
     type: 3}
-  generalThumbnailSprite: {fileID: 8526444965496520883, guid: 83060a317e155fe43b4fa7f38c66e842,
+  generalThumbnailSprite: {fileID: 537914882761767684, guid: 76f55ab67d3656b45a07a6853b0f2fcf,
     type: 3}
+  initialUnlockValue: 1
+  unlocked: 1
   statAttribute: {fileID: 11400000, guid: e756f5ef3b6b0954bb3acf7611c8547c, type: 2}
-  nextUpgradeIndex: 0
   upgrades:
   - cost: 1
     valueChange: 1
@@ -35,3 +37,6 @@ MonoBehaviour:
     valueChange: 5
   - cost: 6
     valueChange: 6
+  nextUpgradeIndex: 0
+  currentValue: 0
+  appliedValue: 0

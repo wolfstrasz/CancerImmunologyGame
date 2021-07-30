@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
-  m_Name: PacProjectileCount
+  m_Name: ImmunotherapyLifetime
   m_EditorClassIdentifier: 
-  attributeName: Number of Metalloprotease enzymes
-  initialValue: 3
-  currentValue: 3
+  attributeName: Immunotherapy Time
+  initialValue: 5
+  currentValue: 5

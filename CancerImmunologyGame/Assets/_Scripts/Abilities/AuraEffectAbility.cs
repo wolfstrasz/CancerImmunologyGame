@@ -5,7 +5,7 @@ using UnityEngine;
 using ImmunotherapyGame.Core;
 namespace ImmunotherapyGame.Abilities
 {
-	[CreateAssetMenu(menuName = "Abilities/Aura Effect Ability")]
+	[CreateAssetMenu(menuName = "MyAssets/Abilities/Aura Effect Ability")]
 
 	public class AuraEffectAbility : Ability
     {

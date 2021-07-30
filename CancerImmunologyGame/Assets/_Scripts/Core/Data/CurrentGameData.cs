@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace ImmunotherapyGame
 {
-    [CreateAssetMenu(menuName = "CurrentGameData")]
     public class CurrentGameData : ScriptableObject
     {
         public int currentLevel = 0;

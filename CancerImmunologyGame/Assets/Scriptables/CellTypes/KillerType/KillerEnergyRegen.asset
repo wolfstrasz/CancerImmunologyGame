@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
-  m_Name: FlatSpeed
+  m_Name: KillerEnergyRegen
   m_EditorClassIdentifier: 
-  attributeName: 
+  attributeName: Energy Regeneration per second
   initialValue: 0
   currentValue: 0

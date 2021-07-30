@@ -5,7 +5,7 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
-    [CreateAssetMenu (menuName = "Data/StatUpgrade")]
+    [CreateAssetMenu (menuName = "MyAssets/Immunotherapy Stat Upgrade")]
     public class StatUpgrade : ScriptableObject, ISerializationCallbackReceiver
     {
 

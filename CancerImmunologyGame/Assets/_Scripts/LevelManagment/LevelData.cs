@@ -6,7 +6,7 @@ using ImmunotherapyGame.SaveSystem;
 namespace ImmunotherapyGame.LevelManagement
 {
 
-    [CreateAssetMenu(menuName = "LevelData")]
+    [CreateAssetMenu(menuName = "MyAssets/Level Data")]
     public class LevelData : ScriptableObject
     {
         public int currentReachedLevel = 0;

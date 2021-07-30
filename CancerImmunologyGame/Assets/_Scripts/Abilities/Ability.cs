@@ -5,7 +5,6 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Abilities
 {
-    [CreateAssetMenu(menuName = "Abilities/Ability")]
     public abstract class Ability : ScriptableObject
     {
         [Header("Ability Description")]

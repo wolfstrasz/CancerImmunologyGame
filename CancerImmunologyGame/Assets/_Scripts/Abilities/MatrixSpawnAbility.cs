@@ -5,7 +5,7 @@ using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame.Abilities
 {
-	[CreateAssetMenu(menuName = "Abilities/Matrix Spawn Ability")]
+	[CreateAssetMenu(menuName = "MyAssets/Abilities/Matrix Spawn Ability")]
 
 	public class MatrixSpawnAbility : Ability
 	{

@@ -8,7 +8,7 @@ using ImmunotherapyGame.SaveSystem;
 
 namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 {
-	[CreateAssetMenu (menuName = "Data/Research Advancement Data")]
+	[CreateAssetMenu (menuName = "MyAssets/Immunotherapy Research Data")]
     public class ImmunotherapyResearchData : ScriptableObject
     {
 		public int points;

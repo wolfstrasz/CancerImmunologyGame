@@ -10,20 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
-  m_Name: PacParticleAmountUpgrade
+  m_Name: IUpg_PacParticleNumbers
   m_EditorClassIdentifier: 
-  initialUnlockValue: 0
-  unlocked: 0
-  title: Pac Particle Increase
-  description: Upgrades the amount of particles released when using the ....
+  title: Enhance metalloprotease exocytosis
+  description: Metalloproteases help break down the thick extracellular matrix surrounding
+    cancer cells. Increase the release (exocytosis) of metalloproteases to help plough
+    through!
   statThumbnailSprite: {fileID: 21300000, guid: 56f2b8fcb5b037548a4e66082b86910a,
     type: 3}
-  generalThumbnailSprite: {fileID: 7101952067027063888, guid: 7aa10e60d4a2db344b05c5008b926a44,
+  generalThumbnailSprite: {fileID: -5688524656129414348, guid: 7aa10e60d4a2db344b05c5008b926a44,
     type: 3}
+  initialUnlockValue: 1
+  unlocked: 1
   statAttribute: {fileID: 11400000, guid: 524fa21593cc57342ba499a19623ddaa, type: 2}
-  nextUpgradeIndex: 0
   upgrades:
   - cost: 5
     valueChange: 1
   - cost: 7
     valueChange: 1
+  nextUpgradeIndex: 0
+  currentValue: 0
+  appliedValue: 0

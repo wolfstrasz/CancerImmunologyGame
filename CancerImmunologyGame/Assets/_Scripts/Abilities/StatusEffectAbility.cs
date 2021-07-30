@@ -7,7 +7,7 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Abilities
 {
-    [CreateAssetMenu(menuName = "Abilities/Status Effect Ability")]
+    [CreateAssetMenu(menuName = "MyAssets/Abilities/Status Effect Ability")]
     public class StatusEffectAbility : Ability
     {
 		[SerializeField] private GameObject statusEffectPrefab;

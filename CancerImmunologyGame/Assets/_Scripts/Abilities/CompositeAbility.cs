@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Abilities
 {
-	[CreateAssetMenu(menuName = "Abilities/Composite Ability")]
+	[CreateAssetMenu(menuName = "MyAssets/Abilities/Composite Ability")]
 	public class CompositeAbility : Ability, ISerializationCallbackReceiver
 	{
 		[Header("Ability Components")]

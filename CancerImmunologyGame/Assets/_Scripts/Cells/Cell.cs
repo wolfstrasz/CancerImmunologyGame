@@ -83,6 +83,9 @@ namespace ImmunotherapyGame
 		protected virtual void LateUpdate()
 		{
 			//Debug.Log("HEALTH : ENERGY = " + health + " : " + energy);
+			updateEnergyValue += cellType.EnergyRegenPerSecond * Time.deltaTime;
+			updateHealthValue += cellType.HealthRegenPerSecond * Time.deltaTime;
+
 			if (!isImmune)
 			{
 				if (updateHealthValue != 0)

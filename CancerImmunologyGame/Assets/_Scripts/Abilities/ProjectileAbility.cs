@@ -5,7 +5,7 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Abilities
 {
-	[CreateAssetMenu(menuName = "Abilities/Particle Ability")]
+	[CreateAssetMenu(menuName = "MyAssets/Abilities/Particle Ability")]
 	public class ProjectileAbility : Ability
 	{
 

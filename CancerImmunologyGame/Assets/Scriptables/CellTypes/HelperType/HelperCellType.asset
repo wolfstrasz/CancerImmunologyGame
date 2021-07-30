@@ -16,3 +16,7 @@ MonoBehaviour:
   maxHealth: {fileID: 11400000, guid: 5dad25c847168c44bba078cfea54617f, type: 2}
   maxEnergy: {fileID: 11400000, guid: b28b9243f5f12104f81700ea9a8e4a93, type: 2}
   initialSpeed: {fileID: 11400000, guid: cd931a4f2cc8dde4196381bfe77a6d20, type: 2}
+  healthRegenPerSecond: {fileID: 11400000, guid: 91d4f73a117c0e1459b3c6a3597f040b,
+    type: 2}
+  energyRegenPerSecond: {fileID: 11400000, guid: 037b5502cc1b5da40ab555e6091e2ba2,
+    type: 2}

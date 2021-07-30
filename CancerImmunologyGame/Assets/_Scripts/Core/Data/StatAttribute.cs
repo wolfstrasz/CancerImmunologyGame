@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ImmunotherapyGame.Core
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu (menuName = "MyAssets/Stat Attribute")]
     public class StatAttribute : ScriptableObject, ISerializationCallbackReceiver
     {
         public string attributeName;

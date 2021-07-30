@@ -6,7 +6,7 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Player
 {
-    [CreateAssetMenu (menuName = "Data/Player Data")]
+    [CreateAssetMenu (menuName = "MyAssets/Player Data")]
     public class PlayerData : ScriptableObject
     {
         [SerializeField] [ReadOnly] private Cell currentCell;

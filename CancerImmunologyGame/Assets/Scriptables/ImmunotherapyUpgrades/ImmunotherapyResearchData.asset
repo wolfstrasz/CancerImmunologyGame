@@ -12,8 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fcb09522476684b937e05a49b5a9c7, type: 3}
   m_Name: ImmunotherapyResearchData
   m_EditorClassIdentifier: 
-  points: 3
+  points: 0
   statUpgrades:
-  - {fileID: 11400000, guid: 628548c7b35e0464cb2652a89da94bbb, type: 2}
   - {fileID: 11400000, guid: 6e4cc1a9393ef47448d312ebea6b4d8b, type: 2}
+  - {fileID: 11400000, guid: 628548c7b35e0464cb2652a89da94bbb, type: 2}
+  - {fileID: 11400000, guid: f8b4f327dcf30364d83369d3ee06dfdc, type: 2}
+  - {fileID: 11400000, guid: 0381889a212b50a479b15966000c4341, type: 2}
   - {fileID: 11400000, guid: d703fab5074d8e04c890e9bc3078587c, type: 2}
+  - {fileID: 11400000, guid: 5717fc7b42c3db64ab39ebc3bae4943a, type: 2}
+  - {fileID: 11400000, guid: e3fec7796d09ba9418eb1eba62901326, type: 2}
+  - {fileID: 11400000, guid: e4ecd5b7c050ca1478a3ccdab5c37dbf, type: 2}
+  - {fileID: 11400000, guid: 83e28b5cfe88af44d8978810cb6c3657, type: 2}
