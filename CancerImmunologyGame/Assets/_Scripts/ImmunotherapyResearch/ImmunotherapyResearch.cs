@@ -204,7 +204,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				data.points -= currentStatUpgrade.ApplyUpgradeAndReturnCost();
 				currentPointsText.text = data.points.ToString();
 
-				if (!currentStatUpgrade.HasAvailableUpgrade)
+				if (!currentStatUpgrade.HasAvailableUpgrade || currentStatUpgrade.NextUpgradeCost > data.points )
 				{
 					EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
 				}
@@ -245,6 +245,32 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			resetPointsPanel.SetActive(false);
 		}
 
+
+
+		internal void SelectStatUpgrade(StatUpgradeButton button)
+		{
+			// Cache data
+			currentStatUpgrade = button.statUpgrade;
+			currentSelectedStatUpgradeButton = button.gameObject;
+
+			// Update panels
+			upgradeDescriptionPanel.gameObject.SetActive(true);
+			upgradeDescriptionPanel.UpdateDisplay();
+
+			upgradePurchasePanel.UpdateDisplay();
+		}
+
+		internal void OnPurchaseButtonCancel()
+		{
+			EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
+			currentStatUpgrade = null;
+			currentSelectedStatUpgradeButton = null;
+			upgradeDescriptionPanel.UpdateDisplay();
+			upgradePurchasePanel.UpdateDisplay();
+		}
+
+
+		// Data Handling
 		public void LoadData()
 		{
 			savedData = SaveManager.Instance.LoadData<SerializableImmunotherapyResearchData>();
@@ -275,28 +301,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			inGameUIButtonData.PingUnlockStatus(false);
 		}
 
-
-		internal void SelectStatUpgrade(StatUpgradeButton button)
-		{
-			// Cache data
-			currentStatUpgrade = button.statUpgrade;
-			currentSelectedStatUpgradeButton = button.gameObject;
-
-			// Update panels
-			upgradeDescriptionPanel.gameObject.SetActive(true);
-			upgradeDescriptionPanel.UpdateDisplay();
-
-			upgradePurchasePanel.UpdateDisplay();
-		}
-
-		internal void OnPurchaseButtonCancel()
-		{
-			EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
-			currentStatUpgrade = null;
-			currentSelectedStatUpgradeButton = null;
-			upgradeDescriptionPanel.UpdateDisplay();
-			upgradePurchasePanel.UpdateDisplay();
-		}
 
 	}
 }

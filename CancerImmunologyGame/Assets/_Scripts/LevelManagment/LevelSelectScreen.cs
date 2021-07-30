@@ -5,88 +5,61 @@ using UnityEngine.EventSystems;
 
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.LevelManagement;
+
 namespace ImmunotherapyGame.UI
 {
     public class LevelSelectScreen : Singleton<LevelSelectScreen>
     {
-        [SerializeField]
-        private InterfaceControlPanel panel = null;
-        [SerializeField]
-        private LevelData levelData = null;
-        [SerializeField]
-        private GameObject horizontalLayoutPrefab = null;
-        [SerializeField]
-        private GameObject levelItemPrefab = null;
-        [SerializeField]
-        private GameObject emptyItemPrefab = null;
+
+        [Header ("Links")]
+        [SerializeField] private InterfaceControlPanel panel = null;
+
+        [Header ("Data")]
+        [SerializeField] private LevelData levelData = null;
+        [SerializeField] private GameObject horizontalLayoutPrefab = null;
+        [SerializeField] private GameObject levelItemPrefab = null;
+        [SerializeField] private GameObject emptyItemPrefab = null;
 
         [Header("Layout")]
-        [SerializeField]
-        private Transform verticalLayout = null;
-        [SerializeField]
-        internal int itemsPerRow = 8;
+        [SerializeField] private Transform verticalLayout = null;
+        [SerializeField] internal int buttonsPerRow = 8;
 
         [Header("Debug")]
-        [ReadOnly]
-        internal List<LevelSelectButton> levelSelectButtons = null;
-        [ReadOnly]
-        private bool initialised = false;
-        [ReadOnly]
-        List<Transform> layoutRows = null;
+        [SerializeField] [ReadOnly] internal List<LevelSelectButton> levelSelectButtons = null;
+        [SerializeField] [ReadOnly] private bool initialised = false;
+        [SerializeField] [ReadOnly] List<Transform> layoutRows = null;
 
-        
-        internal void SelectObjectOnButtonMove(MoveDirection dir, int buttonID)
-        {
-            int buttonsCount = levelSelectButtons.Count;
-            if (dir == MoveDirection.Left)
-			{
-                buttonID = buttonID > 0 ? --buttonID : (buttonsCount - 1);
-			} 
-            else if (dir == MoveDirection.Right)
-			{
-                buttonID = buttonID < (buttonsCount - 1) ? ++buttonID : 0;
-			}
-            else if (dir == MoveDirection.Up)
-			{
-                buttonID -= 8;
 
-                if (buttonID < 0)
-				{
-                    buttonID += layoutRows.Count * itemsPerRow;
-                    if (buttonID >= buttonsCount)
-                        buttonID -= 8;
-				}
-			}
-            else if (dir == MoveDirection.Down)
-			{
-                buttonID += 8;
 
-                if (buttonID >= buttonsCount)
-				{
-                    buttonID %= itemsPerRow;
-				}
-			}
-
-            buttonID = + buttonID - buttonsCount * (buttonID / buttonsCount); // modulo
-            EventSystem.current.SetSelectedGameObject(levelSelectButtons[buttonID].gameObject);
-        }
-    
-
-        private void RefreshViews()
+		public void Open()
 		{
+            
+            if (!initialised)
+            {
+                AddOptions();
+            }
+
+            // Refresh the button visuals
             foreach (var btn in levelSelectButtons)
             {
                 btn.RefreshView();
             }
+
+            panel.Open();
+		}
+
+        public void Close()
+		{
+            panel.Close();
         }
 
         private void AddOptions()
-		{
+        {
             int itemCount = levelData.levels.Count;
-            int rowCount = itemCount / itemsPerRow + 1;
-            int itemSpaceCount = rowCount * itemsPerRow;
+            int rowCount = itemCount / buttonsPerRow + 1;
+            int itemSpaceCount = rowCount * buttonsPerRow;
             int lastRowEmptyItemsCount = itemSpaceCount - itemCount;
-            int lastRowItemCount = itemsPerRow - lastRowEmptyItemsCount;
+            int lastRowItemCount = buttonsPerRow - lastRowEmptyItemsCount;
             int levelDataIndex = 0;
 
             levelSelectButtons = new List<LevelSelectButton>(itemCount);
@@ -103,7 +76,7 @@ namespace ImmunotherapyGame.UI
                 row = rowGo.transform;
 
                 // Add items on row
-                for (int j = 0; j < itemsPerRow; ++j)
+                for (int j = 0; j < buttonsPerRow; ++j)
                 {
                     var item = Instantiate(levelItemPrefab, row).GetComponent<LevelSelectButton>();
                     item.SetData(levelData.levels[levelDataIndex], levelDataIndex);
@@ -138,32 +111,61 @@ namespace ImmunotherapyGame.UI
 
 
             // Add initial button 
-
             foreach (var btn in levelSelectButtons)
-			{
+            {
                 panel.nodesToListen.Add(btn);
-			}
+            }
 
             panel.initialControlNode = levelSelectButtons[0];
             initialised = true;
         }
 
-		public void Open()
-		{
-            
-            if (!initialised)
+
+        /// <summary>
+        /// Selects a new button dependent on the current button's ID and the controller direction command
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="buttonID"></param>
+        internal void SelectObjectOnButtonMove(MoveDirection dir, int buttonID)
+        {
+            int pressedButtonID = buttonID;
+            int maxButtonIndex = levelSelectButtons.Count - 1;
+
+            if (dir == MoveDirection.Left)
             {
-                AddOptions();
+                if ( buttonID > 0)
+				{
+                    --buttonID;
+				}
+            }
+            else if (dir == MoveDirection.Right)
+            {
+                if (buttonID < maxButtonIndex)
+				{
+                    ++buttonID;
+				}
+            }
+            else if (dir == MoveDirection.Up)
+            {
+                if (buttonID >= buttonsPerRow)
+                {
+                    buttonID -= buttonsPerRow;
+                }
+            }
+            else if (dir == MoveDirection.Down)
+            {
+                if (buttonID <= maxButtonIndex - buttonsPerRow)
+				{
+                    buttonID += buttonsPerRow;
+                }
             }
 
-            RefreshViews();
-            panel.Open();
-
-		}
-
-        public void Close()
-		{
-            panel.Close();
+            if (buttonID != pressedButtonID)
+			{
+                EventSystem.current.SetSelectedGameObject(levelSelectButtons[buttonID].gameObject);
+			}
         }
-	}
+
+
+    }
 }

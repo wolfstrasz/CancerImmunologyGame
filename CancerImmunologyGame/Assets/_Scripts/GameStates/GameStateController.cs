@@ -91,7 +91,7 @@ namespace ImmunotherapyGame
 					return RemoveCurrentState(caller.name);
 				
 				}
-				Debug.LogWarning("GCS: Caller requesting to free pause is not the current owner. Owner: " + pauseStateCallers.Peek().name);
+				Debug.LogWarning("GCS: Caller requesting to free pause is not the current owner. Called by " + caller.name + " but owner is: " + pauseStateCallers.Peek().name);
 				return false;
 			}
 

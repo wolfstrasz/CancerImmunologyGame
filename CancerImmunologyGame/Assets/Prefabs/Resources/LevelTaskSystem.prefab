@@ -211,7 +211,7 @@ MonoBehaviour:
   - {fileID: 6148371605847153445}
   - {fileID: 6148371605391913499}
   - {fileID: 6148371604343180434}
-  shouldRefresh: 0
+  refreshNotFinished: 0
   shouldRefreshFromStart: 0
   count: 0
 --- !u!1 &6148371604971545622
@@ -273,7 +273,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_TargetDisplay: 0
 --- !u!114 &6148371604971545620
 MonoBehaviour:
@@ -381,7 +381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6148371605391913503

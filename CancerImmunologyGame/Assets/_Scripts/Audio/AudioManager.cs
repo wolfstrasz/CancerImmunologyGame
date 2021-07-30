@@ -47,7 +47,7 @@ namespace ImmunotherapyGame.Audio
 				uiSource.clip = uiAudioLibrary[key];
 				uiSource.Play();
 			}
-			else
+			else if (key != UIAudioClipKey.NONE)
 			{
 				Debug.LogError("No [" + key + "] was found in UI Audio Library. Check if " + caller.name + " has a correct UI audio key.");
 			}

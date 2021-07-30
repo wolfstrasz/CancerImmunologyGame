@@ -77,7 +77,7 @@ namespace ImmunotherapyGame.LevelTasks
             levelTaskTable[levelTask.levelTaskType].Add(levelTask);
             LevelTaskVisual newLevelTaskVisual = Instantiate(levelTaskUIPrefab, levelTaskUILayout.transform).GetComponent<LevelTaskVisual>();
             newLevelTaskVisual.SetInfo(levelTask);
-            layoutsRefresh.shouldRefreshFromStart = true;
+            layoutsRefresh.ForceRefresh();
 
             levelTaskVisualTable.Add(levelTask, newLevelTaskVisual);
 
@@ -96,7 +96,7 @@ namespace ImmunotherapyGame.LevelTasks
 				{
                     allTaskVisuals[i].UpdateSize();
 				}
-                layoutsRefresh.shouldRefreshFromStart = true;
+                layoutsRefresh.ForceRefresh();
 
 
             }
@@ -165,7 +165,7 @@ namespace ImmunotherapyGame.LevelTasks
             {
                 allTaskVisuals[i].UpdateSize();
             }
-            layoutsRefresh.shouldRefreshFromStart = true;
+            layoutsRefresh.ForceRefresh();
 
             // Update view
             if (allActiveTasks.Count <= 0)
