@@ -16,8 +16,7 @@ namespace ImmunotherapyGame
 			{
 				TopOverlayUI.Instance.GamePaused = false;
 				GlobalLevelData.UpdateLevelData();
-
-				BackgroundMusic.Instance.Initialise();
+				BackgroundMusic.Instance.PlayMusic();
 				TutorialManager.Instance.Initialise();
 			}
 

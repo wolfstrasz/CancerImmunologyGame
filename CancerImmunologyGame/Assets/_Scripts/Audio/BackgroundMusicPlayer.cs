@@ -3,17 +3,43 @@ using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Audio
 {
+	[RequireComponent(typeof(Collider2D))]
 	public class BackgroundMusicPlayer : MonoBehaviour
 	{
-
 		[SerializeField]
-		private BackgroundMusic.BackgroundMusicType type = BackgroundMusic.BackgroundMusicType.NORMAL;
+		private MusicType type;
+		private bool alreadySubscribed = false;
 
-		void OnTriggerEnter2D(Collider2D collider)
+		private void OnTriggerEnter2D(Collider2D collider)
 		{
 			if (collider.GetComponent<PlayerController>() != null)
 			{
-				BackgroundMusic.Instance.PlayMusic(type);
+				if (!alreadySubscribed)
+				{
+					BackgroundMusic.Instance.Subscribe(type);
+					alreadySubscribed = true;
+				}
+			}
+		}
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			if (collider.GetComponent<PlayerController>() != null)
+			{
+				if (alreadySubscribed)
+				{
+					BackgroundMusic.Instance.Unsubscribe(type);
+					alreadySubscribed = false;
+				}
+			}
+		}
+
+		private void OnDisable()
+		{
+			if (alreadySubscribed)
+			{
+				BackgroundMusic.Instance.Unsubscribe(type);
+				alreadySubscribed = false;
 			}
 		}
 	}

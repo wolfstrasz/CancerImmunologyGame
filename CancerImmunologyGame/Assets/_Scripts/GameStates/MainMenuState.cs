@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.UI;
+using ImmunotherapyGame.Audio;
 
 namespace ImmunotherapyGame
 { 
@@ -19,6 +20,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+				BackgroundMusic.Instance.StopMusic();
 			}
 
 			internal override void OnStateExit()

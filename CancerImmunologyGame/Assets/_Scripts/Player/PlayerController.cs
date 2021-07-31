@@ -10,7 +10,7 @@ using ImmunotherapyGame.Audio;
 namespace ImmunotherapyGame.Player
 {
 	[RequireComponent(typeof(PlayerInput))]
-	public class PlayerController : Singleton<PlayerController>, ICancerDeathObserver, IControllerMovementOverridable
+	public class PlayerController : Singleton<PlayerController>, IControllerMovementOverridable
 	{
 		[SerializeField] private PlayerData playerData = null;
 		[SerializeField] private KillerCell controlledCell = null;
@@ -18,65 +18,37 @@ namespace ImmunotherapyGame.Player
 		[Header("Aiming")]
 		[SerializeField] private GameObject crosshairCanvas = null;
 		[SerializeField] private Transform crosshair = null;
-		protected Quaternion CrosshairRotation { get; set; }
+		protected Quaternion crosshairRotation = Quaternion.identity;
 
-		[Header("Debug (Read Only)")]
+		[Header("Debug")]
 		[SerializeField] private List<IControllerMovementOverride> movementOverrides = new List<IControllerMovementOverride>();
-		[SerializeField] private List<Cancer> cancersNearby = new List<Cancer>();
+
+		private bool InitiatePrimaryAttack { get; set; }
+		private bool InitiateSpecialAttack { get; set; }
+		private bool CanAttack => crosshairCanvas.activeInHierarchy;
+		private Vector2 MoveDirection { get; set; }
+
 
 		protected override void Awake()
 		{
 			base.Awake();
-			if (controlledCell != null)
-			{
-				transform.position = controlledCell.transform.position;
-				transform.rotation = controlledCell.transform.rotation;
-				playerData.CurrentCell = controlledCell;
-				PlayerUI.Instance.Activate();
-			}
-
-			CrosshairRotation = Quaternion.identity;
+			playerData.CurrentCell = controlledCell;
 		}
 
-		void OnTriggerEnter2D(Collider2D collider)
-		{
-			Cancer cancer = collider.GetComponent<Cancer>();
-			if (cancer != null && !cancersNearby.Contains(cancer))
-			{
-				cancersNearby.Add(cancer);
-				BackgroundMusic.Instance.PlayBattleMusic();
-				cancer.SubscribeDeathObserver(this);
-			}
-		}
-
-		void OnTriggerExit2D(Collider2D collider)
-		{
-			Cancer cancer = collider.GetComponent<Cancer>();
-			if (cancer != null && cancersNearby.Contains(cancer))
-			{
-				cancersNearby.Remove(cancer);
-				cancer.UnsubscribeDeathObserver(this);
-
-				if (cancersNearby.Count <= 0)
-				{
-					BackgroundMusic.Instance.PlayNormalMusic();
-				}
-			}
-		}
 
 		// input
 		public void OnUpdate()
 		{
-
 			transform.position = controlledCell.transform.position;
 			transform.rotation = controlledCell.transform.rotation;
-			crosshairCanvas.transform.rotation = CrosshairRotation;
+			crosshairCanvas.transform.rotation = crosshairRotation;
 
 			if (CanAttack)
 			{
 				if (InitiatePrimaryAttack)
 				{
 					controlledCell.UsePrimaryAttack(crosshair.gameObject);
+					InitiatePrimaryAttack = false;
 				} else
 				{
 					controlledCell.StopPrimaryAttack();
@@ -84,8 +56,11 @@ namespace ImmunotherapyGame.Player
 				if (InitiateSpecialAttack)
 				{
 					controlledCell.SecondaryAttack(crosshair.gameObject);
+					InitiateSpecialAttack = false;
+
 				}
 			}
+
 		}
 
 		public void OnFixedUpdate()
@@ -103,21 +78,8 @@ namespace ImmunotherapyGame.Player
 			controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 		}
 
-		public void OnCancerDeath(Cancer cancer)
-		{
-			if (cancersNearby.Contains(cancer))
-			{
-				cancersNearby.Remove(cancer);
-
-				if (cancersNearby.Count <= 0)
-					BackgroundMusic.Instance.PlayNormalMusic();
-
-			}
-		}
-
 		public void OnCellDeath()
 		{ 
-
 			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)
 			{
 				Debug.LogWarning("Zero respawn areas found on map. Respawning at same position");
@@ -152,58 +114,13 @@ namespace ImmunotherapyGame.Player
 			}
 		}
 
-		public void UnsubscribMovementOverride(IControllerMovementOverride controllerOverride)
+		public void UnsubscribeMovementOverride(IControllerMovementOverride controllerOverride)
 		{
 			if (movementOverrides.Contains(controllerOverride))
 			{
 				movementOverrides.Remove(controllerOverride);
 			}
 		}
-
-
-		private bool InitiatePrimaryAttack { get; set; }
-		private bool InitiateSpecialAttack { get; set; }
-		private bool CanAttack => crosshairCanvas.activeInHierarchy;
-
-		// Movement properties
-		private bool IsMoving => MoveDirection != Vector2.zero;
-		private float Horizontal
-		{
-			get
-			{
-				var keyboard = Keyboard.current;
-				var horizontal = 0f;
-				if (keyboard.dKey.isPressed)
-				{
-					horizontal += 1f;
-				}
-				if (keyboard.aKey.isPressed)
-				{
-					horizontal -= 1f;
-				}
-				return horizontal;
-			}
-		}
-		private float Vertical
-		{
-			get
-			{
-				var keyboard = Keyboard.current;
-				var vertical = 0f;
-
-				if (keyboard.wKey.isPressed)
-				{
-					vertical += 1f;
-				}
-
-				if (keyboard.sKey.isPressed)
-				{
-					vertical -= 1f;
-				}
-				return vertical;
-			}
-		}
-		private Vector2 MoveDirection { get; set; }
 
 		// Action Callbacks
 		void OnMovement(InputValue value)
@@ -229,7 +146,7 @@ namespace ImmunotherapyGame.Player
 
 			// Calculate rotation
 			float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+			crosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
 		}
 
 		void OnMouseAim(InputValue value)
@@ -244,7 +161,7 @@ namespace ImmunotherapyGame.Player
 
 			// Calculate rotation
 			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-			CrosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+			crosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
 		}
 
 	}

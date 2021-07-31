@@ -16,14 +16,12 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
-				GlobalGameData.isGameplayPaused = true;
 				TopOverlayUI.Instance.GamePaused = true;
 
 			}
 
 			internal override void OnStateExit()
 			{
-				GlobalGameData.isGameplayPaused = true;
 			}
 
 			internal override void OnStateReEnter()

@@ -7,7 +7,7 @@ namespace ImmunotherapyGame
 {
 	namespace GameManagement
 	{
-		public class GameManager : Singleton<GameManager>, IDataManager
+		public class GameManager : Singleton<GameManager>
 		{
 			[SerializeField]
 			internal bool sceneLoaded = false;
@@ -47,7 +47,13 @@ namespace ImmunotherapyGame
 					sceneLoaded = false;
 					Debug.Log("GameManager -> OnActiveSceneChanged: Set Load State");
 					stateController.SetState(new LoadState(stateController));
-				} else
+				} 
+				else if (nextScene.buildIndex == 1)
+				{
+					Debug.Log("GameManager -> OnActiveSceneChanged: Set MainMenu State");
+					stateController.SetState(new MainMenuState(stateController));
+				}
+				else 
 				{
 					Debug.Log("GameManager -> OnActiveSceneChanged: Set Empty State");
 					stateController.SetState(new EmptyState(stateController));
@@ -78,25 +84,6 @@ namespace ImmunotherapyGame
 			{
 				return stateController.RemovePauseState(callerObject);
 			}
-
-
-
-			public void LoadData()
-			{
-				//LoadCurrentGameData();
-			}
-
-			public void SaveData()
-			{
-				//SaveCurrentGameData();
-			}
-
-			public void ResetData()
-			{
-				//ResetCurrentGameData();
-			}
-
-
 			
 		}
 

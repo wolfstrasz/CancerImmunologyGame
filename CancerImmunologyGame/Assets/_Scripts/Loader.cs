@@ -33,8 +33,9 @@ namespace ImmunotherapyGame.Loader
 		{
 			AudioManager.Instance.Initialise();
 			InterfaceManager.Instance.Initialise();
+			BackgroundMusic.Instance.Initialise();
 
-			GlobalGameData.dataManagers = new List<IDataManager>(4);
+			GlobalGameData.dataManagers = new List<IDataManager>(3);
 
 			// Load Settings
 			Debug.Log("Loader: Settings Manager");
@@ -42,9 +43,7 @@ namespace ImmunotherapyGame.Loader
 
 			// Load Game Data
 			Debug.Log("Loader: Game Manager");
-			GameManager.Instance.LoadData();
 			GameManager.Instance.Initialise();
-			GlobalGameData.dataManagers.Add(GameManager.Instance);
 
 			// Load Level Data
 			Debug.Log("Loader: Level Manager");

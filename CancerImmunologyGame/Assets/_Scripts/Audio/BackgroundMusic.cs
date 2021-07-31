@@ -1,80 +1,54 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+
 using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Audio
 {
 	public class BackgroundMusic : Singleton<BackgroundMusic>
 	{
-		[Header("Music")]
-		[SerializeField]
-		private AudioSource normalMusic = null;
-		[SerializeField]
-		private AudioSource travelMusic = null;
-		[SerializeField]
-		private AudioSource battleMusic = null;
+		[Header("Music and Sources")]
+		[SerializeField] private List<MusicType> musicTypes = new List<MusicType>();
+		[SerializeField] private AudioSource firstSource;
+		[SerializeField] private AudioSource secondSource;
+
+		[SerializeField] [ReadOnly] private AudioSource currentSource = null;
+		[SerializeField] [ReadOnly] private AudioSource sourceToDecrease = null;
+		[SerializeField] [ReadOnly] private AudioSource sourceToIncrease = null;
+
+		[SerializeField] [ReadOnly] private MusicType currentType;
+		[SerializeField] [ReadOnly] private MusicType correctType;
 
 		[Header("Timing")]
-		[SerializeField]
-		private float transitionTime = 3.0f;
-		[SerializeField]
-		private float timeInTransition = 3.0f;
-		[SerializeField]
-		private float timeGapSafetyCheck = 10.0f;
-
-		[Header("DEBUG (READ ONLY)")]
-		[SerializeField]
-		AudioSource sourceToDecrease = null;
-		[SerializeField]
-		AudioSource sourceToIncrease = null;
-
-		[SerializeField]
-		private BackgroundMusicType currentType = BackgroundMusicType.NORMAL;
-		[SerializeField]
-		private BackgroundMusicType correctType = BackgroundMusicType.NORMAL;
+		[SerializeField] private float transitionTime = 3.0f;
+		[SerializeField] private float timeInTransition = 3.0f;
+		[SerializeField] private float timeGapSafetyCheck = 10.0f;
+		[SerializeField] [ReadOnly] private bool initialised = false;
 
 		public void Initialise()
 		{
+			// Reset sources
+			firstSource.volume = 0f;
+			firstSource.Stop();
+			secondSource.volume = 0f;
+			secondSource.Stop();
+			currentSource = firstSource;
 
-			travelMusic.Stop();
-			battleMusic.Stop();
-			normalMusic.Play();
-			normalMusic.volume = 1.0f;
-			currentType = BackgroundMusicType.NORMAL;
-			correctType = BackgroundMusicType.NORMAL;
+			// Sort music types by priority and assing current and correct types to the highest priority one
+			musicTypes.Sort((musicType1, musicType2) => musicType1.priority.CompareTo(musicType2.priority));
+			currentType = musicTypes[0];
+			correctType = musicTypes[0];
+
 			timeInTransition = transitionTime + timeGapSafetyCheck;
-
+			initialised = true;
+			gameObject.SetActive(false);
 		}
 
 		// Update is called once per frame
 		void Update()
 		{
-
-			//if (Input.GetKeyDown(KeyCode.B))
-			//{
-			//	correctType = BackgroundMusicType.BATTLE;
-
-			//}
-
-			//if (Input.GetKeyDown(KeyCode.N))
-			//{
-			//	correctType = BackgroundMusicType.TRAVEL;
-
-			//}
-
-			//if (Input.GetKeyDown(KeyCode.M))
-			//{
-			//	correctType = BackgroundMusicType.NORMAL;
-
-			//}
-
-			//if (Input.GetKeyDown(KeyCode.L))
-			//{
-			//	Initialise();
-			//}
-
 			if (timeInTransition < transitionTime)
 			{
-				//Debug.Log("Should Transition: " + timeInTransition +  " : " + Time.deltaTime);
 				timeInTransition += Time.deltaTime;
 				sourceToIncrease.volume = timeInTransition / transitionTime;
 				sourceToDecrease.volume = 1.0f - timeInTransition / transitionTime;
@@ -88,72 +62,75 @@ namespace ImmunotherapyGame.Audio
 
 			if (currentType != correctType && timeInTransition >= transitionTime + timeGapSafetyCheck)
 			{
+				// Music Blending
 				timeInTransition = 0.0f;
-				StopCurrentType();
-				StartCorrectType();
+
+				// Current source has to start decreasing
+				sourceToDecrease = currentSource;
+
+				// Choose other source to be the new and increasing source
+				currentSource = currentSource == firstSource ? secondSource : firstSource;
+				currentSource.clip = correctType.musicClip;
+
+				sourceToIncrease = currentSource;
+				sourceToIncrease.volume = 0.0f;
+				sourceToIncrease.Play();
+
 				currentType = correctType;
 			}
-
 		}
 
-
-		private void StopCurrentType()
+		internal void Subscribe(MusicType type)
 		{
-			if (currentType == BackgroundMusicType.NORMAL)
-			{
-				sourceToDecrease = normalMusic;
-			}
-			if (currentType == BackgroundMusicType.BATTLE)
-			{
-				sourceToDecrease = battleMusic;
-			}
-			if (currentType == BackgroundMusicType.TRAVEL)
-			{
-				sourceToDecrease = travelMusic;
-			}
-
+			type.subscribers++;
+			CorrectMusic();
 		}
 
-		private void StartCorrectType()
+		internal void Unsubscribe(MusicType type)
 		{
-			if (correctType == BackgroundMusicType.NORMAL)
+			type.subscribers--;
+			CorrectMusic();
+		}
+
+		private void CorrectMusic()
+		{
+			// Go through music types and get the one with highest subscribers
+			// if two have the same one then select one with higher priority
+			int maxSubscribers = -1;
+			for (int i = 0; i < musicTypes.Count; ++i)
 			{
-				sourceToIncrease = normalMusic;
+				if (musicTypes[i].subscribers > maxSubscribers)
+				{
+					maxSubscribers = musicTypes[i].subscribers;
+					correctType = musicTypes[i];
+				}
 			}
-			else if (correctType == BackgroundMusicType.BATTLE)
+		}
+
+		public void StopMusic()
+		{
+			gameObject.SetActive(false);
+		}
+
+		private void OnEnable()
+		{
+			if (initialised)
 			{
-				sourceToIncrease = battleMusic;
+				currentSource.clip = currentType.musicClip;
+				currentSource.volume = 1f;
+				currentSource.Play();
 			}
-			else if (correctType == BackgroundMusicType.TRAVEL)
-			{
-				sourceToIncrease = travelMusic;
-			}
-
-			sourceToIncrease.volume = 0.0f;
-			sourceToIncrease.Play();
 		}
 
-
-		public void PlayBattleMusic()
+		private void OnDisable()
 		{
-			correctType = BackgroundMusicType.BATTLE;
+			currentSource.Stop();
 		}
 
-		public void PlayNormalMusic()
+		public void PlayMusic()
 		{
-			correctType = BackgroundMusicType.NORMAL;
+			gameObject.SetActive(true);
 		}
 
-		public void PlayTravelMusic()
-		{
-			correctType = BackgroundMusicType.TRAVEL;
-		}
-
-		public void PlayMusic(BackgroundMusicType type)
-		{
-			correctType = type;
-		}
-
-		public enum BackgroundMusicType { NORMAL, TRAVEL, BATTLE }
 	}
 }
