@@ -21,7 +21,7 @@ namespace ImmunotherapyGame.Abilities
 				return false;
 			}
 
-			MatrixCell matrixCell = Instantiate(spawnObjectPrefab, target.transform.position, Quaternion.identity).GetComponent<MatrixCell>();
+			MatrixCell matrixCell = Instantiate(spawnObjectPrefab, target.transform).GetComponent<MatrixCell>();
 			
 			if (matrixCell == null)
 			{

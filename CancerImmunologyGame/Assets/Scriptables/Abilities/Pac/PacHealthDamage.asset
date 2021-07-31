@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PacHealthDamage
   m_EditorClassIdentifier: 
   attributeName: Pac Particle Damage
-  initialValue: 20
-  currentValue: 20
+  initialValue: 34
+  currentValue: 34
