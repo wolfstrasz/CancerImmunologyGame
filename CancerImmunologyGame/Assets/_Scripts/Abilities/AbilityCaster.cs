@@ -15,31 +15,38 @@ namespace ImmunotherapyGame.Abilities
         [SerializeField] [ReadOnly] protected float currentCooldown;
 
         // Cooldown
-        public delegate void OnCooldownEnded();
-        public OnCooldownEnded onCooldownEnded;
         public bool IsOnCooldown => currentCooldown > 0f;
-        public float CooldownTimePassed => (ability == null ? 0f : ability.CooldownTime - currentCooldown);
 
         // Casting
-        public delegate void OnAbilityCasted();
-        public OnAbilityCasted onAbilityCasted;
-
         public virtual bool CanCastAbility(float resourceValue)
-            => !IsOnCooldown && resourceValue > ability.EnergyCost;
+        { 
+            return !IsOnCooldown && resourceValue >= ability.EnergyCost;
+        }
 
         protected virtual void OnEnable()
 		{
             if (audioSource && ability != null)
             {
                 audioSource.clip = ability.audioClip;
-            }
-            GlobalLevelData.AbilityCasters.Add(this);
-        }
 
+                if (ability.CooldownTime > 0f)
+				{
+                    GlobalLevelData.AbilityCasters.Add(this);
+
+                }
+            }
+
+        }
 
         protected virtual void OnDisable()
         {
-            GlobalLevelData.AbilityCasters.Remove(this);
+            if (ability != null)
+			{
+                if (ability.CooldownTime > 0f)
+                {
+                    GlobalLevelData.AbilityCasters.Remove(this);
+                }
+            }
         }
 
         public virtual void OnUpdate()
@@ -51,11 +58,6 @@ namespace ImmunotherapyGame.Abilities
                 if (currentCooldown <= 0f)
                 {
                     currentCooldown = 0f;
-
-                    if (onCooldownEnded != null)
-                    {
-                        onCooldownEnded();
-                    }
                 }
             }
         }

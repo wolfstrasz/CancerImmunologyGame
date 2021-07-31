@@ -12,29 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14bed69b3e3b8748a8032ac6a1588ed, type: 3}
   m_Name: PacAbility
   m_EditorClassIdentifier: 
-  isUnlocked: 0
-  name: Pac Ability
-  thumbnail: {fileID: 0}
+  name: Pac Particle Ability
   audioClip: {fileID: 0}
-  description: 
   range: {fileID: 11400000, guid: 644cbe6c300139d46b5f0b176e1cde47, type: 2}
   energyCost: {fileID: 11400000, guid: 402731e2819c47f449241ee70dd382ce, type: 2}
   cooldownTime: {fileID: 11400000, guid: 6c76c9cba150e7a4294d56172f6643a3, type: 2}
-  lifetime: {fileID: 0}
   typesToBeInRange:
   - {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
   effectOnTargetCell:
-    healthEffect: {fileID: 0}
+    applicableCellTypes:
+    - {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
+    isDamaging: 1
+    damagingMultiplier: -1
+    healthEffect: {fileID: 11400000, guid: 05ec8b4d10b73c0499ab1410a19ddae8, type: 2}
     energyEffect: {fileID: 0}
     speedEffect: {fileID: 0}
-  applicableCellTypes:
-  - {fileID: 11400000, guid: e741311734047de4c8763b4849d60575, type: 2}
-  projectileRange: {fileID: 11400000, guid: 644cbe6c300139d46b5f0b176e1cde47, type: 2}
   projectileCount: {fileID: 11400000, guid: 524fa21593cc57342ba499a19623ddaa, type: 2}
   projectileSpread: {fileID: 11400000, guid: 5c2ad4576e4fa9142b7aa188ce10e895, type: 2}
   projectileLifetime: {fileID: 0}
   projectilePrefab: {fileID: 5293642523950685746, guid: 3f83288741d54c44fade1f6953906016,
     type: 3}
   useRandomSpreadOffset: 1
-  spreadPerParticle: 45
-  baseStartRotation: -45
+  spreadPerParticle: 22.5
+  baseStartRotation: -22.5

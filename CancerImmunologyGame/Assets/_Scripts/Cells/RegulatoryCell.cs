@@ -15,7 +15,7 @@ namespace ImmunotherapyGame
 		[SerializeField] private RangedAbilityCaster primaryCaster = null;
 		[SerializeField] private RangedAbilityCaster chargeCaster = null;
 		[SerializeField] private GameObject chargePathPivot = null;
-        [SerializeField] [ReadOnly] private Vector3 chargeAtTargetPosition;
+        [SerializeField] [ReadOnly] private Vector3 chargeAtTargetDirection;
         [SerializeField] [ReadOnly] private GameObject chargeAtTarget;
 
         [Header ("Patrol movement")]
@@ -30,26 +30,23 @@ namespace ImmunotherapyGame
         [SerializeField] [ReadOnly] private bool isPreparingForCharge = false;
         [SerializeField] [ReadOnly] private bool isCharging = false;
         [SerializeField] [ReadOnly] private bool isReturningFromCharge = false;
+        [SerializeField] [ReadOnly] private float chargeAttackTimeLeft = 0f;
+        [SerializeField] private float chargeAttackTime = 1f;
 
         private bool isBusy => isPreparingForCharge || isCharging || isReturningFromCharge;
+        public override bool isImmune => true;
 
-        void Awake()
+		void Awake()
         {
             if (path != null)
             {
                 pathToFollow = path.path;
                 pathLengthDistance = pathToFollow.length;
             }
-            else
-            {
-                Debug.LogWarning("Unassigned path to follow for regulatory cell!");
-            }
         }
 
-        public void OnUpdate()
+        public override void OnUpdate()
         {
-            Utils.LookAt2D(chargePathPivot.transform, chargeCaster.transform.position);
-
             if (primaryCaster != null && primaryCaster.HasTargetsInRange && !isBusy)
 			{
 				if (primaryCaster.CanCastAbility(CurrentEnergy))
@@ -62,15 +59,16 @@ namespace ImmunotherapyGame
 			if (chargeCaster != null && chargeCaster.HasTargetsInRange && !isBusy)
 			{
 				// Add secondary skill here!
-				if (chargeCaster.CanCastAbility(CurrentEnergy) && !isCharging)
+				if (chargeCaster.CanCastAbility(CurrentEnergy))
 				{
                     chargeAtTarget = Utils.GetRandomGameObject(chargeCaster.TargetsInRange);
 
 					isPreparingForCharge = true;
                     animator.SetTrigger("PrepareForCharge");
 
-                    chargeAtTargetPosition = chargeAtTarget.transform.position;
-                    Utils.LookAt2D(chargePathPivot.transform, chargeAtTargetPosition);
+                    chargeAtTargetDirection = (chargeAtTarget.transform.position - transform.position).normalized;
+                    render.flipX = chargeAtTargetDirection.x < 0.0f;
+                    Utils.LookAt2D(chargePathPivot.transform, chargePathPivot.transform.position + chargeAtTargetDirection);
 				}
 			}
 
@@ -78,14 +76,15 @@ namespace ImmunotherapyGame
 
         public void OnChargeExecution()
 		{
-            if (chargeCaster.CanCastAbility(CurrentEnergy))
-			{
-                chargeCaster.CastAbility(gameObject);
-			}
+   //         if (chargeCaster.CanCastAbility(CurrentEnergy))
+			//{
+            chargeCaster.CastAbility(gameObject);
+			//}
 
             animator.SetTrigger("Charge");
             isPreparingForCharge = false;
             isCharging = true;
+            chargeAttackTimeLeft = chargeAttackTime;
 		}
 
         private void OnChargeFinish()
@@ -95,20 +94,20 @@ namespace ImmunotherapyGame
             isReturningFromCharge = true;
             isCharging = false;
 
-            closestPathPosition = pathToFollow.GetClosestPointOnPath(transform.position);
+            if (pathToFollow != null)
+			{
+                closestPathPosition = pathToFollow.GetClosestPointOnPath(transform.position);
+			} else
+			{
+                closestPathPosition = transform.position;
+			}
 
         }
 
-
         public void OnFixedUpdate()
         {
-            if (path == null)
-            {
-                return;
-            }
 
-
-            if (!isBusy)
+            if (!isBusy && path != null)
 			{
                 MoveByPath();
 			} 
@@ -157,35 +156,32 @@ namespace ImmunotherapyGame
             else
 			{
                 transform.position = closestPathPosition;
-                float newDistanceAlongPath = pathToFollow.GetClosestDistanceAlongPath(closestPathPosition);
-                distanceTravelled = newDistanceAlongPath;
+
+                if (pathToFollow != null)
+				{
+                    float newDistanceAlongPath = pathToFollow.GetClosestDistanceAlongPath(closestPathPosition);
+                    distanceTravelled = newDistanceAlongPath;
+                }
+     
                 isReturningFromCharge = false;
 			}
 		}
 
         private void MoveToChargeTarget()
 		{
-            Vector3 distanceVector = chargeAtTargetPosition - transform.position;
-            Vector3 direction = distanceVector.normalized;
-            Vector3 movement = direction * Time.fixedDeltaTime * CurrentSpeed;
+            chargeAttackTimeLeft -= Time.fixedDeltaTime;
+            Vector3 movement = chargeAtTargetDirection * Time.fixedDeltaTime * CurrentSpeed;
 
             // Check for flipping
-            render.flipX = direction.x < 0.0f;
+            render.flipX = chargeAtTargetDirection.x < 0.0f;
 
-            if (movement.magnitude < distanceVector.magnitude)
+            transform.position += movement;
+            if (chargeAttackTimeLeft < 0f)
 			{
-                transform.position += movement;
-
-			}
-            else
-            {
                 OnChargeFinish();
             }
         }
 
-        protected override void OnCellDeath()
-		{
-		}
 	}
 
 }

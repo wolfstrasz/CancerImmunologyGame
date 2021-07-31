@@ -50,7 +50,7 @@ namespace ImmunotherapyGame
 		}
 
 
-		public void OnUpdate()
+		public override void OnUpdate()
 		{
 			shouldHeal = healCaster.HasTargetsInRange;
 

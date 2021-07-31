@@ -51,15 +51,6 @@ namespace ImmunotherapyGame
 		private bool CanUsePrimaryAttack => primaryAbilityCaster.CanCastAbility(CurrentEnergy);
 		private bool CanUseSecondaryAttack => secondaryAbilityCaster.CanCastAbility(CurrentEnergy);
 
-		public void OnUpdate()
-		{
-			//if (GlobalGameData.isInPowerUpMode)
-			//{
-			//	float value = immunotherapyEnergyRegain * Time.deltaTime;
-			//	ApplyEnergyAmount(value);
-			//}
-		}
-
 		public void OnFixedUpdate()
 		{
 			if (IsMoving)
@@ -86,9 +77,6 @@ namespace ImmunotherapyGame
 			// moved from Add Energy
 			animator.SetFloat("ExhaustionRate", (maxEnergy - CurrentEnergy) / maxEnergy);
 
-			//// before
-			//if (GlobalGameData.isInPowerUpMode)
-			//	return immunotherapySpeedMultiplier;
 			return 1.0f - (maxEnergy - CurrentEnergy) / maxEnergy * exhaustEffectReduction;
 		}
 
@@ -117,8 +105,6 @@ namespace ImmunotherapyGame
 			animator.SetBool("IsAttacking", false);
 		}
 
-
-
 		public void SecondaryAttack(GameObject target)
 		{
 			if (CannotUseSpecialAttack) return;
@@ -126,25 +112,6 @@ namespace ImmunotherapyGame
 
 			float energyCost = secondaryAbilityCaster.CastAbility(target);
 			ApplyEnergyAmount(-energyCost);
-		}
-
-		// POWER UP IMMUNOTHERAPY
-		public void EnterPowerUpMode()
-		{
-			//isInPowerUpAnimation = true;
-			//animator.SetTrigger("PowerUp");
-			//animator.speed = immunotherapySpeedMultiplier;
-		}
-
-		//public void OnFinishPowerUpAnimation()
-		//{
-		//	//isInPowerUpAnimation = false;
-		//}
-
-		public void ExitPowerUpMode()
-		{
-			//animator.SetTrigger("PowerUpFinished");
-			//animator.speed = 1.0f;
 		}
 
 		protected override void OnCellDeath()

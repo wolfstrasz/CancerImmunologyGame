@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: GranzymeAttackHealthDmg
   m_EditorClassIdentifier: 
-  attributeName: 
+  attributeName: Granzyme Damage
   initialValue: -50
   currentValue: -50

@@ -16,7 +16,7 @@ namespace ImmunotherapyGame
         [SerializeField] [ReadOnly] protected bool isEffectOverTime;
         [SerializeField] [ReadOnly] protected Cell ownerCell = null;
 		[SerializeField] [ReadOnly] protected GameObject owner = null;
-		[SerializeField] [ReadOnly] protected StatusEffectAbility statusEffectAbility = null;
+		[SerializeField] [ReadOnly] protected StatusEffectAbility ability = null;
 		[SerializeField] [ReadOnly] protected float lifetime = 0f;
 
 
@@ -30,18 +30,24 @@ namespace ImmunotherapyGame
 
 			if (!isEffectOverTime)
 			{
-				statusEffectAbility.UndoAbilityEffect(ownerCell);
+				ability.UndoAbilityEffect(ownerCell);
 			}
 			Destroy(gameObject);
 		}
 
 		protected virtual void OnFixedUpdate()
 		{
+			if (owner == null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
 			transform.position = owner.transform.position;
 
 			if (isEffectOverTime)
 			{
-				statusEffectAbility.ApplyAbilityEffect(ownerCell, Time.fixedDeltaTime);
+				ability.ApplyAbilityEffect(ownerCell, Time.fixedDeltaTime);
 			}
 
 			if (lifetime > 0)
@@ -56,12 +62,12 @@ namespace ImmunotherapyGame
 
 		protected virtual void ApplyInitialEffect()
 		{
-			
+			ability.ApplyAbilityEffect(ownerCell);
 		}
 
 		protected virtual void UndoInitialEffect()
 		{
-			
+			ability.UndoAbilityEffect(ownerCell);
 		}
 
 
@@ -69,9 +75,9 @@ namespace ImmunotherapyGame
 		{
 			owner = _owner;
 			ownerCell = _owner.GetComponent<Cell>();
-			statusEffectAbility = _statusEffectAbility;
-			lifetime = statusEffectAbility.Lifetime;
-			isEffectOverTime = statusEffectAbility.IsStatusEffectOverTime;
+			ability = _statusEffectAbility;
+			lifetime = ability.Lifetime;
+			isEffectOverTime = ability.IsStatusEffectOverTime;
 
 			if (ownerCell == null)
 			{
@@ -80,7 +86,14 @@ namespace ImmunotherapyGame
 
 			if (!isEffectOverTime)
 			{
-				statusEffectAbility.ApplyAbilityEffect(ownerCell);
+				ability.ApplyAbilityEffect(ownerCell);
+			} 
+			else
+			{
+				if (ability.CanHitCellType(ownerCell.cellType))
+				{
+					ApplyInitialEffect();
+				}
 			}
 		}
 	}

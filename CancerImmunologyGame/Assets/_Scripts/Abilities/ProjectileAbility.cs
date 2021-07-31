@@ -10,7 +10,6 @@ namespace ImmunotherapyGame.Abilities
 	{
 
 		[Header("Projectile Creation")]
-		[Expandable] public StatAttribute projectileRange;
 		[Expandable] public StatAttribute projectileCount;
 		[Expandable] public StatAttribute projectileSpread;
 		[Expandable] public StatAttribute projectileLifetime;
@@ -20,7 +19,6 @@ namespace ImmunotherapyGame.Abilities
 		[SerializeField] [ReadOnly] private float spreadPerParticle;
 		[SerializeField] [ReadOnly] private float baseStartRotation;
 
-		public float ProjectileRange => (projectileRange != null ? projectileRange.CurrentValue : 0f);
 		public float ProjectileCount => (projectileCount != null ? projectileCount.CurrentValue : 0f);
 		public float ProjectileSpread => (projectileSpread != null ? projectileSpread.CurrentValue : 0f);
 		public float ProjectileLifetime => (projectileLifetime != null ? projectileLifetime.CurrentValue : 0f);
@@ -80,7 +78,7 @@ namespace ImmunotherapyGame.Abilities
 
 			for (int i = 0; i < projectileCount.CurrentValue; ++i)
 			{
-				Debug.Log("Projective ability ( " + name + ") particle: " + (i + 1));
+				Debug.Log("Projectile ability ( " + name + ") particle: " + (i + 1));
 				// Find angle offset
 				float angleOffset = 0f;
 				if (useRandomSpreadOffset)

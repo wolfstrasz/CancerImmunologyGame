@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PacSpreadAngle
   m_EditorClassIdentifier: 
   attributeName: Release angle
-  initialValue: 90
-  currentValue: 90
+  initialValue: 45
+  currentValue: 45

@@ -12,23 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15a5ff5eb30a61741848545720e3fd45, type: 3}
   m_Name: HypoxicAreaAbility
   m_EditorClassIdentifier: 
-  isUnlocked: 0
-  name: 
-  thumbnail: {fileID: 0}
+  name: Hypoxic Area
   audioClip: {fileID: 0}
-  description: 
-  range: {fileID: 11400000, guid: a35e6fed4b49cbb439b938e40059cba2, type: 2}
-  energyCost: {fileID: 11400000, guid: 39d747ea663d8ec41b6cddbcc3c48dcf, type: 2}
-  cooldownTime: {fileID: 11400000, guid: ad26015ccd6934d42aaf1f94d7731970, type: 2}
-  lifetime: {fileID: 0}
-  typesToBeInRange:
-  - {fileID: 0}
+  range: {fileID: 0}
+  energyCost: {fileID: 0}
+  cooldownTime: {fileID: 0}
+  typesToBeInRange: []
   effectOnTargetCell:
-    healthEffect: {fileID: 0}
+    applicableCellTypes:
+    - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+    isDamaging: 1
+    damagingMultiplier: -1
+    healthEffect: {fileID: 11400000, guid: fd1f17edc6e70864f99a8991e1da4147, type: 2}
     energyEffect: {fileID: 0}
     speedEffect: {fileID: 0}
-  applicableCellTypes: []
+  lifetime: {fileID: 0}
   auraRange: {fileID: 11400000, guid: a35e6fed4b49cbb439b938e40059cba2, type: 2}
+  isAuraEffectOverTime: 1
   auraEffectPrefab: {fileID: 5717997335944468769, guid: 9dde72372df1edf418cdf6fe2cc83e15,
     type: 3}
-  isAuraEffectOverTime: 1

@@ -48,28 +48,84 @@ namespace ImmunotherapyGame
 
 		protected virtual void Start()
 		{
+			Debug.Log("S1 HEALTH = " + health);
+
 			health = cellType.MaxHealth;
 			energy = cellType.MaxEnergy;
 			speed = cellType.InitialSpeed;
+			Debug.Log("s2 HEALTH = " + health);
 
 			updateHealthValue = cellType.MaxHealth;
 			updateEnergyValue = cellType.MaxEnergy;
 			updateSpeedValue = 0;
+			Debug.Log("s3 HEALTH = " + health);
+
 		}
 
+		public virtual void OnUpdate()
+		{
+			updateEnergyValue += cellType.EnergyRegenPerSecond * Time.deltaTime;
+			updateHealthValue += cellType.HealthRegenPerSecond * Time.deltaTime;
+		}
+
+		protected virtual void LateUpdate()
+		{
+
+
+			if (updateSpeedValue != 0)
+			{
+				speed += updateSpeedValue;
+				if (onUpdateSpeed != null)
+					onUpdateSpeed();
+			}
+
+			if (!isImmune)
+			{
+				if (updateHealthValue != 0)
+				{
+					health += updateHealthValue;
+					health = Mathf.Clamp(health, 0f, cellType.MaxHealth);
+					if (onUpdateHealth != null)
+						onUpdateHealth();
+				}
+
+				if (updateEnergyValue != 0)
+				{
+					energy += updateEnergyValue;
+					energy = Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
+					if (onUpdateEnergy != null)
+						onUpdateEnergy();
+				}
+
+				if (health <= 0 || energy <= 0)
+				{
+					if (onDeathEvent != null)
+						onDeathEvent(this);
+
+					OnCellDeath();
+				}
+			}
+
+
+			updateHealthValue = 0f;
+			updateEnergyValue = 0f;
+			updateSpeedValue = 0f;
+		}
+
+		// Attribute changes
 		public virtual void ApplyHealthAmount(float amount)
 		{
-			Debug.Log(this.gameObject.name + " got hit for: " + amount);
+			Debug.Log(this.gameObject.name + " got health applied: " + amount);
 			updateHealthValue += amount;
 		}
 
-		public virtual void ApplyEnergyAmount(float amount) 
+		public virtual void ApplyEnergyAmount(float amount)
 		{
-			Debug.Log(this.gameObject.name + " got exhausted for: " + amount);
+			Debug.Log(this.gameObject.name + " got energy applied: " + amount);
 			updateEnergyValue += amount;
 		}
 
-		public virtual void ApplySpeedAmount (float amount)
+		public virtual void ApplySpeedAmount(float amount)
 		{
 			Debug.Log(this.gameObject.name + " got speed for: " + amount);
 			updateSpeedValue += amount;
@@ -80,55 +136,8 @@ namespace ImmunotherapyGame
 			isDying = true;
 		}
 
-		protected virtual void LateUpdate()
-		{
-			//Debug.Log("HEALTH : ENERGY = " + health + " : " + energy);
-			updateEnergyValue += cellType.EnergyRegenPerSecond * Time.deltaTime;
-			updateHealthValue += cellType.HealthRegenPerSecond * Time.deltaTime;
-
-			if (!isImmune)
-			{
-				if (updateHealthValue != 0)
-				{
-					health += updateHealthValue;
-					Mathf.Clamp(health, 0f, cellType.MaxHealth);
-
-					if (onUpdateHealth != null)
-						onUpdateHealth();
-				}
-
-				if (updateEnergyValue != 0)
-				{
-					energy += updateEnergyValue;
-					Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
-					if (onUpdateEnergy != null)
-						onUpdateEnergy();
-				}
-
-				if (updateSpeedValue != 0)
-				{
-					speed += updateSpeedValue;
-					if (onUpdateSpeed != null)
-						onUpdateSpeed();
-				}
-			}
-
-			updateHealthValue = 0f;
-			updateEnergyValue = 0f;
-			updateSpeedValue = 0f;
-
-			if (health <= 0 || energy <= 0)
-			{
-				if (onDeathEvent != null)
-					onDeathEvent(this);
-
-				OnCellDeath();
-			}
-		}
-
-
 	}
 
-	
+
 
 }

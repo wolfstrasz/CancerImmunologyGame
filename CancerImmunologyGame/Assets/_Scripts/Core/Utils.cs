@@ -99,8 +99,9 @@ namespace ImmunotherapyGame.Core
 
 		public static void LookAt2D (this Transform transformToRotate, Vector3 pointToLookAt)
 		{
-			Quaternion rotation = Quaternion.LookRotation (pointToLookAt, transformToRotate.TransformDirection(Vector3.up));
-			transformToRotate.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+			transformToRotate.right = pointToLookAt - transformToRotate.position;
+			//Quaternion rotation = Quaternion.LookRotation (pointToLookAt, transformToRotate.TransformDirection(Vector3.up));
+			//transformToRotate.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
 		}
 
 

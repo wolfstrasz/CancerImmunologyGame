@@ -22,6 +22,7 @@ namespace ImmunotherapyGame.Abilities
 
 			for (int i = 0; i < abilities.Count; ++i)
 			{
+				Debug.Log("Casting Composite part: " + abilities[i].name);
 				if (!abilities[i].CastAbility(abilityCaster, target))
 				{
 					Debug.LogError("Backtrack Log : " + this.GetType());

@@ -15,7 +15,7 @@ MonoBehaviour:
   cellName: Cancer-Assosiated Fibroblast (CAF)
   maxHealth: {fileID: 11400000, guid: 760745c16e5fb9c40b32a25c780ac201, type: 2}
   maxEnergy: {fileID: 11400000, guid: 9777ba592fa9c5e469402455a3a704cd, type: 2}
-  initialSpeed: {fileID: 11400000, guid: 74c75fb2f41e23749957ac3d7d644fac, type: 2}
+  initialSpeed: {fileID: 11400000, guid: c451950ebaaa2db488beb905820696de, type: 2}
   healthRegenPerSecond: {fileID: 11400000, guid: 91d4f73a117c0e1459b3c6a3597f040b,
     type: 2}
   energyRegenPerSecond: {fileID: 11400000, guid: 91d4f73a117c0e1459b3c6a3597f040b,

@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Bloodflow
 			IControllerMovementOverridable overridable = collider.gameObject.GetComponent<IControllerMovementOverridable>();
 			if (overridable != null)
 			{
-				overridable.UnsubscribMovementOverride(environment);
+				overridable.UnsubscribeMovementOverride(environment);
 			}
 		}
 	}

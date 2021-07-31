@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: GranzymeEnergyCost
   m_EditorClassIdentifier: 
-  attributeName: 
-  initialValue: 0
-  modifiers: []
+  attributeName: Granzyme Ability Energy Cost
+  initialValue: 1
+  currentValue: 1

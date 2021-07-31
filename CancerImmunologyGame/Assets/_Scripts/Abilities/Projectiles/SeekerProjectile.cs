@@ -8,20 +8,14 @@ namespace ImmunotherapyGame
 {
 	public class SeekerProjectile : Projectile
 	{
-		[Header("Regulatory Cell Particle Attributes")]
-		[SerializeField]
-		private float chargeSpeed = 4f;
+		[Header("Seeker Attributes")]
+		[SerializeField] private GameObject seekingVisual = null;
+		[SerializeField] private float chargeSpeed = 4f;
 
 		[Header ("Debug")]
-		[SerializeField]
-		[ReadOnly]
-		private float lifeSpan = 0.0f;
-		[SerializeField]
-		[ReadOnly]
-		private float initialSpeed;
-		[SerializeField]
-		[ReadOnly]
-		private float initialColliderRadius = 0f;
+		[SerializeField] [ReadOnly] private float lifeSpan = 0.0f;
+		[SerializeField] [ReadOnly] private float initialSpeed;
+		[SerializeField] [ReadOnly] private float initialColliderRadius = 0f;
 
 		public override void OnFixedUpdate()
 		{
@@ -48,7 +42,7 @@ namespace ImmunotherapyGame
 				spawnPosition = transform.position;
 
 				// Apply stationary behaviour data that is active until it detects a targetable cell
-				maxRangeToMove = projectileAbility.ProjectileRange;
+				maxRangeToMove = projectileAbility.Range;
 				lifeSpan = projectileAbility.ProjectileLifetime;
 				coll.radius = maxRangeToMove;
 				coll.enabled = true;
@@ -70,7 +64,7 @@ namespace ImmunotherapyGame
 				speed = chargeSpeed;
 				coll.radius = initialColliderRadius;
 				coll.enabled = true;
-
+				seekingVisual.SetActive(true);
 				// TODO: if second stage animation is added switch to it.
 			}
 			else if (coll.radius == initialColliderRadius)
@@ -96,7 +90,7 @@ namespace ImmunotherapyGame
 		public override void Shoot(Vector3 _direction, ProjectileAbility _projectileAbility)
 		{
 			base.Shoot(_direction, _projectileAbility);
-
+			seekingVisual.SetActive(false);
 			initialColliderRadius = coll.radius;
 			coll.enabled = false;
 

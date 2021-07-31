@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KillerEnergyRegen
   m_EditorClassIdentifier: 
   attributeName: Energy Regeneration per second
-  initialValue: 0
-  currentValue: 0
+  initialValue: 1
+  currentValue: 1

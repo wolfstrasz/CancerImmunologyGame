@@ -27,9 +27,10 @@ namespace ImmunotherapyGame
 				isBumpedUp = false;
 			}
 		}
-		protected override void ApplyAuraEffect(Cell cell)
+
+		protected override void ApplyAuraEffectOnCollision(Cell cell)
 		{
-			base.ApplyAuraEffect(cell);
+			base.ApplyAuraEffectOnCollision(cell);
 
 			owner.transform.localScale = ownerOriginalScale + onBumpScaleIncrease;
 			transform.localScale = auraOriginalScale + onBumpScaleIncrease;

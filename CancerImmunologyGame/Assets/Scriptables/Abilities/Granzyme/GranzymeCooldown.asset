@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: GranzymeCooldown
   m_EditorClassIdentifier: 
-  attributeName: 
+  attributeName: Granzyme Ability Cooldown
   initialValue: 0.2
   currentValue: 0.2
-  modifiers: []

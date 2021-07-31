@@ -10,16 +10,14 @@ namespace ImmunotherapyGame.Cancers
 		[Header("CAF Cell")]
 		[SerializeField] RangedAbilityCaster matrixSpawnCaster = null;
 		[SerializeField] [ReadOnly] internal Cancer cancerOwner = null;
-		[SerializeField] [ReadOnly] List<CancerCell> cancerCellNearby = new List<CancerCell>();
 
-		public void OnUpdate()
+		public override void OnUpdate()
 		{
-			if (matrixSpawnCaster.CanCastAbility(CurrentEnergy))
+			if (!matrixSpawnCaster.IsOnCooldown)
 			{
 				for (int i = 0; i < matrixSpawnCaster.TargetsInRange.Count; ++i)
 				{
 					CancerCell cell = matrixSpawnCaster.TargetsInRange[i].GetComponent<CancerCell>();
-					Debug.Log(cell);
 					if ( cell != null && cell.matrixCell == null)
 					{
 						matrixSpawnCaster.CastAbility(cell.gameObject);

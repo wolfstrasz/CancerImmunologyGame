@@ -12,7 +12,7 @@ namespace ImmunotherapyGame
 	public interface IControllerMovementOverridable
 	{
 		void SubscribeMovementOverride(IControllerMovementOverride controllerOverride);
-		void UnsubscribMovementOverride(IControllerMovementOverride controllerOverride);
+		void UnsubscribeMovementOverride(IControllerMovementOverride controllerOverride);
 	}
 
 }

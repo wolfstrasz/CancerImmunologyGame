@@ -33,6 +33,7 @@ namespace ImmunotherapyGame
 
 			// Update animation
 			render.flipY = direction.x <= 0;
+			transform.right = direction;
 			animator.SetTrigger("Eat");
 		}
 

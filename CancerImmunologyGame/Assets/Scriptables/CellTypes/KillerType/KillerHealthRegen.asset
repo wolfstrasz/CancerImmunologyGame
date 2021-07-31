@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KillerHealthRegen
   m_EditorClassIdentifier: 
   attributeName: Health Regen per second
-  initialValue: 0
-  currentValue: 0
+  initialValue: 1
+  currentValue: 1

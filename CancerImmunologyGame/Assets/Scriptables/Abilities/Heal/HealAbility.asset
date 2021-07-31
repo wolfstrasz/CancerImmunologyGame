@@ -12,22 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14bed69b3e3b8748a8032ac6a1588ed, type: 3}
   m_Name: HealAbility
   m_EditorClassIdentifier: 
-  name: 
-  thumbnail: {fileID: 0}
+  name: Helper T Cell Heal
   audioClip: {fileID: 8300000, guid: 0a4332531e50dda4ab9eab56fe56ba35, type: 3}
-  description: 
   range: {fileID: 11400000, guid: 1f77bfc05ee95fc4d9e7cf25b91976f5, type: 2}
-  energyCost: {fileID: 11400000, guid: b1d59b59207f5494fa2a199efaad5b73, type: 2}
+  energyCost: {fileID: 0}
   cooldownTime: {fileID: 11400000, guid: 30454dc3143518c4098ba95e27de526c, type: 2}
   typesToBeInRange:
   - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
   effectOnTargetCell:
-    healthEffect: {fileID: 0}
-    energyEffect: {fileID: 0}
+    applicableCellTypes:
+    - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+    isDamaging: 0
+    damagingMultiplier: 1
+    healthEffect: {fileID: 11400000, guid: 7eb7f29cda896594880d79ec2c8bf123, type: 2}
+    energyEffect: {fileID: 11400000, guid: 68e013fa857e68e4f93ecf70cd331b5f, type: 2}
     speedEffect: {fileID: 0}
-  applicableCellTypes:
-  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
-  projectileRange: {fileID: 11400000, guid: 1f77bfc05ee95fc4d9e7cf25b91976f5, type: 2}
   projectileCount: {fileID: 11400000, guid: 09fd05a2b2eb6a744a244f45a8531694, type: 2}
   projectileSpread: {fileID: 11400000, guid: 2541049a39a16b04bb662d98b13a83eb, type: 2}
   projectileLifetime: {fileID: 0}

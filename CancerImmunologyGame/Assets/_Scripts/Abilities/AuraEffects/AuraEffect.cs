@@ -52,14 +52,10 @@ namespace ImmunotherapyGame
 			}
 
 			transform.position = owner.transform.position;
+
 			if (isEffectOverTime)
 			{
-
-				for (int i = 0; i < affectedCells.Count; ++i)
-				{ 
-					if (affectedCells[i] != null)
-						auraEffectAbility.ApplyAbilityEffect(ownerCell, Time.fixedDeltaTime);
-				}
+				ApplyAuraEffectOvertime();
 			}
 
 			if (lifetime > 0)
@@ -73,9 +69,18 @@ namespace ImmunotherapyGame
 		}
 
 
-		protected virtual void ApplyAuraEffect(Cell cell)
+		protected virtual void ApplyAuraEffectOnCollision(Cell cell)
 		{
 			auraEffectAbility.ApplyAbilityEffect(cell);
+		}
+
+		protected virtual void ApplyAuraEffectOvertime()
+		{
+			for (int i = 0; i < affectedCells.Count; ++i)
+			{
+				if (affectedCells[i] != null)
+					auraEffectAbility.ApplyAbilityEffect(affectedCells[i], Time.fixedDeltaTime);
+			}
 		}
 
 		protected virtual void OnTriggerEnter2D(Collider2D coll)
@@ -90,7 +95,7 @@ namespace ImmunotherapyGame
 
 				if (!isEffectOverTime) // Apply single time on first collision
 				{
-					ApplyAuraEffect(cell);
+					ApplyAuraEffectOnCollision(cell);
 				}
 			}
 		}

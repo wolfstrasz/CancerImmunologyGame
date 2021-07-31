@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14bed69b3e3b8748a8032ac6a1588ed, type: 3}
+  m_Name: RegulatoryParticleAbility
+  m_EditorClassIdentifier: 
+  name: Regulatory Particles
+  audioClip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+  range: {fileID: 11400000, guid: f1e988c637b69964fb50cf60773e09d5, type: 2}
+  energyCost: {fileID: 0}
+  cooldownTime: {fileID: 11400000, guid: 2c4cae77223d424449fd00153f66c8fc, type: 2}
+  typesToBeInRange:
+  - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+  effectOnTargetCell:
+    applicableCellTypes:
+    - {fileID: 11400000, guid: ec8d0f8bd522bf046847e1e8b6047aa9, type: 2}
+    isDamaging: 1
+    damagingMultiplier: -1
+    healthEffect: {fileID: 0}
+    energyEffect: {fileID: 11400000, guid: b363781b0dbed8744a12240cfd0ece3b, type: 2}
+    speedEffect: {fileID: 0}
+  projectileCount: {fileID: 11400000, guid: 288fac322818dd1459371780890ebf23, type: 2}
+  projectileSpread: {fileID: 11400000, guid: abc51911936b0724987aa4ca528df9ac, type: 2}
+  projectileLifetime: {fileID: 11400000, guid: 7362a9ab94f54744c8688c674eeab41a, type: 2}
+  projectilePrefab: {fileID: 7457939708117967971, guid: 4825efb6d8d62ca4d8768ca64ec40332,
+    type: 3}
+  useRandomSpreadOffset: 1
+  spreadPerParticle: 90
+  baseStartRotation: -45

@@ -7,8 +7,9 @@ namespace ImmunotherapyGame.Abilities
 {
 	[CreateAssetMenu(menuName = "MyAssets/Abilities/Matrix Spawn Ability")]
 
-	public class MatrixSpawnAbility : Ability
+	public class MatrixSpawnAbility : Ability, ISerializationCallbackReceiver
 	{
+		[Header ("Effect On Target Cell is always null.")]
 		[SerializeField] private GameObject spawnObjectPrefab;
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
@@ -31,6 +32,16 @@ namespace ImmunotherapyGame.Abilities
 			matrixCell.AttachCancerCell(cancerCell);
 			cancerCell.AttachMatrixCell(matrixCell);
 			return true;
+		}
+
+		public void OnAfterDeserialize()
+		{
+			
+		}
+
+		public void OnBeforeSerialize()
+		{
+			effectOnTargetCell = null;
 		}
 	}
 }

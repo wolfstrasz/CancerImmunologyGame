@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HelperCellType
   m_EditorClassIdentifier: 
   cellName: Helper T Cell
-  maxHealth: {fileID: 11400000, guid: 5dad25c847168c44bba078cfea54617f, type: 2}
-  maxEnergy: {fileID: 11400000, guid: b28b9243f5f12104f81700ea9a8e4a93, type: 2}
+  maxHealth: {fileID: 11400000, guid: 42ea18f25d897404f9e027cafdae6f7c, type: 2}
+  maxEnergy: {fileID: 11400000, guid: 0546402520e119942821e4249ac1c92b, type: 2}
   initialSpeed: {fileID: 11400000, guid: cd931a4f2cc8dde4196381bfe77a6d20, type: 2}
   healthRegenPerSecond: {fileID: 11400000, guid: 91d4f73a117c0e1459b3c6a3597f040b,
     type: 2}
