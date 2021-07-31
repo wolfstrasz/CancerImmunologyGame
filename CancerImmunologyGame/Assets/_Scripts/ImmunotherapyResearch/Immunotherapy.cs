@@ -24,6 +24,8 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 		[SerializeField] [ReadOnly] float cooldownLeft = 0f;
 		[SerializeField] [ReadOnly] PlayerControls controls = null;
 
+		[SerializeField] [ReadOnly] private bool isImmunotherapyApplied = false;
+
 		public void Activate()
 		{
 			gameObject.SetActive(true);
@@ -62,10 +64,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				cooldownBar.SetInverseValue(cooldownLeft);
 
 			}
-			//if (abilityCaster != null)
-			//{
-			//	abilityCooldownBar.SetValue(abilityCaster.CooldownTimePassed);
-			//}
 		}
 
 		private void Update()
@@ -119,12 +117,15 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				data.statUpgrades[i].ApplyEffect();
 			}
 
+			isImmunotherapyApplied = true;
 			SwitchToLifetimeBar();
 			Debug.Log("IMMUNOTHERAPY: ACTIVATED");
 		}
 
 		public void RemoveImmunotherapyEffects()
-		{ 
+		{
+			if (!isImmunotherapyApplied) return;
+
 			// Do deactivations
 			for (int i = 0; i < data.statUpgrades.Count; ++i)
 			{

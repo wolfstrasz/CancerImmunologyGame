@@ -20,7 +20,7 @@ MonoBehaviour:
   generalThumbnailSprite: {fileID: 0}
   initialUnlockValue: 0
   unlocked: 0
-  statAttribute: {fileID: 0}
+  statAttribute: {fileID: 11400000, guid: 40f60f1bbb1fd1142ba58a633648462f, type: 2}
   upgrades: []
   nextUpgradeIndex: 0
   currentValue: 0

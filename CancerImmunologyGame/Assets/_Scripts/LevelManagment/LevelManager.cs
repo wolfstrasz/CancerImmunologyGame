@@ -8,6 +8,7 @@ using ImmunotherapyGame.Core.SystemInterfaces;
 using ImmunotherapyGame.SaveSystem;
 using ImmunotherapyGame.ImmunotherapyResearchSystem;
 using ImmunotherapyGame.LevelTasks;
+using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame.LevelManagement
 {
@@ -44,12 +45,7 @@ namespace ImmunotherapyGame.LevelManagement
 			Debug.Log("Points earned: " + pointsEarned);
 
 			ImmunotherapyResearch.Instance.AddPoints(pointsEarned);
-			// Save all data from level
-			for (int i = 0; i < GlobalGameData.dataManagers.Count; ++i)
-			{
-				GlobalGameData.dataManagers[i].SaveData();
-			}
-
+			GameManager.Instance.SaveData();
 			// Clear tasks
 			LevelTaskSystem.Instance.Clear();
 

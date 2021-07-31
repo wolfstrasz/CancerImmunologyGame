@@ -1,6 +1,7 @@
 using UnityEngine;
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
+using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame.UI
 {
@@ -38,17 +39,7 @@ namespace ImmunotherapyGame.UI
 
 		public void StartNewGame()
 		{
-			// Reset data
-			foreach (IDataManager manager in GlobalGameData.dataManagers)
-			{
-				manager.ResetData();
-			}
-
-			foreach (IDataManager manager in GlobalGameData.dataManagers)
-			{
-				manager.SaveData();
-			}
-
+			GameManager.Instance.OnStartNewGame();
 			PlayerPrefs.SetInt("GameInProgress", 1);
 			newGamePromptPanel.Close();
 			LevelSelectScreen.Instance.Open();
@@ -72,12 +63,6 @@ namespace ImmunotherapyGame.UI
 
 		public void Quit()
 		{
-			// Save data
-			foreach(IDataManager manager in GlobalGameData.dataManagers)
-			{
-				manager.SaveData();
-			}
-
 			// Quit
 			Application.Quit();
 		}

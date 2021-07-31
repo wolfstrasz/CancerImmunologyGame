@@ -35,7 +35,7 @@ namespace ImmunotherapyGame.Loader
 			InterfaceManager.Instance.Initialise();
 			BackgroundMusic.Instance.Initialise();
 
-			GlobalGameData.dataManagers = new List<IDataManager>(3);
+			List<IDataManager> allDataManagers = new List<IDataManager>(3);
 
 			// Load Settings
 			Debug.Log("Loader: Settings Manager");
@@ -48,24 +48,27 @@ namespace ImmunotherapyGame.Loader
 			// Load Level Data
 			Debug.Log("Loader: Level Manager");
 			LevelManager.Instance.LoadData();
-			GlobalGameData.dataManagers.Add(LevelManager.Instance);
+			allDataManagers.Add(LevelManager.Instance);
 
 			// Load Cellpedia Data
 			Debug.Log("Loader: Cellpedia");
 			Cellpedia.Instance.LoadData();
 			Cellpedia.Instance.Initialise();
-			GlobalGameData.dataManagers.Add(Cellpedia.Instance);
+			allDataManagers.Add(Cellpedia.Instance);
 
 			// Load Research Advancement
 			Debug.Log("Loader: Research Advancement");
 			ImmunotherapyResearch.Instance.LoadData();
 			ImmunotherapyResearch.Instance.Initialise();
-			GlobalGameData.dataManagers.Add(ImmunotherapyResearch.Instance);
+			allDataManagers.Add(ImmunotherapyResearch.Instance);
 
 			// Load UIs
 			LevelTaskSystem.Instance.Initialise();
 			TopOverlayUI.Instance.Initialise();
 			PauseMenu.Instance.Initialise();
+
+			// Assign managers to Game manager
+			GameManager.DataManagers = allDataManagers;
 
 			// Update
 			InitialisationHasFinished = true;

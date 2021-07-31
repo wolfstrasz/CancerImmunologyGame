@@ -1,5 +1,7 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Collections.Generic;
+
 using ImmunotherapyGame.Core;
 using ImmunotherapyGame.Core.SystemInterfaces;
 
@@ -9,12 +11,10 @@ namespace ImmunotherapyGame
 	{
 		public class GameManager : Singleton<GameManager>
 		{
-			[SerializeField]
-			internal bool sceneLoaded = false;
-			[SerializeField]
-			internal GameStateController stateController = new GameStateController();
-			[SerializeField]
-			private bool isTestScene = false;
+			[SerializeField] internal bool sceneLoaded = false;
+			[SerializeField] internal GameStateController stateController = new GameStateController();
+			[SerializeField] private bool isTestScene = false;
+			public static List<IDataManager> DataManagers;
 
 			void Start() { Initialise(isTestScene); }
 
@@ -26,8 +26,6 @@ namespace ImmunotherapyGame
 			{
 				Debug.Log("Game Manager: Initialise");
 
-				GlobalGameData.gameplaySpeed = 1.0f;
-				GlobalGameData.gameSpeed = 1.0f;
 				SceneManager.activeSceneChanged += OnActiveSceneChanged;
 				SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -85,6 +83,29 @@ namespace ImmunotherapyGame
 				return stateController.RemovePauseState(callerObject);
 			}
 			
+
+			public void OnStartNewGame()
+			{
+				// Reset data
+				foreach (IDataManager manager in DataManagers)
+				{
+					manager.ResetData();
+				}
+
+				foreach (IDataManager manager in DataManagers)
+				{
+					manager.SaveData();
+				}
+			}
+
+			public void SaveData()
+			{
+				// Save all data from level
+				for (int i = 0; i < DataManagers.Count; ++i)
+				{
+					DataManagers[i].SaveData();
+				}
+			}
 		}
 
 		public enum GameStatePauseRequestType { NONE, GAMEPLAY, FULL}

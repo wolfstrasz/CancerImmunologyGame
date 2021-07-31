@@ -21,8 +21,6 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override bool OnUpdateEvent()
 		{
-			if (GlobalGameData.isGameplayPaused) return false;
-
 			foreach (RegulatoryCell cell in regCells)
 			{
 				if (GameCamera2D.Instance.IsInCameraViewBounds(cell.gameObject.transform.position, true))

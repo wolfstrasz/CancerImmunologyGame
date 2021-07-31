@@ -48,7 +48,6 @@ namespace ImmunotherapyGame.Player
 				if (InitiatePrimaryAttack)
 				{
 					controlledCell.UsePrimaryAttack(crosshair.gameObject);
-					InitiatePrimaryAttack = false;
 				} else
 				{
 					controlledCell.StopPrimaryAttack();

@@ -29,7 +29,7 @@ namespace ImmunotherapyGame.Player
 		{
 			if (playerData != null)
 			{
-				playerData.onCurrentCellChanged += OnCurrentObservedCellChanged;
+				playerData.onCurrentCellChanged += OnPlayerCellChanged;
 				observedCell = playerData.CurrentCell;
 			}
 			else
@@ -42,7 +42,7 @@ namespace ImmunotherapyGame.Player
 		{
 			if (playerData != null)
 			{
-				playerData.onCurrentCellChanged -= OnCurrentObservedCellChanged;
+				playerData.onCurrentCellChanged -= OnPlayerCellChanged;
 				observedCell = null;
 			}
 			else
@@ -69,7 +69,7 @@ namespace ImmunotherapyGame.Player
 			}
 		}
 
-		private void OnCurrentObservedCellChanged()
+		private void OnPlayerCellChanged()
 		{
 			observedCell = playerData.CurrentCell;
 		}
