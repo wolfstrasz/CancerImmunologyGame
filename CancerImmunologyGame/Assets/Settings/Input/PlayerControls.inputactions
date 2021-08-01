@@ -276,6 +276,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "LogsMenu",
+                    "type": "Button",
+                    "id": "f35d736b-aa34-4c23-9f28-b83d5d0e5cf2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -304,7 +312,7 @@
                 {
                     "name": "",
                     "id": "96e45c9a-001f-4be8-b839-2edca3d1e5dc",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -348,7 +356,7 @@
                 {
                     "name": "",
                     "id": "d814a71a-c7b2-4363-937e-962954011a3c",
-                    "path": "<Gamepad>/dpad/up",
+                    "path": "<Gamepad>/dpad/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -386,6 +394,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "SurveyMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8719f8a-e0fb-4657-84cd-eed1fc81091a",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LogsMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4b35c4f1-b8bd-4994-9520-46caaa38c15f",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keys+Mouse",
+                    "action": "LogsMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -10,10 +10,6 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private PathblockingFunction function = PathblockingFunction.RELEASE;
 
-		protected override void OnEndEvent()
-		{
-		}
-
 		protected override void OnStartEvent()
 		{
 			if (function == PathblockingFunction.RELEASE)
@@ -31,12 +27,6 @@ namespace ImmunotherapyGame.Tutorials
 				}
 			}
 		}
-
-		protected override bool OnUpdateEvent()
-		{
-			return true;
-		}
-
 
 		private enum PathblockingFunction { RELEASE, LOCK }
 	}

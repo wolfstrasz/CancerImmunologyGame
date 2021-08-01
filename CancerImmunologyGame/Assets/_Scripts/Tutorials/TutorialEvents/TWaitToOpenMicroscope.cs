@@ -7,19 +7,9 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TWaitToOpenMicroscope : TutorialEvent
 	{
-		protected override void OnEndEvent()
-		{
-		}
-
-		protected override void OnStartEvent()
-		{
-		}
-
 		protected override bool OnUpdateEvent()
 		{
-			if (CellpediaSystem.Cellpedia.Instance.IsCellpediaOpened)
-				return true;
-			return false;
+			return CellpediaSystem.Cellpedia.Instance.IsCellpediaOpened;
 		}
 	}
 }

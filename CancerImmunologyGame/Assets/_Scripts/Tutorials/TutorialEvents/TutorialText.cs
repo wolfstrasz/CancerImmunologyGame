@@ -9,25 +9,19 @@ namespace ImmunotherapyGame.Tutorials
 	{
 
 		[Header("Text Displayed")]
-		[SerializeField][TextArea(5,20)]
-		private string text = "";
+		[SerializeField][TextArea(5,20)] private string text = "";
 
 		[Header("Skipping functionality")]
-		[SerializeField]
-		private bool shouldHideText = false;
-		[SerializeField]
-		private bool canSkipTxt = false;
-		[SerializeField]
-		private float waitBeforeSkip = 0.0f;
+		[SerializeField] private bool shouldHideText = false;
+		[SerializeField] private bool canSkipTxt = false;
+		[SerializeField] private float waitBeforeSkip = 0.0f;
 
 		[Header("Timing")]
-		[SerializeField]
-		private bool isTimed = false;
-		[SerializeField]
-		private float timeBeforeFinish = 0.0f;
+		[SerializeField] private bool isTimed = false;
+		[SerializeField] private float timeBeforeFinish = 0.0f;
 
-		private bool isSkipped = false;
-		private bool timedOut = false;
+		[SerializeField] [ReadOnly] private bool isSkipped = false;
+		[SerializeField] [ReadOnly] private bool timedOut = false;
 
 		protected override void OnEndEvent() 
 		{
@@ -38,7 +32,7 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (!shouldHideText)
 			{
-				TutorialManager.Instance.DisplayText(text);
+				TutorialManager.Instance.DisplayTextPanel(text);
 			}
 
 			if (canSkipTxt)

@@ -11,10 +11,6 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private ControlMode mode = ControlMode.DEACTIVATE;
 
-		protected override void OnEndEvent()
-		{
-		}
-
 		protected override void OnStartEvent()
 		{
 			foreach (GameObject obj in objectsToControl)

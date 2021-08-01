@@ -289,6 +289,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""LogsMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""f35d736b-aa34-4c23-9f28-b83d5d0e5cf2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -317,7 +325,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""96e45c9a-001f-4be8-b839-2edca3d1e5dc"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -361,7 +369,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d814a71a-c7b2-4363-937e-962954011a3c"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -399,6 +407,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""SurveyMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8719f8a-e0fb-4657-84cd-eed1fc81091a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LogsMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b35c4f1-b8bd-4994-9520-46caaa38c15f"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keys+Mouse"",
+                    ""action"": ""LogsMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -950,6 +980,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Systems_PauseMenu = m_Systems.FindAction("PauseMenu", throwIfNotFound: true);
         m_Systems_ImmunotherapyResearchMenu = m_Systems.FindAction("ImmunotherapyResearchMenu", throwIfNotFound: true);
         m_Systems_SurveyMenu = m_Systems.FindAction("SurveyMenu", throwIfNotFound: true);
+        m_Systems_LogsMenu = m_Systems.FindAction("LogsMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1089,6 +1120,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Systems_PauseMenu;
     private readonly InputAction m_Systems_ImmunotherapyResearchMenu;
     private readonly InputAction m_Systems_SurveyMenu;
+    private readonly InputAction m_Systems_LogsMenu;
     public struct SystemsActions
     {
         private @PlayerControls m_Wrapper;
@@ -1098,6 +1130,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_Systems_PauseMenu;
         public InputAction @ImmunotherapyResearchMenu => m_Wrapper.m_Systems_ImmunotherapyResearchMenu;
         public InputAction @SurveyMenu => m_Wrapper.m_Systems_SurveyMenu;
+        public InputAction @LogsMenu => m_Wrapper.m_Systems_LogsMenu;
         public InputActionMap Get() { return m_Wrapper.m_Systems; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1122,6 +1155,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SurveyMenu.started -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurveyMenu;
                 @SurveyMenu.performed -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurveyMenu;
                 @SurveyMenu.canceled -= m_Wrapper.m_SystemsActionsCallbackInterface.OnSurveyMenu;
+                @LogsMenu.started -= m_Wrapper.m_SystemsActionsCallbackInterface.OnLogsMenu;
+                @LogsMenu.performed -= m_Wrapper.m_SystemsActionsCallbackInterface.OnLogsMenu;
+                @LogsMenu.canceled -= m_Wrapper.m_SystemsActionsCallbackInterface.OnLogsMenu;
             }
             m_Wrapper.m_SystemsActionsCallbackInterface = instance;
             if (instance != null)
@@ -1141,6 +1177,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @SurveyMenu.started += instance.OnSurveyMenu;
                 @SurveyMenu.performed += instance.OnSurveyMenu;
                 @SurveyMenu.canceled += instance.OnSurveyMenu;
+                @LogsMenu.started += instance.OnLogsMenu;
+                @LogsMenu.performed += instance.OnLogsMenu;
+                @LogsMenu.canceled += instance.OnLogsMenu;
             }
         }
     }
@@ -1284,6 +1323,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnImmunotherapyResearchMenu(InputAction.CallbackContext context);
         void OnSurveyMenu(InputAction.CallbackContext context);
+        void OnLogsMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

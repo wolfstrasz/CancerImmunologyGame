@@ -14,6 +14,7 @@ using ImmunotherapyGame.UI.TopOverlay;
 using ImmunotherapyGame.ImmunotherapyResearchSystem;
 using ImmunotherapyGame.Audio;
 using ImmunotherapyGame.LevelTasks;
+using ImmunotherapyGame.Tutorials;
 
 namespace ImmunotherapyGame.Loader
 {
@@ -35,7 +36,7 @@ namespace ImmunotherapyGame.Loader
 			InterfaceManager.Instance.Initialise();
 			BackgroundMusic.Instance.Initialise();
 
-			List<IDataManager> allDataManagers = new List<IDataManager>(3);
+			List<IDataManager> allDataManagers = new List<IDataManager>(4);
 
 			// Load Settings
 			Debug.Log("Loader: Settings Manager");
@@ -49,6 +50,12 @@ namespace ImmunotherapyGame.Loader
 			Debug.Log("Loader: Level Manager");
 			LevelManager.Instance.LoadData();
 			allDataManagers.Add(LevelManager.Instance);
+
+			// Load Tutorial Manager
+			Debug.Log("Loader: Tutorial Manager");
+			TutorialManager.Instance.LoadData();
+			TutorialManager.Instance.Initialise();
+			allDataManagers.Add(TutorialManager.Instance);
 
 			// Load Cellpedia Data
 			Debug.Log("Loader: Cellpedia");

@@ -9,10 +9,6 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private TutorialPopup popupObject = null;
 
-		protected override void OnEndEvent()
-		{
-		}
-
 		protected override void OnStartEvent()
 		{
 			popupObject.Activate();
@@ -20,7 +16,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override bool OnUpdateEvent()
 		{
-			return popupObject.triggered;
+			return popupObject.wasTriggered;
 		}
 	}
 }

@@ -48,7 +48,7 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			// Collect events and sort them by priority
 			List<TutorialEvent> eventsFound = new List<TutorialEvent>(GetComponentsInChildren<TutorialEvent>(true));
-			eventsFound.OrderBy(e => e.order);
+			//eventsFound.OrderBy(e => e.order);
 			events = eventsFound;
 
 			// Run the first event

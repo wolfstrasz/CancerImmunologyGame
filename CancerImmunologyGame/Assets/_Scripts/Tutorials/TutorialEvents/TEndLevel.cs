@@ -15,14 +15,5 @@ namespace ImmunotherapyGame.Tutorials
 			LevelManager.Instance.OnLevelComplete();
 		}
 
-		protected override void OnStartEvent()
-		{
-		}
-
-		protected override bool OnUpdateEvent()
-		{
-			return true;
-		}
-
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ReachDendriticCell
   m_EditorClassIdentifier: 
   levelTaskType: {fileID: 11400000, guid: 5e0a4b9d762ea704c85ef888baa75b33, type: 2}
-  title: Interact with Dendritic cell
+  title: Interact with the Dendritic cell
   count: 1
   awardPoints: 0
   currentCount: 1

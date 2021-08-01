@@ -17,7 +17,7 @@ namespace ImmunotherapyGame
 				TopOverlayUI.Instance.GamePaused = false;
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.PlayMusic();
-				TutorialManager.Instance.Initialise();
+				TutorialManager.Instance.LoadLevelTutorials();
 			}
 
 			internal override void OnFixedUpdate()

@@ -4,32 +4,34 @@ using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.Tutorials
 {
-	[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
+	[RequireComponent(typeof(Collider2D))]
 	public class TutorialPopup : MonoBehaviour
 	{
-		private SpriteRenderer render = null;
-
-		[SerializeField]
-		private Light2D spotlight = null;
-		[SerializeField]
-		private bool isVisisble = false;
-		[SerializeField]
-		internal bool triggered = false;
+		[SerializeField] private bool isVisisble = false;
+		[SerializeField] private Color colour;
+		[SerializeField] private GameObject visual = null;
+		[SerializeField] private SpriteRenderer sprite1 = null;
+		[SerializeField] private SpriteRenderer sprite2 = null;
+		[SerializeField] [ReadOnly] internal bool wasTriggered = false;
 
 		void Start()
 		{
 			gameObject.SetActive(false);
-			render = GetComponent<SpriteRenderer>();
-			render.enabled = false;
-			spotlight.enabled = false;
+			visual.SetActive(false);
+			sprite1.color = colour;
+			sprite2.color = colour;
 		}
 
 		internal void Activate()
 		{
 			gameObject.SetActive(true);
-			//render.enabled = isVisisble;
-			spotlight.enabled = isVisisble;
-			triggered = false;
+			visual.SetActive(isVisisble);
+			wasTriggered = false;
+		}
+
+		private void OnEnable()
+		{
+			visual.SetActive(isVisisble);
 		}
 
 		private void OnTriggerEnter2D(Collider2D collider)
@@ -37,10 +39,9 @@ namespace ImmunotherapyGame.Tutorials
 			if (collider.gameObject == PlayerController.Instance.gameObject)
 			{
 				Debug.Log("PopUpCollision");
-				render.enabled = false;
-				spotlight.enabled = false;
+				visual.SetActive(false);
 				gameObject.SetActive(false);
-				triggered = true;
+				wasTriggered = true;
 			}
 		}
 	}

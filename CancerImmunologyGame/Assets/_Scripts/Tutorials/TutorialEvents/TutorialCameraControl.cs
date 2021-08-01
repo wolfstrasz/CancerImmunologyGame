@@ -24,11 +24,6 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private CameraBlinding blinding = CameraBlinding.KEEP;
 
-		protected override void OnEndEvent()
-		{
-			return;
-		}
-
 		protected override void OnStartEvent()
 		{
 			if (shouldFocus)
@@ -51,11 +46,7 @@ namespace ImmunotherapyGame.Tutorials
 
 		protected override bool OnUpdateEvent()
 		{
-			if (GameCamera2D.Instance.IsCameraFocusedAndFinishedZooming)
-			{
-				return true;
-			}
-			return false;
+			return GameCamera2D.Instance.IsCameraFocusedAndFinishedZooming;
 		}
 
 		private enum CameraBlinding {KEEP, BLIND, UNBLIND}

@@ -33,11 +33,11 @@ namespace ImmunotherapyGame.Tutorials
 			OnEndEvent();
 		}
 
-		protected abstract void OnStartEvent();
+		protected virtual void OnStartEvent() { }
 
-		protected abstract bool OnUpdateEvent();
+		protected virtual bool OnUpdateEvent() { return true; }
 
-		protected abstract void OnEndEvent();
+		protected virtual void OnEndEvent() { }
 
 		internal bool OnUpdate()
 		{

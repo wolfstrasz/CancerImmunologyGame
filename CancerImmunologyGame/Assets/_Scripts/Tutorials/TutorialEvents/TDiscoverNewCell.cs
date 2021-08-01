@@ -9,18 +9,9 @@ namespace ImmunotherapyGame.Tutorials
 		[SerializeField]
 		private CellpediaItemTypes cellToDiscover = CellpediaItemTypes.NONE;
 
-		protected override void OnEndEvent()
-		{
-		}
-
 		protected override void OnStartEvent()
 		{
 			Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
-		}
-
-		protected override bool OnUpdateEvent()
-		{
-			return true;
 		}
 	}
 }
