@@ -25,6 +25,9 @@ namespace ImmunotherapyGame.UI
         public List<UIMenuNode> nodesToListen = new List<UIMenuNode>();
         [SerializeField] private Canvas canvas = null;
 
+
+        private bool spamStop = false;
+
 		public void Start()
 		{
             Debug.Log("Panel level index: " + gameObject.name + " = " + level);
@@ -32,16 +35,27 @@ namespace ImmunotherapyGame.UI
             canvas.sortingOrder = level;
 		}
 
+		public void LateUpdate()
+		{
+            spamStop = false;
+		}
+
 		public void Open()
 		{
-            Debug.Log(gameObject.name + " requests OPEN");
-            InterfaceManager.Instance.RequestOpen(this);
+            if (!spamStop)
+            {
+                Debug.Log(gameObject.name + " requests OPEN");
+                InterfaceManager.Instance.RequestOpen(this);
+            }
 		}
 
         public void Close()
 		{
-            Debug.Log(gameObject.name + " requests CLOSE");
-            InterfaceManager.Instance.RequestClose(this);
+            if (!spamStop)
+            {
+                Debug.Log(gameObject.name + " requests CLOSE");
+                InterfaceManager.Instance.RequestClose(this);
+            }
 		}
 
         public bool IsOpened => gameObject.activeInHierarchy;
@@ -52,6 +66,7 @@ namespace ImmunotherapyGame.UI
             {
                 node.onCancelCall += delegate { Close(); };
             }
+            spamStop = true;
         }
 
 		private void OnDisable()
@@ -64,6 +79,7 @@ namespace ImmunotherapyGame.UI
 			{
                 gameObject.SetActive(false);
 			}
+            spamStop = false;
         }
 
 

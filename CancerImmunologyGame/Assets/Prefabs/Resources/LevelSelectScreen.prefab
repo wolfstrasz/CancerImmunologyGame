@@ -513,7 +513,7 @@ MonoBehaviour:
   emptyItemPrefab: {fileID: 4371727669248031676, guid: 9393754d65b157846872618ebb1e86a8,
     type: 3}
   verticalLayout: {fileID: 1744454142007105246}
-  itemsPerRow: 8
+  buttonsPerRow: 8
   levelSelectButtons: []
   initialised: 0
   layoutRows: []
@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 10
+  level: 110
   shouldCloseOnSceneChange: 1
   initialControlNode: {fileID: 941471342904990866}
   nodesToListen:
