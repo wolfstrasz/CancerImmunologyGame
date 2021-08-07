@@ -164,7 +164,6 @@ MonoBehaviour:
   controlledCell: {fileID: 0}
   crosshairCanvas: {fileID: 6371407695645343948}
   crosshair: {fileID: 4732172764409589209}
-  cancersNearby: []
 --- !u!114 &436582578362720831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,8 +252,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 361818013
-  m_SortingOrder: 1000
+  m_SortingLayerID: -1262964005
+  m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!114 &3248525686963943998
 MonoBehaviour:

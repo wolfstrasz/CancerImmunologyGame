@@ -15,7 +15,7 @@ namespace ImmunotherapyGame
 			KillerCell kc = collider.gameObject.GetComponent<KillerCell>();
 			if (kc != null)
 			{
-				kc.transform.position = teleportToTransform.position;
+				kc.gameObject.transform.position = teleportToTransform.gameObject.transform.position;
 			}
 
 		}

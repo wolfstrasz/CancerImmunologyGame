@@ -8,18 +8,24 @@ namespace ImmunotherapyGame.Bloodflow
 	[RequireComponent(typeof(Collider2D))]
 	public class BloodflowEntrance : MonoBehaviour
 	{
-		[Header("Attributes")]
-		[SerializeField] private BloodflowEnvironment environment = null;
-
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
 			IControllerMovementOverridable overridable = collider.gameObject.GetComponent<IControllerMovementOverridable>();
 			if (overridable != null)
 			{
-				overridable.SubscribeMovementOverride(environment);
+				BloodflowEnvironment.Instance.AddOverridable(collider.gameObject);
 			}
 		}
-		
+
+		private void OnTriggerExit2D(Collider2D collider)
+		{
+			IControllerMovementOverridable overridable = collider.gameObject.GetComponent<IControllerMovementOverridable>();
+			if (overridable != null)
+			{
+				BloodflowEnvironment.Instance.RemoveOverridable(collider.gameObject);
+			}
+		}
+
 	}
 
 

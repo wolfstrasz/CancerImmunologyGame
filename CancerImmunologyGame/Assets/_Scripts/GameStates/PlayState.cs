@@ -3,6 +3,7 @@ using ImmunotherapyGame.Tutorials;
 using ImmunotherapyGame.AI;
 using ImmunotherapyGame.Audio;
 using ImmunotherapyGame.UI.TopOverlay;
+using ImmunotherapyGame.Bloodflow;
 
 namespace ImmunotherapyGame
 {
@@ -18,6 +19,8 @@ namespace ImmunotherapyGame
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.PlayMusic();
 				TutorialManager.Instance.LoadLevelTutorials();
+				BloodcellSpawner.Instance.Initialise();
+				BloodflowEnvironment.Instance.Initialise();
 			}
 
 			internal override void OnFixedUpdate()
@@ -43,6 +46,9 @@ namespace ImmunotherapyGame
 					if (hc.gameObject.activeSelf)
 						hc.OnFixedUpdate();
 				}
+
+				BloodcellSpawner.Instance.OnFixedUpdate();
+				BloodflowEnvironment.Instance.OnFixedUpdate();
 			}
 
 			internal override void OnUpdate()

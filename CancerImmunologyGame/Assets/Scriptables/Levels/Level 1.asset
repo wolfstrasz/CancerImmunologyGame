@@ -12,18 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5666dfcaed562874c9e0facd7e9470e0, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  sceneName: Trans1Scene
+  sceneName: Level 1
   levelID: 1
   isCompleted: 0
   isLocked: 0
-  LevelTaskCompletions:
-  - levelTask: {fileID: 11400000, guid: fa8273dc345d8ad469628378af3420d4, type: 2}
-    isComplete: 0
-  - levelTask: {fileID: 11400000, guid: 7bcbbd3f35721934ba97a41a7a7eac2e, type: 2}
-    isComplete: 0
-  - levelTask: {fileID: 11400000, guid: 75a601c3711613b438e2179ea2628d82, type: 2}
-    isComplete: 0
-  - levelTask: {fileID: 11400000, guid: f3e8e8362bee67648bf0d29a6a503fa7, type: 2}
-    isComplete: 0
-  - levelTask: {fileID: 11400000, guid: 21d73ae945422f747a30295cf44317b8, type: 2}
-    isComplete: 0
+  LevelTaskCompletions: []

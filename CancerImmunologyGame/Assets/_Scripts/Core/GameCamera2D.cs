@@ -13,36 +13,41 @@ namespace ImmunotherapyGame
 		private GameObject blind = null;
 
 		[Header("Attributes")]
-		[SerializeField]
-		private GameCameraControlState state = GameCameraControlState.IDLE;
+		[SerializeField] private GameCameraControlState state = GameCameraControlState.IDLE;
 
-		[SerializeField, Range(0.5f, 1.0f)]
-		private float focusExponential = 0.943f;
-		private const float focusAcceptedTreshold = 0.2f;
-		private const float focusSkipTreshold = 0.01f;
+		[SerializeField, Range(0.5f, 1.0f)] private float focusExponential = 0.943f;
+		[SerializeField] private const float focusAcceptedTreshold = 0.2f;
+		[SerializeField] private const float focusSkipTreshold = 0.01f;
 
-		[SerializeField, Range(0.5f, 1.0f)]
-		private float zoomExponential = 0.943f;
-		private const float zoomAcceptedTreshold = 0.2f;
-		private const float zoomSkipTreshold = 0.01f;
+		[SerializeField, Range(0.5f, 1.0f)] private float zoomExponential = 0.943f;
+		[SerializeField] private const float zoomAcceptedTreshold = 0.2f;
+		[SerializeField] private const float zoomSkipTreshold = 0.01f;
+
+		[Header("Camera Movement Prediction")]
+		[SerializeField] private GameObject debugDot = null;
+		[SerializeField] private float maxForwardingDistance = 3.5f;
+		[SerializeField] private float minDistanceForPrediction = 0.001f;
+		[SerializeField] private float minPredictionSkipTreshhold = 0.01f;
+		[SerializeField, Range(0.5f, 1.0f)] private float predictionShiftExponential = 0.943f;
+		[SerializeField, Range(0.5f, 1.0f)] private float predictionReturnExponential = 0.943f;
+		private Vector3 prevPosition = Vector3.zero;
+		private Vector3 shiftOffset = Vector3.zero;
+
 
 		[Header("Debug (Read only)")]
-		[SerializeField]
-		private GameObject focusTarget = null;
-		[SerializeField]
-		private Vector3 focusPosition = Vector3.zero;
-		[SerializeField]
-		private bool isFocused = false;
-		[SerializeField]
-		private float orthographicZoom = 6.0f;
-		[SerializeField]
-		private bool isZooming = false;
+		[SerializeField] [ReadOnly] private GameObject focusTarget = null;
+		[SerializeField] [ReadOnly] private Vector3 focusPosition = Vector3.zero;
+		[SerializeField] [ReadOnly] private bool isFocused = false;
+		[SerializeField] [ReadOnly] private float orthographicZoom = 6.0f;
+		[SerializeField] [ReadOnly] private bool isZooming = false;
 
 		public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
+
 
 		// Target's position will change in Update, so camera should move focus here
 		void FixedUpdate()
 		{
+
 			if (state == GameCameraControlState.FOLLOW && focusTarget != null)
 			{
 				UpdateFocusPoint();
@@ -50,6 +55,10 @@ namespace ImmunotherapyGame
 				transform.rotation = focusTarget.transform.rotation;
 #else
 #endif
+			} 
+			else
+			{
+				shiftOffset = Vector3.zero;
 			}
 
 			UpdateOrthographicZoom();
@@ -60,11 +69,13 @@ namespace ImmunotherapyGame
 		void LateUpdate()
 		{
 			UpdatePositionByFocusPoint();
+			//debugDot.transform.position = shiftOffset + transform.position + new Vector3(0.0f, 0.0f, 1.0f);
+
 		}
 
 		private void UpdateFocusPoint()
 		{
-
+			// Focusing
 			Vector3 targetPosition = focusTarget.transform.position;
 			float distance = Vector3.Distance(targetPosition, focusPosition);
 
@@ -73,7 +84,27 @@ namespace ImmunotherapyGame
 			focusPosition = distance <= focusSkipTreshold ? targetPosition
 				: Vector3.Lerp(targetPosition, focusPosition, (float)System.Math.Pow((1.0f - focusExponential), Time.deltaTime));
 
-		}
+			// Movement Prediction
+			Vector3 targetMovementDirection = targetPosition - prevPosition;
+			float movementDistance = targetMovementDirection.magnitude;
+
+			if (movementDistance > minDistanceForPrediction)
+			{
+				Vector3 shiftDirection = targetMovementDirection.normalized;
+				Vector3 maxShiftVector =  shiftDirection * maxForwardingDistance;
+				shiftOffset = Vector3.Lerp(shiftOffset, maxShiftVector, 1.0f - (float)System.Math.Pow((1.0f - predictionShiftExponential), Time.deltaTime));
+				prevPosition = focusTarget.transform.position;
+
+			}
+			else
+			{
+				shiftOffset = Vector3.Lerp(shiftOffset, Vector3.zero,  1.0f - (float) System.Math.Pow((1.0f - predictionReturnExponential), Time.deltaTime));
+				if (shiftOffset.magnitude < minPredictionSkipTreshhold)
+				{
+					shiftOffset = Vector3.zero;
+				}
+			}
+}
 
 		private void UpdateOrthographicZoom()
 		{
@@ -87,7 +118,7 @@ namespace ImmunotherapyGame
 		{
 			Vector3 lookDirection = transform.forward;
 			Vector3 lookPosition = focusPosition - lookDirection * camera.orthographicSize;
-			transform.position = lookPosition;
+			transform.position = lookPosition + shiftOffset;
 		}
 
 		public void SetFocusTarget(GameObject objectToFocusOn, bool shouldInstantlyFocus = false)
@@ -95,7 +126,8 @@ namespace ImmunotherapyGame
 			focusTarget = objectToFocusOn;
 			isFocused = false;
 			state = GameCameraControlState.FOLLOW;
-
+			prevPosition = focusTarget.transform.position;
+			shiftOffset = Vector3.zero;
 			if (shouldInstantlyFocus)
 			{
 				focusPosition = focusTarget.transform.position;

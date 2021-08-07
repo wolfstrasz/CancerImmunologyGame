@@ -12,17 +12,7 @@ namespace ImmunotherapyGame.Bloodflow
 		[SerializeField] private List<BloodcellPathAttributes> pathAttributes = new List<BloodcellPathAttributes>();
 		[SerializeField][ReadOnly] private List<BloodCell> bloodcells = new List<BloodCell>();
 
-		void Start()
-		{
-			Initialise();
-		}
-
-		void FixedUpdate()
-		{
-			OnFixedUpdate();
-		}
-
-		void Initialise()
+		public void Initialise()
 		{
 			int count = 0;
 			for(int i = 0; i < pathAttributes.Count; ++i)
@@ -55,7 +45,7 @@ namespace ImmunotherapyGame.Bloodflow
 			}
 		}
 
-		void OnFixedUpdate()
+		public void OnFixedUpdate()
 		{
 			foreach (BloodCell cell in bloodcells)
 			{

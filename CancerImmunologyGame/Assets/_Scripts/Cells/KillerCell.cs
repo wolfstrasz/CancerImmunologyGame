@@ -53,7 +53,7 @@ namespace ImmunotherapyGame
 
 		public void OnFixedUpdate()
 		{
-			if (IsMoving)
+			//if (IsMoving)
 				Move();
 		}
 
