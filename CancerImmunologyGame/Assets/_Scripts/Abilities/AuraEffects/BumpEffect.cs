@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using ImmunotherapyGame.Abilities;
 
-namespace ImmunotherapyGame
+namespace ImmunotherapyGame.Abilities
 {
     public class BumpEffect : AuraEffect
     {
@@ -12,11 +11,12 @@ namespace ImmunotherapyGame
 		[Header("Bump Attributes")]
 		[SerializeField] float bumpPower = 1f;
         [SerializeField] protected Vector3 onBumpScaleIncrease = Vector3.one;
+		[SerializeField] [ReadOnly] private List<Cell> alreadyHitCells = new List<Cell>();
 		[SerializeField] [ReadOnly] Vector3 ownerOriginalScale;
 		[SerializeField] [ReadOnly] Vector3 auraOriginalScale;
 		[SerializeField] [ReadOnly] bool isBumpedUp = false;
 
-		protected override void OnFixedUpdate()
+		internal override void OnFixedUpdate()
 		{
 			base.OnFixedUpdate();
 
@@ -30,20 +30,22 @@ namespace ImmunotherapyGame
 
 		protected override void ApplyAuraEffectOnCollision(Cell cell)
 		{
+			if (cell.isImmune || alreadyHitCells.Contains(cell))
+			{
+				return;
+			}
+
 			base.ApplyAuraEffectOnCollision(cell);
 
 			owner.transform.localScale = ownerOriginalScale + onBumpScaleIncrease;
 			transform.localScale = auraOriginalScale + onBumpScaleIncrease;
 
-
-			if (!cell.isImmune )
-			{
-				// Calculate bump direction
-				Vector3 bumpDirection = (cell.transform.position - owner.transform.position).normalized;
+			// Calculate bump direction
+			Vector3 bumpDirection = (cell.transform.position - owner.transform.position).normalized;
 				
-				cell.gameObject.transform.position += bumpPower * bumpDirection;
-				isBumpedUp = true;
-			}
+			cell.gameObject.transform.position += bumpPower * bumpDirection;
+			isBumpedUp = true;
+			alreadyHitCells.Add(cell);
 		}
 
 		public override void Apply(AuraEffectAbility _auraEffectAbility, GameObject _owner)
@@ -51,6 +53,7 @@ namespace ImmunotherapyGame
 			base.Apply(_auraEffectAbility, _owner);
 			ownerOriginalScale = owner.transform.localScale;
 			auraOriginalScale = transform.localScale;
+			alreadyHitCells.Clear();
 		}
 	}
 }

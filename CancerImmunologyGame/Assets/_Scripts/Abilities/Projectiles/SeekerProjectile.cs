@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using ImmunotherapyGame.Abilities;
 
-namespace ImmunotherapyGame
+
+namespace ImmunotherapyGame.Abilities
 {
 	public class SeekerProjectile : Projectile
 	{
@@ -17,7 +17,16 @@ namespace ImmunotherapyGame
 		[SerializeField] [ReadOnly] private float initialSpeed;
 		[SerializeField] [ReadOnly] private float initialColliderRadius = 0f;
 
-		public override void OnFixedUpdate()
+
+		/* ABILITY EFFECT */
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+			lifeSpan = -1000f;
+			coll.radius = initialColliderRadius;
+		}
+
+		internal override void OnFixedUpdate()
 		{
 			if (lifeSpan > 0)
 			{
@@ -25,15 +34,18 @@ namespace ImmunotherapyGame
 				if (lifeSpan <= 0)
 				{
 					// Reset particle
-					OnEndOfEffect();
+					OnLifeEnded();
 				}
 			}
 
 			base.OnFixedUpdate();
 		}
 
+		/* PROJECTILE */
 		protected override void OnOutOfRange()
 		{
+			Debug.Log(this + " OutOfRange ");
+
 			if (!coll.enabled)
 			{
 				// Set it to stay in one position and just scan for a target (detect radius collider)
@@ -46,16 +58,24 @@ namespace ImmunotherapyGame
 				lifeSpan = projectileAbility.ProjectileLifetime;
 				coll.radius = maxRangeToMove;
 				coll.enabled = true;
-			} else
+				Debug.Log(this + " Coll not enabled ");
+
+			}
+			else
 			{
-				OnEndOfEffect();
+				Debug.Log(this + " Coll enabled ");
+
+				OnLifeEnded();
 			}
 		}
 
 		protected override void OnCollisionWithTarget(Cell cell)
 		{
+			Debug.Log(this + " Collided with target: " + cell.name);
 			if (coll.radius != initialColliderRadius)
 			{
+				Debug.Log(this + " Collider radius != initialColliderRadius ");
+
 				// Remove lifespan without destroying it
 				lifeSpan = -1000f;
 
@@ -69,23 +89,15 @@ namespace ImmunotherapyGame
 			}
 			else if (coll.radius == initialColliderRadius)
 			{
-				projectileAbility.ApplyAbilityEffect(cell);
+				Debug.Log(this + " Collider radius == initialCollider radius -> must apply effect ");
 
+				projectileAbility.ApplyAbilityEffect(cell);
+				speed = initialSpeed;
 				// Reset particle
-				OnEndOfEffect();
+				OnLifeEnded();
 			}
 		}
 
-		protected override void OnEndOfEffect()
-		{
-			// Reset particle
-			speed = initialSpeed;
-			lifeSpan = -1000f;
-			coll.radius = initialColliderRadius;
-			coll.enabled = false;
-			render.enabled = false;
-			Destroy(gameObject);
-		}
 
 		public override void Shoot(Vector3 _direction, ProjectileAbility _projectileAbility)
 		{
@@ -94,6 +106,7 @@ namespace ImmunotherapyGame
 			initialColliderRadius = coll.radius;
 			coll.enabled = false;
 
+			Debug.Log(this + " SHOT dir: " + direction);
 		}
 
 

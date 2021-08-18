@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using ImmunotherapyGame.Abilities;
 
-namespace ImmunotherapyGame
+
+namespace ImmunotherapyGame.Abilities
 {
     [RequireComponent(typeof(CircleCollider2D))]
-    public class AuraEffect : MonoBehaviour
-    {
+    public class AuraEffect : AbilityEffect
+	{
 
         [Header("Linking")]
         [SerializeField] protected Animator animator = null;
@@ -29,25 +29,13 @@ namespace ImmunotherapyGame
 
 		protected virtual void Awake() { coll.isTrigger = true; }
 
-		protected virtual void OnEnable() { }
+		/* ABILITY EFFECT */
 
-		protected virtual void OnDisable() { }
-
-		protected virtual void FixedUpdate()
+		internal override void OnFixedUpdate()
 		{
-			OnFixedUpdate();
-		}
-
-		protected virtual void OnLifeEnded()
-		{
-			Destroy(gameObject);
-		}
-
-		protected virtual void OnFixedUpdate()
-		{
-			if (owner == null)
+			if (owner == null || !owner.activeInHierarchy)
 			{
-				Destroy(gameObject);
+				OnLifeEnded();
 				return;
 			}
 
@@ -58,31 +46,17 @@ namespace ImmunotherapyGame
 				ApplyAuraEffectOvertime();
 			}
 
-			if (lifetime > 0)
+			if (lifetime > 0f)
 			{
 				lifetime -= Time.fixedDeltaTime;
-				if (lifetime <= 0)
+				if (lifetime <= 0f)
 				{
 					OnLifeEnded();
 				}
 			}
 		}
 
-
-		protected virtual void ApplyAuraEffectOnCollision(Cell cell)
-		{
-			auraEffectAbility.ApplyAbilityEffect(cell);
-		}
-
-		protected virtual void ApplyAuraEffectOvertime()
-		{
-			for (int i = 0; i < affectedCells.Count; ++i)
-			{
-				if (affectedCells[i] != null)
-					auraEffectAbility.ApplyAbilityEffect(affectedCells[i], Time.fixedDeltaTime);
-			}
-		}
-
+		/* AURA EFFECT */
 		protected virtual void OnTriggerEnter2D(Collider2D coll)
 		{
 			Cell cell = coll.GetComponent<Cell>();
@@ -113,6 +87,19 @@ namespace ImmunotherapyGame
 			}
 		}
 
+		protected virtual void ApplyAuraEffectOnCollision(Cell cell)
+		{
+			auraEffectAbility.ApplyAbilityEffect(cell);
+		}
+
+		protected virtual void ApplyAuraEffectOvertime()
+		{
+			for (int i = 0; i < affectedCells.Count; ++i)
+			{
+				if (affectedCells[i] != null)
+					auraEffectAbility.ApplyAbilityEffect(affectedCells[i], Time.fixedDeltaTime);
+			}
+		}
 
 		public virtual void Apply(AuraEffectAbility _auraEffectAbility, GameObject _owner)
 		{

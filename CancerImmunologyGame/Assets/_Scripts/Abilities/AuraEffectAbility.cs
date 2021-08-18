@@ -12,7 +12,6 @@ namespace ImmunotherapyGame.Abilities
 		[Expandable] public StatAttribute lifetime;
 		[Expandable] public StatAttribute auraRange;
 		[SerializeField] private bool isAuraEffectOverTime;
-		[SerializeField] private GameObject auraEffectPrefab;
 
 		// Attributes
 		public float Lifetime => (lifetime != null ? lifetime.CurrentValue : 0f);
@@ -21,7 +20,10 @@ namespace ImmunotherapyGame.Abilities
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target )
 		{
-			AuraEffect auraEffect = Instantiate(auraEffectPrefab, target.transform.position, Quaternion.identity).GetComponent<AuraEffect>();
+			AbilityEffect abilityEffect = AbilityEffectManager.Instance.GetEffect(this );
+			AuraEffect auraEffect = abilityEffect.GetComponent<AuraEffect>();
+			auraEffect.gameObject.transform.position = target.transform.position;
+			auraEffect.gameObject.transform.rotation = target.transform.rotation;
 			auraEffect.Apply(this, target);
 
 			return true;

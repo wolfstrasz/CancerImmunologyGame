@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ImmunotherapyGame
+namespace ImmunotherapyGame.Abilities
 {
     public class PacProjectile : Projectile
     {
 		[Header("Pac Attributes")]
-        [SerializeField]
-        private float secondStageSpeed = 1f;
-		private float initialSpeed = 1f;
+		[SerializeField] private float initialSpeed = 1f;
+        [SerializeField] private float secondStageSpeed = 1f;
+		[SerializeField] [ReadOnly] private Cell hitCell = null;
 
-        [Header("Debug")]
-        [ReadOnly]
-        private Cell hitCell = null;
+		/* ABILITY EFFECT */
+		protected override void OnEnable()
+		{
+			base.OnEnable();
+			hitCell = null;
+			speed = initialSpeed;
+		}
 
-
+		/* PROJECTILE */
 		protected override void OnCollisionWithTarget(Cell cell)
 		{
 			// Mark the cell to kill and cancel collider
@@ -37,17 +41,6 @@ namespace ImmunotherapyGame
 			animator.SetTrigger("Eat");
 		}
 
-		protected override void OnEndOfEffect()
-		{
-			// Reset to original
-			speed = initialSpeed;
-			hitCell = null;
-
-			coll.enabled = false;
-			render.enabled = false;
-			Destroy(gameObject);
-		}
-
 		protected override void OnOutOfRange()
 		{
 			if (hitCell != null )
@@ -55,7 +48,7 @@ namespace ImmunotherapyGame
 				projectileAbility.ApplyAbilityEffect(hitCell);
 			}
 
-			OnEndOfEffect();
+			OnLifeEnded();
 		}
 
 

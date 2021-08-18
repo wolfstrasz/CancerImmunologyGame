@@ -12,7 +12,6 @@ namespace ImmunotherapyGame.Abilities
     {
 		[Expandable] public StatAttribute lifetime;
 		[SerializeField] private bool isStatusEffectOverTime;
-		[SerializeField] private GameObject statusEffectPrefab;
 
 		// Attributes
 		public float Lifetime => (lifetime != null ? lifetime.CurrentValue : 0f);
@@ -20,7 +19,11 @@ namespace ImmunotherapyGame.Abilities
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
-			StatusEffect statusEffect = Instantiate(statusEffectPrefab, target.transform.position, Quaternion.identity).GetComponent<StatusEffect>();
+			AbilityEffect abilityEffect = AbilityEffectManager.Instance.GetEffect(this);
+			abilityEffect.transform.position = target.transform.position;
+			abilityEffect.transform.rotation = target.transform.rotation;
+
+			StatusEffect statusEffect = abilityEffect.GetComponent<StatusEffect>();
 			statusEffect.Apply(this, target);
 		
 			return true;

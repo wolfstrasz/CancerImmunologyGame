@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: KillerInitialSpeed
   m_EditorClassIdentifier: 
-  attributeName: 
+  attributeName: Killer Cell Initial Speed
   initialValue: 4
   currentValue: 4
-  modifiers: []

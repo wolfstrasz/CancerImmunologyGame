@@ -22,7 +22,7 @@ namespace ImmunotherapyGame.Abilities
 
 			for (int i = 0; i < abilities.Count; ++i)
 			{
-				Debug.Log("Casting Composite part: " + abilities[i].name);
+				//Debug.Log("Casting Composite part: " + abilities[i].name);
 				if (!abilities[i].CastAbility(abilityCaster, target))
 				{
 					Debug.LogError("Backtrack Log : " + this.GetType());
@@ -39,10 +39,10 @@ namespace ImmunotherapyGame.Abilities
 			alreadyCalled = false;
 
 			var compositeType = this.GetType();
-			Debug.Log("Composite type + " + compositeType + " has items: ");
+			//Debug.Log("Composite type + " + compositeType + " has items: ");
 			for ( int i = 0; i < abilities.Count; ++i)
 			{
-				Debug.Log("Item (" + (i + 1) + ") of type: " + abilities[i].GetType());
+				//Debug.Log("Item (" + (i + 1) + ") of type: " + abilities[i].GetType());
 				if (abilities[i].GetType().Equals(this.GetType()))
 				{
 					Debug.LogWarning("Composite Ability has a Composite Ability as a child. Possibility of unending loops!");

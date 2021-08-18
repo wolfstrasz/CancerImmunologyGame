@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Regulatory Bump Aura
   audioClip: {fileID: 0}
+  effectType: {fileID: 11400000, guid: c4b7c63857890334cae0fac1bc555c6b, type: 2}
   range: {fileID: 0}
   energyCost: {fileID: 0}
   cooldownTime: {fileID: 0}
@@ -29,5 +30,3 @@ MonoBehaviour:
   lifetime: {fileID: 11400000, guid: c652b6165d7ad3b4d90c1bb1672a413d, type: 2}
   auraRange: {fileID: 11400000, guid: 5c2b9a4443136a34a8b0121379f5c453, type: 2}
   isAuraEffectOverTime: 0
-  auraEffectPrefab: {fileID: 3688097416344702264, guid: 010f0714b630ea84faab6ca700fc1d8c,
-    type: 3}

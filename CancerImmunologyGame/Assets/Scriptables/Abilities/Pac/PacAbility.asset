@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pac Particle Ability
   audioClip: {fileID: 0}
+  effectType: {fileID: 11400000, guid: e3c3f07dde92e9949aa5a89dcf189aa6, type: 2}
   range: {fileID: 11400000, guid: 644cbe6c300139d46b5f0b176e1cde47, type: 2}
   energyCost: {fileID: 11400000, guid: 402731e2819c47f449241ee70dd382ce, type: 2}
   cooldownTime: {fileID: 11400000, guid: 6c76c9cba150e7a4294d56172f6643a3, type: 2}
@@ -30,8 +31,6 @@ MonoBehaviour:
   projectileCount: {fileID: 11400000, guid: 524fa21593cc57342ba499a19623ddaa, type: 2}
   projectileSpread: {fileID: 11400000, guid: 5c2ad4576e4fa9142b7aa188ce10e895, type: 2}
   projectileLifetime: {fileID: 0}
-  projectilePrefab: {fileID: 5293642523950685746, guid: 3f83288741d54c44fade1f6953906016,
-    type: 3}
   useRandomSpreadOffset: 1
-  spreadPerParticle: 22.5
+  spreadPerParticle: 45
   baseStartRotation: -22.5

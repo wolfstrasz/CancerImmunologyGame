@@ -13,7 +13,6 @@ namespace ImmunotherapyGame.Abilities
 		[Expandable] public StatAttribute projectileCount;
 		[Expandable] public StatAttribute projectileSpread;
 		[Expandable] public StatAttribute projectileLifetime;
-		[SerializeField] public GameObject projectilePrefab;
 		[SerializeField] private bool useRandomSpreadOffset;
 
 		[SerializeField] [ReadOnly] private float spreadPerParticle;
@@ -90,7 +89,10 @@ namespace ImmunotherapyGame.Abilities
 				Vector3 bulletDirection = Quaternion.Euler(0.0f, 0.0f, angleToRotateProjectileDirection) * direction;
 
 				// Find position to instantiate
-				Projectile projectile = Instantiate(projectilePrefab, spawnPosition, Quaternion.identity).GetComponent<Projectile>();
+				AbilityEffect abilityEffect = AbilityEffectManager.Instance.GetEffect(this);
+				Projectile projectile = abilityEffect.GetComponent<Projectile>();
+				projectile.transform.position = spawnPosition;
+				projectile.transform.rotation = Quaternion.identity;
 				projectile.Shoot(bulletDirection, this);
 
 				angleToRotateCurrentProjectileDirection += spreadPerParticle;

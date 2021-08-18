@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Regulatory Particles
   audioClip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+  effectType: {fileID: 11400000, guid: 4267c208b91bce0439a8b79907d88402, type: 2}
   range: {fileID: 11400000, guid: f1e988c637b69964fb50cf60773e09d5, type: 2}
   energyCost: {fileID: 0}
   cooldownTime: {fileID: 11400000, guid: 2c4cae77223d424449fd00153f66c8fc, type: 2}
@@ -30,8 +31,6 @@ MonoBehaviour:
   projectileCount: {fileID: 11400000, guid: 288fac322818dd1459371780890ebf23, type: 2}
   projectileSpread: {fileID: 11400000, guid: abc51911936b0724987aa4ca528df9ac, type: 2}
   projectileLifetime: {fileID: 11400000, guid: 7362a9ab94f54744c8688c674eeab41a, type: 2}
-  projectilePrefab: {fileID: 7457939708117967971, guid: 4825efb6d8d62ca4d8768ca64ec40332,
-    type: 3}
   useRandomSpreadOffset: 1
   spreadPerParticle: 90
   baseStartRotation: -45

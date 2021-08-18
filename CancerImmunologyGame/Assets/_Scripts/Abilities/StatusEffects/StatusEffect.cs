@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using ImmunotherapyGame.Abilities;
-
-namespace ImmunotherapyGame
+namespace ImmunotherapyGame.Abilities
 {
-    public class StatusEffect : MonoBehaviour
-    {
+    public class StatusEffect : AbilityEffect
+	{
         [Header("Linking")]
 		[SerializeField] protected Animator animator = null;
         [SerializeField] protected SpriteRenderer render = null;
@@ -19,23 +17,8 @@ namespace ImmunotherapyGame
 		[SerializeField] [ReadOnly] protected StatusEffectAbility ability = null;
 		[SerializeField] [ReadOnly] protected float lifetime = 0f;
 
-
-		protected virtual void FixedUpdate()
-		{
-			OnFixedUpdate();
-		}
-
-		protected virtual void OnLifeEnded()
-		{
-
-			if (!isEffectOverTime)
-			{
-				ability.UndoAbilityEffect(ownerCell);
-			}
-			Destroy(gameObject);
-		}
-
-		protected virtual void OnFixedUpdate()
+		/* ABILITY EFFECT */
+		internal override void OnFixedUpdate()
 		{
 			if (owner == null)
 			{
@@ -60,6 +43,17 @@ namespace ImmunotherapyGame
 			}
 		}
 
+		internal override void OnLifeEnded()
+		{
+
+			if (!isEffectOverTime)
+			{
+				ability.UndoAbilityEffect(ownerCell);
+			}
+			base.OnLifeEnded();
+		}
+
+		/* STATUS EFFECT */
 		protected virtual void ApplyInitialEffect()
 		{
 			ability.ApplyAbilityEffect(ownerCell);
@@ -69,7 +63,6 @@ namespace ImmunotherapyGame
 		{
 			ability.UndoAbilityEffect(ownerCell);
 		}
-
 
 		public virtual void Apply(StatusEffectAbility _statusEffectAbility, GameObject _owner)
 		{

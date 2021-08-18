@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Hypoxic Area
   audioClip: {fileID: 0}
+  effectType: {fileID: 11400000, guid: cdf0a54da967102409c25708264f4462, type: 2}
   range: {fileID: 0}
   energyCost: {fileID: 0}
   cooldownTime: {fileID: 0}
@@ -29,5 +30,3 @@ MonoBehaviour:
   lifetime: {fileID: 0}
   auraRange: {fileID: 11400000, guid: a35e6fed4b49cbb439b938e40059cba2, type: 2}
   isAuraEffectOverTime: 1
-  auraEffectPrefab: {fileID: 5717997335944468769, guid: 9dde72372df1edf418cdf6fe2cc83e15,
-    type: 3}

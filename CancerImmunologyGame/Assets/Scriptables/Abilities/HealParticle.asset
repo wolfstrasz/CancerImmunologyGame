@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
-  m_Name: MatrixSpawnRange
+  m_Script: {fileID: 11500000, guid: 5ae1ef29e1939c44fa6c722327ccfd09, type: 3}
+  m_Name: HealParticle
   m_EditorClassIdentifier: 
-  attributeName: Matrix Spawning Range
-  initialValue: 0.5
-  currentValue: 0.5

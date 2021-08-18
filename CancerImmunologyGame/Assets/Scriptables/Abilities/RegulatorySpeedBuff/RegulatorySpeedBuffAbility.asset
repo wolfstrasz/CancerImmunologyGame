@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Regulatory Speed Buff
   audioClip: {fileID: 8300000, guid: 19ee23220d478354ca29f732069ff0d0, type: 3}
+  effectType: {fileID: 11400000, guid: 37ce1af5d2a03ca4993b37310a94ebc3, type: 2}
   range: {fileID: 0}
   energyCost: {fileID: 0}
   cooldownTime: {fileID: 0}
@@ -28,5 +29,3 @@ MonoBehaviour:
     speedEffect: {fileID: 11400000, guid: 17b633e0518d4fb46991d27213bbcd31, type: 2}
   lifetime: {fileID: 11400000, guid: ccced557f9081664eb76681edea960a1, type: 2}
   isStatusEffectOverTime: 0
-  statusEffectPrefab: {fileID: 5018269084897014119, guid: 94b697ea87e40124c83392ed5fdeaec7,
-    type: 3}

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using ImmunotherapyGame.Abilities;
 
-namespace ImmunotherapyGame
+
+namespace ImmunotherapyGame.Abilities
 {
-	public abstract class Projectile : MonoBehaviour
+	public abstract class Projectile : AbilityEffect
 	{
 		[Header("Linking")]
 		[SerializeField] protected Animator animator = null;
@@ -20,21 +20,27 @@ namespace ImmunotherapyGame
 		[ReadOnly] protected float maxRangeToMove = 0f;
 
 
+		/* ABILITY EFFECT */
 		protected virtual void Awake() 
 		{
 			coll.isTrigger = true;
 		}
 
-		protected virtual void OnEnable() { }
-
-		protected virtual void OnDisable() { }
-
-
-		protected virtual void FixedUpdate()
+		internal override void OnFixedUpdate()
 		{
-			OnFixedUpdate();
+			// Move projectile
+			transform.position += direction * speed * Time.fixedDeltaTime;
+
+			// Check for out of range
+			if (Vector3.Magnitude(transform.position - spawnPosition) > maxRangeToMove)
+			{
+				OnOutOfRange();
+				return;
+			}
+
 		}
 
+		/* PROJECTILE */
 		protected virtual void OnTriggerEnter2D(Collider2D collider)
 		{
 			Cell cell = collider.gameObject.GetComponent<Cell>();
@@ -47,21 +53,7 @@ namespace ImmunotherapyGame
 			}
 		}
 
-		protected virtual void OnTriggerExit2D(Collider2D collider) { }
-
-		public virtual void OnFixedUpdate()
-		{
-			if (Vector3.Magnitude(transform.position - spawnPosition) > maxRangeToMove)
-			{
-				OnOutOfRange();
-				return;
-			}
-
-			transform.position += direction * speed * Time.fixedDeltaTime;
-		}
-
 		protected abstract void OnOutOfRange();
-		protected abstract void OnEndOfEffect();
 		protected abstract void OnCollisionWithTarget(Cell cell);
 
 		public virtual void Shoot(Vector3 _direction, ProjectileAbility _projectileAbility)

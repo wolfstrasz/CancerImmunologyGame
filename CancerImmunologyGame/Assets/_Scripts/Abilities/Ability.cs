@@ -12,6 +12,7 @@ namespace ImmunotherapyGame.Abilities
         public AudioClip audioClip;
 
         [Header("Non-Composite Data")]
+        [SerializeField] internal AbilityEffectType effectType;
         [Expandable] [SerializeField] protected StatAttribute range;
         [Expandable] [SerializeField] protected StatAttribute energyCost;
         [Expandable] [SerializeField] protected StatAttribute cooldownTime;

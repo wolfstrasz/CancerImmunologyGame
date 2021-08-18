@@ -2,44 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ImmunotherapyGame
+namespace ImmunotherapyGame.Abilities
 {  
 	public class SimpleProjectile : Projectile
 	{
-
-		[Header("Simple particle")]
-		[SerializeField]
-		private List<Sprite> sprites = new List<Sprite>();
-
-
-		protected override void Awake()
-		{
-			base.Awake();
-			if (sprites.Count > 0)
-			{
-				int randomInt = Random.Range(0, sprites.Count);
-				render.sprite = sprites[randomInt];
-			}
-
-		}
-
+		/* PROJECTILE */
 		protected override void OnOutOfRange()
 		{
-			OnEndOfEffect();
+			OnLifeEnded();
 		}
 
 		protected override void OnCollisionWithTarget(Cell cell)
 		{
 			projectileAbility.ApplyAbilityEffect(cell);
-			OnEndOfEffect();
+			OnLifeEnded();
 		}
-
-		protected override void OnEndOfEffect()
-		{
-			coll.enabled = false;
-			render.enabled = false;
-			Destroy(gameObject);
-		}
-
 	}
 }
