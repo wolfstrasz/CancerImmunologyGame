@@ -6,16 +6,16 @@ namespace ImmunotherapyGame
 {
 	public class DendriticCell : MonoBehaviour
 	{ 
-		[SerializeField] private List<ChemokinPath> chemokinePaths = new List<ChemokinPath>();
+		[SerializeField] private List<ChemokinePath> chemokinePaths = new List<ChemokinePath>();
 		[SerializeField] [ReadOnly] private bool interacted = false;
 
 		public bool HasInteracted => interacted;
 
 		public void Interact()
 		{
-			foreach (ChemokinPath path in chemokinePaths)
+			foreach (ChemokinePath path in chemokinePaths)
 			{
-				path.ActivateChemokines();
+				path.gameObject.SetActive(true);
 			}
 			interacted = true;
 		}

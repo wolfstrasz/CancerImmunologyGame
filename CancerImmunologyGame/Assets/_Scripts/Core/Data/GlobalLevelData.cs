@@ -33,8 +33,7 @@ namespace ImmunotherapyGame
 
 		public static void UpdateLevelData()
 		{
-			RespawnAreas.Clear();
-			RespawnAreas.AddRange(GameObject.FindObjectsOfType<PlayerRespawnArea>(true));
+	
 			Cancers.Clear();
 			Cancers.AddRange(GameObject.FindObjectsOfType<Cancer>(true));
 			KillerCells.Clear();

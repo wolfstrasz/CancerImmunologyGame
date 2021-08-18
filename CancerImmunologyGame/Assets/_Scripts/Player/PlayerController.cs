@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Player
 		[SerializeField] private KillerCell controlledCell = null;
 
 		[Header("Aiming")]
-		[SerializeField] private GameObject crosshairCanvas = null;
+		[SerializeField] private GameObject crosshairPivot = null;
 		[SerializeField] private Transform crosshair = null;
 		protected Quaternion crosshairRotation = Quaternion.identity;
 
@@ -25,7 +25,7 @@ namespace ImmunotherapyGame.Player
 
 		private bool InitiatePrimaryAttack { get; set; }
 		private bool InitiateSpecialAttack { get; set; }
-		private bool CanAttack => crosshairCanvas.activeInHierarchy;
+		private bool CanAttack => crosshairPivot.activeInHierarchy;
 		private Vector2 MoveDirection { get; set; }
 
 
@@ -33,6 +33,7 @@ namespace ImmunotherapyGame.Player
 		{
 			base.Awake();
 			playerData.CurrentCell = controlledCell;
+			controlledCell.onDeathEvent += OnCellDeath;
 		}
 
 
@@ -41,7 +42,7 @@ namespace ImmunotherapyGame.Player
 		{
 			transform.position = controlledCell.transform.position;
 			transform.rotation = controlledCell.transform.rotation;
-			crosshairCanvas.transform.rotation = crosshairRotation;
+			crosshairPivot.transform.rotation = crosshairRotation;
 
 			if (CanAttack)
 			{
@@ -77,7 +78,7 @@ namespace ImmunotherapyGame.Player
 			controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 		}
 
-		public void OnCellDeath()
+		public void OnCellDeath(Cell cell)
 		{ 
 			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)
 			{
@@ -86,22 +87,25 @@ namespace ImmunotherapyGame.Player
 			}
 
 			// Find closest spawn location
-			List < PlayerRespawnArea > respawnLocations = GlobalLevelData.RespawnAreas;
-			Vector3 closestRespawnLocation = respawnLocations[0].transform.position;
-			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Location);
+			List <PlayerRespawnArea> respawnLocations = GlobalLevelData.RespawnAreas;
+			Vector3 closestRespawnLocation = respawnLocations[0].Position;
+			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Position);
 
 			foreach (var area in respawnLocations)
 			{
-				float distance = Vector3.Distance(transform.position, area.Location);
+				float distance = Vector3.Distance(transform.position, area.Position);
 				if (distance <= minDistance)
 				{
 					minDistance = distance;
-					closestRespawnLocation = area.Location;
+					closestRespawnLocation = area.Position;
 				}
 			}
 
-			controlledCell.gameObject.transform.position = closestRespawnLocation;
-			gameObject.transform.position = closestRespawnLocation;
+			// Transport cell and heal TODO: Move to cell doing it.
+			controlledCell.transform.position = closestRespawnLocation;
+			transform.position = closestRespawnLocation;
+			controlledCell.ApplyHealthAmount(controlledCell.cellType.MaxHealth);
+			controlledCell.ApplyEnergyAmount(controlledCell.cellType.MaxEnergy);
 
 		}
 
@@ -143,13 +147,17 @@ namespace ImmunotherapyGame.Player
 			// Get 2D direction
 			Vector2 direction = value.Get<Vector2>();
 
-			// Calculate rotation
-			float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-			crosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+			if (direction != Vector2.zero)
+			{
+				// Calculate rotation
+				float rotationAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+				crosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+			}
 		}
 
 		void OnMouseAim(InputValue value)
 		{
+
 			// Obtain pointer position
 			Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 			worldPosition.z = 0.0f;
@@ -161,6 +169,14 @@ namespace ImmunotherapyGame.Player
 			// Calculate rotation
 			float rotationAngle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 			crosshairRotation = Quaternion.Euler(0.0f, 0.0f, rotationAngle);
+		}
+
+		void OnDisplayAim(InputValue value)
+		{
+			if (value.isPressed)
+			{
+				crosshairPivot.SetActive(!crosshairPivot.activeInHierarchy);
+			}
 		}
 
 	}

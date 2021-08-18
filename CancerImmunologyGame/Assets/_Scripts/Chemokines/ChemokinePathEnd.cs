@@ -4,13 +4,14 @@ using ImmunotherapyGame.Player;
 namespace ImmunotherapyGame.Chemokines {
 	public class ChemokinePathEnd : MonoBehaviour
 	{
-		[SerializeField] private ChemokinPath owner = null;
+		[SerializeField] private ChemokinePath path = null;
 
 		void OnTriggerEnter2D(Collider2D collider)
 		{
 			if (collider.gameObject.GetComponent<PlayerController>() != null)
 			{
-				owner.OnPlayerReachedEndOfPath();
+				path.HideChemokines();
+				gameObject.SetActive(false);
 			}
 		}
 		

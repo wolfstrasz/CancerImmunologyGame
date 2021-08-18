@@ -6,26 +6,22 @@ using UnityEngine.EventSystems;
 
 namespace ImmunotherapyGame.UI
 {
-    /// Credit zero3growlithe
-    /// sourced from: http://forum.unity3d.com/threads/scripts-useful-4-6-scripts-collection.264161/page-2#post-2011648
 
     [RequireComponent(typeof(ScrollRect))]
     public class UIScrollToSelection : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField]
-        private ScrollType scrollDirection;
-        //[SerializeField]
-        //private float scrollSpeed = 10f;
-        [SerializeField]
-        private int childDepthCheck = 1;
+        [SerializeField] private ScrollType scrollDirection;
+		[SerializeField] private int childDepthCheck = 1;
+        [SerializeField] [ReadOnly] float timeToStopHorizontalScroll = 0.1f;
+        [SerializeField] [ReadOnly] float timeToStopVerticalScroll = 0.01f;
 
         // SCROLL REFERENCES
-        protected RectTransform ScrollWindow { get; set; }
-        protected ScrollRect TargetScrollRect { get; set; }
-        protected RectTransform TargetScrollContent
+        protected ScrollRect scrollRect { get; set; }
+        protected RectTransform scrollRectTransform { get; set; }
+        protected RectTransform scrollContent
         {
-            get { return TargetScrollRect != null ? TargetScrollRect.content : null; }
+            get { return scrollRect != null ? scrollRect.content : null; }
         }
 
         // EVENT SYSTEM SELECTION
@@ -38,13 +34,13 @@ namespace ImmunotherapyGame.UI
         private bool scrollToVerticalSelection = false;
         private bool scrollToHorizontalSelection = false;
 
-        private bool MainReferencesMissing => (TargetScrollRect == null || TargetScrollContent == null || ScrollWindow == null);
+        private bool MainReferencesMissing => (scrollRect == null || scrollContent == null || scrollRectTransform == null);
 
         //*** METHODS - PROTECTED ***//
         protected virtual void Awake()
         {
-            TargetScrollRect = GetComponent<ScrollRect>();
-            ScrollWindow = TargetScrollRect.GetComponent<RectTransform>();
+            scrollRect = GetComponent<ScrollRect>();
+            scrollRectTransform = scrollRect.GetComponent<RectTransform>();
         }
 
         protected virtual void Update()
@@ -71,23 +67,39 @@ namespace ImmunotherapyGame.UI
             // update current selected rect transform
             if (CurrentSelectedGameObject != LastCheckedGameObject && CurrentSelectedGameObject != null)
             {
+                Debug.Log("Update selected");
+
+                // Get transform of current object
                 Transform targetTransform = CurrentSelectedGameObject.transform;
 
-                // Find object that is a child of the scroll rect but a parent of the target object at maximum height parentHeight
+
+                // Check if selected object is part of the content
+                // By finding transform object parent that is child of the content
                 int depth = childDepthCheck;
 
-                while (targetTransform != null && depth > 0 && targetTransform.parent != transform)
+                while (targetTransform != null && depth > 0 && targetTransform.parent != scrollContent.gameObject.transform)
 				{
                     targetTransform = targetTransform.parent;
                     --depth;
-
                 }
 
-                CurrentTargetRectTransform = targetTransform == null ? null 
-                    : targetTransform.GetComponent<RectTransform>();
-            
-                LastCheckedGameObject = CurrentSelectedGameObject;
+                // If going up the parent tree we do not reach the content then we just not update layout
+                if (targetTransform == null || depth < 0)
+				{
+                    CurrentTargetRectTransform = null;
+                    timeToStopHorizontalScroll = 0f;
+                    timeToStopVerticalScroll = 0f;
+                } 
+                else // The target that has to be in screen is the object that is child of the content
+				{
+                    CurrentTargetRectTransform = targetTransform.GetComponent<RectTransform>();
+                }
 
+                LastCheckedGameObject = CurrentSelectedGameObject;
+                timeToStopHorizontalScroll = 0.1f;
+                timeToStopVerticalScroll = 0.1f;
+
+                // Update position depending on selection
                 switch (scrollDirection)
                 {
                     case ScrollType.VERTICAL:
@@ -97,7 +109,6 @@ namespace ImmunotherapyGame.UI
                     case ScrollType.HORIZONTAL:
                         scrollToHorizontalSelection = true;
                         scrollToVerticalSelection = false;
-
                         break;
                     case ScrollType.BOTH:
                         scrollToVerticalSelection = true;
@@ -108,58 +119,79 @@ namespace ImmunotherapyGame.UI
         }
 
 
-        private void UpdateVerticalScrollPosition(RectTransform selection)
-        {
-            // move the current scroll rect to correct position
-            float selectionCentrePosition = -selection.anchoredPosition.y - (selection.rect.height * (0.5f - selection.pivot.y));
-            float elementHalfHeight = selection.rect.height / 2f;
-            float windowHeight = ScrollWindow.rect.height;
-            float contentAnchorPosition = TargetScrollContent.anchoredPosition.y;
+		private void UpdateVerticalScrollPosition(RectTransform selection)
+		{
 
-            // get the element offset value depending on the cursor move direction
-            float offlimitsValue = GetScrollOffset(selectionCentrePosition, contentAnchorPosition, elementHalfHeight, windowHeight);
+			float selectionTopBound = selection.anchoredPosition.y + scrollContent.anchoredPosition.y + selection.rect.height; // positive
+            float selectionBottomBound = selection.anchoredPosition.y + scrollContent.anchoredPosition.y - selection.rect.height; // Negative
 
-            // move the target scroll rect
-            TargetScrollRect.verticalNormalizedPosition += (offlimitsValue / TargetScrollContent.rect.height);
-            if (Mathf.Abs(offlimitsValue) < 1f)
-                scrollToVerticalSelection = false;
-        }
+			float offlimitsValue = 0f;
 
-        private void UpdateHorizontalScrollPosition(RectTransform selection)
-        {
-            // move the current scroll rect to correct position
-            float selectionPosition = -selection.anchoredPosition.x - (selection.rect.width * (0.5f - selection.pivot.x));
 
-            float elementWidth = selection.rect.width;
-            float maskWidth = ScrollWindow.rect.width;
-            float contentAnchorPosition = -TargetScrollContent.anchoredPosition.x;
-            
-            // get the element offset value depending on the cursor move direction
-            float offlimitsValue = -GetScrollOffset(selectionPosition, contentAnchorPosition, elementWidth, maskWidth);
-            // move the target scroll rect
-            TargetScrollRect.horizontalNormalizedPosition += (offlimitsValue / TargetScrollContent.rect.width);
-
-            if (Mathf.Abs(offlimitsValue) < 1f)
-                scrollToHorizontalSelection = false;
-        }
-
-        private float GetScrollOffset(float targetPosition, float contentAnchorPosition, float targetHalfLength, float windowLength)
-        {
-            
-            if (targetPosition - targetHalfLength < contentAnchorPosition)
+            if (selectionTopBound > 0f)
             {
-                return (contentAnchorPosition - targetPosition + targetHalfLength) ;
+                offlimitsValue = (selectionTopBound / scrollContent.rect.height);
             }
-			else if (targetPosition + targetHalfLength > contentAnchorPosition + windowLength)
+            else if (selectionBottomBound < -scrollRectTransform.rect.height)
 			{
-				return (contentAnchorPosition + windowLength) - (targetPosition + targetHalfLength);
-			}
+				offlimitsValue =  (selectionBottomBound - (-scrollRectTransform.rect.height)) / scrollContent.rect.height;
+            }
+			scrollRect.verticalNormalizedPosition += offlimitsValue;
 
-			return 0;
+			if (Mathf.Abs(offlimitsValue) <= 0.001f || scrollRect.verticalNormalizedPosition <= 0f || scrollRect.verticalNormalizedPosition >= 1f)
+			{
+                if (Time.timeScale == 0f)
+				{
+                    scrollToVerticalSelection = false;
+				}
+                else
+				{
+                    timeToStopVerticalScroll -= Time.deltaTime;
+                    if (timeToStopVerticalScroll <= 0f)
+                    {
+                        scrollToVerticalSelection = false;
+                    }
+                }
+               
+            }
+
+		}
+
+		private void UpdateHorizontalScrollPosition(RectTransform selection)
+		{
+            // Check if it out of bounds
+            float selectionLeftBound = selection.anchoredPosition.x - selection.rect.width + scrollContent.anchoredPosition.x;
+            float selectionRightBound = selection.anchoredPosition.x + selection.rect.width  + scrollContent.anchoredPosition.x;
+            float offlimitsValue = 0f;
+
+            if (selectionLeftBound < 0)
+			{
+                offlimitsValue = selectionLeftBound / scrollContent.rect.width;
+            } else if (selectionRightBound > scrollRectTransform.rect.width)
+			{
+                offlimitsValue = (selectionRightBound - scrollRectTransform.rect.width) / scrollContent.rect.width;
+            }
+
+            scrollRect.horizontalNormalizedPosition += offlimitsValue;
+            if (Mathf.Abs(offlimitsValue) <= 0.001f || scrollRect.horizontalNormalizedPosition <= 0f || scrollRect.horizontalNormalizedPosition >= 1f) 
+            {
+
+                if (Time.timeScale == 0f)
+                {
+                    scrollToVerticalSelection = false;
+                }
+                else
+                {
+                    timeToStopHorizontalScroll -= Time.deltaTime;
+                    if (timeToStopHorizontalScroll <= 0f)
+                    {
+                        scrollToHorizontalSelection = false;
+                    }
+                }
+            }
         }
 
-
-        public enum ScrollType
+		public enum ScrollType
         {
             VERTICAL,
             HORIZONTAL,

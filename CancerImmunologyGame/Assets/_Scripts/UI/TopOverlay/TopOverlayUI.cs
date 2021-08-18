@@ -9,8 +9,8 @@ namespace ImmunotherapyGame.UI.TopOverlay
 {
     public class TopOverlayUI : Singleton<TopOverlayUI>
     {
-		[SerializeField]
-		private GameObject gamePausedText = null;
+		[SerializeField] private GameObject gamePausedText = null;
+
 		public bool GamePaused 
 		{ 
 			get { return gamePausedText.activeInHierarchy; } 

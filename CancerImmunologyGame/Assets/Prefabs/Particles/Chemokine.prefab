@@ -120,6 +120,8 @@ MonoBehaviour:
   audio: {fileID: 4010284065806789738}
   render: {fileID: 3205355822767766341}
   glow: {fileID: 6188563708343863915}
+  coll: {fileID: 3205355822767766342}
+  isCollected: 0
 --- !u!82 &4010284065806789738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -248,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskObject: {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
+  isApplicationQuitting: 0
 --- !u!1 &6188563708343863915
 GameObject:
   m_ObjectHideFlags: 0

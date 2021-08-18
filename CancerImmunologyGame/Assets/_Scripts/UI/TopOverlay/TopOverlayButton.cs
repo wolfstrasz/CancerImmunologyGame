@@ -12,25 +12,27 @@ namespace ImmunotherapyGame.UI.TopOverlay
     public class TopOverlayButton : UIMenuNode
     {
         [Header("Overlay Button")]
-        [SerializeField]
-        private TopOverlayButtonData buttonData = null;
-        [SerializeField]
-        private Animator anim = null;
-        [SerializeField]
-        private Image imageRender = null;
-        [SerializeField]
-        private Image glowImageRender = null;
+        [SerializeField] private TopOverlayButtonData buttonData = null;
+        [SerializeField] private GameObject buttonVisual = null;
+        [SerializeField] private Animator anim = null;
+        [SerializeField] private Image imageRender = null;
+        [SerializeField] private Image glowImageRender = null;
 
-
-        void Awake()
-		{
-            buttonData.onChangedStatus += Activate;
-            Debug.Log("ButtonData " + buttonData.name + " is unlocked = " + buttonData.unlocked);
-            gameObject.SetActive(buttonData.unlocked);
+        protected override void OnEnable()
+        {
             imageRender.sprite = buttonData.icon;
             glowImageRender.material = buttonData.glowMaterial;
-		}
+            buttonData.onChangedStatus += Activate;
+            buttonData.onChangedAnimationStatus += Animate;
+            buttonVisual.SetActive(buttonData.unlocked);
+        }
 
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            buttonData.onChangedStatus -= Activate;
+            buttonData.onChangedAnimationStatus -= Animate;
+        }
 
         public void Animate(bool shouldAnimate)
 		{
@@ -49,34 +51,15 @@ namespace ImmunotherapyGame.UI.TopOverlay
         public void Activate(bool shouldActivate)
 		{
             Debug.Log("Activate:  " + buttonData.name + " is unlocked = " + buttonData.unlocked + " should Activate = " + shouldActivate);
-
-            gameObject.SetActive(shouldActivate);
+            buttonVisual.SetActive(shouldActivate);
 		}
-
 
         public override void OnPointerEnter(PointerEventData eventData)
 		{
-            Debug.Log("UMN: POINTER_ENTER -> " + gameObject.name);
             OnSelect(eventData);
         }
 
-		protected override void OnDisable()
-		{
-			base.OnDisable();
-            buttonData.onChangedAnimationStatus -= Animate;
-		}
-
-		protected override void OnEnable()
-		{
-			buttonData.onChangedAnimationStatus += Animate;
-		}
-
-		void OnDestroy()
-		{
-            buttonData.onChangedStatus -= Activate;
-		}
-
-		protected override void OnPointerLeftClick(PointerEventData eventData)
+        protected override void OnPointerLeftClick(PointerEventData eventData)
 		{
 			anim.SetTrigger("Opened");
             if (buttonData.onOpenMenu != null)
@@ -87,7 +70,7 @@ namespace ImmunotherapyGame.UI.TopOverlay
 
 		public override void OnPointerExit(PointerEventData eventData)
 		{
-            Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
+            //Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
             OnDeselect(eventData);
 		}
 	}
