@@ -4,6 +4,9 @@ using ImmunotherapyGame.AI;
 using ImmunotherapyGame.Audio;
 using ImmunotherapyGame.UI.TopOverlay;
 using ImmunotherapyGame.Bloodflow;
+using ImmunotherapyGame.Abilities;
+using ImmunotherapyGame.ImmunotherapyResearchSystem;
+using UnityEngine;
 
 namespace ImmunotherapyGame
 {
@@ -15,16 +18,26 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+
 				TopOverlayUI.Instance.GamePaused = false;
 				GlobalLevelData.UpdateLevelData();
 				BackgroundMusic.Instance.PlayMusic();
 				TutorialManager.Instance.LoadLevelTutorials();
-				BloodcellSpawner.Instance.Initialise();
-				BloodflowEnvironment.Instance.Initialise();
 			}
 
 			internal override void OnFixedUpdate()
 			{
+
+				for (int i = 0; i < GlobalLevelData.BloodflowEnvironments.Count; ++i)
+				{
+					GlobalLevelData.BloodflowEnvironments[i].OnFixedUpdate();
+				}
+
+				for (int i = 0; i < GlobalLevelData.BloodCellSpawners.Count; ++i)
+				{
+					GlobalLevelData.BloodCellSpawners[i].OnFixedUpdate();
+				}
+
 				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
 				{
 					pc.OnFixedUpdate();
@@ -47,14 +60,13 @@ namespace ImmunotherapyGame
 						hc.OnFixedUpdate();
 				}
 
-				BloodcellSpawner.Instance.OnFixedUpdate();
-				BloodflowEnvironment.Instance.OnFixedUpdate();
+				AbilityEffectManager.Instance.OnFixedUpdate();
 			}
 
 			internal override void OnUpdate()
 			{
 				TutorialManager.Instance.OnUpdate();
-
+		
 				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
 				{
 					pc.OnUpdate();
@@ -96,6 +108,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateReEnter()
 			{
+
 				TopOverlayUI.Instance.GamePaused = false;
 
 			}

@@ -2,14 +2,25 @@ using System.Collections.Generic;
 using ImmunotherapyGame.Player;
 using ImmunotherapyGame.Cancers;
 using ImmunotherapyGame.AI;
+using ImmunotherapyGame.ImmunotherapyResearchSystem;
+
 using UnityEngine;
 
 using ImmunotherapyGame.Abilities;
+
+using ImmunotherapyGame.Bloodflow;
 
 namespace ImmunotherapyGame
 {
     public static class GlobalLevelData
     {
+
+		// Bloodflow
+		public static List<BloodflowEnvironment> BloodflowEnvironments = new List<BloodflowEnvironment>();
+		public static List<BloodcellSpawner> BloodCellSpawners = new List<BloodcellSpawner>();
+
+
+
 		// Shared object pool
 		public static List<Cancer> Cancers = new List<Cancer>();
 		public static List<KillerCell> KillerCells = new List<KillerCell>();

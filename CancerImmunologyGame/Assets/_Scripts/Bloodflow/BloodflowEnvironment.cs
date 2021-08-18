@@ -9,33 +9,30 @@ namespace ImmunotherapyGame.Bloodflow
 {
 	public class BloodflowEnvironment : Singleton<BloodflowEnvironment>, IControllerMovementOverride
 	{
-		private VertexPath currentPath = null;
-
 		[Header("Attributes")]
-		[SerializeField] private List<PathCreator> allPathCreators = null;
+		[SerializeField] private List<PathCreator> allPathCreators = new List<PathCreator>();
 		[SerializeField] private float flow_speed = 7.0f;
 		[SerializeField] private bool flipNormal = true;
-
-
-		float FlippedNormal => flipNormal ? -1.0f : 1.0f;
 
 		[Header("Debug")]
 		[SerializeField] [ReadOnly] internal GameObject overridableObject;
 		[SerializeField] [ReadOnly] int count = 0;
-		[SerializeField] [ReadOnly] int pathIndex = -1;
+		[SerializeField] [ReadOnly] int currentPathIndex = -1;
 		[SerializeField] [ReadOnly] private List<VertexPath> allPaths = new List<VertexPath>();
 
+		private float FlippedNormal => flipNormal ? -1.0f : 1.0f;
+		private VertexPath currentPath { get; set; }
 
-		public void Initialise()
+		private void OnEnable()
 		{
-			allPaths.Clear();
-			for (int i = 0; i < allPathCreators.Count; ++i)
-			{
-				allPaths.Add(allPathCreators[i].path);
-			}
-			count = 0;
+			CreatePaths();
+			GlobalLevelData.BloodflowEnvironments.Add(this);
 		}
 
+		private void OnDisable()
+		{
+			GlobalLevelData.BloodflowEnvironments.Remove(this);
+		}
 
 		public void OnFixedUpdate()
 		{
@@ -43,10 +40,17 @@ namespace ImmunotherapyGame.Bloodflow
 			{
 				// Find Closest path
 				SetClosestPath();
-
-				// Apply Override by path
-
 			}
+		}
+
+		public void CreatePaths()
+		{
+			allPaths.Clear();
+			for (int i = 0; i < allPathCreators.Count; ++i)
+			{
+				allPaths.Add(allPathCreators[i].path);
+			}
+			count = 0;
 		}
 
 		private void SetClosestPath()
@@ -59,7 +63,7 @@ namespace ImmunotherapyGame.Bloodflow
 				{
 					currentPath = allPaths[i];
 					minDist = dist;
-					pathIndex = i;
+					currentPathIndex = i;
 				}
 			}
 		}
@@ -67,6 +71,12 @@ namespace ImmunotherapyGame.Bloodflow
 
 		public void ApplyOverride(ref Vector2 movementVector, ref Quaternion newRotation, ref Vector3 position)
 		{
+			if (allPathCreators.Count <= 0)
+			{
+				Debug.LogWarning("Bloodflow Environment has 0 assigned path creators");
+				return;
+			}
+
 			// Find normal at position
 			float time = currentPath.GetClosestTimeOnPath(position);
 			Debug.Log(time);
@@ -96,7 +106,7 @@ namespace ImmunotherapyGame.Bloodflow
 				if (overridableObject != null)
 				{
 					overridableObject.GetComponent<IControllerMovementOverridable>().UnsubscribeMovementOverride(this);
-					pathIndex = -1;
+					currentPathIndex = -1;
 
 				}
 				overridableObject = overridable;
@@ -119,7 +129,7 @@ namespace ImmunotherapyGame.Bloodflow
 				{
 					overridableObject.GetComponent<IControllerMovementOverridable>().UnsubscribeMovementOverride(this);
 					overridableObject = null;
-					pathIndex = -1;
+					currentPathIndex = -1;
 				}
 			}
 		}
