@@ -7264,12 +7264,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: -2
+  sortLevel: -10
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 1870089869874960226}
   nodesToListen:
   - {fileID: 8944252336538770079}
-  canvas: {fileID: 0}
 --- !u!223 &1891725182501558136
 Canvas:
   m_ObjectHideFlags: 0
@@ -7727,6 +7728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollDirection: 0
   childDepthCheck: 1
+  timeToStopHorizontalScroll: 0.1
+  timeToStopVerticalScroll: 0.01
 --- !u!222 &6472819877236642147
 CanvasRenderer:
   m_ObjectHideFlags: 0

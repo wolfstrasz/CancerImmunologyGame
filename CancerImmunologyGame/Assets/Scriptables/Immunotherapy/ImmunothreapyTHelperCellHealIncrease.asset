@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
+  m_Name: ImmunothreapyTHelperCellHealIncrease
+  m_EditorClassIdentifier: 
+  title: 
+  description: 
+  statThumbnailSprite: {fileID: 0}
+  generalThumbnailSprite: {fileID: 0}
+  initialUnlockValue: 0
+  initialCurrentValue: 0
+  unlocked: 0
+  statAttribute: {fileID: 0}
+  upgrades: []
+  nextUpgradeIndex: 0
+  currentValue: 0
+  appliedValue: 0

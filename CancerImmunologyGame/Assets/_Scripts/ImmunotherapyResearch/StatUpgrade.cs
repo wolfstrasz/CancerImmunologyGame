@@ -17,6 +17,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
         [Header("Status")]
         [SerializeField] private bool initialUnlockValue;
+        [SerializeField] private float initialCurrentValue = 0;
         [SerializeField] [ReadOnly] internal bool unlocked; // Data to save
 
         [Header("Upgrades")]
@@ -58,7 +59,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
         internal void ApplyUpgradesFromStartToNextUpgradeIndex()
 		{
-            currentValue = 0f;
+            currentValue = initialCurrentValue;
 
             for (int j = 0; j < nextUpgradeIndex; ++j)
 			{
@@ -95,7 +96,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		public void OnAfterDeserialize()
 		{
-            currentValue = 0;
+            currentValue = initialCurrentValue;
             unlocked = initialUnlockValue;
 		}
 

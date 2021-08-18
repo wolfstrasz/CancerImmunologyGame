@@ -18,6 +18,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+				Debug.Log("Entering: Play State");
 
 				TopOverlayUI.Instance.GamePaused = false;
 				GlobalLevelData.UpdateLevelData();
@@ -67,6 +68,11 @@ namespace ImmunotherapyGame
 			{
 				TutorialManager.Instance.OnUpdate();
 		
+				for (int i  = 0; i < GlobalLevelData.Immunotherapies.Count; ++i)
+				{
+					GlobalLevelData.Immunotherapies[i].OnUpdate();
+				}
+
 				foreach (PlayerController pc in GlobalLevelData.PlayerControllers)
 				{
 					pc.OnUpdate();
@@ -108,6 +114,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateReEnter()
 			{
+				Debug.Log("Re-Entering: Play State");
 
 				TopOverlayUI.Instance.GamePaused = false;
 

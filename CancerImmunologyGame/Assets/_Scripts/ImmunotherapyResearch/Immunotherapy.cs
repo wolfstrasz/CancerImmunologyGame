@@ -10,7 +10,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
     public class Immunotherapy : Singleton<Immunotherapy>
     {
 		[Header("Data")]
-		[SerializeField] ImmunotherapyResearchData data = null;
+		[SerializeField] List<StatUpgrade> applicableUpgrades = null;
 		[SerializeField] [Expandable] private StatAttribute lifetimeStat = null;
 		[SerializeField] [Expandable] private StatAttribute cooldownStat = null;
 
@@ -26,17 +26,13 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		[SerializeField] [ReadOnly] private bool isImmunotherapyApplied = false;
 
-		public void Activate()
-		{
-			gameObject.SetActive(true);
-		}
-
 		public void OnUpdate()
 		{
-			if (!gameObject.activeInHierarchy) return;
-
+			Debug.Log("IMMUNOTHERAPY UPDATE");
 			if (lifetimeLeft > 0f)
 			{
+				Debug.Log("IMMUNOTHERAPY LIFETIME DROP");
+
 				lifetimeLeft -= Time.deltaTime;
 
 				if (lifetimeLeft <= 0f)
@@ -65,12 +61,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 			}
 		}
-
-		private void Update()
-		{
-			OnUpdate();
-		}
-
 
 		private void SwitchToLifetimeBar()
 		{
@@ -106,15 +96,17 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			cooldownBar.gameObject.SetActive(true);
 			lifetimeBar.gameObject.SetActive(false);
 			button.Activate();
+
+			GlobalLevelData.Immunotherapies.Add(this);
 		}
 
 		private void ActivateImmunotherapyEffects()
 		{
 			// Do activations
 			// .....
-			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			for (int i = 0; i < applicableUpgrades.Count; ++i)
 			{
-				data.statUpgrades[i].ApplyEffect();
+				applicableUpgrades[i].ApplyEffect();
 			}
 
 			isImmunotherapyApplied = true;
@@ -127,9 +119,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			if (!isImmunotherapyApplied) return;
 
 			// Do deactivations
-			for (int i = 0; i < data.statUpgrades.Count; ++i)
+			for (int i = 0; i < applicableUpgrades.Count; ++i)
 			{
-				data.statUpgrades[i].RemoveEffect();
+				applicableUpgrades[i].RemoveEffect();
 			}
 
 			SwitchToCooldownBar();
@@ -161,6 +153,12 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			lifetimeLeft = 0f;
 			cooldownLeft = 0f;
 			SwitchToCooldownBar();
+
+			if (isImmunotherapyApplied)
+			{
+				RemoveImmunotherapyEffects();
+			}
+			GlobalLevelData.Immunotherapies.Remove(this);
 		}
 
 	}

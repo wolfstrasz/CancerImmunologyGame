@@ -19,7 +19,7 @@ namespace ImmunotherapyGame
 		public static List<BloodflowEnvironment> BloodflowEnvironments = new List<BloodflowEnvironment>();
 		public static List<BloodcellSpawner> BloodCellSpawners = new List<BloodcellSpawner>();
 
-
+		public static List<Immunotherapy> Immunotherapies = new List<Immunotherapy>();
 
 		// Shared object pool
 		public static List<Cancer> Cancers = new List<Cancer>();

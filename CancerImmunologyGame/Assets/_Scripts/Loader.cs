@@ -15,6 +15,7 @@ using ImmunotherapyGame.ImmunotherapyResearchSystem;
 using ImmunotherapyGame.Audio;
 using ImmunotherapyGame.LevelTasks;
 using ImmunotherapyGame.Tutorials;
+using ImmunotherapyGame.Abilities;
 
 namespace ImmunotherapyGame.Loader
 {
@@ -35,6 +36,7 @@ namespace ImmunotherapyGame.Loader
 			AudioManager.Instance.Initialise();
 			InterfaceManager.Instance.Initialise();
 			BackgroundMusic.Instance.Initialise();
+			AbilityEffectManager.Instance.Initialise();
 
 			List<IDataManager> allDataManagers = new List<IDataManager>(4);
 
