@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3824674062909241635
+--- !u!1 &1631281603921622213
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3824674062909241644}
+  - component: {fileID: 1631281603921622218}
   m_Layer: 0
   m_Name: DebugPlotSpawnLocation
   m_TagString: Untagged
@@ -16,21 +16,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3824674062909241644
+--- !u!4 &1631281603921622218
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824674062909241635}
+  m_GameObject: {fileID: 1631281603921622213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3824674063084145286}
+  m_Father: {fileID: 1631281604032563040}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &3824674063084145284
+--- !u!1 &1631281604032563042
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -38,68 +38,67 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3824674063084145286}
-  - component: {fileID: 3824674063084145285}
-  - component: {fileID: 3824674063084145287}
-  - component: {fileID: 5129179851068921535}
-  m_Layer: 12
-  m_Name: Cancer
+  - component: {fileID: 1631281604032563040}
+  - component: {fileID: 1631281604032563043}
+  - component: {fileID: 1631281604032563041}
+  - component: {fileID: 7250233361236990809}
+  m_Layer: 0
+  m_Name: CancerNoSpawnNoHypoxic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3824674063084145286
+--- !u!4 &1631281604032563040
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824674063084145284}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1631281604032563042}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 141.65, y: -45.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3824674062909241644}
-  - {fileID: 8651414212254473628}
+  - {fileID: 1631281603921622218}
+  - {fileID: 6611141666659881082}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3824674063084145285
+--- !u!114 &1631281604032563043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824674063084145284}
+  m_GameObject: {fileID: 1631281604032563042}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d494a53ac4673bf4fa18e9871a2c63fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cancerCellPrefab: {fileID: 1070459107712460833, guid: 4e2983c11d3771641aedecdfd8d8140d,
+  cancerCellPrefab: {fileID: 1070459107712460833, guid: 14cdc73c3df88814c9ec016d32ce585a,
     type: 3}
-  cafCellPrefab: {fileID: 9164334349910430274, guid: 272c5ee7e9399eb4184efab5a3c2179e,
-    type: 3}
+  cafCellPrefab: {fileID: 0}
   isAlive: 1
-  canSpawnCells: 1
+  canSpawnCells: 0
   canSpawnCafCells: 0
-  shouldKeepCancerCellsPacked: 0
-  maximumCells: 20
-  timeBetweenDivisions: 20
-  spawnsBeforeCafSpawn: 5
-  balanceRatioCellToCaf: 3
+  shouldKeepCellsPacked: 1
+  maximumCells: 6
+  timeBetweenDivisions: 5
+  spawnsBeforeCafSpawn: 0
+  balanceRatioCellToCaf: 0
   radius: 0.25
   radiusThinner: 0.15
   angleRotation: 60
   offsetOfAnimation: 0.2
-  cellsToGenerate: 8
+  cellsToGenerate: 4
   debugPlotting: 0
   availablePointsPrefab: {fileID: 4068078220915920113, guid: 23529fd81df7ac34b9a4443d174201b2,
     type: 3}
   spawnPointPrefab: {fileID: 3472657850428938718, guid: 19b8b34ad8b8d644f9dc319f033cd451,
     type: 3}
-  debugPlotSpawn: {fileID: 3824674062909241644}
+  debugPlotSpawn: {fileID: 1631281603921622218}
   nextSortOrder: 0
   timePassed: 0
   cancerCellContinuousSpawns: 0
@@ -110,24 +109,24 @@ MonoBehaviour:
   locationToSpawn: {x: 0, y: 0, z: 0}
   canGoInDivision: 0
   availableLocations: []
---- !u!210 &3824674063084145287
+--- !u!210 &1631281604032563041
 SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824674063084145284}
+  m_GameObject: {fileID: 1631281604032563042}
   m_Enabled: 1
   m_SortingLayerID: -1262964005
   m_SortingLayer: 3
   m_SortingOrder: 0
---- !u!114 &5129179851068921535
+--- !u!114 &7250233361236990809
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3824674063084145284}
+  m_GameObject: {fileID: 1631281604032563042}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
@@ -135,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskObject: {fileID: 11400000, guid: ca09bbb437d218f4f8f9ae9516a1adf7, type: 2}
   isApplicationQuitting: 0
---- !u!1 &5362397832231103282
+--- !u!1 &7627850204402673364
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +142,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8651414212254473628}
-  - component: {fileID: 4847804202318940550}
-  - component: {fileID: 7179640736913593211}
+  - component: {fileID: 6611141666659881082}
+  - component: {fileID: 6986874189792117856}
+  - component: {fileID: 4617231989396922013}
   m_Layer: 28
   m_Name: BackgroundMusicPlayer
   m_TagString: Untagged
@@ -153,27 +152,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8651414212254473628
+--- !u!4 &6611141666659881082
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362397832231103282}
+  m_GameObject: {fileID: 7627850204402673364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3824674063084145286}
+  m_Father: {fileID: 1631281604032563040}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &4847804202318940550
+--- !u!58 &6986874189792117856
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362397832231103282}
+  m_GameObject: {fileID: 7627850204402673364}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -183,13 +182,13 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 8
---- !u!114 &7179640736913593211
+--- !u!114 &4617231989396922013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362397832231103282}
+  m_GameObject: {fileID: 7627850204402673364}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37df0e9cf66b5d741b1dd94b82c24261, type: 3}

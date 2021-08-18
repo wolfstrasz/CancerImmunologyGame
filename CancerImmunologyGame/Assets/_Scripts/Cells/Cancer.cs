@@ -6,248 +6,174 @@ namespace ImmunotherapyGame.Cancers
 {
 	public class Cancer : MonoBehaviour
 	{
-		[Header("Prefabs Linking")]
-		[SerializeField]
-		private GameObject availablePointsPrefab = null;
-		[SerializeField]
-		private GameObject spawnPointPrefab = null;
-		[SerializeField]
-		private GameObject cancerCellPrefab = null;
-		[SerializeField]
-		private GameObject cafCellPrefab = null;
+		[Header("Spawning")]
+		[SerializeField] private GameObject cancerCellPrefab = null;
+		[SerializeField] private GameObject cafCellPrefab = null;
 
-		[Header("Generation attributes")]
-		[SerializeField]
-		private bool isAlive = true;
-		[SerializeField]
-		private bool canSpawnCafs = false;
-		[SerializeField]
-		private int cellsToGenerate = 0;
-		[SerializeField]
-		private int spawnsBeforeCafSpawn = 5;
-		[SerializeField]
-		private int CAFBalanceRatio = 3;
+		[SerializeField] private bool isAlive = true;
+		[SerializeField] private bool canSpawnCells = true;
+		[SerializeField] private bool canSpawnCafCells = false;
+		[SerializeField] private bool shouldKeepCancerCellsPacked = false;
 
-		[Header("Spawn Attributes")]
-		[SerializeField]
-		private int maximumCells = 10;
-		[SerializeField]
-		private float radius = 0.0f;
-		[SerializeField]
-		private float radiusThinner = 0.0f;
-		[SerializeField]
-		private float angleRotation = 60.0f;
-		[SerializeField]
-		private float offsetOfAnimation = 0.2f;
-		[SerializeField]
-		private bool keepCellsPacked = false;
-		[SerializeField]
-		[Range(5.0f, 100.0f)]
-		private float timeBetweenDivisions = 10.0f;
+		[SerializeField] private int maximumCells = 10;
+		[SerializeField] [Range(5.0f, 100.0f)] private float timeBetweenDivisions = 10.0f;
+		[SerializeField] private int spawnsBeforeCafSpawn = 5;
+		[SerializeField] private int balanceRatioCellToCaf = 3;
 
-		[Header("Debug Attributes")]
-		[SerializeField]
-		private bool debugPlotting = false;
-		[SerializeField]
-		private Transform debugPlotSpawn = null;
+		[Header ("Spawning to division animation fixes")]
+		[SerializeField] private float radius = 0.0f;
+		[SerializeField] private float radiusThinner = 0.0f;
+		[SerializeField] private float angleRotation = 60.0f;
+		[SerializeField] private float offsetOfAnimation = 0.2f;
 
-		[Header("Debug (ReadOnly)")]
-		// Spawning
-		[SerializeField]
-		private int nextSortOrder = 0;
-		[SerializeField]
-		private float timePassed = 0.0f;
-		[SerializeField]
-		private int spawns = 0;
+		[Header("Initial Generation")]
+		[SerializeField] private int cellsToGenerate = 0;
+
+		[Header("Debug Visualisation")]
+		[SerializeField] private bool debugPlotting = false;
+		[SerializeField] private GameObject availablePointsPrefab = null;
+		[SerializeField] private GameObject spawnPointPrefab = null;
+		[SerializeField] private Transform debugPlotSpawn = null;
+
+		[Header("Debug")]
+		[SerializeField] [ReadOnly] private int nextSortOrder = 0;
+		[SerializeField] [ReadOnly] private float timePassed = 0.0f;
+		[SerializeField] [ReadOnly] private int cancerCellContinuousSpawns = 0;
 
 		// Debug containers
-		[SerializeField]
-		private List<GameObject> allPlottingObjects = new List<GameObject>();
-		[SerializeField]
-		private List<CancerCell> cancerCells = new List<CancerCell>();
-		[SerializeField]
-		private List<CAFCell> cafCells = new List<CAFCell>();
-
+		[SerializeField] [ReadOnly] private List<CAFCell> cafCells = new List<CAFCell>();
+		[SerializeField] [ReadOnly] private List<CancerCell> cancerCells = new List<CancerCell>();
+		[SerializeField] [ReadOnly] private List<GameObject> allPlottingObjects = new List<GameObject>();
 
 		// Division handling
-		[SerializeField]
-		private CancerCell cellToDivide;
-		[SerializeField]
-		private Vector3 locationToSpawn;
-		[SerializeField]
-		private bool canDivide = false;
-		[SerializeField]
-		private List<Vector3> availableLocations = new List<Vector3>();
-		[SerializeField]
+		[SerializeField] [ReadOnly] private CancerCell cellToDivide;
+		[SerializeField] [ReadOnly] private Vector3 locationToSpawn;
+		[SerializeField] [ReadOnly] private bool canGoInDivision = false;
+		[SerializeField] [ReadOnly] private List<Vector3> availableLocations = new List<Vector3>();
+
 		private Dictionary<Vector3, int> availableLocationsByDensity = new Dictionary<Vector3, int>();
-		[SerializeField]
 		private Dictionary<Vector3, CancerCell> spawnOwners = new Dictionary<Vector3, CancerCell>();
 
 		// Listeners
 		private List<ICancerDeathObserver> onDeathObservers = new List<ICancerDeathObserver>();
 		private List<ICancerDivisionObserver> onDivisionObservers = new List<ICancerDivisionObserver>();
 
+		// Attributes
 		public bool IsAlive => isAlive;
-		public bool CanDivide => canDivide;
+		public bool CanGoInDivision => canGoInDivision;
 		public GameObject CellToDivide => cellToDivide.gameObject;
 
 		// Start is called before the first frame update
 		void Start()
 		{
+			if (!isAlive) return;
+
+			// Generates the first cancer cell
 			locationToSpawn = transform.position;
-
-			// Generates the initial cancer
 			AddNewCancerCell();
-			canDivide = true;
+			canGoInDivision = true;
 
+			// Cancel any debug plotting for initial generation
 			bool old_debug = debugPlotting;
 			debugPlotting = false;
 
-			while (cancerCells.Count < cellsToGenerate)
-			{
-				//Debug.Log(cancerCells.Count + " " + cellsToGenerate);
-
-				if (canSpawnCafs && spawns == spawnsBeforeCafSpawn) // Cav cell
-				{
-					bool previousSetup = keepCellsPacked;
-					keepCellsPacked = true;
-
-					ResetDivisionProcess();
-					FindAllSpotsAvailable();
-					if (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked)
-					{
-						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
-						timePassed = 0.0f;
-						canDivide = true;
-						keepCellsPacked = previousSetup;
-						cellsToGenerate--;
-						continue;
-					}
-					else
-					{
-						if (!FindSpawnSpot()) continue;
-
-						AddNewCAFCell();
-						spawns = 0;
-						timePassed = 0.0f;
-						canDivide = true;
-						keepCellsPacked = previousSetup;
-						continue;
-					}
-				}
-				else // CancerCell
-				{
-					ResetDivisionProcess();
-					FindAllSpotsAvailable();
-					if ((availableLocations.Count < 0 && !keepCellsPacked) || (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked))
-					{
-						Debug.LogWarning("Update start setup prevents cancer from spawning cells");
-						timePassed = 0.0f;
-						canDivide = true;
-						cellsToGenerate--;
-
-						continue;
-					}
-					else
-					{
-						if (!FindSpawnSpot()) continue;
-
-						AddNewCancerCell();
-						canDivide = true;
-						if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
-							spawns++;
-
-
-						continue;
-					}
-
-				}
-			}
-
+			GenerateInitialCells();
+						
+			// Return previous value
 			debugPlotting = old_debug;
+
+			// Check if any other divison is allowed
+			canGoInDivision = canSpawnCells;
+			timePassed = 0.0f;
+		}
+
+
+		public void GenerateInitialCells()
+		{
+			for (int generatedCells = 1; generatedCells < cellsToGenerate; ++generatedCells)
+			{
+				ResetDivisionProcess();
+				Spawn(true);
+			}
 		}
 
 		public void OnUpdate()
 		{
-	
-			if (!isAlive) return;
+			if (!isAlive)
+			{
+				return;
+			}
 
 			for (int i = 0; i < cafCells.Count; ++i)
 			{
 				cafCells[i].OnUpdate();
 			}
 
-			if (cancerCells.Count >= maximumCells) return;
+			if (cancerCells.Count + cafCells.Count >= maximumCells)
+			{
+				return;
+			}
 
-#if CANCER_DEBUG_DIVISION_PROCESS
-			
-#else
-#endif
-			//if (Input.GetKeyDown(KeyCode.Alpha0))
-			//{
-			//	timePassed = timeBetweenDivisions;
-			//}
-
-			if (canDivide)
+			if (canGoInDivision)
 			{
 				timePassed += Time.deltaTime;
 				if (timePassed > timeBetweenDivisions)
 				{
-
-					canDivide = false;
-
-					if (canSpawnCafs && spawns == spawnsBeforeCafSpawn) // Cav cell
-					{
-						bool previousSetup = keepCellsPacked;
-						keepCellsPacked = true;
-
-						ResetDivisionProcess();
-						FindAllSpotsAvailable();
-						if (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked)
-						{
-							Debug.Log("Update frame setup prevents cancer from spawning cells");
-							timePassed = 0.0f;
-							canDivide = true;
-							keepCellsPacked = previousSetup;
-							return;
-						} else
-						{
-							if (!FindSpawnSpot()) return;
-							spawns = 0;
-							AddNewCAFCell();
-							timePassed = 0.0f;
-							canDivide = true;
-							keepCellsPacked = previousSetup;
-							return;
-						}
-					} 
-					else // CancerCell
-					{
-						ResetDivisionProcess();
-						FindAllSpotsAvailable();
-						if ((availableLocations.Count < 0 && !keepCellsPacked) || (availableLocationsByDensity.Keys.Count < 0 && keepCellsPacked))
-						{
-							Debug.Log("Update frame setup prevents cancer from spawning cells");
-							timePassed = 0.0f;
-							canDivide = true;
-							return;
-						}
-						else
-						{
-							if (!FindSpawnSpot()) return;
-							StartDivision();
-							if (CAFBalanceRatio * cafCells.Count <= cancerCells.Count)
-								spawns++;
-							return;
-						}
-
-					}
+					timePassed = 0.0f;
+					canGoInDivision = false;
+					Spawn(false);
 				}
 			}
 
-		
 		}
 
+		private void Spawn(bool shouldQuickSpawn)
+		{
+			ResetDivisionProcess();
+
+			if (canSpawnCafCells && cancerCellContinuousSpawns == spawnsBeforeCafSpawn)
+			{
+				// CAF spawning is a quick Spawn so definitely can go in division
+				// doesn't matter if successful spawn or not
+				canGoInDivision = true;
+
+				// Caff Cell spawning should always be packed!
+				if (!FindSpawnSpot(true))
+				{
+					return;
+				}
+
+				AddNewCAFCell();
+
+				// Reset counter for Cancer Cells
+				cancerCellContinuousSpawns = 0;
+			}
+			else
+			{
+				if (!FindSpawnSpot(shouldKeepCancerCellsPacked))
+				{
+					canGoInDivision = true;
+					return;
+				}
+				else if (shouldQuickSpawn) // Cancer Cell without division animation
+				{
+					AddNewCancerCell();
+					// Quick spawn => can go instantly into another division
+					canGoInDivision = true;
+				}
+				else // CancerCell with division animation
+				{
+					StartCancerCellDivision();
+				}
+
+				// If successfully spawned / started spawning increase counter
+				cancerCellContinuousSpawns++;
+			}
+			
+		}
+
+
+	
 		/// <summary>
 		/// Adds new cell at the determined locationToSpawn position
 		/// </summary>
@@ -275,20 +201,21 @@ namespace ImmunotherapyGame.Cancers
 
 
 		// Division process functionality 
-		private void FindAllSpotsAvailable()
+		private bool FindAllSpotsAvailable(bool shouldKeepPacked)
 		{
+			bool hasFoundAtLeastOneAvailableSpot = false;
 			float distance = radius * 2.0f + offsetOfAnimation;
 			for (int i = 0; i < cancerCells.Count; i++)
 			{
+				// Skip non-idle cancer cells
 				if (cancerCells[i].isImmune)
 				{
 					continue;
 				}
 				CancerCell cell = cancerCells[i];
-				Vector3 circleCastDirection = Vector3.right;
 
+				Vector3 circleCastDirection = Vector3.right;
 				float numberOfRotations = 360.0f / angleRotation;
-				//Debug.Log(numberOfRotations + " Checking for: " + cell.gameObject.name);
 				while (numberOfRotations > 0)
 				{
 
@@ -296,7 +223,6 @@ namespace ImmunotherapyGame.Cancers
 					circleCastDirection = Quaternion.Euler(0.0f, 0.0f, angleRotation) * circleCastDirection;
 					Vector3 nextSpawnLocation = cell.transform.position + (circleCastDirection * distance);
 					var hits = Physics2D.CircleCastAll(cell.transform.position, radius - radiusThinner, circleCastDirection, distance);
-					//Debug.Log(circleCastDirection);
 
 					// Check for blockers
 					List<GameObject> blockers = new List<GameObject>();
@@ -304,7 +230,6 @@ namespace ImmunotherapyGame.Cancers
 					{
 						if (hit.collider.gameObject.tag == "BlocksCancerSpawns")
 						{
-							//Debug.Log(hit.collider.gameObject.name);
 							blockers.Add(hit.collider.gameObject);
 						}
 
@@ -321,7 +246,8 @@ namespace ImmunotherapyGame.Cancers
 						nextSpawnLocation.x = Mathf.Round(nextSpawnLocation.x * 1000.0f) / 1000.0f;
 						nextSpawnLocation.y = Mathf.Round(nextSpawnLocation.y * 1000.0f) / 1000.0f;
 
-						if (keepCellsPacked)
+
+						if (shouldKeepPacked)
 						{
 							if (availableLocationsByDensity.ContainsKey(nextSpawnLocation))
 							{
@@ -348,6 +274,7 @@ namespace ImmunotherapyGame.Cancers
 							}
 						}
 
+						hasFoundAtLeastOneAvailableSpot = true;
 					}
 					numberOfRotations--;
 				}
@@ -356,7 +283,7 @@ namespace ImmunotherapyGame.Cancers
 
 			if (debugPlotting)
 			{
-				if (keepCellsPacked)
+				if (shouldKeepPacked)
 				{
 					foreach (var location in availableLocationsByDensity.Keys)
 					{
@@ -371,12 +298,20 @@ namespace ImmunotherapyGame.Cancers
 					}
 				}
 			}
+
+			return hasFoundAtLeastOneAvailableSpot;
 		}
 
-		private bool FindSpawnSpot()
+		private bool FindSpawnSpot(bool shouldKeepPacked)
 		{
+			// Find all available spots and if non exists return skip search
+			if (!FindAllSpotsAvailable(shouldKeepPacked))
+			{
+				return false;
+			}
+
 			// Packed algorithm to make cancer be more packed
-			if (keepCellsPacked)
+			if (shouldKeepPacked)
 			{
 				int max = 0;
 				List<Vector3> possibleLocationsToSpawn = new List<Vector3>();
@@ -444,7 +379,7 @@ namespace ImmunotherapyGame.Cancers
 	
 		}
 
-		private void StartDivision()
+		private void StartCancerCellDivision()
 		{
 			//Debug.Log("Division preparation");
 			//Debug.Log("Spawn location: " + locationToSpawn);
@@ -477,7 +412,7 @@ namespace ImmunotherapyGame.Cancers
 			cellToDivide.StartReturnFromDivision();
 			Debug.Log("OnFinsishDivision");
 			timePassed = 0.0f;
-			canDivide = true;
+			canGoInDivision = true;
 
 			foreach (ICancerDivisionObserver observer in onDivisionObservers)
 			{
@@ -538,7 +473,7 @@ namespace ImmunotherapyGame.Cancers
 				}
 
 				isAlive = false;
-				canDivide = false;
+				canGoInDivision = false;
 				gameObject.SetActive(false);
 			}
 		}
