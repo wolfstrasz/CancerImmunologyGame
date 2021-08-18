@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0850432125816104ba5b10f0a83caf6c, type: 3}
+  m_Name: DendriticCellDescription
+  m_EditorClassIdentifier: 
+  cellName: Dendritic cell
+  sprite: {fileID: 452115995815455089, guid: a3bcce0b71d67974395e31a86f02f18a, type: 3}
+  description: "Dendritic cells, the scouts of your body, are always on the lookout
+    for intruders or signs of danger in every corner of the body. When they spot
+    something, the move to the lymph node, where they present evidence of their findings
+    to T cells. If a T cell recognises the evidence too, it becomes activated, gaining
+    \u2018license \u2019 to begin performing its function."
+  spriteUIScale: 1.8
+  noteSprite1: {fileID: 21300000, guid: 38fadbf4f57841b43947ccf483bc72fc, type: 3}
+  noteSprite2: {fileID: 21300000, guid: a3f37bb674aa1e14fb78c61d7073a1e7, type: 3}
+  noteSprite3: {fileID: 0}
+  animatorTrigger: Dendritic
+  isUnlocked: 0
+  isSprite1Unlocked: 0
+  isSprite2Unlocked: 0
+  isSprite3Unlocked: 0

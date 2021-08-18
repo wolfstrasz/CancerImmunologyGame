@@ -20,7 +20,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private Vector3 moveVector = Vector3.zero;
 
 
-		internal void SetData(Vector3 _targetPosition, CellpediaObject cd)
+		internal void SetData(Vector3 _targetPosition, CellpediaCellDescription cd)
 		{
 			targetPosition = _targetPosition;
 			moveVector = targetPosition - transform.position;

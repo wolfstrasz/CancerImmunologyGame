@@ -36,21 +36,21 @@ namespace ImmunotherapyGame.UI
 		public virtual void OnCancel(BaseEventData eventData)
 		{
 			OnDeselect(eventData);
-			Debug.Log("ON CANCEL CALL: " + gameObject.name);
+			//Debug.Log("ON CANCEL CALL: " + gameObject.name);
 			if (onCancelCall != null)
 				onCancelCall();
 		}
 
 		public virtual void OnDeselect(BaseEventData eventData)
 		{
-			Debug.Log("UMN: DESELECT -> " + gameObject.name);
+			//Debug.Log("UMN: DESELECT -> " + gameObject.name);
 
 			OnSelectView = false;
 		}
 
 		public virtual void OnSelect(BaseEventData eventData)
 		{
-			Debug.Log("UMN: SELECT -> " + gameObject.name);
+			//Debug.Log("UMN: SELECT -> " + gameObject.name);
 			OnSelectView = true;
 			AudioManager.Instance.PlayUISoundClip(audioClipKey, gameObject);
 		}
@@ -58,7 +58,7 @@ namespace ImmunotherapyGame.UI
 		// When highlighted with mouse.
 		public virtual void OnPointerEnter(PointerEventData eventData)
 		{
-			Debug.Log("UMN: POINTER_ENTER -> " + gameObject.name);
+			//Debug.Log("UMN: POINTER_ENTER -> " + gameObject.name);
 			EventSystem.current.SetSelectedGameObject(gameObject);
 
 		}
@@ -66,7 +66,7 @@ namespace ImmunotherapyGame.UI
 
 		public virtual void OnPointerExit(PointerEventData eventData) 
 		{
-			Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
+			//Debug.Log("UMN: POINTER_EXIT -> " + gameObject.name);
 		}
 
 

@@ -15,28 +15,22 @@ namespace ImmunotherapyGame.CellpediaSystem
 	{
 		internal static PetridishButton lastSubmitted = null;
 		internal static List<PetridishButton> allPetridishButtons = null;
-		[ReadOnly]
-		private int id = -1;
-		[ReadOnly]
-		internal bool isActivated = false;
-		[ReadOnly]
-		internal CellpediaObject cellObject = null;
+		[SerializeField] [ReadOnly] private int id = -1;
+		[SerializeField] [ReadOnly] internal bool isActivated = false;
+		[SerializeField] [ReadOnly] internal CellpediaCellDescription cellDescription = null;
 
 		[Header("Petridish")]
-		[SerializeField]
-		private Image cellImage = null;
+		[SerializeField] private Image cellImage = null;
 
 		[Header("Scaling On Select")]
-		[SerializeField]
-		private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
-		[SerializeField]
-		private Vector3 initialScaling = new Vector3(1.0f, 1.0f, 1.0f);
+		[SerializeField] private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
+		[SerializeField] private Vector3 initialScaling = new Vector3(1.0f, 1.0f, 1.0f);
 
-		internal void Initialise(CellpediaObject cellObject, int id)
+		internal void Initialise(CellpediaCellDescription cellDescription, int id)
 		{
 			this.id = id;
-			this.cellObject = cellObject;
-			cellImage.sprite = cellObject.sprite;
+			this.cellDescription = cellDescription;
+			cellImage.sprite = cellDescription.sprite;
 			cellImage.color = Color.black;
 			transform.localScale = initialScaling;
 			Deactivate();
@@ -58,7 +52,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		{
 			if (lastSubmitted != this)
 			{
-				bool success = Cellpedia.Instance.microscope.NextPetridish(cellObject);
+				bool success = Cellpedia.Instance.microscope.NextPetridish(cellDescription);
 				if (success)
 				{
 

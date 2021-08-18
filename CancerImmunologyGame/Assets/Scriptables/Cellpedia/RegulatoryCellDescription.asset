@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0850432125816104ba5b10f0a83caf6c, type: 3}
+  m_Name: RegulatoryCellDescription
+  m_EditorClassIdentifier: 
+  cellName: T Regulatory cell
+  sprite: {fileID: -7108142589481656770, guid: 7e879573e80c2e04f9be45bc8ce9943a, type: 3}
+  description: "T Regulatory cells are super important in the body since they have
+    the ability to tell other immune cells to stop what they are doing. This role
+    is crucial in preventing immune cells from accidentally attacking the body, which
+    would result into autoimmunity. However T Regulatory cells can be \u2018bribed
+    \u2019 to protect cancer cells from immune attack. This makes T Regulatory cells
+    an interesting cell: both friend and foe depending on the scenario!\r\n"
+  spriteUIScale: 1.2
+  noteSprite1: {fileID: 21300000, guid: 68896455f10ba5c448ad41aeac47648f, type: 3}
+  noteSprite2: {fileID: 21300000, guid: 412e178a0f001f94a842896f5590aa8f, type: 3}
+  noteSprite3: {fileID: 0}
+  animatorTrigger: Regulatory
+  isUnlocked: 0
+  isSprite1Unlocked: 0
+  isSprite2Unlocked: 0
+  isSprite3Unlocked: 0

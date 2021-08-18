@@ -32,7 +32,10 @@ namespace ImmunotherapyGame.Cancers
 
 		private void Awake()
 		{
-			hypoxicCaster.CastAbility(gameObject);
+			if (hypoxicCaster != null)
+			{
+				hypoxicCaster.CastAbility(gameObject);
+			}
 		}
 
 		// DIVISION HANDLERS
@@ -127,6 +130,9 @@ namespace ImmunotherapyGame.Cancers
 
 		public void OnApoptosisEnd()
 		{
+			if (onDeathEvent != null)
+				onDeathEvent(this);
+
 			Destroy(gameObject);
 		}
 	}

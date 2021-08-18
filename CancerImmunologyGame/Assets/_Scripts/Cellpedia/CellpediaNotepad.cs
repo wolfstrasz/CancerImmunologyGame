@@ -18,23 +18,23 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[SerializeField] private Image notedrawing3 = null;
 
 
-		internal void OnOpen(CellpediaObject cd)
+		internal void OnOpen(CellpediaCellDescription cd)
 		{
 			SetVisual(cd);
 		}
 		
-		internal void SetVisual (CellpediaObject cd)
+		internal void SetVisual (CellpediaCellDescription cd)
 		{
-			cellName.text = cd.cellname;
+			cellName.text = cd.cellName;
 			cellDescription.text = cd.description;
 
-			notedrawing1.sprite = cd.noteSprite1;
+			notedrawing1.sprite = cd.Note1;
 			note1.SetActive(notedrawing1.sprite != null);
 
-			notedrawing2.sprite = cd.noteSprite2;
+			notedrawing2.sprite = cd.Note2;
 			note2.SetActive(notedrawing2.sprite != null);
 
-			notedrawing3.sprite = cd.noteSprite3;
+			notedrawing3.sprite = cd.Note3;
 			note3.SetActive(notedrawing3.sprite != null);
 		}
 

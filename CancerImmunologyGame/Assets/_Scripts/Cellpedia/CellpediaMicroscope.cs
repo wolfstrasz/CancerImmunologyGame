@@ -23,23 +23,23 @@ namespace ImmunotherapyGame.CellpediaSystem
             petridishes[1].SkipAnimation();
         }
 
-        internal void OnOpen(CellpediaObject objToInitialise)
+        internal void OnOpen(CellpediaCellDescription descriptionToInitialise)
 		{
             //petridishes[0].Reset();
             //petridishes[1].Reset();
-            petridishes[dishIndex].SetVisual(objToInitialise);
+            petridishes[dishIndex].SetVisual(descriptionToInitialise);
         }
 
 
-        internal bool NextPetridish(CellpediaObject cellObject)
+        internal bool NextPetridish(CellpediaCellDescription cellDescription)
         {
 
             if (petridishes[0].isShifting || petridishes[1].isShifting) return false;
 
             dishIndex ^= 1;
 
-            petridishes[dishIndex].SetVisual(cellObject);
-            Cellpedia.Instance.notepad.SetVisual(cellObject);
+            petridishes[dishIndex].SetVisual(cellDescription);
+            Cellpedia.Instance.notepad.SetVisual(cellDescription);
 
             petridishes[0].ShiftLeft();
             petridishes[1].ShiftLeft();

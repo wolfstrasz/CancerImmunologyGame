@@ -17,17 +17,24 @@ namespace ImmunotherapyGame.UI
 
 		private List<InterfaceControlPanel> allOpenedInterfacePanels = new List<InterfaceControlPanel>();
 		private InterfaceControlPanel currentInterfaceOpened = null;
-		
+
+		private void OnEnable()
+		{
+			SceneManager.activeSceneChanged += OnSceneUnloaded;
+		}
 
 		public void Initialise()
 		{
-			SceneManager.sceneUnloaded += OnSceneUnloaded;
 		}
 
+		private void OnDisable()
+		{
+			SceneManager.activeSceneChanged -= OnSceneUnloaded;
+		}
 
 		private void ClosePanel (InterfaceControlPanel interfacePanelToClose)
 		{
-			Debug.Log("Interface Manager: Closing Panel = " + interfacePanelToClose.gameObject.name);
+			// Debug.Log("Interface Manager: Closing Panel = " + interfacePanelToClose.gameObject.name);
 			GameManager.Instance.RequestGameStateUnpause(interfacePanelToClose.gameObject);
 
 			interfacePanelToClose.gameObject.SetActive(false);
@@ -46,8 +53,8 @@ namespace ImmunotherapyGame.UI
 		{
 			if (!interfacePanelToOpen.gameObject.activeInHierarchy)
 			{
-				Debug.Log("Interface Manager: Opening Panel = " + interfacePanelToOpen.gameObject.name);
-				if (interfacePanelToOpen.level >= LevelRequirementForFullPause)
+				//Debug.Log("Interface Manager: Opening Panel = " + interfacePanelToOpen.gameObject.name);
+				if (interfacePanelToOpen.sortLevel >= LevelRequirementForFullPause)
 					GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.FULL, interfacePanelToOpen.gameObject);
 				else
 					GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, interfacePanelToOpen.gameObject);
@@ -58,7 +65,7 @@ namespace ImmunotherapyGame.UI
 			}
 			else
 			{
-				Debug.Log("Interface Manager: Going back to Panel = " + interfacePanelToOpen.gameObject.name);
+				// Debug.Log("Interface Manager: Going back to Panel = " + interfacePanelToOpen.gameObject.name);
 			}
 		
 			// if we are sending a null => do not reasign (functionality is used for going down the menu tree)
@@ -81,7 +88,7 @@ namespace ImmunotherapyGame.UI
 
         public void RequestOpen(InterfaceControlPanel interfaceToOpen)
 		{
-			Debug.Log("Interface Manager: " + interfaceToOpen.gameObject.name + " request to open");
+			// Debug.Log("Interface Manager: " + interfaceToOpen.gameObject.name + " request to open");
 			if (currentInterfaceOpened == interfaceToOpen)
 			{
 				Debug.Log("Interface Manager: Will not open same interface");
@@ -90,22 +97,22 @@ namespace ImmunotherapyGame.UI
 
 			if (currentInterfaceOpened == null)
 			{
-				Debug.Log("Interface Manager: " + "On null");
+				// Debug.Log("Interface Manager: " + "On null");
 				// Nothing to reassign
 				OpenPanel(interfaceToOpen, null); 
 				return;
 			}
             
-			if (interfaceToOpen.level < currentInterfaceOpened.level)
+			if (interfaceToOpen.sortLevel < currentInterfaceOpened.sortLevel)
 			{
-				Debug.Log("Interface Manager: " + " need higher level ");
+				// Debug.Log("Interface Manager: " + " need higher level ");
 				return;
 			} 
 
 			// If both are on the same level, close previous one
-			if (interfaceToOpen.level == currentInterfaceOpened.level)
+			if (interfaceToOpen.sortLevel == currentInterfaceOpened.sortLevel)
 			{
-				Debug.Log("Interface Manager: " + " equal level");
+				// Debug.Log("Interface Manager: " + " equal level");
 
 				// Remember previous menu data
 				InterfaceControlPanel lowerInterface = currentInterfaceOpened.LastLowerInterfacePanel;
@@ -115,9 +122,9 @@ namespace ImmunotherapyGame.UI
 				return;
 			}
 
-			if (interfaceToOpen.level > currentInterfaceOpened.level)
+			if (interfaceToOpen.sortLevel > currentInterfaceOpened.sortLevel)
 			{
-				Debug.Log("Interface Manager: " + " higher level");
+				// Debug.Log("Interface Manager: " + " higher level");
 
 				OpenPanel(interfaceToOpen, currentInterfaceOpened);
 				return;
@@ -143,8 +150,9 @@ namespace ImmunotherapyGame.UI
 			}
 		}
 
-		public void OnSceneUnloaded(Scene currentScene)
+		public void OnSceneUnloaded(Scene currentScene, Scene nextScene)
 		{
+			Debug.Log("SCENE UNLOADED");
 			allOpenedInterfacePanels.Clear();
 			currentInterfaceOpened = null;
 		}

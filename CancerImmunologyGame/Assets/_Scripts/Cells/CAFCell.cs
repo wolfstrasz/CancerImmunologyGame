@@ -32,5 +32,11 @@ namespace ImmunotherapyGame.Cancers
 			animator.SetTrigger("Death");
 		}
 
+		public void OnDeathAnimationEnd()
+		{
+			if (onDeathEvent != null)
+				onDeathEvent(this);
+		}
+
 	}
 }

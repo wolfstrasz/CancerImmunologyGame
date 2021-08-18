@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0850432125816104ba5b10f0a83caf6c, type: 3}
+  m_Name: KillerCellDescription
+  m_EditorClassIdentifier: 
+  cellName: T Killer cell
+  sprite: {fileID: 537914882761767684, guid: 76f55ab67d3656b45a07a6853b0f2fcf, type: 3}
+  description: "When T Killer cells like you are given the license to act by Dendritic
+    cells, they gain the ability to see \u2018breadcrumb trails \u2019 of chemokines.
+    These direct them to the source of danger. When they find the cell that is the
+    source of danger, T Killer cells spit little granules that act like tiny missiles,
+    damaging the surface of their target, resulting in the death of their target
+    cell."
+  spriteUIScale: 1.2
+  noteSprite1: {fileID: 21300000, guid: 2e5f9b7a983a9084e98d8897817f4890, type: 3}
+  noteSprite2: {fileID: 21300000, guid: 8ccfc98f2cf2c594eaad498b18165218, type: 3}
+  noteSprite3: {fileID: 21300000, guid: 2ed97cb939e2b7b4faa82bba83d33860, type: 3}
+  animatorTrigger: TKiller
+  isUnlocked: 0
+  isSprite1Unlocked: 0
+  isSprite2Unlocked: 0
+  isSprite3Unlocked: 0

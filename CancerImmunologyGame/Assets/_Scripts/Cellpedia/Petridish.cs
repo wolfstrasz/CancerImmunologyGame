@@ -110,7 +110,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 			isShifting = true;
 		}
 
-		internal void SetVisual(CellpediaObject cd)
+		internal void SetVisual(CellpediaCellDescription cd)
 		{
 			Vector3 scaleVector = scalingFactor * cd.spriteUIScaleVector;
 			cellVisual.transform.localScale = scaleVector;

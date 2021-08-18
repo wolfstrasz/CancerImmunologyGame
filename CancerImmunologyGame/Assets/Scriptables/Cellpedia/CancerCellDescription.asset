@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0850432125816104ba5b10f0a83caf6c, type: 3}
+  m_Name: CancerCellDescription
+  m_EditorClassIdentifier: 
+  cellName: Cancer cell
+  sprite: {fileID: -2487138818442988084, guid: d6c6d95c499c7d6468e7415148eac0ed, type: 3}
+  description: "The ability that cancer cells have to follow conventional rules followed
+    by other cells is the result of damage to the genetic instructions (genes) that
+    dictate how and when our cells divide. These \u2018damages \u2019 are called
+    mutations. Many factors can lead to mutations in genes, although not all mutations
+    are bad or cause diseases. Some are inherited from our parents, or they can appear
+    early only in life from mistakes that occur when cells divide. Other mutations
+    are the result of influences from the environment. These are well known and can
+    include cigarettes, alcohol and exposure to radiation such as UV radiation from
+    the sun."
+  spriteUIScale: 1.2
+  noteSprite1: {fileID: 21300000, guid: 37e520372a2c85741a591fbe13958d65, type: 3}
+  noteSprite2: {fileID: 21300000, guid: a534aae819730564dbb98af6a7aacae2, type: 3}
+  noteSprite3: {fileID: 21300000, guid: 936a9da5358b3e34ab920977cb009016, type: 3}
+  animatorTrigger: Cancer
+  status:
+    isUnlocked: 0
+    isSprite1Unlocked: 0
+    isSprite2Unlocked: 0
+    isSprite3Unlocked: 0

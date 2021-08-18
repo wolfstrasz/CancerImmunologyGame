@@ -13,32 +13,23 @@ namespace ImmunotherapyGame.CellpediaSystem
 	public class Cellpedia : Singleton<Cellpedia>, IDataManager
 	{
 		[Header("Data")]
-		[SerializeField]
-		internal CellpediaData data = null;
+		[SerializeField] internal CellpediaData data = null;
 		private SerializableCellpediaData savedData = null;
-		[ReadOnly]
-		private CellpediaObject selectedCellObject = null;
+		[ReadOnly] private CellpediaCellDescription selectedCellDescription = null;
 
 		[Header("Cellpedia UI")]
-		[SerializeField]
-		private InterfaceControlPanel cellpediaPanel = null;
-		[SerializeField]
-		internal CellpediaNotepad notepad = null;
-		[SerializeField]
-		internal CellpediaMicroscope microscope = null;
-		[SerializeField]
-		internal CellpediaButtonsBar buttonsBar = null;
+		[SerializeField] private InterfaceControlPanel cellpediaPanel = null;
+		[SerializeField] internal CellpediaNotepad notepad = null;
+		[SerializeField] internal CellpediaMicroscope microscope = null;
+		[SerializeField] internal CellpediaButtonsBar buttonsBar = null;
 
 		[Header ("Popups")]
-		[SerializeField]
-		private GameObject popupLayout = null;
-		[SerializeField]
-		private GameObject popupPrefab = null;
+		[SerializeField] private GameObject popupLayout = null;
+		[SerializeField] private GameObject popupPrefab = null;
 
 		[Header("Game UI")]
-		[SerializeField]
-		private TopOverlayButtonData inGameUIButtonData = null;
-		[SerializeField] [ReadOnly] private bool unlockedFeature = false;
+		[SerializeField] private TopOverlayButtonData inGameUIButtonData = null;
+		[SerializeField] [ReadOnly] private bool isFeatureUnlocked = false;
 
 		// Input handling
 		private PlayerControls playerControls = null;
@@ -55,18 +46,13 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		public void Initialise()
 		{
-			unlockedFeature = false;
-			selectedCellObject = null;
+			isFeatureUnlocked = data.isSystemUnlocked;
+
+			selectedCellDescription = null;
 			buttonsBar.Initialise();
 			microscope.Initialise();
 
-			// Set if button is visible
-			for	(int i = 0; i < data.cellpediaItems.Count; ++i)
-			{
-				unlockedFeature |= data.cellpediaItems[i].isUnlocked;
-			}
-
-			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 
 			// Add nodes to listen to
 			for (int i = 0; i < buttonsBar.petridishButtonList.Count; ++i)
@@ -106,7 +92,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 		public void OpenView(InputAction.CallbackContext context)
 		{
 			Debug.Log("Button Call for Cellpedia");
-			if (!unlockedFeature) return; // TODO: remove hidden state
+			if (!isFeatureUnlocked) return; // TODO: remove hidden state
 
 			if (cellpediaPanel.IsOpened)
 			{
@@ -128,23 +114,23 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 			if (PetridishButton.lastSubmitted != null)
 			{
-				selectedCellObject = PetridishButton.lastSubmitted.cellObject;
+				selectedCellDescription = PetridishButton.lastSubmitted.cellDescription;
 			}
 			else // Find the first available one
 			{
 				for (int i = 0; i < data.cellpediaItems.Count; ++i)
 				{
-					if (data.cellpediaItems[i].isUnlocked)
+					if (data.cellpediaItems[i].IsUnlocked)
 					{
-						selectedCellObject = data.cellpediaItems[i];
+						selectedCellDescription = data.cellpediaItems[i];
 						break;
 					}
 				}
 			}
 
-			buttonsBar.OnOpen(selectedCellObject);
-			microscope.OnOpen(selectedCellObject);
-			notepad.OnOpen(selectedCellObject);
+			buttonsBar.OnOpen(selectedCellDescription);
+			microscope.OnOpen(selectedCellDescription);
+			notepad.OnOpen(selectedCellDescription);
 
 			cellpediaPanel.initialControlNode = PetridishButton.lastSubmitted;
 		}
@@ -154,35 +140,31 @@ namespace ImmunotherapyGame.CellpediaSystem
 			microscope.OnClose();
 		}
 
-		// Cell description handling
-		public void UnlockCellDescription(CellpediaItemTypes type)
+		public void UnlockFeature()
 		{
-			var items = data.cellpediaItems;
-			CellpediaObject item = null;
+			isFeatureUnlocked = true;
+			data.isSystemUnlocked = true;
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
+		}
 
-			// Search for item
-			for (int i = 0; i < items.Count; ++i)
+		// Cell description handling
+		public void UnlockCellDescription(CellpediaCellDescription cellDescription)
+		{
+
+			if (cellDescription.IsUnlocked)
 			{
-				if (items[i].type == type)
-				{
-					item = items[i];
-					break;
-				}
+				return;
 			}
 
-			if (item.isUnlocked) return;
-
-
-			item.isUnlocked = true;
-			buttonsBar.ActivateButton(item);
+			cellDescription.IsUnlocked = true;
+			buttonsBar.ActivateButton(cellDescription);
 
 			CellpediaPopup popup = Instantiate(popupPrefab, popupLayout.transform, false).GetComponent<CellpediaPopup>();
-			popup.SetInfo(item);
+			popup.SetInfo(cellDescription);
 
-			unlockedFeature = true;
-			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
 			inGameUIButtonData.PingAnimationStatus(true);
 		}
+
 
 		// Data handling
 		public void LoadData()

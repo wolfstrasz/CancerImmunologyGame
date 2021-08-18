@@ -41,24 +41,20 @@ namespace ImmunotherapyGame
 
 		public float CurrentHealth => Mathf.Clamp(health, 0f, cellType.MaxHealth);
 		public float CurrentEnergy => Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
-		public float CurrentSpeed => Mathf.Clamp(speed, 0f, speed);
+		public float CurrentSpeed => Mathf.Clamp(speed + cellType.InitialSpeed, 0f, speed + cellType.InitialSpeed);
 
 		public int RenderSortOrder { get => render.sortingOrder; set => render.sortingOrder = value; }
 		public virtual bool isImmune { get; }
 
 		protected virtual void Start()
 		{
-			Debug.Log("S1 HEALTH = " + health);
-
 			health = cellType.MaxHealth;
 			energy = cellType.MaxEnergy;
-			speed = cellType.InitialSpeed;
-			Debug.Log("s2 HEALTH = " + health);
+			speed = 0;
 
 			updateHealthValue = cellType.MaxHealth;
 			updateEnergyValue = cellType.MaxEnergy;
 			updateSpeedValue = 0;
-			Debug.Log("s3 HEALTH = " + health);
 
 		}
 
@@ -99,9 +95,6 @@ namespace ImmunotherapyGame
 
 				if (health <= 0 || energy <= 0)
 				{
-					if (onDeathEvent != null)
-						onDeathEvent(this);
-
 					OnCellDeath();
 				}
 			}
