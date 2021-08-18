@@ -118,7 +118,7 @@ namespace ImmunotherapyGame.Loader
 			SkipAction.started -= OnSkipPressed;
 			SkipAction.canceled -= OnSkipPressed;
 			StopAllCoroutines();
-
+			playerControls.Disable();
 		}
 
 		// Intro private methods

@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DisplayAim",
+                    "type": "Button",
+                    "id": "a43c1145-ccf7-4656-a152-004c4dbc428a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -135,7 +143,7 @@
                 {
                     "name": "",
                     "id": "f27b5894-df68-43fd-bfd7-9e7df9543ba0",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -157,7 +165,7 @@
                 {
                     "name": "",
                     "id": "585f41c6-e5d0-4b3b-8cd6-f8b547598665",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/leftTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -228,6 +236,28 @@
                     "processors": "",
                     "groups": "Keys+Mouse",
                     "action": "ActivateImmunotherapy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bb75252-bb46-4115-9ade-2e3db41eb360",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keys+Mouse",
+                    "action": "DisplayAim",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f24e1cd-9752-49b2-b8fa-d3bef28df0fa",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DisplayAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

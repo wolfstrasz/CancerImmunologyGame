@@ -229,13 +229,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 101
+  sortLevel: 200
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 7744851748961660399}
   nodesToListen:
   - {fileID: 7744851748961660399}
   - {fileID: 3108374386922993970}
-  canvas: {fileID: 0}
 --- !u!1 &4483727589396405839
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d4d48f2e61c2d42a9eed021dc8c340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPersistent: 0
   continueBtn: {fileID: 5397122256522053766}
   mainMenuPanel: {fileID: 9058265850268826240}
   newGamePromptPanel: {fileID: 5625495624271523162}
@@ -1003,11 +1005,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 100
-  shouldCloseOnSceneChange: 0
+  sortLevel: 100
+  canvas: {fileID: 0}
+  shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 6604847265374092684}
   nodesToListen: []
-  canvas: {fileID: 0}
 --- !u!1 &9032391777156275974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,12 +1240,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 101
+  sortLevel: 200
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 6605203517004532923}
   nodesToListen:
   - {fileID: 6605203517004532923}
-  canvas: {fileID: 0}
 --- !u!1001 &977563980434880910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1602,12 +1606,12 @@ PrefabInstance:
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 209.2024
+      value: 212.646
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -430.3995
+      value: -429.57828
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -1752,12 +1756,12 @@ PrefabInstance:
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 209.2024
+      value: 212.646
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -310.3995
+      value: -309.57828
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -2087,12 +2091,12 @@ PrefabInstance:
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 209.2024
+      value: 212.646
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -550.39954
+      value: -549.57825
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
@@ -2646,12 +2650,12 @@ PrefabInstance:
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 209.2024
+      value: 212.646
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -190.39932
+      value: -189.57828
       objectReference: {fileID: 0}
     - target: {fileID: 3858756181101708557, guid: 6f09489be23d36e46a429cecfce7948d,
         type: 3}

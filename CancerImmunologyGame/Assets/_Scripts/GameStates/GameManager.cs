@@ -22,20 +22,28 @@ namespace ImmunotherapyGame
 
 			void FixedUpdate() { stateController.OnFixedUpdate(); }
 
+			private void OnEnable()
+			{
+				SceneManager.activeSceneChanged += OnActiveSceneChanged;
+				SceneManager.sceneLoaded += OnSceneLoaded;
+			}
+
+			private void OnDisable()
+			{
+				SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+				SceneManager.sceneLoaded -= OnSceneLoaded;
+			}
+
 			public void Initialise(bool testScene = false)
 			{
 				Debug.Log("Game Manager: Initialise");
-
-				SceneManager.activeSceneChanged += OnActiveSceneChanged;
-				SceneManager.sceneLoaded += OnSceneLoaded;
-
-				if (testScene)
-				{
-					Debug.Log("Game Manager: Initialise Test Scene");
-					sceneLoaded = true;
-					Debug.Log("Game Manager -> Test Scene: Set Play State");
-					stateController.SetState(new PlayState(stateController));
-				}
+				//if (testScene)
+				//{
+				//	Debug.Log("Game Manager: Initialise Test Scene");
+				//	sceneLoaded = true;
+				//	Debug.Log("Game Manager -> Test Scene: Set Play State");
+				//	stateController.SetState(new PlayState(stateController));
+				//}
 			}
 
 			public void OnActiveSceneChanged(Scene currentScene, Scene nextScene)
@@ -60,6 +68,7 @@ namespace ImmunotherapyGame
 
 			private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 			{
+				Debug.Log("Scene Loaded ------------------");
 				sceneLoaded = true;
 			}
 

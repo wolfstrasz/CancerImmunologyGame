@@ -273,15 +273,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  sortLevel: 100
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 9115346182354184227}
   nodesToListen:
   - {fileID: 9115346182354184227}
   - {fileID: 504436990520191813}
   - {fileID: 2131731162142153026}
   - {fileID: 5403863445840364338}
-  canvas: {fileID: 0}
 --- !u!1 &2428062035636442619
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791dc89ee958ad24ba6c0cb7d160d823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isPersistent: 1
+  _isPersistent: 0
   pauseMenuPanel: {fileID: 5542653121181799777}
   pauseMenuBtnData: {fileID: 11400000, guid: 53a36a92266135a4d927648949a765c8, type: 2}
   surveyMenuPanel: {fileID: 8156430539944808921}
@@ -711,13 +712,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  sortLevel: 100
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 504436990806956866}
   nodesToListen:
   - {fileID: 504436989885640549}
   - {fileID: 504436990806956866}
-  canvas: {fileID: 0}
 --- !u!1 &2428062037079530798
 GameObject:
   m_ObjectHideFlags: 0

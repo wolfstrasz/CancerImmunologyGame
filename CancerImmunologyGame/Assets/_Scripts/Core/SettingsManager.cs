@@ -141,7 +141,7 @@ namespace ImmunotherapyGame.Core
         private void SetMasterVolume()
         {
             float volume = masterVolumeSlider.value;
-			Debug.Log("Master Volume: " + volume);
+			//Debug.Log("Master Volume: " + volume);
 			audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("MasterVolumePreference", volume);
 
@@ -150,7 +150,7 @@ namespace ImmunotherapyGame.Core
         private void SetSFXVolume()
         {
             float volume = sfxVolumeSlider.value;
-            Debug.Log("SFX Volume: " + volume);
+            //Debug.Log("SFX Volume: " + volume);
 
             audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("SFXVolumePreference", volume);
@@ -160,7 +160,7 @@ namespace ImmunotherapyGame.Core
         private void SetUIVolume()
         { 
             float volume = uiVolumeSlider.value;
-            Debug.Log("UI Volume: " + volume);
+            //Debug.Log("UI Volume: " + volume);
 
             audioMixer.SetFloat("UIVolume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("UIVolumePreference", volume);
@@ -170,7 +170,7 @@ namespace ImmunotherapyGame.Core
         private void SetMusicVolume()
 		{
             float volume = musicVolumeSlider.value;
-            Debug.Log("Music Volume: " + volume);
+            //Debug.Log("Music Volume: " + volume);
 
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
             PlayerPrefs.SetFloat("MusicVolumePreference", volume);
@@ -189,9 +189,9 @@ namespace ImmunotherapyGame.Core
                 PlayerPrefs.SetInt("ResolutionPreference", currentResolutionIndex);
 			}
             
-            Debug.Log("Loaded: " + resolutionDropdown.CurrentValue);
+            //Debug.Log("Loaded: " + resolutionDropdown.CurrentValue);
 
-            Debug.Log("Loading Toggle");
+            //Debug.Log("Loading Toggle");
 			if (PlayerPrefs.HasKey("FullscreenPreference"))
             {
                 bool value = Convert.ToBoolean(PlayerPrefs.GetInt("FullscreenPreference"));
@@ -205,12 +205,12 @@ namespace ImmunotherapyGame.Core
                 PlayerPrefs.SetInt("FullscreenPreference", 1);
 			}
             currentToggle = fullscreenToggle.isOn;
-            Debug.Log("Loaded: " + currentToggle);
+            //Debug.Log("Loaded: " + currentToggle);
 		}
 
         private void LoadVolumeSettings()
 		{
-            Debug.Log("Loading volume");
+            //Debug.Log("Loading volume");
             float value = 0f;
 
             if (PlayerPrefs.HasKey("MasterVolumePreference"))
@@ -244,14 +244,14 @@ namespace ImmunotherapyGame.Core
 
         private void LoadInputSettings(int currentIndex)
         {
-            Debug.Log("Loading Input");
+            //Debug.Log("Loading Input");
             if (PlayerPrefs.HasKey("InputPreference"))
                 inputDropdown.CurrentValue = PlayerPrefs.GetInt("InputPreference");
             else
                 inputDropdown.CurrentValue = currentIndex;
 
             currentSchemeIndex = inputDropdown.CurrentValue;
-            Debug.Log("Loaded: " + currentSchemeIndex);
+            //Debug.Log("Loaded: " + currentSchemeIndex);
         }
 
         private void UpdateSliderValue (Slider slider, float value)
@@ -278,15 +278,15 @@ namespace ImmunotherapyGame.Core
 
         private void ReloadValues()
 		{
-            Debug.Log("Reloading Values: ");
+            //Debug.Log("Reloading Values: ");
             inputDropdown.CurrentValue = currentSchemeIndex;
-            Debug.Log("Input: " + inputDropdown.CurrentValue);
+            //Debug.Log("Input: " + inputDropdown.CurrentValue);
 
             resolutionDropdown.CurrentValue = currentResolutionIndex;
-            Debug.Log("Resolution: " + resolutionDropdown.CurrentValue);
+            //Debug.Log("Resolution: " + resolutionDropdown.CurrentValue);
 
             fullscreenToggle.isOn = currentToggle;
-            Debug.Log("Fullscreen: " + fullscreenToggle.isOn);
+            //Debug.Log("Fullscreen: " + fullscreenToggle.isOn);
 		}
 
     }

@@ -127,7 +127,6 @@ namespace ImmunotherapyGame
 			isFocused = false;
 			state = GameCameraControlState.FOLLOW;
 			prevPosition = focusTarget.transform.position;
-			shiftOffset = Vector3.zero;
 			if (shouldInstantlyFocus)
 			{
 				focusPosition = focusTarget.transform.position;

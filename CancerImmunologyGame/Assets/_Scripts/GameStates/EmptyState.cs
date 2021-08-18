@@ -13,6 +13,8 @@ namespace ImmunotherapyGame.GameManagement
 
 		internal override void OnStateEnter()
 		{
+			Debug.Log("Entering: Empty State");
+
 		}
 
 		internal override void OnStateExit()
@@ -21,6 +23,8 @@ namespace ImmunotherapyGame.GameManagement
 
 		internal override void OnStateReEnter()
 		{
+			Debug.Log("Re-Entering: Empty State");
+
 		}
 
 		internal override void OnUpdate()

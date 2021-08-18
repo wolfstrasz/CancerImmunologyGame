@@ -20,6 +20,7 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+				Debug.Log("Entering: Pause State");
 				prevTimeScale = Time.timeScale;
 				Time.timeScale = 0.0f;
 				TopOverlayUI.Instance.GamePaused = true;
@@ -33,6 +34,8 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateReEnter()
 			{
+				Debug.Log("Re-Entering: Pause State");
+
 				TopOverlayUI.Instance.GamePaused = true;
 
 			}

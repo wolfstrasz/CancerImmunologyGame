@@ -5,7 +5,7 @@ using ImmunotherapyGame.GameManagement;
 
 namespace ImmunotherapyGame.UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : Singleton<MainMenu>
     {
 		[Header("Main Menu")]
 		[SerializeField]
@@ -18,10 +18,24 @@ namespace ImmunotherapyGame.UI
 		[SerializeField]
 		private InterfaceControlPanel creditsPanel = null;
 
-		private void Awake()
+		public bool Opened { get; set; }
+
+		//private void Awake()
+		//{
+		//	continueBtn.SetActive(PlayerPrefs.HasKey("GameInProgress"));
+		//	mainMenuPanel.Open();
+		//}
+
+		private void Start()
+		{
+			Opened = false;
+		}
+
+		public void RequestOpen()
 		{
 			continueBtn.SetActive(PlayerPrefs.HasKey("GameInProgress"));
 			mainMenuPanel.Open();
+			Opened = true;
 		}
 
 		// Main menu buttons functionality

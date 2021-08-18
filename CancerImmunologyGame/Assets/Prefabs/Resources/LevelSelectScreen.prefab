@@ -671,12 +671,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a772b70bfe228ac45bedf06a6e29fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 110
+  sortLevel: 200
+  canvas: {fileID: 0}
   shouldCloseOnSceneChange: 1
+  spamStop: 0
   initialControlNode: {fileID: 941471342904990866}
   nodesToListen:
   - {fileID: 941471342904990866}
-  canvas: {fileID: 0}
 --- !u!114 &6453486579014181867
 MonoBehaviour:
   m_ObjectHideFlags: 0

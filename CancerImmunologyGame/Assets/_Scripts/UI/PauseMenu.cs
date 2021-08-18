@@ -29,7 +29,11 @@ namespace ImmunotherapyGame.UI
 		private PlayerControls playerControls;
 
 		public void Initialise() { }
-
+		private void Start()
+		{
+			pauseMenuPanel.gameObject.SetActive(false);
+			surveyMenuPanel.gameObject.SetActive(false);
+		}
 		private void OnEnable()
 		{
 			playerControls = new PlayerControls();

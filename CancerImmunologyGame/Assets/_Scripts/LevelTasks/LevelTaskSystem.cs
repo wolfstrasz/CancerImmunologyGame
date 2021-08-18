@@ -6,6 +6,7 @@ using ImmunotherapyGame.UI;
 
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace ImmunotherapyGame.LevelTasks
 {
@@ -44,7 +45,24 @@ namespace ImmunotherapyGame.LevelTasks
             view.SetActive(false);
 		}
 
-        public void Clear()
+		private void OnEnable()
+		{
+            SceneManager.activeSceneChanged += OnSceneChanged;
+		}
+
+		private void OnDisable()
+		{
+            SceneManager.activeSceneChanged -= OnSceneChanged;
+		}
+
+
+        private void OnSceneChanged(Scene id1, Scene id2)
+		{
+            Clear();
+        }
+
+
+		public void Clear()
 		{
 
             for (int i = 0; i < allTaskVisuals.Count; ++i)
@@ -79,6 +97,7 @@ namespace ImmunotherapyGame.LevelTasks
             newLevelTaskVisual.SetInfo(levelTask);
             layoutsRefresh.ForceRefresh();
 
+
             levelTaskVisualTable.Add(levelTask, newLevelTaskVisual);
 
             allTasks.Add(levelTask);
@@ -106,7 +125,7 @@ namespace ImmunotherapyGame.LevelTasks
 
         internal void TaskObjectComplete(LevelTaskType ltObject)
 		{
-            Debug.Log("Task Object Complete: " + ltObject);
+            //Debug.Log("Task Object Complete: " + ltObject);
             if (!levelTaskTable.ContainsKey(ltObject))
             {
                 Debug.LogWarning("Level Task Table does not contain key: " + ltObject);

@@ -27,7 +27,7 @@ namespace ImmunotherapyGame.Tutorials
 			}
 			else if (itemType == SystemItemToUnlock.CELLPEDIA)
 			{
-				//Cellpedia.Instance.UnlockFeature();
+				Cellpedia.Instance.UnlockFeature();
 			} 
 			else if (itemType == SystemItemToUnlock.RESEARCH)
 			{

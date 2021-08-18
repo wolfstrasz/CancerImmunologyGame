@@ -18,7 +18,7 @@ namespace ImmunotherapyGame
 				stateHistory = new Stack<GameState>();
 				if (activeState == null)
 				{
-					Debug.Log("Game State Controller contructor: create empty state");
+					// Debug.Log("Game State Controller contructor: create empty state");
 					SetState(new EmptyState(this));
 				}
 			}
@@ -48,7 +48,7 @@ namespace ImmunotherapyGame
 
 			internal void AddState(GameState state)  // Push new on stack
 			{
-				Debug.Log("GSC: Add new state " + state.ToString());
+				//Debug.Log("GSC: Add new state " + state.ToString());
 
 				if (activeState != null)
 					stateHistory.Push(activeState);
@@ -63,14 +63,14 @@ namespace ImmunotherapyGame
 				pauseStateCallers.Clear();
 
 				// Assign new state
-				Debug.Log("GSC: Set new state " + state.ToString());
+				// Debug.Log("GSC: Set new state " + state.ToString());
 				activeState = state;
 				activeState.OnStateEnter();
 			}
 
 			internal bool AddPauseState(GameObject caller, GameState state)
 			{
-				Debug.Log("GSC: Add new pause state request from: " + caller.name);
+				// Debug.Log("GSC: Add new pause state request from: " + caller.name);
 
 				AddState(state);
 				pauseStateCallers.Push(caller);
@@ -79,7 +79,7 @@ namespace ImmunotherapyGame
 
 			internal bool RemovePauseState (GameObject caller)
 			{
-				Debug.Log("GSC: Remove pause state request from: " + caller.name);
+				// Debug.Log("GSC: Remove pause state request from: " + caller.name);
 
 				if (caller == pauseStateCallers.Peek())
 				{
@@ -97,7 +97,7 @@ namespace ImmunotherapyGame
 
 			internal bool RemoveCurrentState(string callerName) // Removes the state and continues with the previous state
 			{
-				Debug.Log("GSC: remove current state accepted for: " + callerName);
+				// Debug.Log("GSC: remove current state accepted for: " + callerName);
 				if (stateHistory.Count <= 0)
 				{
 					// On reaching this error means that your State machine will have had no STATE to exist in
@@ -107,7 +107,7 @@ namespace ImmunotherapyGame
 
 				activeState.OnStateExit();
 				activeState = stateHistory.Pop();
-				Debug.Log("GSC: returning to state " + activeState.ToString());
+				// Debug.Log("GSC: returning to state " + activeState.ToString());
 				activeState.OnStateReEnter();
 				pauseStateCallers.Pop();
 				return true;

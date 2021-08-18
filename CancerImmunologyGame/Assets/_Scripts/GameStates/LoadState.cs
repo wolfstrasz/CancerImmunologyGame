@@ -18,6 +18,8 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateEnter()
 			{
+				Debug.Log("Entering: Load State");
+
 			}
 
 			internal override void OnStateExit()
@@ -26,6 +28,8 @@ namespace ImmunotherapyGame
 
 			internal override void OnStateReEnter()
 			{
+				Debug.Log("Re-Entering: Load State");
+
 			}
 
 			internal override void OnUpdate()
