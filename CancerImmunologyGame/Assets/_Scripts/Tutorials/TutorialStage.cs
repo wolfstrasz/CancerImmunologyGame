@@ -25,22 +25,24 @@ namespace ImmunotherapyGame.Tutorials
 			if (currentEvent.OnUpdate())
 			{
 				// Stop previous event
-				currentEvent.EndEvent();
-				currentEvent.gameObject.SetActive(false);
-				Debug.Log(gameObject.name + " event finished: " + currentEvent.name);
-				currentEventIndex++;
-
-				// Finish stage if reached last event
-				if (currentEventIndex >= events.Count)
+				if (currentEvent.EndEvent())
 				{
-					isFinished = true;
-					return;
-				}
+					currentEvent.gameObject.SetActive(false);
+					//Debug.Log(gameObject.name + " event finished: " + currentEvent.name);
+					currentEventIndex++;
 
-				// Start next event
-				currentEvent = events[currentEventIndex];
-				currentEvent.gameObject.SetActive(true);    // Debugging
-				currentEvent.StartEvent();
+					// Finish stage if reached last event
+					if (currentEventIndex >= events.Count)
+					{
+						isFinished = true;
+						return;
+					}
+
+					// Start next event
+					currentEvent = events[currentEventIndex];
+					currentEvent.gameObject.SetActive(true);    // Debugging
+					currentEvent.StartEvent();
+				}
 			}
 		}
 

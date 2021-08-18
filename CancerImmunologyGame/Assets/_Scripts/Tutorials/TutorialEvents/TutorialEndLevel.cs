@@ -8,7 +8,7 @@ using ImmunotherapyGame.LevelManagement;
 
 namespace ImmunotherapyGame.Tutorials
 {
-    public class TEndLevel : TutorialEvent
+    public class TutorialEndLevel : TutorialEvent
     {
 		protected override void OnEndEvent()
 		{

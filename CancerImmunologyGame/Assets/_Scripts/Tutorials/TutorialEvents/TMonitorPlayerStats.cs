@@ -7,23 +7,15 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TMonitorPlayerStats : TutorialEvent
 	{
-		[Header("Attributes")]
-		[SerializeField]
-		private PlayerData playerData = null;
-		[SerializeField]
-		private bool monitorHealth = false;
-		[SerializeField]
-		private float healthValue = 50.0f;
-		[SerializeField]
-		private bool monitorEnergy = false;
-		[SerializeField]
-		private float energyValue = 50.0f;
-		[SerializeField]
-		private bool invertChecks = false;
+		[Header("Attributes")] 
+		[SerializeField] private PlayerData playerData = null;
+		[SerializeField] private bool monitorHealth = false;
+		[SerializeField] private float healthValue = 50.0f;
+		[SerializeField] private bool monitorEnergy = false;
+		[SerializeField] private float energyValue = 50.0f;
 
-		[Header("Debug (Read Only)")]
-		[SerializeField]
-		private Cell playerCell = null;
+		[Header("Debug")]
+		[SerializeField] [ReadOnly] private Cell playerCell = null;
 
 		protected override void OnEndEvent()
 		{
@@ -63,12 +55,15 @@ namespace ImmunotherapyGame.Tutorials
 			if (playerCell == null) return false;
 
 			if (monitorHealth && playerCell.CurrentHealth <= healthValue)
-				return true ^ invertChecks;
+			{
+				return true;
+			}
 			if (monitorEnergy && playerCell.CurrentEnergy <= energyValue)
-				return true ^ invertChecks;
-			
+			{
+				return true;
+			}
 
-			return false ^ invertChecks;
+			return false;
 		}
 
 	}

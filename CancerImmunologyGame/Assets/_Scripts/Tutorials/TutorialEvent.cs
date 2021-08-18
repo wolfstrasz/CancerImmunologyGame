@@ -14,23 +14,29 @@ namespace ImmunotherapyGame.Tutorials
 		{
 			if (shouldPauseGameplay)
 			{
-				Debug.Log(gameObject.name + " requests game pause");
+				//Debug.Log(gameObject.name + " requests game pause");
 				TutorialManager.Instance.RequestPause();
 			}
 
 			OnStartEvent();
 		}
 
-		public void EndEvent()
+		public bool EndEvent()
 		{
+			bool successfulUnpause = true;
 			if (shouldPauseGameplay)
 			{
-				Debug.Log(gameObject.name + " requests game UN pause");
+				//Debug.Log(gameObject.name + " requests game UN pause");
 
-				TutorialManager.Instance.RequestUnpause();
+				successfulUnpause = TutorialManager.Instance.RequestUnpause();
 			}
 
-			OnEndEvent();
+			if (successfulUnpause)
+			{
+				OnEndEvent();
+				return true;
+			}
+			return false;
 		}
 
 		protected virtual void OnStartEvent() { }

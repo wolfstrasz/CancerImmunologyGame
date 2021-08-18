@@ -241,9 +241,9 @@ namespace ImmunotherapyGame.Tutorials
 			GameManager.Instance.RequestGameStatePause(GameStatePauseRequestType.GAMEPLAY, gameObject);
 		}
 
-		internal void RequestUnpause()
+		internal bool RequestUnpause()
 		{
-			GameManager.Instance.RequestGameStateUnpause(gameObject);
+			return GameManager.Instance.RequestGameStateUnpause(gameObject);
 		}
 
 

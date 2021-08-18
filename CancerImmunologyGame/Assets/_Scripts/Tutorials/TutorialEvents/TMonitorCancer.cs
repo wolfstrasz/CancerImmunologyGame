@@ -6,18 +6,13 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TMonitorCancer : TutorialEvent , ICancerFullObserver
 	{
-		[SerializeField]
-		private CancerMonitorValue monitorValue = CancerMonitorValue.DIVISION_START;
-		[SerializeField]
-		private int detectionTreshold = 0;
+		[SerializeField] private CancerMonitorValue monitorValue = CancerMonitorValue.DIVISION_START;
+		[SerializeField] private int detectionTreshold = 0;
 
 		[Header("Debug (ReadOnly)")]
-		[SerializeField]
-		private int detectionValue = 0;
-		[SerializeField]
-		private List<Cancer> cancers = null;
-		[SerializeField]
-		private int previousFrameCancerCount = 0;
+		[SerializeField] [ReadOnly] private int detectionValue = 0;
+		[SerializeField] [ReadOnly] private List<Cancer> cancers = null;
+		[SerializeField] [ReadOnly] private int previousFrameCancerCount = 0;
 
 
 		protected override void OnEndEvent()

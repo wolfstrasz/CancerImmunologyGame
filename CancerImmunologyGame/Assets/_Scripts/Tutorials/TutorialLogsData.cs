@@ -14,6 +14,7 @@ namespace ImmunotherapyGame.Tutorials
 
         internal void ResetData()
         {
+			isSystemUnlocked = false;
             for (int i = 0; i < allLogs.Count; ++i)
             {
                 allLogs[i].isUnlocked = false;
