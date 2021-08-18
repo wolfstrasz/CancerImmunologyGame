@@ -16,4 +16,8 @@ MonoBehaviour:
   levelID: 1
   isCompleted: 0
   isLocked: 0
-  LevelTaskCompletions: []
+  LevelTaskCompletions:
+  - levelTask: {fileID: 11400000, guid: 21d73ae945422f747a30295cf44317b8, type: 2}
+    isCompleted: 0
+  - levelTask: {fileID: 11400000, guid: 39447891c8586d240a64efa2a143de5d, type: 2}
+    isCompleted: 0

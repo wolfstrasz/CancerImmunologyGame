@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f82471079d1963458792b6a41c27423, type: 3}
-  m_Name: GatherChemokines10
+  m_Script: {fileID: 11500000, guid: 5666dfcaed562874c9e0facd7e9470e0, type: 3}
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  levelTaskType: {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
-  title: Collect Chemokines
-  count: 9
-  awardPoints: 5
-  currentCount: 9
-  isComplete: 0
+  sceneName: Level 3
+  levelID: 3
+  isCompleted: 0
+  isLocked: 0
+  LevelTaskCompletions: []

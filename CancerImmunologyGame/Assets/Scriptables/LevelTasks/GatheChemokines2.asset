@@ -17,4 +17,4 @@ MonoBehaviour:
   count: 2
   awardPoints: 3
   currentCount: 2
-  isComplete: 1
+  isComplete: 0

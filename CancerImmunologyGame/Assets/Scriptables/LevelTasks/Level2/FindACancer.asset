@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f82471079d1963458792b6a41c27423, type: 3}
-  m_Name: ReachDendriticCell
+  m_Name: FindACancer
   m_EditorClassIdentifier: 
   levelTaskType: {fileID: 11400000, guid: 5e0a4b9d762ea704c85ef888baa75b33, type: 2}
-  title: Interact with the Dendritic cell
+  title: Find a cancer cluster deeper into the colon.
   count: 1
   awardPoints: 0
-  currentCount: 1
-  isComplete: 1
+  currentCount: 0
+  isComplete: 0
