@@ -39,7 +39,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		[Header("Clips")]
 		[SerializeField] private AudioClip resetPointsClip = null;
-		[SerializeField] private AudioClip addPointsClip = null;
 
 		// Input handling
 		PlayerControls playerControls = null;
@@ -160,6 +159,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			EventSystem.current.SetSelectedGameObject(resetPointsPanelCancelButton);
 		}
 
+		/// <summary>
+		/// Clears all stat upgrades and returns all spent points.
+		/// </summary>
 		public void ResetPoints()
 		{
 			int sum = 0;
@@ -178,6 +180,10 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		}
 
+		/// <summary>
+		/// Consumes the points required by the current select stat upgrade.
+		/// Applies the upgrade and intiates the animation for the UI.
+		/// </summary>
 		internal void BuyCurrentSelectedUpgrade()
 		{
 			if (currentStatUpgrade == null)
@@ -204,6 +210,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			}
 		}
 
+		/// <summary>
+		/// Function call to allow the use of the system and display the menu button.
+		/// </summary>
 		public void UnlockFeature()
 		{
 			isFeatureUnlocked = true;
@@ -211,6 +220,10 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 		}
 
+		/// <summary>
+		/// Unlocks all upgrades provided in the list.
+		/// </summary>
+		/// <param name="upgradesToUnlock"></param>
 		public void UnlockUpgrades(List<StatUpgrade> upgradesToUnlock)
 		{
 
@@ -228,6 +241,11 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		}
 
+		/// <summary>
+		/// Increases the amount of point by pointsToAdd.
+		/// Negative values decreases them.
+		/// </summary>
+		/// <param name="pointsToAdd"></param>
 		public void AddPoints(int pointsToAdd)
 		{
 			//source.PlayOneShot(addPointsClip);
@@ -241,8 +259,10 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			resetPointsPanel.SetActive(false);
 		}
 
-
-
+		/// <summary>
+		/// Selects the stat upgrade linked to the stat upgrade button.
+		/// </summary>
+		/// <param name="button"></param>
 		internal void SelectStatUpgrade(StatUpgradeButton button)
 		{
 			// Cache data

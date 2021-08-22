@@ -95,6 +95,10 @@ namespace ImmunotherapyGame.Player
 			controlledCell.MovementRotation = Quaternion.Slerp(controlledCell.transform.rotation, rotation, Time.fixedDeltaTime * 2f);
 		}
 
+		/// <summary>
+		/// Callback to move the player cell back to the closest nearby respawn location.
+		/// </summary>
+		/// <param name="cell"></param>
 		public void OnCellDeath(Cell cell)
 		{ 
 			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)

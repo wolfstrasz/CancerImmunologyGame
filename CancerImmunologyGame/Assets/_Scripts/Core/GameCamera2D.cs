@@ -23,7 +23,6 @@ namespace ImmunotherapyGame
 		[SerializeField] private const float zoomSkipTreshold = 0.01f;
 
 		[Header("Camera Movement Prediction")]
-		[SerializeField] private GameObject debugDot = null;
 		[SerializeField] private float maxForwardingDistance = 3.5f;
 		[SerializeField] private float minDistanceForPrediction = 0.001f;
 		[SerializeField] private float minPredictionSkipTreshhold = 0.01f;
@@ -43,7 +42,6 @@ namespace ImmunotherapyGame
 		[SerializeField] [ReadOnly] private bool isUnblinding = false;
 		[SerializeField] [ReadOnly] private float blindTimeLeft = 0f;
 		[SerializeField] [ReadOnly] private float blindTime = 0f;
-		[SerializeField] [ReadOnly] private float blindAlpha = 0f;
 
 		public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
 

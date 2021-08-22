@@ -28,6 +28,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		public void OnUpdate()
 		{
+			// If immunotherapy was applied wait until it finishes then reverse the effects.
 			if (lifetimeLeft > 0f)
 			{
 				lifetimeLeft -= Time.deltaTime;
@@ -44,7 +45,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				lifetimeBar.SetValue(lifetimeLeft);
 
 			}
-
+			// If the immunotherapy has finished and is on cooldown wait until it can be activated again.
 			else if (cooldownLeft > 0f)
 			{
 				cooldownLeft -= Time.deltaTime;
@@ -60,6 +61,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			}
 		}
 
+		/// <summary>
+		/// Updates the player UI to display the lifetime of the immunotherapy.
+		/// </summary>
 		private void SwitchToLifetimeBar()
 		{
 			cooldownBar.gameObject.SetActive(false);
@@ -70,6 +74,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			button.Deactivate();
 		}
 
+		/// <summary>
+		/// Updates the player UI to display the cooldown of the immunotherapy.
+		/// </summary>
 		private void SwitchToCooldownBar()
 		{
 			cooldownBar.gameObject.SetActive(true);
@@ -99,6 +106,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			GlobalLevelData.Immunotherapies.Add(this);
 		}
 
+		/// <summary>
+		/// Goes through the applicable upgrades and applies them.
+		/// </summary>
 		private void ActivateImmunotherapyEffects()
 		{
 			// Do activations
@@ -112,6 +122,9 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			SwitchToLifetimeBar();
 		}
 
+		/// <summary>
+		/// Goes through the applicable upgrades and undoes their effects.
+		/// </summary>
 		public void RemoveImmunotherapyEffects()
 		{
 

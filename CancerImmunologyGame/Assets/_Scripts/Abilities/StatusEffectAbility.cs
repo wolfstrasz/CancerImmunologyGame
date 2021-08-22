@@ -17,6 +17,12 @@ namespace ImmunotherapyGame.Abilities
 		public float Lifetime => (lifetime != null ? lifetime.CurrentValue : 0f);
 		public bool IsStatusEffectOverTime => isStatusEffectOverTime;
 
+		/// <summary>
+		/// Applies a status effect on the given target.
+		/// </summary>
+		/// <param name="abilityCaster"></param>
+		/// <param name="target"></param>
+		/// <returns></returns>
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
 			AbilityEffect abilityEffect = AbilityEffectManager.Instance.GetEffect(this);

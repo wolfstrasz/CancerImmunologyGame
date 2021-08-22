@@ -6,7 +6,10 @@ namespace ImmunotherapyGame.Tutorials
 	{
 		[SerializeField] protected bool shouldPauseGameplay;
 
-		public void StartEvent()
+		/// <summary>
+		/// Called by the Tutorial Stage when the event is activated.
+		/// </summary>
+		internal void StartEvent()
 		{
 			if (shouldPauseGameplay)
 			{
@@ -17,7 +20,11 @@ namespace ImmunotherapyGame.Tutorials
 			OnStartEvent();
 		}
 
-		public bool EndEvent()
+		/// <summary>
+		/// Called by the Tutorial Stage when the event has fully finished.
+		/// </summary>
+		/// <returns></returns>
+		internal bool EndEvent()
 		{
 			bool successfulUnpause = true;
 			if (shouldPauseGameplay)
@@ -35,15 +42,31 @@ namespace ImmunotherapyGame.Tutorials
 			return false;
 		}
 
-		protected virtual void OnStartEvent() { }
-
-		protected virtual bool OnUpdateEvent() { return true; }
-
-		protected virtual void OnEndEvent() { }
-
+		/// <summary>
+		/// Called by the Tutorial Stage every Update loop.
+		/// </summary>
+		/// <returns></returns>
 		internal bool OnUpdate()
 		{
 			return OnUpdateEvent();
 		}
+
+		/// <summary>
+		/// Called at the end of StartEvent
+		/// </summary>
+		protected virtual void OnStartEvent() { }
+
+		/// <summary>
+		/// Returns true if all event requirements were satisfied.
+		/// </summary>
+		/// <returns></returns>
+		protected virtual bool OnUpdateEvent() { return true; }
+
+		/// <summary>
+		/// Called at the end of EndEvent
+		/// </summary>
+		protected virtual void OnEndEvent() { }
+
+	
 	}
 }

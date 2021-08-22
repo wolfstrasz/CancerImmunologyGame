@@ -15,6 +15,6 @@ MonoBehaviour:
   sceneName: Level 5
   levelID: 5
   isCompleted: 0
-  isLocked: 0
+  isLocked: 1
   LevelTaskCompletions: []
   maxPoints: 0

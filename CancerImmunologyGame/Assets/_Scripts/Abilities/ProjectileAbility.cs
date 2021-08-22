@@ -5,6 +5,9 @@ using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Abilities
 {
+	/// <summary>
+	/// Ability that generates a number of projectiles with a given spread and lifetime.
+	/// </summary>
 	[CreateAssetMenu(menuName = "MyAssets/Abilities/Particle Ability")]
 	public class ProjectileAbility : Ability
 	{
@@ -60,6 +63,13 @@ namespace ImmunotherapyGame.Abilities
 			baseStartRotation = -0.5f * projectileSpread.CurrentValue;
 		}
 
+		/// <summary>
+		/// Cast the ability by generating projectiles at the ability casters position
+		/// that are shot at the direction of the target.
+		/// </summary>
+		/// <param name="abilityCaster"></param>
+		/// <param name="target"></param>
+		/// <returns></returns>
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
 			//Debug.Log("Projectile ability casted: " + name);
@@ -71,6 +81,12 @@ namespace ImmunotherapyGame.Abilities
 			return true;
 		}
 
+		/// <summary>
+		/// Generates all projectile particles at the spawn position and shoots them
+		/// in a cone dependent on the ability's spread value and the given direction.
+		/// </summary>
+		/// <param name="spawnPosition"></param>
+		/// <param name="direction"></param>
 		protected void SpawnProjectiles(Vector3 spawnPosition, Vector3 direction)
 		{
 			float angleToRotateCurrentProjectileDirection = baseStartRotation;

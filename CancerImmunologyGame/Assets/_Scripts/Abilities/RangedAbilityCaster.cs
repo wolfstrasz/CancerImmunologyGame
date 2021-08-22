@@ -80,7 +80,11 @@ namespace ImmunotherapyGame.Abilities
 			}
 		}
 
-
+		/// <summary>
+		/// Casts the ability if there are targets in range of the ability.
+		/// Returns the energy cost or 0 if no targets were found.
+		/// </summary>
+		/// <returns></returns>
 		public override float CastAbility()
 		{
 			Debug.Log(this.name + ": casted ability on all targets in range");

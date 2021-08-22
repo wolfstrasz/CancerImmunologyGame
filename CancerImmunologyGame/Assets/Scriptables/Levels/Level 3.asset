@@ -21,3 +21,4 @@ MonoBehaviour:
     isCompleted: 0
   - levelTask: {fileID: 11400000, guid: eaf1d37070c1fb640acdf70385c87734, type: 2}
     isCompleted: 0
+  maxPoints: 20

@@ -18,7 +18,6 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField] private int maximumCells = 10;
 		[SerializeField] [Range(1.0f, 100.0f)] private float timeBetweenDivisions = 10.0f;
 		[SerializeField] private int spawnsBeforeCafSpawn = 5;
-		[SerializeField] private int balanceRatioCellToCaf = 3;
 
 		[Header ("Spawning to division animation fixes")]
 		[SerializeField] private float radius = 0.0f;

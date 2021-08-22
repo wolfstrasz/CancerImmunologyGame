@@ -34,20 +34,30 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
         internal int NextUpgradeCost => upgrades[nextUpgradeIndex].cost;
         internal float CurrentValue => currentValue;
 
-
+        /// <summary>
+        /// Applies the upgraded values to the linked Stat Attribute
+        /// and saves the value to be used in RemoveEffect().
+        /// </summary>
         internal void ApplyEffect()
 		{
             appliedValue = currentValue;
             statAttribute.CurrentValue += appliedValue; 
 		}
 
+        /// <summary>
+        /// Applies the inverse of the previously applied value to the
+        /// linked Stat Attribute and resets the value.
+        /// </summary>
         internal void RemoveEffect()
 		{
             statAttribute.CurrentValue -= appliedValue;
             appliedValue = 0f;
 		}
 
-
+        /// <summary>
+        /// Returns the cost and switches to the next available upgrade values.
+        /// </summary>
+        /// <returns></returns>
         internal int ApplyUpgradeAndReturnCost()
 		{
             //statAttribute.CurrentValue = statAttribute.CurrentValue + upgrades[nextUpgradeIndex].valueChange;
@@ -55,7 +65,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
             ++nextUpgradeIndex;
             return upgrades[nextUpgradeIndex - 1].cost;
 		}
-
 
         internal void ApplyUpgradesFromStartToNextUpgradeIndex()
 		{
@@ -69,6 +78,10 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
             //statAttribute.CurrentValue = statAttribute.CurrentValue + fullValue;
         } 
 
+        /// <summary>
+        /// Undoes all upgrades and returns the points used.
+        /// </summary>
+        /// <returns></returns>
         internal int ClearUpgradeAndReturnCost()
 		{
             int overallCost = 0;

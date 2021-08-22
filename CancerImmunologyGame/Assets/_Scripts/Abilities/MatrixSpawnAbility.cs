@@ -5,13 +5,25 @@ using ImmunotherapyGame.Cancers;
 
 namespace ImmunotherapyGame.Abilities
 {
-	[CreateAssetMenu(menuName = "MyAssets/Abilities/Matrix Spawn Ability")]
 
+	/// <summary>
+	/// Ability that spawns a game object entity on the position of the caster.
+	/// The ability has effect only when a caster is targeting a cancer cell and
+	/// the isntatiated object has a component of type MatrixCell.
+	/// </summary>
+	[CreateAssetMenu(menuName = "MyAssets/Abilities/Matrix Spawn Ability")]
 	public class MatrixSpawnAbility : Ability, ISerializationCallbackReceiver
 	{
 		[Header ("Effect On Target Cell is always null.")]
 		[SerializeField] private GameObject spawnObjectPrefab;
 
+		/// <summary>
+		/// Instantiates a game entity from the given prefab and attaches it to the target only if
+		/// the target has a CancerCell component and the prefab object has a component of type MatrixCell
+		/// </summary>
+		/// <param name="abilityCaster"></param>
+		/// <param name="target"></param>
+		/// <returns></returns>
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
 			CancerCell cancerCell = target.GetComponent<Cancers.CancerCell>();

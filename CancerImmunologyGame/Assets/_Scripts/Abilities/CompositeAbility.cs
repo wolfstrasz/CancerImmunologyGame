@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace ImmunotherapyGame.Abilities
 {
+	/// <summary>
+	/// An ability that holds a sequence of abilities to be used.
+	/// If an ability was already called it stops the chain to prevent
+	/// infinite execution if two or more composite abilities call each other.
+	/// </summary>
 	[CreateAssetMenu(menuName = "MyAssets/Abilities/Composite Ability")]
 	public class CompositeAbility : Ability, ISerializationCallbackReceiver
 	{
@@ -11,6 +16,12 @@ namespace ImmunotherapyGame.Abilities
 		[SerializeField] protected List<Ability> abilities = new List<Ability>();
 		private bool alreadyCalled = false;
 
+		/// <summary>
+		/// Casts all abilities unless a casting loop is found.
+		/// </summary>
+		/// <param name="abilityCaster"></param>
+		/// <param name="target"></param>
+		/// <returns></returns>
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
 			Debug.Log("Casting ability: " + this);
