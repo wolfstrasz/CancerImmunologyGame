@@ -17,26 +17,27 @@ namespace ImmunotherapyGame.LevelManagement
 		{
             LevelTask task = levelTaskCompletion.levelTask;
             taskTitle.text = task.title;
-            
-            if (levelTaskCompletion.isCompleted)
-			{
-                taskCompletion.text = "Already Completed";
-                taskAward.text = "+0";
-                return 0;
-			}
 
-            if (task.isComplete)
-			{
+            if (levelTaskCompletion.isCompleted)
+            {
+                taskCompletion.text = "Already Completed";
+                taskAward.text = "-";
+                return 0;
+            }
+            else if (task.isComplete)
+            {
                 levelTaskCompletion.isCompleted = true;
                 taskCompletion.text = "Completed";
                 taskAward.text = "+" + task.awardPoints.ToString();
                 return task.awardPoints;
-			}
-
-             // not already completed and not completed
-            taskCompletion.text = "Not Completed";
-            taskAward.text = "+0";
-            return 0;
+            }
+            else
+            {
+                // not already completed and not completed
+                taskCompletion.text = "Not Completed";
+                taskAward.text = "-";
+                return 0;
+            }
 		}
     }
 }

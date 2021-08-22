@@ -406,9 +406,9 @@ AudioSource:
   m_GameObject: {fileID: 6223957440314556186}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 16d9b1cf529e68f4f96d477df83259a6,
+  OutputAudioMixerGroup: {fileID: -6176009157687532862, guid: 16d9b1cf529e68f4f96d477df83259a6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6c28002dd9b25ad468c8df4daf38cb64, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a39d1a23442269844b1c8c029366eaa5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -511,7 +511,6 @@ MonoBehaviour:
   timeToHide: 1.5
   text: {fileID: 7033230435490276745}
   cellImage: {fileID: 6688017695751487910}
-  scaleBoost: 2
 --- !u!225 &3643538320524664661
 CanvasGroup:
   m_ObjectHideFlags: 0

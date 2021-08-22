@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: PacCooldown
   m_EditorClassIdentifier: 
   attributeName: 
-  initialValue: 2
-  currentValue: 2
-  modifiers: []
+  initialValue: 5
+  currentValue: 5

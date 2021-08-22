@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Abilities
 {
@@ -17,7 +18,7 @@ namespace ImmunotherapyGame.Abilities
 
 		public override bool CanCastAbility(float resourceValue)
 		{
-			return base.CanCastAbility(resourceValue) && HasTargetsInRange;
+			return HasTargetsInRange && base.CanCastAbility(resourceValue);
 		}
 
 		protected virtual void Awake()
@@ -33,7 +34,7 @@ namespace ImmunotherapyGame.Abilities
 					Cell colliderCell = colliders[i].GetComponent<Cell>();
 					if (colliderCell != null)
 					{
-						if (cellTypesToTarget.Contains(colliderCell.cellType) && !targetsInRange.Contains(colliderCell.gameObject))
+						if (cellTypesToTarget.Contains(colliderCell.CellType) && !targetsInRange.Contains(colliderCell.gameObject))
 						{
 							targetsInRange.Add(colliderCell.gameObject);
 						}
@@ -54,11 +55,11 @@ namespace ImmunotherapyGame.Abilities
 
 		protected virtual void OnTriggerEnter2D(Collider2D collider)
 		{
-			Debug.Log("Ability caster 2D triggered by " + collider.gameObject);
+			//Debug.Log("Ability caster 2D triggered by " + collider.gameObject);
 			Cell cell = collider.gameObject.GetComponent<Cell>();
 			if (cell != null)
 			{
-				if (cellTypesToTarget.Contains(cell.cellType))
+				if (cellTypesToTarget.Contains(cell.CellType))
 				{
 					if (!targetsInRange.Contains(cell.gameObject))
 						targetsInRange.Add(cell.gameObject);
@@ -71,7 +72,7 @@ namespace ImmunotherapyGame.Abilities
 			Cell cell = collider.gameObject.GetComponent<Cell>();
 			if (cell != null)
 			{
-				if (cellTypesToTarget.Contains(cell.cellType))
+				if (cellTypesToTarget.Contains(cell.CellType))
 				{
 					if (targetsInRange.Contains (cell.gameObject))
 						targetsInRange.Remove(cell.gameObject);

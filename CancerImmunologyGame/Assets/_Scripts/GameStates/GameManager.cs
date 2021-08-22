@@ -107,6 +107,13 @@ namespace ImmunotherapyGame
 				}
 			}
 
+			public void ReloadData()
+			{
+				foreach (IDataManager manager in DataManagers)
+				{
+					manager.LoadData();
+				}
+			}
 			public void SaveData()
 			{
 				// Save all data from level

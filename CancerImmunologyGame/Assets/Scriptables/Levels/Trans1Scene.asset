@@ -15,7 +15,7 @@ MonoBehaviour:
   sceneName: Trans1Scene
   levelID: 2
   isCompleted: 0
-  isLocked: 0
+  isLocked: 1
   LevelTaskCompletions:
   - levelTask: {fileID: 11400000, guid: fa8273dc345d8ad469628378af3420d4, type: 2}
     isCompleted: 0

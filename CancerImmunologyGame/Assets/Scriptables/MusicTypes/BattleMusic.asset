@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1c989528aef34c92f2f4253e2e3d6, type: 3}
   m_Name: BattleMusic
   m_EditorClassIdentifier: 
-  musicClip: {fileID: 8300000, guid: 9e98aa605f3a15a4fb5a7bc56be3cfdb, type: 3}
+  musicClip: {fileID: 8300000, guid: 1eb0d1c6f309bdc41bdf14dbd28a2880, type: 3}
   priority: 2
+  clipStartTime: 20
   subscribers: 0

@@ -29,6 +29,7 @@ namespace ImmunotherapyGame.Cancers
 
 		protected override void OnCellDeath()
 		{
+			isDying = true;
 			animator.SetTrigger("Death");
 		}
 
@@ -36,6 +37,8 @@ namespace ImmunotherapyGame.Cancers
 		{
 			if (onDeathEvent != null)
 				onDeathEvent(this);
+
+			Destroy(gameObject);
 		}
 
 	}

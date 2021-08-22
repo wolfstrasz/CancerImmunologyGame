@@ -22,7 +22,7 @@ namespace ImmunotherapyGame.LevelManagement
 
         public void OnLevelComplete()
 		{
-			FindCompletedLevel();
+			FindCompletedLevelIndex();
 
 			if (currentCompletedLevelIndex == -1)
 			{
@@ -34,9 +34,10 @@ namespace ImmunotherapyGame.LevelManagement
 
 			// Interact with level complete screen to assign points
 			int pointsEarned = LevelCompleteScreen.Instance.PopulateAndGetEarnedPoints(data.levels[currentCompletedLevelIndex]);
+			LevelTaskSystem.Instance.Clear();
 			ImmunotherapyResearch.Instance.AddPoints(pointsEarned);
 
-			// Unlock levels
+			// Unlock next level
 			bool HasNextLevel = currentCompletedLevelIndex < (data.levels.Count - 1);
 			if (HasNextLevel)
 			{
@@ -49,7 +50,7 @@ namespace ImmunotherapyGame.LevelManagement
 			LevelCompleteScreen.Instance.Open(HasNextLevel);
 		}
 
-		private void FindCompletedLevel()
+		private void FindCompletedLevelIndex()
 		{
 			currentCompletedLevelIndex = -1;
 			currentCompletedLevelName = SceneManager.GetActiveScene().name;
@@ -73,12 +74,13 @@ namespace ImmunotherapyGame.LevelManagement
 			if (savedData == null)
 			{
 				Debug.Log("No previous saved data found. Creating new level data save.");
+				ResetData();
+				SaveData();
 			}
 			else
 			{
 				savedData.CopyTo(data);
 			}
-			SaveData();
 		}
 
 		public void SaveData()
@@ -113,6 +115,8 @@ namespace ImmunotherapyGame.LevelManagement
 
 		internal void OnLevelExit()
 		{
+			GameManager.Instance.ReloadData();
+			LevelTaskSystem.Instance.Clear();
 		}
 	}
 }

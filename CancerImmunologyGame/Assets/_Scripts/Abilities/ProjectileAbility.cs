@@ -62,7 +62,7 @@ namespace ImmunotherapyGame.Abilities
 
 		public override bool CastAbility(GameObject abilityCaster, GameObject target)
 		{
-			Debug.Log("Projectile ability casted: " + name);
+			//Debug.Log("Projectile ability casted: " + name);
 			Vector3 originPosition = abilityCaster.transform.position;
 	
 			Vector3 direction = (target.transform.position - originPosition).normalized;
@@ -77,7 +77,7 @@ namespace ImmunotherapyGame.Abilities
 
 			for (int i = 0; i < projectileCount.CurrentValue; ++i)
 			{
-				Debug.Log("Projectile ability ( " + name + ") particle: " + (i + 1));
+				//Debug.Log("Projectile ability ( " + name + ") particle: " + (i + 1));
 				// Find angle offset
 				float angleOffset = 0f;
 				if (useRandomSpreadOffset)

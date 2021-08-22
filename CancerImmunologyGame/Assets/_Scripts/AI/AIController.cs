@@ -1,212 +1,202 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
-using Pathfinding.RVO;
 using BehaviourTreeBase;
-using ImmunotherapyGame.Cancers;
-
+using ImmunotherapyGame.Player;
 
 namespace ImmunotherapyGame.AI
 {
 	[RequireComponent(typeof(Seeker))]
-	public class AIController : MonoBehaviour, IAIKillerCellController
+	public class AIController : MonoBehaviour
 	{
-		[Header("AI Data")]
-		[SerializeField]
-		private BehaviourTree tree = null;
-		[SerializeField]
-		private bool initialised = false;
-		[SerializeField]
-		private bool active = true;
-
-		[Header("Interface Data (Cell controll)")]
-		[SerializeField]
-		private KillerCell controlledCell = null;
-		public KillerCell ControlledCell { get => controlledCell; set => controlledCell = value; }
-
-		[Header("Interface Data (Targeting) (ReadOnly)")]
-		[SerializeField]
-		private GameObject target = null;
-		public GameObject Target { get => target; set => target = value; }
-		[SerializeField]
-		private float acceptableDistanceFromTarget = 1.0f;
-		public float AcceptableDistanceFromTarget { get => acceptableDistanceFromTarget; set => acceptableDistanceFromTarget = value; }
-
-		[Header("Interface Data (Movement) (ReadOnly)")]
-		[SerializeField]
-		private Vector2 movementDirection = Vector2.zero;
-		public Vector2 MovementDirection { get => movementDirection; set => movementDirection = value; }
-		private Vector2 zeroVector = Vector2.zero;
-		[SerializeField]
-		private Seeker pathSeeker = null;
-		public Seeker PathSeeker { get => pathSeeker; set => pathSeeker = value; }
-		[SerializeField]
-		private float repathRate = 1.0f;
-		public float RepathRate => repathRate;
-		[SerializeField]
-		private float movementLookAhead = 1.0f;
-		public float MovementLookAhead => movementLookAhead;
-		[SerializeField]
-		private float slowdownDistance = 0.5f;
-		public float SlowdownDistance => slowdownDistance;
-		[SerializeField]
-		private RVOController rvoController = null;
-		public RVOController RVOController => rvoController;
-		[SerializeField]
-		private GameObject graphObstacle = null;
-		public GameObject GraphObstacle => graphObstacle;
-
-		[Header("Interface Data (Helper Booking) (Read Only)")]
-		[SerializeField]
-		private HelperTCell bookedHelperTcell = null;
-		public HelperTCell BookedHelperTCell { get => bookedHelperTcell; set => bookedHelperTcell = value; }
-		[SerializeField]
-		private GameObject bookingSpot = null;
-		public GameObject BookingSpot { get => bookingSpot; set => bookingSpot = value; }
-
-		[Header("Interface Data (Cancer Attacking) (Read Only)")]
-		[SerializeField]
-		private Cell targetedEvilCell = null;
-		public Cell TargetedEvilCell { get => targetedEvilCell; set => targetedEvilCell = value; }
-
-		[Header("InterfaceData (Cancer Interacting) (Read Only)")]
-		[SerializeField]
-		GameObject basePoint = null;
-		[SerializeField]
-		List<GameObject> controlPoints = new List<GameObject>();
-		[SerializeField]
-		List<Cancer> targetedCancers = new List<Cancer>();
-
-		public GameObject BasePoint { get => basePoint; set => basePoint = value; }
-		public List<GameObject> ControlPoints { get => controlPoints; set => controlPoints = value; }
-		public List<Cancer> TargetCancers { get => targetedCancers; set => targetedCancers = value; }
+		[SerializeField] private BehaviourTree tree = null;
+		[SerializeField] private KillerCell controlledCell = null;
+		[SerializeField] private AIHomeData homeData;
+		[SerializeField] private AITargetingData targetData;
+		[SerializeField] private AIPathfindingData pathfindingData;
+		[SerializeField] private AIControlledCellData controlledCellData;
+		[SerializeField] private AIHealerData healerData;
+		[SerializeField] private AICombatData combatData;
+		[SerializeField] private float distanceFromBaseToDissapear = 4.0f;
 
 		public void Start()
 		{
-			pathSeeker = GetComponent<Seeker>();
 			InitialiseBehaviourTree();
-			initialised = true;
+		}
+
+		public void OnEnable()
+		{
+			controlledCellData.controlledCell = controlledCell;
+			controlledCell.onDeathEvent += OnCellDeath;
+			GlobalLevelData.AIControllers.Add(this);
+		}
+
+		private void OnCellDeath(Cell cell)
+		{
+			if (GlobalLevelData.RespawnAreas == null || GlobalLevelData.RespawnAreas.Count == 0)
+			{
+				Debug.LogWarning("Zero respawn areas found on map. Respawning at same position");
+				return;
+			}
+
+			// Find closest spawn location
+			List<PlayerRespawnArea> respawnLocations = GlobalLevelData.RespawnAreas;
+			Vector3 closestRespawnLocation = respawnLocations[0].Position;
+			float minDistance = Vector3.Distance(transform.position, respawnLocations[0].Position);
+
+			foreach (var area in respawnLocations)
+			{
+				float distance = Vector3.Distance(transform.position, area.Position);
+				if (distance <= minDistance)
+				{
+					minDistance = distance;
+					closestRespawnLocation = area.Position;
+				}
+			}
+
+			// Transport cell and heal TODO: Move to cell doing it.
+			controlledCell.transform.position = closestRespawnLocation;
+			transform.position = closestRespawnLocation;
+			controlledCell.Respawn();
+		}
+
+		public void OnDisable()
+		{
+			controlledCellData.controlledCell = null;
+			controlledCell.onDeathEvent -= OnCellDeath;
+			GlobalLevelData.AIControllers.Remove(this);
 		}
 
 		private void InitialiseBehaviourTree()
 		{
 			tree = new BehaviourTree(); // Garbage collection will clean it if something requires reinitialisation
 
-			BTSelector root = new BTSelector("Root", 2);
+			BTSelector root = new BTSelector("Root", 4);
 			{
-				BTSequence healingState = new BTSequence("HealingState", 3);
+
+				BTSequence checkIfInNeedOfHealing = new BTSequence("Check if in need of healing", 3);
 				{
-					BTSelector isCurrentlyInNeedOfHealing = new BTSelector("isCurrentlyInNeedOfHealing", 2);
+					BTActionNode alreadyHasAHealer = new AICurrentlyHasHelperCellAsTarget("Already has a Healer", tree, targetData, healerData);
+					BTInverter doesNotHaveAHealer = new BTInverter("Does not have a Healer", alreadyHasAHealer);
+
+					BTSelector checkIfInCriticalCondition = new BTSelector("Check if in critical condition", 2);
 					{
-						// Currently healing actions
-						BTActionNode hasAHealingTarget = new AIHasHealingTarget("hasAHealingTarget", tree, this);
-
-						// Should Set healer target
-						BTSequence shouldSetHealingTarget = new BTSequence("shouldSetHealingTarget", 2);
-						{
-
-							// CriticalCondition Selector
-							BTSelector inCriticalCondition = new BTSelector("isInCriticalCondition", 2);
-							{
-								BTActionNode criticalHealth = new AIHealthConditional("LowHealth", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 35f);
-								BTActionNode criticalEnergy = new AIEnergyConditional("LowEnergy", tree, this, ValueConditionalOperator.LESS_THAN_EQUAL, 40f);
-								inCriticalCondition.AddNode(criticalHealth);
-								inCriticalCondition.AddNode(criticalEnergy);
-							}
-
-							BTActionNode setInitialHealerTarget = new AIBookHelperCellToReach("Booking HelperCell", tree, this);
-
-							shouldSetHealingTarget.AddNode(inCriticalCondition);
-							shouldSetHealingTarget.AddNode(setInitialHealerTarget);
-						}
-
-						isCurrentlyInNeedOfHealing.AddNode(hasAHealingTarget);
-						isCurrentlyInNeedOfHealing.AddNode(shouldSetHealingTarget);
+						BTActionNode hasLowHealth = new AIHealthConditional("Has low health", tree, controlledCellData, ValueConditionalOperator.LESS_THAN_EQUAL, 0.25f);
+						BTActionNode hasLowEnergy = new AIEnergyConditional("Has low energy", tree, controlledCellData, ValueConditionalOperator.LESS_THAN_EQUAL, 0.30f);
+						checkIfInCriticalCondition.AddNode(hasLowHealth);
+						checkIfInCriticalCondition.AddNode(hasLowEnergy);
 					}
 
-					BTActionNode goToHealer = new AIReachDestination("Reach Healer", tree, this);
+					BTActionNode bookHealer = new AIBookHealer("Book a Healer", tree, controlledCellData, healerData, targetData);
 
-					BTSelector healingWaitOrGo = new BTSelector("Healing (Wait or Go)", 2);
+					checkIfInNeedOfHealing.AddNode(doesNotHaveAHealer);
+					checkIfInNeedOfHealing.AddNode(checkIfInCriticalCondition);
+					checkIfInNeedOfHealing.AddNode(bookHealer);
+				}
+
+				BTSequence healingState = new BTSequence("Healing State", 3);
+				{
+					BTActionNode alreadyHasAHealer = new AICurrentlyHasHelperCellAsTarget("Already has a Healer", tree, targetData, healerData);
+					BTActionNode reachTheHealer = new AIReachDestination("Reach the healer", tree, controlledCellData, pathfindingData, targetData);
+					BTSelector nearTheHealer = new BTSelector("Near the healer", 2);
 					{
-						BTSequence readyToFight = new BTSequence("StopHealing", 3);
+						BTSequence checkIfReadyToForFighting = new BTSequence("Check if ready for fighting", 2);
 						{
-							BTActionNode perfectHealth = new AIHealthConditional("perfectHealth", tree, this, ValueConditionalOperator.MORE_THAN, 70f);
-							BTActionNode perfectEnergy = new AIEnergyConditional("perfectEnergy", tree, this, ValueConditionalOperator.MORE_THAN, 75f);
-							BTActionNode freeHealingTarget = new AIReleaseHelperTarget("ReleaseHealingTarget", tree, this);
+							BTSequence checkForStableCondition = new BTSequence("Is In Stable Condition", 2);
+							{
+								BTActionNode hasEnoughHealth = new AIHealthConditional("Has Enough Health", tree, controlledCellData, ValueConditionalOperator.MORE_THAN, 0.80f);
+								BTActionNode hasEnoughEnergy = new AIEnergyConditional("Has Enough Energy", tree, controlledCellData, ValueConditionalOperator.MORE_THAN, 0.85f);
+								checkForStableCondition.AddNode(hasEnoughHealth);
+								checkForStableCondition.AddNode(hasEnoughEnergy);
+							}
 
-							readyToFight.AddNode(perfectHealth);
-							readyToFight.AddNode(perfectEnergy);
-							readyToFight.AddNode(freeHealingTarget);
+							BTSequence prepareForFighting = new BTSequence("Prepare for fighting", 2);
+							{
+								BTActionNode releaseHealer = new AIReleaseHealer("Release Healer", tree, healerData);
+								BTActionNode clearTargetData = new AIClearTargetData("Clear Target Data", tree, targetData);
+								prepareForFighting.AddNode(releaseHealer);
+								prepareForFighting.AddNode(clearTargetData);
+							}
+
+							checkIfReadyToForFighting.AddNode(checkForStableCondition);
+							checkIfReadyToForFighting.AddNode(prepareForFighting);
 						}
 
 						BTActionNode waitToHeal = new AIWait("WaitToHeal", tree, 100f, false);
-						healingWaitOrGo.AddNode(readyToFight);
-						healingWaitOrGo.AddNode(waitToHeal);
+
+						nearTheHealer.AddNode(checkIfReadyToForFighting);
+						nearTheHealer.AddNode(waitToHeal);
 					}
 
-					healingState.AddNode(isCurrentlyInNeedOfHealing);
-					healingState.AddNode(goToHealer);
-					healingState.AddNode(healingWaitOrGo);
+					healingState.AddNode(alreadyHasAHealer);
+					healingState.AddNode(reachTheHealer);
+					healingState.AddNode(nearTheHealer);
 				}
 
 
-				BTSequence attackingState = new BTSequence("Attacking", 3);
+				BTSequence fightingState = new BTSequence("Fighting State", 4);
 				{
-					// Currently healing actions
-					BTActionNode getAKillTarget = new AIFindEvilCellTarget("FindAKillTarget", tree, this);
+					BTActionNode getACancerTarget = new AIGetCancerToAttack("Get a Cancer to attack", tree, controlledCellData, combatData);
+					BTActionNode clearTargetData = new AIClearTargetData("Clear target data", tree, targetData);
+					BTActionNode getCellTarget = new AIFindACellTarget("Get Cell target", tree, controlledCellData, combatData, targetData);
 
-					BTSelector inRangeSelector = new BTSelector("CheckRange", 2);
+					BTSelector checkIfInRange = new BTSelector("Check if in range", 3);
 					{
-						BTActionNode isInRange = new AICanAttackEvilCell("CanAttackCell", tree, this);
-						BTActionNode reachKillTarget = new AIReachDestination("ReachKillTarget", tree, this);
-						inRangeSelector.AddNode(isInRange);
-						inRangeSelector.AddNode(reachKillTarget);
-					}
-					BTActionNode attackCancerCell = new AIAttackCancerCell("AttackingCancerCell", tree, this);
+						BTActionNode useSecondaryAttack = new AIUseKillerCellSecondaryAbility("Use secondary Ability", tree, controlledCellData);
+						BTActionNode usePrimaryAttack = new AIUseKillerCellPrimaryAbility("Use secondary Ability", tree, controlledCellData);
+						BTActionNode reachCellTarget = new AIReachDestination("Reach Cell Target", tree, controlledCellData, pathfindingData, targetData);
 
-					attackingState.AddNode(getAKillTarget);
-					attackingState.AddNode(inRangeSelector);
-					attackingState.AddNode(attackCancerCell);
+						checkIfInRange.AddNode(useSecondaryAttack);
+						checkIfInRange.AddNode(usePrimaryAttack);
+						checkIfInRange.AddNode(reachCellTarget);
+					}
+									
+					fightingState.AddNode(getACancerTarget);
+					fightingState.AddNode(clearTargetData);
+					fightingState.AddNode(getCellTarget);
+					fightingState.AddNode(checkIfInRange);
 				}
 
 				// Should be last
-				BTSequence goToBaseSequence = new BTSequence("GoingToBase", 2);
+				BTSequence goToBaseState = new BTSequence("Going to base state", 2);
 				{
-					BTActionNode findBase = new AIGoToBaseTarget("Find Base", tree, this);
-					BTActionNode goToBase = new AIReachDestination("Reach Base", tree, this);
+					BTActionNode targetTheBase = new AISelectABase("Target the base", tree, homeData, targetData);
+					BTActionNode reachTheBase = new AIReachDestination("Reach the base", tree, controlledCellData, pathfindingData, targetData);
 
-					goToBaseSequence.AddNode(findBase);
-					goToBaseSequence.AddNode(goToBase);
+					goToBaseState.AddNode(targetTheBase);
+					goToBaseState.AddNode(reachTheBase);
 				}
 
-
-
+				root.AddNode(checkIfInNeedOfHealing);
 				root.AddNode(healingState);
-				root.AddNode(attackingState);
-				root.AddNode(goToBaseSequence);
+				root.AddNode(fightingState);
+				root.AddNode(goToBaseState);
 			}
-
 
 			tree.rootNode = root;
 		}
 
 		public void OnUpdate()
 		{
-			if (!initialised) return;
-			if (!active) return;
+			// Update position 
+			transform.position = controlledCell.transform.position;
 
-			if (Vector3.SqrMagnitude(controlledCell.transform.position - basePoint.transform.position) < 4f)
+			// Reset the data
+			controlledCellData.movementDirection = Vector3.zero;
+			controlledCellData.speed = controlledCell.CurrentSpeed;
+
+			// Evaluate and apply movement
+			tree.Evaluate();
+			controlledCell.MovementVector = controlledCellData.movementDirection;
+
+			// Hide if reached base
+			if (Vector3.SqrMagnitude(controlledCell.transform.position - homeData.home.transform.position) < distanceFromBaseToDissapear)
 			{
 				controlledCell.gameObject.SetActive(false);
-				active = false;
+				gameObject.SetActive(false);
 				return;
 			}
-
-			movementDirection = zeroVector;
-			tree.Evaluate();
-			controlledCell.MovementVector = movementDirection;
 		}
-
 	}
 
 }

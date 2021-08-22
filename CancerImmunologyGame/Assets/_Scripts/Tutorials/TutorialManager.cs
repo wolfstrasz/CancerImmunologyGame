@@ -48,19 +48,28 @@ namespace ImmunotherapyGame.Tutorials
 		protected override void Awake()
 		{
 			base.Awake();
-
 			playerControls = new PlayerControls();
 
 			// Update skip text
-			List<string> bindings = Utils.GetAllKeybindsStrings(playerControls.Systems.SkipText);
-			if (bindings.Count == 0) return;
-			string displayStr = "Hold [" + bindings[0];
+#if UNITY_WEBGL
+			string displayStr = "Hold [Spacebar] | [LT] to skip. ";
 
-			for (int i = 1; i < bindings.Count; ++i)
+#else
+			List<string> bindings = Utils.GetAllKeybindsStrings(playerControls.Systems.SkipText);
+
+			string displayStr = "Hold [";
+
+			if (bindings.Count != 0)
 			{
-				displayStr += "] | [" + bindings[i];
+				displayStr += bindings[0];
+				for (int i = 1; i < bindings.Count; ++i)
+				{
+					displayStr += "] | [" + bindings[i];
+				}
 			}
 			displayStr += "] to skip. ";
+
+#endif
 			skipTextButton.GetComponent<TMP_Text>().text = displayStr;
 			playerControls.Systems.SkipText.Enable();
 
@@ -256,12 +265,16 @@ namespace ImmunotherapyGame.Tutorials
 			if (savedData == null)
 			{
 				Debug.Log("No previous saved data found. Creating new level data save.");
+				ResetData();
+				SaveData();
 			}
 			else
 			{
 				savedData.CopyTo(data);
 			}
-			SaveData();
+
+			isFeatureUnlocked = data.isSystemUnlocked;
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 		}
 
 		public void SaveData()
@@ -273,6 +286,7 @@ namespace ImmunotherapyGame.Tutorials
 		public void ResetData()
 		{
 			data.ResetData();
+			inGameUIButtonData.PingUnlockStatus(false);
 		}
 	}
 

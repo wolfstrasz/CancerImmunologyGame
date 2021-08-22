@@ -18,8 +18,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 628548c7b35e0464cb2652a89da94bbb, type: 2}
   - {fileID: 11400000, guid: f8b4f327dcf30364d83369d3ee06dfdc, type: 2}
   - {fileID: 11400000, guid: 0381889a212b50a479b15966000c4341, type: 2}
+  - {fileID: 11400000, guid: f64b4a8ca31f1a044bda8e94c603641d, type: 2}
   - {fileID: 11400000, guid: d703fab5074d8e04c890e9bc3078587c, type: 2}
   - {fileID: 11400000, guid: 5717fc7b42c3db64ab39ebc3bae4943a, type: 2}
-  - {fileID: 11400000, guid: e3fec7796d09ba9418eb1eba62901326, type: 2}
   - {fileID: 11400000, guid: e4ecd5b7c050ca1478a3ccdab5c37dbf, type: 2}
   - {fileID: 11400000, guid: 83e28b5cfe88af44d8978810cb6c3657, type: 2}
+  isSystemUnlocked: 0

@@ -10,10 +10,10 @@ namespace ImmunotherapyGame
 	public class CellHealthBar : MonoBehaviour
 	{
 		[SerializeField] private Cell owner = null;
+		[SerializeField] private Image image = null;
 		[SerializeField] private Slider slider = null;
 		[SerializeField] private bool autoHide = false;
 		[SerializeField] private float autoHideScale = 1.0f;
-		[SerializeField] private Image image = null;
 
 		public void UpdateHealth()
 		{
@@ -25,7 +25,7 @@ namespace ImmunotherapyGame
 		{
 			if (owner != null)
 			{
-				slider.maxValue = owner.cellType.MaxHealth;
+				slider.maxValue = owner.CellType.MaxHealth;
 			}
 		}
 
@@ -46,9 +46,9 @@ namespace ImmunotherapyGame
 		{
 			if (owner != null)
 			{
-				if (owner.cellType.maxHealth != null)
+				if (owner.CellType.maxHealth != null)
 				{
-					owner.cellType.maxHealth.onValueChanged += UpdateMaxHealth;
+					owner.CellType.maxHealth.onValueChanged += UpdateMaxHealth;
 					UpdateMaxHealth();
 				}
 
@@ -62,9 +62,9 @@ namespace ImmunotherapyGame
 		{
 			if (owner != null)
 			{
-				if (owner.cellType.maxHealth != null)
+				if (owner.CellType.maxHealth != null)
 				{
-					owner.cellType.maxHealth.onValueChanged -= UpdateMaxHealth;
+					owner.CellType.maxHealth.onValueChanged -= UpdateMaxHealth;
 				}
 
 				owner.onUpdateHealth -= UpdateHealth;

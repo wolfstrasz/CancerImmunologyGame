@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6beba9fe84a76da48ab66e2529917823, type: 3}
   m_Name: GranzymeProjectileSpread
   m_EditorClassIdentifier: 
-  attributeName: 
-  initialValue: 30
-  currentValue: 30
-  modifiers: []
+  attributeName: GranzymeSpread
+  initialValue: 20
+  currentValue: 20

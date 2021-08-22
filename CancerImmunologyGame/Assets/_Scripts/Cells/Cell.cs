@@ -9,15 +9,12 @@ namespace ImmunotherapyGame
 	public abstract class Cell : MonoBehaviour
 	{
 		[Header("GameObject Links")]
-		[SerializeField]
-		protected SpriteRenderer render = null;
-		[SerializeField]
-		protected Animator animator = null;
-		[SerializeField]
-		protected Collider2D bodyBlocker = null;
+		[SerializeField] protected SpriteRenderer render = null;
+		[SerializeField] protected Animator animator = null;
+		[SerializeField] protected Collider2D bodyBlocker = null;
 
 		[Header("Cell Attributes")]
-		public CellType cellType;
+		[SerializeField] protected CellType cellType;
 
 		[SerializeField] [ReadOnly] protected bool isDying;
 		[SerializeField] [ReadOnly] private float health;
@@ -43,6 +40,14 @@ namespace ImmunotherapyGame
 		public float CurrentEnergy => Mathf.Clamp(energy, 0f, cellType.MaxEnergy);
 		public float CurrentSpeed => Mathf.Clamp(speed + cellType.InitialSpeed, 0f, speed + cellType.InitialSpeed);
 
+		public float CurrentHealthPercentage => Mathf.Clamp(health / cellType.MaxHealth, 0f, 1f);
+		public float CurrentEnergyPercentage => Mathf.Clamp(energy / cellType.MaxEnergy, 0f, 1f);
+
+		public float MaxHealth => cellType.MaxHealth;
+		public float MaxEnergy => cellType.MaxEnergy;
+
+		public CellType CellType => cellType; 
+
 		public int RenderSortOrder { get => render.sortingOrder; set => render.sortingOrder = value; }
 		public virtual bool isImmune { get; }
 
@@ -66,8 +71,6 @@ namespace ImmunotherapyGame
 
 		protected virtual void LateUpdate()
 		{
-
-
 			if (updateSpeedValue != 0)
 			{
 				speed += updateSpeedValue;
@@ -108,26 +111,33 @@ namespace ImmunotherapyGame
 		// Attribute changes
 		public virtual void ApplyHealthAmount(float amount)
 		{
-			Debug.Log(this.gameObject.name + " got health applied: " + amount);
+			//Debug.Log(this.gameObject.name + " got health applied: " + amount);
 			updateHealthValue += amount;
 		}
 
 		public virtual void ApplyEnergyAmount(float amount)
 		{
-			Debug.Log(this.gameObject.name + " got energy applied: " + amount);
+			//Debug.Log(this.gameObject.name + " got energy applied: " + amount);
 			updateEnergyValue += amount;
 		}
 
 		public virtual void ApplySpeedAmount(float amount)
 		{
-			Debug.Log(this.gameObject.name + " got speed for: " + amount);
+			//Debug.Log(this.gameObject.name + " got speed for: " + amount);
 			updateSpeedValue += amount;
 		}
 
-		protected virtual void OnCellDeath()
+		public void Respawn()
 		{
-			isDying = true;
+			isDying = false;
+			health = cellType.MaxHealth;
+			energy = cellType.MaxEnergy;
 		}
+
+		/// <summary>
+		/// Method called when the cell's health or energy reaches 0.
+		/// </summary>
+		protected abstract void OnCellDeath();
 
 	}
 

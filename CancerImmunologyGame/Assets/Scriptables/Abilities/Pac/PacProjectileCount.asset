@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PacProjectileCount
   m_EditorClassIdentifier: 
   attributeName: Number of Metalloprotease enzymes
-  initialValue: 1
-  currentValue: 1
+  initialValue: 3
+  currentValue: 3

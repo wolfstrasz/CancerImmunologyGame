@@ -74,6 +74,7 @@ namespace ImmunotherapyGame.Audio
 
 				sourceToIncrease = currentSource;
 				sourceToIncrease.volume = 0.0f;
+				sourceToIncrease.time = correctType.clipStartTime;
 				sourceToIncrease.Play();
 
 				currentType = correctType;
@@ -107,9 +108,14 @@ namespace ImmunotherapyGame.Audio
 			}
 		}
 
-		public void StopMusic()
+		public void StopBackgroundMusic()
 		{
 			gameObject.SetActive(false);
+		}
+
+		public void EnableBackgroundMusic()
+		{
+			gameObject.SetActive(true);
 		}
 
 		private void OnEnable()

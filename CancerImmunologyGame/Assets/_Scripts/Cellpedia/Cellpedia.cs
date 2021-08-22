@@ -51,7 +51,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 			selectedCellDescription = null;
 			buttonsBar.Initialise();
 			microscope.Initialise();
-
+		
 			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 
 			// Add nodes to listen to
@@ -128,9 +128,21 @@ namespace ImmunotherapyGame.CellpediaSystem
 				}
 			}
 
-			buttonsBar.OnOpen(selectedCellDescription);
-			microscope.OnOpen(selectedCellDescription);
-			notepad.OnOpen(selectedCellDescription);
+			if (selectedCellDescription == null) 
+			{
+				buttonsBar.gameObject.SetActive(false);
+				microscope.gameObject.SetActive(false);
+				notepad.gameObject.SetActive(false);
+			} 
+			else
+			{
+				buttonsBar.gameObject.SetActive(true);
+				microscope.gameObject.SetActive(true);
+				notepad.gameObject.SetActive(true);
+				buttonsBar.OnOpen(selectedCellDescription);
+				microscope.OnOpen(selectedCellDescription);
+				notepad.OnOpen(selectedCellDescription);
+			}
 
 			cellpediaPanel.initialControlNode = PetridishButton.lastSubmitted;
 		}
@@ -150,12 +162,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 		// Cell description handling
 		public void UnlockCellDescription(CellpediaCellDescription cellDescription)
 		{
-
-			if (cellDescription.IsUnlocked)
-			{
-				return;
-			}
-
 			cellDescription.IsUnlocked = true;
 			buttonsBar.ActivateButton(cellDescription);
 
@@ -174,12 +180,16 @@ namespace ImmunotherapyGame.CellpediaSystem
 			if (savedData == null)
 			{
 				Debug.Log("No previous saved data found. Creating new level data save.");
+				ResetData();
+				SaveData();
 			}
 			else
 			{
 				savedData.CopyTo(data);
 			}
-			SaveData();
+
+			isFeatureUnlocked = data.isSystemUnlocked;
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 		}
 
 		public void SaveData()

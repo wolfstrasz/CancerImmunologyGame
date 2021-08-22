@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ImmunotherapyLifetime
   m_EditorClassIdentifier: 
   attributeName: Immunotherapy Time
-  initialValue: 5
-  currentValue: 5
+  initialValue: 15
+  currentValue: 15

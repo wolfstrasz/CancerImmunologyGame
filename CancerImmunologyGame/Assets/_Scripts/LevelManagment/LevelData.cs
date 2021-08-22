@@ -10,7 +10,7 @@ namespace ImmunotherapyGame.LevelManagement
     public class LevelData : ScriptableObject
     {
         public int currentReachedLevel = 0;
-        public List<LevelDataObject> levels = null;
+		public List<LevelDataObject> levels = null;
 
         internal void ResetData()
 		{

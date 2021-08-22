@@ -9,16 +9,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 {
     public class CellpediaButtonsBar : MonoBehaviour
     {
-		[SerializeField]
-		private CellpediaData cellData = null;
-		[SerializeField]
-		private GameObject cellbarButtonPrefab = null;
-		[SerializeField]
-		private Transform buttonsLayout = null;
-		[ReadOnly]
-        private Dictionary<CellpediaCellDescription, PetridishButton> petridishButtons = null;
-		[ReadOnly]
-		internal List<PetridishButton> petridishButtonList = null;
+		[SerializeField] private CellpediaData cellData = null;
+		[SerializeField] private GameObject cellbarButtonPrefab = null;
+		[SerializeField] private Transform buttonsLayout = null;
+		[ReadOnly] private Dictionary<CellpediaCellDescription, PetridishButton> petridishButtons = null;
+		[ReadOnly] internal List<PetridishButton> petridishButtonList = null;
 
 		internal void Initialise()
 		{
@@ -48,7 +43,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 
 		internal void OnOpen(CellpediaCellDescription cellDescription)
 		{
-			if (cellDescription == null) return;
 			PetridishButton.lastSubmitted = petridishButtons[cellDescription];
 			PetridishButton.lastSubmitted.SubmitCellData();
 		}

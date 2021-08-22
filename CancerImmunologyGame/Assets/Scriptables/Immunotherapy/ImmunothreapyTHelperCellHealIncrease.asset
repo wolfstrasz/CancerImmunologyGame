@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
   m_Name: ImmunothreapyTHelperCellHealIncrease
   m_EditorClassIdentifier: 
-  title: 
-  description: 
+  title: THelperCell Heal Increase
+  description: Should not be dispalyed in Immunotherapy researched system!
   statThumbnailSprite: {fileID: 0}
   generalThumbnailSprite: {fileID: 0}
-  initialUnlockValue: 0
-  initialCurrentValue: 0
-  unlocked: 0
-  statAttribute: {fileID: 0}
+  initialUnlockValue: 1
+  initialCurrentValue: 20
+  unlocked: 1
+  statAttribute: {fileID: 11400000, guid: 7eb7f29cda896594880d79ec2c8bf123, type: 2}
   upgrades: []
   nextUpgradeIndex: 0
-  currentValue: 0
+  currentValue: 20
   appliedValue: 0

@@ -32,9 +32,10 @@ namespace ImmunotherapyGame
 
 		protected override void OnCellDeath()
 		{
+			isDying = true;
 			animator.Play("Destroyed");
-			// Make destruction sound
 			cancerCell.DetachMatrixCell(this);
+			Destroy(gameObject);
 		}
 
 		public void AttachCancerCell (CancerCell cancerCell)

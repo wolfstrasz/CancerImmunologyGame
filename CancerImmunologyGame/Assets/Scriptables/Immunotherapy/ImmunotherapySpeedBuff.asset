@@ -17,10 +17,10 @@ MonoBehaviour:
   statThumbnailSprite: {fileID: 0}
   generalThumbnailSprite: {fileID: 0}
   initialUnlockValue: 1
-  initialCurrentValue: 3
+  initialCurrentValue: 2
   unlocked: 1
   statAttribute: {fileID: 11400000, guid: 13f09ef038fb4cc4e8f9be8489e97205, type: 2}
   upgrades: []
   nextUpgradeIndex: 1
-  currentValue: 3
+  currentValue: 2
   appliedValue: 0

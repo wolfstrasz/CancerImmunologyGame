@@ -6,10 +6,8 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TutorialObjectControl : TutorialEvent
 	{
-		[SerializeField]
-		private List<GameObject> objectsToControl = new List<GameObject>();
-		[SerializeField]
-		private ControlMode mode = ControlMode.DEACTIVATE;
+		[SerializeField] private List<GameObject> objectsToControl = new List<GameObject>();
+		[SerializeField] private ControlMode mode = ControlMode.DEACTIVATE;
 
 		protected override void OnStartEvent()
 		{

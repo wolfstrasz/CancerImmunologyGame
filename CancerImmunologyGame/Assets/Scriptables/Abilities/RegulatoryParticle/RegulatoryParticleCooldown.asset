@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RegulatoryParticleCooldown
   m_EditorClassIdentifier: 
   attributeName: 
-  initialValue: 5
-  currentValue: 5
+  initialValue: 10
+  currentValue: 10

@@ -6,8 +6,7 @@ namespace ImmunotherapyGame.Tutorials
 { 
 	public class TutorialPopupEvent : TutorialEvent
 	{
-		[SerializeField]
-		private TutorialPopup popupObject = null;
+		[SerializeField]private TutorialPopup popupObject = null;
 
 		protected override void OnStartEvent()
 		{

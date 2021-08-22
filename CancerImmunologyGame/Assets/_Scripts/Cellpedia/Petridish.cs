@@ -8,34 +8,22 @@ namespace ImmunotherapyGame.CellpediaSystem
 		private static Petridish nextPetridish = null;
 
 		[Header("Links")]
-		[SerializeField]
-		private RectTransform trans = null;
-		[SerializeField]
-		private RectTransform parentTransform = null;
-		[SerializeField]
-		private GameObject cellVisual = null;
-		[SerializeField]
-		private Animator cellVisualAnimator = null;
-		[SerializeField]
-		private Image cellVisualSprite = null;
+		[SerializeField] private RectTransform trans = null;
+		[SerializeField] private RectTransform parentTransform = null;
+		[SerializeField] private GameObject cellVisual = null;
+		[SerializeField] private Animator cellVisualAnimator = null;
+		[SerializeField] private Image cellVisualSprite = null;
 
 		[Header("Attributes")]
-		[SerializeField]
-		private bool isLeaving = false;
-		[SerializeField]
-		private static float timetopass = 2.0f;
-		[SerializeField]
-		private float scalingFactor = 0.75f;
+		[SerializeField] private bool isLeaving = false;
+		[SerializeField] private static float timetopass = 2.0f;
+		[SerializeField] private float scalingFactor = 0.75f;
 
 		[Header("Debugging")]
-		[SerializeField]
-		private float xStartCoord = 0.0f;
-		[SerializeField]
-		private static float xShiftCoord = 0.0f;
-		[SerializeField]
-		internal bool isShifting = false;
-		[SerializeField]
-		private float timepassed = 0.0f;
+		[SerializeField] private float xStartCoord = 0.0f;
+		[SerializeField] private static float xShiftCoord = 0.0f;
+		[SerializeField] internal bool isShifting = false;
+		[SerializeField] private float timepassed = 0.0f;
 
 		// Start is called before the first frame update
 		void Start()
@@ -86,7 +74,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 			}
 		}
 
-		internal  void Reset()
+		internal void Reset()
 		{
 			isShifting = false;
 			timepassed = 0.0f;

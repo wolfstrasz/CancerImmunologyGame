@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
+  m_Name: IUpg_Granzyme_Damage
+  m_EditorClassIdentifier: 
+  title: Supplement cytotoxic degranulation
+  description: Your main attack - the release of cell destroying granules (containing
+    perforin and granzyme) is one of the principal methods T killer cells use to
+    kill cancer cells. Power it up to deal more damage!
+  statThumbnailSprite: {fileID: 21300000, guid: f0e860aebcc510044b04f40ad1465e26,
+    type: 3}
+  generalThumbnailSprite: {fileID: 21300000, guid: 6c19337908507ae439feffa47d4c7c89,
+    type: 3}
+  initialUnlockValue: 0
+  initialCurrentValue: 0
+  unlocked: 0
+  statAttribute: {fileID: 11400000, guid: 427709157089bfa42b90e16ebbed6c80, type: 2}
+  upgrades:
+  - cost: 1
+    valueChange: 1
+  - cost: 5
+    valueChange: 2
+  - cost: 10
+    valueChange: 3
+  - cost: 15
+    valueChange: 4
+  nextUpgradeIndex: 0
+  currentValue: 0
+  appliedValue: 0

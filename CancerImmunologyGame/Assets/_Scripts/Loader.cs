@@ -21,8 +21,7 @@ namespace ImmunotherapyGame.Loader
 {
 	public class Loader : MonoBehaviour
 	{
-		[SerializeField]
-		private Intro intro = null;
+		[SerializeField] private Intro intro = null;
 
 		private bool InitialisationHasFinished { get; set; }
 
@@ -33,6 +32,9 @@ namespace ImmunotherapyGame.Loader
 
 		private IEnumerator InitialiseManagers()
 		{
+
+			yield return new WaitForSecondsRealtime(0.1f);
+
 			AudioManager.Instance.Initialise();
 			InterfaceManager.Instance.Initialise();
 			BackgroundMusic.Instance.Initialise();

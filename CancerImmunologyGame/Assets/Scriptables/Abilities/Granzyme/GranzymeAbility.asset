@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GranzymeAbility
   m_EditorClassIdentifier: 
   name: Granzyme
-  audioClip: {fileID: 8300000, guid: 9df4c2e414fd7d847978300d2a2b0213, type: 3}
+  audioClip: {fileID: 8300000, guid: b2ee69bdff6c22a4a88949d677522930, type: 3}
   effectType: {fileID: 11400000, guid: 0e63cdc19c78a6143bd5e8f2125acb4e, type: 2}
   range: {fileID: 11400000, guid: ec07f361d1e1cf24ebe48eb3ffee6711, type: 2}
   energyCost: {fileID: 11400000, guid: cf612f5ed7e059e45b7166ce020bf19b, type: 2}

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HealHealthEffect
   m_EditorClassIdentifier: 
   attributeName: Helper T Cell Heal Health Effect
-  initialValue: 10
-  currentValue: 10
+  initialValue: 20
+  currentValue: 20

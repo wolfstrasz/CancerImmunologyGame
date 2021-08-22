@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GranzymeRange
   m_EditorClassIdentifier: 
   attributeName: Granzyme Ability Range
-  initialValue: 4
-  currentValue: 4
+  initialValue: 2
+  currentValue: 2

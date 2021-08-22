@@ -10,10 +10,8 @@ namespace ImmunotherapyGame.UI
 	public abstract class UIMenuNode : MonoBehaviour, ICancelHandler, IDeselectHandler, ISelectHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 	{
 		[Header("OnSelect")]
-		[SerializeField]
-		protected List<GameObject> viewObjectsOnSelect = null;
-		[SerializeField]
-		protected UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
+		[SerializeField] protected List<GameObject> viewObjectsOnSelect = null;
+		[SerializeField] protected UIAudioClipKey audioClipKey = UIAudioClipKey.BUTTON;
 
 		// Events
 		public delegate void OnCancelCalled();

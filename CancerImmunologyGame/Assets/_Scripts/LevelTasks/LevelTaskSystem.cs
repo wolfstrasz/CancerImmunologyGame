@@ -5,8 +5,7 @@ using ImmunotherapyGame.Core;
 using ImmunotherapyGame.UI;
 
 using TMPro;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+
 
 namespace ImmunotherapyGame.LevelTasks
 {
@@ -14,143 +13,130 @@ namespace ImmunotherapyGame.LevelTasks
     {
 
         [Header ("Data")]
-        [SerializeField] private List<LevelTaskType> allLevelTaskObjects = null;
+        [SerializeField] private List<LevelTaskType> allLevelTaskTypes = null;
 
         [Header("UI Linking")]
         [SerializeField] private GameObject view = null;
         [SerializeField] private GameObject levelTaskUILayout = null;
         [SerializeField] private GameObject levelTaskUIPrefab = null;
         [SerializeField] private RefreshLayouts layoutsRefresh = null;
+        [SerializeField] private AudioSource source = null;
 
+        // Data management containers
         private Dictionary<LevelTaskType, List<LevelTask>> levelTaskTable = new Dictionary<LevelTaskType, List<LevelTask>>();
-        private Dictionary<LevelTask, LevelTaskVisual> levelTaskVisualTable = new Dictionary<LevelTask, LevelTaskVisual>();
+        private Dictionary<LevelTask, LevelTaskVisual> levelTaskVisualsTable = new Dictionary<LevelTask, LevelTaskVisual>();
         [SerializeField] [ReadOnly] private List<LevelTask> allTasks = new List<LevelTask>();
         [SerializeField] [ReadOnly] private List<LevelTask> allActiveTasks = new List<LevelTask>();
         [SerializeField] [ReadOnly] private List<LevelTaskVisual> allTaskVisuals = new List<LevelTaskVisual>();
 
-        [SerializeField] [ReadOnly] private TMP_Text currentLongestTaskText = null;
-        [SerializeField] [ReadOnly] private int currentLongestLength = -1;
+        [Header("Debug")]
+        [SerializeField] [ReadOnly] private TMP_Text currentLongestTaskTMPText = null;
+        [SerializeField] [ReadOnly] private int currentLongestTaskTextLength = -1;
 
-        public TMP_Text CurrentLongestTaskText => currentLongestTaskText;
+        public TMP_Text CurrentLongestTaskText => currentLongestTaskTMPText;
 
         public void Initialise()
 		{
             // Generate empty levelTaskTable
-            levelTaskTable = new Dictionary<LevelTaskType, List<LevelTask>>(allLevelTaskObjects.Count);
-            foreach (LevelTaskType ltObject in allLevelTaskObjects)
+            levelTaskTable = new Dictionary<LevelTaskType, List<LevelTask>>(allLevelTaskTypes.Count);
+            foreach (LevelTaskType levelTaskType in allLevelTaskTypes)
 			{
-                levelTaskTable.Add(ltObject, new List<LevelTask>());
+                levelTaskTable.Add(levelTaskType, new List<LevelTask>());
 			}
 
             view.SetActive(false);
 		}
 
-		private void OnEnable()
-		{
-            SceneManager.activeSceneChanged += OnSceneChanged;
-		}
-
-		private void OnDisable()
-		{
-            SceneManager.activeSceneChanged -= OnSceneChanged;
-		}
-
-
-        private void OnSceneChanged(Scene id1, Scene id2)
-		{
-            Clear();
-        }
-
-
 		public void Clear()
 		{
-
+            // Clear visuals of tasks
             for (int i = 0; i < allTaskVisuals.Count; ++i)
 			{
                 Destroy(allTaskVisuals[i].gameObject);
 			}
+            levelTaskVisualsTable.Clear();
 
+            // Clear all tasks of each task type
             foreach (var key in levelTaskTable.Keys)
 			{
                 levelTaskTable[key].Clear();
 			}
-            levelTaskVisualTable.Clear();
 
             allTasks.Clear();
             allActiveTasks.Clear();
             allTaskVisuals.Clear();
 
-            currentLongestTaskText = null;
-            currentLongestLength = -1;
+            currentLongestTaskTMPText = null;
+            currentLongestTaskTextLength = -1;
             view.SetActive(false);
-
-
 		}
-
 
         public void CreateTask(LevelTask levelTask)
 		{
             view.SetActive(true);
+
+            // Initialise and create a visual
             levelTask.Initialise();
-            levelTaskTable[levelTask.levelTaskType].Add(levelTask);
             LevelTaskVisual newLevelTaskVisual = Instantiate(levelTaskUIPrefab, levelTaskUILayout.transform).GetComponent<LevelTaskVisual>();
             newLevelTaskVisual.SetInfo(levelTask);
-            layoutsRefresh.ForceRefresh();
 
-
-            levelTaskVisualTable.Add(levelTask, newLevelTaskVisual);
+            // Add to tables
+            levelTaskTable[levelTask.levelTaskType].Add(levelTask);
+            levelTaskVisualsTable.Add(levelTask, newLevelTaskVisual);
 
             allTasks.Add(levelTask);
             allActiveTasks.Add(levelTask);
             allTaskVisuals.Add(newLevelTaskVisual);
 
-            // Update size
-            if (levelTask.title.Length > currentLongestLength)
+            // Update size and 
+            if (levelTask.title.Length > currentLongestTaskTextLength)
 			{
-                Debug.Log(this + ": new longer task msg -> RESIZING");
-                currentLongestLength = levelTask.title.Length;
-                currentLongestTaskText = newLevelTaskVisual.taskTitle;
+                currentLongestTaskTextLength = levelTask.title.Length;
+                // Update value for resizers to use
+                currentLongestTaskTMPText = newLevelTaskVisual.taskTitleText;
 
                 for (int i = 0; i < allTaskVisuals.Count; i++)
 				{
-                    allTaskVisuals[i].UpdateSize();
+                    allTaskVisuals[i].UpdateResizerSize();
 				}
-                layoutsRefresh.ForceRefresh();
-
-
             }
 
+            // Refresh visual layouts
+            layoutsRefresh.ForceRefresh();
         }
 
 
         internal void TaskObjectComplete(LevelTaskType ltObject)
 		{
-            //Debug.Log("Task Object Complete: " + ltObject);
             if (!levelTaskTable.ContainsKey(ltObject))
             {
                 Debug.LogWarning("Level Task Table does not contain key: " + ltObject);
                 return;
             }
 
+            // Cache tasks of given task type
             List<LevelTask> tasks = levelTaskTable[ltObject];
 
             for (int i = 0; i < tasks.Count; ++i)
 			{
-
                 LevelTask task = tasks[i];
-                Debug.Log("Should Update task: " + task.title + " " + !task.isComplete);
+
+                if (task == null)
+				{
+                    continue;
+				}
 
                 if (!task.isComplete)
 				{
-                    Debug.Log("Updating task: " + task.title);
                     ++task.currentCount;
-                    LevelTaskVisual ltVisual = levelTaskVisualTable[task];
-                    ltVisual.UpdateInfo();
+                    LevelTaskVisual levelTaskVisual = levelTaskVisualsTable[task];
+                    levelTaskVisual.UpdateCompletionTextInfo();
 
                     if (task.count == task.currentCount)
 					{
-                        task.Complete();
-                        ltVisual.OnTaskComplete();
+                        task.isComplete = true;
+                        levelTaskVisual.OnTaskComplete();
+                        source.Play();
 					}
 
 				}
@@ -162,27 +148,28 @@ namespace ImmunotherapyGame.LevelTasks
             allActiveTasks.Remove(task);
             allTaskVisuals.Remove(taskVisual);
 
-            // Update sizes 
+            // Update layout max size 
             int maxLength = -1;
             for (int i = 0; i < allActiveTasks.Count; ++i)
 			{
                 if (allActiveTasks[i].title.Length > maxLength)
 				{
                     maxLength = allActiveTasks[i].title.Length;
-                    currentLongestLength = maxLength;
-                    currentLongestTaskText = levelTaskVisualTable[allActiveTasks[i]].taskTitle;
+                    currentLongestTaskTextLength = maxLength;
+                    currentLongestTaskTMPText = levelTaskVisualsTable[allActiveTasks[i]].taskTitleText;
 				}
 			}
 
             if (maxLength < 0)
 			{
-                currentLongestTaskText = null;
-                currentLongestLength = -1;
+                currentLongestTaskTMPText = null;
+                currentLongestTaskTextLength = -1;
 			}
 
+            // Resize items
             for (int i = 0; i < allTaskVisuals.Count; i++)
             {
-                allTaskVisuals[i].UpdateSize();
+                allTaskVisuals[i].UpdateResizerSize();
             }
             layoutsRefresh.ForceRefresh();
 

@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 4851716123014601267}
   - component: {fileID: 248959172395795517}
   - component: {fileID: 4830379638426490206}
+  - component: {fileID: 6013841230933768669}
   m_Layer: 6
   m_Name: MatrixCell
   m_TagString: BlocksCancerSpawns
@@ -287,6 +288,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &6013841230933768669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4851716123014601265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: e3d592c255b41414eb3f915e2adcfb70, type: 2}
+  isApplicationQuitting: 0
 --- !u!1 &5044407210104160461
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 4851716123014601267}
+  image: {fileID: 8768801988207210690}
   slider: {fileID: 753957991891489175}
   autoHide: 1
   autoHideScale: 1
-  image: {fileID: 8768801988207210690}

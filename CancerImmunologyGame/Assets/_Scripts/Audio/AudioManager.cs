@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Audio;
 using ImmunotherapyGame.Core;
 
 namespace ImmunotherapyGame.Audio
@@ -10,11 +11,14 @@ namespace ImmunotherapyGame.Audio
 	{
 		private Dictionary<UIAudioClipKey, AudioClip> uiAudioLibrary = null;
 
+		[Header("General Settings")]
+		[SerializeField] private AudioMixer mixer = null;
+		[SerializeField] private float volumeBoost = 10f;
+
 		[Header("UI Audio")]
-		[SerializeField]
-		private AudioSource uiSource = null;
-		[SerializeField]
-		private List<UIAudioClipBinding> uiAudioClipBindings = null;
+		[SerializeField] private AudioSource uiSource = null;
+		[SerializeField] private List<UIAudioClipBinding> uiAudioClipBindings = null;
+		float lowestDecibelsBeforeMute = -80f;
 
 		public void Initialise()
 		{
@@ -53,8 +57,41 @@ namespace ImmunotherapyGame.Audio
 			}
 		}
 
+		public void SetVolume(AudioChannel channel, float volume)
+		{
+			Debug.Log("Setting new volume :" + volume);
+
+			float adjustedVolume = lowestDecibelsBeforeMute + (-lowestDecibelsBeforeMute / 5 * volume / 20);
+			Debug.Log("Setting new volume :" + adjustedVolume);
+
+			if (volume == 0)
+			{
+				adjustedVolume = -100;
+			}
+			Debug.Log("Setting new volume :" + adjustedVolume);
+
+			switch (channel)
+			{
+				case AudioChannel.Master:
+					mixer.SetFloat("MasterVolume", adjustedVolume + volumeBoost);
+					break;
+				case AudioChannel.Music:
+					mixer.SetFloat("MusicVolume", adjustedVolume + volumeBoost);
+					break;
+				case AudioChannel.SFX:
+					mixer.SetFloat("SFXVolume", adjustedVolume + volumeBoost);
+					break;
+				case AudioChannel.UI:
+					mixer.SetFloat("UIVolume", adjustedVolume + volumeBoost);
+					break;
+				default:
+					break;
+			}
+		}
 	}
 
+
+	
 	[System.Serializable]
 	public class UIAudioClipBinding
 	{
@@ -64,4 +101,6 @@ namespace ImmunotherapyGame.Audio
 
 	[System.Serializable]
 	public enum UIAudioClipKey { NONE, BUTTON, ACHIEVEMENT }
+	[System.Serializable]
+	public enum AudioChannel { Master, Music, SFX, UI}
 }

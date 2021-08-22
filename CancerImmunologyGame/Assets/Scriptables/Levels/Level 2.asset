@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Level 2
   levelID: 2
-  isCompleted: 0
+  isCompleted: 1
   isLocked: 0
-  LevelTaskCompletions: []
+  LevelTaskCompletions:
+  - levelTask: {fileID: 11400000, guid: fe3d625fbce22834986a46c28a864dec, type: 2}
+    isCompleted: 0
+  maxPoints: 5

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RegulatorySpecial
   m_EditorClassIdentifier: 
   name: Regulatory Special Attack
-  audioClip: {fileID: 8300000, guid: 6c28002dd9b25ad468c8df4daf38cb64, type: 3}
+  audioClip: {fileID: 8300000, guid: 9df4c2e414fd7d847978300d2a2b0213, type: 3}
+  effectType: {fileID: 0}
   range: {fileID: 11400000, guid: bd2e22182318d684792bbbe506aca021, type: 2}
   energyCost: {fileID: 0}
   cooldownTime: {fileID: 11400000, guid: eafb7d58ff72e27409774e36f6558965, type: 2}

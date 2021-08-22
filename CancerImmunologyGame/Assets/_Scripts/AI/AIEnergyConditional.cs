@@ -7,16 +7,16 @@ namespace ImmunotherapyGame.AI
 {
 	public class AIEnergyConditional : BTActionNode
 	{
-		IAICellController controller;
+		AIControlledCellData controlledCellData;
 		ValueConditionalOperator op;
-		float value;
+		float percentageValue;
 
-		public AIEnergyConditional(string name, BehaviourTree owner, IAICellController controller, ValueConditionalOperator op, float value) : base(name, owner, "EnergyConditional")
+		public AIEnergyConditional(string name, BehaviourTree owner, AIControlledCellData controlledCellData, ValueConditionalOperator op, float percentageValue) : base(name, owner, "AIEnergyConditional")
 		{
 			this.name = name;
 			this.owner = owner;
-			this.controller = controller;
-			this.value = value;
+			this.controlledCellData = controlledCellData;
+			this.percentageValue = percentageValue;
 			this.op = op;
 
 		}
@@ -24,23 +24,24 @@ namespace ImmunotherapyGame.AI
 		protected override NodeStates OnEvaluateAction()
 		{
 			bool result = false;
+			float energyPercentage = controlledCellData.controlledCell.CurrentEnergyPercentage;
 
 			switch (op)
 			{
 				case ValueConditionalOperator.LESS_THAN:
-					result = (controller.ControlledCell.Energy < value);
+					result = (energyPercentage < percentageValue);
 					break;
 				case ValueConditionalOperator.LESS_THAN_EQUAL:
-					result = (controller.ControlledCell.Energy <= value);
+					result = (energyPercentage <= percentageValue);
 					break;
 				case ValueConditionalOperator.EQUAL:
-					result = (controller.ControlledCell.Energy == value);
+					result = (energyPercentage == percentageValue);
 					break;
 				case ValueConditionalOperator.MORE_THAN:
-					result = (controller.ControlledCell.Energy > value);
+					result = (energyPercentage > percentageValue);
 					break;
 				case ValueConditionalOperator.MORE_THAN_EQUAL:
-					result = (controller.ControlledCell.Energy >= value);
+					result = (energyPercentage >= percentageValue);
 					break;
 				default: result = false; break;
 			}

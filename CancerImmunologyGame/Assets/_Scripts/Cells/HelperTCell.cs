@@ -9,37 +9,26 @@ namespace ImmunotherapyGame
 	public class HelperTCell : Cell
 	{
 		[Header("Healing")]
-		[SerializeField]
-		private RangedAbilityCaster healCaster = null;
+		[SerializeField] private RangedAbilityCaster healCaster = null;
 
 		[Header("AI Booking")]
-		[SerializeField]
-		private int forcedFreeSpots = 1;
-		[SerializeField]
-		private float spreadAngleInDegrees = 60.0f;
-		[SerializeField]
-		private float bookingSpotDistance = 1.0f;
+		[SerializeField] private int forcedFreeSpots = 1;
+		[SerializeField] private float spreadAngleInDegrees = 60.0f;
+		[SerializeField] private float bookingSpotDistance = 1.0f;
 
-		[SerializeField][ReadOnly]
-		private bool shouldHeal = false;
-		[SerializeField][ReadOnly]
-		private bool hasSpotBeenReserved = false;
-		[SerializeField][ReadOnly]
-		private List<GameObject> bookingSpots = null;
-		[SerializeField][ReadOnly]
-		private List<GameObject> freeBookingSpots = null;
+		[SerializeField][ReadOnly] private bool shouldHeal = false;
+		[SerializeField][ReadOnly] private bool hasSpotBeenReserved = false;
+		[SerializeField][ReadOnly] private List<GameObject> bookingSpots = null;
+		[SerializeField][ReadOnly] private List<GameObject> freeBookingSpots = null;
 
 		[Header("Simulation of booking spot rotation")]
-		[SerializeField]
-		private float timeToPassForFullRotation = 5f;
-		[SerializeField][ReadOnly]
-		private float timePassedForFullRotation = 0f;
+		[SerializeField] private float timeToPassForFullRotation = 5f;
+		[SerializeField][ReadOnly] private float timePassedForFullRotation = 0f;
 
-		[Header("Patrol Movement")]
-		[SerializeField]
-		private List<Transform> patrolPoints = new List<Transform>();
-		[SerializeField][ReadOnly]
-		private int patrolIndex = 0;
+		[Header("Movement")]
+		[SerializeField] private GameObject graphObstacle = null;
+		[SerializeField] private List<Transform> patrolPoints = new List<Transform>();
+		[SerializeField][ReadOnly] private int patrolIndex = 0;
 
 		public override bool isImmune => true;
 
@@ -48,7 +37,6 @@ namespace ImmunotherapyGame
 			base.Start();
 			GenerateBookingSpots();
 		}
-
 
 		public override void OnUpdate()
 		{
@@ -79,8 +67,9 @@ namespace ImmunotherapyGame
 			if (!(hasSpotBeenReserved || shouldHeal))
 			{
 				if (patrolPoints.Count > 1)
+				{
 					MoveToNextPatrolPoint();
-
+				}
 				FakeRotateBookingSpots();
 			}
 		}
@@ -167,6 +156,7 @@ namespace ImmunotherapyGame
 				GameObject spotToReserve = freeBookingSpots[spotID];
 				freeBookingSpots.RemoveAt(spotID);
 				hasSpotBeenReserved = true;
+				graphObstacle.SetActive(true);
 				return spotToReserve;
 			}
 
@@ -178,8 +168,17 @@ namespace ImmunotherapyGame
 			Debug.Log("Releasing booking spot");
 			freeBookingSpots.Add(bookingSpotToFree);
 			if (freeBookingSpots.Count == bookingSpots.Count)
+			{
 				hasSpotBeenReserved = false;
+				if (patrolPoints.Count > 1)
+				{
+					graphObstacle.SetActive(false);
+				}
+
+			}
 		}
+
+		protected override void OnCellDeath() {}
 	}
 
 }

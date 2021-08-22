@@ -5,6 +5,10 @@ using UnityEngine;
 using TMPro;
 using System;
 
+/* 
+ * Credits to Akrone and Antistone at: https://forum.unity.com/threads/does-the-content-size-fitter-work.484678/
+ */
+
 [ExecuteInEditMode]
 public class LevelTaskTextResizer : MonoBehaviour
 {

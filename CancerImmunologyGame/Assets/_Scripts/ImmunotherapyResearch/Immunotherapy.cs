@@ -28,17 +28,17 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		public void OnUpdate()
 		{
-			Debug.Log("IMMUNOTHERAPY UPDATE");
 			if (lifetimeLeft > 0f)
 			{
-				Debug.Log("IMMUNOTHERAPY LIFETIME DROP");
-
 				lifetimeLeft -= Time.deltaTime;
 
 				if (lifetimeLeft <= 0f)
 				{
 					lifetimeLeft = 0f;
-					RemoveImmunotherapyEffects();
+					if (isImmunotherapyApplied)
+					{
+						RemoveImmunotherapyEffects();
+					}
 				}
 
 				lifetimeBar.SetValue(lifetimeLeft);
@@ -53,8 +53,6 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				{
 					cooldownLeft = 0f;
 					button.Activate();
-					Debug.Log("IMMUNOTHERAPY: AVAILABLE");
-
 				}
 
 				cooldownBar.SetInverseValue(cooldownLeft);
@@ -67,6 +65,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			cooldownBar.gameObject.SetActive(false);
 			lifetimeBar.gameObject.SetActive(true);
 			lifetimeLeft = lifetimeStat.CurrentValue;
+			lifetimeBar.SetMaxValue(lifetimeStat.CurrentValue);
 			lifetimeBar.SetValue(lifetimeLeft);
 			button.Deactivate();
 		}
@@ -76,12 +75,12 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			cooldownBar.gameObject.SetActive(true);
 			lifetimeBar.gameObject.SetActive(false);
 			cooldownLeft = cooldownStat.CurrentValue;
+			cooldownBar.SetMaxValue(cooldownStat.CurrentValue);
 			cooldownBar.SetInverseValue(cooldownLeft);
 		}
 
 		private void OnEnable()
 		{
-
 			Debug.Log("Attach Activate Immunotherapy to  Immunotherapy Started");
 			controls = new PlayerControls();
 			controls.Enable();
@@ -111,12 +110,10 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 			isImmunotherapyApplied = true;
 			SwitchToLifetimeBar();
-			Debug.Log("IMMUNOTHERAPY: ACTIVATED");
 		}
 
 		public void RemoveImmunotherapyEffects()
 		{
-			if (!isImmunotherapyApplied) return;
 
 			// Do deactivations
 			for (int i = 0; i < applicableUpgrades.Count; ++i)
@@ -124,15 +121,16 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				applicableUpgrades[i].RemoveEffect();
 			}
 
+			isImmunotherapyApplied = false;
 			SwitchToCooldownBar();
-			Debug.Log("IMMUNOTHERAPY: FINISHED");
+
 		}
 
 	
 		private void ActivateImmunotherapy(InputAction.CallbackContext context)
 		{
 			Debug.Log("Activate Immunotherapy called");
-			if (cooldownLeft == 0f)
+			if (cooldownLeft == 0f && !isImmunotherapyApplied)
 			{
 				ActivateImmunotherapyEffects();
 			}
@@ -140,7 +138,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		public void ActivateImmunotherapy()
 		{
-			if (cooldownLeft == 0f)
+			if (cooldownLeft == 0f && !isImmunotherapyApplied)
 			{
 				ActivateImmunotherapyEffects();
 			}

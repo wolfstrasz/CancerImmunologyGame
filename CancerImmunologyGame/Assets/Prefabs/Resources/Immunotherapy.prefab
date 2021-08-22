@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 1582279876598350759}
   - component: {fileID: 1582279876598350758}
   - component: {fileID: 1582279876598350753}
+  - component: {fileID: 8895938660886784752}
   m_Layer: 5
   m_Name: CooldownBar
   m_TagString: Untagged
@@ -505,6 +506,20 @@ MonoBehaviour:
   barColour: {r: 0.08235294, g: 0.76470596, b: 0.9921569, a: 1}
   fillImage: {fileID: 1582279876707011507}
   fillBackgroundImage: {fileID: 1582279877276225715}
+--- !u!114 &8895938660886784752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1582279876598350755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: 7c367075b5dd30947b85aee6689102c3, type: 2}
+  isApplicationQuitting: 0
 --- !u!1 &1582279876629205256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1398,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: -10
+  m_SortingOrder: -100
   m_TargetDisplay: 0
 --- !u!222 &1582279877914255055
 CanvasRenderer:
@@ -1447,7 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPersistent: 0
   applicableUpgrades:
-  - {fileID: 11400000, guid: e3fec7796d09ba9418eb1eba62901326, type: 2}
+  - {fileID: 11400000, guid: f64b4a8ca31f1a044bda8e94c603641d, type: 2}
   - {fileID: 11400000, guid: e4ecd5b7c050ca1478a3ccdab5c37dbf, type: 2}
   - {fileID: 11400000, guid: 83e28b5cfe88af44d8978810cb6c3657, type: 2}
   - {fileID: 11400000, guid: 0381889a212b50a479b15966000c4341, type: 2}

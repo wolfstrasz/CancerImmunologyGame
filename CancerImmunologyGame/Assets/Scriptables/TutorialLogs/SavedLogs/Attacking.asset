@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Attacking
   m_EditorClassIdentifier: 
   isUnlocked: 0
-  title: Combat
+  title: Combat - T cell degranulation
   imageSprite: {fileID: 21300000, guid: f7d0971c79297e54390866e073aa7a4f, type: 3}

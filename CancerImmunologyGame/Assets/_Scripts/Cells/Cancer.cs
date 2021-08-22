@@ -16,7 +16,7 @@ namespace ImmunotherapyGame.Cancers
 		[SerializeField] private bool shouldKeepCancerCellsPacked = false;
 
 		[SerializeField] private int maximumCells = 10;
-		[SerializeField] [Range(5.0f, 100.0f)] private float timeBetweenDivisions = 10.0f;
+		[SerializeField] [Range(1.0f, 100.0f)] private float timeBetweenDivisions = 10.0f;
 		[SerializeField] private int spawnsBeforeCafSpawn = 5;
 		[SerializeField] private int balanceRatioCellToCaf = 3;
 
@@ -43,6 +43,8 @@ namespace ImmunotherapyGame.Cancers
 		// Debug containers
 		[SerializeField] [ReadOnly] private List<CAFCell> cafCells = new List<CAFCell>();
 		[SerializeField] [ReadOnly] private List<CancerCell> cancerCells = new List<CancerCell>();
+		[SerializeField] [ReadOnly] private List<Cell> allCells = new List<Cell>();
+
 		[SerializeField] [ReadOnly] private List<GameObject> allPlottingObjects = new List<GameObject>();
 
 		// Division handling
@@ -62,7 +64,8 @@ namespace ImmunotherapyGame.Cancers
 		public bool IsAlive => isAlive;
 		public bool CanGoInDivision => canGoInDivision;
 		public GameObject CellToDivide => cellToDivide.gameObject;
-
+		public int AllCellsCount => allCells.Count;
+		public List<Cell> AllCells => allCells;
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -109,7 +112,7 @@ namespace ImmunotherapyGame.Cancers
 				cafCells[i].OnUpdate();
 			}
 
-			if (cancerCells.Count + cafCells.Count >= maximumCells)
+			if (allCells.Count >= maximumCells)
 			{
 				return;
 			}
@@ -185,6 +188,7 @@ namespace ImmunotherapyGame.Cancers
 			newCancerCell.cancerOwner = this;
 			++nextSortOrder;
 			cancerCells.Add(newCancerCell);
+			allCells.Add(newCancerCell);
 		}
 
 
@@ -197,6 +201,7 @@ namespace ImmunotherapyGame.Cancers
 			newCAFCell.cancerOwner = this;
 			++nextSortOrder;
 			cafCells.Add(newCAFCell);
+			allCells.Add(newCAFCell);
 		}
 
 
@@ -463,6 +468,7 @@ namespace ImmunotherapyGame.Cancers
 		{
 			CancerCell cancerCell = cell.GetComponent<CancerCell>();
 			cancerCells.Remove(cancerCell);
+			allCells.Remove(cancerCell);
 
 			if (cancerCells.Count == 0)
 			{
@@ -482,6 +488,7 @@ namespace ImmunotherapyGame.Cancers
 		{
 			CAFCell cafCell = cell.GetComponent<CAFCell>();
 			cafCells.Remove(cafCell);
+			allCells.Remove(cafCell);
 		}
 	}
 }

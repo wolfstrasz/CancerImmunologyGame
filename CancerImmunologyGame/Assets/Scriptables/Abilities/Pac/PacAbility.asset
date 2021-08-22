@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PacAbility
   m_EditorClassIdentifier: 
   name: Pac Particle Ability
-  audioClip: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: b2ee69bdff6c22a4a88949d677522930, type: 3}
   effectType: {fileID: 11400000, guid: e3c3f07dde92e9949aa5a89dcf189aa6, type: 2}
   range: {fileID: 11400000, guid: 644cbe6c300139d46b5f0b176e1cde47, type: 2}
   energyCost: {fileID: 11400000, guid: 402731e2819c47f449241ee70dd382ce, type: 2}

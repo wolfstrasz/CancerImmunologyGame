@@ -9,32 +9,32 @@ namespace ImmunotherapyGame.AI
 {
 	public class AIReachDestination : BTActionNode
 	{
-		// Data obtained from controller
-		private IAIMovementController controller;
-		private Transform targetToReach;
-		private Transform targetToMove;
-		private float distanceSq;
+		private AIPathfindingData pathfindingData;
+		private AITargetingData targetData;
+		private AIControlledCellData controlledCellData;
 
-		// Data to work with
+		// Controller and objects cached data
+		private GameObject targetObjectToReach;
+		private GameObject targetObjectToMove;
+
+		// AStar handling: attributes (obtained from controller
+		private float acceptableDistanceFromTargetSq;
+
+		// AStar handling: data from search
 		private Path path = null;
-		private AIPathState aiPathState;
 		private int currentWaypoint = 0;
 		private List<Vector3> vectorPath = new List<Vector3>();
-		private float repathRate = 1f;
 		private float timePassedForRepath = 0f;
-		private float movementLookAhead = 0f;
-		private float slowdownDistance = 0f;
-		RVOController rvoController = null;
 
+		// AStar handling: State machine
+		private AIPathState aiPathState;
 		protected enum AIPathState { NEEDTOSEARCH, FOUND, ERROR, SEARCHING, ENDED }
 
-		public AIReachDestination(string name, BehaviourTree owner, IAIMovementController controller) : base(name, owner, "AIReachDestination")
+		public AIReachDestination(string name, BehaviourTree owner, AIControlledCellData controlledCellData, AIPathfindingData pathfindingData, AITargetingData targetData) : base(name, owner, "AIReachDestination")
 		{
-			this.controller = controller;
-			rvoController = controller.RVOController;
-			repathRate = controller.RepathRate;
-			movementLookAhead = controller.MovementLookAhead;
-			slowdownDistance = controller.SlowdownDistance;
+			this.controlledCellData = controlledCellData;
+			this.pathfindingData = pathfindingData;
+			this.targetData = targetData;
 		}
 
 
@@ -48,9 +48,9 @@ namespace ImmunotherapyGame.AI
 			}
 
 			// Cache the value for more optimised use
-			Vector3 currentTargetToMovePosition = targetToMove.position;
+			Vector3 targetObjectToMovePosition = targetObjectToMove.transform.position;
 
-			if (Vector3.SqrMagnitude(currentTargetToMovePosition - targetToReach.position) <= distanceSq)
+			if (Vector3.SqrMagnitude(targetObjectToMovePosition - targetObjectToReach.transform.position) <= acceptableDistanceFromTargetSq)
 			{
 				//rvoController.locked = true;
 				nodeState = NodeStates.SUCCESS;
@@ -59,8 +59,8 @@ namespace ImmunotherapyGame.AI
 				path.Release(this);
 				path = null;
 
-				controller.GraphObstacle.SetActive(true);
-				rvoController.locked = true;
+				pathfindingData.graphObstacle.SetActive(true);
+				pathfindingData.rvoController.locked = true;
 
 				return nodeState;
 			}
@@ -69,24 +69,24 @@ namespace ImmunotherapyGame.AI
 			{
 				//rvoController.lockWhenNotMoving = true;
 				//rvoController.locked = true;
-				float speed = controller.ControlledCell.movementSpeed;
-				rvoController.SetTarget(currentTargetToMovePosition, speed, speed);
+				float speed = controlledCellData.speed;
+				pathfindingData.rvoController.SetTarget(targetObjectToMovePosition, speed, speed);
 			}
 			else
 			{
-				rvoController.locked = false;
-				controller.GraphObstacle.SetActive(false);
+				pathfindingData.rvoController.locked = false;
+				pathfindingData.graphObstacle.SetActive(false);
 				//rvoController.lockWhenNotMoving = false;
 				//rvoController.locked = false;
 
 				// Check in a loop if we are close enough to the current waypoint to switch to the next one.
 				// We do this in a loop because many waypoints might be close to each other and we may reach
 				// several of them in the same frame.
-				float distanceToNextWaypointSQ = Vector3.SqrMagnitude(currentTargetToMovePosition - path.vectorPath[currentWaypoint]);
-				while (distanceToNextWaypointSQ < movementLookAhead * movementLookAhead && currentWaypoint != (vectorPath.Count - 1))
+				float distanceToNextWaypointSQ = Vector3.SqrMagnitude(targetObjectToMovePosition - path.vectorPath[currentWaypoint]);
+				while (distanceToNextWaypointSQ < pathfindingData.movementLookAhead * pathfindingData.movementLookAhead && currentWaypoint != (vectorPath.Count - 1))
 				{
 					currentWaypoint++;
-					distanceToNextWaypointSQ = Vector3.SqrMagnitude(currentTargetToMovePosition - path.vectorPath[currentWaypoint]);
+					distanceToNextWaypointSQ = Vector3.SqrMagnitude(targetObjectToMovePosition - path.vectorPath[currentWaypoint]);
 				}
 
 				// Obtain path point at MovementLookAhead distance
@@ -97,17 +97,15 @@ namespace ImmunotherapyGame.AI
 				var p1 = (currentWaypoint > 0) ? vectorPath[currentWaypoint - 1] : vectorPath[0];
 				var p2 = vectorPath[currentWaypoint];
 
-				// Calculate the intersection with the circle. This involves some math.
-				var t = VectorMath.LineCircleIntersectionFactor(currentTargetToMovePosition, p1, p2, movementLookAhead);
+				// Calculate the intersection with the circle.
+				var t = VectorMath.LineCircleIntersectionFactor(targetObjectToMovePosition, p1, p2, pathfindingData.movementLookAhead);
 
 				// Clamp to a point on the segment
 				t = Mathf.Clamp01(t);
 				Vector3 intersectionWaypoint = Vector3.Lerp(p1, p2, t);
 
-				//Vector3 intersectionWaypoint = vectorPath[currentWaypoint];
-				//Debug.Log("Controller of: " + controller.ControlledCell.gameObject.name + " has found current waypoint to be: " + intersectionWaypoint);
 				// Obtain the remaining distance to goal
-				float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude + (intersectionWaypoint - p2).magnitude;
+				float remainingDistance = (intersectionWaypoint - targetObjectToMovePosition).magnitude + (intersectionWaypoint - p2).magnitude;
 				//float remainingDistance = (intersectionWaypoint - currentTargetToMovePosition).magnitude;
 				for (int i = currentWaypoint; i < vectorPath.Count - 1; i++)
 				{
@@ -115,11 +113,11 @@ namespace ImmunotherapyGame.AI
 				}
 
 				// Obtain weight vector for local avoidance, where remainingDistance is the weight, 
-				var direction = (intersectionWaypoint - currentTargetToMovePosition).normalized;
-				var rvoTarget = direction * remainingDistance + currentTargetToMovePosition;
-				var desiredSpeed = Mathf.Clamp01(remainingDistance / slowdownDistance) * controller.ControlledCell.movementSpeed;
+				var direction = (intersectionWaypoint - targetObjectToMovePosition).normalized;
+				var rvoTarget = direction * remainingDistance + targetObjectToMovePosition;
+				var desiredSpeed = Mathf.Clamp01(remainingDistance / pathfindingData.slowdownDistance) * controlledCellData.speed;
 
-				rvoController.SetTarget(rvoTarget, controller.ControlledCell.movementSpeed, controller.ControlledCell.movementSpeed);
+				pathfindingData.rvoController.SetTarget(rvoTarget, controlledCellData.speed, controlledCellData.speed);
 
 			}
 
@@ -127,14 +125,14 @@ namespace ImmunotherapyGame.AI
 
 			// Get a processed movement delta from the rvo controller and move the character.
 			// This is based on information from earlier frames.
-			var movementDelta = rvoController.CalculateMovementDelta(Time.deltaTime);
+			var movementDelta = pathfindingData.rvoController.CalculateMovementDelta(Time.deltaTime);
 
 			// Transform into raw direction vector (non-normalized) that afterwards the cell will use to move to the same position
 			// after AIController applies it
 			Vector2 raw;
 			raw.x = movementDelta.x;// / controller.ControlledCell.movementSpeed;
 			raw.y = movementDelta.y;// / controller.ControlledCell.movementSpeed;
-			controller.MovementDirection = raw.normalized;
+			controlledCellData.movementDirection = raw.normalized;
 
 			nodeState = NodeStates.RUNNING;
 			return nodeState;
@@ -143,27 +141,27 @@ namespace ImmunotherapyGame.AI
 
 		protected override NodeStates OnEvaluateAction()
 		{
-			if (controller.Target == null)
+			// Fail on no target
+			if (targetData.currentTarget == null)
 			{
 				nodeState = NodeStates.FAILURE;
 				return nodeState;
 			}
 
-
+			// Check if we need to find a new path (Repathing)
 			if (!(aiPathState == AIPathState.SEARCHING))
 			{
-
 				timePassedForRepath -= Time.deltaTime;
-				if (targetToReach != controller.Target.transform)
+				if (targetObjectToReach != targetData.currentTarget)
 				{
 					Debug.Log("Different target to reach and controller target. -> Will Search for new path");
-					timePassedForRepath = repathRate;
+					timePassedForRepath = pathfindingData.repathRate;
 					aiPathState = AIPathState.NEEDTOSEARCH;
 				}
 				if (timePassedForRepath <= 0f)
 				{
 					Debug.Log("Repathing");
-					timePassedForRepath = repathRate;
+					timePassedForRepath = pathfindingData.repathRate;
 					aiPathState = AIPathState.NEEDTOSEARCH;
 				}
 			}
@@ -171,50 +169,67 @@ namespace ImmunotherapyGame.AI
 			if (aiPathState == AIPathState.NEEDTOSEARCH)
 			{
 				Debug.Log("Need to search for new path!");
-				targetToMove = controller.ControlledCell.transform;
-				if (targetToMove == null)
+
+				if (controlledCellData.controlledObject == null)
+				{
+					ActionNodeLogWarning("Controller is missing a controlled cell");
+					nodeState = NodeStates.FAILURE;
+					return nodeState;
+				}
+
+				targetObjectToMove = controlledCellData.controlledObject;
+
+				if (targetObjectToMove == null)
 				{
 					ActionNodeLogWarning("Did not receive a targed to move in movement data");
 					nodeState = NodeStates.FAILURE;
 					return nodeState;
 				}
 
-				targetToReach = controller.Target.transform;
-				if (targetToReach == null)
+				targetObjectToReach = targetData.currentTarget;
+				if (targetObjectToReach == null)
 				{
 					ActionNodeLogWarning("Did not receive a targed to reach in movement data");
 					nodeState = NodeStates.FAILURE;
 					return nodeState;
 				}
 
-				distanceSq = controller.AcceptableDistanceFromTarget;
-				distanceSq *= distanceSq;
+				// Calculate acceptable distance
+				acceptableDistanceFromTargetSq = targetData.acceptableDistanceFromCurrentTarget * targetData.acceptableDistanceFromCurrentTarget;
 
-				if (Vector3.SqrMagnitude(targetToReach.position - targetToMove.position) < distanceSq)
+				// Check if we are already there
+				if (Vector3.SqrMagnitude(targetObjectToReach.transform.position - targetObjectToMove.transform.position) < acceptableDistanceFromTargetSq)
 				{
 					Debug.Log("Already reached target position");
 
-					nodeState = NodeStates.SUCCESS;
+					// Make cell an obstacle
+					pathfindingData.SetObstacleActive(true);
+				
+
+					// Update states
 					aiPathState = AIPathState.ENDED;
-					controller.GraphObstacle.SetActive(true);
-					rvoController.locked = true;
+					nodeState = NodeStates.SUCCESS;
 					return nodeState;
 				}
 				else
 				{
 					Debug.Log("Searching for new path");
+					// Stop cell from being an obstacle
+					pathfindingData.SetObstacleActive(false);
 
-					controller.GraphObstacle.SetActive(false);
-					rvoController.locked = false;
+					// Request path
+					pathfindingData.pathSeeker.StartPath(targetObjectToMove.transform.position, targetObjectToReach.transform.position, OnPathComplete);
+
+					// Update State
 					aiPathState = AIPathState.SEARCHING;
-					controller.PathSeeker.StartPath(targetToMove.position, targetToReach.position, OnPathComplete);
 					nodeState = NodeStates.RUNNING;
 				}
 
 				return nodeState;
 			}
 
-			if (targetToMove == null || targetToReach == null)
+			// Safe guard check
+			if (targetObjectToMove == null || targetObjectToReach == null)
 			{
 				nodeState = NodeStates.FAILURE;
 				return nodeState;
@@ -234,21 +249,20 @@ namespace ImmunotherapyGame.AI
 
 			if (aiPathState == AIPathState.ENDED)
 			{
-				targetToReach = null;
+				targetObjectToReach = null;
+
+				// Enable cell as obstacle in graph
+				pathfindingData.SetObstacleActive(true);
+			
 				nodeState = NodeStates.SUCCESS;
-				controller.GraphObstacle.SetActive(true);
-				rvoController.locked = true;
 				return nodeState;
 			}
-
-
 
 			if (aiPathState == AIPathState.ERROR)
 			{
 				nodeState = NodeStates.FAILURE;
 				return nodeState;
 			}
-
 
 			// Safe to report failure even if it this code is not reachable
 			nodeState = NodeStates.FAILURE;

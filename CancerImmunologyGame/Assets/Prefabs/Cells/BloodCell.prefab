@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae803e694e0f6a4fadd258935fe24e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  render: {fileID: 4189095983323802905}
   speed: 5.5
   rotationSpeed: 90
   distanceTravelled: 0

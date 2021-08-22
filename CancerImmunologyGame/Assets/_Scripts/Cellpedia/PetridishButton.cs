@@ -13,11 +13,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 	[RequireComponent (typeof(Selectable))]
 	public class PetridishButton : UIMenuNode, ISelectHandler, IDeselectHandler, IPointerEnterHandler, ISubmitHandler, IMoveHandler
 	{
-		internal static PetridishButton lastSubmitted = null;
-		internal static List<PetridishButton> allPetridishButtons = null;
-		[SerializeField] [ReadOnly] private int id = -1;
-		[SerializeField] [ReadOnly] internal bool isActivated = false;
-		[SerializeField] [ReadOnly] internal CellpediaCellDescription cellDescription = null;
 
 		[Header("Petridish")]
 		[SerializeField] private Image cellImage = null;
@@ -25,6 +20,14 @@ namespace ImmunotherapyGame.CellpediaSystem
 		[Header("Scaling On Select")]
 		[SerializeField] private Vector3 scaling = new Vector3(1.0f, 1.0f, 1.0f);
 		[SerializeField] private Vector3 initialScaling = new Vector3(1.0f, 1.0f, 1.0f);
+
+		[Header("Debug")]
+		[SerializeField] [ReadOnly] private int id = -1;
+		[SerializeField] [ReadOnly] internal bool isActivated = false;
+		[SerializeField] [ReadOnly] internal CellpediaCellDescription cellDescription = null;
+
+		internal static PetridishButton lastSubmitted = null;
+		internal static List<PetridishButton> allPetridishButtons = null;
 
 		internal void Initialise(CellpediaCellDescription cellDescription, int id)
 		{
@@ -64,7 +67,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 					cellImage.gameObject.SetActive(false);
 					lastSubmitted = this;
 				}
-			} else
+			} 
+			else
 			{
 				cellImage.gameObject.SetActive(false);
 			}

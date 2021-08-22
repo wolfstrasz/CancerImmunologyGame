@@ -16,39 +16,34 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
     public class ImmunotherapyResearch : Singleton<ImmunotherapyResearch>, IDataManager
     {
 		[Header("Data")]
-		[SerializeField]
-		internal ImmunotherapyResearchData data = null;
+		[SerializeField] internal ImmunotherapyResearchData data = null;
 		private SerializableImmunotherapyResearchData savedData = null;
 
 		[Header("System UI")]
-		[SerializeField]
-		private InterfaceControlPanel researchAdvancementPanel = null;
-		[SerializeField]
-		private UpgradeDescriptionPanel upgradeDescriptionPanel = null;
-		[SerializeField]
-		private UpgradePurchasePanel upgradePurchasePanel = null;
-		[SerializeField]
-		internal GameObject currentSelectedStatUpgradeButton = null;
-		[SerializeField]
-		private List<StatUpgradeButton> allButtons = new List<StatUpgradeButton>();
+		[SerializeField] private AudioSource source = null;
+		[SerializeField] private InterfaceControlPanel researchAdvancementPanel = null;
+		[SerializeField] private UpgradeDescriptionPanel upgradeDescriptionPanel = null;
+		[SerializeField] private UpgradePurchasePanel upgradePurchasePanel = null;
+		[SerializeField] internal GameObject currentSelectedStatUpgradeButton = null;
+		[SerializeField] private List<StatUpgradeButton> allButtons = new List<StatUpgradeButton>();
+		[SerializeField] private ImmunotherapyMachine machine = null;
 
 		[Header("Game UI")]
-		[SerializeField]
-		private TopOverlayButtonData inGameUIButtonData = null;
-		[SerializeField]
-		private Animator machineAnimator = null;
-		[SerializeField]
-		private TMPro.TMP_Text currentPointsText = null;
+		[SerializeField] private TopOverlayButtonData inGameUIButtonData = null;
+		[SerializeField] private TMPro.TMP_Text currentPointsText = null;
 
 		[Header("Reset Points Panel")]
-		[SerializeField]
-		private GameObject resetPointsPanel = null;
-		[SerializeField]
-		private GameObject resetPointsPanelCancelButton = null;
+		[SerializeField] private GameObject resetPointsPanel = null;
+		[SerializeField] private GameObject resetPointsPanelCancelButton = null;
+		public bool IsImmunotherapyResearchOpened => researchAdvancementPanel.IsOpened;
+
+		[Header("Clips")]
+		[SerializeField] private AudioClip resetPointsClip = null;
+		[SerializeField] private AudioClip addPointsClip = null;
 
 		// Input handling
 		PlayerControls playerControls = null;
-		private bool unlockedFeature = false;
+		private bool isFeatureUnlocked = false;
 
 		private StatUpgrade currentStatUpgrade = null;
 		internal StatUpgrade CurrentStatUpgrade
@@ -69,7 +64,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 		public void Initialise()
 		{
-			unlockedFeature = false;
+			isFeatureUnlocked = data.isSystemUnlocked;
 			currentSelectedStatUpgradeButton = null;
 			upgradeDescriptionPanel.UpdateDisplay();
 			upgradePurchasePanel.UpdateDisplay();
@@ -80,8 +75,8 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			{
 				data.statUpgrades[i].ApplyUpgradesFromStartToNextUpgradeIndex();
 
-				// 4) Set if GameUI button is visible 
-				unlockedFeature |= data.statUpgrades[i].unlocked;
+				//// 4) Set if GameUI button is visible 
+				//unlockedFeature |= data.statUpgrades[i].unlocked;
 			}
 
 			// 1) Initialise all required components
@@ -95,7 +90,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 				researchAdvancementPanel.nodesToListen.Add(allButtons[i]);
 			}
 
-			inGameUIButtonData.PingUnlockStatus(unlockedFeature);
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 
 		}
 
@@ -129,7 +124,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 		// Input callback
 		public void OpenView(InputAction.CallbackContext context)
 		{
-			if (!unlockedFeature) return; // TODO: remove hidden state
+			if (!isFeatureUnlocked) return; // TODO: remove hidden state
 
 			if (researchAdvancementPanel.IsOpened)
 			{
@@ -179,6 +174,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			currentStatUpgrade = null;
 			upgradeDescriptionPanel.UpdateDisplay();
 			upgradePurchasePanel.UpdateDisplay();
+			source.PlayOneShot(resetPointsClip);
 
 		}
 
@@ -191,18 +187,28 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			}
 			else
 			{
-				machineAnimator.SetTrigger("UpgradeBuy");
-				data.points -= currentStatUpgrade.ApplyUpgradeAndReturnCost();
-				currentPointsText.text = data.points.ToString();
 
-				if (!currentStatUpgrade.HasAvailableUpgrade || currentStatUpgrade.NextUpgradeCost > data.points )
+				if (machine.PlayAnimation())
 				{
-					EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
-				}
+					data.points -= currentStatUpgrade.ApplyUpgradeAndReturnCost();
+					currentPointsText.text = data.points.ToString();
 
-				upgradePurchasePanel.UpdateDisplay();
-				upgradeDescriptionPanel.UpdateDisplay();
+					if (!currentStatUpgrade.HasAvailableUpgrade || currentStatUpgrade.NextUpgradeCost > data.points)
+					{
+						EventSystem.current.SetSelectedGameObject(currentSelectedStatUpgradeButton);
+					}
+
+					upgradePurchasePanel.UpdateDisplay();
+					upgradeDescriptionPanel.UpdateDisplay();
+				}
 			}
+		}
+
+		public void UnlockFeature()
+		{
+			isFeatureUnlocked = true;
+			data.isSystemUnlocked = true;
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 		}
 
 		public void UnlockUpgrades(List<StatUpgrade> upgradesToUnlock)
@@ -217,15 +223,14 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 
 			if (!notNewUnlock)
 			{
-				unlockedFeature = true;
-				inGameUIButtonData.PingUnlockStatus(unlockedFeature);
-				inGameUIButtonData.PingAnimationStatus(unlockedFeature);
+				inGameUIButtonData.PingAnimationStatus(isFeatureUnlocked);
 			}
 
 		}
 
 		public void AddPoints(int pointsToAdd)
 		{
+			//source.PlayOneShot(addPointsClip);
 			data.points += pointsToAdd;
 			currentPointsText.text = data.points.ToString();
 			upgradePurchasePanel.UpdateDisplay();
@@ -269,13 +274,16 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			if (savedData == null)
 			{
 				Debug.Log("No previous saved data found. Creating new level data save.");
+				ResetData();
+				SaveData();
 			}
 			else
 			{
 				savedData.CopyTo(data);
 			}
-			SaveData();
 			
+			isFeatureUnlocked = data.isSystemUnlocked;
+			inGameUIButtonData.PingUnlockStatus(isFeatureUnlocked);
 		}
 
 

@@ -14,22 +14,15 @@ namespace ImmunotherapyGame.UI
     public class MenuDropdown : UIMenuNode, ISubmitHandler, IPointerExitHandler
     {
         [Header("Dropdown")]
-        [SerializeField]
-        internal GameObject view = null;
-        [SerializeField]
-        private Transform content = null;
-        [SerializeField]
-        private GameObject templateItem = null;
+        [SerializeField] internal GameObject view = null;
+        [SerializeField] private Transform content = null;
+        [SerializeField] private GameObject templateItem = null;
         internal List<MenuDropdownItem> dropdownItems = null;
 
         [Header("Selected Item")]
-        [SerializeField]
-        private TMP_Text selectedDisplayText = null;
-        [ReadOnly]
-        private int possibleInitialValue = -1;
-        [ReadOnly]
-        private MenuDropdownItem selectedItem = null;
-
+        [SerializeField] private TMP_Text selectedDisplayText = null;
+        [SerializeField] [ReadOnly] private int possibleInitialValue = -1;
+        [SerializeField] [ReadOnly] private MenuDropdownItem selectedItem = null;
 
         // Accessors
         public int CurrentValue 

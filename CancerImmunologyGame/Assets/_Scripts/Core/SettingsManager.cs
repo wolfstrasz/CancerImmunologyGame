@@ -7,57 +7,43 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 using ImmunotherapyGame.UI;
+using ImmunotherapyGame.Audio;
+
 using UnityEngine.InputSystem;
 
 namespace ImmunotherapyGame.Core
 {
     public class SettingsManager : Singleton<SettingsManager>
     {
-        [SerializeField]
-        private InterfaceControlPanel panel = null;
-        [SerializeField]
-        private AudioMixer audioMixer = null;
+        [SerializeField] private InterfaceControlPanel panel = null;
 
         [Header("UI Audio Control")]
-        [SerializeField]
-        private Slider masterVolumeSlider = null;
-        [SerializeField]
-        private Slider musicVolumeSlider = null;
-        [SerializeField]
-        private Slider sfxVolumeSlider = null;
-        [SerializeField]
-        private Slider uiVolumeSlider = null;
+        [SerializeField] private Slider masterVolumeSlider = null;
+        [SerializeField] private Slider musicVolumeSlider = null;
+        [SerializeField] private Slider sfxVolumeSlider = null;
+        [SerializeField] private Slider uiVolumeSlider = null;
 
         [Header("Graphics & Input Control")]
-        [SerializeField]
-        private MenuDropdown inputDropdown = null;
-        [SerializeField]
-        private InputActionAsset inputAsset = null;
-        [ReadOnly]
-        private int currentSchemeIndex = 0;
+        [SerializeField] private MenuDropdown inputDropdown = null;
+        [SerializeField] private InputActionAsset inputAsset = null;
+        [SerializeField] [ReadOnly]private int currentSchemeIndex = 0;
 
-        [SerializeField]
-        private Toggle fullscreenToggle = null;
-        private bool currentToggle = false;
+        [SerializeField] private Toggle fullscreenToggle = null;
+        [SerializeField] [ReadOnly] private bool currentToggle = false;
 
-        [SerializeField]
-        private MenuDropdown resolutionDropdown = null;
+        [SerializeField] private MenuDropdown resolutionDropdown = null;
+        [SerializeField] [ReadOnly] private int currentResolutionIndex = 0;
+        [SerializeField] [ReadOnly] private string currentResolution = "";
         private Resolution[] resolutions = null;
 
-        private int currentResolutionIndex = 0;
-        [ReadOnly]
-        private string currentResolution = "";
-
-        public void Initialise()
+		public void Initialise()
 		{
-            // Volume init
-            masterVolumeSlider.onValueChanged.AddListener(delegate { SetMasterVolume(); });
-            musicVolumeSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
-            sfxVolumeSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
-            uiVolumeSlider.onValueChanged.AddListener(delegate { SetUIVolume(); });
 
+
+#if UNITY_WEBGL
+#else
             // Add Graphic init
-			List<string> options = new List<string>();
+            List<string> options = new List<string>();
 			resolutions = Screen.resolutions;
 			currentResolutionIndex = 0;
 
@@ -97,12 +83,19 @@ namespace ImmunotherapyGame.Core
             //Debug.Log("Select input option: " + inputDropdown.CurrentValue);
             inputDropdown.RefreshShownValue();
 
-
-            LoadVolumeSettings();
             LoadGraphicsSettings(currentResolutionIndex);
             LoadInputSettings(currentSchemeIndex);
-
             ApplyChangedSettings();
+
+#endif 
+
+            LoadVolumeSettings();
+			// Register to volume sliders
+			masterVolumeSlider.onValueChanged.AddListener(delegate { SetMasterVolume(); });
+			musicVolumeSlider.onValueChanged.AddListener(delegate { SetMusicVolume(); });
+			sfxVolumeSlider.onValueChanged.AddListener(delegate { SetSFXVolume(); });
+			uiVolumeSlider.onValueChanged.AddListener(delegate { SetUIVolume(); });
+
             panel.gameObject.SetActive(false);
         }
 
@@ -141,18 +134,14 @@ namespace ImmunotherapyGame.Core
         private void SetMasterVolume()
         {
             float volume = masterVolumeSlider.value;
-			//Debug.Log("Master Volume: " + volume);
-			audioMixer.SetFloat("MasterVolume", Mathf.Log10(volume) * 20);
+            AudioManager.Instance.SetVolume(AudioChannel.Master, volume * 100f);
             PlayerPrefs.SetFloat("MasterVolumePreference", volume);
-
         }
 
         private void SetSFXVolume()
         {
             float volume = sfxVolumeSlider.value;
-            //Debug.Log("SFX Volume: " + volume);
-
-            audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+            AudioManager.Instance.SetVolume(AudioChannel.SFX, volume * 100f);
             PlayerPrefs.SetFloat("SFXVolumePreference", volume);
 
         }
@@ -160,9 +149,8 @@ namespace ImmunotherapyGame.Core
         private void SetUIVolume()
         { 
             float volume = uiVolumeSlider.value;
-            //Debug.Log("UI Volume: " + volume);
-
-            audioMixer.SetFloat("UIVolume", Mathf.Log10(volume) * 20);
+            Debug.Log(" ++++++++ SETTING UI VOLUME: " + volume);
+            AudioManager.Instance.SetVolume(AudioChannel.UI, volume * 100f);
             PlayerPrefs.SetFloat("UIVolumePreference", volume);
 
         }
@@ -170,9 +158,7 @@ namespace ImmunotherapyGame.Core
         private void SetMusicVolume()
 		{
             float volume = musicVolumeSlider.value;
-            //Debug.Log("Music Volume: " + volume);
-
-            audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+            AudioManager.Instance.SetVolume(AudioChannel.Master, volume * 100f);
             PlayerPrefs.SetFloat("MusicVolumePreference", volume);
         }
 
@@ -210,37 +196,28 @@ namespace ImmunotherapyGame.Core
 
         private void LoadVolumeSettings()
 		{
-            //Debug.Log("Loading volume");
             float value = 0f;
+			value = PlayerPrefs.GetFloat("MasterVolumePreference", 1f);
+            masterVolumeSlider.value = value;
+            AudioManager.Instance.SetVolume(AudioChannel.Master, value * 100f);
+            PlayerPrefs.SetFloat("SFXVolumePreference", value);
 
-            if (PlayerPrefs.HasKey("MasterVolumePreference"))
-			    value = PlayerPrefs.GetFloat("MasterVolumePreference");
-            else
-			    value = 1f;
-            UpdateSliderValue(masterVolumeSlider, value);
+            value = PlayerPrefs.GetFloat("MusicVolumePreference", 1f);
+            musicVolumeSlider.value = value;
+            AudioManager.Instance.SetVolume(AudioChannel.Music, value * 100f);
+            PlayerPrefs.SetFloat("SFXVolumePreference", value);
 
+            value = PlayerPrefs.GetFloat("SFXVolumePreference", 1f);
+            sfxVolumeSlider.value = value;
+            AudioManager.Instance.SetVolume(AudioChannel.SFX, value * 100f);
+            PlayerPrefs.SetFloat("SFXVolumePreference", value);
 
-            if (PlayerPrefs.HasKey("MusicVolumePreference"))
-			    value = PlayerPrefs.GetFloat("MusicVolumePreference");
-            else
-			    value = 1f;
-            UpdateSliderValue(musicVolumeSlider, value);
+            value = PlayerPrefs.GetFloat("UIVolumePreference", 1f);
+            uiVolumeSlider.value = value;
+            AudioManager.Instance.SetVolume(AudioChannel.UI, value * 100f);
+            PlayerPrefs.SetFloat("SFXVolumePreference", value);
 
-
-            if (PlayerPrefs.HasKey("SFXVolumePreference"))
-			    value = PlayerPrefs.GetFloat("SFXVolumePreference");
-            else
-			    value = 1f;
-            UpdateSliderValue(sfxVolumeSlider, value);
-
-
-            if (PlayerPrefs.HasKey("UIVolumePreference"))
-			    value = PlayerPrefs.GetFloat("UIVolumePreference");
-            else
-			    value = 1f;
-            UpdateSliderValue(uiVolumeSlider, value);
-
-		}
+        }
 
         private void LoadInputSettings(int currentIndex)
         {
@@ -254,25 +231,14 @@ namespace ImmunotherapyGame.Core
             //Debug.Log("Loaded: " + currentSchemeIndex);
         }
 
-        private void UpdateSliderValue (Slider slider, float value)
-		{
-
-            if (slider.value != value)
-            {
-                slider.value = value;
-            }
-            else
-            {
-                slider.value = 0f;
-                slider.value = 1f;
-                slider.value = value;
-            }
-        }
-
 
         public void Open()
 		{
+
+#if UNITY_WEBGL
+#else
             ReloadValues();
+#endif
             panel.Open();
 		}
 

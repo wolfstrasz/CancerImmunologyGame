@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HypoxicAreaHealthDamage
   m_EditorClassIdentifier: 
   attributeName: Hypoxic Area Health Damage
-  initialValue: 5
-  currentValue: 5
+  initialValue: 0.8
+  currentValue: 0.8

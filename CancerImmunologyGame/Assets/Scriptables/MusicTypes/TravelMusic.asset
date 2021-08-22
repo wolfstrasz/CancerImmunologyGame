@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1c989528aef34c92f2f4253e2e3d6, type: 3}
   m_Name: TravelMusic
   m_EditorClassIdentifier: 
-  musicClip: {fileID: 8300000, guid: ba98bb7a3f92f92469b783d7f4921613, type: 3}
+  musicClip: {fileID: 8300000, guid: 4f4d516055b0477479575c00f96751cc, type: 3}
   priority: 1
+  clipStartTime: 0
   subscribers: 0

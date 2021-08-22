@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ImmunotherapyGame.LevelTasks
 {
     [CreateAssetMenu(menuName = "MyAssets/Level Task")]
-    public class LevelTask : ScriptableObject, ISerializationCallbackReceiver
+    public class LevelTask : ScriptableObject
     {
         public LevelTaskType levelTaskType;
         public string title;
@@ -19,28 +19,5 @@ namespace ImmunotherapyGame.LevelTasks
             currentCount = 0;
             isComplete = false;
 		}
-
-        public void Complete()
-		{
-            isComplete = true;
-		}
-
-		public void Reset()
-		{
-			currentCount = 0;
-			isComplete = false;
-		}
-
-		public void OnBeforeSerialize()
-		{
-		}
-
-		public void OnAfterDeserialize()
-		{
-			if (levelTaskType == null)
-			{
-				Debug.LogWarning("Task has no task type!");
-			}
-		}
-	}
+    }
 }

@@ -90,7 +90,6 @@ namespace ImmunotherapyGame.Abilities
             return ability.EnergyCost;
         }
 
-    
 
       
     }

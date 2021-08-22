@@ -12,16 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7c49cf1d1f6f64c8e4b9ef23a8e9c9, type: 3}
   m_Name: IUpg_Immunotherapy_Cooldown
   m_EditorClassIdentifier: 
-  title: Immunotherapy  CD
-  description: BLA BLAH
+  title: Reduce immunotherapy toxicity
+  description: Modifications to your immunotherapy that reduce side-effects and toxicity
+    will reduce immunotherapy cool-down, allowing you to use it more often!
   statThumbnailSprite: {fileID: 21300000, guid: fc5ebdaf450673641abfc40d5bc2665a,
     type: 3}
   generalThumbnailSprite: {fileID: 21300000, guid: 47a4f6d4e70676c469155a0a292a6c3e,
     type: 3}
-  initialUnlockValue: 1
-  unlocked: 1
+  initialUnlockValue: 0
+  initialCurrentValue: 0
+  unlocked: 0
   statAttribute: {fileID: 11400000, guid: fe92c7d0bd8e73f4ab981809fc4a3afa, type: 2}
-  upgrades: []
+  upgrades:
+  - cost: 5
+    valueChange: -5
+  - cost: 10
+    valueChange: -10
+  - cost: 15
+    valueChange: -20
   nextUpgradeIndex: 0
   currentValue: 0
   appliedValue: 0

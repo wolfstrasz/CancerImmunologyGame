@@ -9,9 +9,11 @@ namespace ImmunotherapyGame.Audio
 	{
 		public AudioClip musicClip;
 		public int priority;
+		public float clipStartTime = 0.0f;
 		[ReadOnly] public int subscribers;
 		public void OnAfterDeserialize() { subscribers = 0; }
 		public void OnBeforeSerialize() { }
+
 	}
 
 }

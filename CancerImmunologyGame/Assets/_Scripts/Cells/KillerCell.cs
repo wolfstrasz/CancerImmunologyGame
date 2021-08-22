@@ -8,53 +8,51 @@ namespace ImmunotherapyGame
 
 	public class KillerCell : Cell
 	{
-		public float movementSpeed = 4.0f; // Linked to AI need to remove
+		[Header ("Linking")]
+		[SerializeField] private Rigidbody2D rb = null;
+		[SerializeField] private Transform spriteTransform = null;
+		[Header("Exhaustion")]
+		[SerializeField] private float exhaustEffectReduction = 0.75f;
 
-		[SerializeField]
-		private Rigidbody2D rb = null;
+		[Header("Attacks")]
+		[SerializeField] private RangedAbilityCaster primaryAbilityCaster = null;
+		[SerializeField] private RangedAbilityCaster secondaryAbilityCaster = null;
 
-		[Header("Attributes")]
-		[SerializeField]
-		private float exhaustEffectReduction = 0.75f;
-		//[SerializeField]
-		//private float immunotherapySpeedMultiplier = 1.66f;
-		//[SerializeField]
-		//private float immunotherapyEnergyRegain = 3.33f;
-
-		[Header("Normal Attack")]
-		[SerializeField]
-		private RangedAbilityCaster primaryAbilityCaster = null;
-
-		[Header("Secondary Attack Attributes")]
-		[SerializeField]
-		private RangedAbilityCaster secondaryAbilityCaster = null;
-
-		[Header("Debug only")]
-		[ReadOnly]
-		private Vector2 movementVector = Vector2.zero;
-		[ReadOnly]
-		private Quaternion movementRotation = Quaternion.identity;
-		//[ReadOnly]
-		//private bool isInPowerUpAnimation = false;
-		 
-		// Public properties
-		public float Health { get => CurrentHealth;}
-		public float Energy { get => CurrentEnergy;}
+		[Header("Debug")]
+		[SerializeField][ReadOnly] private Vector2 movementVector = Vector2.zero;
+		[SerializeField][ReadOnly] private Quaternion movementRotation = Quaternion.identity;
+		[SerializeField][ReadOnly] private GameObject primaryAttackTarget = null;
+		
+		/* Public properties */
+		public override bool isImmune => isDying;
 		public Vector2 MovementVector { get => movementVector; set => movementVector = value; }
 		public Quaternion MovementRotation { get => movementRotation; set => movementRotation = value; }
-		public override bool isImmune => /*isInPowerUpAnimation || */ isDying;
 
-		// Private proterties
-		private bool CannotUseNormalAttack => !CanUsePrimaryAttack;// || isInPowerUpAnimation;
-		private bool CannotUseSpecialAttack => !CanUseSecondaryAttack;// || isInPowerUpAnimation;
-		private bool IsMoving => /*!isInPowerUpAnimation  && */ MovementVector != Vector2.zero;
-		private bool CanUsePrimaryAttack => primaryAbilityCaster.CanCastAbility(CurrentEnergy);
-		private bool CanUseSecondaryAttack => secondaryAbilityCaster.CanCastAbility(CurrentEnergy);
+		public bool CanUsePrimaryAttack => primaryAbilityCaster.CanCastAbility(CurrentEnergy);
+		public bool CanUseSecondaryAttack => secondaryAbilityCaster.CanCastAbility(CurrentEnergy);
+
+		public RangedAbilityCaster PrimaryAbilityCaster => primaryAbilityCaster;
+		public RangedAbilityCaster SecondaryAbilityCaster => secondaryAbilityCaster;
+
+		public bool FlipSpriteLocalTransform 
+		{ 
+			set
+			{
+				if (value)
+				{
+					spriteTransform.localRotation = new Quaternion(0f, -180f, 0f, 0f);
+				} 
+				else
+				{
+					spriteTransform.localRotation = Quaternion.identity;
+				}
+			}
+
+		}
 
 		public void OnFixedUpdate()
 		{
-			//if (IsMoving)
-				Move();
+			Move();
 		}
 
 		/// <summary>
@@ -64,13 +62,16 @@ namespace ImmunotherapyGame
 		private void Move()
 		{
 			movementVector *= CurrentSpeed * Time.fixedDeltaTime * ExhaustionEffect();
-
 			rb.MovePosition(movementVector + rb.position);
 			transform.rotation = movementRotation;
 			movementVector = Vector3.zero;
 			movementRotation = Quaternion.identity;
 		}
 
+		/// <summary>
+		/// Calculatates and returns the effect variable of low energy exhaustion.
+		/// </summary>
+		/// <returns></returns>
 		private float ExhaustionEffect()
 		{
 			float maxEnergy = cellType.MaxEnergy;
@@ -80,48 +81,62 @@ namespace ImmunotherapyGame
 			return 1.0f - (maxEnergy - CurrentEnergy) / maxEnergy * exhaustEffectReduction;
 		}
 
-		private GameObject attackTarget;
-
+		/* PRIMARY ATTACK EXECUTION METHODS */
+		/// <summary>
+		/// Starts the primary attack execution of the Killer Cell given a target object.
+		/// </summary>
+		/// <param name="target"></param>
 		public void UsePrimaryAttack(GameObject target)
 		{
-			if (CannotUseNormalAttack) return;
-			Debug.Log("Killer cell tries to use primary attacK!");
+			if (!CanUsePrimaryAttack) return;
 			animator.SetBool("IsAttacking", true);
-
-			attackTarget = target;
+			primaryAttackTarget = target;
 		}
 
+		/// <summary>
+		/// Callback for the attack animation to trigger the primary attack
+		/// </summary>
 		public void OnExecutePrimaryAttack()
 		{
-			if (CannotUseNormalAttack) return;
+			if (!CanUsePrimaryAttack || primaryAttackTarget == null)
+			{
+				StopPrimaryAttack();
+				return;
+			}
 			Debug.Log("Killer cell executes primary attack!");
 
-			float energyCost = primaryAbilityCaster.CastAbility(attackTarget);
+			float energyCost = primaryAbilityCaster.CastAbility(primaryAttackTarget);
 			ApplyEnergyAmount(-energyCost);
 		}
 
+		/// <summary>
+		/// Forces the cell to leave its primary attack animation state and break the primary attack execution.
+		/// </summary>
 		public void StopPrimaryAttack()
 		{
 			animator.SetBool("IsAttacking", false);
 		}
 
-		public void SecondaryAttack(GameObject target)
+		/// <summary>
+		/// Starts the secondary attack execution of the Killer Cell given a target object.
+		/// </summary>
+		/// <param name="target"></param>
+		public void UseSecondaryAttack(GameObject target)
 		{
-			if (CannotUseSpecialAttack) return;
-			Debug.Log("Killer cell executes secondary attack! On Target: " + target);
-
+			if (!CanUseSecondaryAttack) return;
 			float energyCost = secondaryAbilityCaster.CastAbility(target);
 			ApplyEnergyAmount(-energyCost);
 		}
 
 		protected override void OnCellDeath()
 		{
-			base.OnCellDeath();
-			isDying = false;
-			ApplyHealthAmount(cellType.MaxHealth);
-			ApplyEnergyAmount(cellType.MaxEnergy);
-		}
+			isDying = true;
 
+			if (onDeathEvent != null)
+			{
+				onDeathEvent(this);
+			}
+		}
 
 	}
 }

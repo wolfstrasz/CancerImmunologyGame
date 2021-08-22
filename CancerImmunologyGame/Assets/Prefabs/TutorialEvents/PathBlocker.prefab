@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6672266053824033147}
   - component: {fileID: 6672266053824033148}
   - component: {fileID: 6672266053824033149}
-  - component: {fileID: 6672266053824033150}
   m_Layer: 31
-  m_Name: LymphTutorialPathBlocker
+  m_Name: PathBlocker
   m_TagString: BlocksCancerSpawns
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,15 +313,3 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &6672266053824033150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6672266053824033120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b7aaa3cb4a1af48905c63647b01337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

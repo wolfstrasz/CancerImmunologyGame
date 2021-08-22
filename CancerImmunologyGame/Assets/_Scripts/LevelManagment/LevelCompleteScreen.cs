@@ -11,10 +11,11 @@ namespace ImmunotherapyGame.LevelManagement
     public class LevelCompleteScreen : Singleton<LevelCompleteScreen>
     {
         [SerializeField] private InterfaceControlPanel controlPanel = null;
+        [SerializeField] private InterfaceControlPanel endSceenPanel = null;
         [SerializeField] private Transform levelTasksComepletedLayout = null;
         [SerializeField] private GameObject levelTaskCompletedPrefab = null;
         [SerializeField] private GameObject nextLevelButton = null;
-
+        [SerializeField] private GameObject levelTaskDescription = null;
         [SerializeField] [ReadOnly] private List<GameObject> levelTaskObjects = new List<GameObject>();
         [SerializeField] [ReadOnly] LevelDataObject currentLevelData = null;
 
@@ -22,6 +23,18 @@ namespace ImmunotherapyGame.LevelManagement
         {
             nextLevelButton.SetActive(nextLevelAvailable);
             controlPanel.Open();
+
+            if (!nextLevelAvailable)
+			{
+                controlPanel.onOpenInterface += OpenEndScreen;
+            }
+
+        }
+
+        private void OpenEndScreen()
+		{
+            endSceenPanel.Open();
+            controlPanel.onOpenInterface -= OpenEndScreen;
         }
 
         public int PopulateAndGetEarnedPoints(LevelDataObject levelDataObject)
@@ -30,6 +43,9 @@ namespace ImmunotherapyGame.LevelManagement
             currentLevelData = levelDataObject;
 
             var levelTaskCompletions = currentLevelData.LevelTaskCompletions;
+
+            levelTaskDescription.SetActive(levelTaskCompletions.Count > 0);
+
             int earnedPoints = 0;
             for (int i = 0; i < levelTaskCompletions.Count; ++i)
             {
@@ -57,14 +73,17 @@ namespace ImmunotherapyGame.LevelManagement
 
         public void OpenMainMenu()
 		{
-            Debug.Log("OPEN MAIN MENU CALLED");
             LevelManager.Instance.LoadMainMenu();
 		}
 
         public void NextLevel()
 		{
-            Debug.Log("NEXT LEVEL CALLED BY BUTTON");
             LevelManager.Instance.LoadNextLevel();
+		}
+
+        public void OpenWebpage()
+		{
+            Application.OpenURL("https://www.cancerimmunology.co.uk/");
 		}
         
     }

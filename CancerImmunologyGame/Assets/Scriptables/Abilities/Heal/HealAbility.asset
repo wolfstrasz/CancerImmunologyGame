@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealAbility
   m_EditorClassIdentifier: 
   name: Helper T Cell Heal
-  audioClip: {fileID: 8300000, guid: 0a4332531e50dda4ab9eab56fe56ba35, type: 3}
+  audioClip: {fileID: 8300000, guid: 70e02441ad3cd8f488092b6a4933e446, type: 3}
   effectType: {fileID: 11400000, guid: fb07d11d2db4e8841857e1b0a82329b4, type: 2}
   range: {fileID: 11400000, guid: 1f77bfc05ee95fc4d9e7cf25b91976f5, type: 2}
   energyCost: {fileID: 0}

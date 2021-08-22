@@ -14,11 +14,6 @@ namespace ImmunotherapyGame.Tutorials
     {
         [SerializeField] private SystemItemToUnlock itemType;
 
-		[Header ("To use with RESEARCH type")]
-		[SerializeField] private List<StatUpgrade> researchToUnlock = new List<StatUpgrade>();
-		//[Header("To use with CELLPEDIA type")]
-		//[SerializeField] private List<StatUpgrade> statUpgradesToUnlock = new List<StatUpgrade>();
-
 		protected override void OnStartEvent()
 		{
 			if (itemType == SystemItemToUnlock.LOGS)
@@ -31,7 +26,7 @@ namespace ImmunotherapyGame.Tutorials
 			} 
 			else if (itemType == SystemItemToUnlock.RESEARCH)
 			{
-				//ImmunotherapyResearch.Instance.UnlockFeature();
+				ImmunotherapyResearch.Instance.UnlockFeature();
 			}
 		}
 

@@ -10,16 +10,12 @@ namespace ImmunotherapyGame.AI
 	public class AIGraphObstacle : MonoBehaviour
 	{
 		private Vector3 prevPosition = Vector3.zero;
-
 		private Collider2D coll;
 
 		// Graph Updating
-		[SerializeField]
-		private float unitsError = 0.5f;
-		[SerializeField]
-		private float checkTime = 0.2f;
-		[SerializeField]
-		private float lastCheckTime = -10f;
+		[SerializeField] private float unitsError = 0.5f;
+		[SerializeField] private float checkTime = 0.2f;
+		[SerializeField] private float lastCheckTime = -10f;
 
 		Bounds prevBounds;
 
@@ -72,7 +68,10 @@ namespace ImmunotherapyGame.AI
 			}
 		}
 
-
+		internal void SetActive(bool active)
+		{
+			gameObject.SetActive(active);
+		}
 
 		/// <summary>
 		/// Update the graphs around this object.

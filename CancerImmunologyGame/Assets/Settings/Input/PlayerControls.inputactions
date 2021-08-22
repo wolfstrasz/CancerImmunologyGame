@@ -52,14 +52,6 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "DisplayAim",
-                    "type": "Button",
-                    "id": "a43c1145-ccf7-4656-a152-004c4dbc428a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -236,28 +228,6 @@
                     "processors": "",
                     "groups": "Keys+Mouse",
                     "action": "ActivateImmunotherapy",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7bb75252-bb46-4115-9ade-2e3db41eb360",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keys+Mouse",
-                    "action": "DisplayAim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6f24e1cd-9752-49b2-b8fa-d3bef28df0fa",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "DisplayAim",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

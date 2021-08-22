@@ -14,10 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneName: Level 1
   levelID: 1
-  isCompleted: 0
+  isCompleted: 1
   isLocked: 0
   LevelTaskCompletions:
-  - levelTask: {fileID: 11400000, guid: 21d73ae945422f747a30295cf44317b8, type: 2}
+  - levelTask: {fileID: 11400000, guid: 8dc2741b5b6717a4fbf7c88e26cd567f, type: 2}
     isCompleted: 0
-  - levelTask: {fileID: 11400000, guid: 39447891c8586d240a64efa2a143de5d, type: 2}
+  - levelTask: {fileID: 11400000, guid: 12705c4308e444342ab864522be051a5, type: 2}
     isCompleted: 0
+  - levelTask: {fileID: 11400000, guid: 7df008ee77a69ac49961dda72615aef9, type: 2}
+    isCompleted: 0
+  - levelTask: {fileID: 11400000, guid: 7df008ee77a69ac49961dda72615aef9, type: 2}
+    isCompleted: 0
+  - levelTask: {fileID: 11400000, guid: 1bbadbaf33a51ad4d94d7544d922d47a, type: 2}
+    isCompleted: 0
+  maxPoints: 3

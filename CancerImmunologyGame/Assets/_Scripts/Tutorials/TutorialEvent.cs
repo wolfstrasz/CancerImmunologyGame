@@ -4,11 +4,7 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public abstract class TutorialEvent : MonoBehaviour
 	{
-		[SerializeField]
-		internal int order = 0;
-
-		[SerializeField]
-		protected bool shouldPauseGameplay;
+		[SerializeField] protected bool shouldPauseGameplay;
 
 		public void StartEvent()
 		{

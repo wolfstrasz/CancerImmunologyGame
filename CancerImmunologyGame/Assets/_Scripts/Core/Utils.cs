@@ -104,6 +104,50 @@ namespace ImmunotherapyGame.Core
 			//transformToRotate.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
 		}
 
+		public static GameObject GetClosestObject (List<GameObject> objectsToCheck, GameObject mainObject)
+		{
+			Vector3 mainObjectPosition = mainObject.transform.position;
+			float minDist = 100000f;
+			GameObject closestObject = null;
+			for (int i = 0; i < objectsToCheck.Count; ++i)
+			{
+				GameObject target = objectsToCheck[i];
+
+				float distanceSqrt = (target.transform.position - mainObjectPosition).sqrMagnitude;
+				if (distanceSqrt < minDist)
+				{
+					minDist = distanceSqrt;
+					closestObject = target;
+				}
+			}
+
+			return closestObject;
+		}
+
+		public static void GetClosestObject<Type>(List<Type> objectsToCheck, Type mainObject, ref Type objectToReturn) where Type : MonoBehaviour
+		{
+			Vector3 mainObjectPosition = mainObject.transform.position;
+			float minDist = 100000f;
+			Type closestObject = null;
+			for (int i = 0; i < objectsToCheck.Count; ++i)
+			{
+				Type target = objectsToCheck[i];
+
+				if (!target.gameObject.activeInHierarchy)
+				{
+					continue;
+				}
+
+				float distanceSqrt = (target.transform.position - mainObjectPosition).sqrMagnitude;
+				if (distanceSqrt < minDist)
+				{
+					minDist = distanceSqrt;
+					closestObject = target;
+				}
+			}
+
+			objectToReturn = closestObject;
+		}
 
 		public static GameObject GetRandomGameObjectInRange(List<GameObject> possibleObjects, float range, GameObject fromObject)
 		{
@@ -113,6 +157,11 @@ namespace ImmunotherapyGame.Core
 			for (int i = 0; i < possibleObjects.Count; ++i)
 			{
 				GameObject target = possibleObjects[i];
+
+				if (!target.gameObject.activeInHierarchy)
+				{
+					continue;
+				}
 
 				float distanceSqrt = (target.transform.position - fromObject.transform.position).sqrMagnitude;
 				if (distanceSqrt < 1.0f || distanceSqrt < rangeSqrt)

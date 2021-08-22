@@ -11,10 +11,10 @@ namespace ImmunotherapyGame.Abilities
 		[Header("Bump Attributes")]
 		[SerializeField] float bumpPower = 1f;
         [SerializeField] protected Vector3 onBumpScaleIncrease = Vector3.one;
-		[SerializeField] [ReadOnly] private List<Cell> alreadyHitCells = new List<Cell>();
-		[SerializeField] [ReadOnly] Vector3 ownerOriginalScale;
-		[SerializeField] [ReadOnly] Vector3 auraOriginalScale;
 		[SerializeField] [ReadOnly] bool isBumpedUp = false;
+		[SerializeField] [ReadOnly] Vector3 auraOriginalScale;
+		[SerializeField] [ReadOnly] Vector3 ownerOriginalScale;
+		[SerializeField] [ReadOnly] private List<Cell> alreadyHitCells = new List<Cell>();
 
 		internal override void OnFixedUpdate()
 		{

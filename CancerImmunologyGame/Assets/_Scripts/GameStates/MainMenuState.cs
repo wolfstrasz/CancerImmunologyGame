@@ -22,7 +22,7 @@ namespace ImmunotherapyGame
 			{
 				Debug.Log("Entering: MainMenu State");
 
-				BackgroundMusic.Instance.StopMusic();
+				BackgroundMusic.Instance.EnableBackgroundMusic();
 			}
 
 			internal override void OnStateExit()

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RegulatorySpecialCooldown
   m_EditorClassIdentifier: 
   attributeName: Regulatory Special Attack Cooldown
-  initialValue: 2
-  currentValue: 2
+  initialValue: 8
+  currentValue: 8

@@ -15,6 +15,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
         [SerializeField] private Image generalThumbnail;
         [SerializeField] private Image attributeThumbnail;
         [SerializeField] private TMP_Text upgradeValueText;
+        [SerializeField] private TMP_Text currentValueText;
 
         internal void UpdateDisplay()
 		{
@@ -32,12 +33,17 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
             generalThumbnail.sprite = upgrade.generalThumbnailSprite;
             attributeThumbnail.sprite = upgrade.statThumbnailSprite;
 
+            var currentValue = upgrade.CurrentValue;
+            var attributeName = upgrade.statAttribute.attributeName;
+
+            currentValueText.text = "Current: " + currentValue.ToString() + " " + attributeName;
+
             if (upgrade.HasAvailableUpgrade)
             {
                 float valueIncrease = upgrade.NextUpgradeValueChange;
                 string sign = upgrade.NextUpgradeValueChange > 0 ? "+" : "-";
-                string text = "Next Upgrade: " + Mathf.Abs(valueIncrease).ToString()
-                            +" (" + sign + Mathf.Abs(valueIncrease + upgrade.CurrentValue).ToString()
+                string text = "Next Upgrade: " + (valueIncrease + upgrade.CurrentValue).ToString()
+                            + " (" + sign + Mathf.Abs(valueIncrease).ToString()
                             + ") " +  upgrade.statAttribute.attributeName;
                 upgradeValueText.text = text;
 			} 

@@ -285,10 +285,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 9164334349910430275}
+  image: {fileID: 5029264454749272241}
   slider: {fileID: 3894517870125783524}
   autoHide: 1
   autoHideScale: 1
-  image: {fileID: 5029264454749272241}
 --- !u!1 &5759487605060555295
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +347,8 @@ AudioSource:
   m_GameObject: {fileID: 5759487605060555295}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6176009157687532862, guid: 16d9b1cf529e68f4f96d477df83259a6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -359,7 +360,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 5
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -394,7 +395,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -639,6 +640,7 @@ GameObject:
   - component: {fileID: 6204581631179808506}
   - component: {fileID: 9164334349910430275}
   - component: {fileID: 12692528351063033}
+  - component: {fileID: 3001657576721217312}
   m_Layer: 6
   m_Name: CafCell
   m_TagString: BlocksCancerSpawns
@@ -724,7 +726,6 @@ MonoBehaviour:
   updateSpeedValue: 0
   matrixSpawnCaster: {fileID: 33263189537316517}
   cancerOwner: {fileID: 0}
-  cancerCellNearby: []
 --- !u!50 &12692528351063033
 Rigidbody2D:
   serializedVersion: 4
@@ -746,3 +747,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &3001657576721217312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9164334349910430274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e749e76f561beea41b95179215f8efb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskObject: {fileID: 11400000, guid: b5f2188f6396a5846b34207deaebc5e8, type: 2}
+  isApplicationQuitting: 0

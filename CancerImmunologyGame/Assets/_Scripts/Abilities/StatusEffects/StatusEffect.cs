@@ -83,7 +83,7 @@ namespace ImmunotherapyGame.Abilities
 			} 
 			else
 			{
-				if (ability.CanHitCellType(ownerCell.cellType))
+				if (ability.CanHitCellType(ownerCell.CellType))
 				{
 					ApplyInitialEffect();
 				}

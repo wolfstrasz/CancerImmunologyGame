@@ -12,18 +12,13 @@ namespace ImmunotherapyGame.UI
     public class PauseMenu : Singleton<PauseMenu>
     {
 		[Header("Menu")]
-		[SerializeField]
-		private InterfaceControlPanel pauseMenuPanel = null;
-        [SerializeField]
-        private TopOverlayButtonData pauseMenuBtnData = null;
+		[SerializeField] private InterfaceControlPanel pauseMenuPanel = null;
+        [SerializeField] private TopOverlayButtonData pauseMenuBtnData = null;
 
 		[Header ("Survey")]
-		[SerializeField]
-		private InterfaceControlPanel surveyMenuPanel = null;
-		[SerializeField]
-		private TopOverlayButtonData surveyMenuBtnData = null;
-		[SerializeField]
-		private string surveyURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u";
+		[SerializeField] private InterfaceControlPanel surveyMenuPanel = null;
+		[SerializeField] private TopOverlayButtonData surveyMenuBtnData = null;
+		[SerializeField] private string surveyURL = "https://forms.office.com/Pages/ResponsePage.aspx?id=MEu3vWiVVki9vwZ1l3j8vDgrGvdUcKhJmLa6FrN3JvhUNVA2OUZJUkQ2VFMzUlQ1WldWUUJLSkVJUC4u";
 
 		// Input handling
 		private PlayerControls playerControls;

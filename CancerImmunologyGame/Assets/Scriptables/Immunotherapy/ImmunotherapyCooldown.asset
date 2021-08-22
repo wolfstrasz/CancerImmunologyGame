@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ImmunotherapyCooldown
   m_EditorClassIdentifier: 
   attributeName: Immunotherapy Cooldown
-  initialValue: 10
-  currentValue: 10
+  initialValue: 40
+  currentValue: 40

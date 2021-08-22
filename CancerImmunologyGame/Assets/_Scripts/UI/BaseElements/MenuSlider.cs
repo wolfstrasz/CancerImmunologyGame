@@ -10,9 +10,8 @@ namespace ImmunotherapyGame.UI
     [RequireComponent(typeof(Slider))]
     public class MenuSlider : UIMenuNode
     {
-        [SerializeField]
-        private float sliderSoundTimeout = 0.1f;
-        private float timeout = 0f;
+        [SerializeField] private float sliderSoundTimeout = 0.1f;
+        [SerializeField][ReadOnly] private float timeout = 0f;
 
         void Update()
 		{

@@ -6,14 +6,10 @@ namespace ImmunotherapyGame.Tutorials
 {
 	public class TutorialStage : MonoBehaviour
 	{
-		[SerializeField]
-		private List<TutorialEvent> events = null;
-		[SerializeField]
-		private TutorialEvent currentEvent = null;
-		[SerializeField]
-		private int currentEventIndex = 0;
-		[SerializeField]
-		private bool isFinished = false;
+		[SerializeField] private List<TutorialEvent> events = null;
+		[SerializeField] private TutorialEvent currentEvent = null;
+		[SerializeField] private int currentEventIndex = 0;
+		[SerializeField] private bool isFinished = false;
 
 		internal bool IsFinished { get => isFinished; }
 

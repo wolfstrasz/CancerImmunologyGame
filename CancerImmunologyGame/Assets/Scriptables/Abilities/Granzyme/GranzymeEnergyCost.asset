@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GranzymeEnergyCost
   m_EditorClassIdentifier: 
   attributeName: Granzyme Ability Energy Cost
-  initialValue: 1
-  currentValue: 1
+  initialValue: 1.5
+  currentValue: 1.5

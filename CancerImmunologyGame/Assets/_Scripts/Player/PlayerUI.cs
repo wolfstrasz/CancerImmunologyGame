@@ -60,12 +60,10 @@ namespace ImmunotherapyGame.Player
 				healthSlider.SetValue(observedCell.CurrentHealth);
 				energySlider.SetValue(observedCell.CurrentEnergy);
 
-				if (observedCell.cellType)
-				{
-					// TODO: Bind to stat attributes changes
-					healthSlider.SetMaxValue(observedCell.cellType.MaxHealth);
-					energySlider.SetMaxValue(observedCell.cellType.MaxEnergy);
-				}
+				// TODO: Bind to stat attributes changes
+				healthSlider.SetMaxValue(observedCell.MaxHealth);
+				energySlider.SetMaxValue(observedCell.MaxEnergy);
+				
 			}
 		}
 

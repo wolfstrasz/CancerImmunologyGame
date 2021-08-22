@@ -60,6 +60,7 @@ MonoBehaviour:
   transitionTime: 3
   timeInTransition: 15
   timeGapSafetyCheck: 10
+  initialised: 0
 --- !u!1 &1452668898681485286
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +101,7 @@ AudioSource:
   m_GameObject: {fileID: 1452668898681485286}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 16d9b1cf529e68f4f96d477df83259a6,
+  OutputAudioMixerGroup: {fileID: 177602615207331055, guid: 16d9b1cf529e68f4f96d477df83259a6,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -228,7 +229,7 @@ AudioSource:
   m_GameObject: {fileID: 1452668899825299584}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 16d9b1cf529e68f4f96d477df83259a6,
+  OutputAudioMixerGroup: {fileID: 177602615207331055, guid: 16d9b1cf529e68f4f96d477df83259a6,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0

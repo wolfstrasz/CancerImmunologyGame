@@ -6,16 +6,11 @@ namespace ImmunotherapyGame.CellpediaSystem
 {
 	public class CellpediaPopup : MonoBehaviour
 	{
-		[SerializeField]
-		private CanvasGroup alphaGroup = null;
-		[SerializeField]
-		private float timeBeforeHiding = 3.0f;
-		[SerializeField]
-		private float timeToHide = 3.0f;
-		[SerializeField]
-		private TMP_Text text = null;
-		[SerializeField]
-		private Image cellImage = null;
+		[SerializeField] private TMP_Text text = null;
+		[SerializeField] private Image cellImage = null;
+		[SerializeField] private CanvasGroup alphaGroup = null;
+		[SerializeField] private float timeToHide = 3.0f;
+		[SerializeField] private float timeBeforeHiding = 3.0f;
 
 		internal void SetInfo(CellpediaCellDescription cellDescription)
 		{

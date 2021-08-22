@@ -6,12 +6,16 @@ namespace ImmunotherapyGame.CellpediaSystem
 {
     public class CellpediaMicroscope : MonoBehaviour
     {
-        [SerializeField]
-        private List<Petridish> petridishes = new List<Petridish>();
-        [SerializeField]
-        private int dishIndex = 0;
+        [SerializeField] [ReadOnly] AudioSource source = null;
+        [SerializeField] private List<Petridish> petridishes = new List<Petridish>();
+        [SerializeField] [ReadOnly] private int dishIndex = 0;
 
-        internal void Initialise()
+		private void Start()
+		{
+            source = GetComponent<AudioSource>();
+		}
+
+		internal void Initialise()
 		{
             petridishes[0].Reset();
             petridishes[1].Reset();
@@ -25,8 +29,6 @@ namespace ImmunotherapyGame.CellpediaSystem
 
         internal void OnOpen(CellpediaCellDescription descriptionToInitialise)
 		{
-            //petridishes[0].Reset();
-            //petridishes[1].Reset();
             petridishes[dishIndex].SetVisual(descriptionToInitialise);
         }
 
@@ -43,7 +45,8 @@ namespace ImmunotherapyGame.CellpediaSystem
 
             petridishes[0].ShiftLeft();
             petridishes[1].ShiftLeft();
-     
+
+            source.Play();
             return true;
         }
     }

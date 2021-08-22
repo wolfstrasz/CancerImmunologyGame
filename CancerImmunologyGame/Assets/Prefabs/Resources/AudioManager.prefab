@@ -142,7 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 1
+  mixer: {fileID: 24100000, guid: 16d9b1cf529e68f4f96d477df83259a6, type: 2}
+  volumeBoost: 0
   uiSource: {fileID: 8789866188287736459}
   uiAudioClipBindings:
-  - clip: {fileID: 8300000, guid: 99348d26b121bdf40bca2ff30b000207, type: 3}
+  - clip: {fileID: 8300000, guid: 9fc72a3887c533c48a0f93586d5e8e3e, type: 3}
     key: 1

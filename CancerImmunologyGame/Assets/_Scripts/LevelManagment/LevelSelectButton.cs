@@ -14,20 +14,17 @@ namespace ImmunotherapyGame.LevelManagement
 {
     [RequireComponent(typeof(Selectable))]
     public class LevelSelectButton : UIMenuNode, ISubmitHandler, IMoveHandler, ICancelHandler
-    {
-        [ReadOnly]
-        private LevelDataObject data = null;
-        [ReadOnly]
-        private int buttonID = 0;
-        
+    {        
+        [Header("Linking")]
+        [SerializeField] TMP_Text levelText = null;
+        [SerializeField] private List<GameObject> levelLockedView = null;
+        [SerializeField] private List<GameObject> levelCompletedView = null;
+        [SerializeField] private TMP_Text pointsCollectedText = null;
 
-        [Header("Attributes")]
-        [SerializeField]
-        TMP_Text levelText = null;
+        [Header("Debug")]
+        [SerializeField] [ReadOnly] private LevelDataObject data = null;
+        [SerializeField] [ReadOnly] private int buttonID = 0;
 
-        [Header("Views")]
-        [SerializeField]
-        private List<GameObject> levelCompletedView = null;
         private bool LevelCompletedView
 		{
             set
@@ -39,8 +36,6 @@ namespace ImmunotherapyGame.LevelManagement
 			}
 		}
 
-        [SerializeField]
-        private List<GameObject> levelLockedView = null;
         private bool LevelLockedView
         {
             set
@@ -65,6 +60,8 @@ namespace ImmunotherapyGame.LevelManagement
             LevelCompletedView = data.isCompleted;
             LevelLockedView = data.isLocked;
             levelText.text = data.levelID.ToString();
+            pointsCollectedText.gameObject.SetActive(data.isCompleted);
+            pointsCollectedText.text = data.GetCollectedPoints().ToString() + " l " + data.MaxPoints.ToString();
         }
 
         private void LoadLevel()

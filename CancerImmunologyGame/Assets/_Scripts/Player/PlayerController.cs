@@ -17,6 +17,9 @@ namespace ImmunotherapyGame.Player
 
 		[Header("Aiming")]
 		[SerializeField] private GameObject crosshairPivot = null;
+		[SerializeField] private GameObject crosshairPrimary = null;
+		[SerializeField] private GameObject crosshairSecondary = null;
+
 		[SerializeField] private Transform crosshair = null;
 		protected Quaternion crosshairRotation = Quaternion.identity;
 
@@ -25,7 +28,9 @@ namespace ImmunotherapyGame.Player
 
 		private bool InitiatePrimaryAttack { get; set; }
 		private bool InitiateSpecialAttack { get; set; }
-		private bool CanAttack => crosshairPivot.activeInHierarchy;
+		private bool CanUsePrimary => crosshairPrimary.activeInHierarchy;
+		private bool CanUseSecondary => crosshairSecondary.activeInHierarchy;
+
 		private Vector2 MoveDirection { get; set; }
 
 
@@ -44,7 +49,14 @@ namespace ImmunotherapyGame.Player
 			transform.rotation = controlledCell.transform.rotation;
 			crosshairPivot.transform.rotation = crosshairRotation;
 
-			if (CanAttack)
+			var rotationZ = crosshairRotation.eulerAngles.z;
+			controlledCell.FlipSpriteLocalTransform = !(rotationZ >= 90f && rotationZ <= 270f);
+
+			// Update CrosshairVisibilities
+			crosshairPrimary.SetActive(controlledCell.PrimaryAbilityCaster.HasTargetsInRange);
+			crosshairSecondary.SetActive(controlledCell.CanUseSecondaryAttack);
+
+			if (CanUsePrimary)
 			{
 				if (InitiatePrimaryAttack)
 				{
@@ -53,9 +65,14 @@ namespace ImmunotherapyGame.Player
 				{
 					controlledCell.StopPrimaryAttack();
 				}
+				
+			}
+
+			if (CanUseSecondary)
+			{
 				if (InitiateSpecialAttack)
 				{
-					controlledCell.SecondaryAttack(crosshair.gameObject);
+					controlledCell.UseSecondaryAttack(crosshair.gameObject);
 					InitiateSpecialAttack = false;
 
 				}
@@ -104,8 +121,7 @@ namespace ImmunotherapyGame.Player
 			// Transport cell and heal TODO: Move to cell doing it.
 			controlledCell.transform.position = closestRespawnLocation;
 			transform.position = closestRespawnLocation;
-			controlledCell.ApplyHealthAmount(controlledCell.cellType.MaxHealth);
-			controlledCell.ApplyEnergyAmount(controlledCell.cellType.MaxEnergy);
+			controlledCell.Respawn();
 
 		}
 

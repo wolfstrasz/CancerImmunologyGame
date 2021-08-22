@@ -18,14 +18,6 @@ namespace ImmunotherapyGame.Abilities
 		[SerializeField] [ReadOnly] private float initialColliderRadius = 0f;
 
 
-		/* ABILITY EFFECT */
-		protected override void OnEnable()
-		{
-			base.OnEnable();
-			lifeSpan = -1000f;
-			coll.radius = initialColliderRadius;
-		}
-
 		internal override void OnFixedUpdate()
 		{
 			if (lifeSpan > 0)
@@ -33,8 +25,7 @@ namespace ImmunotherapyGame.Abilities
 				lifeSpan -= Time.fixedDeltaTime;
 				if (lifeSpan <= 0)
 				{
-					// Reset particle
-					OnLifeEnded();
+					ResetSeeekerParticle();
 				}
 			}
 
@@ -51,31 +42,27 @@ namespace ImmunotherapyGame.Abilities
 				// Set it to stay in one position and just scan for a target (detect radius collider)
 				initialSpeed = speed;
 				speed = 0f;
+
+				// Update new range limits
 				spawnPosition = transform.position;
+				maxRangeToMove = projectileAbility.Range;
 
 				// Apply stationary behaviour data that is active until it detects a targetable cell
-				maxRangeToMove = projectileAbility.Range;
 				lifeSpan = projectileAbility.ProjectileLifetime;
 				coll.radius = maxRangeToMove;
 				coll.enabled = true;
-				Debug.Log(this + " Coll not enabled ");
 
 			}
 			else
 			{
-				Debug.Log(this + " Coll enabled ");
-
-				OnLifeEnded();
+				ResetSeeekerParticle();
 			}
 		}
 
 		protected override void OnCollisionWithTarget(Cell cell)
 		{
-			Debug.Log(this + " Collided with target: " + cell.name);
 			if (coll.radius != initialColliderRadius)
 			{
-				Debug.Log(this + " Collider radius != initialColliderRadius ");
-
 				// Remove lifespan without destroying it
 				lifeSpan = -1000f;
 
@@ -85,16 +72,11 @@ namespace ImmunotherapyGame.Abilities
 				coll.radius = initialColliderRadius;
 				coll.enabled = true;
 				seekingVisual.SetActive(true);
-				// TODO: if second stage animation is added switch to it.
 			}
 			else if (coll.radius == initialColliderRadius)
 			{
-				Debug.Log(this + " Collider radius == initialCollider radius -> must apply effect ");
-
 				projectileAbility.ApplyAbilityEffect(cell);
-				speed = initialSpeed;
-				// Reset particle
-				OnLifeEnded();
+				ResetSeeekerParticle();
 			}
 		}
 
@@ -102,13 +84,19 @@ namespace ImmunotherapyGame.Abilities
 		public override void Shoot(Vector3 _direction, ProjectileAbility _projectileAbility)
 		{
 			base.Shoot(_direction, _projectileAbility);
-			seekingVisual.SetActive(false);
-			initialColliderRadius = coll.radius;
 			coll.enabled = false;
-
+			initialColliderRadius = coll.radius;
+			lifeSpan = -1000f;
 			Debug.Log(this + " SHOT dir: " + direction);
 		}
 
-
+		private void ResetSeeekerParticle()
+		{
+			// Reset particle
+			coll.radius = initialColliderRadius;
+			speed = initialSpeed;
+			seekingVisual.SetActive(false);
+			OnLifeEnded();
+		}
 	}
 }

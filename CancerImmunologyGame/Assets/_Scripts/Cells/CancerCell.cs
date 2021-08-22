@@ -10,25 +10,16 @@ namespace ImmunotherapyGame.Cancers
 	public class CancerCell : Cell
 	{
 		[Header("Links")]
-		[SerializeField]
-		public CircleCollider2D divisionBodyBlocker = null;
-		[SerializeField]
-		private RangedAbilityCaster hypoxicCaster = null;
-		[SerializeField]
-		internal Cancer cancerOwner = null;
+		[SerializeField] public CircleCollider2D divisionBodyBlocker = null;
+		[SerializeField] private RangedAbilityCaster hypoxicCaster = null;
+		[SerializeField] internal Cancer cancerOwner = null;
 
 		[Header("Debug (Read Only)")]
-		[SerializeField]
-		private float rotationAngle = 0.0f;
-		[SerializeField]
-		private bool isInDivision = false;
+		[SerializeField] [ReadOnly] private float rotationAngle = 0.0f;
+		[SerializeField] [ReadOnly] private bool isInDivision = false;
+		[SerializeField] [ReadOnly] public MatrixCell matrixCell = null;
 
 		public override bool isImmune => isDying || isInDivision || matrixCell != null;
-
-		// Matrix handling
-		// -------------------------------------------------
-		[ReadOnly]
-		public MatrixCell matrixCell = null;
 
 		private void Awake()
 		{
@@ -38,8 +29,7 @@ namespace ImmunotherapyGame.Cancers
 			}
 		}
 
-		// DIVISION HANDLERS
-		// -----------------------------------------------------------------
+		/* DIVISION HANDLERS */
 		internal void StartPrepareDivision(float _rotationAngle)
 		{
 			isInDivision = true;

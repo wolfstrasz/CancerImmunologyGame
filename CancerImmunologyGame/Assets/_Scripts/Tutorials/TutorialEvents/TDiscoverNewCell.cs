@@ -25,7 +25,11 @@ namespace ImmunotherapyGame.Tutorials
 			{
 				cellToDiscover.Note3IsUnlocked = true;
 			}
-			Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
+
+			if (!cellToDiscover.IsUnlocked)
+			{
+				Cellpedia.Instance.UnlockCellDescription(cellToDiscover);
+			}
 		}
 	}
 }

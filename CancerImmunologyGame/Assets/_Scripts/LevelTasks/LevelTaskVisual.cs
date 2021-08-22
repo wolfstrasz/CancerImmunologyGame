@@ -7,40 +7,38 @@ namespace ImmunotherapyGame.LevelTasks
 {
     public class LevelTaskVisual : MonoBehaviour
     {
-        [SerializeField] internal TMP_Text taskTitle = null;
-        [SerializeField] private TMP_Text taskCounting = null;
-        [SerializeField] private TMP_Text taskAwardPoints = null;
-        [SerializeField] private LevelTaskTextResizer resizer = null;
-        [SerializeField] private GameObject pointsVisual = null;
+        [SerializeField][ReadOnly] private LevelTask task = null;
+        [SerializeField] internal TMP_Text taskTitleText = null;
+        [SerializeField] private TMP_Text taskCompletionText = null;
+        [SerializeField] private GameObject taskAwardPointsVisual = null;
+        [SerializeField] private TMP_Text taskAwardPointsText = null;
+        [SerializeField] private LevelTaskTextResizer textResizer = null;
         [SerializeField] private Animator anim = null;
-        [SerializeField] private new AudioSource audio = null;
-
-        private LevelTask task = null;
 
         internal void SetInfo(LevelTask task)
         {
             this.task = task;
-            taskTitle.text = task.title;
-            taskCounting.text = "0/" + task.count.ToString();
-            taskAwardPoints.text = task.awardPoints.ToString();
-            pointsVisual.SetActive(task.awardPoints > 0);
-            UpdateSize();
+            taskTitleText.text = task.title;
+            taskCompletionText.text = "0/" + task.count.ToString();
+            taskAwardPointsText.text = task.awardPoints.ToString();
+            taskAwardPointsVisual.SetActive(task.awardPoints > 0);
+            UpdateResizerSize();
         }
 
-        internal void UpdateInfo()
+        internal void UpdateCompletionTextInfo()
 		{
-            taskCounting.text = task.currentCount.ToString() + "/" + task.count.ToString();
+            taskCompletionText.text = task.currentCount.ToString() + "/" + task.count.ToString();
 		}
 
-        internal void UpdateSize()
+        internal void UpdateResizerSize()
 		{
-            resizer.Text = LevelTaskSystem.Instance.CurrentLongestTaskText;
-            resizer.Refresh();
+            // Point the personal resiser to look at the current longest TMP_text in the system
+            textResizer.Text = LevelTaskSystem.Instance.CurrentLongestTaskText;
+            textResizer.Refresh();
         }
 
         internal void OnTaskComplete()
 		{
-            audio.Play();
             anim.SetTrigger("TaskComplete");
 		}
 

@@ -7,16 +7,16 @@ namespace ImmunotherapyGame.AI
 {
 	public class AIHealthConditional : BTActionNode
 	{
-		IAICellController controller;
+		AIControlledCellData controlledCellData;
 		ValueConditionalOperator op;
-		float value;
+		float percentageValue;
 
-		public AIHealthConditional(string name, BehaviourTree owner, IAICellController controller, ValueConditionalOperator op, float value) : base(name, owner, "HealthConditional")
+		public AIHealthConditional(string name, BehaviourTree owner, AIControlledCellData controlledCellData, ValueConditionalOperator op, float percentageValue) : base(name, owner, "AIHealthConditional")
 		{
 			this.name = name;
 			this.owner = owner;
-			this.controller = controller;
-			this.value = value;
+			this.controlledCellData = controlledCellData;
+			this.percentageValue = percentageValue;
 			this.op = op;
 
 		}
@@ -24,23 +24,23 @@ namespace ImmunotherapyGame.AI
 		protected override NodeStates OnEvaluateAction()
 		{
 			bool result = false;
-
+			float healthPercentage = controlledCellData.controlledCell.CurrentHealthPercentage;
 			switch (op)
 			{
 				case ValueConditionalOperator.LESS_THAN:
-					result = (controller.ControlledCell.Health < value);
+					result = (healthPercentage < percentageValue);
 					break;
 				case ValueConditionalOperator.LESS_THAN_EQUAL:
-					result = (controller.ControlledCell.Health <= value);
+					result = (healthPercentage <= percentageValue);
 					break;
 				case ValueConditionalOperator.EQUAL:
-					result = (controller.ControlledCell.Health == value);
+					result = (healthPercentage == percentageValue);
 					break;
 				case ValueConditionalOperator.MORE_THAN:
-					result = (controller.ControlledCell.Health > value);
+					result = (healthPercentage > percentageValue);
 					break;
 				case ValueConditionalOperator.MORE_THAN_EQUAL:
-					result = (controller.ControlledCell.Health >= value);
+					result = (healthPercentage >= percentageValue);
 					break;
 				default: result = false; break;
 

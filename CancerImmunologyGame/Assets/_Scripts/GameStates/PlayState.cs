@@ -100,9 +100,9 @@ namespace ImmunotherapyGame
 					GlobalLevelData.Cancers[i].OnUpdate();
 				}
 
-				foreach (AIController controller in GlobalLevelData.AIKillerCells)
+				for (int i = 0; i < GlobalLevelData.AIControllers.Count; ++i)
 				{
-					controller.OnUpdate();
+					GlobalLevelData.AIControllers[i].OnUpdate();
 				}
 
 				for (int i = 0; i < GlobalLevelData.AbilityCasters.Count; ++i)

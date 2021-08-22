@@ -13,6 +13,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
     {
 		public int points;
         public List<StatUpgrade> statUpgrades;
+		public bool isSystemUnlocked;
 
 		internal void Reset()
 		{
@@ -21,6 +22,7 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			{
 				statUpgrades[i].Reset();
 			}
+			isSystemUnlocked = false;
 		}
     }
 
@@ -30,14 +32,14 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 		public int points = 0;
 		public List<bool> isUnlocked = new List<bool>();
 		public List<int> nextUpgradeIndex = new List<int>();
-
+		public bool isSystemUnlocked = false;
 		public SerializableImmunotherapyResearchData(ImmunotherapyResearchData data)
 		{
 
 			points = data.points;
 			isUnlocked = new List<bool>();
 			nextUpgradeIndex = new List<int>();
-
+			isSystemUnlocked = data.isSystemUnlocked;
 			for (int i = 0; i < data.statUpgrades.Count; ++i)
 			{
 				isUnlocked.Add(data.statUpgrades[i].unlocked);
@@ -50,17 +52,18 @@ namespace ImmunotherapyGame.ImmunotherapyResearchSystem
 			points = 0;
 			isUnlocked = new List<bool>();
 			nextUpgradeIndex = new List<int>();
-
-	}
-
-	public void CopyTo(ImmunotherapyResearchData data)
-	{
-		data.points = points;
-		for (int i = 0; i < isUnlocked.Count; ++i)
-		{
-			data.statUpgrades[i].unlocked = isUnlocked[i];
-			data.statUpgrades[i].nextUpgradeIndex = nextUpgradeIndex[i];
+			isSystemUnlocked = false;
 		}
-	}
+
+		public void CopyTo(ImmunotherapyResearchData data)
+		{
+			data.isSystemUnlocked = isSystemUnlocked;
+			data.points = points;
+			for (int i = 0; i < isUnlocked.Count; ++i)
+			{
+				data.statUpgrades[i].unlocked = isUnlocked[i];
+				data.statUpgrades[i].nextUpgradeIndex = nextUpgradeIndex[i];
+			}
+		}
 	}
 }

@@ -293,6 +293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollDirection: 0
   childDepthCheck: 1
+  timeToStopHorizontalScroll: 0.1
+  timeToStopVerticalScroll: 0.01
 --- !u!1 &5779456381203215271
 GameObject:
   m_ObjectHideFlags: 0

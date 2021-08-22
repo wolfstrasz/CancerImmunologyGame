@@ -11,14 +11,6 @@ namespace ImmunotherapyGame.Abilities
         [SerializeField] private float secondStageSpeed = 1f;
 		[SerializeField] [ReadOnly] private Cell hitCell = null;
 
-		/* ABILITY EFFECT */
-		protected override void OnEnable()
-		{
-			base.OnEnable();
-			hitCell = null;
-			speed = initialSpeed;
-		}
-
 		/* PROJECTILE */
 		protected override void OnCollisionWithTarget(Cell cell)
 		{
@@ -51,6 +43,12 @@ namespace ImmunotherapyGame.Abilities
 			OnLifeEnded();
 		}
 
+		public override void Shoot(Vector3 _direction, ProjectileAbility _projectileAbility)
+		{
+			base.Shoot(_direction, _projectileAbility);
+			hitCell = null;
+			speed = initialSpeed;
+		}
 
 	}
 }

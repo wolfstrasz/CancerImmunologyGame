@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5717997335944468769}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 2002447667946481302}
   - {fileID: 807374390390012691}
@@ -134,15 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5669378036c1f74c8f6e96f2d29c6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: {fileID: 0}
   animator: {fileID: 7670979606044821197}
   render: {fileID: 8824542250481688752}
   coll: {fileID: 5897526566097394091}
-  isEffectOverTime: 0
   ownerCell: {fileID: 0}
   owner: {fileID: 0}
   auraEffectAbility: {fileID: 0}
   lifetime: 0
   auraRange: 0
+  isEffectOverTime: 0
   affectedCells: []
 --- !u!1 &7577749706620721823
 GameObject:

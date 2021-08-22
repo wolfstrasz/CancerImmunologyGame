@@ -23,6 +23,7 @@ namespace ImmunotherapyGame.CellpediaSystem
 			{
 				cellpediaItems[i].Reset();
 			}
+			isSystemUnlocked = false;
 		}
 	}
 

@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 6148371604971545620}
   - component: {fileID: 6148371604971545621}
   - component: {fileID: 6148371604971545609}
+  - component: {fileID: 5056642804843309951}
   m_Layer: 5
   m_Name: LevelTaskSystem
   m_TagString: Untagged
@@ -273,7 +274,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -15
   m_TargetDisplay: 0
 --- !u!114 &6148371604971545620
 MonoBehaviour:
@@ -328,22 +329,122 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistent: 1
-  allLevelTaskObjects:
+  allLevelTaskTypes:
   - {fileID: 11400000, guid: c1c084f2f74013e4ca30394d4868b480, type: 2}
   - {fileID: 11400000, guid: ca09bbb437d218f4f8f9ae9516a1adf7, type: 2}
   - {fileID: 11400000, guid: d6b4197e9a8f7b241b064afe5752249a, type: 2}
   - {fileID: 11400000, guid: 5e0a4b9d762ea704c85ef888baa75b33, type: 2}
   - {fileID: 11400000, guid: 7c367075b5dd30947b85aee6689102c3, type: 2}
+  - {fileID: 11400000, guid: b5f2188f6396a5846b34207deaebc5e8, type: 2}
+  - {fileID: 11400000, guid: e3d592c255b41414eb3f915e2adcfb70, type: 2}
   view: {fileID: 6148371604872572627}
   levelTaskUILayout: {fileID: 6148371605847153446}
   levelTaskUIPrefab: {fileID: 8471430405235140857, guid: fa2def6c157ef9f4ab14417d6b2bdf27,
     type: 3}
   layoutsRefresh: {fileID: 1929771200913071968}
+  source: {fileID: 5056642804843309951}
   allTasks: []
   allActiveTasks: []
   allTaskVisuals: []
-  currentLongestTaskText: {fileID: 0}
-  currentLongestLength: -1
+  currentLongestTaskTMPText: {fileID: 0}
+  currentLongestTaskTextLength: -1
+--- !u!82 &5056642804843309951
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6148371604971545622}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -6176009157687532862, guid: 16d9b1cf529e68f4f96d477df83259a6,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 6c28002dd9b25ad468c8df4daf38cb64, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6148371605391913508
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 20, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &6148371605391913503

@@ -21,8 +21,9 @@ MonoBehaviour:
     type: 3}
   generalThumbnailSprite: {fileID: 537914882761767684, guid: 76f55ab67d3656b45a07a6853b0f2fcf,
     type: 3}
-  initialUnlockValue: 1
-  unlocked: 1
+  initialUnlockValue: 0
+  initialCurrentValue: 0
+  unlocked: 0
   statAttribute: {fileID: 11400000, guid: e756f5ef3b6b0954bb3acf7611c8547c, type: 2}
   upgrades:
   - cost: 1

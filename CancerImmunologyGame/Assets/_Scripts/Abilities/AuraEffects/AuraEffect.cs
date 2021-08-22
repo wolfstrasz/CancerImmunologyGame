@@ -9,20 +9,18 @@ namespace ImmunotherapyGame.Abilities
     [RequireComponent(typeof(CircleCollider2D))]
     public class AuraEffect : AbilityEffect
 	{
-
         [Header("Linking")]
         [SerializeField] protected Animator animator = null;
         [SerializeField] protected SpriteRenderer render = null;
         [SerializeField] protected CircleCollider2D coll = null;
 
-
 		[Header("Attributes")]
-		[SerializeField] [ReadOnly] protected bool isEffectOverTime;
 		[SerializeField] [ReadOnly] protected Cell ownerCell = null;
 		[SerializeField] [ReadOnly] protected GameObject owner = null;
 		[SerializeField] [ReadOnly] protected AuraEffectAbility auraEffectAbility = null;
 		[SerializeField] [ReadOnly] protected float lifetime = 0f;
 		[SerializeField] [ReadOnly] protected float auraRange = 0f;
+		[SerializeField] [ReadOnly] protected bool isEffectOverTime;
 
 		[Header("Targets")]
 		[SerializeField] [ReadOnly] protected List<Cell> affectedCells = new List<Cell>();
@@ -30,7 +28,6 @@ namespace ImmunotherapyGame.Abilities
 		protected virtual void Awake() { coll.isTrigger = true; }
 
 		/* ABILITY EFFECT */
-
 		internal override void OnFixedUpdate()
 		{
 			if (owner == null || !owner.activeInHierarchy)
@@ -60,7 +57,7 @@ namespace ImmunotherapyGame.Abilities
 		protected virtual void OnTriggerEnter2D(Collider2D coll)
 		{
 			Cell cell = coll.GetComponent<Cell>();
-			if (cell && auraEffectAbility.CanHitCellType(cell.cellType) && cell != ownerCell)
+			if (cell && auraEffectAbility.CanHitCellType(cell.CellType) && cell != ownerCell)
 			{
 
 				if (!affectedCells.Contains(cell)){
@@ -78,7 +75,7 @@ namespace ImmunotherapyGame.Abilities
 		{
 
 			Cell cell = coll.GetComponent<Cell>();
-			if (cell && auraEffectAbility.CanHitCellType(cell.cellType) && cell != ownerCell)
+			if (cell && auraEffectAbility.CanHitCellType(cell.CellType) && cell != ownerCell)
 			{
 				if (isEffectOverTime)
 				{

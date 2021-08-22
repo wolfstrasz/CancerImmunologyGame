@@ -12,8 +12,7 @@ namespace ImmunotherapyGame.UI
 {
 	public class InterfaceManager : Singleton<InterfaceManager>
 	{
-		[SerializeField]
-		private int LevelRequirementForFullPause = 0;
+		[SerializeField] private int LevelRequirementForFullPause = 0;
 
 		private List<InterfaceControlPanel> allOpenedInterfacePanels = new List<InterfaceControlPanel>();
 		private InterfaceControlPanel currentInterfaceOpened = null;

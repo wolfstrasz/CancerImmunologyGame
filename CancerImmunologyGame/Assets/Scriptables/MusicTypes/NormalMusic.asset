@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9db1c989528aef34c92f2f4253e2e3d6, type: 3}
   m_Name: NormalMusic
   m_EditorClassIdentifier: 
-  musicClip: {fileID: 8300000, guid: 8071e2b2de351074a9420300af23797c, type: 3}
+  musicClip: {fileID: 8300000, guid: c5070ad49997a004994573b5045022db, type: 3}
   priority: 0
   subscribers: 0

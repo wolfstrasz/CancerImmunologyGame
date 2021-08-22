@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GranzymeAttackHealthDmg
   m_EditorClassIdentifier: 
   attributeName: Granzyme Damage
-  initialValue: 50
-  currentValue: 50
+  initialValue: 10
+  currentValue: 10

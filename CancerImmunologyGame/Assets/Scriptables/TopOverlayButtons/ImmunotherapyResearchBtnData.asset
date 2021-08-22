@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ImmunotherapyResearchBtnData
   m_EditorClassIdentifier: 
   unlocked: 1
-  icon: {fileID: 21300000, guid: 47a4f6d4e70676c469155a0a292a6c3e, type: 3}
-  glowMaterial: {fileID: 2100000, guid: 8bf788e565bae5e40a8cadcbdc4eca96, type: 2}
+  icon: {fileID: 21300000, guid: 8f2120785b2e2b6429185a367eced421, type: 3}
+  glowMaterial: {fileID: 2100000, guid: ca99d47fa75a5dd488f6735f9723ff4b, type: 2}

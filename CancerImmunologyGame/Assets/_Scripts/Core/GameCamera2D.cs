@@ -7,10 +7,9 @@ namespace ImmunotherapyGame
 	{
 
 		[Header("Links")]
-		[SerializeField]
-		private new Camera camera = null;
-		[SerializeField]
-		private GameObject blind = null;
+		[SerializeField] private new Camera camera = null;
+		[SerializeField] private GameObject blind = null;
+		[SerializeField] private SpriteRenderer blindImage = null;
 
 		[Header("Attributes")]
 		[SerializeField] private GameCameraControlState state = GameCameraControlState.IDLE;
@@ -40,6 +39,11 @@ namespace ImmunotherapyGame
 		[SerializeField] [ReadOnly] private bool isFocused = false;
 		[SerializeField] [ReadOnly] private float orthographicZoom = 6.0f;
 		[SerializeField] [ReadOnly] private bool isZooming = false;
+		[SerializeField] [ReadOnly] private bool isBlinding = false;
+		[SerializeField] [ReadOnly] private bool isUnblinding = false;
+		[SerializeField] [ReadOnly] private float blindTimeLeft = 0f;
+		[SerializeField] [ReadOnly] private float blindTime = 0f;
+		[SerializeField] [ReadOnly] private float blindAlpha = 0f;
 
 		public bool IsCameraFocusedAndFinishedZooming => (isFocused && !isZooming);
 
@@ -62,7 +66,7 @@ namespace ImmunotherapyGame
 			}
 
 			UpdateOrthographicZoom();
-
+			UpdateGradualBlind();
 		}
 
 		// Focus objects can change in Update, so camera moves here
@@ -150,13 +154,74 @@ namespace ImmunotherapyGame
 		public void Blind()
 		{
 			blind.SetActive(true);
+			isBlinding = false;
+			isUnblinding = false;
+			blindTimeLeft = 0f;
+			blindImage.color = new Color(0,0,0,1);
+
 		}
 
 		public void Unblind()
 		{
 			blind.SetActive(false);
+			isBlinding = false;
+			isUnblinding = false;
+			blindTimeLeft = 0f;
 		}
 
+		public void GradualBlind(float t)
+		{
+			blind.SetActive(true);
+			blindTimeLeft = t;
+			blindTime = t;
+			isBlinding = true;
+			isUnblinding = false;
+			blindImage.color = new Color(0, 0, 0, 0);
+
+		}
+
+		public void GradualUnblind(float t)
+		{
+			blindTimeLeft = t;
+			blindTime = t;
+			isBlinding = false;
+			isUnblinding = true;
+		}
+
+		private void UpdateGradualBlind()
+		{
+		
+			if (isBlinding)
+			{
+				blindTimeLeft -= Time.fixedDeltaTime;
+
+				if (blindTimeLeft <= 0)
+				{
+					blindTimeLeft = 0f;
+					isBlinding = false;
+				}
+
+				Color c = new Color(0, 0, 0, ((blindTime - blindTimeLeft) / blindTime));
+				blindImage.color = c;
+
+			}
+			else if (isUnblinding)
+			{
+				blindTimeLeft -= Time.fixedDeltaTime;
+
+				if (blindTimeLeft <= 0)
+				{
+					blindTimeLeft = 0f;
+					isBlinding = false;
+					blind.SetActive(false);
+
+				}
+
+				Color c = new Color(0, 0, 0,  (blindTimeLeft / blindTime));
+				blindImage.color = c;
+
+			}
+		}
 
 		public bool IsInCameraViewBounds(Vector3 position, bool useHalfBoundsForX = false)
 		{

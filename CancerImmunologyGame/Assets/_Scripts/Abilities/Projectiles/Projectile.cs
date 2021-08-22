@@ -46,7 +46,7 @@ namespace ImmunotherapyGame.Abilities
 			Cell cell = collider.gameObject.GetComponent<Cell>();
 			if (cell)
 			{
-				if (projectileAbility.CanHitCellType(cell.cellType))
+				if (projectileAbility.CanHitCellType(cell.CellType))
 				{
 					OnCollisionWithTarget(cell);
 				}
